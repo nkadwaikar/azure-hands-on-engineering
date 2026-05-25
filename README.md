@@ -1,10 +1,3 @@
-Absolutely, Nadeem — I’ll update your **GitHub profile README** so it matches your new structure, tone, and the work you’ve added (VMSS Custom Image Lab, separate MD files, portfolio layout, etc.).  
-
-Here is your **clean, modern, polished, portfolio‑ready README**, rewritten for clarity, flow, and professional impact — while keeping your original personality and style.
-
----
-
-# `https://img.shields.io/badge/Azure-Expert-blue` `https://img.shields.io/badge/GitHub%20Actions-Automation-blue`
 
 # 👋 Hi, I’m Nadeem  
 ### **Cloud Engineer • Identity Architect • Azure Practitioner**
@@ -41,8 +34,8 @@ Global routing • Caching • Origin configuration
 
 ### ⚙️ **VMSS Using Custom Image (Full Lab Series)**  
 A complete hands‑on workflow:  
-- Build base VM (IIS + custom page)  
-- Sysprep (Azure‑safe method)  
+- Build base VM (IIS + custom page) (https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/VMSS/1-build-base-vm.md)
+- Sysprep (Azure‑safe method) 
 - Capture & validate image  
 - Deploy VMSS + scaling tests  
 
