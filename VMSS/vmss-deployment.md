@@ -1,4 +1,4 @@
-# 🚀 **VMSS Deployment Using a Custom Windows Image
+# 🚀 VMSS Deployment Using a Custom Windows Image
 
 This document covers the **end‑to‑end deployment** of an Azure **Virtual Machine Scale Set (VMSS)** using a **custom Windows Server image** stored in a **Shared Image Gallery**.
 
