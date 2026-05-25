@@ -4,10 +4,11 @@ Day 7 delivers the full **identity‑first architecture** for Week 1 using modul
 This is the foundation of a secure, secretless, RBAC‑driven Azure environment.
 
 This document explains the architecture, module responsibilities, and deployment flow.
+
 All Bicep files referenced here are located in:
 
 ```
-capstone/architecture/bicep/
+bicep/
 ```
 
 ---
@@ -28,16 +29,15 @@ This identity-first foundation will be reused across future capstones.
 
 ## 🧱 Final Folder Structure
 
+
 ```
-capstone/
-  architecture/
-    bicep/
-      main.bicep
-      modules/
-        identity.bicep
-        keyvault.bicep
-        rbac.bicep
-        locks.bicep
+bicep/
+  main.bicep
+  modules/
+    identity.bicep
+    keyvault.bicep
+    rbac.bicep
+    locks.bicep
 ```
 
 Each module is small, focused, and reusable — following enterprise IaC patterns.
@@ -155,19 +155,20 @@ All code lives in the `capstone/architecture/bicep/` folder to avoid duplication
 
 ---
 
+
 ## 🔗 Related Labs
 
-- **Day 1 — Managed Identity Basics**  
-  [01-managed-identity-basics.md](01-managed-identity-basics.md)
+- **Day 1 — Identity Fundamentals + RBAC Basics**  
+  [01-identity fundamentals.md](01-identity%20fundamentals.md)
 
-- **Day 2 — Key Vault RBAC Setup**  
-  [02-key-vault-rbac-setup.md](02-key-vault-rbac-setup.md)
+- **Day 2 — Managed Identity + Azure Key Vault**  
+  [02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
 
-- **Day 3 — Bicep Modular Architecture**  
-  [03-bicep-modular-architecture.md](03-bicep-modular-architecture.md)
+- **Day 3 — Azure AD Roles + RBAC Scopes**  
+  [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
 
 - **Day 4 — Azure Locks + Resource Policies**  
-  [04-locks-resource-policies.md](04-locks-resource-policies.md)
+  [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
 - **Day 5 — Access Validation (Portal + CLI)**  
   [05-access-validation.md](05-access-validation.md)

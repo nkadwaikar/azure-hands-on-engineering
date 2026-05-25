@@ -59,6 +59,6 @@ If IIS works → your custom image is **ready for VMSS**.
 # 🎉 Image is ready for VMSS deployment
 
 Next step:
-➡ [Sysprep VM](./2-sysprep-vm.md)
+➡ [Sysprep VM](2-sysprep-vm.md)
 
 ---

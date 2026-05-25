@@ -335,7 +335,7 @@ Today you learned:
 ## ⬅️ Previous Lab
 
 **Day 1 — Identity Fundamentals + RBAC Basics**  
-[01-identity-rbac-basics.md](01-identity-rbac-basics.md)
+[01-identity fundamentals.md](01-identity%20fundamentals.md)
 
 ---
 

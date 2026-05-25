@@ -71,7 +71,7 @@ Deleting it causes:
 # 🎉 Sysprep complete
 
 Proceed to:  
-➡ [3-capture-and-test-image.md](3-capture-and-test-image.md)
+➡ [Capture & Test Image](3-capture-and-test-image.md)
 
 ---
 

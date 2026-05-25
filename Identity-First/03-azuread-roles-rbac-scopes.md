@@ -148,14 +148,14 @@ These nuances reflect real enterprise identity governance and are essential for 
 ## ⬅️ Previous Lab
 
 **Day 2 — Managed Identity + Azure Key Vault**  
-[02-managed-identity-azure-key-vault.md](02-managed-identity-azure-key-vault.md)
+[02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
 
 ---
 
 ## 🔗 Related Resources
 
 - **Day 1 — Identity Fundamentals + RBAC Basics**  
-  [01-identity-rbac-basics.md](01-identity-rbac-basics.md)
+  [01-identity fundamentals.md](01-identity%20fundamentals.md)
 
 - **Day 5 — Access Validation (Portal + CLI)**  
   [05-access-validation.md](05-access-validation.md)

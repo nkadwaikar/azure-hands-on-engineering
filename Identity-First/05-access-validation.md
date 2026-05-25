@@ -317,17 +317,17 @@ Today you learned:
 ## ⬅️ Previous Lab
 
 **Day 4 — Azure Locks + Resource Policies**  
-[04-locks-resource-policies.md](04-locks-resource-policies.md)
+[04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
 ---
 
 ## 🔗 Related Resources
 
 - **Day 1 — Identity Fundamentals + RBAC Basics**  
-  [01-identity-rbac-basics.md](01-identity-rbac-basics.md)
+  [01-identity fundamentals.md](01-identity%20fundamentals.md)
 
 - **Day 2 — Managed Identity + Azure Key Vault**  
-  [02-managed-identity-azure-key-vault.md](02-managed-identity-azure-key-vault.md)
+  [02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
 
 - **Day 3 — Azure AD Roles + RBAC Scopes**  
   [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
