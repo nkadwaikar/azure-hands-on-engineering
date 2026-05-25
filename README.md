@@ -1,97 +1,113 @@
-![Azure Certified](https://img.shields.io/badge/Azure-Expert-blue)
-![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Automation-blue)
+Absolutely, Nadeem — I’ll update your **GitHub profile README** so it matches your new structure, tone, and the work you’ve added (VMSS Custom Image Lab, separate MD files, portfolio layout, etc.).  
 
-# 👋 Hi, I’m Nadeem
-Cloud Engineer • Identity Architect • Azure Practitioner
-I design and build cloud systems that are identity‑first, network‑secure, and production‑ready.
+Here is your **clean, modern, polished, portfolio‑ready README**, rewritten for clarity, flow, and professional impact — while keeping your original personality and style.
+
+---
+
+# `https://img.shields.io/badge/Azure-Expert-blue` `https://img.shields.io/badge/GitHub%20Actions-Automation-blue`
+
+# 👋 Hi, I’m Nadeem  
+### **Cloud Engineer • Identity Architect • Azure Practitioner**
+
+I design and build cloud systems that are **identity‑first**, **network‑secure**, and **production‑ready**.  
 My work spans Azure identity, networking, automation, governance, and security — always with a focus on clarity, repeatability, and real‑world practicality.
-I love building things future‑me won’t have to reverse‑engineer.
+
+I love building things future‑me won’t have to reverse‑engineer.  
 Powered by ☕ and clean architecture.
 
 ---
 
-
-
 ## 💡 What I Do Best
 
-- Identity‑first Azure architecture
-- Secure network baselines (Hub‑Spoke, Zero Trust, Private Link)
-- Automation with Bicep, PowerShell & GitHub Actions
-- Turning complex cloud patterns into simple, repeatable labs
-- Writing documentation that feels human, not corporate
+- Identity‑first Azure architecture  
+- Secure network baselines (Hub‑Spoke, Zero Trust, Private Link)  
+- Automation with Bicep, PowerShell & GitHub Actions  
+- Turning complex cloud patterns into simple, repeatable labs  
+- Writing documentation that feels human, not corporate  
 
 ---
 
 ## 📌 Featured Work
 
-- 🔐 Identity‑First Landing Zone  
-	RBAC • Managed Identity • Key Vault • Policy • Locks • Monitoring
-- 🌐 Secure Hub‑Spoke Architecture  
-	VNets • NSGs • ASGs • Private Endpoints • DNS • Firewall • UDRs
-- 🖥️ [Azure Front Door — Global Routing & Delivery](Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)  
-	Global routing • Caching • Origin configuration
+### 🔐 **Identity‑First Landing Zone**  
+RBAC • Managed Identity • Key Vault • Policy • Locks • Monitoring
 
----
+### 🌐 **Secure Hub‑Spoke Architecture**  
+VNets • NSGs • ASGs • Private Endpoints • DNS • Azure Firewall • UDRs
+
+### 🖥️ **Azure Front Door — Global Routing & Delivery**  
+Global routing • Caching • Origin configuration  
+📄 [Static Website Hosting Lab](https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
+
+### ⚙️ **VMSS Using Custom Image (Full Lab Series)**  
+A complete hands‑on workflow:  
+- Build base VM (IIS + custom page)  
+- Sysprep (Azure‑safe method)  
+- Capture & validate image  
+- Deploy VMSS + scaling tests  
 
 ## 🧠 Skills
 
 **Cloud & Architecture:**  
-Azure Landing Zones • Hub‑Spoke • Zero Trust • Hybrid Identity • Governance
+Azure Landing Zones • Hub‑Spoke • Zero Trust • Hybrid Identity • Governance  
 
 **Identity & Security:**  
-RBAC • PIM • Conditional Access • Key Vault • Managed Identity • Defender • Sentinel
+RBAC • PIM • Conditional Access • Key Vault • Managed Identity • Defender • Sentinel  
 
 **Networking:**  
-VNets • NSGs • ASGs • Private Link • DNS • Azure Firewall • Load Balancing • UDRs
+VNets • NSGs • ASGs • Private Link • DNS • Azure Firewall • Load Balancing • UDRs  
 
 **Automation & DevOps:**  
-Bicep • PowerShell • GitHub Actions • ARM Templates
+Bicep • PowerShell • GitHub Actions • ARM Templates  
 
 ---
 
 ## 🎖️ Certifications
 
-- **🛡️ Identity & Security**
-	- SC‑300
-	- SC‑400
-- **🪟 Microsoft & Enterprise Tech**
-	- Windows Solutions & Enterprise Administrator
-	- Dynamics 365
-- **📘 Governance & Delivery**
-	- ITIL Foundation
-	- PRINCE2® Agile Practitioner
-	- PMP
-- **🚀 Agile & Scrum**
-	- SAFe 5 PO/PM
-	- PSM I
-	- CSM
-- **🏢 Virtualization**
-	- VCP‑DCV
+### 🛡️ Identity & Security  
+- SC‑300  
+- SC‑400  
+
+### 🪟 Microsoft & Enterprise Tech  
+- Windows Solutions & Enterprise Administrator  
+- Dynamics 365  
+
+### 📘 Governance & Delivery  
+- ITIL Foundation  
+- PRINCE2® Agile Practitioner  
+- PMP  
+
+### 🚀 Agile & Scrum  
+- SAFe 5 PO/PM  
+- PSM I  
+- CSM  
+
+### 🏢 Virtualization  
+- VCP‑DCV  
 
 ---
 
 ## 🧩 How I Work
 
-- Document everything
-- Automate anything repeated twice
-- Validate like it’s production
-- Design for clarity and scale
+- Document everything  
+- Automate anything repeated twice  
+- Validate like it’s production  
+- Design for clarity and scale  
 
 ---
 
 ## ☕ Fun Things
 
-- I solve cloud problems the way I make coffee: slowly, carefully, joyfully
-- Documentation is a love letter to your future self
-- Architecture diagrams should be as clean as the systems they represent
+- I solve cloud problems the way I make coffee: slowly, carefully, joyfully  
+- Documentation is a love letter to your future self  
+- Architecture diagrams should be as clean as the systems they represent  
 
 ---
 
 ## 📚 Resources
 
-- [Azure Front Door — Static Website Hosting Lab](https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
-  
-- [Microsoft Learn: Azure](https://learn.microsoft.com/azure/)
+- [Azure Front Door — Static Website Hosting Lab](https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)  
+- [Microsoft Learn: Azure](https://learn.microsoft.com/azure/)  
 
 ---
 
@@ -99,5 +115,5 @@ Bicep • PowerShell • GitHub Actions • ARM Templates
 
 If you’re working on Azure identity, networking, automation, or architecture — I’m always happy to collaborate, learn, or share ideas.
 
-- [LinkedIn](https://www.linkedin.com/in/nadeemkadwaikar)
+- [LinkedIn](https://www.linkedin.com/in/nadeemkadwaikar)  
 - [Email](mailto:nadeemkadwaikar@outlook.com)
