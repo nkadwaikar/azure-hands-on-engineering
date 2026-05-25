@@ -1,6 +1,6 @@
 
 # 👋 Hi, I’m Nadeem  
-### **Cloud Engineer • Identity Architect • Azure Practitioner**
+### **Cloud Engineer • Identity First • Azure Practitioner**
 
 I design and build cloud systems that are **identity‑first**, **network‑secure**, and **production‑ready**.  
 My work spans Azure identity, networking, automation, governance, and security — always with a focus on clarity, repeatability, and real‑world practicality.
@@ -35,9 +35,9 @@ Global routing • Caching • Origin configuration
 ### ⚙️ **VMSS Using Custom Image (Full Lab Series)**  
 A complete hands‑on workflow:  
 - Build base VM (IIS + custom page) (https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/VMSS/1-build-base-vm.md)
-- Sysprep (Azure‑safe method) 
-- Capture & validate image  
-- Deploy VMSS + scaling tests  
+- Sysprep (Azure‑safe method) (https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/VMSS/2-sysprep-vm.md)
+- Capture & validate image  (https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/VMSS/3-capture-and-test-image.md)
+- Deploy VMSS + scaling tests  (https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/VMSS/vmss-deployment.md)
 
 ## 🧠 Skills
 
