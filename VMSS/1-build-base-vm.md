@@ -62,22 +62,3 @@ Next step:
 ➡ [Deploy VMSS using this image](vmss-deployment.md)
 
 ---
-
-# ⭐ Optional: Add an Index File
-
-You can also add a simple `README.md` in the folder:
-
-```
-1-custom-image/README.md
-```
-
-```markdown
-# Custom Windows Image for Azure VMSS
-
-This folder contains the full workflow for creating a reusable Windows Server image:
-
-1. **Build Base VM** → [1-build-base-vm.md](1-build-base-vm.md)  
-2. **Sysprep VM** → [2-sysprep-vm.md](2-sysprep-vm.md)  
-3. **Capture & Test Image** → [3-capture-and-test-image.md](3-capture-and-test-image.md)  
-
-This image is later used to deploy a VM Scale Set (VMSS).
