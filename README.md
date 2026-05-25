@@ -23,7 +23,8 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 * 🛠️ **[Build Base VM](VMSS/1-build-base-vm.md)** – IIS setup, golden image customization, and image capture.
 * 💻 **[Sysprep Azure VM](VMSS/2-sysprep-vm.md)** – Standardizing Windows Server environments for seamless deployment.
 * 📸 **[Capture & Test Image](VMSS/3-capture-and-test-image.md)** – Image capture and validation steps.
-* 🌐 **[Azure Front Door Static Web](Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md)** – Global routing, CDN delivery, and static website hosting.
+* 🌐 **[Azure Front Door Static Web](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)** – Global routing, CDN delivery, and static website hosting.
+* 🌐 **[Azure Front Door Static Web](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)** – Global routing, CDN delivery, and static website hosting.
 * 🛡️ **[Identity-First Capstone Lab](Identity-First/07-bicep-beployment-identity-stack.md)** – Modular Bicep, RBAC, Managed Identity, and secure cloud patterns.
 
 ---
