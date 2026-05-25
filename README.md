@@ -99,7 +99,7 @@ Bicep • PowerShell • GitHub Actions • ARM Templates
 
 ## 📚 Resources
 
-- [Azure Front Door — Static Website Hosting Lab](https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)  
+- [Static Website Hosting Lab](https://github.com/nkadwaikar/azure-hands-on-engineering/blob/main/Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)  
 - [Microsoft Learn: Azure](https://learn.microsoft.com/azure/)  
 
 ---

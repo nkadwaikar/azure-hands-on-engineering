@@ -1,4 +1,3 @@
-# ✅ **FILE 3 — `3-capture-and-test-image.md`**
 ## 📸 Capture the Image + Deploy Test VM
 
 This document covers capturing the custom image and validating it before using it in VMSS.
@@ -60,7 +59,7 @@ If IIS works → your custom image is **ready for VMSS**.
 # 🎉 Image is ready for VMSS deployment
 
 Next step:  
-➡ Deploy VMSS using this image
+➡ [Deploy VMSS using this image](vmss-deployment.md)
 
 ---
 
@@ -77,20 +76,8 @@ You can also add a simple `README.md` in the folder:
 
 This folder contains the full workflow for creating a reusable Windows Server image:
 
-1. **Build Base VM** → `1-build-base-vm.md`  
-2. **Sysprep VM** → `2-sysprep-vm.md`  
-3. **Capture & Test Image** → `3-capture-and-test-image.md`  
+1. **Build Base VM** → [1-build-base-vm.md](1-build-base-vm.md)  
+2. **Sysprep VM** → [2-sysprep-vm.md](2-sysprep-vm.md)  
+3. **Capture & Test Image** → [3-capture-and-test-image.md](3-capture-and-test-image.md)  
 
 This image is later used to deploy a VM Scale Set (VMSS).
-```
-
----
-
-If you want, I can now generate:
-
-🔥 A **VMSS Deployment** folder with separate MD files  
-🔥 A **diagram** for this entire workflow  
-🔥 A **root README.md** for your GitHub portfolio  
-🔥 A **navigation index** for all labs  
-
-Just tell me what you want next.
