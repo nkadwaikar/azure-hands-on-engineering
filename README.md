@@ -1,71 +1,54 @@
+# 👋 Hi, I’m Nadeem  
+Cloud Engineer focused on Azure infrastructure, identity, and Microsoft 365.
 
+I’m building a hands‑on portfolio of real Azure labs, with an emphasis on clear documentation, practical engineering, and solutions that are easy to understand and support. I enjoy creating clean, reliable cloud environments and improving them through steady, thoughtful iteration.
 
-# 👋 Hi, I’m Nadeem
-**Cloud Engineer • Identity‑First • Azure Practitioner**
-
-I design and build cloud systems that are **identity‑driven, secure, and practical**.
-
-Right now, I’m focused on strengthening my Azure fundamentals through hands‑on labs aligned with **AZ‑104 (Azure Administrator)** and **MS‑102 (Microsoft 365 Administrator)**.
-
-I love building things future‑me won’t have to reverse‑engineer.  
-Powered by ☕ and clean architecture.
+I build things future‑me — and future teams — won’t have to untangle.
 
 ---
 
-## 💡 What I Do
-
-- Azure administration fundamentals
-- VM deployment, management, and automation
-- Core networking (VNets, NSGs, Load Balancers)
-- Entra ID identity & access management
-- Turning Microsoft Learn concepts into real labs
-
----
-
-## 📌 Featured Work
-
-- [Azure VMSS Using Custom Image](VMSS/1-build-base-vm.md) — SIG, Sysprep, scaling, load balancing
-- [Azure Front Door (Static Website Hosting)](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — global routing & delivery
-- [Azure VM Image Creation](VMSS/3-capture-and-test-image.md) — IIS, customization, image capture
-- *(More AZ‑104 & MS‑102 labs coming soon)*
+## 💡 What I Do  
+- Azure infrastructure and administration  
+- Identity and access management with Entra ID  
+- Core networking (VNets, NSGs, Load Balancers)  
+- Microsoft 365 configuration and management  
+- Turning cloud concepts into practical, well‑documented labs  
 
 ---
 
-## 🧠 Skills
+## 📌 Featured Work  
+- [**VMSS Using Custom Image**](VMSS/vmss-deployment.md) — SIG, Sysprep, scaling, load balancing  
+- [**Azure VM Image Creation**](VMSS/3-capture-and-test-image.md) — IIS setup, customization, image capture
+- [**Azure Front Door (Static Website Hosting)**](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — global routing & delivery  
 
-**Azure Administration:**  
-VMs • Storage • Networking • Load Balancers • Monitoring
+---
+
+## 🧠 Skills  
+**Azure Infrastructure:**  
+VMs • Storage • Networking • Load Balancers • Monitoring  
 
 **Identity & Access:**  
-Entra ID • RBAC • Conditional Access • Identity Governance
+Entra ID • RBAC • Conditional Access • Identity Governance  
 
-**Automation:**  
-PowerShell • GitHub Actions • Bicep (beginner)
+**Automation & Scripting:**  
+PowerShell • GitHub Actions • Bicep (beginner)  
 
----
-
-## 🎖️ Certifications
-
-- AZ‑104 (in progress)
-- MS‑102 (in progress)
-- SC‑300
-- SC‑400
-- ITIL
-- PRINCE2 Agile
-- PMP
-- SAFe PO/PM
-- PSM I
-- CSM
-- VCP‑DCV
+**Microsoft 365:**  
+User & group management • Security & compliance • Endpoint basics  
 
 ---
 
+## 🎖️ Certifications  
+SC‑300 • SC‑400 • ITIL • PRINCE2 Agile • PMP • SAFe PO/PM • PSM I • CSM • VCP‑DCV  
 
 ---
 
-## 📫 Connect
+## 📚 Resources  
+- [Microsoft Learn: Azure](https://learn.microsoft.com/azure/)  
 
-- [LinkedIn](https://www.linkedin.com/in/nadeemkadwaikar)
-- [Email](mailto:nadeemkadwaikar@outlook.com)
+---
+
+## 📫 Connect  
+[LinkedIn](https://www.linkedin.com/in/nadeemkadwaikar) • [Email](mailto:nadeemkadwaikar@outlook.com)
 
 ---
