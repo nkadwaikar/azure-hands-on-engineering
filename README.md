@@ -1,4 +1,4 @@
-# Hi, I’m Nadeem 👋
+# Hi, I’m Nadeem Kadwaikar👋
 ### Cloud Engineer | Azure Infrastructure • Identity • Microsoft 365
 
 I build a hands-on portfolio of real Azure labs focused on clear documentation, practical engineering, and solutions that are easy to understand and support. I enjoy creating reliable cloud environments and improving them through steady, thoughtful iteration.
