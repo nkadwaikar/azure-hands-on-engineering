@@ -1,10 +1,9 @@
-# 👋 Hi, I’m Nadeem  
+👋 Hi, I’m Nadeem
 Cloud Engineer focused on Azure infrastructure, identity, and Microsoft 365.
 
 I’m building a hands‑on portfolio of real Azure labs, with an emphasis on clear documentation, practical engineering, and solutions that are easy to understand and support. I enjoy creating clean, reliable cloud environments and improving them through steady, thoughtful iteration.
 
-I build things future‑me — and future teams — won’t have to untangle.
-
+I build things future‑me — and future teams — won’t have to untangle. Powered by coffee and clean, intentional engineering.
 ---
 
 ## 💡 What I Do  
