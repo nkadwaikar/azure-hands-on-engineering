@@ -19,10 +19,12 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 ### 📌 Featured Labs & Work
 *📁 Click the links below to explore the step-by-step engineering documentation.*
 
-* 🚀 **[VMSS Using Custom Image](./labs/vmss-custom-image)** – Shared Image Gallery (SIG), Sysprep, auto-scaling, and load balancing.
-* 🛠️ **[Azure VM Image Creation](./labs/vm-image-creation)** – IIS setup, golden image customization, and image capture.
-* 💻 **[Sysprep Azure VM](./labs/sysprep-vm)** – Standardizing Windows Server environments for seamless deployment.
-* 🌐 **[Azure Front Door Static Web](./labs/front-door-static-site)** – Global routing, CDN delivery, and static website hosting.
+* 🚀 **[VMSS Deployment Guide](VMSS/vmss-deployment.md)** – Shared Image Gallery (SIG), Sysprep, auto-scaling, and load balancing.
+* 🛠️ **[Build Base VM](VMSS/1-build-base-vm.md)** – IIS setup, golden image customization, and image capture.
+* 💻 **[Sysprep Azure VM](VMSS/2-sysprep-vm.md)** – Standardizing Windows Server environments for seamless deployment.
+* 📸 **[Capture & Test Image](VMSS/3-capture-and-test-image.md)** – Image capture and validation steps.
+* 🌐 **[Azure Front Door Static Web](Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md)** – Global routing, CDN delivery, and static website hosting.
+* 🛡️ **[Identity-First Capstone Lab](Identity-First/07-bicep-beployment-identity-stack.md)** – Modular Bicep, RBAC, Managed Identity, and secure cloud patterns.
 
 ---
 
@@ -50,5 +52,5 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 ---
 
 ### 📫 Connect With Me
-* 💼 **LinkedIn:** [https://www.linkedin.com/in/nadeemkadwaikar]
-* 📧 **Email:** [nadeemkadwaikar@outlook.com]
+* 💼 **LinkedIn:** [linkedin.com/in/nadeemkadwaikar](https://www.linkedin.com/in/nadeemkadwaikar)
+* 📧 **Email:** [nadeemkadwaikar@outlook.com](mailto:nadeemkadwaikar@outlook.com)
