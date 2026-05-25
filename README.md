@@ -19,7 +19,7 @@ I build things that future-me — and future teams — won’t have to untangle.
 ## 📌 Featured Work  
 - [**VMSS Using Custom Image**](VMSS/vmss-deployment.md) — SIG, Sysprep, scaling, load balancing  
 - [**Azure VM Image Creation**](VMSS/3-capture-and-test-image.md) — IIS setup, customization, image capture
-- [**Sysprep Azure VM**](./2-sysprep-vm.md)
+- [**Sysprep Azure VM**](VMSS/2-sysprep-vm.md) - Sysprep
 - [**Azure Front Door (Static Website Hosting)**](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — global routing & delivery  
 
 ---
