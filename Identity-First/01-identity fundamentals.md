@@ -9,11 +9,11 @@
 
 Before starting this lab, ensure you have:
 
-- ✅ An **Azure Subscription** with Owner or User Access Administrator rights
-- ✅ Permission to create **Azure AD users** (or admin assistance available)
-- ✅ **Azure CLI** installed (optional, for CLI commands)
+- An **Azure Subscription** with Owner or User Access Administrator rights
+- Permission to create **Azure AD users** (or admin assistance available)
+- **Azure CLI** installed (optional, for CLI commands)
   - Installation guide: https://learn.microsoft.com/cli/azure/install-azure-cli
-- ✅ Access to **Azure Portal**
+- Access to **Azure Portal**
 
 **⏱️ Estimated Time:** 45–60 minutes
 
