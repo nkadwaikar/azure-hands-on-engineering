@@ -87,7 +87,7 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 ---
 
 ### 🛠️ Upcoming Projects
-* 📝 **Next Lab:** Designing a resilient Azure Backup and Recovery Vault framework for business continuity.
+* Designing a resilient Azure Backup and Recovery Vault framework for business continuity.
 * Azure Arc Onboarding (Hybrid Integration)
 * Defender for Cloud (CSPM + Plans)
 * Defender for Cloud + Hub‑and‑Spoke Integration
