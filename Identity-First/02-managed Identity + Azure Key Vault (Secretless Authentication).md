@@ -218,10 +218,10 @@ SuperSecretValue123
 
 ### ✅ What This Validates
 
-- ✅ VM identity authentication
-- ✅ RBAC permissions are correctly configured
-- ✅ Key Vault access is working
-- ✅ Zero credentials stored on the VM
+- VM identity authentication
+- RBAC permissions are correctly configured
+- Key Vault access is working
+- Zero credentials stored on the VM
 
 ---
 
