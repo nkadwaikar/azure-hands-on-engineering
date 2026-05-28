@@ -1,13 +1,60 @@
 # Hi, I’m Nadeem Kadwaikar👋
+---
+
+## 📑 Table of Contents
+1. [Topics & Navigation](#topics--navigation)
+2. [About Me](#about-me)
+3. [Featured Labs & Work](#featured-labs--work)
+4. [Technical Skills & Toolbox](#-technical-skills--toolbox)
+5. [Upcoming Projects](#-upcoming-projects)
+6. [Certifications](#-certifications)
+7. [Connect With Me](#-connect-with-me)
+
+---
+
+## 🗂️ Topics & Navigation
+
+Organize and explore labs by topic:
+
+### 1. Azure Infrastructure as Code (IaC)
+* [Identity-First Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
+* [VS Code Bicep Deployment Workflow](Identity-First/vscode-deployment-workflow.md)
+
+### 2. Identity-First Security & Zero Trust
+* [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
+* [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20+%20Azure%20Key%20Vault%20(Secretless%20Authentication).md)
+* [Azure AD Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md)
+* [Access Validation](Identity-First/05-access-validation.md)
+
+### 3. Cloud Networking & Global Delivery
+* [Azure Front Door Static Web](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
+
+### 4. Image Lifecycle & Automation
+* [Build Base VM](VMSS/1-build-base-vm.md)
+* [Sysprep Azure VM](VMSS/2-sysprep-vm.md)
+* [Capture & Test Image](VMSS/3-capture-and-test-image.md)
+* [VMSS Deployment Guide](VMSS/vmss-deployment.md)
+
+### 5. Monitoring, Compliance & Governance
+* [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
+* [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
+* [Governance Flow Diagram](Identity-First/governance-flow.md)
+
+### 6. Business Continuity & Resilience
+* (Coming soon) Azure Backup & Recovery Vault
+
+### 7. Hybrid & Multi-Cloud Integration
+* (Planned) Azure Arc Onboarding
+
+---
+
+## 👤 About Me
+
 ### Cloud Engineer | Azure Infrastructure • Identity • Microsoft 365
 
 I build a hands-on portfolio of real Azure labs focused on clear documentation, practical engineering, and solutions that are easy to understand and support. I enjoy creating reliable cloud environments and improving them through steady, thoughtful iteration.
 
----
-
 > **The Philosophy:** I build things that future-me — and future teams — won’t have to untangle. Powered by coffee and clean, intentional engineering.
-
----
 
 > **Why These Labs Matter:** These labs demonstrate real Azure engineering patterns including image lifecycle management, global routing, identity‑first design, and modular Bicep deployments. Each lab is built with production‑aligned principles: clarity, repeatability, and secure defaults.
 
@@ -23,14 +70,8 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 ---
 
 ### 📌 Featured Labs & Work
-*📁 Click the links below to explore the step-by-step engineering documentation.*
 
-* 🚀 **[VMSS Deployment Guide](VMSS/vmss-deployment.md)** – Shared Image Gallery (SIG), Sysprep, auto-scaling, and load balancing.
-* 🛠️ **[Build Base VM](VMSS/1-build-base-vm.md)** – IIS setup, golden image customization, and image capture.
-* 💻 **[Sysprep Azure VM](VMSS/2-sysprep-vm.md)** – Standardizing Windows Server environments for seamless deployment.
-* 📸 **[Capture & Test Image](VMSS/3-capture-and-test-image.md)** – Image capture and validation steps.
-* 🌐 **[Azure Front Door Static Web](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)** – Global routing, CDN delivery, and static website hosting.
-* 🛡️ **[Identity-First Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)** – Modular Bicep, RBAC, Managed Identity, and secure cloud patterns.
+*📁 See [Topics & Navigation](#topics--navigation) above for a categorized list of labs.*
 
 ---
 
@@ -47,8 +88,10 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 
 ### 🛠️ Upcoming Projects
 * 📝 **Next Lab:** Designing a resilient Azure Backup and Recovery Vault framework for business continuity.
+* Azure Arc Onboarding (Hybrid Integration)
+* Defender for Cloud (CSPM + Plans)
+* Defender for Cloud + Hub‑and‑Spoke Integration
 
----
 
 ### 🎖️ Certifications
 * **Security & Identity:** SC-300 | SC-400
@@ -64,3 +107,5 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 
 Last updated: May 2026
 Built with ❤️, curiosity, and coffee.
+
+---
