@@ -2,13 +2,13 @@
 ---
 
 ## 📑 Table of Contents
-1. [Topics & Navigation](#topics--navigation)
+1. [Topics & Navigation](#%EF%B8%8F-topics--navigation)
 2. [About Me](#about-me)
-3. [Featured Labs & Work](#featured-labs--work)
-4. [Technical Skills & Toolbox](#-technical-skills--toolbox)
-5. [Upcoming Projects](#-upcoming-projects)
-6. [Certifications](#-certifications)
-7. [Connect With Me](#-connect-with-me)
+3. [Featured Labs & Work](#%F0%9F%93%8C-featured-labs--work)
+4. [Technical Skills & Toolbox](#%F0%9F%A7%A0-technical-skills--toolbox)
+5. [Upcoming Projects](#%F0%9F%9B%A0%EF%B8%8F-upcoming-projects)
+6. [Certifications](#%F0%9F%8E%96%EF%B8%8F-certifications)
+7. [Connect With Me](#%F0%9F%93%AB-connect-with-me)
 
 ---
 
