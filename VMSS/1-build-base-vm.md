@@ -7,12 +7,22 @@ This document covers building the base Windows Server VM and preparing it for Sy
 
 ## 📘 1. Create the Base VM
 
-- Deploy a new Windows Server VM from the Azure Marketplace.
-- Log in using RDP.
+
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machines** in the top search bar.
+2. Click **+ Create** and select **Virtual Machine**.
+3. Choose a **Windows Server** image from the Marketplace (e.g., Windows Server 2022 Datacenter).
+4. Fill in the required details (resource group, VM name, region, size, admin username/password, etc.).
+5. Click **Review + Create** → **Create**.
+6. Once deployment completes, go to the VM's overview page and use the **Connect** button to open an RDP session.
 
 ---
 
 ## 📘 2. Install IIS + Create a Custom Test Page
+
+**Portal Navigation:**
+1. In your RDP session to the VM, open **PowerShell as Administrator**.
+2. Run the following script to install IIS and create a custom test page.
 
 Run the following PowerShell script inside the VM:
 

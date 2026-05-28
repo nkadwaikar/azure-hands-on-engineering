@@ -7,15 +7,18 @@ This document covers capturing the custom image and validating it before using i
 
 # 📘 **1. Capture the Image**
 
-1. Open the VM in Azure Portal  
-2. Select **Capture**  
-3. Configure:
+
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machines** in the top search bar.
+2. Select your prepared VM from the list.
+3. In the VM blade, click **Capture** from the top menu.
+4. Configure:
 
    - **Shared Image Gallery** → ✔ Recommended  
    - Create Image Definition (if needed)  
    - Create Image Version → e.g., `1.0.0`  
 
-4. Optional (recommended):  
+5. (Optional, recommended):
    **✔ Automatically delete this VM after creating the image**
 
 ⏱ Capture time: **10–25 minutes**
@@ -24,12 +27,12 @@ This document covers capturing the custom image and validating it before using i
 
 # 📘 **2. Deploy a Test VM from the Captured Image**
 
-After the image is created:
 
-- Go to **Shared Image Gallery**  
-- Select your **Image Definition**  
-- Choose the **Image Version**  
-- Deploy a **Test VM**
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), search for **Shared Image Gallery**.
+2. Select your gallery, then your **Image Definition**.
+3. Click on the desired **Image Version** (e.g., `1.0.0`).
+4. Click **+ Create VM** to deploy a test VM from this image.
 
 ---
 

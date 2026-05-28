@@ -28,11 +28,17 @@ Your Shared Image Gallery should now contain a **validated image version** (e.g.
 
 # 📘 **2. Create the Resource Group**
 
-Create a dedicated resource group for the VMSS lab:
+
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), search for **Resource groups** in the top search bar.
+2. Click **+ Create**.
+3. Enter the following name:
 
 ```
 rg-vmss-lab
 ```
+
+4. Select your subscription and region, then click **Review + Create** → **Create**.
 
 This keeps all VMSS resources isolated and easy to delete later.
 
@@ -40,9 +46,15 @@ This keeps all VMSS resources isolated and easy to delete later.
 
 # 📘 **3. Deploy the VM Scale Set (VMSS)**
 
-In the Azure Portal:
+
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machine Scale Sets** in the top search bar.
+2. Click **+ Create** and select **Virtual Machine Scale Set**.
+3. Fill in the following details:
 
 ### **Basics**
+
+- **Create a Virtual Machine Scale Set (VMSS)**
 - **Image** → Shared Image Gallery → Your Image Version  
 - **Authentication** → Password or SSH  
 - **Instance Count** → **2**  
@@ -67,16 +79,18 @@ In the Azure Portal:
 
 Click **Review + Create** → **Create**
 
----
 
 # 📘 **4. Validate VMSS Deployment**
 
-After deployment completes:
+
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), go to **Virtual Machine Scale Sets** and select your VMSS.
+2. Use the left menu to navigate to **Instances** to check running VMs.
+3. In the same VMSS blade, find **Load Balancer** under **Networking** or search for **Load Balancers** and select the one linked to your VMSS.
+4. Use **Backend Pools** and **Health Probes** to validate instance registration and health.
 
 ### ✔ Check VMSS Instances
-Navigate to:
 
-**VMSS → Instances**
 
 You should see:
 
@@ -84,9 +98,7 @@ You should see:
 - Both in **Succeeded** state
 
 ### ✔ Check Load Balancer
-Navigate to:
 
-**Load Balancer → Backend Pools**
 
 You should see:
 
@@ -97,9 +109,11 @@ You should see:
 
 # 📘 **5. Validate IIS Through Load Balancer**
 
-1. Go to the **Load Balancer**  
-2. Copy the **Public IP**  
-3. Open in browser:
+
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), search for **Load Balancers** and select the one created for your VMSS.
+2. On the overview page, copy the **Public IP address**.
+3. Open in your browser:
 
 ```
 http://<Public-IP>
@@ -119,13 +133,14 @@ This confirms:
 
 This is the most important part of the lab — proving that your custom image works **across scaling events**.
 
----
 
 ## 🔹 **Scale Out (2 → 4 instances)**
 
-1. Go to:
 
-**VMSS → Instances → Capacity**
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), go to **Virtual Machine Scale Sets** and select your VMSS.
+2. In the left menu, click **Instances**.
+3. At the top, click **Scale** or **Capacity**.
 
 2. Change instance count from:
 
@@ -133,7 +148,8 @@ This is the most important part of the lab — proving that your custom image wo
 2 → 4
 ```
 
-3. Azure will create **2 new instances**
+3. Update the instance count to **4** and click **Save**.
+4. Azure will create **2 new instances**
 
 ### Validate:
 
@@ -142,17 +158,20 @@ This is the most important part of the lab — proving that your custom image wo
 - Load Balancer backend pool shows **4 healthy nodes**  
 - IIS page loads successfully via Public IP  
 
----
 
 ## 🔹 **Scale In (4 → 2 instances)**
 
-1. Change instance count from:
+
+**Portal Navigation:**
+1. In the [Azure Portal](https://portal.azure.com), go to your VMSS, click **Instances**, then **Scale/Capacity** at the top.
+2. Change instance count from:
 
 ```
 4 → 2
 ```
 
-2. Azure will delete **2 instances**
+3. Update the instance count to **2** and click **Save**.
+4. Azure will delete **2 instances**
 
 ### Validate:
 
