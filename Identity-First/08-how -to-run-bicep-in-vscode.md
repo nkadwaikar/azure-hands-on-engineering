@@ -1,6 +1,4 @@
 # 🚀 How to Deploy Bicep Files Using Visual Studio Code  
-*A VS Code-Only Workflow for Azure Architects*
-
 This guide shows you how to deploy Bicep templates **entirely inside Visual Studio Code**, using the Azure extensions. No Azure Portal. No CLI. No switching tools.  
 Just VS Code — clean, simple, and architect-friendly.
 

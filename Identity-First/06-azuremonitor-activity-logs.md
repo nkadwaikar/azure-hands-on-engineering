@@ -1,5 +1,5 @@
 
-# **Day 6 — Azure Monitor + Activity Logs**  
+# **Azure Monitor + Activity Logs**  
 ### *Observe, audit, and validate identity + governance operations across your environment.*
 
 Today you add the **observability pillar** to your identity‑first, governance‑first Landing Zone.  

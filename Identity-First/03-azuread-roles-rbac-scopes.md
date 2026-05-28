@@ -1,5 +1,5 @@
 
-# **Day 3 — Azure AD Roles + RBAC Scopes (Hands‑On Lab)**  
+# **Azure AD Roles + RBAC Scopes (Hands‑On Lab)**  
 ### *Directory roles vs resource roles. Control plane vs data plane. Identity clarity unlocked.*
 
 > This lab builds on Day 1 (RBAC Basics) and Day 2 (Managed Identity + Key Vault).  

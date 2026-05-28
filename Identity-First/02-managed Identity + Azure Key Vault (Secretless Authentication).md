@@ -1,4 +1,4 @@
-# Day 2 — Managed Identity + Azure Key Vault (Secretless Authentication)
+# Managed Identity + Azure Key Vault (Secretless Authentication)
 
 > **Prerequisites:** This lab continues from Day 1 (see `01-identity-rbac-basics.md`), using the same Resource Group (`rg-bootcamp`).  
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  

@@ -1,4 +1,4 @@
-# **Day 4 — Azure Locks + Resource Policies (Hands-On Lab)**  
+# **Azure Locks + Resource Policies (Hands-On Lab)**  
 ### *Protect resources from accidental deletion and enforce governance at scale.*
 
 Day 4 introduces two foundational governance controls used in every enterprise Landing Zone:  

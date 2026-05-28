@@ -1,4 +1,4 @@
-# 📝 Week 1 — Lessons Learned  
+# 📝 Lessons Learned  
 *Identity-First, Governance-Ready Landing Zone*
 
 Week 1 focused on building a secure, identity-driven foundation using modular Bicep and a VS Code-only workflow.  

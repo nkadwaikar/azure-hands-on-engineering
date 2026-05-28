@@ -1,4 +1,4 @@
-# Day 7 — Identity‑First Bicep Deployment Identity Stack (Week 1 Capstone)
+# Identity‑First Bicep Deployment Identity Stack (Week 1 Capstone)
 
 Day 7 delivers the full **identity‑first architecture** for Week 1 using modular Bicep.
 This is the foundation of a secure, secretless, RBAC‑driven Azure environment.

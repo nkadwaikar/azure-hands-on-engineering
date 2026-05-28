@@ -1,4 +1,4 @@
-# **Day 5 — Access Validation (Portal + CLI)**  
+# **Access Validation (Portal + CLI)**  
 ### *Validate RBAC, Identity, Locks, and Policy Enforcement Across Real Access Paths*
 
 Day 5 is where you **prove** that everything you built in Days 1–4 works exactly as intended.  

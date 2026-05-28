@@ -1,4 +1,4 @@
-# Day 1 — Identity Fundamentals (Entra ID, RBAC Scopes, Least Privilege)
+# Identity Fundamentals (Entra ID, RBAC Scopes, Least Privilege)
 
 > **Note:** All user accounts in this lab use the placeholder domain `@contoso.com` to avoid exposing my real Azure AD tenant domain.  
 > Steps **1**, **2**, and **3.2** are performed by administrators with elevated privileges.
