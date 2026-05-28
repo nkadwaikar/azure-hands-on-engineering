@@ -1,20 +1,29 @@
 # Hi, I’m Nadeem Kadwaikar👋
----
-
-## 📑 Table of Contents
-1. [Topics & Navigation](#%EF%B8%8F-topics--navigation)
-2. [About Me](#about-me)
-3. [Featured Labs & Work](#%F0%9F%93%8C-featured-labs--work)
-4. [Technical Skills & Toolbox](#%F0%9F%A7%A0-technical-skills--toolbox)
-5. [Upcoming Projects](#%F0%9F%9B%A0%EF%B8%8F-upcoming-projects)
-6. [Certifications](#%F0%9F%8E%96%EF%B8%8F-certifications)
-7. [Connect With Me](#%F0%9F%93%AB-connect-with-me)
 
 ---
 
-## 🗂️ Topics & Navigation
+## 👤 About Me
 
-Organize and explore labs by topic:
+### Cloud Engineer | Azure Infrastructure • Identity • Microsoft 365
+
+I build a hands-on portfolio of real Azure labs focused on clear documentation, practical engineering, and solutions that are easy to understand and support. I enjoy creating reliable cloud environments and improving them through steady, thoughtful iteration.
+
+> **The Philosophy:** I build things that future-me — and future teams — won’t have to untangle. Powered by coffee and clean, intentional engineering.
+
+> **Why These Labs Matter:** These labs demonstrate real Azure engineering patterns including image lifecycle management, global routing, identity‑first design, and modular Bicep deployments. Each lab is built with production‑aligned principles: clarity, repeatability, and secure defaults.
+
+---
+
+### 💡 What I Do
+* 🌐 **Azure Infrastructure & Administration:** Designing resilient, scalable core infrastructure.
+* 🔒 **Identity & Access Management:** Securing environments with Entra ID and modern auth.
+* 🔌 **Core Networking:** Implementing secure routing via VNets, NSGs, and Load Balancers.
+* 📦 **Microsoft 365:** Streamlining configuration, management, and compliance.
+* 📚 **Technical Documentation:** Turning complex cloud concepts into practical, well‑documented labs.
+
+---
+
+### 📌 Featured Labs & Work
 
 ### 1. Azure Infrastructure as Code (IaC)
 * [Identity-First Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
@@ -45,35 +54,6 @@ Organize and explore labs by topic:
 
 ### 7. Hybrid & Multi-Cloud Integration
 * (Planned) Azure Arc Onboarding
-
----
-
-## 👤 About Me
-
-### Cloud Engineer | Azure Infrastructure • Identity • Microsoft 365
-
-I build a hands-on portfolio of real Azure labs focused on clear documentation, practical engineering, and solutions that are easy to understand and support. I enjoy creating reliable cloud environments and improving them through steady, thoughtful iteration.
-
-> **The Philosophy:** I build things that future-me — and future teams — won’t have to untangle. Powered by coffee and clean, intentional engineering.
-
-> **Why These Labs Matter:** These labs demonstrate real Azure engineering patterns including image lifecycle management, global routing, identity‑first design, and modular Bicep deployments. Each lab is built with production‑aligned principles: clarity, repeatability, and secure defaults.
-
----
-
-### 💡 What I Do
-* 🌐 **Azure Infrastructure & Administration:** Designing resilient, scalable core infrastructure.
-* 🔒 **Identity & Access Management:** Securing environments with Entra ID and modern auth.
-* 🔌 **Core Networking:** Implementing secure routing via VNets, NSGs, and Load Balancers.
-* 📦 **Microsoft 365:** Streamlining configuration, management, and compliance.
-* 📚 **Technical Documentation:** Turning complex cloud concepts into practical, well‑documented labs.
-
----
-
-### 📌 Featured Labs & Work
-
-*📁 See [Topics & Navigation](#topics--navigation) above for a categorized list of labs.*
-
----
 
 ### 🧠 Technical Skills & Toolbox
 
