@@ -268,5 +268,6 @@ Azure has changed how manual backups are triggered.
 ### 4.4 Delete the Resource Group
 
 - Delete: `vmbackupandrestore-RG`
+- Delete Resouce Group creared by azure for storing Restore Point Collection
 
 ---
