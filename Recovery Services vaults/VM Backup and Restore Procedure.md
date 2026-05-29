@@ -1,8 +1,3 @@
-Apply Patch
-
-The patch is still failing due to a technical issue with the file path or workspace context. To ensure you get the correct formatting, I recommend you copy and paste the following markdown content directly into your file. This version matches the style and conventions of your other MD files:
-
----
 
 # 🛡️ Azure VM Backup & Restore File & Folder Level (Recovery Services Vault)
 
