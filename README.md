@@ -44,11 +44,11 @@
 	- [Capture & Test Image](VMSS/3-capture-and-test-image.md)
 	- [VMSS Deployment Guide](VMSS/vmss-deployment.md)
 5. **Monitoring, Compliance & Governance**
-	- [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
-	- [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
-	- Governance Flow Diagram
+   - [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
+   - [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
+   - [Governance Flow Diagram](Identity-First/governance-flow.md)
 6. **Business Continuity & Resilience**
-	- Azure VM Backup & Restore (File & Folder Level using Recovery Services Vault)
+   - [Azure VM Backup & Restore (File & Folder Level using Recovery Services Vault)](Recovery%20Services%20vaults/VM%20Backup%20and%20Restore%20Procedure.md)
 7. **Hybrid & Multi‑Cloud Integration**
 	- (Planned) Azure Arc Onboarding
 
@@ -87,35 +87,4 @@
 
 ---
 
-<sub>Last updated: May 2026 — Built with ❤️, curiosity, and coffee.</sub>
-	- [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
-Governance Flow Diagram
-6. Business Continuity & Resilience
-Azure VM Backup & Restore (File & Folder Level using Recovery Services Vault)
-7. Hybrid & Multi‑Cloud Integration
-(Planned) Azure Arc Onboarding
----
-🧠 Technical Skills & Toolbox
-Category	Technologies & Tools
-Azure Core Infra	VMs • VMSS • VNets • NSGs • Load Balancers • Front Door • Storage Accounts
-Identity & Security	Microsoft Entra ID • RBAC • Conditional Access • Identity Governance
-Automation & IaC	PowerShell • GitHub Actions • Bicep (Learning) • Azure CLI
-Microsoft 365	Tenant Admin • Users & Groups • Security & Compliance • Endpoint Basics
----
-🛠️ Upcoming Projects
-Designing a resilient Azure Backup & Recovery Vault framework (Business Continuity)
-Azure Arc Onboarding (Hybrid Integration)
-Defender for Cloud (CSPM + Plans)
-Defender for Cloud + Hub‑and‑Spoke Integration
----
-🎖️ Certifications
-Security & Identity: SC‑300 | SC‑400
-Methodology & Management: PMP | PRINCE2 Agile | ITIL | SAFe PO/PM | PSM I | CSM
-Virtualization: VCP‑DCV
----
-📫 Connect With Me
-💼 LinkedIn: linkedin.com/in/nadeemkadwaikar
-📧 Email: nadeemkadwaikar@outlook.com
----
-Last updated: May 2026 — Built with ❤️, curiosity, and coffee.
----
+<Last updated: May 2026 — Built with ❤️, curiosity, and coffee.
