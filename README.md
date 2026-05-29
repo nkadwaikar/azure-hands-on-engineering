@@ -50,7 +50,7 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 * [Governance Flow Diagram](Identity-First/governance-flow.md)
 
 ### 6. Business Continuity & Resilience
-* (Coming soon) Azure Backup & Recovery Vault
+* [Azure VM Backup & Restore File & Folder Level (Recovery Services Vault)](Recovery%20Services%20vaults/VM%20Backup%20and%20Restore%20Procedure.md)
 
 ### 7. Hybrid & Multi-Cloud Integration
 * (Planned) Azure Arc Onboarding
@@ -67,7 +67,7 @@ I build a hands-on portfolio of real Azure labs focused on clear documentation, 
 ---
 
 ### 🛠️ Upcoming Projects
-* Designing a resilient Azure Backup and Recovery Vault framework for business continuity.
+* Designing a resilient Azure Backup and Recovery Vault framework for business continuity : Site Recovery
 * Azure Arc Onboarding (Hybrid Integration)
 * Defender for Cloud (CSPM + Plans)
 * Defender for Cloud + Hub‑and‑Spoke Integration
