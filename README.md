@@ -48,7 +48,7 @@
    - [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
    - [Governance Flow Diagram](Identity-First/governance-flow.md)
 6. **Business Continuity & Resilience**
-   - [Azure VM Backup & Restore (File & Folder Level using Recovery Services Vault)](Recovery%20Services%20vaults/VM%20Backup%20and%20Restore%20Procedure.md)
+   - [Azure VM Backup](Recovery%20Services%20vaults/VM%20Backup%20and%20Restore%20Procedure.md)
 7. **Hybrid & Multi‑Cloud Integration**
 	- (Planned) Azure Arc Onboarding
 
@@ -87,4 +87,4 @@
 
 ---
 
-<Last updated: May 2026 — Built with ❤️, curiosity, and coffee.
+Last updated: May 2026 — Built with ❤️, curiosity, and coffee.

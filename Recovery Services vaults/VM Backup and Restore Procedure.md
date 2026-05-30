@@ -1,5 +1,5 @@
 
-# 🛡️ Azure VM Backup & Restore File & Folder Level (Recovery Services Vault)
+# 🛡️ Azure VM Backup 
 
 A complete hands-on lab demonstrating Enhanced VM backup, file-level recovery, full VM restore, and cleanup using the new Azure Backup experience.
 
