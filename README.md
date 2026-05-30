@@ -49,8 +49,6 @@
    - [Governance Flow Diagram](Identity-First/governance-flow.md)
 6. **Business Continuity & Resilience**
    - [Azure VM Backup](Recovery%20Services%20vaults/VM%20Backup%20and%20Restore%20Procedure.md)
-7. **Hybrid & Multi‑Cloud Integration**
-	- (Planned) Azure Arc Onboarding
 
 ---
 
@@ -66,6 +64,8 @@
 ## 🛠️ Upcoming Projects
 
 - Designing a resilient Azure Backup & Recovery Vault framework (Business Continuity)
+- Azure Policy Remediation
+- Azure App Services
 - Azure Arc Onboarding (Hybrid Integration)
 - Defender for Cloud (CSPM + Plans)
 - Defender for Cloud + Hub‑and‑Spoke Integration
