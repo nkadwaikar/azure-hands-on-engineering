@@ -70,6 +70,20 @@
 - Defender for Cloud (CSPM + Plans)
 - Defender for Cloud + Hub‑and‑Spoke Integration
 
+## 🤖 Copilot Studio (AI Engineering Track)
+
+Hands‑on labs covering Copilot Studio fundamentals, generative copilots, flows, plugins, data integration, and enterprise governance.
+
+- Introduction to Copilot Studio
+- Create Your Initial Copilot
+- Subjects & Generative AI
+- Information Sources & Data Links
+- Processes & Functions
+- Extensions & API Incorporation
+- Evaluation & Problem Solving
+- Deployment, Protection & Oversight
+- Sophisticated Schemes
+
 ---
 
 ## 🎖️ Certifications
