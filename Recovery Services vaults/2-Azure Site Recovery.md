@@ -192,15 +192,6 @@ Important:
 
 ---
 
-## 8. Re-protect and Failback (West US 2 to East US)
-
-### 8.1 Re-protect in Reverse Direction
-
-1. In the recovery plan, select Re-protect.
-2. Confirm direction is now West US 2 to East US.
-3. Wait until replication health is Healthy.
-
-
 ### 8.2 Run Failback
 
 1. In the same recovery plan, select Failover.
