@@ -48,7 +48,7 @@ By the end of this lab, you will:
 ### 1.2 Create a Storage Account
 
 1. Go to **Create a resource** → **Storage account**
-2. Name: `vmbackupandrestorestg`
+2. Name: `vmbackupandrestorestg<unique-suffix>`
 3. Performance: Standard
 4. Redundancy: Locally Redundant Storage (LRS)
 5. Click **Review + Create** → **Create**
@@ -186,16 +186,64 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-## 3. File-Level Recovery Test
+### 2.8 Verify Backup Job Completion
 
-### 3.1 Delete Files in the VM
+1. In the vault, open **Backup Jobs**
+2. Filter by your VM name (`fntech-FS01`)
+3. Confirm the latest **Backup** job status is **Completed**
+4. Only proceed after completion to ensure a valid restore point is available
+
+---
+
+## 3. Full VM Restore Test
+
+### 3.1 Start Full VM Restore
+
+1. Go to **Recovery Services Vault** → **Backup items** → **Azure Virtual Machine**
+2. Select your VM (`fntech-FS01`)
+3. Click **Restore VM**
+4. Select a restore point from the successful backup
+
+---
+
+### 3.2 Configure Restore Options
+
+1. Choose restore type:
+  - **Create new virtual machine** (recommended for lab validation)
+2. Configure target settings:
+  - Resource group: `vmbackupandrestore-RG`
+  - Virtual network and subnet: use existing lab network
+  - Restored VM name: `fntech-FS01-restore`
+3. Review settings and click **Restore**
+
+---
+
+### 3.3 Validate Restored VM
+
+1. Open **Backup Jobs** and wait until restore job status is **Completed**
+2. Go to **Virtual machines** and confirm `fntech-FS01-restore` is created
+3. Connect to restored VM using RDP
+4. Validate expected OS state and file presence
+
+---
+
+### 3.4 Clean Up Restored VM (Lab)
+
+1. If restore validation is complete, delete the restored VM and related resources created by restore
+2. Keep the original VM and vault resources for file-level recovery steps below
+
+---
+
+## 4. File-Level Recovery Test
+
+### 4.1 Delete Files in the VM
 
 1. RDP into the VM
 2. Delete several files/subfolders from `C:\Data Files`
 
 ---
 
-### 3.2 Start File Recovery
+### 4.2 Start File Recovery
 
 1. Go to **Recovery Services Vault** → **Backup items** → **Azure Virtual Machine**
 2. Select your VM
@@ -205,7 +253,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 3.3 Mount the Recovery Volume
+### 4.3 Mount the Recovery Volume
 
 1. Copy the `.exe` into the VM (or download directly inside the VM)
 2. Run it as **Administrator**
@@ -214,7 +262,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 3.4 Restore Deleted Files
+### 4.4 Restore Deleted Files
 
 1. Open the mounted drive
 2. Navigate to: `E:\Data Files\`
@@ -222,7 +270,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 3.5 Unmount the Recovery Volume
+### 4.5 Unmount the Recovery Volume
 
 1. Return to the executable window
 2. Click **Unmount Disks**
@@ -230,16 +278,16 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 3.6 Verify Recovery
+### 4.6 Verify Recovery
 
 - Confirm file structure and content
 - Document any additional steps
 
 ---
 
-## 4. Cleanup (Updated & Correct Order)
+## 5. Cleanup (Updated & Correct Order)
 
-### 4.1 Stop Backup for the VM
+### 5.1 Stop Backup for the VM
 
 1. Open the **Recovery Services Vault**
 2. Go to **Backup items** → **Azure Virtual Machine**
@@ -251,7 +299,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 4.2 Delete the Recovery Services Vault
+### 5.2 Delete the Recovery Services Vault
 
 1. Ensure **Backup items = 0**
 2. Click **Delete**
@@ -259,15 +307,15 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 4.3 Delete the Storage Account
+### 5.3 Delete the Storage Account
 
-- Delete: `vmbackupandrestorestg`
+- Delete: `vmbackupandrestorestg<unique-suffix>`
 
 ---
 
-### 4.4 Delete the Resource Group
+### 5.4 Delete the Resource Group
 
 - Delete: `vmbackupandrestore-RG`
-- Delete Resouce Group creared by azure for storing Restore Point Collection
+- Delete the resource group created by Azure for storing Restore Point Collection
 
 ---

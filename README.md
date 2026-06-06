@@ -69,6 +69,7 @@
 - Azure Arc Onboarding (Hybrid Integration)
 - Defender for Cloud (CSPM + Plans)
 - Defender for Cloud + Hub‑and‑Spoke Integration
+  
 
 ## 🤖 Copilot Studio (AI Engineering Track)
 
