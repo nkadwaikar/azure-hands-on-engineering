@@ -274,7 +274,7 @@ Today you learned:
 - How to correlate governance events across services
 - How to confirm your identity-first architecture is fully auditable
 
---
+---
 
 ## ▶️ **Next Lab**
 

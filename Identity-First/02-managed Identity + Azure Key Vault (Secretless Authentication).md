@@ -1,6 +1,6 @@
 # Managed Identity + Azure Key Vault (Secretless Authentication)
 
-> **Prerequisites:** This lab continues from Day 1 (see `01-identity-rbac-basics.md`), using the same Resource Group (`rg-bootcamp`).  
+> **Prerequisites:** This lab continues from Day 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-bootcamp`).  
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
@@ -27,7 +27,7 @@ This lab introduces the identity-first pattern used in modern cloud workloads.
 
 Ensure you have completed:
 
-- **Day 1 — Identity Fundamentals + RBAC Basics** (see `01-identity-rbac-basics.md`)
+- **Day 1 — Identity Fundamentals + RBAC Basics** (see `01-identity fundamentals.md`)
 - Resource group: `rg-bootcamp` (created in Day 1)
 
 ---

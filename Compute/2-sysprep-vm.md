@@ -84,7 +84,7 @@ Deleting it causes:
 # 🎉 Sysprep complete
 
 Proceed to:  
-➡ [Capture & Test Image](3-capture-and-test-image.md)
+➡ [Capture & Test Image](../VMSS/1-capture-and-test-image.md)
 
 ---
 

@@ -63,4 +63,4 @@ If IIS works → your custom image is **ready for VMSS**.
 # 🎉 Image is ready for VMSS deployment
 
 Next step:  
-➡ [VMSS Deployment Guide](vmss-deployment.md)
+➡ [VMSS Deployment Guide](2-vmss-deployment.md)
