@@ -111,7 +111,7 @@ East US to West US 2 disaster recovery lab.
 ### 4.3 Validate Source Application
 
 1. Copy source VM public IP from VM Overview.
-2. Browse to http://<public-ip>.
+2. Browse to http://public-ip.
 3. Confirm IIS default page is reachable.
 
 ---
