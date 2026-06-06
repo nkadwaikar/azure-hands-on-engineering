@@ -29,27 +29,27 @@
 ## 📌 Labs & Guides
 
 1. **Azure Infrastructure as Code (IaC)**
-	- [Identity‑First Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
-	- [VS Code Bicep Deployment Workflow](Identity-First/vscode-deployment-workflow.md)
+   - [Identity‑First Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
+   - [VS Code Bicep Deployment Workflow](Identity-First/vscode-deployment-workflow.md)
 2. **Identity‑First Security & Zero Trust**
-	- [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
-	- [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
-	- [Azure AD Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md)
-	- [Access Validation](Identity-First/05-access-validation.md)
+   - [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
+   - [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
+   - [Azure AD Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md)
+   - [Access Validation](Identity-First/05-access-validation.md)
 3. **Cloud Networking & Global Delivery**
-	- [Azure Front Door Static Web](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
+   - [Azure Front Door Static Web](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
 4. **Image Lifecycle & Automation**
-	- [Build Base VM](Compute/1-build-base-vm.md)
-	- [Sysprep Azure VM](Compute/2-sysprep-vm.md)
-	- [Capture & Test Image](VMSS/1-capture-and-test-image.md)
-	- [VMSS Deployment Guide](VMSS/2-vmss-deployment.md)
+   - [Build Base VM](Compute/1-build-base-vm.md)
+   - [Sysprep Azure VM](Compute/2-sysprep-vm.md)
+   - [Capture & Test Image](VMSS/1-capture-and-test-image.md)
+   - [VMSS Deployment Guide](VMSS/2-vmss-deployment.md)
 5. **Monitoring, Compliance & Governance**
    - [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
    - [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
    - [Governance Flow Diagram](Identity-First/governance-flow.md)
 6. **Business Continuity & Resilience**
    - [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
-	- [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
+   - [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
 
 ---
 
@@ -68,7 +68,6 @@
 - Azure App Services
 - Azure Arc Onboarding (Hybrid Integration)
 - Defender for Cloud (CSPM + Plans) with Hub-and-Spoke Integration
-
 
 ## 🤖 Copilot Studio (AI Engineering Track)
 
