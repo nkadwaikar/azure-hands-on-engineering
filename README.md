@@ -42,7 +42,7 @@
    - [Build Base VM](Compute/1-build-base-vm.md)
    - [Sysprep Azure VM](Compute/2-sysprep-vm.md)
    - [Capture & Test Image](VMSS/1-capture-and-test-image.md)
-   - [VMSS Deployment Guide](VMSS/2-vmss-deployment.md)
+   - [VMSS Deployment](VMSS/2-vmss-deployment.md)
 5. **Monitoring, Compliance & Governance**
    - [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
    - [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
