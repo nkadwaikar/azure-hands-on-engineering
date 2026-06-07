@@ -71,17 +71,26 @@
 
 ## 🤖 Copilot Studio (AI Engineering Track)
 
-Hands‑on labs covering Copilot Studio fundamentals, generative copilots, flows, plugins, data integration, and enterprise governance.
+Hands‑on labs covering Copilot Studio fundamentals, generative copilots, flows, plugins, data integration, and enterprise governance.  
 
-- Introduction to Copilot Studio
-- Create Your Initial Copilot
-- Subjects & Generative AI
-- Information Sources & Data Links
-- Processes & Functions
-- Extensions & API Incorporation
-- Evaluation & Problem Solving
-- Deployment, Protection & Oversight
-- Sophisticated Schemes
+### 📘 Foundations
+- Introduction to Copilot Studio  
+- Create Your Initial Copilot  
+
+### 🧠 Generative AI & Topics
+- Subjects & Generative AI  
+- Information Sources & Data Links  
+
+### ⚙️ Actions, Flows & Extensions
+- Processes & Functions  
+- Extensions & API Incorporation  
+
+### 🧪 Testing & Evaluation
+- Evaluation & Problem Solving  
+
+### 🚀 Deployment & Governance
+- Deployment, Protection & Oversight  
+- Sophisticated Schemes  
 
 ---
 
