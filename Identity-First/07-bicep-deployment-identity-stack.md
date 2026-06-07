@@ -1,9 +1,9 @@
 # Identity‑First Bicep Deployment Identity Stack (Week 1 Capstone)
 
-Day 7 delivers the full **identity‑first architecture** for Week 1 using modular Bicep.
-This is the foundation of a secure, secretless, RBAC‑driven Azure environment.
+Day 7 brings together the full **identity‑first architecture** for Week 1 using modular Bicep.
+It forms the foundation of a secure, secretless, RBAC-driven Azure environment.
 
-This document explains the architecture, module responsibilities, and deployment flow.
+This page outlines the architecture, the module responsibilities, and the deployment flow.
 
 All Bicep files referenced here are located in:
 
@@ -23,7 +23,7 @@ Build a modular Bicep stack that deploys:
 - A **resource lock** to protect the environment
 - A clean **composition layer** (`main.bicep`)
 
-This identity-first foundation will be reused across future capstones.
+This foundation carries forward into future capstones.
 
 ---
 
@@ -151,7 +151,7 @@ You now have:
 - Enterprise-grade RBAC and governance patterns  
 - Documentation that is clean, readable, and recruiter-ready  
 
-All code lives in the `capstone/architecture/bicep/` folder to avoid duplication and keep your repo maintainable.
+The separate capstone stack lives in `capstone/architecture/bicep/` to avoid duplication and keep the repo maintainable.
 
 ---
 

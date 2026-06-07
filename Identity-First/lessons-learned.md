@@ -1,8 +1,8 @@
 # 📝 Lessons Learned  
 *Identity-First, Governance-Ready Landing Zone*
 
-Week 1 focused on building a secure, identity-driven foundation using modular Bicep and a VS Code-only workflow.  
-These lessons capture the architectural insights, mistakes corrected, and patterns validated during the capstone.
+Week 1 focused on building a secure, identity-driven foundation with modular Bicep and a VS Code-only workflow.  
+These lessons capture the architectural insights, the mistakes corrected, and the patterns validated during the lab.
 
 ---
 
@@ -59,14 +59,14 @@ Deploying Bicep files directly from VS Code:
 
 ## 🛡️ 4. Governance Must Be Applied Early, Not Later
 
-**Key Insight**  
-Governance is not a "Week 8 thing."  
-It must be part of the foundation.
+**Key Insight**
+Governance is not something to add in a later week.  
+It needs to be part of the foundation.
 
-**What I learned**  
+**What I learned**
 - Resource Locks prevent accidental deletion during experimentation.  
 - RBAC assignments must be scoped correctly (resource vs RG).  
-- Policies should be introduced early to enforce consistency.
+- Policies can be added later if the stack needs central enforcement.
 
 ---
 
@@ -101,16 +101,16 @@ They force clarity and reveal gaps.
 A well-organized repo is a competitive advantage.
 
 **What I learned**  
-- Separating `bicep/`, `docs/`, `validation/`, `governance/`, and `observability/` keeps everything clean.  
-- Validation screenshots deserve their own folder hierarchy.  
-- A consistent structure sets the tone for future capstones.
+- Separating `bicep/` from the markdown labs keeps everything easier to navigate.  
+- Keeping validation evidence near the relevant lab reduces friction.  
+- A consistent structure sets the tone for future projects.
 
 ---
 
 ## 🚀 8. Small Wins Compound Into Big Momentum
 
-**Key Insight**  
-Week 1 wasn't about complexity — it was about **foundations**.
+**Key Insight**
+Week 1 was not about complexity — it was about **foundations**.
 
 **What I learned**  
 - A simple, secure landing zone is better than a complex, fragile one.  

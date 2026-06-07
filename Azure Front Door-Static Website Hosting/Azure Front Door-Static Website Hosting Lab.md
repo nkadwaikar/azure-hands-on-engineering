@@ -5,9 +5,9 @@
 
 ### **Objective**
 Deploy a static website using **Azure Storage Static Website Hosting** and publish it globally through **Azure Front Door (Standard/Premium)**.  
-This lab covers:
+The lab walks through:
 
-- Static website hostingå  
+- Static website hosting  
 - Front Door endpoint, origin, and route configuration  
 - Validation using `curl`  
 - Caching behavior  
@@ -46,7 +46,7 @@ This ensures:
 
 Example static website endpoint:
 ```
-https://<storage-account>.z13.web.core.windows.net/
+https://<storage-account>.zXX.web.core.windows.net/
 ```
 
 ---
@@ -62,7 +62,7 @@ https://<storage-account>.z13.web.core.windows.net/
 
 ### Test the origin directly:
 ```bash
-curl -I https://<storage-account>.z13.web.core.windows.net/
+curl -I https://<storage-account>.zXX.web.core.windows.net/
 ```
 
 Expected:
@@ -76,7 +76,7 @@ HTTP/1.1 200 OK
 
 ## **3.1 Create Front Door Profile (with Endpoint, Origin, and Route)**
 
-Using **Custom Create**, Azure prompts you to configure all major components during setup.
+Using **Custom Create**, Azure guides you through configuring all major components during setup.
 
 ### **Profile Details**
 - **Name:** Choose a descriptive name  
@@ -97,8 +97,9 @@ Using **Custom Create**, Azure prompts you to configure all major components dur
 ### **Origin Settings**
 - **Origin type:** Storage (Static website)  
 - **Origin host name:**  
+  Use the storage account's actual static website hostname:
   ```
-  <storage-account>.z13.web.core.windows.net
+  <storage-account>.zXX.web.core.windows.net
   ```
 - **Origin host header:** Same as hostname  
 - **HTTPS port:** 443  
@@ -131,8 +132,8 @@ Configure the route during creation:
 | Compression          | Optional                         |
 
 ### **Why “HTTPS only” is required**
-Azure Storage Static Website Hosting **only supports HTTPS**.  
-Forwarding HTTP would cause origin failures.
+Azure Storage Static Website Hosting should be reached over HTTPS from Front Door.  
+Keep the route's forwarding protocol set to HTTPS only so the origin is always contacted securely.
 
 ---
 

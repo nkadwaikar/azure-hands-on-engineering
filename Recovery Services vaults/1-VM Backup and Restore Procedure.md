@@ -1,7 +1,7 @@
 
 # 🛡️ Azure VM Backup 
 
-A complete hands-on lab demonstrating Enhanced VM backup, file-level recovery, full VM restore, and cleanup using the new Azure Backup experience.
+A hands-on lab covering Enhanced VM backup, file-level recovery, full VM restore, and cleanup using the current Azure Backup experience.
 
 > **Note:** This lab uses Azure Backup defaults. Adjust retention, encryption, and security settings based on your organization’s governance and compliance requirements.
 

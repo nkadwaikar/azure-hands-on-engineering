@@ -1,6 +1,6 @@
 ## 🧼 Sysprep the Windows VM (Azure‑Safe Method)
 
-This document covers preparing the VM for image capture using the correct Sysprep command.
+This guide walks you through preparing the VM for image capture with the correct Sysprep command.
 
 ---
 
@@ -41,7 +41,7 @@ cd C:\Windows\System32\Sysprep
 .\sysprep.exe /generalize /oobe /shutdown /mode:vm
 ```
 
-### Why these switches matter:
+### Why these switches matter
 - **/generalize** → resets SID  
 - **/oobe** → Azure can specialize the VM  
 - **/shutdown** → required before capture  

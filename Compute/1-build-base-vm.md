@@ -2,7 +2,7 @@
 
 ## 🎯 Purpose
 
-This guide helps you quickly create a VM in Azure using consistent steps and naming conventions.
+This guide walks you through creating a VM in Azure with consistent steps and naming conventions.
 Use it as a reference for labs, demos, or production-aligned builds.
 
 ---
@@ -37,10 +37,8 @@ Configure:
 - **Security type:** Standard
 - **Image:** Windows Server 2022 / Ubuntu LTS
 - **VM architecture:** x64
-- **Run with Azure Spot discount:** Yes
-  - **Eviction type:** Capacity only
-  - **Eviction policy:** Stop / Deallocate
-- **Size:** Standard_FX2mds_v2 — 2 vCPUs, 42 GiB RAM ($0.07682/hr)
+- **Run with Azure Spot discount:** No
+- **Size:** Standard_B2s — 2 vCPUs, 4 GiB RAM
 - **Administrator account:**
   - **Username:** your choice
   - **Password or SSH key:** set credentials

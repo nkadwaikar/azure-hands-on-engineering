@@ -1,6 +1,6 @@
 # Azure Site Recovery (ASR) Lab Guide
 
-East US to West US 2 disaster recovery lab.
+An East US to West US 2 disaster recovery lab.
 
 ---
 
@@ -95,7 +95,7 @@ East US to West US 2 disaster recovery lab.
 
 ### 4.1 Install IIS on Source VM
 
-1. Follow instructions from ../Compute/3-Install IIS.md.
+1. Follow instructions from [../Compute/3-Install IIS.md](../Compute/3-Install%20IIS.md).
 
 ### 4.2 Allow HTTP on Source VM
 

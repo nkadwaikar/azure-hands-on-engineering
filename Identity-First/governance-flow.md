@@ -1,7 +1,7 @@
 # 🛡️ Governance Flow Diagram  
-*How Policies, RBAC, and Locks Enforce Safe Operations in the Landing Zone*
+*How RBAC and Locks Enforce Safe Operations in the Landing Zone*
 
-This diagram illustrates the governance controls applied in your Week 1 capstone. It shows how **Azure Policy**, **RBAC**, and **Resource Locks** work together to enforce compliance, prevent accidental deletion, and ensure identity-first access.
+This diagram highlights the governance controls applied in your Week 1 stack. It shows how **RBAC** and **Resource Locks** work together to enforce compliance, prevent accidental deletion, and preserve identity-first access.
 
 ---
 
@@ -13,8 +13,8 @@ This diagram illustrates the governance controls applied in your Week 1 capstone
                          │   (Governance Root Scope)       │
                          └───────────────┬────────────────┘
                                          │
-                                         │ 1. Policy Assignments
-                                         │    (Deny/Audit/DeployIfNotExists)
+                                         │ 1. Governance Baseline
+                                         │    (RBAC + Deployment Scope)
                                          ▼
                          ┌────────────────────────────────┐
                          │      Resource Group Level       │
@@ -57,17 +57,8 @@ This diagram illustrates the governance controls applied in your Week 1 capstone
 
 ## 🧠 What This Diagram Shows
 
-**✔ Azure Policy governs the environment from the top**  
-Policies enforce:
-
-- Allowed locations  
-- Tag requirements  
-- Diagnostic settings  
-- Key Vault RBAC mode  
-- Resource naming conventions (optional)
-
 **✔ RBAC controls who can do what**  
-Examples from your capstone:
+Examples from your stack:
 
 - Deployment identity → Contributor  
 - UAMI → Key Vault Secrets User  
@@ -81,7 +72,7 @@ Your `wk1-lock` prevents accidental deletion of:
 - Any other protected resource  
 
 **✔ Identity-first access is enforced by governance**  
-Policies + RBAC ensure:
+RBAC + locks ensure:
 
 - No secrets  
 - No access policies  
@@ -94,7 +85,7 @@ Governance is not an afterthought — it's part of the IaC.
 
 ## 🎉 Summary
 
-This governance flow demonstrates:
+This governance flow shows:
 
 - **Policy-driven compliance** — centralized enforcement at subscription scope
 - **RBAC-based authorization** — granular access control without secrets

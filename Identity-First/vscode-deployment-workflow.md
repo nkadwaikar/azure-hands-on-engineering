@@ -1,8 +1,10 @@
 # 🔄 How Bicep Deploys from VS Code → Subscription → Resource Group → Modules
 
-*Visual Studio Code Deployment Workflow for Week 1 Capstone*
+*Visual Studio Code Deployment Workflow for the Identity-First Lab Stack*
 
-This diagram shows the exact flow of how your Week 1 capstone is deployed using VS Code only, without Azure CLI or Portal.
+This diagram maps how the Identity-First lab stack is deployed using VS Code only, without Azure CLI or the Portal.
+
+> Note: the separate capstone architecture under `Identity-First/capstone/architecture/bicep/` uses its own resource-group naming and module layout.
 
 ---
 
@@ -39,10 +41,9 @@ This diagram shows the exact flow of how your Week 1 capstone is deployed using 
         │   2. keyvault.bicep      → Creates Key Vault         │
         │   3. rbac.bicep          → Assigns KV RBAC           │
         │   4. locks.bicep         → Adds CanNotDelete lock    │
-        │   5. diagnostics.bicep   → (Optional) Logging        │
         └──────────────────────────────────────────────────────┘
                               │
-                              │  Outputs returned to VS Code
+                        │  Outputs surfaced in VS Code
                               ▼
                 ┌──────────────────────────────────┐
                 │   VS Code Output & Azure Explorer │
@@ -79,7 +80,7 @@ Azure Explorer shows:
 
 ## 🎉 Summary
 
-This workflow demonstrates:
+This workflow shows:
 
 - **Pure VS Code deployment** — no command-line tools required
 - **Hierarchical deployment** — subscription → resource group → modules

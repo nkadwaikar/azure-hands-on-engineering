@@ -7,29 +7,29 @@
 ---
 
 > **Philosophy:**
-> I build things that future‑me — and future teams — won’t have to untangle. Powered by coffee and clean, intentional engineering.
+> I build things that future‑me — and future teams — can pick up without unpacking a mess. Powered by coffee and clean, intentional engineering.
 
 ---
 
 > **Why These Labs Matter:**
-> Each lab demonstrates real Azure engineering patterns including image lifecycle management, global routing, identity‑first design, and modular Bicep deployments. Every lab is built with production‑aligned principles: **clarity, repeatability, and secure defaults**.
+> Each lab shows a real Azure engineering pattern in action, from image lifecycle management and global routing to identity‑first design and modular Bicep deployments. Every lab is shaped by production-aligned principles: **clarity, repeatability, and secure defaults**.
 
 ---
 
 ## 💡 What I Do
 
-- 🌐 Azure Infrastructure & Administration — Designing resilient, scalable core infrastructure
+- 🌐 Azure Infrastructure & Administration — Building resilient, scalable core infrastructure
 - 🔒 Identity & Access Management — Securing environments with Microsoft Entra ID and modern authentication
 - 🔌 Core Networking — VNets, NSGs, Load Balancers, routing, and global delivery
 - 📦 Microsoft 365 — Tenant configuration, management, and compliance
-- 📚 Technical Documentation — Turning complex cloud concepts into practical, well‑documented labs
+- 📚 Technical Documentation — Turning complex cloud concepts into practical, well-documented labs
 
 ---
 
 ## 📌 Labs & Guides
 
 1. **Azure Infrastructure as Code (IaC)**
-   - [Identity‑First Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
+   - [Identity‑First Bicep Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
    - [VS Code Bicep Deployment Workflow](Identity-First/vscode-deployment-workflow.md)
 2. **Identity‑First Security & Zero Trust**
    - [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
@@ -37,7 +37,7 @@
    - [Azure AD Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md)
    - [Access Validation](Identity-First/05-access-validation.md)
 3. **Cloud Networking & Global Delivery**
-   - [Azure Front Door Static Web](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
+   - [Azure Front Door Static Website Hosting](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
 4. **Image Lifecycle & Automation**
    - [Build Base VM](Compute/1-build-base-vm.md)
    - [Sysprep Azure VM](Compute/2-sysprep-vm.md)
@@ -71,7 +71,7 @@
 
 ## 🤖 Copilot Studio (AI Engineering Track)
 
-Hands‑on labs covering Copilot Studio fundamentals, generative copilots, flows, plugins, data integration, and enterprise governance.  
+Hands-on labs that cover Copilot Studio fundamentals, generative copilots, flows, plugins, data integration, and enterprise governance.  
 
 ### 📘 Foundations
 - Introduction to Copilot Studio  

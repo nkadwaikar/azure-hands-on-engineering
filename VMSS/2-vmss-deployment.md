@@ -18,9 +18,9 @@ Before starting this VMSS deployment, ensure you have completed:
 
 | Step | File |
 |------|------|
-| Build Base VM (IIS + custom page) | `1-build-base-vm.md` |
-| Sysprep the VM | `2-sysprep-vm.md` |
-| Capture & Test the Image | `3-capture-and-test-image.md` |
+| Build Base VM (IIS + custom page) | [../Compute/1-build-base-vm.md](../Compute/1-build-base-vm.md) |
+| Sysprep the VM | [../Compute/2-sysprep-vm.md](../Compute/2-sysprep-vm.md) |
+| Capture & Test the Image | [1-capture-and-test-image.md](1-capture-and-test-image.md) |
 
 Your Shared Image Gallery should now contain a **validated image version** (e.g., `1.0.0`).
 
