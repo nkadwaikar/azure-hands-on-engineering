@@ -79,6 +79,7 @@ This gives you something to remediate.
    - **Resource Group:** `rg-policy-autoremedy-eus-lab` (created in Step 0)
    - **Storage Account Name:** `stpolicyremedy01` (must be globally unique; adjust as needed)
    - **Region:** Same as your resource group (East US)
+   - **Primary service** Azure Blob Storage or Azure Data Lake Storage
 3. Under the **Advanced** tab, set **Secure transfer required** = **Disabled**
 4. Complete the remaining fields and click **Review + Create → Create**
 
