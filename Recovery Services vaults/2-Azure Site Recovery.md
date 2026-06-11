@@ -2,6 +2,11 @@
 
 An East US to West US 2 disaster recovery lab.
 
+Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Index](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)
+
+Last validated on: 2026-06-10
+Portal experience note: Steps validated in Azure Portal June 2026; failover/re-protect labels may vary slightly across subscriptions.
+
 ---
 
 ## 1. Prerequisites
@@ -13,6 +18,28 @@ An East US to West US 2 disaster recovery lab.
 - Target resource group for DR resources: rg-fntech-asr-lab-eus-core-dr
 - Recovery Services vault name reserved: rsv-fntech-asr-lab-eus-dr
 - (Recommended) Existing target VNet and subnet in West US 2
+
+Naming reference: [README Naming Convention](../README.md#naming-convention)
+
+### Assumptions and Scope Boundaries
+
+- Lab assumes source and DR subscriptions are available and allowed for ASR usage.
+- Private endpoint architecture and custom DNS failover are out of scope.
+- CMK-based encryption and advanced compliance controls are out of scope.
+- Cross-subscription failback complexity and production runbook automation are out of scope.
+- Production hardening (change windows, CAB approvals, and app dependency mapping) is not fully covered.
+
+## Lab Architecture
+
+```mermaid
+flowchart LR
+	EUS[East US VM<br/>vm-fntech-asr-lab-eus-app01] -->|ASR Replication| WUS2[West US 2 Replica]
+	RP[Recovery Plan<br/>rp-asr-lab-eus-to-wus2] --> TF[Test Failover]
+	RP --> PF[Planned Failover]
+	PF --> C1[Commit]
+	C1 --> RP2[Re-protect Reverse Direction]
+	RP2 --> FB[Failback to East US]
+```
 
 ---
 
@@ -192,6 +219,29 @@ Important:
 
 ---
 
+### 7.3 Commit Planned Failover
+
+1. Return to recovery plan rp-asr-lab-eus-to-wus2.
+2. Open Jobs and confirm failover status is Succeeded.
+3. Select Commit for the failed over VM(s).
+4. Wait until commit job is completed.
+
+---
+
+## 8. Failback (West US 2 to East US)
+
+### 8.1 Re-protect Before Failback
+
+1. In the recovery plan, select the replicated item after planned failover.
+2. Select Re-protect.
+3. Confirm replication direction is now West US 2 to East US.
+4. Review target settings for East US resources and start re-protect.
+5. Wait for replication health to return to Healthy and recovery points to appear.
+
+This step is required so failback has valid reverse-direction replication.
+
+---
+
 ### 8.2 Run Failback
 
 1. In the same recovery plan, select Failover.
@@ -208,6 +258,12 @@ Important:
 
 This confirms data consistency and end-to-end DR flow.
 
+### 8.4 Commit Failback
+
+1. In recovery plan jobs, confirm failback shows Succeeded.
+2. Select Commit to finalize the East US workload as primary.
+3. Wait for commit completion before cleanup or next DR cycle.
+
 ---
 
 ## 9. Cleanup
@@ -220,3 +276,50 @@ This confirms data consistency and end-to-end DR flow.
 	- DR networking resources (if lab-only)
 2. Delete Recovery Services vault after protected items and backup artifacts are removed.
 3. Delete lab resource groups if no longer needed.
+
+## Optional CLI Path (Key Steps)
+
+```bash
+# Create target DR resource group
+az group create --name rg-fntech-asr-lab-eus-core-dr --location westus2
+
+# Create Recovery Services vault
+az backup vault create \
+	--resource-group rg-fntech-asr-lab-eus-core-dr \
+	--name rsv-fntech-asr-lab-eus-dr
+
+# List fabrics and protection containers (ASR discovery)
+az site-recovery fabric list \
+	--resource-group rg-fntech-asr-lab-eus-core-dr \
+	--vault-name rsv-fntech-asr-lab-eus-dr
+
+# List replicated items (health check)
+az site-recovery protected-item list \
+	--resource-group rg-fntech-asr-lab-eus-core-dr \
+	--vault-name rsv-fntech-asr-lab-eus-dr
+```
+
+Note: ASR CLI commands vary by scenario and API version. Use CLI for inventory/validation and keep failover execution in portal unless you have an automation runbook.
+
+## Troubleshooting
+
+- Enable replication button is disabled: Verify vault region, source VM eligibility, and required provider registration.
+- Test failover fails at networking stage: Confirm target VNet/subnet exists in West US 2 and has no conflicting policy.
+- Failover button unavailable in recovery plan: Ensure replication health is Healthy and at least one recent recovery point exists.
+- Re-protect fails after commit: Check reverse path target settings and required DR resources in source region.
+- Replication lag confusion: RPO is asynchronous; verify Latest recovery point timestamp before failover decisions.
+- Vault deletion blocked: Disable replication for all protected items and remove recovery plans first.
+- DR VM unreachable: Attach NSG/Public IP and confirm inbound rules for RDP/HTTP.
+
+## Evidence to Capture
+
+- Screenshot of replicated item health and RPO value.
+- Test failover job status and cleanup completion.
+- Planned failover and commit job completion timestamps.
+- Re-protect and failback job completion evidence.
+- DR VM validation artifacts (IIS page and `C:\DR-Folder-Test`).
+- Cleanup evidence: zero protected items and vault deletion readiness.
+
+---
+
+Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Index](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)

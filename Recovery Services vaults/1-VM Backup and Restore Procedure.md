@@ -1,13 +1,18 @@
 
-# 🛡️ Azure VM Backup 
+# Azure VM Backup Lab Guide
 
 A hands-on lab covering Enhanced VM backup, file-level recovery, full VM restore, and cleanup using the current Azure Backup experience.
+
+Navigation: [Lab Index](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)
+
+Last validated on: 2026-06-10
+Portal experience note: Steps validated against Azure Portal UI as of June 2026; labels can vary slightly by region and feature rollout.
 
 > **Note:** This lab uses Azure Backup defaults. Adjust retention, encryption, and security settings based on your organization’s governance and compliance requirements.
 
 ---
 
-## 🎯 Learning Objectives
+## 1. Learning Objectives
 
 By the end of this lab, you will:
 - Deploy a Recovery Services Vault
@@ -19,7 +24,7 @@ By the end of this lab, you will:
 
 ---
 
-## 📋 Prerequisites
+## 2. Prerequisites
 
 - Azure subscription with **Owner** or **Contributor** permissions
 - Ability to create:
@@ -28,15 +33,30 @@ By the end of this lab, you will:
   - Storage accounts
   - Recovery Services Vault
 
+Naming reference: [README Naming Convention](../README.md#naming-convention)
+
+### Assumptions and Scope Boundaries
+
+- Lab uses non-production resources only.
+- Private endpoints, CMK encryption, and immutability settings are out of scope.
+- Cross-subscription backup and restore scenarios are out of scope.
+- Production hardening (policy enforcement, lock strategy, monitoring baseline) is not covered in depth.
+
+## Lab Architecture
+
+```mermaid
+flowchart LR
+    VM[Source VM<br/>fntech-FS01] -->|Backup policy| RSV[Recovery Services Vault]
+    RSV -->|Recovery point| RP[Restore Point]
+    RP -->|Full restore| VMR[Restored VM<br/>fntech-FS01-restore]
+    RP -->|File-level mount| FLR[Mounted recovery volume]
+```
+
 ---
 
-# 🧪 Lab Steps
+## 3. Initial Setup
 
----
-
-## 1. Initial Setup
-
-### 1.1 Create the Resource Group
+### 3.1 Create the Resource Group
 
 1. In the Azure Portal, select **Create a resource** → **Resource group**
 2. Name: `vmbackupandrestore-RG`
@@ -45,7 +65,7 @@ By the end of this lab, you will:
 
 ---
 
-### 1.2 Create a Storage Account
+### 3.2 Create a Storage Account
 
 1. Go to **Create a resource** → **Storage account**
 2. Name: `vmbackupandrestorestg<unique-suffix>`
@@ -55,7 +75,7 @@ By the end of this lab, you will:
 
 ---
 
-### 1.3 Deploy a Windows VM
+### 3.3 Deploy a Windows VM
 
 1. Go to **Create a resource** → **Virtual machine**
 2. Configure:
@@ -70,7 +90,7 @@ By the end of this lab, you will:
 
 ---
 
-### 1.4 Prepare the VM
+### 3.4 Prepare the VM
 
 1. Connect via RDP from the VM blade
 2. Inside Windows:
@@ -80,7 +100,7 @@ By the end of this lab, you will:
 
 ---
 
-## 2. Configure Backup (New Azure Backup Experience)
+## 4. Configure Backup (New Azure Backup Experience)
 
 Azure has redesigned the VM backup workflow. You now configure backup per VM, and during that process you either select an existing policy or create a new Enhanced policy.
 
@@ -88,7 +108,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ---
 
-### 2.1 Start Backup from Backup Items
+### 4.1 Start Backup from Backup Items
 
 1. Open the **Recovery Services Vault**
 2. Select **Backup items**
@@ -97,7 +117,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ---
 
-### 2.2 Select Backup Source
+### 4.2 Select Backup Source
 
 1. Where is your workload running? → **Azure**
 2. What do you want to back up? → **Virtual machine**
@@ -105,7 +125,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ---
 
-### 2.3 Select Virtual Machines
+### 4.3 Select Virtual Machines
 
 1. Click **Add**
 2. Select your VM: `fntech-FS01`
@@ -115,7 +135,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ---
 
-### 2.4 Create or Select a Backup Policy
+### 4.4 Create or Select a Backup Policy
 
 **Create a New Enhanced Policy**
 
@@ -146,7 +166,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ---
 
-### 2.5 Selective Disk Backup
+### 4.5 Selective Disk Backup
 
 - Azure displays all disks attached to the VM:
   - OS disk cannot be excluded
@@ -158,7 +178,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ---
 
-### 2.6 Enable Backup
+### 4.6 Enable Backup
 
 1. Review the Enhanced policy warning:
    - Once enabled, switching to Standard policy is not possible
@@ -170,7 +190,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ---
 
-### 2.7 Trigger the First Backup (Updated Method)
+### 4.7 Trigger the First Backup (Updated Method)
 
 Azure has changed how manual backups are triggered.
 
@@ -186,7 +206,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 2.8 Verify Backup Job Completion
+### 4.8 Verify Backup Job Completion
 
 1. In the vault, open **Backup Jobs**
 2. Filter by your VM name (`fntech-FS01`)
@@ -195,9 +215,9 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-## 3. Full VM Restore Test
+## 5. Full VM Restore Test
 
-### 3.1 Start Full VM Restore
+### 5.1 Start Full VM Restore
 
 1. Go to **Recovery Services Vault** → **Backup items** → **Azure Virtual Machine**
 2. Select your VM (`fntech-FS01`)
@@ -206,7 +226,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 3.2 Configure Restore Options
+### 5.2 Configure Restore Options
 
 1. Choose restore type:
   - **Create new virtual machine** (recommended for lab validation)
@@ -218,7 +238,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 3.3 Validate Restored VM
+### 5.3 Validate Restored VM
 
 1. Open **Backup Jobs** and wait until restore job status is **Completed**
 2. Go to **Virtual machines** and confirm `fntech-FS01-restore` is created
@@ -227,23 +247,23 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 3.4 Clean Up Restored VM (Lab)
+### 5.4 Clean Up Restored VM (Lab)
 
 1. If restore validation is complete, delete the restored VM and related resources created by restore
 2. Keep the original VM and vault resources for file-level recovery steps below
 
 ---
 
-## 4. File-Level Recovery Test
+## 6. File-Level Recovery Test
 
-### 4.1 Delete Files in the VM
+### 6.1 Delete Files in the VM
 
 1. RDP into the VM
 2. Delete several files/subfolders from `C:\Data Files`
 
 ---
 
-### 4.2 Start File Recovery
+### 6.2 Start File Recovery
 
 1. Go to **Recovery Services Vault** → **Backup items** → **Azure Virtual Machine**
 2. Select your VM
@@ -253,7 +273,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 4.3 Mount the Recovery Volume
+### 6.3 Mount the Recovery Volume
 
 1. Copy the `.exe` into the VM (or download directly inside the VM)
 2. Run it as **Administrator**
@@ -262,7 +282,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 4.4 Restore Deleted Files
+### 6.4 Restore Deleted Files
 
 1. Open the mounted drive
 2. Navigate to: `E:\Data Files\`
@@ -270,7 +290,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 4.5 Unmount the Recovery Volume
+### 6.5 Unmount the Recovery Volume
 
 1. Return to the executable window
 2. Click **Unmount Disks**
@@ -278,16 +298,16 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 4.6 Verify Recovery
+### 6.6 Verify Recovery
 
 - Confirm file structure and content
 - Document any additional steps
 
 ---
 
-## 5. Cleanup (Updated & Correct Order)
+## 7. Cleanup (Updated and Correct Order)
 
-### 5.1 Stop Backup for the VM
+### 7.1 Stop Backup for the VM
 
 1. Open the **Recovery Services Vault**
 2. Go to **Backup items** → **Azure Virtual Machine**
@@ -299,7 +319,7 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 5.2 Delete the Recovery Services Vault
+### 7.2 Delete the Recovery Services Vault
 
 1. Ensure **Backup items = 0**
 2. Click **Delete**
@@ -307,15 +327,64 @@ Azure has changed how manual backups are triggered.
 
 ---
 
-### 5.3 Delete the Storage Account
+### 7.3 Delete the Storage Account
 
 - Delete: `vmbackupandrestorestg<unique-suffix>`
 
 ---
 
-### 5.4 Delete the Resource Group
+### 7.4 Delete the Resource Group
 
 - Delete: `vmbackupandrestore-RG`
 - Delete the resource group created by Azure for storing Restore Point Collection
 
+## Optional CLI Path (Key Steps)
+
+```bash
+# Create resource group
+az group create --name vmbackupandrestore-RG --location eastus
+
+# Create Recovery Services vault
+az backup vault create \
+  --resource-group vmbackupandrestore-RG \
+  --name rsv-vmbackup-lab-eus
+
+# Enable backup for VM (example policy: DefaultPolicy)
+az backup protection enable-for-vm \
+  --resource-group vmbackupandrestore-RG \
+  --vault-name rsv-vmbackup-lab-eus \
+  --vm fntech-FS01 \
+  --policy-name DefaultPolicy
+
+# Trigger on-demand backup
+az backup protection backup-now \
+  --resource-group vmbackupandrestore-RG \
+  --vault-name rsv-vmbackup-lab-eus \
+  --container-name "iaasvmcontainerv2;vmbackupandrestore-rg;fntech-fs01" \
+  --item-name "fntech-fs01" \
+  --retain-until 2026-06-30T23:59:00Z
+```
+
+Note: Container and item names can differ by environment; confirm exact values with `az backup item list`.
+
+## Troubleshooting
+
+- Backup now option not visible: Open VM under Backup Items, scroll right, and use the row action menu.
+- Policy creation blocked for Enhanced policy: Ensure at least one VM is selected in the backup wizard before creating policy.
+- File Recovery executable fails to mount: Run as Administrator and verify one-time password has not expired.
+- Restore job fails with quota or SKU issue: Choose a different size/zone for restored VM and re-run restore.
+- Vault deletion blocked: Stop backup and delete backup data for all protected items first, then retry vault delete.
+- Disk include/exclude confusion: OS disk cannot be excluded; validate selected data disks before enable backup.
+
+## Evidence to Capture
+
+- Screenshot of vault with protected VM and applied policy.
+- Backup job status showing Completed with timestamp.
+- Restore job status and restored VM overview.
+- File-level recovery mounted drive and recovered file list.
+- Cleanup proof: Backup items count = 0 and vault deletion completion.
+- Notes: observed RPO/RTO, total recovery duration, and any portal variance.
+
 ---
+
+Navigation: [Lab Index](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)
