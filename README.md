@@ -87,6 +87,7 @@ Next recommended lab: [Azure Monitor & Activity Logs](Identity-First/06-azuremon
 ### 5. Monitoring, Compliance & Governance
 - [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md) - Audit trail and alerting for security events
 - [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md) - Prevent accidental deletion and enforce tagging and SKU constraints
+- [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/Azure%20Policy%20Auto%E2%80%91Remediation.md) - DINE policy with managed identity and auto-remediation pipelines
 - [Governance Flow Diagram](Identity-First/governance-flow.md)
 
 Next recommended lab: [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
@@ -107,7 +108,6 @@ Recommended lab order:
 
 ## 🛠️ Currently Building
 
-- Azure Policy Remediation (auto-remediation pipelines)
 - Azure App Services (deployment slots, scaling, managed identity integration)
 - Defender for Cloud - CSPM + Plans with Hub-and-Spoke topology
 - Azure Arc Onboarding (hybrid server management)
