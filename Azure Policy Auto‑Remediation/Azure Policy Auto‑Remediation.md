@@ -54,13 +54,33 @@ Components you will configure:
 
 ---
 
+### Step 0 — Create a Resource Group
+
+Before deploying resources, create a dedicated resource group for this lab.
+
+1. Go to **Azure Portal → Resource Groups → Create**
+2. Fill in:
+   - **Subscription:** Your target subscription
+   - **Resource Group Name:** `rg-policy-autoremedy-eus-lab` (or adjust region code as needed)
+   - **Region:** East US (or your preferred region)
+3. Click **Review + Create → Create**
+
+> **Expected state:** The resource group is created and visible in your subscription under **Resource Groups**.
+
+---
+
 ### Step 1 — Create a Non-Compliant Resource
 
 This gives you something to remediate.
 
 1. Go to **Azure Portal → Storage Accounts → Create**
-2. Under the **Advanced** tab, set **Secure transfer required** = **Disabled**
-3. Complete the remaining fields and click **Review + Create → Create**
+2. Fill in:
+   - **Subscription:** Your target subscription
+   - **Resource Group:** `rg-policy-autoremedy-eus-lab` (created in Step 0)
+   - **Storage Account Name:** `stpolicyremedy01` (must be globally unique; adjust as needed)
+   - **Region:** Same as your resource group (East US)
+3. Under the **Advanced** tab, set **Secure transfer required** = **Disabled**
+4. Complete the remaining fields and click **Review + Create → Create**
 
 > **Expected state:** The storage account is created with HTTPS enforcement off. It will show as **Non-Compliant** after policy evaluation (up to 30 minutes after assignment).
 
