@@ -23,18 +23,12 @@ I keep cloud engineering clear, repeatable, and secure by default. Every lab fol
 
 ---
 
-## 🎖️ Certifications
+## 🎖️ Azure-Focused Certifications
 
 | Certification | Focus |
 |---|---|
 | **SC-300** | Microsoft Identity and Access Administrator |
 | **SC-400** | Microsoft Information Protection Administrator |
-| **PMP** | Project Management Professional |
-| **PRINCE2 Agile** | Agile Project Delivery |
-| **ITIL** | IT Service Management |
-| **SAFe PO/PM** | Scaled Agile |
-| **PSM I / CSM** | Scrum |
-| **VCP-DCV** | VMware Virtualisation |
 
 ---
 
