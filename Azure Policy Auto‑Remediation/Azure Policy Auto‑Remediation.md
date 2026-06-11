@@ -1,4 +1,4 @@
-# Azure Policy Auto-Remediation Lab (Portal-Only)
+# Azure Policy Auto-Remediation (Portal-Only)
 
 **End-to-End Hands-On Lab for Real-World Auto-Remediation Pipelines**
 
