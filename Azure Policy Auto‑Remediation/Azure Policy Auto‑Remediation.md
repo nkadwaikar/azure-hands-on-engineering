@@ -61,7 +61,7 @@ Before deploying resources, create a dedicated resource group for this lab.
 1. Go to **Azure Portal → Resource Groups → Create**
 2. Fill in:
    - **Subscription:** Your target subscription
-   - **Resource Group Name:** `rg-policy-autoremedy-eus-lab` (or adjust region code as needed)
+  - **Resource Group Name:** `rg-policy-eus-lab-remedy` (or adjust region code as needed)
    - **Region:** East US (or your preferred region)
 3. Click **Review + Create → Create**
 
@@ -76,8 +76,8 @@ This gives you something to remediate.
 1. Go to **Azure Portal → Storage Accounts → Create**
 2. Fill in:
    - **Subscription:** Your target subscription
-   - **Resource Group:** `rg-policy-autoremedy-eus-lab` (created in Step 0)
-   - **Storage Account Name:** `stpolicyremedy01` (must be globally unique; adjust as needed)
+  - **Resource Group:** `rg-policy-eus-lab-remedy` (created in Step 0)
+  - **Storage Account Name:** `stpolicylabremedy01` (must be globally unique; adjust as needed)
    - **Region:** Same as your resource group (East US)
    - **Primary service** Azure Blob Storage or Azure Data Lake Storage
 3. Under the **Advanced** tab, set **Secure transfer required** = **Disabled**

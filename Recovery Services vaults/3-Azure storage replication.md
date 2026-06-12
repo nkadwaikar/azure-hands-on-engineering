@@ -12,7 +12,7 @@
 
 1. Go to **Resource groups** → **+ Create**.
 2. **Subscription:** your lab subscription.
-3. **Resource group name:** `rg-storage-replication-lab`
+3. **Resource group name:** `rg-fntech-eus-lab-repl`
 4. **Region:** choose a primary region (e.g., East US).
 5. Click **Review + create** → **Create**.
 
@@ -22,8 +22,8 @@
 
 1. Search **Storage accounts** → **+ Create**.
 2. **Subscription:** your lab subscription.
-3. **Resource group:** `rg-storage-replication-lab`
-4. **Storage account name:** `streplicationlab01` (must be globally unique).
+3. **Resource group:** `rg-fntech-eus-lab-repl`
+4. **Storage account name:** `stfntechlabrepl01` (must be globally unique).
 5. **Region:** same as RG (e.g., East US).
 6. **Primary service:** Azure Blob Storage or Azure Data Lake Storage
 7. **Performance:** Standard.
@@ -34,7 +34,7 @@
 
 ## 4. Create a Blob Container and Upload a Test File
 
-1. Open `streplicationlab01`.
+1. Open `stfntechlabrepl01`.
 2. In left menu, select **Containers** → **+ Container**.
 3. **Name:** `testdata`
 4. **Public access level:** Private (no anonymous access).
@@ -60,8 +60,8 @@
 ## 6. Create Second Storage Account (ZRS)
 
 1. **Storage accounts** → **+ Create** again.
-2. **Resource group:** `rg-storage-replication-lab`
-3. **Storage account name:** `streplicationlab02`
+2. **Resource group:** `rg-fntech-eus-lab-repl`
+3. **Storage account name:** `stfntechlabrepl02`
 4. **Region:** choose a region that supports ZRS and GZRS (e.g., West Europe or East US 2, depending on availability).
 5. **Performance:** Standard.
 6. **Redundancy:** Zone redundant storage (ZRS).
@@ -73,7 +73,7 @@
 
 ## 7. Test ZRS Behavior
 
-1. Open `streplicationlab02`.
+1. Open `stfntechlabrepl02`.
 2. Go to **Data Management** and confirm **Redundancy = ZRS**.
 3. Create a container `testzrs` and upload a file `sample-zrs.txt`.
 
@@ -85,7 +85,7 @@
 
 > **Note:** Not all transitions are allowed in all regions. If a specific path is blocked, document it as a "limitation observed."
 
-1. In `streplicationlab02`, go to **Configuration**.
+1. In `stfntechlabrepl02`, go to **Configuration**.
 2. Under **Redundancy**, click **Upgrade** (or change) if available.
 3. Try changing:
    - From ZRS → GZRS (if supported), or
@@ -100,29 +100,29 @@
 
 ## 9. Create Third Storage Account and Enable Read Access (RA GZRS / RA GRS)
 
-> **Note:** A third storage account (`streplicationlab03`) is needed for this step, to keep the failover test in Step 11 independent.
+> **Note:** A third storage account (`stfntechlabrepl03`) is needed for this step, to keep the failover test in Step 11 independent.
 
-### 9a. Create `streplicationlab03`
+### 9a. Create `stfntechlabrepl03`
 
 1. **Storage accounts** → **+ Create**.
-2. **Resource group:** `rg-storage-replication-lab`
-3. **Storage account name:** `streplicationlab03`
-4. **Region:** same region used for `streplicationlab02`.
+2. **Resource group:** `rg-fntech-eus-lab-repl`
+3. **Storage account name:** `stfntechlabrepl03`
+4. **Region:** same region used for `stfntechlabrepl02`.
 5. **Performance:** Standard.
 6. **Redundancy:** Zone redundant storage (ZRS) or GZRS if available.
 7. Click **Review + create** → **Create**.
 
 ### 9b. Enable Read Access
 
-1. In `streplicationlab03`, go to **Configuration**.
+1. In `stfntechlabrepl03`, go to **Configuration**.
 2. Under **Redundancy**, click **Upgrade** (or change) to:
    - Read-access geo-zone-redundant storage (RA GZRS), or
    - Read-access geo-redundant storage (RA GRS) — depending on what's available.
 3. Click **Save**.
 4. After it completes, go to **Endpoints**.
 5. Note both endpoints:
-   - Primary: `https://streplicationlab03.blob.core.windows.net`
-   - Secondary: `https://streplicationlab03-secondary.blob.core.windows.net`
+   - Primary: `https://stfntechlabrepl03.blob.core.windows.net`
+   - Secondary: `https://stfntechlabrepl03-secondary.blob.core.windows.net`
 
 ---
 
@@ -132,8 +132,8 @@
 
 1. Open **Azure Storage Browser**.
 2. Sign in with your Azure account.
-3. Expand **Storage Accounts** → `streplicationlab03` → **Blob Containers**.
-4. Locate the container created in `streplicationlab03`.
+3. Expand **Storage Accounts** → `stfntechlabrepl03` → **Blob Containers**.
+4. Locate the container created in `stfntechlabrepl03`.
 5. In the account tree, you should see both (primary) and (secondary) endpoints.
 6. Try browsing the container via the secondary endpoint.
 7. Confirm you can read (download or open) the blob, but cannot write to it.
@@ -152,7 +152,7 @@
 
 > ⚠️ **Warning:** Geo-failover is one-way and irreversible. Use only in a lab storage account with no important data.
 
-1. In `streplicationlab02`, go to **Geo-replication** (under Settings).
+1. In `stfntechlabrepl02`, go to **Geo-replication** (under Settings).
 2. Review:
    - Primary region
    - Secondary region
@@ -197,7 +197,7 @@
 
 1. Delete blobs to reduce any ongoing egress costs.
 2. Delete storage accounts:
-   - `streplicationlab01`
-   - `streplicationlab02`
-   - `streplicationlab03`
-3. Delete resource group: `rg-storage-replication-lab`
+   - `stfntechlabrepl01`
+   - `stfntechlabrepl02`
+   - `stfntechlabrepl03`
+3. Delete resource group: `rg-fntech-eus-lab-repl`

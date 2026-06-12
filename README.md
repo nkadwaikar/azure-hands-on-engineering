@@ -1,7 +1,5 @@
 # 👋 Hi, I'm Nadeem Kadwaikar
 
-# 👋 Hi, I'm Nadeem Kadwaikar
-
 *Cloud Engineer - Azure Infrastructure, Identity, and Microsoft 365*
 
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
@@ -10,7 +8,6 @@
 ![Entra ID](https://img.shields.io/badge/Entra%20ID-0078D4?style=flat&logo=microsoftazure&logoColor=white)
 
 
-I build secure, identity-first Azure platforms...
 I build secure, identity-first Azure platforms for regulated environments using infrastructure as code and practical governance.
 
 ## 💡 Engineering Philosophy
@@ -32,39 +29,57 @@ I keep cloud engineering clear, repeatable, and secure by default. Every lab fol
 
 ---
 
-## 🎖️ Azure-Focused Certifications
+## 🎖️ Certifications
 
 | Certification | Focus |
 |---|---|
 | **SC-300** | Microsoft Identity and Access Administrator |
 | **SC-400** | Microsoft Information Protection Administrator |
+| **PMP** | Project Management Professional |
+| **PRINCE2 Agile** | Agile Project Delivery |
+| **ITIL** | IT Service Management |
+| **SAFe PO/PM** | Scaled Agile |
+| **PSM I / CSM** | Scrum |
+| **VCP-DCV** | VMware Virtualisation |
 
 ---
 
 ## Naming Convention
 
-Use these patterns across labs to keep resource names predictable and avoid drift.
+Use these standards across labs to keep names predictable, searchable, and automation-friendly.
+
+Token legend:
+- `workload`: short solution/system name (`fntech`, `identity`, `web`).
+- `region`: short Azure region code (`eus`, `wus2`, `weu`).
+- `env`: environment marker (`lab`, `dev`, `tst`, `prd`).
+- `purpose` / `role`: concise function (`core`, `dr`, `app`, `kv`).
+- `nn`: 2-digit sequence (`01`, `02`).
 
 | Resource Type | Pattern | Example |
 |---|---|---|
-| Resource Group | `rg-<workload>-<region>-<env>-<purpose>` | `rg-fntech-asr-lab-eus-core` |
-| VM | `vm-<workload>-<region>-<role><nn>` | `vm-fntech-asr-lab-eus-app01` |
-| Recovery Services Vault | `rsv-<workload>-<region>-<purpose>` | `rsv-fntech-asr-lab-eus-dr` |
-| Storage Account | `st<workload><purpose><nn>` | `streplicationlab01` |
-| VNet | `vnet-<workload>-<region>-<purpose>` | `vnet-fntech-asr-lab-wus2-dr` |
-| NSG | `nsg-<workload>-<region>-<scope>` | `nsg-asr-dr-vm` |
-| Public IP | `pip-<workload>-<region>-<target>` | `pip-asr-dr-vm` |
+| Resource Group | `rg-<workload>-<region>-<env>-<purpose>` | `rg-fntech-eus-lab-core` |
+| Virtual Machine | `vm-<workload>-<region>-<env>-<role><nn>` | `vm-fntech-eus-lab-app01` |
+| User Assigned Managed Identity | `uami-<workload>-<region>-<env>-<purpose>` | `uami-identity-eus-lab-deploy` |
+| Key Vault | `kv-<workload>-<region>-<env>-<purpose>` | `kv-identity-eus-lab-core` |
+| Recovery Services Vault | `rsv-<workload>-<region>-<env>-<purpose>` | `rsv-fntech-eus-lab-dr` |
+| VNet | `vnet-<workload>-<region>-<env>-<purpose>` | `vnet-fntech-wus2-lab-dr` |
+| NSG | `nsg-<workload>-<region>-<env>-<scope>` | `nsg-fntech-wus2-lab-vm` |
+| Public IP | `pip-<workload>-<region>-<env>-<target>` | `pip-fntech-wus2-lab-vm` |
+| Storage Account* | `st<workload><env><purpose><nn>` | `stidentitylabdiag01` |
 
-Naming notes:
-- Keep names lowercase where required by Azure service rules.
-- Use short region codes consistently (`eus`, `wus2`, `weu`).
-- Keep `lab` in names for non-production resources.
+*Storage account names must be 3-24 chars, lowercase letters/numbers only, and no hyphens.
+
+Naming rules:
+- Keep all names lowercase unless an Azure resource explicitly allows and requires otherwise.
+- Keep region codes and environment tokens consistent across all labs.
+- Use `lab` for non-production exercises; reserve `prd` for production examples.
+- Prefer short, stable tokens so scripts and Bicep parameters remain reusable.
 
 ---
 
 ## 📌 Practical Labs
 
-These labs reflect real Azure engineering patterns. They are production-aligned implementations with the reasoning documented, not step-by-step tutorials.
+These labs reflect real Azure engineering patterns. Each includes a documented walkthrough and, where applicable, Bicep templates or scripts for reproducibility.
 
 ### 1. Azure Infrastructure as Code (IaC)
 - [Identity-First Bicep Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md) - Modular Bicep stack: Managed Identity + Key Vault + RBAC + Governance Lock

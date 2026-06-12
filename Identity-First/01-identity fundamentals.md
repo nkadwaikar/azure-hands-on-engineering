@@ -80,7 +80,7 @@ az ad user create \
 3. Click **Create**  
 4. Fill in the following:
    - **Subscription:** Select your subscription
-   - **Resource group:** `rg-bootcamp`
+  - **Resource group:** `rg-identity-eus-lab-core`
    - **Region:** Your preferred region (e.g., East US)
 5. Click **Review + Create → Create**
 
@@ -88,14 +88,14 @@ az ad user create \
 
 ```bash
 az group create \
-  --name rg-bootcamp \
+  --name rg-identity-eus-lab-core \
   --location eastus
 ```
 
 **Verify creation:**
 
 ```bash
-az group show --name rg-bootcamp --output table
+az group show --name rg-identity-eus-lab-core --output table
 ```
 
 ---
@@ -125,7 +125,7 @@ Assign Alex the **Contributor** role at the Resource Group scope.
 
 #### Using Azure Portal
 
-1. Navigate to **Resource groups → rg-bootcamp**
+1. Navigate to **Resource groups → rg-identity-eus-lab-core**
 2. Click **Access control (IAM)** in the left menu
 3. Click **Add → Add role assignment**
 4. On the **Role** tab:
@@ -148,7 +148,7 @@ SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 az role assignment create \
   --assignee alex.james@contoso.com \
   --role Contributor \
-  --scope /subscriptions/$SUBSCRIPTION_ID/resourceGroups/rg-bootcamp
+  --scope /subscriptions/$SUBSCRIPTION_ID/resourceGroups/rg-identity-eus-lab-core
 ```
 
 #### Verify the Assignment
@@ -156,7 +156,7 @@ az role assignment create \
 ```bash
 az role assignment list \
   --assignee alex.james@contoso.com \
-  --resource-group rg-bootcamp \
+  --resource-group rg-identity-eus-lab-core \
   --output table
 ```
 
@@ -165,7 +165,7 @@ az role assignment list \
 ```
 Principal                    Role         Scope
 ---------------------------  -----------  -----------------------------------
-alex.james@contoso.com       Contributor  /subscriptions/.../resourceGroups/rg-bootcamp
+alex.james@contoso.com       Contributor  /subscriptions/.../resourceGroups/rg-identity-eus-lab-core
 ```
 
 ---
@@ -174,7 +174,7 @@ alex.james@contoso.com       Contributor  /subscriptions/.../resourceGroups/rg-b
 
 When Alex signs in to Azure Portal:
 
-- ✅ Only `rg-bootcamp` is visible under Resource Groups  
+- ✅ Only `rg-identity-eus-lab-core` is visible under Resource Groups  
 - ❌ No other resource groups appear  
 - ❌ Attempts to access or create resources outside this RG result in **Access denied**  
 
@@ -189,7 +189,7 @@ This validates **RBAC scoping** and **least-privilege** principles.
 ### Steps to Validate
 
 1. Go to **Azure Portal → Resource Groups**  
-2. Confirm that **only** `rg-bootcamp` is visible  
+2. Confirm that **only** `rg-identity-eus-lab-core` is visible  
 3. Attempt the following (all should fail):  
    - View subscription-level settings  
    - Create a resource in a different resource group  
@@ -198,7 +198,7 @@ This validates **RBAC scoping** and **least-privilege** principles.
 
 ### Expected Result
 
-All attempts outside `rg-bootcamp` should return:
+All attempts outside `rg-identity-eus-lab-core` should return:
 
 ```
 ❌ Access denied
@@ -212,15 +212,15 @@ This confirms **correct RBAC enforcement** at the Resource Group scope.
 
 ### 👨‍💼 Admin: Create a Test Resource
 
-Create a Storage Account inside `rg-bootcamp` to test inheritance.
+Create a Storage Account inside `rg-identity-eus-lab-core` to test inheritance.
 
 #### Using Azure Portal
 
 1. Navigate to **Storage accounts → Create**
 2. Fill in:
    - **Subscription:** Your subscription
-   - **Resource group:** `rg-bootcamp`
-   - **Storage account name:** `stbootcamp<uniqueid>` (e.g., `stbootcamp2025`)
+  - **Resource group:** `rg-identity-eus-lab-core`
+  - **Storage account name:** `stidentitylabcore01` (must be globally unique in your tenant)
    - **Region:** Same as the resource group
    - **Performance:** Standard
    - **Redundancy:** Locally-redundant storage (LRS)
@@ -230,11 +230,11 @@ Create a Storage Account inside `rg-bootcamp` to test inheritance.
 
 ```bash
 # Generate a unique storage account name
-STORAGE_NAME="stbootcamp$RANDOM"
+STORAGE_NAME="stidentitylabcore01"
 
 az storage account create \
   --name $STORAGE_NAME \
-  --resource-group rg-bootcamp \
+  --resource-group rg-identity-eus-lab-core \
   --location eastus \
   --sku Standard_LRS
 ```
@@ -256,7 +256,7 @@ Sign in as `alex.james@contoso.com` and navigate to the storage account.
 #### ❌ Actions the User CANNOT Perform
 
 - Assign IAM roles on the storage account (requires Owner or User Access Administrator)
-- Access resources outside `rg-bootcamp`
+- Access resources outside `rg-identity-eus-lab-core`
 - View or modify subscription-level settings
 
 ---
@@ -269,7 +269,7 @@ This demonstrates how **RBAC permissions inherit down the scope hierarchy**:
 Contributor at RG → Contributor on ALL resources inside RG
 ```
 
-The Contributor role assigned at the `rg-bootcamp` scope automatically applies to:
+The Contributor role assigned at the `rg-identity-eus-lab-core` scope automatically applies to:
 - The storage account
 - Any future resources created in this RG
 
@@ -319,7 +319,7 @@ az role assignment list \
 ```bash
 az role assignment list \
   --assignee alex.james@contoso.com \
-  --resource-group rg-bootcamp \
+  --resource-group rg-identity-eus-lab-core \
   --query "[].roleDefinitionName" \
   --output tsv
 ```
@@ -331,13 +331,13 @@ az role assignment list \
 az role assignment delete \
   --assignee alex.james@contoso.com \
   --role Reader \
-  --resource-group rg-bootcamp
+  --resource-group rg-identity-eus-lab-core
 
 # Assign Contributor role
 az role assignment create \
   --assignee alex.james@contoso.com \
   --role Contributor \
-  --resource-group rg-bootcamp
+  --resource-group rg-identity-eus-lab-core
 ```
 
 ---
@@ -359,7 +359,7 @@ az role assignment create \
 ```bash
 az role assignment list \
   --assignee alex.james@contoso.com \
-  --resource-group rg-bootcamp
+  --resource-group rg-identity-eus-lab-core
 ```
 
 ---
@@ -374,7 +374,7 @@ This will delete all resources inside it (including the storage account):
 
 ```bash
 az group delete \
-  --name rg-bootcamp \
+  --name rg-identity-eus-lab-core \
   --yes \
   --no-wait
 ```
@@ -389,7 +389,7 @@ az ad user delete \
 **Verify deletion:**
 
 ```bash
-az group list --query "[?name=='rg-bootcamp']" --output table
+az group list --query "[?name=='rg-identity-eus-lab-core']" --output table
 az ad user show --id alex.james@contoso.com 2>/dev/null || echo "User deleted"
 ```
 

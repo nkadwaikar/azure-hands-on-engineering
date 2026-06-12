@@ -10,7 +10,7 @@ This lab validates RBAC, Managed Identity, locks, and policies using both the **
 If you removed resources after Day 4, recreate the following:
 
 ### **Resource Groups**
-- `rg-bootcamp` (policy-free sandbox)  
+- `rg-identity-eus-lab-core` (policy-free sandbox)  
 - `rg-test-compliant` (policy-restricted RG)
 
 ### **Policies**
@@ -22,7 +22,7 @@ Deploy a VM with:
 
 - System-assigned managed identity  
 - Ubuntu or Windows (your choice)  
-- In `rg-bootcamp` (no restrictions)
+- In `rg-identity-eus-lab-core` (no restrictions)
 
 ### **Optional**
 - Create a Key Vault for MI access tests  
@@ -52,7 +52,7 @@ By the end of this lab, you will:
 ### **1. Validate RBAC in the Azure Portal**
 
 #### **Test 1 — Reader Role**
-Log in as a user with **Reader** on `rg-bootcamp`.
+Log in as a user with **Reader** on `rg-identity-eus-lab-core`.
 
 Try the following:
 
@@ -65,7 +65,7 @@ This confirms Reader = view-only.
 ---
 
 #### **Test 2 — Contributor Role**
-Log in as a user with **Contributor** on `rg-bootcamp`.
+Log in as a user with **Contributor** on `rg-identity-eus-lab-core`.
 
 Try:
 
@@ -105,7 +105,7 @@ az account show
 #### **Test 1 — List Role Assignments**
 
 ```bash
-az role assignment list --scope /subscriptions/<subId>/resourceGroups/rg-bootcamp -o table
+az role assignment list --scope /subscriptions/<subId>/resourceGroups/rg-identity-eus-lab-core -o table
 ```
 
 Expected:
@@ -262,7 +262,7 @@ Compare:
 - Policy enforcement  
 - Lock behavior  
 
-#### **`rg-bootcamp` (Unrestricted)**
+#### **`rg-identity-eus-lab-core` (Unrestricted)**
 - No policies  
 - No restrictions  
 - Full freedom  

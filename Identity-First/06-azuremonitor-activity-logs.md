@@ -19,7 +19,7 @@ This is how real cloud security teams validate governance in production.
 
 If you cleaned up after Day 5, recreate:
 
-- `rg-bootcamp` (unrestricted RG)  
+- `rg-identity-eus-lab-core` (unrestricted RG)  
 - `rg-test-compliant` (policy‑restricted RG)  
 - VM with system-assigned identity  
 - Key Vault (optional for identity access logs)  
@@ -54,7 +54,7 @@ By the end of this lab, you will:
 **Azure Portal → Log Analytics workspaces → Create**
 
 - Name: `law-governance`  
-- Resource Group: `rg-bootcamp`  
+- Resource Group: `rg-identity-eus-lab-core`  
 - Region: same as your resources  
 
 This workspace will receive all logs.
@@ -86,7 +86,7 @@ This ensures all subscription-level governance events are captured.
 
 Do this for:
 
-- `rg-bootcamp`  
+- `rg-identity-eus-lab-core`  
 - `rg-test-compliant`
 
 **Resource Group → Diagnostic settings → Add**
@@ -153,7 +153,7 @@ From your VM’s managed identity:
 - Try accessing Storage (denied)  
 
 ### **Event 6 — Resource Deployment**
-Deploy a VM or storage account in `rg-bootcamp`.
+Deploy a VM or storage account in `rg-identity-eus-lab-core`.
 
 These events will populate your logs.
 

@@ -5,7 +5,7 @@
 **Portal Navigation**
 
 1. In Azure Portal, go to **Virtual Machines**.
-2. Select your VM: `vm-fntech-lab-eus-app01`.
+2. Select your VM: `vm-fntech-eus-lab-app01`.
 3. Click **Connect** → choose **RDP** (for Windows Server).
 4. Download the `.rdp` file and sign in using the admin credentials you set during VM creation.
 

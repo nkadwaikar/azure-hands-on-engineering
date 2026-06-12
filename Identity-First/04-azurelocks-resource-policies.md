@@ -194,7 +194,7 @@ In `rg-test-compliant`:
 - Allowed SKUs → visible  
 - Disallowed SKUs → hidden or blocked  
 
-In `rg-bootcamp` (no policy):
+In `rg-identity-eus-lab-core` (no policy):
 
 - All SKUs → visible  
 - No restrictions  
@@ -235,7 +235,7 @@ VM size dropdowns automatically filter based on allowed SKUs.
 Default VM images often select SKUs not in your allowed list.
 
 ### 8. Policy‑free vs policy‑enforced RGs behave differently  
-Your A/B comparison (`rg-bootcamp` vs `rg-test-compliant`) demonstrated real Landing Zone behavior.
+Your A/B comparison (`rg-identity-eus-lab-core` vs `rg-test-compliant`) demonstrated real Landing Zone behavior.
 
 ---
 
@@ -278,7 +278,7 @@ Once locks and policies are removed:
 - Delete `rg-locks-demo`  
 - Delete `rg-test-compliant`  
 - Delete `rg-test-noncompliant`  
-- Keep `rg-bootcamp` if you plan to use it for future labs  
+- Keep `rg-identity-eus-lab-core` if you plan to use it for future labs  
 
 ---
 

@@ -1,6 +1,6 @@
 # Managed Identity + Azure Key Vault (Secretless Authentication)
 
-> **Prerequisites:** This lab continues from Day 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-bootcamp`).  
+> **Prerequisites:** This lab continues from Day 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
@@ -28,7 +28,7 @@ This lab introduces the identity-first pattern used in modern cloud workloads.
 Ensure you have completed:
 
 - **Day 1 — Identity Fundamentals + RBAC Basics** (see `01-identity fundamentals.md`)
-- Resource group: `rg-bootcamp` (created in Day 1)
+- Resource group: `rg-identity-eus-lab-core` (created in Day 1)
 
 ---
 
@@ -40,8 +40,8 @@ Ensure you have completed:
 2. Select **Create → Azure virtual machine**
 
 **Configuration:**
-- **Resource group:** `rg-bootcamp`
-- **VM name:** `vm-bootcamp`
+- **Resource group:** `rg-identity-eus-lab-core`
+- **VM name:** `vm-identity-eus-lab-app01`
 - **Region:** Same as Resource Group
 - **Image:** Ubuntu Server 22.04 LTS
 - **Size:** Standard_B1s
@@ -62,7 +62,7 @@ chmod 400 ~/Downloads/bootcamp-key.pem
 
 ### 2.2 Enable Managed Identity
 
-1. Navigate to **vm-bootcamp** in Azure Portal
+1. Navigate to **vm-identity-eus-lab-app01** in Azure Portal
 2. In the left menu, select **Identity**
 3. Under **System assigned** tab, switch Status to **On**
 4. Click **Save**
@@ -79,8 +79,8 @@ Azure automatically creates a service principal for the VM.
 3. Configure the Key Vault:
 
 **Basics:**
-- **Resource group:** `rg-bootcamp`
-- **Key Vault name:** `kv-bootcamp-<unique>` (must be globally unique, e.g., `kv-bootcamp-12345`)
+- **Resource group:** `rg-identity-eus-lab-core`
+- **Key Vault name:** `kv-identity-eus-lab-core` (if unavailable, use your own globally unique suffix)
 - **Region:** Same as Resource Group
 - **Permission model:** Azure role-based access control (RBAC) ← **Important**
 
@@ -116,7 +116,7 @@ Grant the VM's managed identity permission to read secrets.
    - **Assign access to:** Managed identity
    - Click **Select members**
    - **Managed identity:** Virtual machine
-   - Select **vm-bootcamp**
+  - Select **vm-identity-eus-lab-app01**
    - Click **Select**
 7. Click **Review + assign**
 
@@ -134,7 +134,7 @@ This enforces the **principle of least privilege**.
 
 ## 6. Connect to the VM
 
-1. Open **vm-bootcamp** in Azure Portal
+1. Open **vm-identity-eus-lab-app01** in Azure Portal
 2. Select **Connect → SSH**
 3. Copy the connection command
 4. In your local terminal, run:
@@ -203,12 +203,12 @@ Now retrieve the secret from Key Vault without any stored credentials:
 
 ```bash
 az keyvault secret show \
-  --vault-name kv-bootcamp-<unique> \
+  --vault-name kv-identity-eus-lab-core \
   --name app-secret \
   --query value -o tsv
 ```
 
-**Important:** Replace `kv-bootcamp-<unique>` with your actual Key Vault name.
+**Important:** Replace `kv-identity-eus-lab-core` if you used a different globally unique Key Vault name.
 
 ### Expected Result
 
@@ -232,7 +232,7 @@ SuperSecretValue123
 **Cause:** Missing or incorrect RBAC assignment  
 **Fix:**  
 1. Verify the role assignment in Key Vault → Access Control (IAM)
-2. Ensure `Key Vault Secrets User` is assigned to `vm-bootcamp` managed identity
+2. Ensure `Key Vault Secrets User` is assigned to `vm-identity-eus-lab-app01` managed identity
 3. Wait 3-5 minutes for RBAC changes to propagate
 4. Retry the command
 
@@ -307,7 +307,7 @@ To remove all resources created in this lab:
 
 ```bash
 az group delete \
-  --name rg-bootcamp \
+  --name rg-identity-eus-lab-core \
   --yes \
   --no-wait
 ```

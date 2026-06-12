@@ -14,9 +14,9 @@ Portal experience note: Steps validated in Azure Portal June 2026; failover/re-p
 - Azure subscription with Contributor or Owner permissions in source and target subscriptions
 - Source VM running in East US
 - Target region capacity in West US 2
-- Existing source resource group: rg-fntech-asr-lab-eus-core
-- Target resource group for DR resources: rg-fntech-asr-lab-eus-core-dr
-- Recovery Services vault name reserved: rsv-fntech-asr-lab-eus-dr
+- Existing source resource group: rg-fntech-eus-lab-core
+- Target resource group for DR resources: rg-fntech-wus2-lab-dr
+- Recovery Services vault name reserved: rsv-fntech-wus2-lab-dr
 - (Recommended) Existing target VNet and subnet in West US 2
 
 Naming reference: [README Naming Convention](../README.md#naming-convention)
@@ -33,8 +33,8 @@ Naming reference: [README Naming Convention](../README.md#naming-convention)
 
 ```mermaid
 flowchart LR
-	EUS[East US VM<br/>vm-fntech-asr-lab-eus-app01] -->|ASR Replication| WUS2[West US 2 Replica]
-	RP[Recovery Plan<br/>rp-asr-lab-eus-to-wus2] --> TF[Test Failover]
+	EUS[East US VM<br/>vm-fntech-eus-lab-app01] -->|ASR Replication| WUS2[West US 2 Replica]
+	RP[Recovery Plan<br/>rp-fntech-eus-to-wus2-lab] --> TF[Test Failover]
 	RP --> PF[Planned Failover]
 	PF --> C1[Commit]
 	C1 --> RP2[Re-protect Reverse Direction]
@@ -49,22 +49,22 @@ flowchart LR
 
 1. In Azure Portal, go to Resource groups and select Create.
 2. Use the following values:
-	- Resource group name: rg-fntech-asr-lab-eus-core-dr
+	- Resource group name: rg-fntech-wus2-lab-dr
 	- Region: West US 2
 3. Select Review + create, then Create.
 
 ### 2.2 Create the Source VM (Source Region)
 
 1. Create or reuse the source VM in East US.
-2. Use resource group rg-fntech-asr-lab-eus-core.
-3. Use source VM vm-fntech-asr-lab-eus-app01 for all steps in this lab.
+2. Use resource group rg-fntech-eus-lab-core.
+3. Use source VM vm-fntech-eus-lab-app01 for all steps in this lab.
 
 ### 2.3 Create the Recovery Services Vault (Target Region)
 
 1. Search for Recovery Services vaults and select Create.
 2. Use the following values:
-	- Name: rsv-fntech-asr-lab-eus-dr
-	- Resource group: rg-fntech-asr-lab-eus-core-dr
+	- Name: rsv-fntech-wus2-lab-dr
+	- Resource group: rg-fntech-wus2-lab-dr
 	- Region: West US 2
 3. Create the vault.
 4. In vault settings, enable Cross Region Restore if your lab requires it.
@@ -75,7 +75,7 @@ flowchart LR
 
 ### 3.1 Start Replication Workflow
 
-1. Open Recovery Services vault rsv-fntech-asr-lab-eus-dr.
+1. Open Recovery Services vault rsv-fntech-wus2-lab-dr.
 2. In the left menu, select Site Recovery.
 3. Select Enable replication.
 
@@ -83,25 +83,25 @@ flowchart LR
 
 1. Set source configuration:
 	- Source location: East US
-	- Source resource group: rg-fntech-asr-lab-eus-core
+	- Source resource group: rg-fntech-eus-lab-core
 	- Deployment model: Resource Manager
 	- Disaster recovery between availability zones: No
-2. Select VM vm-fntech-asr-lab-eus-app01.
+2. Select VM vm-fntech-eus-lab-app01.
 3. Select Next.
 
 ### 3.3 Configure Target
 
 1. Set target configuration:
 	- Target location: West US 2
-	- Target resource group: rg-fntech-asr-lab-eus-core-dr
-	- Target VNet: vnet-fntech-asr-lab-wus2-dr
+	- Target resource group: rg-fntech-wus2-lab-dr
+	- Target VNet: vnet-fntech-wus2-lab-dr
 	- Target subnet: default (10.0.0.0/24)
 2. Cache storage account:
 	- Use auto-created account, or select an existing one in source region.
 3. Replication policy:
 	- Select 24-hour-retention-policy (or your lab policy).
 4. Replication group:
-	- Name: asr-lab-eus-dr
+	- Name: asr-fntech-eus-to-wus2-lab
 5. Extension settings:
 	- Allow ASR to manage updates for Mobility service.
 6. Select Enable replication.
@@ -109,7 +109,7 @@ flowchart LR
 ### 3.4 Validate Replication Health
 
 1. Go to Vault, Site Recovery, Replicated items.
-2. Select vm-fntech-asr-lab-eus-app01.
+2. Select vm-fntech-eus-lab-app01.
 3. Confirm:
 	- Replication health is Healthy.
 	- RPO is visible.
@@ -148,10 +148,10 @@ flowchart LR
 1. Go to Vault, Site Recovery, Recovery plans.
 2. Select Create recovery plan.
 3. Use:
-	- Name: rp-asr-lab-eus-to-wus2
+	- Name: rp-fntech-eus-to-wus2-lab
 	- Source: East US
 	- Target: West US 2
-4. Add VM vm-fntech-asr-lab-eus-app01.
+4. Add VM vm-fntech-eus-lab-app01.
 5. Create the recovery plan.
 
 ---
@@ -164,11 +164,11 @@ Important:
 
 ### 6.1 Run Test Failover
 
-1. Open recovery plan rp-asr-lab-eus-to-wus2.
+1. Open recovery plan rp-fntech-eus-to-wus2-lab.
 2. Select Test failover.
 3. Use:
 	- Recovery point: Latest processed
-	- Target VNet: vnet-fntech-asr-lab-wus2-dr
+	- Target VNet: vnet-fntech-wus2-lab-dr
 4. Start test failover.
 
 ### 6.2 Validate Test VM
@@ -193,7 +193,7 @@ Important:
 
 ### 7.1 Run Planned Failover
 
-1. Open recovery plan rp-asr-lab-eus-to-wus2.
+1. Open recovery plan rp-fntech-eus-to-wus2-lab.
 2. Select Failover.
 3. Set Recovery point to Latest processed.
 4. Confirm direction is East US to West US 2.
@@ -206,9 +206,9 @@ Important:
 	- Open Virtual machines and select the failed over DR VM.
 	- Go to Networking and open the VM network interface (NIC).
 	- In IP configurations, open ipconfig1 (or primary configuration).
-	- Set Public IP to Create new, name it pip-asr-dr-vm, then Save.
+	- Set Public IP to Create new, name it pip-fntech-wus2-lab-vm, then Save.
 	- Go back to the NIC and open Network security group.
-	- Associate an existing NSG, or create nsg-asr-dr-vm.
+	- Associate an existing NSG, or create nsg-fntech-wus2-lab-vm.
 	- In NSG inbound rules, add:
 		- Allow-RDP-3389 (TCP, port 3389, Priority 1000)
 		- Allow-HTTP-80 (TCP, port 80, Priority 1010)
@@ -221,7 +221,7 @@ Important:
 
 ### 7.3 Commit Planned Failover
 
-1. Return to recovery plan rp-asr-lab-eus-to-wus2.
+1. Return to recovery plan rp-fntech-eus-to-wus2-lab.
 2. Open Jobs and confirm failover status is Succeeded.
 3. Select Commit for the failed over VM(s).
 4. Wait until commit job is completed.
@@ -281,22 +281,22 @@ This confirms data consistency and end-to-end DR flow.
 
 ```bash
 # Create target DR resource group
-az group create --name rg-fntech-asr-lab-eus-core-dr --location westus2
+az group create --name rg-fntech-wus2-lab-dr --location westus2
 
 # Create Recovery Services vault
 az backup vault create \
-	--resource-group rg-fntech-asr-lab-eus-core-dr \
-	--name rsv-fntech-asr-lab-eus-dr
+	--resource-group rg-fntech-wus2-lab-dr \
+	--name rsv-fntech-wus2-lab-dr
 
 # List fabrics and protection containers (ASR discovery)
 az site-recovery fabric list \
-	--resource-group rg-fntech-asr-lab-eus-core-dr \
-	--vault-name rsv-fntech-asr-lab-eus-dr
+	--resource-group rg-fntech-wus2-lab-dr \
+	--vault-name rsv-fntech-wus2-lab-dr
 
 # List replicated items (health check)
 az site-recovery protected-item list \
-	--resource-group rg-fntech-asr-lab-eus-core-dr \
-	--vault-name rsv-fntech-asr-lab-eus-dr
+	--resource-group rg-fntech-wus2-lab-dr \
+	--vault-name rsv-fntech-wus2-lab-dr
 ```
 
 Note: ASR CLI commands vary by scenario and API version. Use CLI for inventory/validation and keep failover execution in portal unless you have an automation runbook.

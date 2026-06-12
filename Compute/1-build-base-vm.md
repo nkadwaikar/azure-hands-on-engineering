@@ -31,7 +31,7 @@ Configure:
 
 - **Subscription:** Your subscription
 - **Resource group:** `rg-fntech-vm-lab-eus-core`
-- **Virtual machine name:** `vm-fntech-lab-eus-app01`
+- **Virtual machine name:** `vm-fntech-eus-lab-app01`
 - **Region:** East US
 - **Availability options:** No infrastructure redundancy required
 - **Security type:** Standard
@@ -60,7 +60,7 @@ Configure:
   - **Name:** `vnet-fntech-vm-lab-eus-core`
   - **Subnet:** `snet-app`
 - **Public IP:** Create new
-  - **Name:** `pip-fntech-vm-lab-eus-app01`
+  - **Name:** `pip-fntech-eus-lab-vm`
 - **NIC network security group:**
   - Select **Basic**
   - Allow RDP (Windows) or SSH (Linux)

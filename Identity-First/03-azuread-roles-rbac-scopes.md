@@ -95,7 +95,7 @@ Expected:
 
 | User | Microsoft Entra ID Role | RBAC Role | What They Can Do |
 |------|--------------------------|-----------|------------------|
-| **Alex** | None | Contributor (Resource Group) | Full control **inside `rg-bootcamp`** only |
+| **Alex** | None | Contributor (Resource Group) | Full control **inside `rg-identity-eus-lab-core`** only |
 | **Emma** | User Administrator | Reader (Subscription) | Manage users in Microsoft Entra ID, view all Azure resources but **cannot create or modify anything** |
 
 ### ✔ Correct Interpretation
@@ -110,7 +110,7 @@ Expected:
 
 **Alex (Contributor at RG)**  
 - Can navigate Azure  
-- Can create/modify/delete resources **inside `rg-bootcamp`**  
+- Can create/modify/delete resources **inside `rg-identity-eus-lab-core`**  
 - Cannot manage users  
 - Cannot read Key Vault secrets  
 

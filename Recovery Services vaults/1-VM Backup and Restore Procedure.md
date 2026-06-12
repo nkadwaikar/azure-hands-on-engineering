@@ -46,9 +46,9 @@ Naming reference: [README Naming Convention](../README.md#naming-convention)
 
 ```mermaid
 flowchart LR
-    VM[Source VM<br/>fntech-FS01] -->|Backup policy| RSV[Recovery Services Vault]
+    VM[Source VM<br/>vm-fntech-eus-lab-fs01] -->|Backup policy| RSV[Recovery Services Vault]
     RSV -->|Recovery point| RP[Restore Point]
-    RP -->|Full restore| VMR[Restored VM<br/>fntech-FS01-restore]
+    RP -->|Full restore| VMR[Restored VM<br/>vm-fntech-eus-lab-fs02]
     RP -->|File-level mount| FLR[Mounted recovery volume]
 ```
 
@@ -59,7 +59,7 @@ flowchart LR
 ### 3.1 Create the Resource Group
 
 1. In the Azure Portal, select **Create a resource** → **Resource group**
-2. Name: `vmbackupandrestore-RG`
+2. Name: `rg-fntech-eus-lab-backup`
 3. Choose your subscription and region
 4. Click **Review + Create** → **Create**
 
@@ -68,7 +68,7 @@ flowchart LR
 ### 3.2 Create a Storage Account
 
 1. Go to **Create a resource** → **Storage account**
-2. Name: `vmbackupandrestorestg<unique-suffix>`
+2. Name: `stfntechlabbkp01`
 3. Performance: Standard
 4. Redundancy: Locally Redundant Storage (LRS)
 5. Click **Review + Create** → **Create**
@@ -79,8 +79,8 @@ flowchart LR
 
 1. Go to **Create a resource** → **Virtual machine**
 2. Configure:
-   - Name: `fntech-FS01`
-   - Resource group: `vmbackupandrestore-RG`
+  - Name: `vm-fntech-eus-lab-fs01`
+  - Resource group: `rg-fntech-eus-lab-backup`
    - Availability options: No infrastructure redundancy required
    - Security type: Standard
    - Image: Windows Server 2019 Datacenter – Gen2
@@ -128,7 +128,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 ### 4.3 Select Virtual Machines
 
 1. Click **Add**
-2. Select your VM: `fntech-FS01`
+2. Select your VM: `vm-fntech-eus-lab-fs01`
 3. Click **Select**
 
 > You cannot proceed without selecting at least one VM.
@@ -197,7 +197,7 @@ Azure has changed how manual backups are triggered.
 1. Open the **Recovery Services Vault**
 2. Go to **Backup items**
 3. Select **Azure Virtual Machine**
-4. Locate your VM (`fntech-FS01`)
+4. Locate your VM (`vm-fntech-eus-lab-fs01`)
 5. Scroll horizontally to the right
 6. Click the three‑dot **(…)** menu
 7. Select **Backup now**
@@ -209,7 +209,7 @@ Azure has changed how manual backups are triggered.
 ### 4.8 Verify Backup Job Completion
 
 1. In the vault, open **Backup Jobs**
-2. Filter by your VM name (`fntech-FS01`)
+2. Filter by your VM name (`vm-fntech-eus-lab-fs01`)
 3. Confirm the latest **Backup** job status is **Completed**
 4. Only proceed after completion to ensure a valid restore point is available
 
@@ -220,7 +220,7 @@ Azure has changed how manual backups are triggered.
 ### 5.1 Start Full VM Restore
 
 1. Go to **Recovery Services Vault** → **Backup items** → **Azure Virtual Machine**
-2. Select your VM (`fntech-FS01`)
+2. Select your VM (`vm-fntech-eus-lab-fs01`)
 3. Click **Restore VM**
 4. Select a restore point from the successful backup
 
@@ -231,9 +231,9 @@ Azure has changed how manual backups are triggered.
 1. Choose restore type:
   - **Create new virtual machine** (recommended for lab validation)
 2. Configure target settings:
-  - Resource group: `vmbackupandrestore-RG`
+  - Resource group: `rg-fntech-eus-lab-backup`
   - Virtual network and subnet: use existing lab network
-  - Restored VM name: `fntech-FS01-restore`
+  - Restored VM name: `vm-fntech-eus-lab-fs02`
 3. Review settings and click **Restore**
 
 ---
@@ -241,7 +241,7 @@ Azure has changed how manual backups are triggered.
 ### 5.3 Validate Restored VM
 
 1. Open **Backup Jobs** and wait until restore job status is **Completed**
-2. Go to **Virtual machines** and confirm `fntech-FS01-restore` is created
+2. Go to **Virtual machines** and confirm `vm-fntech-eus-lab-fs02` is created
 3. Connect to restored VM using RDP
 4. Validate expected OS state and file presence
 
@@ -329,39 +329,39 @@ Azure has changed how manual backups are triggered.
 
 ### 7.3 Delete the Storage Account
 
-- Delete: `vmbackupandrestorestg<unique-suffix>`
+- Delete: `stfntechlabbkp01`
 
 ---
 
 ### 7.4 Delete the Resource Group
 
-- Delete: `vmbackupandrestore-RG`
+- Delete: `rg-fntech-eus-lab-backup`
 - Delete the resource group created by Azure for storing Restore Point Collection
 
 ## Optional CLI Path (Key Steps)
 
 ```bash
 # Create resource group
-az group create --name vmbackupandrestore-RG --location eastus
+az group create --name rg-fntech-eus-lab-backup --location eastus
 
 # Create Recovery Services vault
 az backup vault create \
-  --resource-group vmbackupandrestore-RG \
-  --name rsv-vmbackup-lab-eus
+  --resource-group rg-fntech-eus-lab-backup \
+  --name rsv-vmbackup-eus-lab-backup
 
 # Enable backup for VM (example policy: DefaultPolicy)
 az backup protection enable-for-vm \
-  --resource-group vmbackupandrestore-RG \
-  --vault-name rsv-vmbackup-lab-eus \
-  --vm fntech-FS01 \
+  --resource-group rg-fntech-eus-lab-backup \
+  --vault-name rsv-vmbackup-eus-lab-backup \
+  --vm vm-fntech-eus-lab-fs01 \
   --policy-name DefaultPolicy
 
 # Trigger on-demand backup
 az backup protection backup-now \
-  --resource-group vmbackupandrestore-RG \
-  --vault-name rsv-vmbackup-lab-eus \
-  --container-name "iaasvmcontainerv2;vmbackupandrestore-rg;fntech-fs01" \
-  --item-name "fntech-fs01" \
+  --resource-group rg-fntech-eus-lab-backup \
+  --vault-name rsv-vmbackup-eus-lab-backup \
+  --container-name "iaasvmcontainerv2;rg-fntech-eus-lab-backup;vm-fntech-eus-lab-fs01" \
+  --item-name "vm-fntech-eus-lab-fs01" \
   --retain-until 2026-06-30T23:59:00Z
 ```
 
