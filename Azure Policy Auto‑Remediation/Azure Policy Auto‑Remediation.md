@@ -165,23 +165,8 @@ Click **Save**.
 
 ---
 
-### Step 4 — Grant the Managed Identity Required Permissions
 
-Azure creates the managed identity automatically, but you must verify the role assignment.
-
-1. Go to **Subscription → Access Control (IAM)**
-2. Click **Add → Add Role Assignment**
-3. Set:
-   - **Role:** Storage Account Contributor
-   - **Assign access to:** Managed Identity
-   - **Members:** Select the managed identity created by the policy assignment (named after the assignment)
-4. Click **Review + Assign**
-
-> This is required for DINE to modify storage accounts. Without this, remediation tasks will fail with an authorization error.
-
----
-
-### Step 5 — Trigger a Remediation Task
+### Step 4 — Trigger a Remediation Task
 
 1. Go to **Policy → Remediation**
 2. Click **+ New Remediation Task**
@@ -199,7 +184,7 @@ Azure will:
 
 ---
 
-### Step 6 — Validate Auto-Remediation
+### Step 5 — Validate Auto-Remediation
 
 **Check policy compliance:**
 
@@ -226,9 +211,6 @@ Azure will:
 | Parameterised ARM template | Correct resource targeting by name and location |
 | Least-privilege role assignment | Follows Zero Trust principles |
 | Remediation Tasks | Fixes existing non-compliant resources, not just new ones |
-| Monitor Alerts | Enterprise-grade governance drift detection |
-
----
 
 ## Cleanup
 
