@@ -100,16 +100,6 @@ This gives you something to remediate.
 ```json
 {
   "mode": "All",
-  "parameters": {
-    "storageAccountName": {
-      "type": "String",
-      "metadata": { "displayName": "Storage Account Name" }
-    },
-    "storageAccountLocation": {
-      "type": "String",
-      "metadata": { "displayName": "Storage Account Location" }
-    }
-  },
   "policyRule": {
     "if": {
       "field": "type",
@@ -129,23 +119,14 @@ This gives you something to remediate.
         "deployment": {
           "properties": {
             "mode": "incremental",
-            "parameters": {
-              "storageAccountName": { "value": "[field('name')]" },
-              "storageAccountLocation": { "value": "[field('location')]" }
-            },
             "template": {
               "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
               "contentVersion": "1.0.0.0",
-              "parameters": {
-                "storageAccountName": { "type": "string" },
-                "storageAccountLocation": { "type": "string" }
-              },
               "resources": [
                 {
                   "type": "Microsoft.Storage/storageAccounts",
                   "apiVersion": "2022-09-01",
-                  "name": "[parameters('storageAccountName')]",
-                  "location": "[parameters('storageAccountLocation')]",
+                  "name": "[field('name')]",
                   "properties": {
                     "supportsHttpsTrafficOnly": true
                   }
@@ -158,8 +139,10 @@ This gives you something to remediate.
     }
   }
 }
+
 ```
 
+Role definitions **Storage Account Contributor**
 Click **Save**.
 
 > **Expected state:** The policy definition appears under **Policy → Definitions** in your custom category.
