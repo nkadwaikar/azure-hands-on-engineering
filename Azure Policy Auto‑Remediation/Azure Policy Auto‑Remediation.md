@@ -216,21 +216,6 @@ Azure will:
 
 ---
 
-### Step 7 — Add Monitoring and Alerts (Optional)
-
-Track governance drift across your environment with alerts.
-
-1. Go to **Monitor → Alerts → + Create Alert Rule**
-2. Set:
-   - **Scope:** Your subscription
-   - **Signal:** `Policy State Changed` (under Azure Policy category)
-   - **Condition:** Non-compliant count > 0
-3. Create an **Action Group** with your email or a Teams webhook
-4. Name the alert and click **Review + Create**
-
-> **Expected state:** You receive a notification whenever a new non-compliant resource is detected in scope.
-
----
 
 ## What Makes This Lab Production-Ready
 
