@@ -1,7 +1,16 @@
 # 👋 Hi, I'm Nadeem Kadwaikar
 
+# 👋 Hi, I'm Nadeem Kadwaikar
+
 *Cloud Engineer - Azure Infrastructure, Identity, and Microsoft 365*
 
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
+![Bicep](https://img.shields.io/badge/Bicep-success?style=flat)
+![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white)
+![Entra ID](https://img.shields.io/badge/Entra%20ID-0078D4?style=flat&logo=microsoftazure&logoColor=white)
+
+
+I build secure, identity-first Azure platforms...
 I build secure, identity-first Azure platforms for regulated environments using infrastructure as code and practical governance.
 
 ## 💡 Engineering Philosophy
