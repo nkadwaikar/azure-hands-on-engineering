@@ -117,6 +117,7 @@ Next recommended lab: [Azure Monitor & Activity Logs](Identity-First/06-azuremon
 Next recommended lab: [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
 
 ### 6. Business Continuity & Resilience
+- [Microsoft Entra Backup & Recovery](%20Microsoft%20Entra%20Backup%20%26%20Recovery/%20Microsoft%20Entra%20Backup%20%26%20Recovery.md) - Compare daily Entra snapshots and recover supported cloud-managed directory objects
 - [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md) - RPO/RTO-aware backup configuration
 - [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md) - Cross-region failover for business continuity
 - [Azure Storage Replication](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md) - Compare LRS/ZRS/GRS/GZRS and validate read-access geo-replication
@@ -124,9 +125,10 @@ Next recommended lab: [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Back
 Next recommended lab: [Identity-First Bicep Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
 
 Recommended lab order:
-1. [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
-2. [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
-3. [Azure Storage Replication](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md)
+1. [Microsoft Entra Backup & Recovery](%20Microsoft%20Entra%20Backup%20%26%20Recovery/%20Microsoft%20Entra%20Backup%20%26%20Recovery.md)
+2. [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
+3. [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
+4. [Azure Storage Replication](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md)
 
 ---
 
