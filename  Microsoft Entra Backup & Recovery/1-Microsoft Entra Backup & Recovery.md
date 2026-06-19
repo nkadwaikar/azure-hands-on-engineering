@@ -9,6 +9,8 @@ Portal experience note: Steps validated against Microsoft Entra admin center UI 
 
 > **Note:** Microsoft Entra Backup & Recovery is a Microsoft-managed service. This lab focuses on comparing recent directory state and restoring supported cloud-managed objects. Tenant-level backup schedule and retention controls are not configurable.
 
+> **Preview note:** Because this capability is still evolving, some labels and delete options can vary by tenant during rollout.
+
 ---
 
 ## 1. Learning Objectives
@@ -92,15 +94,15 @@ A difference report compares the current state of your directory with one of the
 
 1. Select **Include only certain types of objects**
 2. Choose all relevant object types shown in your tenant, such as:
-	- Users
-	- Groups
-	- Devices
-	- Applications
-	- Service principals
-	- Conditional Access policies
-	- Authentication methods
-	- Roles and assignments
-	- Administrative units
+   - Users
+   - Groups
+   - Devices
+   - Applications
+   - Service principals
+   - Conditional Access policies
+   - Authentication methods
+   - Roles and assignments
+   - Administrative units
 3. Leave synchronized on-premises objects selected only if you want them included in the report output for review
 
 > **Important:** Objects synchronized from on-premises Active Directory can appear in the report, but they are automatically excluded from recovery actions.
@@ -112,14 +114,28 @@ A difference report compares the current state of your directory with one of the
 1. Select **Generate difference report**
 2. Wait for the report to appear under **Difference reports**
 3. Open the report and review entries for:
-	- Added objects
-	- Deleted objects
-	- Modified objects
-	- Policy changes
-	- Application configuration changes
-	- Role assignment changes
+   - Added objects
+   - Deleted objects
+   - Modified objects
+   - Policy changes
+   - Application configuration changes
+   - Role assignment changes
 
 Expected outcome: you have a point-in-time view of recent directory drift across supported Entra object types.
+
+---
+
+### 4.6 Difference Reports Take Time to Run
+
+Difference reports are not always generated immediately. In many tenants, the report can remain in a running or queued state for several minutes before results are available.
+
+Keep the following in mind:
+
+- Wait for the current difference report job to finish before starting another dependent action
+- Review the report status in **Difference reports** until it shows as completed
+- Do not assume the feature is stuck if the report does not appear instantly
+
+> **Important:** You cannot start a recovery operation while a previous Backup & Recovery job is still in progress. Wait until the earlier job shows **Completed** or **Failed** before attempting recovery.
 
 ---
 
@@ -146,14 +162,14 @@ Recovery allows you to restore supported cloud-managed objects from one of the l
 
 1. Select **Include only certain types of objects**
 2. Choose the object categories you want to restore, for example:
-	- Users
-	- Groups
-	- Applications
-	- Service principals
-	- Roles
-	- Conditional Access policies
-	- Authentication methods
-	- Cloud-only devices
+   - Users
+   - Groups
+   - Applications
+   - Service principals
+   - Roles
+   - Conditional Access policies
+   - Authentication methods
+   - Cloud-only devices
 
 > **Important:** On-premises synchronized objects are visible for review but cannot be recovered from this interface.
 
@@ -171,9 +187,9 @@ Recovery allows you to restore supported cloud-managed objects from one of the l
 
 1. Open **Recovery history**
 2. Review job states such as:
-	- In progress
-	- Completed
-	- Failed
+   - In progress
+   - Completed
+   - Failed
 3. Open job details to inspect logs for auditing and troubleshooting
 
 Expected outcome: the recovery job completes successfully for supported cloud-managed objects, and detailed job history is available for validation.
@@ -236,3 +252,11 @@ This cleanup removes recovery history entries from the interface. It does not re
 4. On-premises synchronized objects may appear in reporting but remain outside recovery scope.
 5. Recovery history is important for auditability and post-change review.
 6. Preview features can expose reporting before full lifecycle management actions, such as delete, are available.
+
+---
+
+## 9. Next Steps
+
+- [Azure VM Backup](../Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md) — Extend the recovery theme into workload-level backup and restore
+- [Azure Site Recovery](../Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md) — Compare configuration recovery with cross-region failover
+- [Azure Monitor and Activity Logs](../Identity-First/06-azuremonitor-activity-logs.md) — Add audit visibility around directory and platform changes

@@ -1,10 +1,17 @@
-# Azure Policy Auto-Remediation (Portal-Only)
+# Azure Policy Auto-Remediation Lab Guide
 
-**End-to-End Hands-On Lab for Real-World Auto-Remediation Pipelines**
+A portal-only lab covering custom Azure Policy creation, managed identity-backed remediation, and compliance validation using a DeployIfNotExists workflow.
+
+Navigation: [Lab Index](../README.md)
+
+Last validated on: 2026-06-19
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
+
+> **Note:** This lab uses a custom policy with the DeployIfNotExists effect to enforce secure transfer on Azure Storage accounts. The workflow is designed for learning and validation, not as a substitute for broader enterprise policy design, exemptions, or change control.
 
 ---
 
-## Prerequisites
+## 1. Prerequisites
 
 | Requirement | Detail |
 |---|---|
@@ -13,9 +20,18 @@
 | Estimated Time | 45-60 minutes |
 | Tools | Azure Portal only — no CLI, ARM, or Bicep required |
 
+Naming reference: [README Naming Convention](../README.md#naming-convention)
+
+### Assumptions and Scope Boundaries
+
+- The lab uses a non-production resource group and storage account.
+- The policy is scoped narrowly for demonstration and validation.
+- Policy exemptions, initiative definitions, and multi-subscription rollout are out of scope.
+- Monitoring integration is mentioned but not implemented in depth in this walkthrough.
+
 ---
 
-## Lab Outcome
+## 2. Learning Objectives
 
 By the end of this lab, you will have:
 
@@ -28,15 +44,15 @@ This is the exact workflow used in enterprise governance baselines.
 
 ---
 
-## Scenario
+## 3. Scenario
 
 **Ensure all Storage Accounts have Secure Transfer Enabled.**
-If a storage account is non-compliant, Azure Policy will auto-remediate and enable it.
+If a storage account is non-compliant, Azure Policy will auto-remediate it by enabling secure transfer.
 This is the most common real-world DINE example.
 
 ---
 
-## Lab Architecture
+## 4. Lab Architecture
 
 Components you will configure:
 
@@ -50,7 +66,7 @@ Components you will configure:
 
 ---
 
-## Lab Steps
+## 5. Lab Steps
 
 ---
 
@@ -60,9 +76,9 @@ Before deploying resources, create a dedicated resource group for this lab.
 
 1. Go to **Azure Portal → Resource Groups → Create**
 2. Fill in:
-   - **Subscription:** Your target subscription
+  - **Subscription:** Your target subscription
   - **Resource Group Name:** `rg-policy-eus-lab-remedy` (or adjust region code as needed)
-   - **Region:** East US (or your preferred region)
+  - **Region:** East US (or your preferred region)
 3. Click **Review + Create → Create**
 
 > **Expected state:** The resource group is created and visible in your subscription under **Resource Groups**.
@@ -75,11 +91,11 @@ This gives you something to remediate.
 
 1. Go to **Azure Portal → Storage Accounts → Create**
 2. Fill in:
-   - **Subscription:** Your target subscription
+  - **Subscription:** Your target subscription
   - **Resource Group:** `rg-policy-eus-lab-remedy` (created in Step 0)
   - **Storage Account Name:** `stpolicylabremedy01` (must be globally unique; adjust as needed)
-   - **Region:** Same as your resource group (East US)
-   - **Primary service** Azure Blob Storage or Azure Data Lake Storage
+  - **Region:** Same as your resource group (East US)
+  - **Primary service:** Azure Blob Storage or Azure Data Lake Storage
 3. Under the **Advanced** tab, set **Secure transfer required** = **Disabled**
 4. Complete the remaining fields and click **Review + Create → Create**
 
@@ -127,6 +143,7 @@ This gives you something to remediate.
                   "type": "Microsoft.Storage/storageAccounts",
                   "apiVersion": "2022-09-01",
                   "name": "[field('name')]",
+                  "location": "[field('location')]",
                   "properties": {
                     "supportsHttpsTrafficOnly": true
                   }
@@ -142,8 +159,10 @@ This gives you something to remediate.
 
 ```
 
-Role definitions **Storage Account Contributor**
-Click **Save**.
+5. Under **Parameters**, leave the section empty for this lab
+6. Under **Review + create**, confirm the definition details and click **Save**
+
+The policy uses the built-in **Storage Account Contributor** role definition so the managed identity can update the target storage account during remediation.
 
 > **Expected state:** The policy definition appears under **Policy → Definitions** in your custom category.
 
@@ -161,7 +180,7 @@ Click **Save**.
    - **Location:** Same region as your storage account
 4. Click **Review + Create → Create**
 
-> **Note:** Azure Policy evaluation runs on a schedule (up to **30 minutes** after assignment). Non-compliant resources will not appear immediately — this is expected behaviour.
+> **Note:** Azure Policy evaluation runs on a schedule and can take up to **30 minutes** after assignment. Non-compliant resources may not appear immediately; this is expected behavior.
 
 ---
 
@@ -177,7 +196,7 @@ Click **Save**.
 
 Azure will:
 - Detect non-compliant storage accounts in scope
-- Deploy the ARM template via the managed identity
+- Deploy the remediation template via the managed identity
 - Enable **Secure Transfer Required** on each non-compliant account
 
 > **Expected state:** The remediation task status progresses from **Evaluating → Deploying → Succeeded**.
@@ -202,17 +221,19 @@ Azure will:
 ---
 
 
-## What Makes This Lab Production-Ready
+## 6. What Makes This Lab Production-Ready
 
 | Capability | Why It Matters |
 |---|---|
 | DeployIfNotExists effect | Real-world auto-remediation, not just audit |
 | Managed Identity | No secrets or stored credentials |
-| Parameterised ARM template | Correct resource targeting by name and location |
+| Parameterized deployment template | Correct resource targeting by name and location |
 | Least-privilege role assignment | Follows Zero Trust principles |
 | Remediation Tasks | Fixes existing non-compliant resources, not just new ones |
 
-## Cleanup
+---
+
+## 7. Cleanup
 
 To avoid ongoing charges and clutter, remove resources after the lab:
 
@@ -224,7 +245,7 @@ To avoid ongoing charges and clutter, remove resources after the lab:
 
 ---
 
-## Next Steps
+## 8. Next Steps
 
 - [Azure Monitor and Activity Logs](../Identity-First/06-azuremonitor-activity-logs.md) — Monitor policy and resource changes
 - [Azure Locks and Resource Policies](../Identity-First/04-azurelocks-resource-policies.md) — Prevent accidental configuration drift
