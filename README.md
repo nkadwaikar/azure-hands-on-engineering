@@ -46,34 +46,34 @@ az deployment group create \
 
 ## Suggested Learning Path
 
-1. [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
-2. [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
-3. [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md)
-4. [Azure Front Door + Static Website](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
-5. [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md)
+1. [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>)
+2. [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>)
+3. [Identity-First Bicep Capstone](<Identity-First/07-bicep-deployment-identity-stack.md>)
+4. [Azure Front Door + Static Website](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
+5. [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
 
 ## Module Index
 
 ### 01 Identity Governance
 
-- Track overview: [Identity-First README](Identity-First/README.md)
-- Labs: [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md), [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md), [RBAC Scopes](Identity-First/03-azuread-roles-rbac-scopes.md)
+- Track overview: [Identity-First README](<Identity-First/README.md>)
+- Labs: [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>), [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>), [RBAC Scopes](<Identity-First/03-azuread-roles-rbac-scopes.md>)
 
 ### 02 Compute Lifecycle
 
-- Labs: [Build Base VM](Compute/1-build-base-vm.md), [Sysprep VM](Compute/2-sysprep-vm.md), [Capture and Test Image](VMSS/1-capture-and-test-image.md), [VMSS Deployment](VMSS/2-vmss-deployment.md)
+- Labs: [Build Base VM](<Compute/1-build-base-vm.md>), [Sysprep VM](<Compute/2-sysprep-vm.md>), [Capture and Test Image](<VMSS/1-capture-and-test-image.md>), [VMSS Deployment](<VMSS/2-vmss-deployment.md>)
 
 ### 03 Global Delivery
 
-- Lab: [Azure Front Door + Static Website Hosting](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
+- Lab: [Azure Front Door + Static Website Hosting](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
 
 ### 04 Governance Automation
 
-- Lab: [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md)
+- Lab: [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
 
 ### 05 Business Continuity
 
-- Labs: [Microsoft Entra Backup and Recovery](%20Microsoft%20Entra%20Backup%20%26%20Recovery/1-Microsoft%20Entra%20Backup%20%26%20Recovery.md), [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md), [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
+- Labs: [Microsoft Entra Backup and Recovery](<Microsoft Entra Backup & Recovery/1-Microsoft Entra Backup & Recovery.md>), [Azure VM Backup](<Recovery Services vaults/1-VM Backup and Restore Procedure.md>), [Azure Site Recovery](<Recovery Services vaults/2-Azure Site Recovery.md>)
 
 ## Architecture at a Glance
 
@@ -117,4 +117,4 @@ flowchart LR
 
 Last updated: June 2026. Built for maintainable engineering and enterprise-ready Azure patterns.
 
-[LinkedIn](https://linkedin.com/in/nadeemkadwaikar) | nadeemkadwaikar@outlook.com | [License](LICENSE)
+[LinkedIn](https://linkedin.com/in/nadeemkadwaikar) | nadeemkadwaikar@outlook.com | [License](<LICENSE>)
