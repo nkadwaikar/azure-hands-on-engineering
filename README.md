@@ -6,6 +6,7 @@
 ![Bicep](https://img.shields.io/badge/Bicep-success?style=flat)
 ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white)
 ![Entra ID](https://img.shields.io/badge/Entra%20ID-0078D4?style=flat&logo=microsoftazure&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 
 I build secure, identity-first Azure platforms for regulated environments using infrastructure as code and practical governance.
@@ -176,4 +177,4 @@ Start here and follow the "Next recommended lab" pointers:
 
 *Last updated: June 2026 — Built with strong collaboration and a focus on clean, maintainable engineering.*
 
-💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) · 📧 nadeemkadwaikar@outlook.com
+💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) · 📧 nadeemkadwaikar@outlook.com · 📄 [License](LICENSE)
