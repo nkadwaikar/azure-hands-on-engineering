@@ -2,11 +2,24 @@
 
 Simple, practical Azure labs focused on Infrastructure as Code, identity-first security, governance, and recovery.
 
+Who this is for: Cloud engineers, platform teams, and security practitioners building production-ready Azure skills.
+
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
 ![Bicep](https://img.shields.io/badge/Bicep-IaC-4CAF50?style=flat)
 ![Zero Trust](https://img.shields.io/badge/Security-Zero%20Trust-0A66C2?style=flat)
 ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+## Table of Contents
+
+- [What This Repo Covers](#what-this-repo-covers)
+- [Outcomes](#outcomes)
+- [Quick Start](#quick-start)
+- [How to Use This Repo in 30 Minutes](#how-to-use-this-repo-in-30-minutes)
+- [Suggested Learning Path](#suggested-learning-path)
+- [Module Index](#module-index)
+- [Architecture at a Glance](#architecture-at-a-glance)
+- [In Development](#in-development)
 
 ## What This Repo Covers
 
@@ -44,6 +57,17 @@ az deployment group create \
 	--parameters location=eastus
 ```
 
+## How to Use This Repo in 30 Minutes
+
+If you are short on time, follow this path:
+
+1. Spend 5 minutes on [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>) to align on core concepts.
+2. Spend 10 minutes on [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>) to learn secretless access.
+3. Spend 10 minutes on [Azure Front Door + Static Website Hosting](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>) to see global delivery in practice.
+4. Spend 5 minutes on [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>) to understand governance automation.
+
+Outcome in 30 minutes: you will understand the identity-first model, secretless authentication, edge delivery basics, and policy-driven governance.
+
 ## Suggested Learning Path
 
 1. [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>)
@@ -73,7 +97,7 @@ az deployment group create \
 
 ### 05 Business Continuity
 
-- Labs: [Microsoft Entra Backup and Recovery](<%20Microsoft Entra Backup & Recovery/1-Microsoft Entra Backup & Recovery.md>), [Azure VM Backup](<Recovery Services vaults/1-VM Backup and Restore Procedure.md>), [Azure Site Recovery](<Recovery Services vaults/2-Azure Site Recovery.md>), [Azure Storage Replication](<Recovery Services vaults/3-Azure storage replication.md>)
+- Labs: [Microsoft Entra Backup and Recovery](<Microsoft Entra Backup & Recovery/1-Microsoft Entra Backup & Recovery.md>), [Azure VM Backup](<Recovery Services vaults/1-VM Backup and Restore Procedure.md>), [Azure Site Recovery](<Recovery Services vaults/2-Azure Site Recovery.md>), [Azure Storage Replication](<Recovery Services vaults/3-Azure storage replication.md>)
 
 ### 06 Emergency Access
 
@@ -92,6 +116,17 @@ flowchart LR
 		KV --> Lock[Resource Lock]
 ```
 
+### Compute Lifecycle
+
+```mermaid
+flowchart LR
+		Build[Base VM Build] --> Prep[Sysprep]
+		Prep --> Image[Golden Image Capture]
+		Image --> Gallery[Image Version]
+		Gallery --> VMSS[VM Scale Set]
+		VMSS --> Validate[App Validation IIS]
+```
+
 ### Global Delivery
 
 ```mermaid
@@ -102,13 +137,36 @@ flowchart LR
 		Site --> Web[$web Container]
 ```
 
+### Governance Automation
+
+```mermaid
+flowchart LR
+		Def[Policy Definition] --> Assign[Policy Assignment]
+		Assign --> Eval[Compliance Evaluation]
+		Eval --> Remed[Auto Remediation Task]
+		Remed --> State[Compliant Resource State]
+```
+
 ### Business Continuity
 
 ```mermaid
 flowchart LR
 		VM[Production VM] --> RSV[Recovery Services Vault]
-		RSV --> RP[Recovery Point]
-		RP --> Restore[Restore / Failover]
+		RSV --> Backup[Backup Recovery Points]
+		RSV --> ASR[Site Recovery Replication]
+		ASR --> Failover[Failover / Failback]
+		Backup --> Restore[Restore / Point-in-time Recovery]
+```
+
+### Emergency Access
+
+```mermaid
+flowchart LR
+		Admin[Privileged Admin] --> Normal[Standard Identity]
+		Normal --> Issue[Access Failure or Incident]
+		Issue --> BreakGlass[Break-Glass Account]
+		BreakGlass --> Recover[Emergency Recovery Actions]
+		Recover --> Audit[Post-Incident Audit]
 ```
 
 ## In Development
@@ -119,6 +177,6 @@ flowchart LR
 
 ---
 
-Last updated: June 2026. Built for maintainable engineering and enterprise-ready Azure patterns.
+Last updated: June 2026 (maintained monthly). Built for maintainable engineering and enterprise-ready Azure patterns.
 
 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) | nadeemkadwaikar@outlook.com | [License](<LICENSE>)

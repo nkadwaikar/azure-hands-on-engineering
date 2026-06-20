@@ -145,7 +145,7 @@ Recovery allows you to restore supported cloud-managed objects from one of the l
 
 ### 5.1 Open the Recovery Experience
 
-1. Go to **Microsoft Entra ID** → **Backup and recovery**
+1. Go to **Microsoft Entra ID** -> **Backup and recovery**
 2. Select **Recovery**
 
 ---
@@ -230,7 +230,7 @@ This is expected preview behavior and does not indicate a tenant misconfiguratio
 
 ### 7.2 Delete Recovery History Entries
 
-1. Go to **Backup and recovery** → **Recovery history**
+1. Go to **Backup and recovery** -> **Recovery history**
 2. Select the recovery job entries you want to remove from the view
 3. Select **Delete**
 
