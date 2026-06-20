@@ -1,8 +1,15 @@
-# Azure Hands-On Engineering Labs
 
-Simple, practical Azure labs focused on Infrastructure as Code, identity-first security, governance, and recovery.
+## About Nadeem Kadwaikar
 
-Who this is for: Cloud engineers, platform teams, and security practitioners building production-ready Azure skills.
+I'm Nadeem Kadwaikar, and I create hands-on Azure engineering content around identity-first architecture, governance, and resilient platform design.
+
+Connect with me on [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) or reach out at nadeemkadwaikar@outlook.com.
+
+# Nadeem Kadwaikar | Azure Architecture Portfolio
+
+A curated set of Azure labs, reference architectures, and implementation notes for identity-first systems, governance, and recovery.
+
+Built for cloud engineers, platform teams, and security practitioners.
 
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
 ![Bicep](https://img.shields.io/badge/Bicep-IaC-4CAF50?style=flat)
@@ -12,26 +19,26 @@ Who this is for: Cloud engineers, platform teams, and security practitioners bui
 
 ## Table of Contents
 
-- [What This Repo Covers](#what-this-repo-covers)
-- [Outcomes](#outcomes)
-- [Quick Start](#quick-start)
-- [How to Use This Repo in 30 Minutes](#how-to-use-this-repo-in-30-minutes)
-- [Suggested Learning Path](#suggested-learning-path)
-- [Module Index](#module-index)
-- [Architecture at a Glance](#architecture-at-a-glance)
-- [In Development](#in-development)
+- [What I Explore](#what-i-explore)
+- [Why It Matters](#why-it-matters)
+- [Get Started](#get-started)
+- [A 30-Minute Starting Path](#a-30-minute-starting-path)
+- [My Reading Path](#my-reading-path)
+- [Topics](#topics)
+- [Architecture Overview](#architecture-overview)
+- [What I'm Working On](#what-im-working-on)
 
-## What This Repo Covers
+## What I Explore
 
 - Identity and access governance
 - Compute image lifecycle and scale sets
-- Global content delivery with Front Door
-- Policy-based governance auto-remediation
+- Global content delivery with Front Door and static hosting
+- Policy-based governance and auto-remediation
 - Backup, restore, and disaster recovery
 
-## Outcomes
+## Why It Matters
 
-After completing these labs, you will be able to:
+After working through these labs, you will be able to:
 
 - Design identity-first Azure architectures with least-privilege access.
 - Deploy repeatable infrastructure using Bicep and Azure CLI.
@@ -39,14 +46,14 @@ After completing these labs, you will be able to:
 - Implement governance controls with policy evaluation and remediation.
 - Validate backup and recovery workflows against RPO and RTO goals.
 
-## Quick Start
+## Get Started
 
 ### Prerequisites
 
 - Azure subscription
 - Azure CLI
-- VS Code + Bicep extension
-- PowerShell and curl (for validation steps)
+- VS Code with the Bicep extension
+- PowerShell and curl for validation steps
 
 ### Deploy Example (Identity Bicep Capstone)
 
@@ -57,18 +64,18 @@ az deployment group create \
 	--parameters location=eastus
 ```
 
-## How to Use This Repo in 30 Minutes
+## A 30-Minute Starting Path
 
-If you are short on time, follow this path:
+Short on time? Start here:
 
 1. Spend 5 minutes on [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>) to align on core concepts.
 2. Spend 10 minutes on [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>) to learn secretless access.
 3. Spend 10 minutes on [Azure Front Door + Static Website Hosting](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>) to see global delivery in practice.
 4. Spend 5 minutes on [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>) to understand governance automation.
 
-Outcome in 30 minutes: you will understand the identity-first model, secretless authentication, edge delivery basics, and policy-driven governance.
+In 30 minutes, you will understand the identity-first model, secretless authentication, edge delivery basics, and policy-driven governance.
 
-## Suggested Learning Path
+## My Reading Path
 
 1. [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>)
 2. [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>)
@@ -76,34 +83,34 @@ Outcome in 30 minutes: you will understand the identity-first model, secretless 
 4. [Azure Front Door + Static Website](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
 5. [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
 
-## Module Index
+## Topics
 
 ### 01 Identity Governance
 
-- Track overview: [Identity-First README](<Identity-First/README.md>)
-- Labs: [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>), [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>), [RBAC Scopes](<Identity-First/03-azuread-roles-rbac-scopes.md>)
+- [Identity-First README](<Identity-First/README.md>)
+- [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>), [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>), [RBAC Scopes](<Identity-First/03-azuread-roles-rbac-scopes.md>)
 
 ### 02 Compute Lifecycle
 
-- Labs: [Build Base VM](<Compute/1-build-base-vm.md>), [Sysprep VM](<Compute/2-sysprep-vm.md>), [Install IIS](<Compute/3-Install IIS.md>), [Capture and Test Image](<VMSS/1-capture-and-test-image.md>), [VMSS Deployment](<VMSS/2-vmss-deployment.md>)
+- [Build Base VM](<Compute/1-build-base-vm.md>), [Sysprep VM](<Compute/2-sysprep-vm.md>), [Install IIS](<Compute/3-Install IIS.md>), [Capture and Test Image](<VMSS/1-capture-and-test-image.md>), [VMSS Deployment](<VMSS/2-vmss-deployment.md>)
 
 ### 03 Global Delivery
 
-- Lab: [Azure Front Door + Static Website Hosting](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
+- [Azure Front Door + Static Website Hosting](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
 
 ### 04 Governance Automation
 
-- Lab: [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
+- [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
 
 ### 05 Business Continuity
 
-- Labs: [Microsoft Entra Backup and Recovery](<Microsoft Entra Backup & Recovery/1-Microsoft Entra Backup & Recovery.md>), [Azure VM Backup](<Recovery Services vaults/1-VM Backup and Restore Procedure.md>), [Azure Site Recovery](<Recovery Services vaults/2-Azure Site Recovery.md>), [Azure Storage Replication](<Recovery Services vaults/3-Azure storage replication.md>)
+- [Microsoft Entra Backup and Recovery](<Microsoft Entra Backup & Recovery/1-Microsoft Entra Backup & Recovery.md>), [Azure VM Backup](<Recovery Services vaults/1-VM Backup and Restore Procedure.md>), [Azure Site Recovery](<Recovery Services vaults/2-Azure Site Recovery.md>), [Azure Storage Replication](<Recovery Services vaults/3-Azure storage replication.md>)
 
 ### 06 Emergency Access
 
-- Lab: [Secure Break-Glass Accounts](<Secure Break‑Glass Accounts/1-Secure Break‑Glass Accounts.md>)
+- [Secure Break-Glass Accounts](<Secure Break‑Glass Accounts/1-Secure Break‑Glass Accounts.md>)
 
-## Architecture at a Glance
+## Architecture Overview
 
 ### Identity Governance
 
@@ -169,14 +176,15 @@ flowchart LR
 		Recover --> Audit[Post-Incident Audit]
 ```
 
-## In Development
+## What I'm Working On
 
-- Azure App Services with managed identity and deployment slots.
-- Defender for Cloud CSPM in hub-and-spoke architectures.
-- Azure Arc hybrid server management patterns.
+- Azure App Services with managed identity and deployment slots
+- Defender for Cloud CSPM in hub-and-spoke architectures
+- Azure Arc hybrid server management patterns
+
 
 ---
 
-Last updated: June 2026 (maintained monthly). Built for maintainable engineering and enterprise-ready Azure patterns.
+Last updated: June 2026. I update this monthly to keep the guidance practical and enterprise-ready.
 
 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) | nadeemkadwaikar@outlook.com | [License](<LICENSE>)
