@@ -8,59 +8,7 @@ Identity-first Azure labs for infrastructure, governance, global delivery, and r
 ![Entra ID](https://img.shields.io/badge/Entra%20ID-0078D4?style=flat&logo=microsoftazure&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## Repository Standards
-
-The repo is organized so each lab can be explored, executed, and reviewed without guessing.
-
-### Folder Naming
-
-Use numbered folders for new work so the learning path is obvious at a glance:
-
-- `01-Identity-Governance`
-- `02-Compute-Lifecycle`
-- `03-Global-Delivery`
-- `04-Governance-Automation`
-- `05-Business-Continuity`
-
-Current folders remain in place for backwards compatibility, but new modules should follow the numbered pattern above.
-
-### Execution First
-
-Every major lab should surface a direct execution path near the top of the doc. Prefer one of these patterns:
-
-- `az deployment group create ...` for Bicep-backed labs
-- `az storage blob upload-batch ...` for content publication labs
-- `curl -I ...` for edge and health validation
-- Portal-only walkthroughs where the control plane experience is the point of the exercise
-
-### What I Learned
-
-Each lab should close with the business value of the technology, not just the steps. The goal is to show why the pattern matters in an enterprise environment.
-
-### Visuals
-
-Complex flows should include a simple architecture diagram in Mermaid or an exported diagram so the control flow is obvious before reading the implementation.
-
-### Git Hygiene
-
-- Keep `main` clean and avoid committing local credentials or environment files.
-- Use atomic commits with descriptive messages.
-- Add local ignore rules for editor state, OS metadata, and secret files.
-
-### Suggested GitHub Topics
-
-These topics improve discoverability for recruiters and reviewers:
-
-- `azure`
-- `bicep`
-- `infrastructure-as-code`
-- `identity-security`
-- `devops`
-- `microsoft-entra`
-- `azure-policy`
-- `azure-front-door`
-- `azure-backup`
-- `azure-site-recovery`
+**Five hands-on modules covering identity, compute, delivery, governance, and recovery with working code and architectural patterns.**
 
 ## Architecture at a Glance
 
@@ -108,9 +56,11 @@ Microsoft Entra ID is the control plane, managed identities remove secrets, RBAC
 Azure subscription, Entra administrative access where required, Azure CLI, and VS Code with Bicep support for the IaC parts.
 
 **Execution**  
-Use the lab walkthroughs in this track, then deploy the capstone stack with:
+Use the lab walkthroughs in this track, then deploy the capstone stack:
 
-- `az deployment group create --resource-group <resource-group> --template-file Identity-First/bicep/main.bicep --parameters location=eastus`
+```bash
+az deployment group create --resource-group <resource-group> --template-file Identity-First/bicep/main.bicep --parameters location=eastus
+```
 
 **What I Learned**  
 Identity-first design reduces credential sprawl, makes authorization auditable, and gives you a cleaner path to govern every dependent workload.
@@ -141,9 +91,11 @@ A base VM becomes a golden image through sysprep, then that image is validated a
 Contributor access, a Windows VM, and enough quota to create images and scale sets.
 
 **Execution**  
-Start with a base VM and then follow the image lifecycle. A CLI-shaped starting point is:
+Start with a base VM and follow the image lifecycle:
 
-- `az vm create --resource-group <resource-group> --name <vm-name> --image Win2019Datacenter --admin-username <admin-user>`
+```bash
+az vm create --resource-group <resource-group> --name <vm-name> --image Win2019Datacenter --admin-username <admin-user>
+```
 
 **What I Learned**  
 Golden images reduce drift, shorten deployment time, and make scale-out behavior predictable.
@@ -167,10 +119,15 @@ Front Door handles the edge, origin health, HTTPS routing, and caching while the
 A storage account with static website enabled, Azure Front Door Standard or Premium, and a working `curl` client for validation.
 
 **Execution**  
-Upload the site, then validate the edge endpoint directly:
+Upload content and validate globally:
 
-- `az storage blob upload-batch --destination '$web' --source <site-folder>`
-- `curl -I https://<frontdoor-endpoint>.z01.azurefd.net/`
+```bash
+az storage blob upload-batch --destination '$web' --source <site-folder>
+```
+
+```bash
+curl -I https://<frontdoor-endpoint>.z01.azurefd.net/
+```
 
 **What I Learned**  
 Edge delivery is about more than performance; it separates global routing, caching, and origin health from the content-hosting layer.
@@ -212,9 +169,11 @@ Recovery Services vaults capture restore points, Azure Site Recovery extends the
 Appropriate backup or DR permissions, source workloads, target regions, and lab-safe resource groups with enough capacity.
 
 **Execution**  
-Use the backup and replication commands surfaced in the lab docs. A common starting point is:
+Create a recovery services vault:
 
-- `az backup vault create --resource-group <resource-group> --name <vault-name>`
+```bash
+az backup vault create --resource-group <resource-group> --name <vault-name>
+```
 
 **What I Learned**  
 RPO and RTO are architecture choices, not after-the-fact reports, and the recovery workflow only matters if it is validated end to end.
@@ -226,35 +185,23 @@ Included labs:
 - [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
 - [Azure Storage Replication](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md)
 
-## Recommended Learning Path
+## Quick Start
 
-Follow the numbered modules in order:
+**New to the labs?** Start here:
 
-1. [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
-2. [Microsoft Entra Break-Glass & Emergency Access Accounts](Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md)
-3. [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
-4. [Microsoft Entra Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md)
-5. [Azure Locks & Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
-6. [Access Validation](Identity-First/05-access-validation.md)
-7. [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
-8. [Identity-First Bicep Capstone Lab](Identity-First/07-bicep-deployment-identity-stack.md)
-9. [VS Code Bicep Deployment Workflow](Identity-First/vscode-deployment-workflow.md)
-10. [Azure Front Door + Static Website Hosting](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
-11. [Build Base VM](Compute/1-build-base-vm.md)
-12. [Sysprep Azure VM](Compute/2-sysprep-vm.md)
-13. [Capture & Test Image](VMSS/1-capture-and-test-image.md)
-14. [VMSS Deployment](VMSS/2-vmss-deployment.md)
-15. [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md)
-16. [Microsoft Entra Backup & Recovery](%20Microsoft%20Entra%20Backup%20%26%20Recovery/1-Microsoft%20Entra%20Backup%20%26%20Recovery.md)
-17. [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
-18. [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
-19. [Azure Storage Replication](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md)
+1. [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md) — Build identity-first thinking
+2. [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md) — Secretless authentication
+3. [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md) — Deploy a complete stack
+4. [Azure Front Door + Static Website](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — Global delivery
+5. [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md) — Governance automation
 
-## Currently Building
+**Full curriculum available** in each lab's folder with 19 total modules.
 
-- Azure App Services (deployment slots, scaling, managed identity integration)
-- Defender for Cloud CSPM and plans with hub-and-spoke topology
-- Azure Arc onboarding for hybrid server management
+## In Development
+
+- Azure App Services with managed identity and deployment slots
+- Defender for Cloud CSPM in hub-and-spoke architectures
+- Azure Arc hybrid server management patterns
 
 ---
 
