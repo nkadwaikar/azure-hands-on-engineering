@@ -4,7 +4,7 @@
 
 A complete, portal-only lab implementing Microsoft's 2025 security baseline for emergency access accounts with phishing-resistant MFA and Conditional Access enforcement.
 
-Navigation: [Lab Index](../README.md)
+Navigation: [Lab Guide](../README.md)
 
 Last validated on: 2026-06-20  
 Portal experience note: Steps validated against Entra Admin Center as of June 2026.

@@ -2,7 +2,7 @@
 
 A hands-on, portal-only lab covering Microsoft Entra Backup & Recovery difference reports, object-level recovery, and post-run cleanup using the current Entra admin experience.
 
-Navigation: [Lab Index](../README.md)
+Navigation: [Lab Guide](../README.md)
 
 Last validated on: 2026-06-19
 Portal experience note: Steps validated against Microsoft Entra admin center UI as of June 2026; labels can vary slightly by tenant, licensing, and feature rollout.

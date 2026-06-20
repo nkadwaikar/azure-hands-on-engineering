@@ -42,7 +42,7 @@ flowchart LR
 		RP --> Restore[Restore / Failover]
 ```
 
-## Lab Index
+## Lab Guide
 
 ### 01-Identity-Governance
 

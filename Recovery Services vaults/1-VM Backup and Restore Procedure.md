@@ -3,7 +3,7 @@
 
 A hands-on lab covering Enhanced VM backup, file-level recovery, full VM restore, and cleanup using the current Azure Backup experience.
 
-Navigation: [Lab Index](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)
+Navigation: [Lab Guide](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)
 
 Last validated on: 2026-06-10
 Portal experience note: Steps validated against Azure Portal UI as of June 2026; labels can vary slightly by region and feature rollout.
@@ -387,4 +387,4 @@ Note: Container and item names can differ by environment; confirm exact values w
 
 ---
 
-Navigation: [Lab Index](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)
+Navigation: [Lab Guide](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)

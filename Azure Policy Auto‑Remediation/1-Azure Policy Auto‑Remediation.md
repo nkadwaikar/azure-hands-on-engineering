@@ -2,7 +2,7 @@
 
 A portal-only lab covering custom Azure Policy creation, managed identity-backed remediation, and compliance validation using a DeployIfNotExists workflow.
 
-Navigation: [Lab Index](../README.md)
+Navigation: [Lab Guide](../README.md)
 
 Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.

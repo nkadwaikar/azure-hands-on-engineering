@@ -2,7 +2,7 @@
 
 An East US to West US 2 disaster recovery lab.
 
-Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Index](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)
+Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Guide](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)
 
 Last validated on: 2026-06-10
 Portal experience note: Steps validated in Azure Portal June 2026; failover/re-protect labels may vary slightly across subscriptions.
@@ -322,4 +322,4 @@ Note: ASR CLI commands vary by scenario and API version. Use CLI for inventory/v
 
 ---
 
-Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Index](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)
+Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Guide](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)
