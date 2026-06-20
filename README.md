@@ -1,15 +1,12 @@
 
-## About Nadeem Kadwaikar
+🚀 Azure Engineering
+## Identity‑First Architecture • Governance • Automation • Resilience
 
-I'm Nadeem Kadwaikar, and I create hands-on Azure engineering content around identity-first architecture, governance, and resilient platform design.
+I’m Nadeem Kadwaikar, and I design and document Azure solutions with an engineering‑first mindset — identity, governance, automation, and resilient cloud architectures.
 
-Connect with me on [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) or reach out at nadeemkadwaikar@outlook.com.
+A comprehensive set of Azure engineering labs, architecture notes, and implementation walkthroughs showcasing identity‑centric design, governance controls, and recovery‑ready cloud engineering.
 
-# Nadeem Kadwaikar | Azure Architecture Portfolio
-
-A curated set of Azure labs, reference architectures, and implementation notes for identity-first systems, governance, and recovery.
-
-Built for cloud engineers, platform teams, and security practitioners.
+Built for Azure cloud engineers
 
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
 ![Bicep](https://img.shields.io/badge/Bicep-IaC-4CAF50?style=flat)
