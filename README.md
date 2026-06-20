@@ -1,5 +1,3 @@
-
-🚀 Azure Engineering
 ## Identity‑First Architecture • Governance • Automation • Resilience
 
 I’m Nadeem Kadwaikar, and I design and document Azure solutions with an engineering‑first mindset — identity, governance, automation, and resilient cloud architectures.
