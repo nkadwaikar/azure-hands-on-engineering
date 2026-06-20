@@ -1,0 +1,17 @@
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+*.log
+*.env
+*.env.*
+*.local
+node_modules/
+dist/
+build/
+bin/
+obj/
+*.user
+*.rsuser
