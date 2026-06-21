@@ -17,6 +17,7 @@ Built for Azure cloud engineers
 - [What I Explore](#what-i-explore)
 - [Why It Matters](#why-it-matters)
 - [Get Started](#get-started)
+- [Naming Convention](#naming-convention)
 - [A 30-Minute Starting Path](#a-30-minute-starting-path)
 - [My Reading Path](#my-reading-path)
 - [Topics](#topics)
@@ -58,6 +59,24 @@ az deployment group create \
 	--template-file Identity-First/bicep/main.bicep \
 	--parameters location=eastus
 ```
+
+## Naming Convention
+
+Use these naming patterns across labs to keep resources discoverable, sortable, and policy-friendly.
+
+- Pattern: `<org>-<workload>-<env>-<region>-<type>-<instance>`
+- Keep names lowercase where the Azure resource allows it
+- Use short, stable workload and environment tokens (for example: `id`, `gov`, `prod`, `dev`)
+- Use Azure region short codes consistently (for example: `eus`, `wus2`, `weu`)
+- Reserve numeric suffixes for scale/replicas (for example: `01`, `02`)
+
+Examples:
+
+- Resource group: `rg-id-prod-eus-01`
+- User-assigned managed identity: `uami-id-prod-eus-01`
+- Key Vault: `kv-id-prod-eus-01`
+- Storage account: `stidprodeus01` (no hyphens for storage account naming rules)
+- Virtual machine: `vm-id-prod-eus-01`
 
 ## A 30-Minute Starting Path
 
