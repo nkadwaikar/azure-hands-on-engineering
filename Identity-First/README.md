@@ -39,7 +39,7 @@ From the repository root:
 ```bash
 az deployment group create \
   --resource-group <resource-group> \
-  --template-file Identity-First/bicep/main.bicep \
+  --template-file Identity-First/capstone/architecture/bicep/main.bicep \
   --parameters location=eastus
 ```
 

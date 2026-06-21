@@ -89,7 +89,34 @@ Expected:
 
 ---
 
-// ...existing code...
+## **4. Assign Azure RBAC Reader Role to Emma (Subscription Scope)**
+
+Now add a resource role so Emma can view Azure resources without modifying them.
+
+**Azure Portal → Subscriptions → Access control (IAM) → Add role assignment**
+
+Configure:
+
+- **Role:** Reader
+- **Assign access to:** User, group, or service principal
+- **Member:** `emma.lee@contoso.com`
+
+### Validate Reader Scope
+
+Sign back in as: `emma.lee@contoso.com`
+
+Emma can now:
+
+- Open **Subscriptions**, **Resource Groups**, and resource blades
+- View resources across subscription scope
+
+Emma still cannot:
+
+- Create, update, or delete resources
+- Assign RBAC roles
+- Read Key Vault secrets without a data-plane role
+
+This demonstrates that **Reader adds visibility only**, while directory and data-plane permissions remain separate.
 
 ## **5. Compare Emma vs Alex (From Day 1)**
 

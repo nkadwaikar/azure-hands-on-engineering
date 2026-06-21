@@ -279,14 +279,14 @@ Today you learned:
 ## ▶️ **Next Lab**
 
 **Day 7 — Bicep Deployment: Identity Stack**  
-`07-bicep-identity-stack.md`
+[07-bicep-deployment-identity-stack.md](07-bicep-deployment-identity-stack.md)
 
 ---
 
 ## 🔗 **Related Labs**
 
 - **Day 4 — Azure Locks + Resource Policies**  
-  `04-locks-resource-policies.md`
+  [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
 - **Day 5 — Access Validation (Portal + CLI)**  
-  `05-access-validation.md`
+  [05-access-validation.md](05-access-validation.md)

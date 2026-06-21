@@ -56,9 +56,16 @@ After working through these labs, you will be able to:
 ```bash
 az deployment group create \
 	--resource-group <resource-group> \
-	--template-file Identity-First/bicep/main.bicep \
+	--template-file Identity-First/capstone/architecture/bicep/main.bicep \
 	--parameters location=eastus
 ```
+
+The standalone module examples are in `Identity-First/bicep/`, and the deployable Week 1 capstone stack is in `Identity-First/capstone/architecture/bicep/`.
+
+### Path Name Note
+
+Some folders intentionally use a non-breaking hyphen (`‑`, U+2011), such as `Azure Policy Auto‑Remediation` and `Secure Break‑Glass Accounts`.
+For terminal commands, prefer tab completion or copy/paste paths directly from this repo to avoid subtle path mismatches.
 
 ## Naming Convention
 
@@ -91,11 +98,15 @@ In 30 minutes, you will understand the identity-first model, secretless authenti
 
 ## My Reading Path
 
-1. [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>)
-2. [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>)
-3. [Identity-First Bicep Capstone](<Identity-First/07-bicep-deployment-identity-stack.md>)
-4. [Azure Front Door + Static Website](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
-5. [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
+1. [Identity-First Track Overview](<Identity-First/README.md>)
+2. [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>)
+3. [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>)
+4. [Identity-First Access Flow](<Identity-First/identity-first-access-flow.md>)
+5. [Identity-First Bicep Capstone](<Identity-First/07-bicep-deployment-identity-stack.md>)
+6. [Run Bicep in VS Code](<Identity-First/08-how-to-run-bicep-in-vscode.md>)
+7. [Identity-First Lessons Learned](<Identity-First/lessons-learned.md>)
+8. [Azure Front Door + Static Website](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
+9. [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
 
 ## Topics
 
@@ -103,6 +114,7 @@ In 30 minutes, you will understand the identity-first model, secretless authenti
 
 - [Identity-First README](<Identity-First/README.md>)
 - [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>), [Managed Identity + Key Vault](<Identity-First/02-managed Identity + Azure Key Vault (Secretless Authentication).md>), [RBAC Scopes](<Identity-First/03-azuread-roles-rbac-scopes.md>)
+- [Identity Access Flow](<Identity-First/identity-first-access-flow.md>), [How to Run Bicep in VS Code](<Identity-First/08-how-to-run-bicep-in-vscode.md>), [Lessons Learned](<Identity-First/lessons-learned.md>)
 
 ### 02 Compute Lifecycle
 
