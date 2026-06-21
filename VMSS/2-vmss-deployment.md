@@ -142,12 +142,7 @@ This is the most important part of the lab — proving that your custom image wo
 1. In the [Azure Portal](https://portal.azure.com), go to **Virtual Machine Scale Sets** and select your VMSS.
 2. In the left menu, click **Instances**.
 3. At the top, click **Scale** or **Capacity**.
-4. Change instance count from:
-
-```text
-2 → 4
-```
-
+4. Change instance count from: 2 → 4
 5. Click **Save**.
 
 Azure will create **2 new instances**.
@@ -164,13 +159,8 @@ Azure will create **2 new instances**.
 **Portal Navigation:**
 
 1. In the [Azure Portal](https://portal.azure.com), go to your VMSS, click **Instances**, then **Scale/Capacity** at the top.
-2. Change instance count from:
-
-```text
-4 → 2
-```
-
-3. Update the instance count to **2** and click **Save**.
+2. Change instance count from: 4 → 2
+3. Click **Save**.
 4. Azure will delete **2 instances**
 
 ### Validate
