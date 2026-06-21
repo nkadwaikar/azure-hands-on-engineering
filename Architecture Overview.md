@@ -1,6 +1,6 @@
 # Architecture Overview
 
-### Identity Governance
+## Identity Governance
 
 Text flow: Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
 
@@ -13,7 +13,7 @@ flowchart LR
     KV --> Lock[Resource Lock]
 ```
 
-### Compute Lifecycle
+## Compute Lifecycle
 
 Text flow: Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
 
@@ -26,7 +26,7 @@ flowchart LR
     VMSS --> Validate[App Validation IIS]
 ```
 
-### Global Delivery
+## Global Delivery
 
 Text flow: Client -> Front Door -> Origin Group -> Storage Static Website -> $web content.
 
@@ -38,9 +38,9 @@ flowchart LR
     Site --> Web[$web Container]
 ```
 
-### Governance Automation
+## Governance Automation
 
-Text flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant state.
+Text flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant State.
 
 ```mermaid
 flowchart LR
@@ -50,7 +50,7 @@ flowchart LR
     Remed --> State[Compliant Resource State]
 ```
 
-### Business Continuity
+## Business Continuity
 
 Text flow: Production VM -> Recovery Services Vault -> Backup/ASR -> Restore or Failover.
 
@@ -63,7 +63,7 @@ flowchart LR
     Backup --> Restore[Restore / Point-in-time Recovery]
 ```
 
-### Emergency Access
+## Emergency Access
 
 Text flow: Standard identity fails during an incident -> Break-glass account -> Recovery actions -> Audit.
 
