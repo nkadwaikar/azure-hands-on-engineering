@@ -1,11 +1,31 @@
+# VMSS Image Validation Track
 
-## 📸 Capture the Image + Deploy Test VM
+## Capture the Image + Deploy Test VM
+
+## Track Structure
+
+```text
+VMSS/
+|-- 1-capture-and-test-image.md
+`-- 2-vmss-deployment.md
+```
+
+Flow: capture reusable image -> validate with a test VM -> deploy scale set from known-good image.
+
+## Quick Navigation
+
+- Track Structure
+- Capture the Image
+- Deploy a Test VM from the Image
+- Validate the Test VM
+- Validate IIS
+- Continue to VMSS Deployment
 
 This document covers capturing the custom image and validating it before using it in VMSS.
 
 ---
 
-# 📘 **1. Capture the Image**
+## 1. Capture the Image
 
 
 **Portal Navigation:**
@@ -25,7 +45,7 @@ This document covers capturing the custom image and validating it before using i
 
 ---
 
-# 📘 **2. Deploy a Test VM from the Captured Image**
+## 2. Deploy a Test VM from the Captured Image
 
 
 **Portal Navigation:**
@@ -36,7 +56,7 @@ This document covers capturing the custom image and validating it before using i
 
 ---
 
-# 📘 **3. Validate the Test VM**
+## 3. Validate the Test VM
 
 ### Expected behavior:
 
@@ -49,7 +69,7 @@ This document covers capturing the custom image and validating it before using i
 
 ---
 
-# 📘 **4. Validate IIS**
+## 4. Validate IIS
 
 Inside the test VM:
 
@@ -60,7 +80,7 @@ If IIS works → your custom image is **ready for VMSS**.
 
 ---
 
-# 🎉 Image is ready for VMSS deployment
+## Image is ready for VMSS deployment
 
 Next step:  
 ➡ [VMSS Deployment Guide](2-vmss-deployment.md)

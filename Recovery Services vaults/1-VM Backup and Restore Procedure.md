@@ -12,6 +12,30 @@ Portal experience note: Steps validated against Azure Portal UI as of June 2026;
 
 ---
 
+## Track Structure
+
+```text
+Recovery Services vaults/
+|-- 1-VM Backup and Restore Procedure.md
+|-- 2-Azure Site Recovery.md
+`-- 3-Azure storage replication.md
+```
+
+Use this file first, then continue through Site Recovery and storage replication.
+
+## Quick Navigation
+
+- Track Structure
+- Learning Objectives
+- Prerequisites
+- Lab Architecture
+- Initial Setup
+- Configure Backup
+- Restore and Validation
+- Cleanup
+
+---
+
 ## 1. Learning Objectives
 
 By the end of this lab, you will:
@@ -43,6 +67,8 @@ Naming reference: [README Naming Convention](../README.md#naming-convention)
 - Production hardening (policy enforcement, lock strategy, monitoring baseline) is not covered in depth.
 
 ## Lab Architecture
+
+Text flow: Source VM -> Recovery Services Vault -> Recovery Point -> Full VM restore and file-level restore.
 
 ```mermaid
 flowchart LR

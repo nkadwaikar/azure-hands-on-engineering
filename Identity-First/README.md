@@ -2,6 +2,18 @@
 
 This module demonstrates how to design and deploy an Azure foundation where identity is the first control plane decision, not a late-stage security add-on.
 
+## Quick Navigation
+
+- Business Challenge
+- Architecture Logic
+- Prerequisites
+- Deployment (Capstone)
+- Validation Checklist
+- Lab Sequence
+- Track Structure
+- Folder Map
+- Business Value Delivered
+
 ## Business Challenge
 
 Platform teams often provision infrastructure first and bolt identity controls on later. This creates excess standing privilege, manual access workflows, and weak auditability.
@@ -14,6 +26,8 @@ Platform teams often provision infrastructure first and bolt identity controls o
 - Key Vault centralizes secret governance where secrets are still required.
 - Resource locks and policy controls reduce accidental or non-compliant drift.
 
+Text flow: Platform Engineer -> Microsoft Entra ID -> User-Assigned Managed Identity -> Scoped RBAC Assignment -> Azure Key Vault -> Workload/Automation -> Access Validation and Monitoring -> Governance controls.
+
 ```mermaid
 flowchart LR
     User[Platform Engineer] --> Entra[Microsoft Entra ID]
@@ -24,6 +38,8 @@ flowchart LR
     Workload --> Monitor[Access Validation and Monitoring]
     Monitor --> Guard[Locks and Governance]
 ```
+
+This text flow is provided as a fallback for markdown viewers that do not render Mermaid diagrams.
 
 ## Prerequisites
 
@@ -61,6 +77,29 @@ az deployment group create \
 6. [Azure Monitor and Activity Logs](06-azuremonitor-activity-logs.md)
 7. [Identity-First Bicep Deployment Capstone](07-bicep-deployment-identity-stack.md)
 8. [How to Run Bicep in VS Code](08-how-to-run-bicep-in-vscode.md)
+
+## Track Structure
+
+```text
+Identity-First/
+|-- README.md
+|-- 01-identity fundamentals.md
+|-- 02-managed Identity + Azure Key Vault (Secretless Authentication).md
+|-- 03-azuread-roles-rbac-scopes.md
+|-- 04-azurelocks-resource-policies.md
+|-- 05-access-validation.md
+|-- 06-azuremonitor-activity-logs.md
+|-- 07-bicep-deployment-identity-stack.md
+|-- 08-how-to-run-bicep-in-vscode.md
+|-- bicep/
+|   |-- main.bicep
+|   `-- modules/
+|-- capstone/architecture/bicep/
+|-- governance-flow.md
+|-- identity-first-access-flow.md
+|-- lessons-learned.md
+`-- vscode-deployment-workflow.md
+```
 
 ## Folder Map
 

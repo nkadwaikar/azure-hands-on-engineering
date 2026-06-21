@@ -1,26 +1,31 @@
+# Azure Hands-On Engineering
+
 ## Identity‑First Architecture • Governance • Automation • Resilience
 
 I’m Nadeem Kadwaikar, and I design and document Azure solutions with an engineering‑first mindset — identity, governance, automation, and resilient cloud architectures.
 
 A comprehensive set of Azure engineering labs, architecture notes, and implementation walkthroughs showcasing identity‑centric design, governance controls, and recovery‑ready cloud engineering.
 
-Built for Azure cloud engineers
+Built for Azure cloud engineers.
 
-![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![Bicep](https://img.shields.io/badge/Bicep-IaC-4CAF50?style=flat)
-![Zero Trust](https://img.shields.io/badge/Security-Zero%20Trust-0A66C2?style=flat)
-![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com)
+[![Bicep](https://img.shields.io/badge/Bicep-IaC-4CAF50?style=flat)](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+[![Zero Trust](https://img.shields.io/badge/Security-Zero%20Trust-0A66C2?style=flat)](https://learn.microsoft.com/security/zero-trust/)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white)](https://learn.microsoft.com/powershell/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+If badges do not render in your viewer: Azure | Bicep | Zero Trust | PowerShell | MIT License.
 
 ## Table of Contents
 
 - [What I Explore](#what-i-explore)
 - [Why It Matters](#why-it-matters)
 - [Get Started](#get-started)
+- [Repository Structure](#repository-structure)
 - [Naming Convention](#naming-convention)
 - [A 30-Minute Starting Path](#a-30-minute-starting-path)
-- [My Reading Path](#my-reading-path)
-- [Topics](#topics)
+- [Recommended Reading Path](#recommended-reading-path)
+- [Full Topic Index](#full-topic-index)
 - [Architecture Overview](#architecture-overview)
 - [What I'm Working On](#what-im-working-on)
 
@@ -66,6 +71,34 @@ The standalone module examples are in `Identity-First/bicep/`, and the deployabl
 
 Some folders intentionally use a non-breaking hyphen (`‑`, U+2011), such as `Azure Policy Auto‑Remediation` and `Secure Break‑Glass Accounts`.
 For terminal commands, prefer tab completion or copy/paste paths directly from this repo to avoid subtle path mismatches.
+If typing manually, use wildcard navigation to avoid Unicode mismatch issues:
+
+```bash
+cd Azure\ Policy\ Auto*Remediation
+cd Secure\ Break*Accounts
+```
+
+If this causes repeated team friction, renaming folders to plain ASCII hyphen (`-`) is a reasonable trade-off.
+
+## Repository Structure
+
+```text
+azure-hands-on-engineering/
+|-- Identity-First/
+|   |-- README.md
+|   |-- bicep/
+|   |-- capstone/architecture/bicep/
+|   |-- 01-identity fundamentals.md
+|   |-- ...
+|   `-- 08-how-to-run-bicep-in-vscode.md
+|-- Compute/
+|-- VMSS/
+|-- Azure Front Door-Static Website Hosting/
+|-- Azure Policy Auto‑Remediation/
+|-- Recovery Services vaults/
+|-- Microsoft Entra Backup & Recovery/
+`-- Secure Break‑Glass Accounts/
+```
 
 ## Naming Convention
 
@@ -96,7 +129,9 @@ Short on time? Start here:
 
 In 30 minutes, you will understand the identity-first model, secretless authentication, edge delivery basics, and policy-driven governance.
 
-## My Reading Path
+## Recommended Reading Path
+
+This is the primary quick navigation path for first-time readers.
 
 1. [Identity-First Track Overview](<Identity-First/README.md>)
 2. [Identity Fundamentals](<Identity-First/01-identity fundamentals.md>)
@@ -104,11 +139,10 @@ In 30 minutes, you will understand the identity-first model, secretless authenti
 4. [Identity-First Access Flow](<Identity-First/identity-first-access-flow.md>)
 5. [Identity-First Bicep Capstone](<Identity-First/07-bicep-deployment-identity-stack.md>)
 6. [Run Bicep in VS Code](<Identity-First/08-how-to-run-bicep-in-vscode.md>)
-7. [Identity-First Lessons Learned](<Identity-First/lessons-learned.md>)
-8. [Azure Front Door + Static Website](<Azure Front Door-Static Website Hosting/Azure Front Door-Static Website Hosting Lab.md>)
-9. [Azure Policy Auto-Remediation](<Azure Policy Auto‑Remediation/1-Azure Policy Auto‑Remediation.md>)
 
-## Topics
+## Full Topic Index
+
+Use this as the complete domain-by-domain reference.
 
 ### 01 Identity Governance
 
@@ -140,6 +174,8 @@ In 30 minutes, you will understand the identity-first model, secretless authenti
 
 ### Identity Governance
 
+Text flow: Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
+
 ```mermaid
 flowchart LR
 		User[Engineer / Admin] --> Entra[Microsoft Entra ID]
@@ -150,6 +186,8 @@ flowchart LR
 ```
 
 ### Compute Lifecycle
+
+Text flow: Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
 
 ```mermaid
 flowchart LR
@@ -162,6 +200,8 @@ flowchart LR
 
 ### Global Delivery
 
+Text flow: Client -> Front Door -> Origin Group -> Storage Static Website -> $web content.
+
 ```mermaid
 flowchart LR
 		Client[Client] --> FD[Azure Front Door]
@@ -171,6 +211,8 @@ flowchart LR
 ```
 
 ### Governance Automation
+
+Text flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant state.
 
 ```mermaid
 flowchart LR
@@ -182,6 +224,8 @@ flowchart LR
 
 ### Business Continuity
 
+Text flow: Production VM -> Recovery Services Vault -> Backup/ASR -> Restore or Failover.
+
 ```mermaid
 flowchart LR
 		VM[Production VM] --> RSV[Recovery Services Vault]
@@ -192,6 +236,8 @@ flowchart LR
 ```
 
 ### Emergency Access
+
+Text flow: Standard identity fails during incident -> Break-glass account -> Recovery actions -> Audit.
 
 ```mermaid
 flowchart LR

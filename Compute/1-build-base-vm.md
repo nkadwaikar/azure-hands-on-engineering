@@ -1,9 +1,30 @@
-# 🖥️ Create a Virtual Machine in Azure (Portal Guide)
+# Create a Virtual Machine in Azure (Portal Guide)
 
 ## 🎯 Purpose
 
 This guide walks you through creating a VM in Azure with consistent steps and naming conventions.
 Use it as a reference for labs, demos, or production-aligned builds.
+
+## Track Structure
+
+```text
+Compute/
+|-- 1-build-base-vm.md
+|-- 2-sysprep-vm.md
+`-- 3-Install IIS.md
+```
+
+Flow: build base VM -> sysprep the image source -> install/validate IIS for web workload testing.
+
+## Quick Navigation
+
+- Purpose
+- Track Structure
+- Create Resource Group
+- Create Virtual Machine
+- Post-Deployment Steps
+- Optional IIS Installation
+- Cleanup
 
 ---
 

@@ -1,9 +1,27 @@
 
-# **Azure Front Door + Static Website Hosting Lab**
+# Azure Front Door + Static Website Hosting Lab
 
-## **1. Lab Overview**
+## Quick Orientation
 
-### **Objective**
+```text
+Azure Front Door-Static Website Hosting/
+`-- Azure Front Door-Static Website Hosting Lab.md
+```
+
+This module is a focused single-lab walkthrough for global static website delivery through Azure Front Door.
+
+## Quick Navigation
+
+- Lab Overview
+- Quick Orientation
+- Environment Setup
+- Front Door Configuration
+- Validation and Troubleshooting
+- Cleanup
+
+## 1. Lab Overview
+
+### Objective
 Deploy a static website using **Azure Storage Static Website Hosting** and publish it globally through **Azure Front Door (Standard/Premium)**.  
 The lab walks through:
 
@@ -13,16 +31,16 @@ The lab walks through:
 - Caching behavior  
 - Troubleshooting propagation delays (`CONFIG_NOCACHE`, `TCP_MISS`, `TCP_HIT`)  
 
-### **Architecture Flow**
+### Architecture Flow
 ```
 Client → Azure Front Door Endpoint → Origin Group → Static Website Endpoint → $web Container → index.html
 ```
 
 ---
 
-# **2. Environment Setup**
+## 2. Environment Setup
 
-## **2.1 Create a Resource Group**
+### 2.1 Create a Resource Group
 Create a new resource group dedicated to this lab.  
 This ensures:
 
@@ -32,7 +50,7 @@ This ensures:
 
 ---
 
-## **2.2 Create a Storage Account and Enable Static Website**
+### 2.2 Create a Storage Account and Enable Static Website
 
 - Create a **Storage Account** in any region  
 - **LRS** redundancy is sufficient for lab purposes  
@@ -51,7 +69,7 @@ https://<storage-account>.zXX.web.core.windows.net/
 
 ---
 
-## **2.3 Upload Website Content**
+### 2.3 Upload Website Content
 
 1. Navigate to **Containers → `$web`**  
 2. Upload `index.html` into the root of the `$web` container  
@@ -72,20 +90,20 @@ HTTP/1.1 200 OK
 
 ---
 
-# **3. Configure Azure Front Door (Portal‑Aligned)**
+## 3. Configure Azure Front Door (Portal‑Aligned)
 
-## **3.1 Create Front Door Profile (with Endpoint, Origin, and Route)**
+### 3.1 Create Front Door Profile (with Endpoint, Origin, and Route)
 
 Using **Custom Create**, Azure guides you through configuring all major components during setup.
 
-### **Profile Details**
+#### Profile Details
 - **Name:** Choose a descriptive name  
 - **Tier:** Standard or Premium  
 - **Resource group location:** e.g., East US 2  
 
 ---
 
-### **Endpoint Settings**
+#### Endpoint Settings
 - **Endpoint name:** Choose a unique name  
 - Azure generates:
   ```
@@ -94,7 +112,7 @@ Using **Custom Create**, Azure guides you through configuring all major componen
 
 ---
 
-### **Origin Settings**
+#### Origin Settings
 - **Origin type:** Storage (Static website)  
 - **Origin host name:**  
   Use the storage account's actual static website hostname:
@@ -107,14 +125,14 @@ Using **Custom Create**, Azure guides you through configuring all major componen
 
 ---
 
-### **Caching and Compression**
+#### Caching and Compression
 - **Enable caching:** Yes  
 - **Query string caching behavior:** Ignore Query String  
 - **Enable compression:** Optional  
 
 ---
 
-### **Route Configuration**
+#### Route Configuration
 Configure the route during creation:
 
 | Setting               | Value                            |
@@ -131,13 +149,13 @@ Configure the route during creation:
 | Query string behavior| Ignore Query String              |
 | Compression          | Optional                         |
 
-### **Why “HTTPS only” is required**
+#### Why “HTTPS only” is required
 Azure Storage Static Website Hosting should be reached over HTTPS from Front Door.  
 Keep the route's forwarding protocol set to HTTPS only so the origin is always contacted securely.
 
 ---
 
-### **Review + Create**
+#### Review + Create
 - Click **Review + Create**  
 - Ensure validation passes  
 - Deploy the Front Door profile  
@@ -152,11 +170,11 @@ Azure provisions:
 
 ---
 
-## **3.2 Post‑Deployment Configuration Update**
+### 3.2 Post‑Deployment Configuration Update
 
 After deployment, update the **origin group health probe** for accuracy.
 
-### **Updated Health Probe Settings**
+#### Updated Health Probe Settings
 
 | Setting         | Value        |
 |----------------|--------------|
@@ -165,14 +183,14 @@ After deployment, update the **origin group health probe** for accuracy.
 | Method         | HEAD         |
 | Interval       | 100 seconds  |
 
-### **Why this matters**
+#### Why this matters
 - Ensures the probe checks the root of your static site  
 - Matches the origin’s HTTPS endpoint  
 - Keeps the origin in a **Healthy** state  
 
 ---
 
-## **3.3 Validate Route Settings**
+### 3.3 Validate Route Settings
 
 Confirm the route settings match:
 
@@ -185,11 +203,11 @@ Confirm the route settings match:
 
 ---
 
-# **3.4 Purge Front Door Cache**
+### 3.4 Purge Front Door Cache
 
 After deploying Azure Front Door and configuring the route, purge the cache to ensure that no stale configuration or content is served by edge nodes.
 
-### **Steps**
+#### Steps
 - Navigate to **Caching → Purge** in the Azure Front Door portal.
 - Purge the pattern:
   ```
@@ -200,9 +218,9 @@ This forces all POPs (Points of Presence) to refresh their cached configuration 
 
 ---
 
-# **4. Validation & Troubleshooting**
+## 4. Validation & Troubleshooting
 
-## **4.1 Initial Behavior: 404 with `CONFIG_NOCACHE`**
+### 4.1 Initial Behavior: 404 with `CONFIG_NOCACHE`
 
 When testing the Front Door endpoint immediately after deployment:
 
@@ -217,7 +235,7 @@ HTTP/2 404
 x-cache: CONFIG_NOCACHE
 ```
 
-### **Meaning**
+#### Meaning
 - Azure Front Door’s global edge POPs **have not yet received the route configuration**.
 - This is a **propagation delay**, not a misconfiguration.
 
@@ -231,7 +249,7 @@ Produces the same result, confirming the route has not propagated.
 
 ---
 
-## **4.2 Configuration Verification**
+### 4.2 Configuration Verification
 
 Verify the following to ensure the configuration is correct:
 
@@ -244,13 +262,13 @@ Verify the following to ensure the configuration is correct:
 - No origin path is set.  
 - No private endpoints or firewalls are blocking traffic.  
 
-### **Conclusion**
+#### Conclusion
 The configuration is correct.  
 The 404 `CONFIG_NOCACHE` response is caused by **propagation delay**, not an error.
 
 ---
 
-## **4.3 Propagation Completion**
+### 4.3 Propagation Completion
 
 After waiting and periodically testing:
 
@@ -266,7 +284,7 @@ content-length: <size>
 x-cache: TCP_MISS
 ```
 
-### **Meaning**
+#### Meaning
 - The route is now active.  
 - The origin is serving content.  
 - Azure Front Door is delivering the static website globally.  
@@ -275,7 +293,7 @@ x-cache: TCP_MISS
 
 ---
 
-# **5. Lessons Learned**
+## 5. Lessons Learned
 
 1. `CONFIG_NOCACHE` indicates no active route at the edge.  
 2. This is caused by propagation delay, not misconfiguration.  
