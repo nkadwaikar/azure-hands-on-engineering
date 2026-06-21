@@ -2,42 +2,43 @@
 
 Senior Cloud & Identity Engineer. I build Azure platforms that are secure by design, not by accident.
 
-Most of my work lives at the intersection of **identity**, **Zero Trust**, and **infrastructure that actually holds up when things go wrong**. Everything I ship is practical and deployable — no slides, no theory-ware.
+Most of my work sits where identity, Zero Trust, and resilient infrastructure meet. Everything I build is meant to run in the real world — no theory, no slideware.
 
 ---
 
 ## What I'm building
 
-| | |
+| Area | Focus |
 | --- | --- |
-| 🔐 | Secretless auth with Managed Identity + Key Vault — credentials out of the stack entirely |
-| 📋 | Policy-driven governance with auto-remediation — compliance that enforces itself |
-| 🖥️ | VM image lifecycle and scale-set engineering — golden images, repeatable builds |
-| 🌐 | Global delivery via Azure Front Door — WAF at the edge, custom domains, static hosting |
-| 🔄 | Backup, DR, and Entra recovery — platforms that come back cleanly |
-| 🚨 | Break-glass account design — emergency access that doesn't punch a hole in Zero Trust |
+| 🔐 Identity | Secretless auth with Managed Identity + Key Vault — credentials out of the stack entirely |
+| 📋 Governance | Policy-driven governance with auto-remediation — compliance that enforces itself |
+| 🖥️ Compute | VM image lifecycle and scale-set engineering — golden images, repeatable builds |
+| 🌐 Networking | Global delivery via Azure Front Door — WAF at the edge, custom domains, static hosting |
+| 🔄 Resilience | Backup, DR, and Entra recovery — platforms that come back cleanly |
+| 🚨 Security | Break-glass account design — emergency access that doesn't punch a hole in Zero Trust |
 
-→ **[See the full lab repo](https://github.com/nadeemkadwaikar/azure-hands-on-engineering)**
+---
+
+## Recently shipped
+
+| Lab | What it covers |
+| --- | --- |
+| [Identity-First Stack](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep deployment |
+| [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Policy definitions, assignments, and automatic remediation tasks |
+| [VMSS & Golden Images](./VMSS/README.md) | Sysprep, image capture, scale set deployment |
+| [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin |
+| [Backup & Site Recovery](./Recovery%20Services%20vaults/README.md) | VM backup, restore, ASR replication |
+| [Break-Glass Accounts](./Secure%20Break%E2%80%91Glass%20Accounts/README.md) | Emergency access without breaking Zero Trust |
+| [Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID configuration backup and restore procedures |
+| [Compute & IIS](./Compute/README.md) | Base VM build, Sysprep, IIS installation and configuration |
 
 ---
 
 ## Current focus
 
-- [ ] App Services with managed identity and deployment slots
-- [ ] Defender for Cloud CSPM in a hub-and-spoke architecture  
-- [ ] Azure Arc for hybrid server management
-
----
-
-## Stack
-
-![Microsoft Azure](https://img.shields.io/badge/Microsoft%20Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![Microsoft Entra ID](https://img.shields.io/badge/Microsoft%20Entra%20ID-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![Azure Key Vault](https://img.shields.io/badge/Azure%20Key%20Vault-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![Azure Policy](https://img.shields.io/badge/Azure%20Policy-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![Azure Front Door](https://img.shields.io/badge/Azure%20Front%20Door-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![Bicep](https://img.shields.io/badge/Bicep-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white)
+- App Services with managed identity and deployment slots
+- Defender for Cloud CSPM in a hub-and-spoke architecture
+- Azure Arc for hybrid server management
 
 ---
 

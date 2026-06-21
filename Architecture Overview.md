@@ -1,6 +1,7 @@
-## Architecture Overview
 
-### Identity Governance
+# Architecture Overview
+
+## Identity Governance
 
 Text flow: Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
 
