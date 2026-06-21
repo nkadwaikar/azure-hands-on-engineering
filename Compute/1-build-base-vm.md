@@ -10,11 +10,11 @@ Use it as a reference for labs, demos, or production-aligned builds.
 ```text
 Compute/
 |-- 1-build-base-vm.md
-|-- 2-sysprep-vm.md
-`-- 3-Install IIS.md
+|-- 2-install-iis.md
+`-- 3-sysprep-vm.md
 ```
 
-Flow: build base VM -> sysprep the image source -> install/validate IIS for web workload testing.
+Flow: build base VM -> install/validate IIS for web workload testing -> sysprep the image source.
 
 ## Quick Navigation
 
@@ -166,7 +166,7 @@ http://<public-ip>
 
 ---
 
-## 🎉 Base VM is ready for Sysprep
+## 🎉 Base VM is ready for IIS Installation
 
 **Next step:**
-➡ [Sysprep VM](2-sysprep-vm.md)
+➡ [Install IIS](2-install-iis.md)

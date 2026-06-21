@@ -15,11 +15,12 @@ flowchart LR
 
 ### Compute Lifecycle
 
-Text flow: Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
+Text flow: Base VM Build -> Install IIS -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
 
 ```mermaid
 flowchart LR
-    Build[Base VM Build] --> Prep[Sysprep]
+    Build[Base VM Build] --> IIS[Install IIS]
+    IIS --> Prep[Sysprep]
     Prep --> Image[Golden Image Capture]
     Image --> Gallery[Image Version]
     Gallery --> VMSS[VM Scale Set]
