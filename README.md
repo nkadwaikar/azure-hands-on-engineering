@@ -21,7 +21,6 @@ If badges do not render in your viewer: Azure | Bicep | Zero Trust | PowerShell 
 - [What I Explore](#what-i-explore)
 - [Why It Matters](#why-it-matters)
 - [Get Started](#get-started)
-- [Repository Structure](#repository-structure)
 - [Naming Convention](#naming-convention)
 - [A 30-Minute Starting Path](#a-30-minute-starting-path)
 - [Recommended Reading Path](#recommended-reading-path)
@@ -79,26 +78,6 @@ cd Secure\ Break*Accounts
 ```
 
 If this causes repeated team friction, renaming folders to plain ASCII hyphen (`-`) is a reasonable trade-off.
-
-## Repository Structure
-
-```text
-azure-hands-on-engineering/
-|-- Identity-First/
-|   |-- README.md
-|   |-- bicep/
-|   |-- capstone/architecture/bicep/
-|   |-- 01-identity fundamentals.md
-|   |-- ...
-|   `-- 08-how-to-run-bicep-in-vscode.md
-|-- Compute/
-|-- VMSS/
-|-- Azure Front Door-Static Website Hosting/
-|-- Azure Policy Auto‑Remediation/
-|-- Recovery Services vaults/
-|-- Microsoft Entra Backup & Recovery/
-`-- Secure Break‑Glass Accounts/
-```
 
 ## Naming Convention
 
