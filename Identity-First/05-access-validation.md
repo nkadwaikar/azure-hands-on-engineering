@@ -1,23 +1,26 @@
-# **Access Validation (Portal + CLI)**  
-### *Validate RBAC, Identity, Locks, and Policy Enforcement Across Real Access Paths*
+# **Access Validation (Portal + CLI)**
 
-Day 5 is where you **prove** that everything you built in Days 1–4 works exactly as intended.  
+## *Validate RBAC, Identity, Locks, and Policy Enforcement Across Real Access Paths*
+
+Day 5 is where you **prove** that everything you built in Days 1–4 works exactly as intended.
 This lab validates RBAC, Managed Identity, locks, and policies using both the **Azure Portal** and **Azure CLI** — the same way real cloud engineers test governance in production environments.
-
 
 ## 🔧 **Prerequisites (Rebuild Environment if Cleaned Up)**
 
 If you removed resources after Day 4, recreate the following:
 
 ### **Resource Groups**
+
 - `rg-identity-eus-lab-core` (policy-free sandbox)  
 - `rg-test-compliant` (policy-restricted RG)
 
 ### **Policies**
+
 - Assign your **Custom Audit Policy — Audit Resource Groups Missing a Tag** at subscription scope  
 - Assign **Allowed VM Size SKUs** to `rg-test-compliant`
 
 ### **VM for Identity Tests**
+
 Deploy a VM with:
 
 - System-assigned managed identity  
@@ -25,6 +28,7 @@ Deploy a VM with:
 - In `rg-identity-eus-lab-core` (no restrictions)
 
 ### **Optional**
+
 - Create a Key Vault for MI access tests  
 
 This ensures Day 5 starts with a clean, consistent environment.
@@ -52,6 +56,7 @@ By the end of this lab, you will:
 ### **1. Validate RBAC in the Azure Portal**
 
 #### **Test 1 — Reader Role**
+
 Log in as a user with **Reader** on `rg-identity-eus-lab-core`.
 
 Try the following:
@@ -65,6 +70,7 @@ This confirms Reader = view-only.
 ---
 
 #### **Test 2 — Contributor Role**
+
 Log in as a user with **Contributor** on `rg-identity-eus-lab-core`.
 
 Try:
@@ -78,6 +84,7 @@ Contributor cannot grant permissions — correct behavior.
 ---
 
 #### **Test 3 — Owner Role**
+
 Log in as **Owner** on `rg-locks-demo`.
 
 Try:
@@ -124,7 +131,7 @@ az group delete -n rg-locks-demo
 
 Expected:
 
-```
+```text
 Operation failed due to a lock on the resource group.
 ```
 
@@ -144,7 +151,7 @@ az vm create \
 
 Expected:
 
-```
+```text
 The resource is disallowed by policy.
 ```
 
@@ -257,12 +264,14 @@ This proves lock behavior is consistent across interfaces.
 Compare:
 
 #### **`rg-test-compliant` (Restricted)**
+
 - SKU restrictions  
 - Tag audit  
 - Policy enforcement  
 - Lock behavior  
 
 #### **`rg-identity-eus-lab-core` (Unrestricted)**
+
 - No policies  
 - No restrictions  
 - Full freedom  
@@ -274,14 +283,17 @@ This mirrors real Landing Zone design.
 ## 🧹 **Cleanup (Optional)**
 
 ### **1. Remove Locks**
+
 - Delete locks from `rg-locks-demo`  
 - Delete resource-level locks  
 
 ### **2. Remove Policy Assignments**
+
 - Custom Audit Policy  
 - Allowed VM Size SKUs  
 
 ### **3. Delete Test Resource Groups**
+
 - `rg-locks-demo`  
 - `rg-test-compliant`  
 - `rg-test-noncompliant`  
@@ -289,6 +301,7 @@ This mirrors real Landing Zone design.
 - `rg-audit-pass`  
 
 ### **4. Delete Test VMs**
+
 - Any VM created for MI or SKU tests  
 
 ---

@@ -27,8 +27,8 @@ This document covers capturing the custom image and validating it before using i
 
 ## 1. Capture the Image
 
-
 **Portal Navigation:**
+
 1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machines** in the top search bar.
 2. Select your prepared VM from the list.
 3. In the VM blade, click **Capture** from the top menu.
@@ -47,8 +47,8 @@ This document covers capturing the custom image and validating it before using i
 
 ## 2. Deploy a Test VM from the Captured Image
 
-
 **Portal Navigation:**
+
 1. In the [Azure Portal](https://portal.azure.com), search for **Shared Image Gallery**.
 2. Select your gallery, then your **Image Definition**.
 3. Click on the desired **Image Version** (e.g., `1.0.0`).
@@ -58,10 +58,10 @@ This document covers capturing the custom image and validating it before using i
 
 ## 3. Validate the Test VM
 
-### Expected behavior:
+### Expected behavior
 
 | Behavior | Meaning |
-|---------|---------|
+| --------- | --------- |
 | ✔ Windows login screen | Image is healthy |
 | ❌ “Hi there” OOBE | Wrong capture process |
 | ❌ “Specializing…” | Sysprep failed |

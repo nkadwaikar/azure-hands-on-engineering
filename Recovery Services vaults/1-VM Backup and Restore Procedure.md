@@ -39,6 +39,7 @@ Use this file first, then continue through Site Recovery and storage replication
 ## 1. Learning Objectives
 
 By the end of this lab, you will:
+
 - Deploy a Recovery Services Vault
 - Configure Enhanced Backup for an Azure VM
 - Perform file-level recovery using the downloadable recovery executable
@@ -105,13 +106,14 @@ flowchart LR
 
 1. Go to **Create a resource** → **Virtual machine**
 2. Configure:
-  - Name: `vm-fntech-eus-lab-fs01`
-  - Resource group: `rg-fntech-eus-lab-backup`
+   - Name: `vm-fntech-eus-lab-fs01`
+   - Resource group: `rg-fntech-eus-lab-backup`
    - Availability options: No infrastructure redundancy required
    - Security type: Standard
    - Image: Windows Server 2019 Datacenter – Gen2
    - Size: Standard_D2ds_v4 (2 vCPUs, 8 GiB RAM)
    - Configure admin credentials and networking
+
 3. Click **Review + Create** → **Create**
 
 ---
@@ -163,13 +165,13 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
 
 ### 4.4 Create or Select a Backup Policy
 
-**Create a New Enhanced Policy**
+#### Create a New Enhanced Policy
 
 1. Under **Backup policy**, click **Create a new policy**
 2. Choose **Enhanced**
 3. Enter a name: `EnhancedPolicy-VMDaily`
 
-**Configure Policy Details**
+#### Configure Policy Details
 
 - Full Backup
   - Backup frequency: Daily
@@ -188,7 +190,7 @@ Azure has redesigned the VM backup workflow. You now configure backup per VM, an
   - Prefix: `fntechnotes`
   - Suffix: `BKP`
 
-4. Click **OK** to create the policy
+1. Click **OK** to create the policy
 
 ---
 
@@ -255,11 +257,13 @@ Azure has changed how manual backups are triggered.
 ### 5.2 Configure Restore Options
 
 1. Choose restore type:
-  - **Create new virtual machine** (recommended for lab validation)
+   - **Create new virtual machine** (recommended for lab validation)
+
 2. Configure target settings:
-  - Resource group: `rg-fntech-eus-lab-backup`
-  - Virtual network and subnet: use existing lab network
-  - Restored VM name: `vm-fntech-eus-lab-fs02`
+   - Resource group: `rg-fntech-eus-lab-backup`
+   - Virtual network and subnet: use existing lab network
+   - Restored VM name: `vm-fntech-eus-lab-fs02`
+
 3. Review settings and click **Restore**
 
 ---

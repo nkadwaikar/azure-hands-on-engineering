@@ -12,7 +12,7 @@ Before starting this lab, ensure you have:
 - An **Azure Subscription** with Owner or User Access Administrator rights
 - Permission to create **Azure AD users** (or admin assistance available)
 - **Azure CLI** installed (optional, for CLI commands)
-  - Installation guide: https://learn.microsoft.com/cli/azure/install-azure-cli
+  - Installation guide: <https://learn.microsoft.com/cli/azure/install-azure-cli>
 - Access to **Azure Portal**
 
 **⏱️ Estimated Time:** 45–60 minutes
@@ -29,13 +29,13 @@ By the end of this lab, you will:
 
 ---
 
-# 🧪 Lab Steps
+## 🧪 Lab Steps
 
 ---
 
 ## 1. Create BootCamp User (Admin)
 
-**👨‍💼 Admin Task**
+### 👨‍💼 Admin Task
 
 Create a non-admin user for RBAC testing:
 
@@ -71,20 +71,20 @@ az ad user create \
 
 ## 2. Create Resource Group
 
-**👨‍💼 Admin Task**
-
-### Using Azure Portal
+### Using the Azure Portal
 
 1. Open **Azure Portal**  
 2. Search for **Resource groups**  
 3. Click **Create**  
 4. Fill in the following:
    - **Subscription:** Select your subscription
-  - **Resource group:** `rg-identity-eus-lab-core`
-   - **Region:** Your preferred region (e.g., East US)
-5. Click **Review + Create → Create**
 
-### Using Azure CLI
+- **Resource group:** `rg-identity-eus-lab-core`
+- **Region:** Your preferred region (e.g., East US)
+
+1. Click **Review + Create → Create**
+
+### Using Azure CLI (Resource Group)
 
 ```bash
 az group create \
@@ -100,13 +100,11 @@ az group show --name rg-identity-eus-lab-core --output table
 
 ---
 
-## 3. Assign RBAC Roles at Different Scopes (Admin)
-
-**👨‍💼 Admin Task**
+## 3. Assign RBAC Roles at Different Scopes
 
 Azure RBAC hierarchy operates in a top-down inheritance model:
 
-```
+```text
 Subscription → Resource Group → Resource
 ```
 
@@ -119,11 +117,11 @@ Subscription → Resource Group → Resource
 
 ---
 
-### 3.2 Resource Group Scope (Actual Assignment)
+### 3.2 Resource Group Scope - Actual Assignment
 
 Assign Alex the **Contributor** role at the Resource Group scope.
 
-#### Using Azure Portal
+#### Assign Role Using Azure Portal
 
 1. Navigate to **Resource groups → rg-identity-eus-lab-core**
 2. Click **Access control (IAM)** in the left menu
@@ -138,7 +136,7 @@ Assign Alex the **Contributor** role at the Resource Group scope.
    - Click **Select**
 6. Click **Review + assign** (twice)
 
-#### Using Azure CLI
+#### Assign Role Using Azure CLI
 
 ```bash
 # Get your subscription ID
@@ -162,7 +160,7 @@ az role assignment list \
 
 **Expected output:**
 
-```
+```table
 Principal                    Role         Scope
 ---------------------------  -----------  -----------------------------------
 alex.james@contoso.com       Contributor  /subscriptions/.../resourceGroups/rg-identity-eus-lab-core
@@ -200,7 +198,7 @@ This validates **RBAC scoping** and **least-privilege** principles.
 
 All attempts outside `rg-identity-eus-lab-core` should return:
 
-```
+```text
 ❌ Access denied
 ```
 
@@ -214,19 +212,19 @@ This confirms **correct RBAC enforcement** at the Resource Group scope.
 
 Create a Storage Account inside `rg-identity-eus-lab-core` to test inheritance.
 
-#### Using Azure Portal
+#### Admin: Using Azure Portal
 
 1. Navigate to **Storage accounts → Create**
 2. Fill in:
    - **Subscription:** Your subscription
-  - **Resource group:** `rg-identity-eus-lab-core`
-  - **Storage account name:** `stidentitylabcore01` (must be globally unique in your tenant)
+   - **Resource group:** `rg-identity-eus-lab-core`
+   - **Storage account name:** `stidentitylabcore01` (must be globally unique in your tenant)
    - **Region:** Same as the resource group
    - **Performance:** Standard
    - **Redundancy:** Locally-redundant storage (LRS)
 3. Click **Review + Create → Create**
 
-#### Using Azure CLI
+#### Admin: Using Azure CLI
 
 ```bash
 # Generate a unique storage account name
@@ -265,11 +263,12 @@ Sign in as `alex.james@contoso.com` and navigate to the storage account.
 
 This demonstrates how **RBAC permissions inherit down the scope hierarchy**:
 
-```
+```text
 Contributor at RG → Contributor on ALL resources inside RG
 ```
 
 The Contributor role assigned at the `rg-identity-eus-lab-core` scope automatically applies to:
+
 - The storage account
 - Any future resources created in this RG
 
@@ -280,7 +279,7 @@ The Contributor role assigned at the `rg-identity-eus-lab-core` scope automatica
 Test these scenarios to understand RBAC behavior:
 
 | Scenario | Expected Result | Reason |
-|---------|-----------------|--------|
+| --------- | --------------- | -------- |
 | User tries to access another RG | ❌ Access denied | No role assigned at that scope |
 | User tries to assign IAM roles | ❌ Access denied | Contributor cannot manage IAM (requires Owner) |
 | User tries to view subscription billing | ❌ Access denied | No subscription-level permissions |
@@ -366,7 +365,7 @@ az role assignment list \
 
 ## 8. Clean Up (Optional)
 
-**👨‍💼 Admin Task**
+### 👨‍💼 Admin Task: Clean Up Resources
 
 ### Delete the Resource Group
 
@@ -406,7 +405,6 @@ Today you learned:
 - How to **validate and troubleshoot** RBAC assignments
 
 ---
-
 
 ## ▶️ Next Lab
 

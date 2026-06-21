@@ -2,7 +2,7 @@
 
 ## 1. Connect to the VM
 
-**Portal Navigation**
+### Portal Navigation
 
 1. In Azure Portal, go to **Virtual Machines**.
 2. Select your VM: `vm-fntech-eus-lab-app01`.
@@ -95,5 +95,3 @@ If your VM has a Public IP and NSG rule allowing port 80:
 - Check Windows Firewall inside the VM: **Control Panel** → **Windows Defender Firewall** → **Allow an app** → ensure **World Wide Web Services** is allowed.
 - Restart IIS manually: `iisreset`
 - Confirm the file exists: `C:\inetpub\wwwroot\index.html`
-
-

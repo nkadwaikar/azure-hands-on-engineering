@@ -1,5 +1,6 @@
 # 📝 Lessons Learned  
-*Identity-First, Governance-Ready Landing Zone*
+
+## Identity-First, Governance-Ready Landing Zone
 
 Week 1 focused on building a secure, identity-driven foundation with modular Bicep and a VS Code-only workflow.  
 These lessons capture the architectural insights, the mistakes corrected, and the patterns validated during the lab.
@@ -10,6 +11,7 @@ These lessons capture the architectural insights, the mistakes corrected, and th
 
 **Key Insight**  
 Using **User Assigned Managed Identity (UAMI)** as the primary authentication mechanism eliminates:
+
 - Secrets  
 - Keys  
 - Connection strings  
@@ -17,7 +19,8 @@ Using **User Assigned Managed Identity (UAMI)** as the primary authentication me
 
 This drastically reduces operational risk and aligns with zero-trust principles.
 
-**What I learned**  
+### What I Learned About Identity-First Design  
+
 - RBAC-mode Key Vault is the modern standard.  
 - Access Policies are legacy and should be avoided.  
 - Identity-first access forces clean architecture decisions early.
@@ -28,13 +31,15 @@ This drastically reduces operational risk and aligns with zero-trust principles.
 
 **Key Insight**  
 Breaking infrastructure into modules (identity, keyvault, rbac, locks) creates:
+
 - Reusable patterns  
 - Cleaner code  
 - Easier debugging  
 - Better documentation  
 - Enterprise-grade structure  
 
-**What I learned**  
+### What I Discovered About Modular Bicep  
+
 - Outputs between modules must be explicit and consistent.  
 - A single typo in a parameter name can break the entire chain.  
 - Module orchestration in `main.bicep` becomes the "source of truth."
@@ -45,12 +50,14 @@ Breaking infrastructure into modules (identity, keyvault, rbac, locks) creates:
 
 **Key Insight**  
 Deploying Bicep files directly from VS Code:
+
 - Removes the need for CLI  
 - Removes the need for Portal  
 - Keeps the workflow consistent  
 - Reduces cognitive load  
 
-**What I learned**  
+### What I Learned About VS Code Deployment  
+
 - Right-click → Deploy Bicep File is reliable and intuitive.  
 - Azure Explorer provides everything needed for validation.  
 - Staying inside VS Code improves focus and reduces context switching.
@@ -63,7 +70,8 @@ Deploying Bicep files directly from VS Code:
 Governance is not something to add in a later week.  
 It needs to be part of the foundation.
 
-**What I learned**
+### What I Learned
+
 - Resource Locks prevent accidental deletion during experimentation.  
 - RBAC assignments must be scoped correctly (resource vs RG).  
 - Policies can be added later if the stack needs central enforcement.
@@ -75,7 +83,8 @@ It needs to be part of the foundation.
 **Key Insight**  
 A deployment is not "done" until it is validated.
 
-**What I learned**  
+### What I Learned About Validation  
+
 - VS Code Azure Explorer is perfect for visual validation.  
 - Screenshots create an audit trail for recruiters and reviewers.  
 - Identity-first access tests (UAMI → Key Vault) prove the architecture works.
@@ -88,7 +97,8 @@ A deployment is not "done" until it is validated.
 ASCII diagrams are simple but powerful.  
 They force clarity and reveal gaps.
 
-**What I learned**  
+### What I Learned About Architecture Diagrams  
+
 - Visualizing the flow (identity, governance, deployment) exposes mistakes early.  
 - Diagrams make documentation more accessible and recruiter-friendly.  
 - Architecture is communication — not just code.
@@ -100,7 +110,8 @@ They force clarity and reveal gaps.
 **Key Insight**  
 A well-organized repo is a competitive advantage.
 
-**What I learned**  
+### What I Learned About Folder Structure  
+
 - Separating `bicep/` from the markdown labs keeps everything easier to navigate.  
 - Keeping validation evidence near the relevant lab reduces friction.  
 - A consistent structure sets the tone for future projects.
@@ -112,7 +123,8 @@ A well-organized repo is a competitive advantage.
 **Key Insight**
 Week 1 was not about complexity — it was about **foundations**.
 
-**What I learned**  
+### What I Learned About Momentum  
+
 - A simple, secure landing zone is better than a complex, fragile one.  
 - Identity-first patterns scale into every future capstone.  
 - Momentum matters more than perfection.
@@ -122,6 +134,7 @@ Week 1 was not about complexity — it was about **foundations**.
 ## 🎉 Summary
 
 Week 1 delivered:
+
 - A secure identity-first landing zone  
 - Modular Bicep architecture  
 - Governance controls  

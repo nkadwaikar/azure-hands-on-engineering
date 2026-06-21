@@ -1,6 +1,6 @@
 # Microsoft Entra Break‑Glass & Emergency Access Accounts
 
-**Updated Design for 2025: Production-Ready Identity Resilience**
+## Updated Design for 2025: Production-Ready Identity Resilience
 
 A complete, portal-only lab implementing Microsoft's 2025 security baseline for emergency access accounts with phishing-resistant MFA and Conditional Access enforcement.
 
@@ -38,7 +38,7 @@ This module is a focused single-lab implementation guide for modern break-glass 
 ## Prerequisites
 
 | Requirement | Detail |
-|---|---|
+| --- | --- |
 | Azure Role | **Global Administrator** on the target Entra ID tenant |
 | Tenant Type | Cloud-only (hybrid/federated not required) |
 | MFA Hardware | FIDO2 security key (2 recommended) or Certificate-based authentication support |
@@ -76,41 +76,50 @@ This is the exact design pattern required by Microsoft's 2025 security baseline.
 **Ensure Operational Continuity with Secure Emergency Access.**
 
 Your tenant is locked out due to:
+
 - Misconfigured Conditional Access policies blocking all admins
 - MFA outage affecting standard admin accounts
 - Network restrictions preventing access from corporate locations
 
 Break‑glass accounts remain functional because they:
+
 - Use phishing-resistant FIDO2 keys (not dependent on Authenticator app)
 - Are protected by dedicated Authentication Strength (not bypassed)
 - Maintain access during outages (Conditional Access still enforces, but break‑glass can authenticate)
 
-This lab walks through creating, testing, and validating this scenario.
+This lab walks through creating, testing, and validating this scenario
+
 ---
 
 ## 1. Design Principles for Secure Break‑Glass Accounts
 
 ### 1.1 Two Cloud‑Only Emergency Accounts
+
 - No federation, no sync, no external IdP
 
 ### 1.2 Global Administrator Role
+
 - Active assignment (not PIM‑eligible)
 
 ### 1.3 Phishing‑Resistant MFA (Required)
+
 - FIDO2 security keys (preferred)
 - Certificate‑based authentication (CBA) (alternative)
 - Windows Hello for Business (acceptable)
 - **Blocked:** Authenticator app, SMS, voice, password-only
 
 ### 1.4 Conditional Access Enforced
+
 - Break‑glass accounts are NOT excluded from CA
 - Protected by dedicated Authentication Strength policy
 
 ### 1.5 Monitoring & Alerting
+
 - Every break‑glass sign-in generates an alert
 - Role changes, MFA modifications tracked
 
 ### 1.6 Tested & Documented
+
 - Recovery runbook maintained
 - Quarterly break‑glass tests performed
 
@@ -151,7 +160,7 @@ This lab walks through creating, testing, and validating this scenario.
 
 Microsoft now requires MFA for all admins. Complete this step for each emergency account:
 
-1. Sign in to **https://myaccount.microsoft.com** as **Emergency Admin 01**
+1. Sign in to **<https://myaccount.microsoft.com>** as **Emergency Admin 01**
 2. Navigate to **Security Info** → **+ Add sign-in method** → **Security key**
 3. **Register FIDO2 Security Key (Recommended):**
    - Click **+ Add method** → **Security key**
@@ -218,10 +227,12 @@ Break‑glass accounts must not be excluded from Conditional Access. Instead, th
 4. Click **Create**
 
 **Result:** This ensures:
+
 - Break‑glass accounts must use FIDO2/CBA
 - They cannot use weak MFA
 - They cannot bypass CA
 - They remain usable during outages
+
 ---
 
 ## 4. Monitoring & Alerting
@@ -246,6 +257,7 @@ Every sign‑in by a break‑glass account must trigger an alert.
 ### 4.3 Alert Configuration
 
 Set up alerts to trigger when:
+
 - Emergency Admin accounts sign in
 - Global Administrator role is assigned
 - Authentication methods are modified
@@ -308,6 +320,7 @@ If locked out due to a misconfigured Conditional Access policy:
 6. **Rotate break‑glass passwords** — Generate new passwords for both emergency accounts
 7. **Review logs** — Check sign-in logs and audit logs for unauthorized attempts
 8. **Document the incident** — Create an incident report noting the time, cause, and resolution
+
 ---
 
 ## 7. Validation Checklist

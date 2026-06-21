@@ -8,7 +8,7 @@ Last validated on: 2026-06-19
 Portal experience note: Steps validated against Microsoft Entra admin center UI as of June 2026; labels can vary slightly by tenant, licensing, and feature rollout.
 
 > **Note:** Microsoft Entra Backup & Recovery is a Microsoft-managed service. This lab focuses on comparing recent directory state and restoring supported cloud-managed objects. Tenant-level backup schedule and retention controls are not configurable.
-
+>
 > **Preview note:** Because this capability is still evolving, some labels and delete options can vary by tenant during rollout.
 
 ---
@@ -38,6 +38,7 @@ This module is a focused single-lab guide for Entra difference reports and objec
 ## 1. Learning Objectives
 
 By the end of this lab, you will:
+
 - Understand how Microsoft Entra Backup & Recovery works
 - Generate a difference report against a recent backup snapshot
 - Filter the comparison to selected object types

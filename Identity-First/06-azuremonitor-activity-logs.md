@@ -1,6 +1,7 @@
 
 # **Azure Monitor + Activity Logs**  
-### *Observe, audit, and validate identity + governance operations across your environment.*
+
+## *Observe, audit, and validate identity + governance operations across your environment.*
 
 Today you add the **observability pillar** to your identity‑first, governance‑first Landing Zone.  
 Azure Monitor and Activity Logs give you the visibility needed to track:
@@ -15,7 +16,7 @@ Azure Monitor and Activity Logs give you the visibility needed to track:
 
 This is how real cloud security teams validate governance in production.
 
-# 🔧 **Prerequisites (Rebuild if Cleaned Up)**
+## 🔧 **Prerequisites (Rebuild if Cleaned Up)**
 
 If you cleaned up after Day 5, recreate:
 
@@ -31,7 +32,7 @@ This ensures logs capture meaningful governance events.
 
 ---
 
-# 🎯 **Learning Objectives**
+## 🎯 **Learning Objectives**
 
 By the end of this lab, you will:
 
@@ -45,13 +46,13 @@ By the end of this lab, you will:
 
 ---
 
-# 🧪 **Lab Steps**
+## 🧪 **Lab Steps**
 
 ---
 
-# **1. Create a Log Analytics Workspace**
+## **1. Create a Log Analytics Workspace**
 
-**Azure Portal → Log Analytics workspaces → Create**
+### Azure Portal → Log Analytics workspaces → Create
 
 - Name: `law-governance`  
 - Resource Group: `rg-identity-eus-lab-core`  
@@ -61,9 +62,9 @@ This workspace will receive all logs.
 
 ---
 
-# **2. Enable Activity Logs → Log Analytics**
+## **2. Enable Activity Logs → Log Analytics**
 
-**Azure Portal → Monitor → Activity Log → Diagnostic settings → Add**
+### Azure Portal → Monitor → Activity Log → Diagnostic settings → Add
 
 Configure:
 
@@ -82,14 +83,14 @@ This ensures all subscription-level governance events are captured.
 
 ---
 
-# **3. Enable Diagnostic Settings on Resource Groups**
+## **3. Enable Diagnostic Settings on Resource Groups**
 
 Do this for:
 
 - `rg-identity-eus-lab-core`  
 - `rg-test-compliant`
 
-**Resource Group → Diagnostic settings → Add**
+### Resource Group → Diagnostic settings → Add
 
 Enable:
 
@@ -102,9 +103,9 @@ Send to: `law-governance`
 
 ---
 
-# **4. Enable Diagnostic Settings on Key Vault (Optional but Recommended)**
+## **4. Enable Diagnostic Settings on Key Vault (Optional but Recommended)**
 
-**Key Vault → Diagnostic settings → Add**
+### Key Vault → Diagnostic settings → Add
 
 Enable:
 
@@ -116,9 +117,9 @@ This captures identity access attempts.
 
 ---
 
-# **5. Enable Diagnostic Settings on Virtual Machines**
+## **5. Enable Diagnostic Settings on Virtual Machines**
 
-**VM → Diagnostic settings → Add**
+### VM → Diagnostic settings → Add
 
 Enable:
 
@@ -130,40 +131,46 @@ Send to: `law-governance`
 
 ---
 
-# **6. Generate Governance Events to Observe**
+## **6. Generate Governance Events to Observe**
 
 Now create events that will appear in logs.
 
-### **Event 1 — RBAC Change**
+## **Event 1 — RBAC Change**
+
 Assign Reader → Contributor → Reader again.
 
 ### **Event 2 — Lock Operation**
+
 Add a Delete lock to a resource group, then remove it.
 
 ### **Event 3 — Policy Deny**
+
 Try deploying a disallowed VM SKU in `rg-test-compliant`.
 
 ### **Event 4 — Audit Event**
+
 Create a resource group without the required tag.
 
 ### **Event 5 — Identity Access**
+
 From your VM’s managed identity:
 
 - Try accessing Key Vault (allowed)  
 - Try accessing Storage (denied)  
 
 ### **Event 6 — Resource Deployment**
+
 Deploy a VM or storage account in `rg-identity-eus-lab-core`.
 
 These events will populate your logs.
 
 ---
 
-# **7. Query Logs Using KQL**
+## **7. Query Logs Using KQL**
 
 Go to:
 
-**Azure Portal → Monitor → Logs → law-governance**
+### Azure Portal → Monitor → Logs → law-governance
 
 ---
 
@@ -222,42 +229,51 @@ AzureDiagnostics
 
 ---
 
-# **8. Validate Observability Across Governance Layers**
+## **8. Validate Observability Across Governance Layers**
 
 ### **RBAC**
+
 - Role assignment events appear in Activity Logs.
 
 ### **Locks**
+
 - Lock creation/deletion events appear in Activity Logs.
 
 ### **Policy**
+
 - Deny events appear in Activity Logs.  
 - Audit events appear in Policy Insights.
 
 ### **Identity**
+
 - Key Vault access attempts appear in Diagnostic Logs.
 
 ### **Compute**
+
 - VM lifecycle events appear in Activity Logs.
 
 You now have a complete observability baseline.
 
 ---
 
-# 🧹 **Cleanup (Optional)**
+## 🧹 **Cleanup (Optional)**
 
 ### **1. Remove Diagnostic Settings**
+
 From RGs, VMs, Key Vault.
 
 ### **2. Delete Log Analytics Workspace**
+
 `law-governance`
 
 ### **3. Delete Test Resource Groups**
+
 - `rg-test-compliant`  
 - `rg-audit-test`  
 - `rg-audit-pass`  
 
 ### **4. Remove Policy Assignments**
+
 - Custom Audit Policy  
 - Allowed VM Size SKUs  
 

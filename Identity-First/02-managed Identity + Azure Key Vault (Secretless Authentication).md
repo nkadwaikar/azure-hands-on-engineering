@@ -19,7 +19,7 @@ This lab introduces the identity-first pattern used in modern cloud workloads.
 
 ---
 
-# 🧪 Lab Steps
+## 🧪 Lab Steps
 
 ---
 
@@ -40,6 +40,7 @@ Ensure you have completed:
 2. Select **Create → Azure virtual machine**
 
 **Configuration:**
+
 - **Resource group:** `rg-identity-eus-lab-core`
 - **VM name:** `vm-identity-eus-lab-app01`
 - **Region:** Same as Resource Group
@@ -50,9 +51,9 @@ Ensure you have completed:
 - **SSH public key source:** Generate new key pair
 - **Key pair name:** `bootcamp-key`
 
-3. Click **Review + Create → Create**
-4. Download the SSH key when prompted
-5. Set proper permissions on the key:
+1. Click **Review + Create → Create**
+2. Download the SSH key when prompted
+3. Set proper permissions on the key:
 
 ```bash
 chmod 400 ~/Downloads/bootcamp-key.pem
@@ -79,12 +80,13 @@ Azure automatically creates a service principal for the VM.
 3. Configure the Key Vault:
 
 **Basics:**
+
 - **Resource group:** `rg-identity-eus-lab-core`
 - **Key Vault name:** `kv-identity-eus-lab-core` (if unavailable, use your own globally unique suffix)
 - **Region:** Same as Resource Group
 - **Permission model:** Azure role-based access control (RBAC) ← **Important**
 
-4. Click **Review + Create → Create**
+1. Click **Review + Create → Create**
 
 ---
 
@@ -99,7 +101,7 @@ Azure automatically creates a service principal for the VM.
 - **Name:** `app-secret`
 - **Secret value:** `SuperSecretValue123`
 
-5. Click **Create**
+1. Click **Create**
 
 ---
 
@@ -116,7 +118,7 @@ Grant the VM's managed identity permission to read secrets.
    - **Assign access to:** Managed identity
    - Click **Select members**
    - **Managed identity:** Virtual machine
-  - Select **vm-identity-eus-lab-app01**
+   - Select **vm-identity-eus-lab-app01**
    - Click **Select**
 7. Click **Review + assign**
 
@@ -212,7 +214,7 @@ az keyvault secret show \
 
 ### Expected Result
 
-```
+```text
 SuperSecretValue123
 ```
 
@@ -225,12 +227,13 @@ SuperSecretValue123
 
 ---
 
-# 🧠 Troubleshooting
+## 🧠 Troubleshooting
 
 ### ❌ Error: `ForbiddenByRbac`
 
 **Cause:** Missing or incorrect RBAC assignment  
 **Fix:**  
+
 1. Verify the role assignment in Key Vault → Access Control (IAM)
 2. Ensure `Key Vault Secrets User` is assigned to `vm-identity-eus-lab-app01` managed identity
 3. Wait 3-5 minutes for RBAC changes to propagate
@@ -238,7 +241,7 @@ SuperSecretValue123
 
 ---
 
-### ❌ Error: `az: command not found`
+## ❌ Error: `az: command not found`
 
 **Cause:** Azure CLI not installed on the VM  
 **Fix:** Install Azure CLI:
@@ -259,6 +262,7 @@ az version
 
 **Cause:** Incorrect Key Vault name or the vault doesn't exist  
 **Fix:**  
+
 1. Verify the exact Key Vault name in Azure Portal (under Key Vaults)
 2. Ensure the name includes any unique suffix you added
 3. Use the exact name in the command
@@ -269,6 +273,7 @@ az version
 
 **Cause:** RBAC propagation delay  
 **Fix:**  
+
 1. Wait 3-5 minutes after assigning the role
 2. Try logging out and back in: `az logout && az login --identity`
 3. Verify the role assignment in the portal
@@ -281,13 +286,14 @@ az version
 **Fix:**  
 
 1. Set correct permissions:
+
 ```bash
 chmod 400 ~/Downloads/bootcamp-key.pem
 ```
 
-2. Verify the key path matches the download location
+1. Verify the key path matches the download location
 
-3. If you saved the key elsewhere, update the path accordingly
+2. If you saved the key elsewhere, update the path accordingly
 
 ---
 
@@ -295,6 +301,7 @@ chmod 400 ~/Downloads/bootcamp-key.pem
 
 **Cause:** Role assignment not completed or propagated  
 **Fix:**  
+
 1. Confirm the managed identity is enabled on the VM
 2. Re-verify the RBAC assignment
 3. Ensure you selected the correct managed identity (VM, not user-assigned)
@@ -327,6 +334,7 @@ Today you learned:
 - How **OAuth token-based authentication** enables secure service-to-service communication
 
 ---
+
 ## ▶️ Next Lab
 
 **Day 3 — Azure AD Roles + RBAC Scopes**  

@@ -1,5 +1,6 @@
-# 🛡️ Governance Flow Diagram  
-*How RBAC and Locks Enforce Safe Operations in the Landing Zone*
+## 🛡️ Governance Flow Diagram  
+
+How RBAC and Locks Enforce Safe Operations in the Landing Zone
 
 This diagram highlights the governance controls applied in your Week 1 stack. It shows how **RBAC** and **Resource Locks** work together to enforce compliance, prevent accidental deletion, and preserve identity-first access.
 

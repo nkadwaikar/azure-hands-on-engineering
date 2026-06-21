@@ -1,6 +1,7 @@
 
 # **Azure AD Roles + RBAC Scopes (Hands‑On Lab)**  
-### *Directory roles vs resource roles. Control plane vs data plane. Identity clarity unlocked.*
+
+## *Directory roles vs resource roles. Control plane vs data plane. Identity clarity unlocked.*
 
 > This lab builds on Day 1 (RBAC Basics) and Day 2 (Managed Identity + Key Vault).  
 > All user accounts use the placeholder domain `@contoso.com` to avoid exposing my real Microsoft Entra ID tenant domain.  
@@ -18,7 +19,7 @@ By the end of this lab, you will:
 
 ---
 
-# 🧪 Lab Steps
+## 🧪 Lab Steps
 
 ---
 
@@ -36,7 +37,7 @@ This user will test Microsoft Entra ID directory roles.
 
 Assign Emma the **User Administrator** role.
 
-**Azure Portal → Microsoft Entra ID → Roles and administrators → User Administrator**
+### Azure Portal → Microsoft Entra ID → Roles and administrators → User Administrator
 
 Add assignment:
 
@@ -93,7 +94,7 @@ Expected:
 
 Now add a resource role so Emma can view Azure resources without modifying them.
 
-**Azure Portal → Subscriptions → Access control (IAM) → Add role assignment**
+### Azure Portal → Subscriptions → Access control (IAM) → Add role assignment
 
 Configure:
 
@@ -121,13 +122,14 @@ This demonstrates that **Reader adds visibility only**, while directory and data
 ## **5. Compare Emma vs Alex (From Day 1)**
 
 | User | Microsoft Entra ID Role | RBAC Role | What They Can Do |
-|------|--------------------------|-----------|------------------|
+| --- | --- | --- | --- |
 | **Alex** | None | Contributor (Resource Group) | Full control **inside `rg-identity-eus-lab-core`** only |
 | **Emma** | User Administrator | Reader (Subscription) | Manage users in Microsoft Entra ID, view all Azure resources but **cannot create or modify anything** |
 
 ### ✔ Correct Interpretation
 
 **Emma (User Administrator + Reader)**  
+
 - Can navigate across Azure  
 - Can view all resources  
 - Can manage users  
@@ -136,6 +138,7 @@ This demonstrates that **Reader adds visibility only**, while directory and data
 - Cannot assign RBAC roles  
 
 **Alex (Contributor at RG)**  
+
 - Can navigate Azure  
 - Can create/modify/delete resources **inside `rg-identity-eus-lab-core`**  
 - Cannot manage users  

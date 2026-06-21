@@ -1,5 +1,6 @@
 # **Azure Locks + Resource Policies (Hands-On Lab)**  
-### *Protect resources from accidental deletion and enforce governance at scale.*
+
+## *Protect resources from accidental deletion and enforce governance at scale.*
 
 Day 4 introduces two foundational governance controls used in every enterprise Landing Zone:  
 **Resource Locks** (Delete / Read‑only) and **Azure Policy** (Deny / Audit / Modify).  
@@ -18,13 +19,13 @@ You will learn to:
 
 ---
 
-# 🧪 **Lab Steps**
+## 🧪 **Lab Steps**
 
 ---
 
 ## **1. Create a Test Resource Group**
 
-**Azure Portal → Resource groups → Create**
+### Azure Portal → Resource groups → Create
 
 - Name: `rg-locks-demo`  
 - Region: any  
@@ -33,12 +34,13 @@ You will learn to:
 
 ## **2. Apply a Delete Lock at Resource Group Scope**
 
-**rg-locks-demo → Settings → Locks → Add**
+### rg-locks-demo → Settings → Locks → Add
 
 - Lock name: `rg-delete-lock`  
 - Lock type: Delete  
 
 ### Expected Behavior
+
 - RG cannot be deleted  
 - Resources inside cannot be deleted  
 - Resources **can still be modified**  
@@ -56,7 +58,7 @@ Try deleting a resource → blocked
 
 To test Read‑only behavior correctly:
 
-**rg-locks-demo → Locks → Delete**
+### rg-locks-demo → Locks → Delete
 
 ---
 
@@ -64,12 +66,13 @@ To test Read‑only behavior correctly:
 
 Choose any resource (e.g., storage account):
 
-**Storage account → Locks → Add**
+### Storage account → Locks → Add
 
 - Lock name: `sa-readonly-lock`  
 - Lock type: Read‑only  
 
-### Expected Behavior
+### Expected Behavior (Read‑Only)
+
 - Cannot modify  
 - Cannot delete  
 - Can view settings  
@@ -79,11 +82,11 @@ Choose any resource (e.g., storage account):
 
 ## **6. Remove the Read‑Only Lock**
 
-**Storage account → Locks → Delete**
+### Storage account → Locks → Delete
 
 ---
 
-# **Azure Policy Section**
+## **Azure Policy Section**
 
 ---
 
@@ -135,19 +138,20 @@ Therefore, we created a custom Audit policy.
 }
 ```
 
-### **Assign the Custom Policy**
+## Assign the Custom Policy
 
-**Azure Portal → Policy → Definitions → Select your custom policy → Assign**
+### Azure Portal → Policy → Definitions → Select your custom policy → Assign
 
 - Scope: Subscription  
 - Assignment name: `audit-missing-environment-tag`  
 - Parameter:  
   - Tag Name: `environment`  
 
-### Expected Behavior
+### Expected Behavior — Policy Assignment
+
 - No deployments are blocked  
-- RGs missing the tag appear as **Non‑compliant**  
-- RGs with the tag appear as **Compliant**  
+- RGs missing the tag appear as Non‑compliant  
+- RGs with the tag appear as Compliant  
 
 ---
 
@@ -160,9 +164,9 @@ Create:
 
 ---
 
-## **9. View Compliance**
+### 9. View Compliance
 
-**Azure Portal → Policy → Compliance**
+#### Azure Portal → Policy → Compliance → Select your custom policy
 
 Audit policies provide visibility without enforcement.
 
@@ -177,7 +181,7 @@ Assign:
 
 ### Allowed SKUs (validated list)
 
-```
+```text
 Standard_B1s
 Standard_B1ms
 Standard_B2s
@@ -201,7 +205,7 @@ In `rg-identity-eus-lab-core` (no policy):
 
 ---
 
-# 🧩 **Governance + Identity Interaction**
+## 🧩 **Governance + Identity Interaction**
 
 - **Locks override RBAC**  
 - **Policies override RBAC**  
@@ -211,67 +215,79 @@ In `rg-identity-eus-lab-core` (no policy):
 
 ---
 
-# 📘 **Lessons Learned — Day 4**
+## 📘 **Lessons Learned — Day 4**
 
 ### 1. Locks enforce operational safety  
+
 They prevent accidental changes and override RBAC.
 
 ### 2. Lock inheritance is absolute  
+
 A lock at RG or subscription scope applies to all child resources.
 
 ### 3. Read‑only lock testing must be isolated  
+
 Remove RG locks before testing resource‑level locks.
 
 ### 4. Azure Policy defines *what* can be deployed  
+
 Deny, Audit, Modify effects enforce compliance at scale.
 
 ### 5. Custom policies fill governance gaps  
+
 Your custom Audit policy provides visibility where no built‑in policy exists.
 
 ### 6. The Azure Portal becomes governance‑aware  
+
 VM size dropdowns automatically filter based on allowed SKUs.
 
 ### 7. SKU governance requires tuning  
+
 Default VM images often select SKUs not in your allowed list.
 
 ### 8. Policy‑free vs policy‑enforced RGs behave differently  
+
 Your A/B comparison (`rg-identity-eus-lab-core` vs `rg-test-compliant`) demonstrated real Landing Zone behavior.
 
 ---
 
-# 🧹 **Cleanup (Optional but Recommended)**
+## 🧹 Cleanup (Optional but Recommended)
 
 Perform these steps if you want to reset your environment before moving to Day 5.
 
 ---
 
-## **1. Remove Locks**
+### 1. Remove Locks
 
 Locks must be removed **before** deleting any resource groups.
 
-### **Resource Group Locks**
-**Azure Portal → Resource groups → rg-locks-demo → Locks → Delete all locks**
+#### Resource Group Locks
 
-### **Resource-Level Locks**
+Azure Portal → Resource groups → rg-locks-demo → Locks → Delete all locks
+
+#### Resource-Level Locks
+
 If you added a Read‑only lock:
 
-**Storage account → Locks → Delete**
+Storage account → Locks → Delete
 
 ---
 
-## **2. Remove Policy Assignments**
+### 2. Remove Policy Assignments
 
-### **Custom Audit Policy**
-**Azure Portal → Policy → Assignments → audit-missing-environment-tag → Delete**
+#### Custom Audit Policy
 
-### **SKU Restriction Policy**
-**Azure Portal → Policy → Assignments → Allowed virtual machine size SKUs → Delete**
+Azure Portal → Policy → Assignments → audit-missing-environment-tag → Delete
+
+#### SKU Restriction Policy
+
+Azure Portal → Policy → Assignments → Allowed virtual machine size SKUs → Delete
 
 This ensures no Deny or Audit rules remain active.
 
 ---
 
-## **3. Delete Test Resource Groups**
+### 3. Delete Test Resource Groups
 
 Once locks and policies are removed:
 
@@ -282,7 +298,7 @@ Once locks and policies are removed:
 
 ---
 
-## **4. Verify a Clean State**
+### 4. Verify a Clean State
 
 Optional but helpful:
 
@@ -291,6 +307,7 @@ Optional but helpful:
 - Confirm no RGs are stuck in a locked state  
 
 ---
+
 ## 📌 Day 4 Summary
 
 Today you learned:

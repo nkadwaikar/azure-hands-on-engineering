@@ -1,5 +1,6 @@
-# 🔐 Identity-First Access Flow  
-*How the UAMI Authenticates and Accesses Key Vault Without Secrets*
+## 🔐 Identity-First Access Flow
+
+How the UAMI Authenticates and Accesses Key Vault Without Secrets
 
 This diagram illustrates the **end-to-end identity flow** used in your Week 1 stack. It shows how a workload uses a **User Assigned Managed Identity (UAMI)** to authenticate to Microsoft Entra ID and access Key Vault using RBAC — no secrets, no keys, no connection strings.
 

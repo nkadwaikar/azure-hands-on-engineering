@@ -7,7 +7,7 @@ This page outlines the architecture, the module responsibilities, and the deploy
 
 All Bicep files referenced here are located in:
 
-```
+```plaintext
 bicep/
 ```
 
@@ -29,8 +29,7 @@ This foundation carries forward into future capstones.
 
 ## 🧱 Final Folder Structure
 
-
-```
+```plaintext
 bicep/
   main.bicep
   modules/
@@ -71,6 +70,7 @@ This diagram shows the identity-first flow:
 ## 🧩 Module Overview
 
 ### 1. identity.bicep  
+
 Creates a **User‑Assigned Managed Identity** and outputs:
 
 - `identityId` — full ARM resource ID  
@@ -81,6 +81,7 @@ This identity becomes the root of the Week 1 architecture.
 ---
 
 ### 2. keyvault.bicep  
+
 Deploys a **Key Vault in RBAC mode**, with:
 
 - `enableRbacAuthorization: true`  
@@ -96,6 +97,7 @@ This ensures a modern, secretless, identity-first vault.
 ---
 
 ### 3. rbac.bicep  
+
 Assigns the **Key Vault Secrets User** role to the Managed Identity.
 
 Key behaviors:
@@ -109,6 +111,7 @@ This module enforces least privilege and repeatable deployments.
 ---
 
 ### 4. locks.bicep  
+
 Applies a **CanNotDelete** lock to protect critical identity resources.
 
 This enforces governance and prevents accidental deletion.
@@ -154,7 +157,6 @@ You now have:
 The separate capstone stack lives in `capstone/architecture/bicep/` to avoid duplication and keep the repo maintainable.
 
 ---
-
 
 ## 🔗 Related Labs
 

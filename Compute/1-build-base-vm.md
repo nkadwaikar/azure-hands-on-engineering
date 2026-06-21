@@ -152,7 +152,7 @@ $indexPath = "C:\inetpub\wwwroot\index.html"
 
 Browse to:
 
-```
+```text
 http://<public-ip>
 ```
 
@@ -170,4 +170,3 @@ http://<public-ip>
 
 **Next step:**
 ➡ [Sysprep VM](2-sysprep-vm.md)
-

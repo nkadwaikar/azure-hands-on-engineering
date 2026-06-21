@@ -36,7 +36,7 @@ This module is a focused single-lab guide for Policy DeployIfNotExists auto-reme
 ## 1. Prerequisites
 
 | Requirement | Detail |
-|---|---|
+| --- | --- |
 | Azure Role | **Owner** or **Contributor + Policy Contributor** on the target subscription |
 | Subscription | Pay-As-You-Go or Visual Studio subscription |
 | Estimated Time | 45-60 minutes |
@@ -97,11 +97,14 @@ Components you will configure:
 Before deploying resources, create a dedicated resource group for this lab.
 
 1. Go to **Azure Portal → Resource Groups → Create**
+
 2. Fill in:
-  - **Subscription:** Your target subscription
-  - **Resource Group Name:** `rg-policy-eus-lab-remedy` (or adjust region code as needed)
-  - **Region:** East US (or your preferred region)
-3. Click **Review + Create → Create**
+
+- **Subscription:** Your target subscription
+- **Resource Group Name:** `rg-policy-eus-lab-remedy` (or adjust region code as needed)
+- **Region:** East US (or your preferred region)
+
+1. Click **Review + Create → Create**
 
 > **Expected state:** The resource group is created and visible in your subscription under **Resource Groups**.
 
@@ -113,11 +116,11 @@ This gives you something to remediate.
 
 1. Go to **Azure Portal → Storage Accounts → Create**
 2. Fill in:
-  - **Subscription:** Your target subscription
-  - **Resource Group:** `rg-policy-eus-lab-remedy` (created in Step 0)
-  - **Storage Account Name:** `stpolicylabremedy01` (must be globally unique; adjust as needed)
-  - **Region:** Same as your resource group (East US)
-  - **Primary service:** Azure Blob Storage or Azure Data Lake Storage
+   - **Subscription:** Your target subscription
+   - **Resource Group:** `rg-policy-eus-lab-remedy` (created in Step 0)
+   - **Storage Account Name:** `stpolicylabremedy01` (must be globally unique; adjust as needed)
+   - **Region:** Same as your resource group (East US)
+   - **Primary service:** Azure Blob Storage or Azure Data Lake Storage
 3. Under the **Advanced** tab, set **Secure transfer required** = **Disabled**
 4. Complete the remaining fields and click **Review + Create → Create**
 
@@ -181,8 +184,8 @@ This gives you something to remediate.
 
 ```
 
-5. Under **Parameters**, leave the section empty for this lab
-6. Under **Review + create**, confirm the definition details and click **Save**
+1. Under **Parameters**, leave the section empty for this lab
+2. Under **Review + create**, confirm the definition details and click **Save**
 
 The policy uses the built-in **Storage Account Contributor** role definition so the managed identity can update the target storage account during remediation.
 
@@ -206,7 +209,6 @@ The policy uses the built-in **Storage Account Contributor** role definition so 
 
 ---
 
-
 ### Step 4 — Trigger a Remediation Task
 
 1. Go to **Policy → Remediation**
@@ -217,6 +219,7 @@ The policy uses the built-in **Storage Account Contributor** role definition so 
 4. Click **Remediate**
 
 Azure will:
+
 - Detect non-compliant storage accounts in scope
 - Deploy the remediation template via the managed identity
 - Enable **Secure Transfer Required** on each non-compliant account
@@ -242,11 +245,10 @@ Azure will:
 
 ---
 
-
 ## 6. What Makes This Lab Production-Ready
 
 | Capability | Why It Matters |
-|---|---|
+| --- | --- |
 | DeployIfNotExists effect | Real-world auto-remediation, not just audit |
 | Managed Identity | No secrets or stored credentials |
 | Parameterized deployment template | Correct resource targeting by name and location |

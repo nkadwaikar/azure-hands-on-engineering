@@ -1,4 +1,5 @@
 # 🚀 How to Deploy Bicep Files Using Visual Studio Code  
+
 This guide shows you how to deploy Bicep templates **entirely inside Visual Studio Code**, using the Azure extensions. No Azure Portal. No CLI. No switching tools.  
 Just VS Code — clean, simple, and architect-friendly.
 
@@ -9,9 +10,11 @@ Just VS Code — clean, simple, and architect-friendly.
 Before deploying Bicep files, make sure you have:
 
 ### 1. Visual Studio Code Installed  
+
 <https://code.visualstudio.com/>
 
 ### 2. Required VS Code Extensions
+
 Install these from the Extensions panel:
 
 - **Azure Account**  
@@ -19,6 +22,7 @@ Install these from the Extensions panel:
 - **Bicep**
 
 ### 3. Sign in to Azure
+
 In VS Code:
 
 1. Open the **Azure** panel (left sidebar)  

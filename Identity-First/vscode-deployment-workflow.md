@@ -1,6 +1,6 @@
 # 🔄 How Bicep Deploys from VS Code → Subscription → Resource Group → Modules
 
-*Visual Studio Code Deployment Workflow for the Identity-First Lab Stack*
+## Visual Studio Code Deployment Workflow for the Identity-First Lab Stack
 
 This diagram maps how the Identity-First lab stack is deployed using VS Code only, without Azure CLI or the Portal.
 

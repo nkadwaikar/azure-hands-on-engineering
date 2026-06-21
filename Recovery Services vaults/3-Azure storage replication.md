@@ -93,6 +93,7 @@
 4. Click **Save** and wait for the change to complete.
 
 **Document:**
+
 - Which transitions were allowed (e.g., ZRS → GZRS).
 - Which were blocked, including any error message shown (e.g., the ZRS → GRS option may be grayed out).
 
@@ -162,6 +163,7 @@
 5. Proceed with the failover.
 
 **Azure will:**
+
 - Promote the secondary region to primary.
 - Update endpoints so that the former secondary becomes the new primary.
 
@@ -183,7 +185,7 @@
 ## 13. Summary: When to Use Each Redundancy Type
 
 | Type | Scope | Notes |
-|------|-------|-------|
+| ------ | ------- | ------- |
 | **LRS** | Single region, single datacenter | Lowest cost; no cross-zone or cross-region protection. |
 | **ZRS** | Single region, multi-zone | Protects against zone failure; no secondary region. |
 | **GRS** | Cross-region | Asynchronous replication to secondary; no read access to secondary. |
