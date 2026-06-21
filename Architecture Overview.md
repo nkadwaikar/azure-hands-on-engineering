@@ -1,10 +1,8 @@
-# Architecture Overview
+## Architecture Overview
 
-This document summarizes the core Azure architecture patterns used across the labs in this repository.
+### Identity Governance
 
-## Identity Governance
-
-**Flow:** Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
+Text flow: Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
 
 ```mermaid
 flowchart LR
@@ -15,9 +13,9 @@ flowchart LR
     KV --> Lock[Resource Lock]
 ```
 
-## Compute Lifecycle
+### Compute Lifecycle
 
-**Flow:** Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
+Text flow: Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
 
 ```mermaid
 flowchart LR
@@ -28,9 +26,9 @@ flowchart LR
     VMSS --> Validate[App Validation IIS]
 ```
 
-## Global Delivery
+### Global Delivery
 
-**Flow:** Client -> Front Door -> Origin Group -> Storage Static Website -> $web content.
+Text flow: Client -> Front Door -> Origin Group -> Storage Static Website -> $web content.
 
 ```mermaid
 flowchart LR
@@ -40,9 +38,9 @@ flowchart LR
     Site --> Web[$web Container]
 ```
 
-## Governance Automation
+### Governance Automation
 
-**Flow:** Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant State.
+Text flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant state.
 
 ```mermaid
 flowchart LR
@@ -52,9 +50,9 @@ flowchart LR
     Remed --> State[Compliant Resource State]
 ```
 
-## Business Continuity
+### Business Continuity
 
-**Flow:** Production VM -> Recovery Services Vault -> Backup/ASR -> Restore or Failover.
+Text flow: Production VM -> Recovery Services Vault -> Backup/ASR -> Restore or Failover.
 
 ```mermaid
 flowchart LR
@@ -65,9 +63,9 @@ flowchart LR
     Backup --> Restore[Restore / Point-in-time Recovery]
 ```
 
-## Emergency Access
+### Emergency Access
 
-**Flow:** Standard identity fails during an incident -> Break-glass account -> Recovery actions -> Audit.
+Text flow: Standard identity fails during incident -> Break-glass account -> Recovery actions -> Audit.
 
 ```mermaid
 flowchart LR

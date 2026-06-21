@@ -5,7 +5,7 @@
 
 Kia ora — I’m **Nadeem Kadwaikar**, a Senior Cloud & Identity Engineer focused on building secure, well‑governed, and resilient Azure platforms.
 
-This repository is a collection of **hands‑on labs, architecture patterns, and implementation guides** that reflect how modern Azure environments are designed and operated. Everything here is practical, deployable, and aligned with real‑world engineering work.
+This README is the portfolio landing page for my Azure engineering work. It brings together **hands‑on labs, architecture patterns, and implementation guides** that reflect how modern Azure environments are designed and operated.
 
 Start here: [Architecture Overview](Architecture%20Overview.md)
 
