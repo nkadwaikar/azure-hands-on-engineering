@@ -2,7 +2,7 @@
 
 ## Identity Governance
 
-Text flow: Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
+Flow: Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
 
 ```mermaid
 flowchart LR
@@ -15,7 +15,7 @@ flowchart LR
 
 ## Compute Lifecycle
 
-Text flow: Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
+Flow: Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ flowchart LR
 
 ## Global Delivery
 
-Text flow: Client -> Front Door -> Origin Group -> Storage Static Website -> $web content.
+Flow: Client -> Front Door -> Origin Group -> Storage Static Website -> $web content.
 
 ```mermaid
 flowchart LR
@@ -40,7 +40,7 @@ flowchart LR
 
 ## Governance Automation
 
-Text flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant State.
+Flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant State.
 
 ```mermaid
 flowchart LR
@@ -52,7 +52,7 @@ flowchart LR
 
 ## Business Continuity
 
-Text flow: Production VM -> Recovery Services Vault -> Backup/ASR -> Restore or Failover.
+Flow: Production VM -> Recovery Services Vault -> Backup/ASR -> Restore or Failover.
 
 ```mermaid
 flowchart LR
@@ -65,7 +65,7 @@ flowchart LR
 
 ## Emergency Access
 
-Text flow: Standard identity fails during an incident -> Break-glass account -> Recovery actions -> Audit.
+Flow: Standard identity fails during an incident -> Break-glass account -> Recovery actions -> Audit.
 
 ```mermaid
 flowchart LR
