@@ -65,7 +65,7 @@ flowchart LR
 
 ### Emergency Access
 
-Text flow: Standard identity fails during incident -> Break-glass account -> Recovery actions -> Audit.
+Text flow: Standard identity fails during an incident -> Break-glass account -> Recovery actions -> Audit.
 
 ```mermaid
 flowchart LR
