@@ -45,7 +45,7 @@ A relaxed overview of the core components, identity flow, and how the system hol
 - Defender for Cloud CSPM in a hub-and-spoke architecture
 - Azure Arc for hybrid server management
 
-### I tend to update this during weekends, so more will land over time
+I tend to update this during weekends, so more will land over time
 
 ---
 
