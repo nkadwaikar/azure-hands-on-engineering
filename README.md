@@ -39,7 +39,7 @@ A relaxed overview of the core components, identity flow, and how the system hol
 
 ---
 
-## Current focus
+## Coming soon — adding this shortly
 
 - App Services with managed identity and deployment slots
 - Defender for Cloud CSPM in a hub-and-spoke architecture
