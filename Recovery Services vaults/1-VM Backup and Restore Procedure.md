@@ -58,7 +58,7 @@ By the end of this lab, you will:
   - Storage accounts
   - Recovery Services Vault
 
-Naming reference: [README Naming Convention](../README.md#naming-convention)
+Naming reference: [Naming Convention](../Naming-Convention.md)
 
 ### Assumptions and Scope Boundaries
 

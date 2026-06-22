@@ -42,7 +42,7 @@ This module is a focused single-lab guide for Policy DeployIfNotExists auto-reme
 | Estimated Time | 45-60 minutes |
 | Tools | Azure Portal only — no CLI, ARM, or Bicep required |
 
-Naming reference: [README Naming Convention](../README.md#naming-convention)
+Naming reference: [Naming Convention](../Naming-Convention.md)
 
 ### Assumptions and Scope Boundaries
 

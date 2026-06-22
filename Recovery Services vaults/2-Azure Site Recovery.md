@@ -19,7 +19,7 @@ Portal experience note: Steps validated in Azure Portal June 2026; failover/re-p
 - Recovery Services vault name reserved: rsv-fntech-wus2-lab-dr
 - (Recommended) Existing target VNet and subnet in West US 2
 
-Naming reference: [README Naming Convention](../README.md#naming-convention)
+Naming reference: [Naming Convention](../Naming-Convention.md)
 
 ### Assumptions and Scope Boundaries
 

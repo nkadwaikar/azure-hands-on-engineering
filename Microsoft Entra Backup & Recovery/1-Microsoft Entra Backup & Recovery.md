@@ -54,7 +54,7 @@ By the end of this lab, you will:
 - Global Administrator or Privileged Role Administrator access for review and recovery actions
 - Enough recent directory activity to make the difference report meaningful
 
-Naming reference: [README Naming Convention](../README.md#naming-convention)
+Naming reference: [Naming Convention](../Naming-Convention.md)
 
 ### Assumptions and Scope Boundaries
 
