@@ -6,6 +6,11 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 
 ---
 
+## Architecture
+
+A relaxed overview of the core components, identity flow, and how the system holds together in day‑to‑day use.
+[Architecture Overview](./Architecture%20Overview.md)
+
 ## What I'm building
 
 | Area | Focus |
