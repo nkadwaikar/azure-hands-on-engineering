@@ -37,6 +37,10 @@ A relaxed overview of the core components, identity flow, and how the system hol
 | [Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID configuration backup and restore procedures |
 | [Compute & IIS](./Compute/README.md) | Base VM build, Sysprep, IIS installation and configuration |
 
+## [Naming-Convention]
+
+[Naming-Convention](./Naming-Convention.md) A small guide on how I name things across the repo.
+
 ---
 
 ## Coming soon — adding this shortly
