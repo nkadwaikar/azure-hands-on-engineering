@@ -27,3 +27,7 @@ Secure Break‑Glass Accounts/
 - Microsoft Entra ID P1 or P2 licensing
 - FIDO2 security keys provisioned for break-glass use
 - Access to the [Microsoft Entra admin center](https://entra.microsoft.com)
+
+---
+
+[← Back to Azure Hands-On Engineering](../README.md)

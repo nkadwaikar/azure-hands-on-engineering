@@ -25,3 +25,7 @@ Azure Front Door-Static Website Hosting/
 - Azure subscription with Contributor rights
 - Azure Portal access
 - Basic familiarity with Azure Storage and blob containers
+
+---
+
+[← Back to Azure Hands-On Engineering](../README.md)

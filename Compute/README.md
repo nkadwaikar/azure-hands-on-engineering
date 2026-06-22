@@ -24,3 +24,7 @@ Flow: build base VM → Sysprep the image source → install and validate IIS.
 - Azure subscription with Contributor rights on the target resource group
 - Azure Portal access
 - RDP client for post-deployment validation
+
+---
+
+[← Back to Azure Hands-On Engineering](../README.md)

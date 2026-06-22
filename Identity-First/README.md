@@ -117,3 +117,7 @@ Identity-First/
 - Improved auditability of authorization decisions.
 - Safer platform operations through lock and policy guardrails.
 - Repeatable deployment path for onboarding new environments.
+
+---
+
+[← Back to Azure Hands-On Engineering](../README.md)

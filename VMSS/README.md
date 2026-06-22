@@ -22,3 +22,7 @@ Flow: capture reusable image → validate with a test VM → deploy scale set.
 - Completed [Compute track](../Compute/README.md) — base VM built and Sysprepped
 - Azure Compute Gallery created or access to create one
 - Azure subscription with Contributor rights on the target resource group
+
+---
+
+[← Back to Azure Hands-On Engineering](../README.md)

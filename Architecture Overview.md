@@ -76,3 +76,20 @@ flowchart LR
     BreakGlass --> Recover[Emergency Recovery Actions]
     Recover --> Audit[Post-Incident Audit]
 ```
+
+---
+
+## Lab Tracks
+
+| Track | Description |
+| --- | --- |
+| [Identity-First](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep |
+| [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Custom policy, DeployIfNotExists, remediation tasks |
+| [Compute](./Compute/README.md) | Base VM build, Sysprep, IIS installation |
+| [VMSS](./VMSS/README.md) | Golden image capture, scale set deployment |
+| [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin |
+| [Recovery Services Vaults](./Recovery%20Services%20vaults/README.md) | VM backup, restore, ASR replication |
+| [Secure Break-Glass Accounts](./Secure%20Break%E2%80%91Glass%20Accounts/README.md) | Emergency access without breaking Zero Trust |
+| [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
+
+[← Back to README](./README.md)

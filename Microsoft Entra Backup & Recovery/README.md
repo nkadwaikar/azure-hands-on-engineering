@@ -27,3 +27,7 @@ Microsoft Entra Backup & Recovery/
 - Access to the [Microsoft Entra admin center](https://entra.microsoft.com)
 
 > **Note:** Backup schedule and retention are Microsoft-managed. Tenant-level configuration of these controls is not available.
+
+---
+
+[← Back to Azure Hands-On Engineering](../README.md)
