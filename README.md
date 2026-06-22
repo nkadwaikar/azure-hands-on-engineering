@@ -1,4 +1,4 @@
-# Kia ora, I'm Nadeem 👋
+# Kia ora, I'm Nadeem Kadwaiakr👋
 
 Senior Cloud & Identity Engineer. I build Azure platforms that are secure by design, not by accident.
 
