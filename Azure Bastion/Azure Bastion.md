@@ -212,7 +212,7 @@ Just-In-Time access adds a time-limited, on-demand approval layer on top of Bast
 ## 9. Bastion vs Jumpbox vs Private Endpoint — Comparison
 
 | Feature | Azure Bastion | Jumpbox VM | Private Endpoint |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | Public IP on target VM | Not required | Not required | Not required |
 | Requires separate VM | No | Yes (jumpbox VM) | No |
 | Browser-based access | Yes (HTML5 RDP/SSH) | No | No |
