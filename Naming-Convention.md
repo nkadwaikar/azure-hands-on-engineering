@@ -41,6 +41,7 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `law` | Log Analytics Workspace |
 | `uami` | User-Assigned Managed Identity |
 | `fd` | Azure Front Door profile |
+| `bas` | Azure Bastion host |
 
 ---
 
@@ -105,6 +106,20 @@ snet-app                        Application tier subnet
 pip-fntech-eus-lab-vm           Lab VM public IP
 nsg-fntech-wus2-lab-vm          DR environment NSG
 ```
+
+### Azure Bastion
+
+```text
+bas-{project}-{region}-{env}    Bastion host (one per VNet)
+```
+
+Example:
+
+```text
+bas-fntech-eus-lab              Bastion host for lab VNet (East US)
+```
+
+The `AzureBastionSubnet` name is fixed by Azure and is not subject to the project naming pattern.
 
 ### Recovery Services Vaults
 

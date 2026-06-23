@@ -64,6 +64,19 @@ flowchart LR
     Backup --> Restore[Restore / Point-in-time Recovery]
 ```
 
+### Secure VM Access
+
+Text flow: Engineer browser (HTTPS 443) -> Azure Bastion (AzureBastionSubnet) -> Private VNet -> Target VM (private IP only). JIT opens the NSG rule for a time-bounded window before the session is established.
+
+```mermaid
+flowchart LR
+    Browser[Engineer Browser\nHTTPS 443] --> Bastion[Azure Bastion\nAzureBastionSubnet /26]
+    Bastion --> VNet[Private VNet]
+    VNet --> VM[Target VM\nPrivate IP Only]
+    JIT[JIT Request\nDefender for Cloud] --> NSG[NSG Rule\nTime-Bounded]
+    NSG --> VM
+```
+
 ### Emergency Access
 
 Text flow: Standard identity fails during incident -> Break-glass account (FIDO2 or CBA) -> Authentication Strength enforced by Conditional Access -> Emergency Recovery Actions -> Post-Incident Audit.
@@ -90,6 +103,7 @@ flowchart LR
 
 | Track | Description |
 | --- | --- |
+| [Azure Bastion](./Azure%20Bastion/README.md) | Secure browser-based VM access, JIT integration, no public IP |
 | [Identity-First](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Custom policy, DeployIfNotExists, remediation tasks |
 | [Compute](./Compute/README.md) | Base VM build, Sysprep, IIS installation |
