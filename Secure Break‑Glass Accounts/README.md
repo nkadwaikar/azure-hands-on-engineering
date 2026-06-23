@@ -18,6 +18,7 @@ Secure Break‑Glass Accounts/
 ## What it covers
 
 **Lab 1 (FIDO2):**
+
 - Cloud-only emergency account creation and naming conventions
 - FIDO2 security key registration as primary phishing-resistant MFA
 - Authentication Strength Conditional Access policy (FIDO2/CBA)
@@ -25,6 +26,7 @@ Secure Break‑Glass Accounts/
 - Monitoring, alerting, and incident runbook
 
 **Lab 2 (CBA):**
+
 - Certificate generation using PowerShell (self-signed root CA + user certs)
 - Uploading the root CA to Entra ID Certificate Authorities trust store
 - Configuring CBA authentication binding at MFA level
