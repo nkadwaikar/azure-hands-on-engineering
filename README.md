@@ -1,4 +1,4 @@
-# Kia ora, I'm Nadeem Kadwaiakr👋
+# Kia ora, I'm Nadeem Kadwaikar👋
 
 Senior Cloud & Identity Engineer. I build Azure platforms that are secure by design, not by accident.
 
@@ -19,8 +19,8 @@ A relaxed overview of the core components, identity flow, and how the system hol
 | 📋 Governance | Policy-driven governance with auto-remediation — compliance that enforces itself |
 | 🖥️ Compute | VM image lifecycle and scale-set engineering — golden images, repeatable builds |
 | 🌐 Networking | Global delivery via Azure Front Door — WAF at the edge, custom domains, static hosting |
-| � Secure Access | Browser-based VM access via Bastion + JIT — zero public IP, time-boxed sessions |
-| � Resilience | Backup, DR, and Entra recovery — platforms that come back cleanly |
+| 🔒 Secure Access | Browser-based VM access via Bastion + JIT — zero public IP, time-boxed sessions |
+| 🔄 Resilience | Backup, DR, and Entra recovery — platforms that come back cleanly |
 | 🚨 Security | Break-glass account design — emergency access that doesn't punch a hole in Zero Trust |
 
 ---
@@ -39,6 +39,8 @@ A relaxed overview of the core components, identity flow, and how the system hol
 | [Break-Glass Accounts – CBA](./Secure%20Break‑Glass%20Accounts/README.md) | Certificate-based authentication as phishing-resistant MFA for emergency accounts |
 | [Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID configuration backup and restore procedures |
 | [Compute & IIS](./Compute/README.md) | Base VM build, Sysprep, IIS installation and configuration |
+
+---
 
 ## Naming-Convention
 
