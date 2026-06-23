@@ -66,16 +66,23 @@ flowchart LR
 
 ### Emergency Access
 
-Text flow: Standard identity fails during incident -> Break-glass account -> Recovery actions -> Audit.
+Text flow: Standard identity fails during incident -> Break-glass account (FIDO2 or CBA) -> Authentication Strength enforced by Conditional Access -> Emergency Recovery Actions -> Post-Incident Audit.
 
 ```mermaid
 flowchart LR
     Admin[Privileged Admin] --> Normal[Standard Identity]
     Normal --> Issue[Access Failure or Incident]
-    Issue --> BreakGlass[Break-Glass Account]
-    BreakGlass --> Recover[Emergency Recovery Actions]
-    Recover --> Audit[Post-Incident Audit]
+    Issue --> BG[Break-Glass Account]
+    BG --> FIDO2[FIDO2 Security Key\nLab 1]
+    BG --> CBA[X.509 Certificate\nLab 2]
+    FIDO2 --> AS[Authentication Strength\nPhishing-Resistant Only]
+    CBA --> AS
+    AS --> CA[Conditional Access\nEnforced - Not Bypassed]
+    CA --> Recover[Emergency Recovery Actions]
+    Recover --> Audit[Post-Incident Audit & Log Review]
 ```
+
+**Design note:** Both MFA methods are enforced by a dedicated Authentication Strength policy inside Conditional Access. Break-glass accounts are never excluded from CA — consistent with the Microsoft 2025 security baseline.
 
 ---
 
@@ -89,7 +96,8 @@ flowchart LR
 | [VMSS](./VMSS/README.md) | Golden image capture, scale set deployment |
 | [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin |
 | [Recovery Services Vaults](./Recovery%20Services%20vaults/README.md) | VM backup, restore, ASR replication |
-| [Secure Break-Glass Accounts](./Secure%20Break%E2%80%91Glass%20Accounts/README.md) | Emergency access without breaking Zero Trust |
+| [Break-Glass – FIDO2 (Lab 1)](./Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) | Cloud-only emergency accounts with FIDO2 keys, Authentication Strength, CA enforcement |
+| [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
 
 [← Back to README](./README.md)

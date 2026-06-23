@@ -132,7 +132,36 @@ System-assigned managed identities are named automatically by Azure and follow t
 | Pattern | Use |
 | --- | --- |
 | `{firstname}.{lastname}@{domain}` | Standard lab user accounts |
-| `emergency-admin-{number}@{tenant}.onmicrosoft.com` | Break-glass accounts |
+| `emergency-admin-{number}@{tenant}.onmicrosoft.com` | Break-glass accounts — FIDO2 security key MFA (Lab 1) |
+| `emergency-cba-{number}@{tenant}.onmicrosoft.com` | Break-glass accounts — Certificate-Based Authentication MFA (Lab 2) |
+
+Both emergency account series follow the same role assignment pattern (Global Administrator, Active) and differ only in the phishing-resistant MFA credential type.
+
+---
+
+### Certificates
+
+Certificates used in lab environments (self-signed via PowerShell) follow a descriptive Subject naming pattern:
+
+```text
+CN=EmergencyAccessRootCA, O=Lab, C=US    Self-signed root CA for CBA lab
+CN=Emergency CBA Admin 01                User certificate — emergency-cba-01 account
+CN=Emergency CBA Admin 02                User certificate — emergency-cba-02 account
+```
+
+The Subject Alternative Name (SAN) UPN field must match the Entra ID User Principal Name exactly:
+
+```text
+SAN UPN: emergency-cba-01@{tenant}.onmicrosoft.com
+```
+
+Exported file names follow the account short-name:
+
+```text
+RootCA.cer                  Root CA public certificate (uploaded to Entra ID)
+EmergencyCBA01.pfx          User certificate + private key for device installation
+EmergencyCBA02.pfx
+```
 
 ---
 
@@ -146,6 +175,22 @@ audit-missing-environment-tag                  Audit tag-compliance policy
 rg-delete-lock                                 Delete lock on a Resource Group
 sa-readonly-lock                               Read-only lock on a Storage Account
 ```
+
+### Entra ID — Authentication Strength policies
+
+```text
+Emergency Admin – Phishing Resistant Only      Allows FIDO2, CBA, Windows Hello (Lab 1)
+Emergency Access – CBA Required                Allows CBA only (Lab 2)
+```
+
+### Entra ID — Conditional Access policies
+
+```text
+Emergency Admin – Phishing‑Resistant MFA Required     CA policy enforcing Authentication Strength for FIDO2 break-glass accounts (Lab 1)
+Emergency CBA Admin – CBA Authentication Required     CA policy enforcing CBA Authentication Strength for CBA break-glass accounts (Lab 2)
+```
+
+Conditional Access policy names follow the pattern `{scope} – {control}` to make the intent readable directly in the CA policy list.
 
 ---
 
