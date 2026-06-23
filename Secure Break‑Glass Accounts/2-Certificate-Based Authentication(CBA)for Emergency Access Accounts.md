@@ -285,7 +285,7 @@ Entra ID maps certificate fields to the correct user account using these setting
 | Binding type | SubjectAlternativeName |
 | Priority | 1 (highest) |
 
-3. Click **Save**
+1. Click **Save**
 
 ### 5.3 Verify UPN Match
 
