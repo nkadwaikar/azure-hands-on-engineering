@@ -28,9 +28,7 @@ Before connecting, ensure:
   - A NIC
   - A private IP
   - RDP/SSH enabled in the OS
-- NSG allows:
-  - Inbound RDP (`3389`) or SSH (`22`) from `VirtualNetwork`
-  - Outbound `443`
+- NSG rules configured correctly *(see Section 2 for required rules)*
 
 ---
 
@@ -53,22 +51,40 @@ The subnet must exist in your VNet **before** deploying Bastion.
 1. Go to **Azure Portal**
 2. Search: **Bastion**
 3. Click **Create**
-4. Configure:
+4. Under the **Basics** tab, configure:
+   - **Subscription:** your subscription
    - **Resource group:** same as VM
-   - **Name:** `bastion-host-RG`
+   - **Name:** `bastion-prod` *(avoid the `-RG` suffix — that convention is for resource groups)*
    - **Region:** same as VM
+   - **Tier:** `Basic` (sufficient for RDP/SSH; choose `Standard` for features like IP-based connection or tunneling)
    - **Virtual Network:** same as VM
    - **Subnet:** select `AzureBastionSubnet` (created above)
-5. **Public IP address:** click **Create new** → provide a name (e.g., `bastion-pip`)
-6. Click **Review + Create** → **Create**
+5. **Public IP address:** click **Create new** → configure:
+   - **Name:** `bastion-pip`
+   - **SKU:** `Standard` *(Basic SKU is retired — Standard is required)*
+6. Click **Review + Create** → verify no validation errors → **Create**
 
 > **Note:** Deployment takes approximately 5–10 minutes.
+
+> **Scope:** Azure Bastion is a **VNet-level resource** — one deployment covers all VMs in that VNet. No per-VM enablement is required. For peered VNets, upgrade to the **Standard** tier and enable **IP-based connection**.
+
+> **NSG on AzureBastionSubnet:** If you attach an NSG to the Bastion subnet, it must include these inbound rules or Bastion will fail:
+> | Priority | Source | Port | Purpose |
+> | --- | --- | --- | --- |
+> | 100 | `Internet` | `443` | User browser → Bastion |
+> | 110 | `GatewayManager` | `443` | Azure control plane |
+> | 120 | `AzureLoadBalancer` | `443` | Health probes |
+>
+> And these outbound rules:
+> | Priority | Destination | Port | Purpose |
+> | --- | --- | --- | --- |
+> | 100 | `VirtualNetwork` | `3389`, `22` | Bastion → VM |
+> | 110 | `AzureCloud` | `443` | Bastion → Azure APIs |
 
 ### Step 3 — Verify Bastion Is Ready
 
 1. Navigate to **Bastion** resource in the portal
 2. Confirm **Provisioning state** shows `Succeeded`
-3. Note the **DNS name** — this is the public entry point Bastion uses internally
 
 ---
 
@@ -86,14 +102,6 @@ The subnet must exist in your VNet **before** deploying Bastion.
 6. Click **Connect**
 
 A browser-based RDP/SSH session opens instantly.
-
-### Method B — From the Bastion Resource
-
-1. Open **Bastion**
-2. Select **Connect**
-3. Choose the VM
-4. Enter credentials
-5. Click **Connect**
 
 ---
 
@@ -124,9 +132,11 @@ A browser-based RDP/SSH session opens instantly.
 
 ### Issue: "You don't have permission to connect to this VM"
 
-- Your Azure account lacks the **Reader** role (or higher) on the VM
-- Bastion requires at minimum the **Virtual Machine Contributor** or **Reader** role on the VM, plus **Reader** on the Bastion resource
-- Check role assignments via **VM** → **Access control (IAM)**
+- Minimum required roles:
+  - **Reader** on the target VM
+  - **Reader** on the Bastion resource
+- Check role assignments via **VM** → **Access control (IAM)** and **Bastion** → **Access control (IAM)**
+- Note: Virtual Machine Contributor is not required — Reader is sufficient to initiate a Bastion session
 
 ### Issue: Bastion deployment fails with subnet error
 
@@ -223,14 +233,7 @@ The following describes the secure access flow when using Azure Bastion:
 
 Just-In-Time access adds a time-limited, on-demand approval layer on top of Bastion. It is managed through Microsoft Defender for Cloud.
 
-### How It Works
-
-1. By default, inbound RDP/SSH ports are blocked by NSG
-2. A user requests access via Microsoft Defender for Cloud
-3. Defender temporarily opens the NSG rule for a defined time window (e.g., 1–3 hours)
-4. The session is logged and the rule automatically closes after the window expires
-
-### Enable JIT on a VM
+### Step 1 — Enable JIT on a VM
 
 1. Go to **Microsoft Defender for Cloud** → **Workload Protections**
 2. Select **Just-in-time VM access**
@@ -239,21 +242,21 @@ Just-In-Time access adds a time-limited, on-demand approval layer on top of Bast
 5. Set max request time (e.g., 3 hours)
 6. Click **Save**
 
-### Request JIT Access
+### Step 2 — Request JIT Access
 
 1. Go to **Defender for Cloud** → **JIT VM Access**
 2. Select your VM → Click **Request Access**
 3. Enter justification, IP range, and time window
 4. Click **Open Ports**
 
-### Step 4 — Verify the NSG Rule Was Opened
+### Step 3 — Verify the NSG Rule Was Opened
 
 1. Go to **Virtual Machines** → Select your VM
 2. Click **Networking** → **Network Security Group**
 3. Check **Inbound security rules** — you should see a temporary rule allowing RDP/SSH from your requested IP range with a high priority number (e.g., `100`)
 4. Note the rule includes an expiry; it will be auto-removed after the time window
 
-### Step 5 — Connect via Bastion After JIT Approval
+### Step 4 — Connect via Bastion After JIT Approval
 
 1. Go to **Virtual Machines** → Select your VM
 2. Click **Connect** → Choose **Bastion**
@@ -261,7 +264,7 @@ Just-In-Time access adds a time-limited, on-demand approval layer on top of Bast
 4. Click **Connect** — a browser-based session opens
 5. Confirm the session is active
 
-### Step 6 — Verify JIT Rule Auto-Closes
+### Step 5 — Verify JIT Rule Auto-Closes
 
 After the time window expires:
 
@@ -320,7 +323,7 @@ When you are done with the lab, remove resources to avoid ongoing charges.
 ### Delete the Bastion Resource
 
 1. Go to **Azure Portal** → **Bastion**
-2. Select your Bastion resource (e.g., `bastion-host-RG`)
+2. Select your Bastion resource (e.g., `bastion-prod`)
 3. Click **Delete** → Confirm
 
 > **Note:** Deleting Bastion does not affect the VM or VNet.
