@@ -19,7 +19,7 @@ A relaxed overview of the core components, identity flow, and how the system hol
 | 📋 Governance | Policy-driven governance with auto-remediation — compliance that enforces itself |
 | 🖥️ Compute | VM image lifecycle and scale-set engineering — golden images, repeatable builds |
 | 🌐 Networking | Global delivery via Azure Front Door — WAF at the edge, custom domains, static hosting |
-| 🔒 Secure Access | Browser-based VM access via Bastion + JIT — zero public IP, time-boxed sessions |
+| 🔒 Secure Access | Browser-based VM access via Bastion — zero public IP, hub-spoke VNet Peering, JIT time-boxed sessions via Defender for Cloud |
 | 🔄 Resilience | Backup, DR, and Entra recovery — platforms that come back cleanly |
 | 🚨 Security | Break-glass account design — emergency access that doesn't punch a hole in Zero Trust |
 
@@ -29,7 +29,8 @@ A relaxed overview of the core components, identity flow, and how the system hol
 
 | Lab | What it covers |
 | --- | --- |
-| [Azure Bastion](./Azure%20Bastion/README.md) | Secure browser-based VM access, JIT integration, no public IP |
+| [Azure Bastion](./Azure%20Bastion/README.md) | Secure browser-based VM access, hub-spoke VNet Peering, no public IP |
+| [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access, time-bounded NSG rules, zero standing access |
 | [Identity-First Stack](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep deployment |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Policy definitions, assignments, and automatic remediation tasks |
 | [VMSS & Golden Images](./VMSS/README.md) | Sysprep, image capture, scale set deployment |

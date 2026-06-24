@@ -42,6 +42,7 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `uami` | User-Assigned Managed Identity |
 | `fd` | Azure Front Door profile |
 | `bas` | Azure Bastion host |
+| `peer` | VNet Peering |
 
 ---
 
@@ -106,6 +107,13 @@ vnet-fntech-wus2-lab-dr         DR virtual network (West US 2)
 snet-app                        Application tier subnet
 pip-fntech-eus-lab-vm           Lab VM public IP
 nsg-fntech-wus2-lab-vm          DR environment NSG
+```
+
+VNet Peering names use a descriptive `{source}-to-{destination}` pattern rather than the standard type prefix, as they exist within the context of a VNet:
+
+```text
+hub-to-spoke                    Hub VNet → Spoke VNet peering (Azure auto-creates the reverse)
+spoke-to-hub                    Reverse peering — auto-created by Azure in same-subscription/same-tenant scenarios
 ```
 
 ### Azure Bastion
@@ -207,6 +215,38 @@ Emergency CBA Admin – CBA Authentication Required     CA policy enforcing CBA 
 ```
 
 Conditional Access policy names follow the pattern `{scope} – {control}` to make the intent readable directly in the CA policy list.
+
+---
+
+## Microsoft Defender for Cloud
+
+### JIT VM Access policies
+
+JIT policies are not separately named resources — they are scoped to the VM and managed internally by Defender for Cloud. No user-defined name is required.
+
+### JIT NSG rules
+
+NSG rules created by JIT are **auto-generated and ephemeral**. They are not subject to the project naming pattern:
+
+| Pattern | Example | Notes |
+| --- | --- | --- |
+| `SecurityCenter-JITRule-{port}-{timestamp}` | `SecurityCenter-JITRule-3389-1234567890` | Auto-created on JIT approval |
+
+These rules are automatically removed when the time window expires. Do not manually rename or modify them.
+
+### JIT request justifications
+
+Justification text entered when requesting JIT access should follow a descriptive pattern:
+
+```text
+{purpose} – {requester} – {date}
+```
+
+Example:
+
+```text
+Incident response – nkadwaikar – 2026-06-23
+```
 
 ---
 

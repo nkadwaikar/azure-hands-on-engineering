@@ -11,9 +11,10 @@ Azure Bastion lets you RDP/SSH into a VM without exposing a public IP, using an 
 - [Why Bastion Matters](#5-why-bastion-matters-engineering-justification)
 - [Password from Key Vault](#6-password-from-azure-key-vault-secretless-access-pattern)
 - [Bastion Access Diagram](#7-bastion-access-diagram)
-- [Bastion + JIT Lab](#8-bastion--just-in-time-jit-vm-access-lab)
-- [Bastion vs Jumpbox vs Private Endpoint](#9-bastion-vs-jumpbox-vs-private-endpoint--comparison)
-- [Cleanup / Teardown](#10-cleanup--teardown)
+- [Bastion vs Jumpbox vs Private Endpoint](#8-bastion-vs-jumpbox-vs-private-endpoint--comparison)
+- [Cleanup / Teardown](#9-cleanup--teardown)
+- [VNet Peering for Cross-VNet Bastion Access](#10-vnet-peering-for-cross-vnet-bastion-access)
+- [Bastion + JIT Lab](../Microsoft%20Defender%20for%20Cloud/1-JIT.md)
 
 ---
 
@@ -65,7 +66,6 @@ The subnet must exist in your VNet **before** deploying Bastion.
 3. Click **Create**
 4. Under the **Basics** tab, configure:
    - **Subscription:** your subscription
-   - **Resource group:** same as VM
    - **Name:** `bastion-prod` *(avoid the `-RG` suffix — that convention is for resource groups)*
    - **Region:** same as VM
    - **Tier:** `Basic` (sufficient for RDP/SSH; choose `Standard` for features like IP-based connection or tunneling)
@@ -241,58 +241,7 @@ The following describes the secure access flow when using Azure Bastion:
 
 ---
 
-## 8. Bastion + Just-In-Time (JIT) VM Access Lab
-
-Just-In-Time access adds a time-limited, on-demand approval layer on top of Bastion. It is managed through Microsoft Defender for Cloud.
-
-### Step 1 — Enable JIT on a VM
-
-1. Go to **Microsoft Defender for Cloud** → **Workload Protections**
-2. Select **Just-in-time VM access**
-3. Find your VM → Click **Enable JIT on 1 VM**
-4. Configure allowed ports: `3389` (RDP) or `22` (SSH)
-5. Set max request time (e.g., 3 hours)
-6. Click **Save**
-
-### Step 2 — Request JIT Access
-
-1. Go to **Defender for Cloud** → **JIT VM Access**
-2. Select your VM → Click **Request Access**
-3. Enter justification, IP range, and time window
-4. Click **Open Ports**
-
-### Step 3 — Verify the NSG Rule Was Opened
-
-1. Go to **Virtual Machines** → Select your VM
-2. Click **Networking** → **Network Security Group**
-3. Check **Inbound security rules** — you should see a temporary rule allowing RDP/SSH from your requested IP range with a high priority number (e.g., `100`)
-4. Note the rule includes an expiry; it will be auto-removed after the time window
-
-### Step 4 — Connect via Bastion After JIT Approval
-
-1. Go to **Virtual Machines** → Select your VM
-2. Click **Connect** → Choose **Bastion**
-3. Enter your credentials (or retrieve from Key Vault per Section 6)
-4. Click **Connect** — a browser-based session opens
-5. Confirm the session is active
-
-### Step 5 — Verify JIT Rule Auto-Closes
-
-After the time window expires:
-
-1. Go back to **Networking** → **Network Security Group** → **Inbound security rules**
-2. Confirm the temporary JIT rule has been removed automatically
-3. Any new connection attempts will be blocked until JIT is requested again
-
-### Combined Pattern — Bastion + JIT
-
-- JIT controls **when** the port is open (time-boxed)
-- Bastion controls **how** you connect (no public IP, browser-based)
-- Together they eliminate standing access and reduce the attack surface to near zero
-
----
-
-## 9. Bastion vs Jumpbox vs Private Endpoint — Comparison
+## 8. Bastion vs Jumpbox vs Private Endpoint — Comparison
 
 | Feature | Azure Bastion | Jumpbox VM | Private Endpoint |
 | --- | --- | --- | --- |
@@ -328,7 +277,7 @@ After the time window expires:
 
 ---
 
-## 10. Cleanup / Teardown
+## 9. Cleanup / Teardown
 
 When you are done with the lab, remove resources to avoid ongoing charges.
 
@@ -359,6 +308,48 @@ When you are done with the lab, remove resources to avoid ongoing charges.
 1. Go to **Microsoft Defender for Cloud** → **Just-in-time VM access**
 2. Find your VM → Click the **...** menu → **Remove JIT**
 3. Confirm — inbound NSG rules return to their default state
+
+---
+
+## 10. VNet Peering for Cross-VNet Bastion Access
+
+If your `AzureBastionSubnet` (`10.0.1.0/26`) and your VM subnet (`172.16.0.0/24`) are in separate VNets, you must create VNet Peering so Bastion (in the hub VNet) can reach the VM (in the spoke VNet).
+
+### Create VNet Peering (Hub → Spoke)
+
+1. Go to **Azure Portal** → **Virtual Networks** → select your Bastion VNet
+2. Click **Peerings** → **+ Add**
+3. Configure:
+   - **Peering name:** `hub-to-spoke`
+   - **Remote VNet:** select the VNet that contains your VM
+4. Enable:
+   - ✔ **Allow virtual network access**
+   - ✔ **Allow forwarded traffic**
+   - ❌ Do **NOT** enable "Use remote gateway"
+5. Click **Add**
+
+### Why You Cannot Create the Spoke-to-Hub Peering
+
+> Your VNets are already fully peered and synchronized — you did not make a mistake.
+
+When you created the hub-to-spoke peering, Azure **automatically** created the reverse peering (spoke → hub) for you. This happens when:
+
+- Both VNets are in the same subscription
+- Both VNets are in the same tenant
+- You selected the remote VNet from the dropdown
+
+So when Azure says:
+
+> *"Select a different virtual network. These virtual networks are already peered to each other."*
+
+It means:
+
+- ✔ The reverse peering already exists
+- ✔ The connection is healthy
+- ✔ You do **not** need to create another peering
+- ✔ Bastion can now reach the VM (assuming NSG/UDR rules are correct)
+
+---
 
 ### Full Resource Group Cleanup (If Lab-Only Environment)
 

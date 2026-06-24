@@ -66,17 +66,40 @@ flowchart LR
 
 ### Secure VM Access
 
-Text flow: Resource Group (rg-bastion-eus-lab) -> VNet with AzureBastionSubnet -> Azure Bastion host -> Engineer browser (HTTPS 443) connects through Bastion -> Target VM (private IP only). JIT opens the NSG rule for a time-bounded window before the session is established.
+Text flow: Resource Group (rg-bastion-eus-lab) -> Hub VNet with AzureBastionSubnet -> Azure Bastion host -> Engineer browser (HTTPS 443) connects through Bastion -> VNet Peering (hub-to-spoke) -> Spoke VNet -> Target VM (private IP only). JIT opens the NSG rule for a time-bounded window before the session is established.
 
 ```mermaid
 flowchart LR
-    RG[Resource Group\nrg-bastion-eus-lab] --> VNet[Private VNet]
-    VNet --> Subnet[AzureBastionSubnet /26]
-    Subnet --> Bastion[Azure Bastion Host\nbas-fntech-eus-lab]
     Browser[Engineer Browser\nHTTPS 443] --> Bastion
-    Bastion --> VM[Target VM\nPrivate IP Only]
-    JIT[JIT Request\nDefender for Cloud] --> NSG[NSG Rule\nTime-Bounded]
-    NSG --> VM
+
+    subgraph Hub VNet
+        Subnet[AzureBastionSubnet /26]
+        Bastion[Azure Bastion Host\nbas-fntech-eus-lab]
+        Subnet --> Bastion
+    end
+
+    subgraph Spoke VNet
+        VM[Target VM\nPrivate IP Only]
+        NSG[NSG Rule\nTime-Bounded]
+        NSG --> VM
+    end
+
+    Bastion -->|VNet Peering\nhub-to-spoke| VM
+    JIT[JIT Request\nDefender for Cloud] --> NSG
+```
+
+### JIT Access Lifecycle
+
+Text flow: Engineer submits JIT request -> Defender for Cloud evaluates and approves -> Time-bounded NSG rule opens -> Engineer connects via Bastion -> Time window expires -> NSG rule auto-removed.
+
+```mermaid
+flowchart LR
+    Req[Engineer\nJIT Request] --> MDC[Microsoft Defender\nfor Cloud]
+    MDC --> Approve[Approval +\nTime Window]
+    Approve --> NSGOpen[NSG Rule Opens\nTime-Bounded]
+    NSGOpen --> Session[Bastion Session\nEstablished]
+    Session --> Expire[Time Window\nExpires]
+    Expire --> NSGClose[NSG Rule\nAuto-Removed]
 ```
 
 ### Emergency Access
@@ -105,7 +128,8 @@ flowchart LR
 
 | Track | Description |
 | --- | --- |
-| [Azure Bastion](./Azure%20Bastion/README.md) | Secure browser-based VM access, JIT integration, no public IP |
+| [Azure Bastion](./Azure%20Bastion/README.md) | Secure browser-based VM access, VNet Peering hub-spoke, no public IP |
+| [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access, time-bounded NSG rules, zero standing access |
 | [Identity-First](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Custom policy, DeployIfNotExists, remediation tasks |
 | [Compute](./Compute/README.md) | Base VM build, Sysprep, IIS installation |
