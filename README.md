@@ -4,8 +4,6 @@ Senior Cloud & Identity Engineer. I build Azure platforms that are secure by des
 
 Most of my work sits where identity, Zero Trust, and resilient infrastructure meet. Everything I build is meant to run in the real world — no theory, no slideware.
 
---
-
 ## What I'm building
 
 | Area | Focus |
