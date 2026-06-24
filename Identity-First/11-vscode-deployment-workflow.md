@@ -4,7 +4,7 @@
 
 This diagram maps how the Identity-First lab stack is deployed using VS Code only, without Azure CLI or the Portal.
 
-> Note: the separate capstone architecture under `Identity-First/capstone/architecture/bicep/` uses its own resource-group naming and module layout.
+> Note: this workflow reflects the capstone architecture under `Identity-First/capstone/architecture/bicep/` with its own resource-group naming (`rg-identity-capstone`) and module layout.
 
 ---
 
@@ -20,14 +20,14 @@ This diagram maps how the Identity-First lab stack is deployed using VS Code onl
                 ▼
         ┌──────────────────────────────────────────┐
         │        Azure Subscription Scope           │
-        │   (Deployment of create-rg.bicep)         │
+        │   (Deployment of create-rg.bicep)            │
         └───────────────┬──────────────────────────┘
                         │
                         │  Creates Resource Group
                         ▼
               ┌──────────────────────────────┐
               │   Resource Group:            │
-              │   rg-identity-lab            │
+              │   rg-identity-capstone        │
               └───────────────┬─────────────┘
                               │
                               │  Deploy main.bicep
@@ -37,10 +37,9 @@ This diagram maps how the Identity-First lab stack is deployed using VS Code onl
         │                                                      │
         │   main.bicep → calls modules in sequence:            │
         │                                                      │
-        │   1. identity.bicep      → Creates UAMI              │
-        │   2. keyvault.bicep      → Creates Key Vault         │
-        │   3. rbac.bicep          → Assigns KV RBAC           │
-        │   4. locks.bicep         → Adds CanNotDelete lock    │
+        │   1. create-rg.bicep     → Creates Resource Group    │
+        │   2. create-uami.bicep   → Creates UAMI              │
+        │   3. create-keyvault.bicep → Creates Key Vault       │
         └──────────────────────────────────────────────────────┘
                               │
                         │  Outputs surfaced in VS Code
@@ -59,21 +58,23 @@ This diagram maps how the Identity-First lab stack is deployed using VS Code onl
 All deployments start from your editor — no CLI, no Portal.
 
 **✔ Subscription-level deployment**  
-`create-rg.bicep` runs at subscription scope to create the Resource Group.
+`create-rg.bicep` runs at subscription scope to create the Resource Group `rg-identity-capstone`.
 
 **✔ Resource-group-level deployment**  
-`main.bicep` deploys all modules into `rg-identity-lab`.
+`main.bicep` deploys all modules into `rg-identity-capstone`.
 
 **✔ Module orchestration**  
-Each module is deployed in sequence with outputs feeding into the next.
+Each module is deployed in sequence with outputs feeding into the next:
+
+- `create-rg.bicep` → outputs `rgName` and `location`
+- `create-uami.bicep` → outputs `principalId`
+- `create-keyvault.bicep` → uses UAMI principal ID for KV access policy
 
 **✔ Validation happens inside VS Code**  
 Azure Explorer shows:
 
-- UAMI
-- Key Vault
-- RBAC assignments
-- Locks
+- UAMI (`wk1-uami`)
+- Key Vault (`wk1-kv`)
 - Deployment logs
 
 ---

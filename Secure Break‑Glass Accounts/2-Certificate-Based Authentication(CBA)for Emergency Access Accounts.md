@@ -354,7 +354,7 @@ Break-glass accounts must be protected by a dedicated Authentication Strength po
   - Voice call
   - Password only
 
-3. Click **Create**
+1. Click **Create**
 
 ---
 
@@ -389,7 +389,7 @@ Break-glass accounts must be protected by a dedicated Authentication Strength po
 - Select **Emergency Access – CBA Required**
 - Click **Select**
 
-3. Click **Create**
+1. Click **Create**
 
 **Result:** Emergency accounts must authenticate with a valid certificate on every sign-in. All weaker methods are blocked.
 
