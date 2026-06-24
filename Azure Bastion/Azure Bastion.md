@@ -13,6 +13,7 @@ Azure Bastion lets you RDP/SSH into a VM without exposing a public IP, using an 
 - [Bastion Access Diagram](#7-bastion-access-diagram)
 - [Bastion + JIT Lab](#8-bastion--just-in-time-jit-vm-access-lab)
 - [Bastion vs Jumpbox vs Private Endpoint](#9-bastion-vs-jumpbox-vs-private-endpoint--comparison)
+- [Cleanup / Teardown](#10-cleanup--teardown)
 
 ---
 
@@ -35,6 +36,20 @@ Before connecting, ensure:
 
 ## 2. Deploy Azure Bastion (If Not Already Deployed)
 
+### Step 1 — Create the AzureBastionSubnet
+
+The subnet must exist in your VNet **before** deploying Bastion.
+
+1. Go to **Azure Portal** → **Virtual Networks**
+2. Select your VNet
+3. Click **Subnets** → **+ Subnet**
+4. Configure:
+   - **Name:** `AzureBastionSubnet` *(exact name — case-sensitive)*
+   - **Address range:** minimum `/26` (e.g., `10.0.1.0/26`)
+5. Click **Save**
+
+### Step 2 — Deploy the Bastion Resource
+
 1. Go to **Azure Portal**
 2. Search: **Bastion**
 3. Click **Create**
@@ -42,12 +57,18 @@ Before connecting, ensure:
    - **Resource group:** same as VM
    - **Name:** `bastion-host-RG`
    - **Region:** same as VM
-   - **VNet:** same as VM
-   - **Subnet:** must be `AzureBastionSubnet`
-5. **Public IP:** create new
+   - **Virtual Network:** same as VM
+   - **Subnet:** select `AzureBastionSubnet` (created above)
+5. **Public IP address:** click **Create new** → provide a name (e.g., `bastion-pip`)
 6. Click **Review + Create** → **Create**
 
-> **Note:** Deployment takes approximately 5 minutes.
+> **Note:** Deployment takes approximately 5–10 minutes.
+
+### Step 3 — Verify Bastion Is Ready
+
+1. Navigate to **Bastion** resource in the portal
+2. Confirm **Provisioning state** shows `Succeeded`
+3. Note the **DNS name** — this is the public entry point Bastion uses internally
 
 ---
 
@@ -94,6 +115,30 @@ A browser-based RDP/SSH session opens instantly.
 
 - Subnet name must be exact: `AzureBastionSubnet`
 - Minimum subnet size: `/26`
+
+### Issue: Bastion session connects but screen is black
+
+- VM is still booting — wait 1–2 minutes and retry
+- Remote Desktop Services (`TermService`) may be stopped — connect via Azure Serial Console and restart it
+- Check if the VM has enough memory/CPU to render the desktop
+
+### Issue: "You don't have permission to connect to this VM"
+
+- Your Azure account lacks the **Reader** role (or higher) on the VM
+- Bastion requires at minimum the **Virtual Machine Contributor** or **Reader** role on the VM, plus **Reader** on the Bastion resource
+- Check role assignments via **VM** → **Access control (IAM)**
+
+### Issue: Bastion deployment fails with subnet error
+
+- Subnet CIDR is too small — must be `/26` or larger
+- Subnet already contains other resources — `AzureBastionSubnet` must be dedicated to Bastion only
+- Address space conflicts with existing subnets in the VNet
+
+### Issue: JIT request is stuck in "Pending"
+
+- Microsoft Defender for Cloud plan may not be enabled on the subscription
+- The requesting user must have the **Security Reader** + **Virtual Machine Contributor** roles
+- Check **Defender for Cloud** → **Environment settings** → confirm Defender for Servers is on
 
 ---
 
@@ -201,6 +246,29 @@ Just-In-Time access adds a time-limited, on-demand approval layer on top of Bast
 3. Enter justification, IP range, and time window
 4. Click **Open Ports**
 
+### Step 4 — Verify the NSG Rule Was Opened
+
+1. Go to **Virtual Machines** → Select your VM
+2. Click **Networking** → **Network Security Group**
+3. Check **Inbound security rules** — you should see a temporary rule allowing RDP/SSH from your requested IP range with a high priority number (e.g., `100`)
+4. Note the rule includes an expiry; it will be auto-removed after the time window
+
+### Step 5 — Connect via Bastion After JIT Approval
+
+1. Go to **Virtual Machines** → Select your VM
+2. Click **Connect** → Choose **Bastion**
+3. Enter your credentials (or retrieve from Key Vault per Section 6)
+4. Click **Connect** — a browser-based session opens
+5. Confirm the session is active
+
+### Step 6 — Verify JIT Rule Auto-Closes
+
+After the time window expires:
+
+1. Go back to **Networking** → **Network Security Group** → **Inbound security rules**
+2. Confirm the temporary JIT rule has been removed automatically
+3. Any new connection attempts will be blocked until JIT is requested again
+
 ### Combined Pattern — Bastion + JIT
 
 - JIT controls **when** the port is open (time-boxed)
@@ -242,3 +310,46 @@ Just-In-Time access adds a time-limited, on-demand approval layer on top of Bast
 - You need private access to PaaS services (Azure SQL, Storage, Key Vault, etc.)
 - Not used for VM RDP/SSH — it connects your VNet to a specific PaaS resource
 - Best for: securing backend services without exposing them to the public Internet
+
+---
+
+## 10. Cleanup / Teardown
+
+When you are done with the lab, remove resources to avoid ongoing charges.
+
+### Delete the Bastion Resource
+
+1. Go to **Azure Portal** → **Bastion**
+2. Select your Bastion resource (e.g., `bastion-host-RG`)
+3. Click **Delete** → Confirm
+
+> **Note:** Deleting Bastion does not affect the VM or VNet.
+
+### Delete the Bastion Public IP
+
+1. Go to **Public IP Addresses**
+2. Find the IP created for Bastion (e.g., `bastion-pip`)
+3. Confirm it shows **Not associated** (Bastion must be deleted first)
+4. Click **Delete** → Confirm
+
+### Remove the AzureBastionSubnet (Optional)
+
+1. Go to **Virtual Networks** → Select your VNet
+2. Click **Subnets**
+3. Select `AzureBastionSubnet` → Click **Delete**
+4. Confirm — only do this if no other resources depend on the subnet
+
+### Disable JIT (If Enabled)
+
+1. Go to **Microsoft Defender for Cloud** → **Just-in-time VM access**
+2. Find your VM → Click the **...** menu → **Remove JIT**
+3. Confirm — inbound NSG rules return to their default state
+
+### Full Resource Group Cleanup (If Lab-Only Environment)
+
+If this was a dedicated lab resource group with no other resources you need to keep:
+
+1. Go to **Resource Groups**
+2. Select the lab resource group
+3. Click **Delete resource group**
+4. Type the resource group name to confirm → Click **Delete**
