@@ -1,6 +1,6 @@
 # Kia ora, I'm Nadeem Kadwaikar👋
 
-Senior Cloud & Identity Engineer. I build Azure platforms that are secure by design, not by accident.
+Identity and Access Administrator. I build Azure platforms that are secure by design, not by accident.
 
 Most of my work sits where identity, Zero Trust, and resilient infrastructure meet. Everything I build is meant to run in the real world — no theory, no slideware.
 
