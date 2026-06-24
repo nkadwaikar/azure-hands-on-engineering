@@ -65,10 +65,9 @@ The subnet must exist in your VNet **before** deploying Bastion.
 6. Click **Review + Create** → verify no validation errors → **Create**
 
 > **Note:** Deployment takes approximately 5–10 minutes.
-
 > **Scope:** Azure Bastion is a **VNet-level resource** — one deployment covers all VMs in that VNet. No per-VM enablement is required. For peered VNets, upgrade to the **Standard** tier and enable **IP-based connection**.
-
 > **NSG on AzureBastionSubnet:** If you attach an NSG to the Bastion subnet, it must include these inbound rules or Bastion will fail:
+>
 > | Priority | Source | Port | Purpose |
 > | --- | --- | --- | --- |
 > | 100 | `Internet` | `443` | User browser → Bastion |
@@ -76,6 +75,7 @@ The subnet must exist in your VNet **before** deploying Bastion.
 > | 120 | `AzureLoadBalancer` | `443` | Health probes |
 >
 > And these outbound rules:
+>
 > | Priority | Destination | Port | Purpose |
 > | --- | --- | --- | --- |
 > | 100 | `VirtualNetwork` | `3389`, `22` | Bastion → VM |
