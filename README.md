@@ -8,8 +8,7 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 
 ## Architecture
 
-A relaxed overview of the core components, identity flow, and how the system holds together in day‑to‑day use.
-[Architecture Overview](./Architecture%20Overview.md)
+A relaxed overview of the core components, identity flow, and how the system holds together in day‑to‑day use — [Architecture Overview](./Architecture%20Overview.md).
 
 ## What I'm building
 
@@ -36,26 +35,25 @@ A relaxed overview of the core components, identity flow, and how the system hol
 | [VMSS & Golden Images](./VMSS/README.md) | Sysprep, image capture, scale set deployment |
 | [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin |
 | [Backup & Site Recovery](./Recovery%20Services%20vaults/README.md) | VM backup, restore, ASR replication |
-| [Break-Glass Accounts – FIDO2](./Secure%20Break‑Glass%20Accounts/README.md) | Emergency access with FIDO2 keys, Authentication Strength, and CA enforcement |
-| [Break-Glass Accounts – CBA](./Secure%20Break‑Glass%20Accounts/README.md) | Certificate-based authentication as phishing-resistant MFA for emergency accounts |
+| [Break-Glass Accounts – FIDO2](./Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) | Emergency access with FIDO2 keys, Authentication Strength, and CA enforcement |
+| [Break-Glass Accounts – CBA](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency accounts |
 | [Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID configuration backup and restore procedures |
 | [Compute & IIS](./Compute/README.md) | Base VM build, Sysprep, IIS installation and configuration |
 
 ---
 
-## Naming-Convention
+## Reference
 
-[Naming-Convention](./Naming-Convention.md) A small guide on how I name things across the repo.
+- [Naming Convention](./Naming-Convention.md) — resource abbreviations, segment pattern, and per-type naming rules used across all labs
+- [Architecture Overview](./Architecture%20Overview.md) — system diagrams for every track
 
 ---
 
 ## Coming soon — adding this shortly
 
 - App Services with managed identity and deployment slots
-- Defender for Cloud CSPM in a hub-and-spoke architecture
+- Defender for Cloud CSPM and security posture management in a hub-and-spoke architecture
 - Azure Arc for hybrid server management
-
-I tend to update this during weekends, so more will land over time
 
 ---
 
