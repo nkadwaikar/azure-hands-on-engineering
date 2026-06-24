@@ -65,6 +65,7 @@ rg-policy-eus-lab-remedy        Azure Policy auto-remediation lab
 rg-fntech-eus-lab-backup        VM backup and recovery lab
 rg-fntech-wus2-lab-dr           Disaster recovery environment (West US 2)
 rg-vmss-lab                     VMSS deployment lab
+rg-bastion-eus-lab              Azure Bastion lab (East US)
 ```
 
 ### Virtual Machines

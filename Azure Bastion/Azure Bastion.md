@@ -34,7 +34,19 @@ Before connecting, ensure:
 
 ## 2. Deploy Azure Bastion (If Not Already Deployed)
 
-### Step 1 — Create the AzureBastionSubnet
+### Step 1 — Create the Resource Group
+
+1. Go to **Azure Portal** → **Resource groups**
+2. Click **+ Create**
+3. Configure:
+   - **Subscription:** your subscription
+   - **Resource group name:** e.g., `rg-bastion-prod` *(follow your naming convention)*
+   - **Region:** same region as your VM and VNet
+4. Click **Review + Create** → **Create**
+
+---
+
+### Step 2 — Create the AzureBastionSubnet
 
 The subnet must exist in your VNet **before** deploying Bastion.
 
@@ -46,7 +58,7 @@ The subnet must exist in your VNet **before** deploying Bastion.
    - **Address range:** minimum `/26` (e.g., `10.0.1.0/26`)
 5. Click **Save**
 
-### Step 2 — Deploy the Bastion Resource
+### Step 3 — Deploy the Bastion Resource
 
 1. Go to **Azure Portal**
 2. Search: **Bastion**
@@ -81,7 +93,7 @@ The subnet must exist in your VNet **before** deploying Bastion.
 > | 100 | `VirtualNetwork` | `3389`, `22` | Bastion → VM |
 > | 110 | `AzureCloud` | `443` | Bastion → Azure APIs |
 
-### Step 3 — Verify Bastion Is Ready
+### Step 4 — Verify Bastion Is Ready
 
 1. Navigate to **Bastion** resource in the portal
 2. Confirm **Provisioning state** shows `Succeeded`

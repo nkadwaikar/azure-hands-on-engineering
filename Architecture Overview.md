@@ -66,13 +66,15 @@ flowchart LR
 
 ### Secure VM Access
 
-Text flow: Engineer browser (HTTPS 443) -> Azure Bastion (AzureBastionSubnet) -> Private VNet -> Target VM (private IP only). JIT opens the NSG rule for a time-bounded window before the session is established.
+Text flow: Resource Group (rg-bastion-eus-lab) -> VNet with AzureBastionSubnet -> Azure Bastion host -> Engineer browser (HTTPS 443) connects through Bastion -> Target VM (private IP only). JIT opens the NSG rule for a time-bounded window before the session is established.
 
 ```mermaid
 flowchart LR
-    Browser[Engineer Browser\nHTTPS 443] --> Bastion[Azure Bastion\nAzureBastionSubnet /26]
-    Bastion --> VNet[Private VNet]
-    VNet --> VM[Target VM\nPrivate IP Only]
+    RG[Resource Group\nrg-bastion-eus-lab] --> VNet[Private VNet]
+    VNet --> Subnet[AzureBastionSubnet /26]
+    Subnet --> Bastion[Azure Bastion Host\nbas-fntech-eus-lab]
+    Browser[Engineer Browser\nHTTPS 443] --> Bastion
+    Bastion --> VM[Target VM\nPrivate IP Only]
     JIT[JIT Request\nDefender for Cloud] --> NSG[NSG Rule\nTime-Bounded]
     NSG --> VM
 ```
