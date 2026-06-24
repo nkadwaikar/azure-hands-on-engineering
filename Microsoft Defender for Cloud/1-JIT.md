@@ -11,6 +11,8 @@ Just-In-Time VM access adds a time-limited, on-demand approval layer on top of A
 - [Connect via Bastion After JIT Approval](#step-4--connect-via-bastion-after-jit-approval)
 - [Verify JIT Rule Auto-Closes](#step-5--verify-jit-rule-auto-closes)
 - [Combined Pattern](#combined-pattern--bastion--jit)
+- [Troubleshooting](#troubleshooting)
+- [Why JIT Matters](#why-jit-matters-engineering-justification)
 - [Disable JIT / Cleanup](#disable-jit--cleanup)
 
 ---
@@ -77,6 +79,63 @@ After the time window expires:
 - JIT controls **when** the port is open (time-boxed)
 - Bastion controls **how** you connect (no public IP, browser-based)
 - Together they eliminate standing access and reduce the attack surface to near zero
+
+---
+
+## Troubleshooting
+
+### Issue: JIT option not available on the VM
+
+- **Defender for Servers** plan is not enabled on the subscription — go to **Defender for Cloud** → **Environment settings** → confirm Defender for Servers is on
+- VM is not yet onboarded to Defender for Cloud — wait up to 24 hours after enabling the plan
+- VM must be running (deallocated VMs cannot be JIT-enabled)
+
+### Issue: JIT request is stuck in "Pending"
+
+- The requesting user is missing the **Security Reader** role on the VM or resource group
+- The requesting user is missing the **Virtual Machine Contributor** role on the target VM
+- Check role assignments via **VM** → **Access control (IAM)**
+
+### Issue: NSG inbound rule not appearing after JIT approval
+
+- Confirm the request shows **Approved** in **Defender for Cloud** → **JIT VM Access** → **Configured** tab
+- NSG propagation can take 1–2 minutes — refresh the **Networking** blade
+- If the VM has multiple NICs, check the NSG on the correct NIC
+
+### Issue: Bastion session fails immediately after JIT approval
+
+- JIT only opens the NSG rule — it does not start a Bastion session automatically; initiate the connection manually via **Connect** → **Bastion**
+- Verify the approved IP range matches your current public IP (use `curl ifconfig.me` to check)
+- If your IP changed between request and connection, submit a new JIT request
+
+### Issue: JIT rule did not auto-close after the time window
+
+- Check **Defender for Cloud** → **JIT VM Access** → confirm the request shows **Expired**
+- NSG rule removal can lag a few minutes after expiry — refresh the **Inbound security rules** view
+- If the rule persists beyond 10 minutes, manually delete it and re-check the Defender for Cloud plan health
+
+### NSG rule naming
+
+JIT rules are auto-generated and ephemeral — do not rename or modify them:
+
+```text
+SecurityCenter-JITRule-{port}-{timestamp}    e.g., SecurityCenter-JITRule-3389-1234567890
+```
+
+See [Naming Convention — JIT NSG Rules](../Naming-Convention.md#jit-nsg-rules) for the full reference.
+
+---
+
+## Why JIT Matters (Engineering Justification)
+
+- **No standing inbound access** — RDP/SSH ports are closed by default; opened only on explicit request
+- **Time-bounded** — port access expires automatically; no manual cleanup required
+- **IP-scoped** — NSG rule restricts access to the requester's IP, not the open Internet
+- **Fully audited** — all approvals and connections are logged in Azure Activity Logs and Defender for Cloud
+- **Zero Trust aligned** — enforces least-privilege, just-in-time access without a VPN or jumpbox
+- **Complements Bastion** — JIT controls *when* the port is open; Bastion controls *how* you connect
+
+> This is the recommended access pattern for production VMs requiring interactive sessions.
 
 ---
 

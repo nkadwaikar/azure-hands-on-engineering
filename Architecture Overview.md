@@ -66,21 +66,22 @@ flowchart LR
 
 ### Secure VM Access
 
-Text flow: Resource Group (rg-bastion-eus-lab) -> Hub VNet with AzureBastionSubnet -> Azure Bastion host -> Engineer browser (HTTPS 443) connects through Bastion -> VNet Peering (hub-to-spoke) -> Spoke VNet -> Target VM (private IP only). JIT opens the NSG rule for a time-bounded window before the session is established.
+Text flow: Engineer retrieves VM credentials from Key Vault (secretless auth) -> Engineer browser (HTTPS 443) connects to Azure Bastion public IP -> Bastion sits in AzureBastionSubnet /26 with required NSG rules -> VNet Peering (hub-to-spoke) -> Target VM (private IP only, no public IP). JIT opens a time-bounded, IP-scoped NSG rule on the VM before the session is established.
 
 ```mermaid
 flowchart LR
+    KV[Azure Key Vault\nSecret Retrieval] --> Browser
     Browser[Engineer Browser\nHTTPS 443] --> Bastion
 
     subgraph Hub VNet
-        Subnet[AzureBastionSubnet /26]
+        Subnet[AzureBastionSubnet /26\nNSG: Internet→443, GatewayMgr→443]
         Bastion[Azure Bastion Host\nbas-fntech-eus-lab]
         Subnet --> Bastion
     end
 
     subgraph Spoke VNet
         VM[Target VM\nPrivate IP Only]
-        NSG[NSG Rule\nTime-Bounded]
+        NSG[NSG Rule\nTime-Bounded / IP-Scoped]
         NSG --> VM
     end
 
@@ -128,13 +129,13 @@ flowchart LR
 
 | Track | Description |
 | --- | --- |
-| [Azure Bastion](./Azure%20Bastion/README.md) | Secure browser-based VM access, VNet Peering hub-spoke, no public IP |
-| [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access, time-bounded NSG rules, zero standing access |
+| [Azure Bastion](./Azure%20Bastion/README.md) | Browser-based RDP/SSH with no public IP, NSG rules for Bastion subnet, Key Vault secretless auth, hub-spoke VNet Peering, troubleshooting guide |
+| [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access, time-bounded IP-scoped NSG rules, zero standing access, audit trail |
 | [Identity-First](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Custom policy, DeployIfNotExists, remediation tasks |
 | [Compute](./Compute/README.md) | Base VM build, Sysprep, IIS installation |
-| [VMSS](./VMSS/README.md) | Golden image capture, scale set deployment |
-| [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin |
+| [VMSS](./VMSS/README.md) | Golden image capture, Compute Gallery, scale set deployment |
+| [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin, caching behaviour |
 | [Recovery Services Vaults](./Recovery%20Services%20vaults/README.md) | VM backup, restore, ASR replication |
 | [Break-Glass – FIDO2 (Lab 1)](./Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) | Cloud-only emergency accounts with FIDO2 keys, Authentication Strength, CA enforcement |
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |

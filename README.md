@@ -4,11 +4,7 @@ Senior Cloud & Identity Engineer. I build Azure platforms that are secure by des
 
 Most of my work sits where identity, Zero Trust, and resilient infrastructure meet. Everything I build is meant to run in the real world — no theory, no slideware.
 
----
-
-## Architecture
-
-A relaxed overview of the core components, identity flow, and how the system holds together in day‑to‑day use — [Architecture Overview](./Architecture%20Overview.md).
+--
 
 ## What I'm building
 
@@ -28,7 +24,7 @@ A relaxed overview of the core components, identity flow, and how the system hol
 
 | Lab | What it covers |
 | --- | --- |
-| [Azure Bastion](./Azure%20Bastion/README.md) | Secure browser-based VM access, hub-spoke VNet Peering, no public IP |
+| [Azure Bastion](./Azure%20Bastion/README.md) | Browser-based RDP/SSH with no public IP, NSG rules for Bastion subnet, Key Vault secretless auth, hub-spoke VNet Peering, troubleshooting guide |
 | [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access, time-bounded NSG rules, zero standing access |
 | [Identity-First Stack](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep deployment |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Policy definitions, assignments, and automatic remediation tasks |

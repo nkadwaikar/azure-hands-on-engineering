@@ -41,8 +41,14 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `law` | Log Analytics Workspace |
 | `uami` | User-Assigned Managed Identity |
 | `fd` | Azure Front Door profile |
+| `fde` | Azure Front Door endpoint |
+| `ogrp` | Front Door origin group |
+| `waf` | WAF policy |
 | `bas` | Azure Bastion host |
 | `peer` | VNet Peering |
+| `gal` | Azure Compute Gallery (Shared Image Gallery) |
+| `imgdef` | Gallery image definition |
+| `imgver` | Gallery image version (semver `major.minor.patch`) |
 
 ---
 
@@ -129,6 +135,59 @@ bas-fntech-eus-lab              Bastion host for lab VNet (East US)
 ```
 
 The `AzureBastionSubnet` name is fixed by Azure and is not subject to the project naming pattern.
+
+The Bastion public IP follows the standard `pip-` prefix:
+
+```text
+pip-bas-{project}-{region}-{env}    e.g., pip-bas-fntech-eus-lab
+```
+
+> **Note:** Lab guides may use the shorthand `bastion-pip` for brevity — in production, use the full `pip-bas-` prefix.
+
+---
+
+### Azure Front Door
+
+```text
+fd-{project}-{env}              Front Door profile
+fde-{project}-{env}             Endpoint (auto-generates <name>.z01.azurefd.net)
+ogrp-{project}-{env}            Origin group
+waf-{project}-{env}             WAF policy linked to the Front Door profile
+```
+
+Examples:
+
+```text
+fd-fntech-lab                   Front Door profile for lab static hosting
+fde-fntech-lab                  Endpoint — resolves to fde-fntech-lab.z01.azurefd.net
+ogrp-fntech-lab                 Origin group pointing at the Storage static website
+waf-fntech-lab                  WAF policy (Standard/Premium tier required)
+```
+
+---
+
+### Azure Compute Gallery (Shared Image Gallery)
+
+```text
+gal-{project}-{region}-{env}              Gallery
+imgdef-{os}-{project}-{env}              Image definition (OS type + workload)
+```
+
+Image versions use semver — no prefix:
+
+```text
+1.0.0    Initial golden image
+1.0.1    Patch (security updates)
+1.1.0    Minor (additional software)
+```
+
+Examples:
+
+```text
+gal-fntech-eus-lab                        Compute gallery for VMSS lab
+imgdef-win2022-fntech-lab                 Windows Server 2022 image definition
+1.0.0                                     First captured image version (IIS + baseline config)
+```
 
 ### Recovery Services Vaults
 
