@@ -103,7 +103,7 @@ Mandatory tags — enforced via Azure Policy (deny or modify) so Arc servers are
 
 Assign at RG or subscription level — avoid per-resource RBAC sprawl.
 
-### 2.4 *(Added)* Management Group Hierarchy
+### 2.4  Management Group Hierarchy
 
 Place the hybrid landing zone subscription under a dedicated **Management Group** (e.g., `mg-hybrid-servers`) so Azure Policy initiatives and RBAC can be inherited rather than re-applied per subscription. Align with the broader CAF (Cloud Adoption Framework) management group design if one exists.
 
@@ -142,7 +142,7 @@ Place the hybrid landing zone subscription under a dedicated **Management Group*
 - **Entra ID** for admin identities
 - **Managed identities** for Automation runbooks and Logic Apps
 
-### 3.3 *(Added)* Private Connectivity Options
+### 3.3 Private Connectivity Options
 
 For environments where direct outbound internet access is restricted, choose one of:
 
@@ -152,14 +152,14 @@ For environments where direct outbound internet access is restricted, choose one
 
 Document the chosen approach per site in the network runbook.
 
-### 3.4 *(Added)* Agent Health & Extension Management
+### 3.4 Agent Health & Extension Management
 
 - Monitor agent connectivity via the `Heartbeat` table — alert if a machine misses heartbeats for > 15 minutes.
 - Use **Arc extension inventory** (portal or `az connectedmachine extension list`) to audit installed extensions across all Arc machines.
 - Pin extension versions where possible and test new versions in non-prod before promoting to prod.
 - Define an **extension lifecycle policy**: which extensions are mandatory (AMA, MDE, Guest Config), which are optional, and who can approve additions.
 
-### 3.5 *(Added)* Agent Installation
+### 3.5 Agent Installation
 
 #### Windows (PowerShell — run as Administrator)
 
@@ -201,7 +201,7 @@ sudo azcmagent connect \
 
 > **At-scale / unattended:** Use a service principal with the `Azure Connected Machine Onboarding` role and pass `--client-id` and `--client-secret` flags. Alternatively, generate an onboarding script from **Azure Arc → Add machines → Add multiple servers** in the portal.
 
-### 3.6 *(Added)* Onboarding Verification
+### 3.6 Onboarding Verification
 
 **On the server:**
 
@@ -259,7 +259,7 @@ Build workbooks for: health & performance, patch compliance, Arc connectivity st
 | `UpdateSummary`  | Patch status reporting     |
 | `SecurityAlert`  | Defender signals           |
 
-### 4.4 *(Added)* Alerting & Notification
+### 4.4 Alerting & Notification
 
 Define alert rules in Azure Monitor for actionable conditions:
 
@@ -272,7 +272,7 @@ Define alert rules in Azure Monitor for actionable conditions:
 
 Route alerts to **Action Groups** targeting on-call teams (email, SMS, PagerDuty webhook). Separate action groups for Ops vs Security teams. Suppress known maintenance windows using alert suppression rules.
 
-### 4.5 *(Added)* Log Retention & Archival Policy
+### 4.5 Log Retention & Archival Policy
 
 - Set the **Log Analytics workspace retention** to meet compliance requirements (e.g., 90 days hot, 2 years archived using workspace archive tier).
 - Export long-term audit logs (Security, Defender alerts) to **Azure Storage** or an Event Hub for cold storage.
@@ -301,7 +301,7 @@ Use **machine configuration** (Guest Configuration) to:
 - Enforce security baselines (CIS, Microsoft benchmarks)
 - Report compliance centrally; remediate via Automation runbooks
 
-### 5.3 *(Added)* Policy Exemptions Management
+### 5.3 Policy Exemptions Management
 
 Not every server fits every policy. Establish a formal exemption process:
 
@@ -310,7 +310,7 @@ Not every server fits every policy. Establish a formal exemption process:
 - Review all exemptions quarterly — auto-expire after 12 months unless renewed.
 - Track exemptions centrally (e.g., in a tagged Azure resource or a spreadsheet linked from the CMDB).
 
-### 5.4 *(Added)* Configuration Drift Detection
+### 5.4  Configuration Drift Detection
 
 - Schedule Guest Configuration assessments to run daily.
 - Alert on newly non-compliant machines using a **Policy compliance change** event alert.
@@ -360,21 +360,21 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 | Policy | Azure Policy + Guest Configuration for hardening |
 | Telemetry | Centralized in Log Analytics + Defender + Sentinel |
 
-### 6.5 *(Added)* Just-in-Time (JIT) Admin Access
+### 6.5 Just-in-Time (JIT) Admin Access
 
 - Enable **JIT VM access** in Defender for Cloud for all production Arc servers.
 - Require explicit JIT request approval before any administrative session (RDP/SSH) is permitted.
 - Set maximum session duration (e.g., 2 hours) and restrict source IPs to known admin ranges or Azure Bastion.
 - Log all JIT approvals and sessions to Log Analytics for audit trail.
 
-### 6.6 *(Added)* File Integrity Monitoring (FIM)
+### 6.6 File Integrity Monitoring (FIM)
 
 - Enable **FIM** (available in Defender for Servers Plan 2) on critical servers.
 - Monitor high-value paths: system binaries (`/bin`, `/sbin`, `C:\Windows\System32`), configuration files (`/etc`, web server configs), and startup locations.
 - Alert on unexpected changes; investigate before approving.
 - Maintain an approved change baseline — update it during patching windows to suppress false positives.
 
-### 6.7 *(Added)* Defender Plan Cost Management
+### 6.7 Defender Plan Cost Management
 
 - **Plan 2** (full EDR + FIM + JIT + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
 - **Plan 1** (foundational posture only) is sufficient for Tier3 / dev/test servers — apply via subscription filter or resource tag.
@@ -402,7 +402,7 @@ Use **Azure Automation** (or Logic Apps) for:
 - Configuration management tools (SCCM, Ansible, Puppet) to deploy CMA
 - Azure Policy machine enrollment (preview) for auto-config of monitoring & security
 
-### 7.3 *(Added)* Runbook Version Control & Testing
+### 7.3 Runbook Version Control & Testing
 
 - Store all runbooks in **source control** (GitHub / Azure DevOps repo) — never edit directly in the Automation account.
 - Use a **CI/CD pipeline** to lint, unit-test (Pester for PowerShell, pytest for Python), and publish runbooks to the Automation account on merge to main.
@@ -418,7 +418,7 @@ Standard pattern:
 3. Unregister Arc machine
 4. Archive logs for compliance
 
-### 7.5 *(Added)* Emergency Break-Glass Procedure
+### 7.5  Emergency Break-Glass Procedure
 
 Define a documented break-glass process for scenarios where normal Arc/Automation access is unavailable:
 
@@ -429,46 +429,15 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 
 ---
 
-## 8. Rollout Model
-
-### Phase 1 — Foundation
-
-- Build platform RGs, Log Analytics workspace, Automation account, and Defender config
-- Define tags, RBAC model, and policy initiatives
-- **Success criteria:** Core infrastructure deployed; policy initiative assigned; no servers onboarded yet
-- **Sign-off:** Platform team + Security team
-
-### Phase 2 — Pilot
-
-- Onboard 10–20 servers across Windows/Linux, from different locations
-- Validate: connectivity, monitoring, Defender alerts, patch flows, JIT access
-- **Success criteria:** All pilot servers show `Connected`; heartbeat latency < 5 min; at least one Defender recommendation resolved end-to-end
-- **Sign-off:** Ops team + Security team + Server owners
-
-### Phase 3 — Scale-Out
-
-- Automate CMA deployment via SCCM, Ansible, or Puppet
-- Enforce policy-driven baselines; activate FIM on Tier1 servers
-- Integrate with ITSM and SOC (Sentinel or existing SIEM)
-- **Success criteria:** > 80% of in-scope servers onboarded; patch compliance ≥ 90%; ITSM integration tested end-to-end
-- **Sign-off:** Change Advisory Board (CAB)
-
-### Phase 4 — Optimization
-
-- Tune DCRs and workbooks based on Phase 3 learnings
-- Refine Secure Score targets; address remaining high/critical recommendations
-- Add advanced scenarios (GitOps for config, Arc-enabled SQL, Arc-enabled Kubernetes)
-- **Success criteria:** Secure Score target met; spend within budget; all runbooks version-controlled in source control
-- **Sign-off:** CISO / IT Leadership
-
----
-
 ## Next Steps
 
-- [ ] Draft one-page architecture diagram for stakeholder presentation
-- [ ] Build sample policy initiative + KQL workbook skeleton
-- [ ] Define ITSM integration runbook for high-severity Defender alerts
-- [ ] Validate outbound endpoint connectivity using `azcmagent check` before production rollout
-- [ ] Create cost baseline estimate using the Azure Pricing Calculator
-- [ ] Finalize policy exemption process and CMDB integration design
-- [ ] Schedule Phase 1 kickoff with platform and security teams
+1. **Validate prerequisites** — confirm all Azure roles, subscriptions, and OS support are in place.
+2. **Provision Azure resources** — create Log Analytics Workspace, Automation account, Key Vault, and Storage account.
+3. **Configure networking & DNS** — set up private endpoints, firewall rules, and custom DNS resolution for on-prem environment.
+4. **Deploy Arc Connected Machine Agent** — use manual, scripted, or bulk deployment methods; verify agent registration in Azure.
+5. **Onboard Defender for Servers** — enable Defender plans, configure monitoring policy, and validate data ingestion.
+6. **Test policies & automations** — apply policies at scale, validate remediation runbooks, and monitor audit logs.
+7. **Establish monitoring dashboard** — create alerting rules in Azure Monitor, KQL queries for incident detection.
+8. **Document runbook version control** — set up CI/CD pipeline and source control for lifecycle automation.
+9. **Conduct rollout in phased waves** — start with pilot group, expand to production with documented success criteria.
+10. **Conduct break-glass procedure test** — validate emergency access and incident response playbook quarterly.
