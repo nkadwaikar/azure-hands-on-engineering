@@ -14,7 +14,6 @@
 - [Policy, Configuration & Compliance](#5-policy-configuration--compliance)
 - [Security Architecture with Defender for Servers](#6-security-architecture-with-defender-for-servers)
 - [Automation & Lifecycle Management](#7-automation--lifecycle-management)
-- [Next Steps](#next-steps)
 
 ---
 
@@ -440,3 +439,5 @@ Standard pattern:
 2. Stop Defender monitoring
 3. Unregister Arc machine
 4. Archive logs for compliance
+
+---
