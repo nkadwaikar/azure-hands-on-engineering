@@ -408,16 +408,7 @@ Use **Azure Automation** (or Logic Apps) for:
 - Maintain a non-prod Automation account for staging runbook changes before promoting to production.
 - Tag each runbook with version, owner, and last-tested date.
 
-### 7.4 Decommissioning
-
-Standard pattern:
-
-1. Remove from CMDB
-2. Stop Defender monitoring
-3. Unregister Arc machine
-4. Archive logs for compliance
-
-### 7.5  Emergency Break-Glass Procedure
+### 7.4  Emergency Break-Glass Procedure
 
 Define a documented break-glass process for scenarios where normal Arc/Automation access is unavailable:
 
@@ -428,7 +419,7 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 
 ---
 
-## Next Steps
+## Check List
 
 1. **Validate prerequisites** — confirm all Azure roles, subscriptions, and OS support are in place.
 2. **Provision Azure resources** — create Log Analytics Workspace, Automation account, Key Vault, and Storage account.
@@ -440,3 +431,12 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 8. **Document runbook version control** — set up CI/CD pipeline and source control for lifecycle automation.
 9. **Conduct rollout in phased waves** — start with pilot group, expand to production with documented success criteria.
 10. **Conduct break-glass procedure test** — validate emergency access and incident response playbook quarterly.
+
+### 7.5 Decommissioning
+
+Standard pattern:
+
+1. Remove from CMDB
+2. Stop Defender monitoring
+3. Unregister Arc machine
+4. Archive logs for compliance
