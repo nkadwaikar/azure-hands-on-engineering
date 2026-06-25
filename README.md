@@ -36,7 +36,7 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 | [Break-Glass Accounts – CBA](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency accounts |
 | [Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID configuration backup and restore procedures |
 | [Compute & IIS](./Compute/README.md) | Base VM build, Sysprep, IIS installation and configuration |
-| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/Readme) | Arc Connected Machine Agent, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration policy, private connectivity options |
+| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/Readme.md) | Arc Connected Machine Agent, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration policy, private connectivity options |
 
 ---
 
