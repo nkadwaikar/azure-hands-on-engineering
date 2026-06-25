@@ -51,6 +51,11 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `gal` | Azure Compute Gallery (Shared Image Gallery) |
 | `imgdef` | Gallery image definition |
 | `imgver` | Gallery image version (semver `major.minor.patch`) |
+| `arcm` | Azure Arc-enabled Server (Connected Machine) |
+| `aa` | Automation Account |
+| `mg` | Management Group |
+| `dcr` | Data Collection Rule |
+| `pls` | Private Link Scope (Azure Monitor / Arc) |
 
 ---
 
@@ -329,6 +334,33 @@ Example:
 
 ```text
 Incident response – nkadwaikar – 2026-06-23
+```
+
+---
+
+### Azure Arc Hybrid Servers
+
+Arc-enabled server (Connected Machine) resources are named to match the on-prem hostname where possible — this makes cross-referencing straightforward in the portal and in KQL queries.
+
+```text
+arcm-{hostname}                 Connected Machine — name mirrors on-prem hostname
+aa-{project}-{region}-{env}    Automation Account (Update Manager, runbooks)
+mg-{name}                      Management Group (no type segment required — context is clear)
+dcr-{project}-{region}-{env}   Data Collection Rule
+pls-{project}-{env}            Private Link Scope for Arc / Azure Monitor
+```
+
+Examples:
+
+```text
+rg-arc-servers-prod             Arc landing zone (production)
+rg-arc-servers-nonprod         Arc landing zone (non-production)
+law-hybrid-ops                  Central Log Analytics workspace for hybrid telemetry
+arcm-srv-dc01                   On-prem domain controller projected into Azure Arc
+aa-arc-eus-prod                 Automation Account for Update Manager and runbooks
+mg-hybrid-servers               Management Group housing the Arc landing zone subscription
+dcr-arc-eus-prod                Data Collection Rule — OS perf + events for Arc servers
+pls-arc-prod                    Private Link Scope for fully private Arc / Monitor connectivity
 ```
 
 ---

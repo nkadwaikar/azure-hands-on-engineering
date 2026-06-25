@@ -16,6 +16,7 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 | 🔄 Resilience | Backup, DR, and Entra recovery — platforms that come back cleanly |
 | 🚀 CI/CD | App Service deployment slots with Managed Identity, Key Vault references, and Azure DevOps approval gates |
 | 🛡️ Security | Break-glass account design — emergency access that doesn't punch a hole in Zero Trust |
+| 🌍 Hybrid | Azure Arc hybrid server onboarding — project on-prem and multi-cloud servers into Azure Resource Manager |
 
 ---
 
@@ -35,6 +36,7 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 | [Break-Glass Accounts – CBA](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency accounts |
 | [Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID configuration backup and restore procedures |
 | [Compute & IIS](./Compute/README.md) | Base VM build, Sysprep, IIS installation and configuration |
+| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/Readme) | Arc Connected Machine Agent, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration policy, private connectivity options |
 
 ---
 
@@ -48,7 +50,6 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 ## Coming soon — adding this shortly
 
 - Defender for Cloud CSPM and security posture management in a hub-and-spoke architecture
-- Azure Arc for hybrid server management
 
 ---
 
