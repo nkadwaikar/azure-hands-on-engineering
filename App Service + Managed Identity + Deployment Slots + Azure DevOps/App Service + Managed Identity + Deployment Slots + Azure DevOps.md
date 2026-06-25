@@ -1,0 +1,532 @@
+# App Service + Managed Identity + Deployment Slots + Azure DevOps
+
+A portal-first lab covering Azure App Service deployment with System-Assigned Managed Identity, deployment slots for blue-green deployments, Key Vault secret integration, and a full Azure DevOps CI/CD pipeline with manual approval gates.
+
+Last validated on: 2026-06-24
+
+> **Note:** This lab uses placeholder resource names such as `app-appservice-wus2-lab` and `kv-appservice-wus2-lab`. Substitute your own names following your naming convention.
+
+---
+
+## Module Structure
+
+```text
+App Service + Managed Identity + Deployment Slots + Azure DevOps/
+├── App Service + Managed Identity + Deployment Slots + Azure DevOps.md
+└── README.md
+```
+
+---
+
+## Quick Navigation
+
+- [Prerequisites](#1-prerequisites)
+- [Learning Objectives](#2-learning-objectives)
+- [Scenario](#3-scenario)
+- [Lab Architecture](#4-lab-architecture)
+- [Create the App Service](#5-create-the-app-service)
+- [Create a Deployment Slot](#6-create-a-deployment-slot)
+- [Enable Managed Identity](#7-enable-managed-identity)
+- [Copy Managed Identity Object IDs](#8-copy-the-managed-identity-object-id-for-each-slot)
+- [Grant Key Vault Access](#9-grant-key-vault-access-to-both-slots)
+- [Add Key Vault References](#10-add-key-vault-references-in-app-service-configuration)
+- [Azure DevOps Pipeline](#11-azure-devops-pipeline-setup)
+- [Test Slot Swap](#12-test-slot-swap)
+- [Add Manual Approval Gates](#13-add-manual-approval-gates-enterprise-pattern)
+- [Cleanup](#14-cleanup--teardown)
+
+---
+
+## 1. Prerequisites
+
+| Requirement | Detail |
+| --- | --- |
+| Azure Role | **Owner** or **Contributor** on the target subscription |
+| Subscription | Pay-As-You-Go or Visual Studio subscription |
+| Estimated Time | 60–90 minutes |
+| Tools | Azure Portal + Azure DevOps (dev.azure.com) |
+| Key Vault | An existing Key Vault with at least one secret (e.g., `app-secret`) |
+
+---
+
+## 2. Learning Objectives
+
+By the end of this lab, you will have:
+
+- An App Service with a **staging deployment slot**
+- **System-Assigned Managed Identity** enabled on both the production and staging slots
+- A **Key Vault RBAC role assignment** granting both identities secret read access
+- **Key Vault references** in App Service configuration (secretless authentication)
+- A **multi-stage Azure DevOps YAML pipeline** that builds, deploys to staging, and swaps to production
+- A **manual approval gate** controlling the production swap
+
+---
+
+## 3. Scenario
+
+**Deploy a web application with zero secrets in code or pipelines.**
+
+The App Service reads secrets from Key Vault via Managed Identity. A CI/CD pipeline deploys to a staging slot first, and a manual approval gate controls the promotion to production. This is the standard enterprise deployment pattern for regulated environments.
+
+---
+
+## 4. Lab Architecture
+
+```text
+Azure DevOps Pipeline
+        |
+        v
+  [Build Stage]
+        |
+        v
+  [Deploy to Staging Slot]  ---- Managed Identity ---- Key Vault
+        |
+        v  (Manual Approval Gate)
+  [Swap: Staging to Production]
+        |
+        v
+  App Service (Production)  ---- Managed Identity ---- Key Vault
+```
+
+**Resources created in this lab:**
+
+| Resource | Name |
+| --- | --- |
+| Resource Group | `rg-appservice-wus2-lab` |
+| App Service Plan | `asp-appservice-wus2-lab` (S1) |
+| App Service | `app-appservice-wus2-lab` |
+| Deployment Slot | `app-appservice-wus2-lab/staging` |
+| Key Vault | `kv-appservice-wus2-lab` (pre-existing or create new) |
+| DevOps Service Connection | `sc-appservice-lab` |
+
+---
+
+## 5. Create the App Service
+
+### Step 1 — Open App Services
+
+1. Go to **Azure Portal** → **App Services**
+2. Click **+ Create**
+
+### Step 2 — Fill in the Basics
+
+Configure the following:
+
+| Field | Value |
+| --- | --- |
+| Resource Group | `rg-appservice-wus2-lab` (create new if needed) |
+| Name | `app-appservice-wus2-lab` |
+| Publish | `Code` |
+| Runtime stack | `.NET`, `Node`, or `Python` (any) |
+| Region | `West US 2` (or your preferred region) |
+| App Service Plan | Create new → `asp-appservice-wus2-lab` → SKU: `S1` |
+
+Click **Review + Create** → **Create**
+
+> **Note:** The S1 SKU is required — deployment slots are not available on the Free or Shared tiers.
+
+---
+
+## 6. Create a Deployment Slot
+
+1. Open **App Services** → **app-appservice-wus2-lab**
+2. In the left menu, select **Deployment slots**
+3. Click **+ Add Slot**
+4. Configure:
+   - **Name:** `staging`
+   - **Clone settings from:** Do not clone
+5. Click **Add**
+
+You now have two slots:
+
+- **Production:** `https://app-appservice-wus2-lab.azurewebsites.net`
+- **Staging:** `https://app-appservice-wus2-lab-staging.azurewebsites.net`
+
+---
+
+## 7. Enable Managed Identity
+
+Each deployment slot has its own identity in Azure AD. Enable Managed Identity on both slots separately.
+
+### Step 1 — Enable on the Production Slot
+
+1. Open **App Services** → **app-appservice-wus2-lab**
+2. In the left menu, select **Identity**
+3. Under **System assigned**, set **Status** to **On**
+4. Click **Save** → confirm when prompted
+
+### Step 2 — Enable on the Staging Slot
+
+1. Go to **App Services** → **app-appservice-wus2-lab** → **Deployment slots**
+2. Click the **staging** slot (this opens a separate blade)
+3. In the left menu of the staging blade, select **Identity**
+4. Under **System assigned**, set **Status** to **On**
+5. Click **Save** → confirm when prompted
+
+---
+
+## 8. Copy the Managed Identity Object ID for Each Slot
+
+You need the Object ID from both slots to grant Key Vault access to each identity independently.
+
+### Production Slot
+
+1. Open **App Services** → **app-appservice-wus2-lab**
+2. In the left menu, select **Identity**
+3. Under **System assigned**, confirm **Status** = **On**
+4. Copy the **Object (principal) ID**
+
+### Staging Slot
+
+1. Go to **App Services** → **app-appservice-wus2-lab** → **Deployment slots**
+2. Click the **staging** slot
+3. In the left menu of the staging blade, select **Identity**
+4. Under **System assigned**, confirm **Status** = **On**
+5. Copy the **Object (principal) ID**
+
+> **Why both Object IDs matter:** Azure treats each deployment slot as a separate identity in Microsoft Entra ID. Both identities must be granted Key Vault access independently.
+
+---
+
+## 9. Grant Key Vault Access to Both Slots
+
+Assign the **Key Vault Secrets User** role to both identities via IAM.
+
+### Step 1 — Open Key Vault IAM
+
+1. Go to **Azure Portal** → **Key Vaults** → select `kv-appservice-wus2-lab`
+2. In the left menu, select **Access control (IAM)**
+3. Click **+ Add** → **Add role assignment**
+
+### Step 2 — Assign to the Production Slot
+
+1. **Role tab:** search for and select **Key Vault Secrets User** → click **Next**
+2. **Members tab:** click **+ Select members**
+3. Search for `app-appservice-wus2-lab` and select the identity
+4. Click **Review + Assign** → **Assign**
+
+### Step 3 — Assign to the Staging Slot
+
+Repeat the same steps:
+
+1. **Add role assignment** → **Key Vault Secrets User**
+2. **Members tab:** search for `app-appservice-wus2-lab (staging)` and select it
+3. Click **Review + Assign** → **Assign**
+
+### Verify the Assignments
+
+Go to **Key Vault** → **Access control (IAM)** → **Role assignments**. You should see:
+
+| Role | Principal |
+| --- | --- |
+| Key Vault Secrets User | `app-appservice-wus2-lab` |
+| Key Vault Secrets User | `app-appservice-wus2-lab/staging` |
+
+---
+
+## 10. Add Key Vault References in App Service Configuration
+
+Key Vault references allow the App Service to resolve secrets at runtime without storing credentials anywhere. Perform these steps for **both** the production slot and the staging slot.
+
+### Step 1 — Open Configuration
+
+1. **Azure Portal** → **App Services** → `app-appservice-wus2-lab`
+2. Left menu → **Configuration**
+
+### Step 2 — Add Application Setting
+
+1. Click **+ New application setting**
+2. Fill in:
+   - **Name:** `MySecret`
+   - **Value:** Key Vault reference URI in the following format:
+
+```text
+@Microsoft.KeyVault(SecretUri=https://<your-key-vault-name>.vault.azure.net/secrets/<secret-name>/)
+```
+
+Example:
+
+```text
+@Microsoft.KeyVault(SecretUri=https://kv-appservice-wus2-lab.vault.azure.net/secrets/app-secret/)
+```
+
+3. Click **OK** → **Save**
+
+The App Service restarts automatically and resolves the reference on next startup.
+
+### Step 3 — Repeat for the Staging Slot
+
+1. **App Services** → `app-appservice-wus2-lab` → **Deployment slots** → **staging**
+2. Left menu → **Configuration**
+3. Add the same application setting with the same Key Vault reference
+4. Click **OK** → **Save**
+
+### Verify the Reference Resolves
+
+After saving, return to **Configuration**. The value column for `MySecret` should show a green check and `Key Vault Reference` instead of the raw URI. If it shows a red error icon, confirm the Managed Identity is enabled and the IAM role assignment has propagated (allow up to 5 minutes).
+
+### Reading the Secret in Code
+
+| Runtime | Code |
+| --- | --- |
+| .NET | `Environment.GetEnvironmentVariable("MySecret")` |
+| Node.js | `process.env.MySecret` |
+| Python | `os.getenv("MySecret")` |
+
+---
+
+## 11. Azure DevOps Pipeline Setup
+
+At this point, the environment includes:
+
+- App Service
+- Staging slot
+- Managed Identity
+- Key Vault reference
+
+### Step 1 — Create a Service Connection
+
+The pipeline authenticates to Azure using a service connection. Create it before creating the pipeline.
+
+1. Go to `dev.azure.com` → Your Project
+2. In the bottom-left, click **Project settings**
+3. Under **Pipelines**, select **Service connections**
+4. Click **New service connection** → choose **Azure Resource Manager** → click **Next**
+5. Select **Service principal (automatic)** → click **Next**
+6. Configure:
+   - **Scope level:** Subscription
+   - **Subscription:** select your Azure subscription
+   - **Resource group:** `rg-appservice-wus2-lab`
+   - **Service connection name:** `sc-appservice-lab`
+7. Check **Grant access permission to all pipelines** → click **Save**
+
+> **Note:** Automatic service principal creation requires the **Owner** role on the subscription. If you see a permission error, ask your subscription owner to create the service connection or use the **Manual** option with an existing service principal.
+
+### Step 2 — Open Azure DevOps
+
+1. Go to `dev.azure.com` → Your Project → **Pipelines**
+2. Click **New Pipeline**
+
+### Step 3 — Choose Your Code Source
+
+Select **Azure Repos Git** (if your code is in Azure DevOps) or **GitHub** if applicable, then pick your repository.
+
+### Step 4 — Select Starter Pipeline
+
+When Azure DevOps displays template options, choose **Starter pipeline** to create a blank YAML file.
+
+### Step 5 — Replace the Starter YAML
+
+Paste the following into the editor:
+
+```yaml
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  appName: 'app-appservice-wus2-lab'
+  resourceGroup: 'rg-appservice-wus2-lab'
+  serviceConnection: 'sc-appservice-lab'
+
+stages:
+
+- stage: Build
+  displayName: Build Application
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Build your app here"
+      displayName: Build
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Artifact
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+- stage: Deploy_Staging
+  displayName: Deploy to Staging Slot
+  dependsOn: Build
+  jobs:
+  - deployment: DeployStaging
+    environment: staging
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(serviceConnection)
+              appName: $(appName)
+              deployToSlotOrASE: true
+              resourceGroupName: $(resourceGroup)
+              slotName: 'staging'
+              package: '$(Pipeline.Workspace)/drop'
+
+- stage: SwapToProduction
+  displayName: Swap Staging → Production
+  dependsOn: Deploy_Staging
+  jobs:
+  - job: Swap
+    steps:
+    - task: AzureAppServiceManage@0
+      inputs:
+        azureSubscription: $(serviceConnection)
+        Action: 'Swap Slots'
+        WebAppName: $(appName)
+        ResourceGroupName: $(resourceGroup)
+        SourceSlot: 'staging'
+        TargetSlot: 'production'
+```
+
+### Step 6 — Save and Run
+
+Click **Save** then **Run**. The pipeline completes the following flow:
+
+1. Build
+2. Deploy to staging slot
+3. Swap staging → production
+
+### Validate the Deployment
+
+| Slot | URL |
+| --- | --- |
+| Staging | `https://app-appservice-wus2-lab-staging.azurewebsites.net` |
+| Production | `https://app-appservice-wus2-lab.azurewebsites.net` |
+
+---
+
+## 12. Test Slot Swap
+
+Before testing, confirm all components are in place: production slot, staging slot, Azure DevOps pipeline, Key Vault reference, and Managed Identity.
+
+### Step 1 — Make a Visible Change in the App
+
+Create a small change that is easy to identify after deployment (e.g., change homepage text, add a version label, or add a "Deployed to Staging" message). Commit and push the change to your repo.
+
+### Step 2 — Run the Pipeline
+
+Go to **Azure DevOps** → **Pipelines** → **Run pipeline**.
+
+### Step 3 — Validate the Staging Slot
+
+Open `https://<your-app-name>-staging.azurewebsites.net`. The new version should appear here first.
+
+### Step 4 — Validate the Production Slot
+
+Open `https://<your-app-name>.azurewebsites.net`. After the swap stage completes, the new version should appear in production.
+
+### Step 5 — Validate Key Vault Secret Access
+
+Inside your app, print the environment variable:
+
+| Runtime | Code |
+| --- | --- |
+| .NET | `Environment.GetEnvironmentVariable("MySecret")` |
+| Node.js | `process.env.MySecret` |
+| Python | `os.getenv("MySecret")` |
+
+If the value appears correctly, Key Vault access through Managed Identity is working.
+
+### Step 6 — Validate Rollback (Optional)
+
+Test rollback by swapping production back to staging:
+
+1. Go to **App Service** → **Deployment slots**
+2. Click **Swap**
+3. Swap production → staging
+
+The previous version should return to production after the rollback swap completes.
+
+---
+
+## 13. Add Manual Approval Gates (Enterprise Pattern)
+
+Manual approvals add a controlled checkpoint before production changes are released. With this gate, the pipeline pauses after staging deployment and waits for explicit approval before swapping to production.
+
+### Step 1 — Create an Environment in Azure DevOps
+
+1. Go to **Azure DevOps** → **Pipelines** → **Environments**
+2. Click **New Environment**
+3. Name it: `production`
+4. Click **Create**
+
+### Step 2 — Add an Approval Gate
+
+Inside the new `production` environment:
+
+1. Open the environment
+2. Click **Approvals and checks**
+3. Click **Add** → **Approvals**
+4. Add yourself (or any approver)
+
+The pipeline will now pause until the configured approver approves the production swap.
+
+### Step 3 — Update the Pipeline YAML
+
+Modify the `SwapToProduction` stage to use a `deployment` job with the `production` environment:
+
+```yaml
+- stage: SwapToProduction
+  displayName: Swap Staging → Production
+  dependsOn: Deploy_Staging
+  jobs:
+  - deployment: Swap
+    environment: production
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureAppServiceManage@0
+            inputs:
+              azureSubscription: $(serviceConnection)
+              Action: 'Swap Slots'
+              WebAppName: $(appName)
+              ResourceGroupName: $(resourceGroup)
+              SourceSlot: 'staging'
+              TargetSlot: 'production'
+```
+
+The key change is the `environment: production` assignment, which links the swap stage to the environment where the approval gate is configured.
+
+### Step 4 — Approve the Pipeline Run
+
+Once the pipeline is running with the updated YAML:
+
+1. Go to **Azure DevOps** → **Pipelines** → open the active pipeline run
+2. The `Swap Staging → Production` stage displays a **Waiting for review** banner
+3. Click **Review** → **Approve**
+4. Optionally add a comment (e.g., `Validated in staging — approved for production`)
+5. Click **Approve** to confirm
+
+The swap executes immediately after approval and the new version promotes to production.
+
+> **Tip:** You can also **Reject** the gate if staging validation fails. The pipeline stops without touching production.
+
+### Resulting Pipeline Flow
+
+```text
+1. Build
+2. Deploy to Staging
+3. WAIT for approval
+4. Swap Staging → Production
+```
+
+---
+
+## 14. Cleanup / Teardown
+
+To avoid ongoing charges, delete the resources created in this lab:
+
+1. Go to **Azure Portal** → **Resource Groups**
+2. Select `rg-appservice-wus2-lab`
+3. Click **Delete resource group**
+4. Type the resource group name to confirm, then click **Delete**
+
+This removes the App Service, App Service Plan, and all associated slots. The Key Vault (`kv-appservice-wus2-lab`) must be deleted separately if it was created for this lab.

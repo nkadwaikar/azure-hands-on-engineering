@@ -14,7 +14,8 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 | 🌐 Networking | Global delivery via Azure Front Door — WAF at the edge, custom domains, static hosting |
 | 🔒 Secure Access | Browser-based VM access via Bastion — zero public IP, hub-spoke VNet Peering, JIT time-boxed sessions via Defender for Cloud |
 | 🔄 Resilience | Backup, DR, and Entra recovery — platforms that come back cleanly |
-| 🚨 Security | Break-glass account design — emergency access that doesn't punch a hole in Zero Trust |
+| 🚀 CI/CD | App Service deployment slots with Managed Identity, Key Vault references, and Azure DevOps approval gates |
+| 🛡️ Security | Break-glass account design — emergency access that doesn't punch a hole in Zero Trust |
 
 ---
 
@@ -25,6 +26,7 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 | [Azure Bastion](./Azure%20Bastion/README.md) | Browser-based RDP/SSH with no public IP, NSG rules for Bastion subnet, Key Vault secretless auth, hub-spoke VNet Peering, troubleshooting guide |
 | [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access, time-bounded NSG rules, zero standing access |
 | [Identity-First Stack](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep deployment |
+| [App Service + Managed Identity + Deployment Slots + Azure DevOps](./App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/ReadME.md) | System-Assigned Managed Identity per slot, Key Vault references (secretless), deployment slots, multi-stage Azure DevOps YAML pipeline, manual approval gates |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Policy definitions, assignments, and automatic remediation tasks |
 | [VMSS & Golden Images](./VMSS/README.md) | Sysprep, image capture, scale set deployment |
 | [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin |
@@ -45,7 +47,6 @@ Most of my work sits where identity, Zero Trust, and resilient infrastructure me
 
 ## Coming soon — adding this shortly
 
-- App Services with managed identity and deployment slots
 - Defender for Cloud CSPM and security posture management in a hub-and-spoke architecture
 - Azure Arc for hybrid server management
 

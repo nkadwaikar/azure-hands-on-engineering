@@ -40,6 +40,8 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `asr` | ASR Replication Group |
 | `law` | Log Analytics Workspace |
 | `uami` | User-Assigned Managed Identity |
+| `app` | App Service |
+| `asp` | App Service Plan |
 | `fd` | Azure Front Door profile |
 | `fde` | Azure Front Door endpoint |
 | `ogrp` | Front Door origin group |
@@ -143,6 +145,28 @@ pip-bas-{project}-{region}-{env}    e.g., pip-bas-fntech-eus-lab
 ```
 
 > **Note:** Lab guides may use the shorthand `bastion-pip` for brevity — in production, use the full `pip-bas-` prefix.
+
+---
+
+### App Service
+
+```text
+app-{project}-{region}-{env}    App Service
+asp-{project}-{region}-{env}    App Service Plan
+```
+
+Examples:
+
+```text
+app-appservice-wus2-lab         App Service for hands-on lab (West US 2)
+asp-appservice-wus2-lab         App Service Plan (S1 SKU) for hands-on lab
+```
+
+Deployment slot names are short, lowercase identifiers appended automatically to the parent App Service hostname:
+
+```text
+staging    app-appservice-wus2-lab-staging.azurewebsites.net
+```
 
 ---
 

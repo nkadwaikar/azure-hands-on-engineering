@@ -39,6 +39,35 @@ flowchart LR
     Site --> Web[$web Container]
 ```
 
+### App Service Delivery
+
+Text flow: Azure DevOps Pipeline -> Build Stage -> Publish Artifact -> Deploy to Staging Slot (Managed Identity resolves Key Vault reference) -> Manual Approval Gate -> Swap Staging to Production -> App Service Production (Managed Identity resolves Key Vault reference). No secrets stored in code, app settings, or pipeline variables.
+
+```mermaid
+flowchart LR
+    Pipeline[Azure DevOps Pipeline] --> Build[Build Stage]
+    Build --> Artifact[Publish Artifact]
+    Artifact --> Staging[Deploy to Staging Slot]
+
+    subgraph Staging Slot
+        Staging --> SAMI1[System-Assigned
+Managed Identity]
+        SAMI1 --> KV[Key Vault
+Secret Resolution]
+    end
+
+    Staging --> Gate[Manual Approval Gate]
+    Gate --> Swap[Swap Staging to Production]
+
+    subgraph Production Slot
+        Swap --> Prod[App Service
+Production]
+        Prod --> SAMI2[System-Assigned
+Managed Identity]
+        SAMI2 --> KV
+    end
+```
+
 ### Governance Automation
 
 Text flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant state.
@@ -132,6 +161,7 @@ flowchart LR
 | [Azure Bastion](./Azure%20Bastion/README.md) | Browser-based RDP/SSH with no public IP, NSG rules for Bastion subnet, Key Vault secretless auth, hub-spoke VNet Peering, troubleshooting guide |
 | [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access, time-bounded IP-scoped NSG rules, zero standing access, audit trail |
 | [Identity-First](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep |
+| [App Service + Managed Identity + Deployment Slots + Azure DevOps](./App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/ReadME.md) | System-Assigned Managed Identity per slot, Key Vault references (secretless), deployment slots, multi-stage Azure DevOps YAML pipeline, manual approval gates |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Custom policy, DeployIfNotExists, remediation tasks |
 | [Compute](./Compute/README.md) | Base VM build, Sysprep, IIS installation |
 | [VMSS](./VMSS/README.md) | Golden image capture, Compute Gallery, scale set deployment |
