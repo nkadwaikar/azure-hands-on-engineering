@@ -14,7 +14,6 @@
 - [Policy, Configuration & Compliance](#5-policy-configuration--compliance)
 - [Security Architecture with Defender for Servers](#6-security-architecture-with-defender-for-servers)
 - [Automation & Lifecycle Management](#7-automation--lifecycle-management)
-- [Rollout Model](#8-rollout-model)
 - [Next Steps](#next-steps)
 
 ---
