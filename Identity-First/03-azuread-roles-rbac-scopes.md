@@ -1,6 +1,8 @@
 
 # **Azure AD Roles + RBAC Scopes (Hands‑On Lab)**  
 
+> **Why this matters:** Assigning roles without understanding the boundary between Entra directory roles and Azure RBAC creates either access gaps or blast-radius that can't be cleanly audited — this lab maps both role systems, assigns roles at multiple scopes, and validates behavior from the user's perspective.
+
 ## *Directory roles vs resource roles. Control plane vs data plane. Identity clarity unlocked.*
 
 > This lab builds on Day 1 (RBAC Basics) and Day 2 (Managed Identity + Key Vault).  

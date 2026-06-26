@@ -1,23 +1,28 @@
-# Kia ora, I'm Nadeem Kadwaikar👋
+# 👋 Hi, I'm Nadeem Kadwaikar
 
-Identity and Access Administrator focused on Azure security engineering. I remove credentials from application stacks using Managed Identity and Key Vault, enforce compliance through Policy with auto-remediation, and design emergency access that holds under Zero Trust constraints.
+*Cloud & Identity Engineer — Azure · Microsoft 365 · Zero Trust*
 
-Every lab here is built end-to-end — deployed, tested, and documented from a real environment.
-
-## Stack
-
-![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
-![Entra ID](https://img.shields.io/badge/Entra%20ID-00BCF2?style=flat&logo=microsoftazure&logoColor=white)
-![Bicep](https://img.shields.io/badge/Bicep-7B2FBE?style=flat&logo=microsoftazure&logoColor=white)
-![Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-0066B8?style=flat&logo=azuredevops&logoColor=white)
-![Defender for Cloud](https://img.shields.io/badge/Defender%20for%20Cloud-D83B01?style=flat&logo=microsoftazure&logoColor=white)
-![Key Vault](https://img.shields.io/badge/Key%20Vault-FFB900?style=flat&logo=microsoftazure&logoColor=black)
-![Azure Policy](https://img.shields.io/badge/Azure%20Policy-107C10?style=flat&logo=microsoftazure&logoColor=white)
-![Azure Arc](https://img.shields.io/badge/Azure%20Arc-50E6FF?style=flat&logo=microsoftazure&logoColor=black)
+I design and build Azure environments that are secure by default, repeatable by design, and maintainable by the next engineer. My focus is identity-first architecture, infrastructure as code, and production-aligned governance — the kind of work that keeps regulated environments compliant and teams unblocked.
 
 ---
 
-## Platform Architecture
+## 🎯 What I Bring to Teams
+
+| Area | What I Do |
+|---|---|
+| **Azure Infrastructure** | VMs, VMSS, VNets, NSGs, Load Balancers, Front Door, Storage — built for resilience |
+| **Identity & Zero Trust** | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
+| **IaC & Automation** | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
+| **Governance & Compliance** | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
+| **Microsoft 365** | Tenant admin, users & groups, security & compliance, endpoint basics |
+| **Business Continuity** | Azure Backup, Site Recovery, VMSS failover patterns |
+
+---
+
+## 🗺️ Platform Architecture
+
+<details>
+<summary>View architecture diagram</summary>
 
 ```mermaid
 flowchart TD
@@ -26,23 +31,19 @@ flowchart TD
         MI["Managed Identity"]
         KV["Key Vault"]
     end
-
     subgraph Governance["📋 Governance"]
         Policy["Azure Policy"]
         Remediation["Auto-Remediation"]
     end
-
     subgraph Access["🔒 Secure Access"]
         Bastion["Azure Bastion"]
         JIT["JIT · Defender for Cloud"]
         AFD["Front Door · WAF"]
     end
-
     subgraph Compute["🖥️ Compute"]
         VM["Virtual Machines · VMSS"]
         App["App Service"]
     end
-
     subgraph Ops["🔄 Ops & Resilience"]
         DevOps["Azure DevOps"]
         Monitor["Azure Monitor"]
@@ -54,58 +55,81 @@ flowchart TD
     MI --> KV
     MI --> App
     MI --> VM
-
     Policy --> Remediation
     Remediation --> VM & App
-
     Bastion --> VM
     JIT --> VM
     AFD --> App
-
     DevOps --> App
     Monitor --> VM & App
     Backup --> VM
     Arc --> VM & Monitor
 ```
 
----
-
-## Labs
-
-| Lab | What it covers |
-| --- | --- |
-| [Azure Bastion](./Azure%20Bastion/README.md) | Browser-based RDP/SSH — no public IP, hub-spoke VNet Peering, secretless Key Vault auth |
-| [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/Readme.md) | Just-In-Time VM access — time-bounded NSG rules, zero standing inbound access |
-| [Identity-First Stack](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, and Policy deployed end-to-end with Bicep |
-| [App Service + Managed Identity + Deployment Slots + Azure DevOps](./App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/ReadME.md) | Secretless app config via Key Vault references, per-slot Managed Identity, multi-stage pipeline with manual approval gates |
-| [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Custom policy definitions, assignments, and automated remediation tasks |
-| [VMSS & Golden Images](./VMSS/README.md) | Sysprep, generalized image capture, and scale set deployment from a golden image |
-| [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF at the edge, custom domain with TLS, static website origin |
-| [Backup & Site Recovery](./Recovery%20Services%20vaults/README.md) | VM backup and restore, ASR replication, storage redundancy options |
-| [Break-Glass Accounts – FIDO2](./Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) | Emergency access with FIDO2 hardware keys, Authentication Strength policy, Conditional Access enforcement |
-| [Break-Glass Accounts – CBA](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based auth as phishing-resistant MFA for emergency accounts |
-| [Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID configuration export, versioning, and restore procedures |
-| [Compute & IIS](./Compute/README.md) | Base VM build, Sysprep, IIS installation |
-| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/Readme.md) | Arc-enabled servers, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration |
+</details>
 
 ---
 
-## Reference
+## 📌 Labs & Guides
 
-- [Naming Convention](./Naming-Convention.md) — resource abbreviations, segment pattern, and per-type naming rules used across all labs
-- [Architecture Overview](./Architecture%20Overview.md) — system diagrams for every track
+Each lab reflects a real Azure engineering pattern — not a tutorial walkthrough, but a production-aligned implementation with documented reasoning.
+
+### 1. Identity-First Security & Zero Trust
+- [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md) — Modular Bicep stack: Managed Identity + Key Vault + RBAC + Governance Lock
+- [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md) — Secretless authentication; eliminates credential sprawl
+- [Azure AD Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md) — Least-privilege role assignments across scopes
+- [Break-Glass Accounts – FIDO2](Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) — Emergency access with FIDO2 hardware keys and Conditional Access enforcement
+- [Break-Glass Accounts – CBA](Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) — Certificate-based auth as phishing-resistant MFA for emergency accounts
+- [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/1-Microsoft%20Entra%20Backup%20%26%20Recovery.md) — Entra ID configuration export, versioning, and restore procedures
+
+### 2. Azure Infrastructure as Code (IaC)
+- [VS Code Bicep Deployment Workflow](Identity-First/11-vscode-deployment-workflow.md)
+- [Naming Convention](Naming-Convention.md) — Resource abbreviations, segment pattern, and per-type naming rules used across all labs
+
+### 3. Secure Access & Networking
+- [Azure Bastion](Azure%20Bastion/1-Azure%20Bastion.md) — Browser-based RDP/SSH, no public IP, hub-spoke VNet peering, secretless Key Vault auth
+- [Microsoft Defender for Cloud – JIT](Microsoft%20Defender%20for%20Cloud/1-JIT.md) — Time-bounded NSG rules, zero standing inbound access
+- [Azure Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — WAF at the edge, custom domain with TLS, static website origin
+
+### 4. Governance & Compliance
+- [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md) — Custom policy definitions, assignments, and automated remediation tasks
+- [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md) — Audit trail and alerting for security events
+- [Governance Flow Diagram](Identity-First/09-governance-flow.md)
+
+### 5. Compute & Image Lifecycle
+- [Build Base VM](Compute/1-build-base-vm.md)
+- [Sysprep Azure VM](Compute/2-sysprep-vm.md)
+- [Capture & Test Image](VMSS/1-capture-and-test-image.md)
+- [VMSS Deployment](VMSS/2-vmss-deployment.md) — Auto-scaling VM fleet from a golden image
+
+### 6. App Service & DevOps
+- [App Service + Managed Identity + Deployment Slots + Azure DevOps](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps.md) — Secretless app config via Key Vault references, per-slot Managed Identity, multi-stage pipeline with manual approval gates
+
+### 7. Business Continuity & Resilience
+- [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md) — RPO/RTO-aware backup configuration
+- [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md) — Cross-region failover for business continuity
+- [Storage Replication](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md) — LRS, ZRS, GRS, RA-GZRS — redundancy options and geo-failover
+
+### 8. Hybrid & Arc
+- [Azure Arc Hybrid Server Architecture](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md) — Arc-enabled servers, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration
 
 ---
 
-## In progress
+## 🛠️ In Progress
 
 - Defender for Cloud CSPM — security posture management across a hub-and-spoke architecture
+- Copilot Studio — AI agent with SharePoint knowledge source, secured with Entra ID
 
 ---
 
-## Get in touch
+## 💡 Engineering Philosophy
 
-Open to conversations about platform engineering, identity architecture, and Zero Trust.
+I build things that future-me — and future teams — can pick up without unpacking a mess. Every lab here is shaped by three principles: **clarity** (documented decisions, not just commands), **repeatability** (idempotent deployments, not one-time scripts), and **secure defaults** (identity-first, least privilege, no hardcoded credentials).
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-nadeemkadwaikar-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/nadeemkadwaikar)
-[![Email](https://img.shields.io/badge/Email-nadeemkadwaikar%40outlook.com-0078D4?style=flat&logo=microsoftoutlook&logoColor=white)](mailto:nadeemkadwaikar@outlook.com)
+---
+
+
+💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) · 📧 nadeemkadwaikar@outlookcom
+
+---
+Last updated: June 2026

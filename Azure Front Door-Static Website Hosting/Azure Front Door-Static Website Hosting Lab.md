@@ -1,6 +1,8 @@
 
 # Azure Front Door + Static Website Hosting Lab
 
+> **Why this matters:** Without an edge layer, a storage-hosted site has no DDoS protection, no global caching, and no clean custom domain — this lab puts Azure Front Door in front of a static website so the origin endpoint is never directly reachable by clients.
+
 ## Quick Orientation
 
 ```text
@@ -10,27 +12,24 @@ Azure Front Door-Static Website Hosting/
 
 This module is a focused single-lab walkthrough for global static website delivery through Azure Front Door.
 
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Azure Portal as of June 2026; Front Door propagation typically takes 5–15 minutes after configuration changes.
+
+> **Note:** Azure Front Door Standard/Premium incurs hourly and data transfer charges. The origin storage static website endpoint remains accessible directly unless locked down with Private Link — origin lock-down is out of scope for this lab.
+
+---
+
 ## Quick Navigation
 
-- Lab Overview
-- Quick Orientation
-- Environment Setup
-- Front Door Configuration
-- Validation and Troubleshooting
-- Cleanup
+- [Lab Overview](#1-lab-overview)
+- [Learning Objectives](#2-learning-objectives)
+- [Environment Setup](#3-environment-setup)
+- [Front Door Configuration](#4-configure-azure-front-door-portal-aligned)
+- [Validation and Troubleshooting](#5-validation--troubleshooting)
+- [Lessons Learned](#6-lessons-learned)
+- [Cleanup](#7-cleanup)
 
 ## 1. Lab Overview
-
-### Objective
-
-Deploy a static website using **Azure Storage Static Website Hosting** and publish it globally through **Azure Front Door (Standard/Premium)**.  
-The lab walks through:
-
-- Static website hosting  
-- Front Door endpoint, origin, and route configuration  
-- Validation using `curl`  
-- Caching behavior  
-- Troubleshooting propagation delays (`CONFIG_NOCACHE`, `TCP_MISS`, `TCP_HIT`)  
 
 ### Architecture Flow
 
@@ -40,7 +39,19 @@ Client → Azure Front Door Endpoint → Origin Group → Static Website Endpoin
 
 ---
 
-## 2. Environment Setup
+## 2. Learning Objectives
+
+By the end of this lab, you will have:
+
+- A **static website** hosted on Azure Blob Storage with a public `$web` container
+- An **Azure Front Door Standard/Premium** profile with an origin group pointing to the storage endpoint
+- A **route** and **endpoint** configured so all client traffic enters through Front Door
+- Cache behavior validated by inspecting `X-Cache` headers (`TCP_MISS` on first hit, `TCP_HIT` on repeat)
+- Experience troubleshooting Front Door propagation delays and `CONFIG_NOCACHE` responses
+
+---
+
+## 3. Environment Setup
 
 ### 2.1 Create a Resource Group
 
@@ -51,26 +62,48 @@ This ensures:
 - Easier cleanup  
 - Accurate cost tracking  
 
+**Steps:**
+
+1. In Azure Portal, search **Resource groups** → **+ Create**
+2. Configure:
+   - **Subscription:** your lab subscription
+   - **Resource group name:** `rg-afd-eus-lab-web`
+   - **Region:** East US
+3. Click **Review + Create** → **Create**
+
 ---
 
 ### 2.2 Create a Storage Account and Enable Static Website
 
-- Create a **Storage Account** in any region  
-- **LRS** redundancy is sufficient for lab purposes  
+**Create the storage account:**
 
-### Enable Static Website
+1. Search **Storage accounts** → **+ Create**
+2. Configure:
+   - **Subscription:** your lab subscription
+   - **Resource group:** `rg-afd-eus-lab-web`
+   - **Storage account name:** `stafdeuslab01` *(must be globally unique — adjust as needed)*
+   - **Region:** East US
+   - **Performance:** Standard
+   - **Redundancy:** Locally redundant storage (LRS)
+3. Leave remaining defaults → **Review + Create** → **Create**
 
-- Go to **Static Website**  
-- Enable the feature  
-- Set:
-  - **Index document:** `index.html`
-  - **Error document:** optional  
+**Enable static website hosting:**
 
-Example static website endpoint:
+1. Open `stafdeuslab01`
+2. In the left menu, go to **Data management → Static website**
+3. Set **Static website** to **Enabled**
+4. Configure:
+   - **Index document name:** `index.html`
+   - **Error document path:** *(leave blank for this lab)*
+5. Click **Save**
+
+Azure creates the `$web` container automatically. Your static website endpoint will look like:
 
 ```url
-https://<storage-account>.zXX.web.core.windows.net/
+https://stafdeuslab01.zXX.web.core.windows.net/
 ```
+
+Copy this URL — you will use it as the **Origin hostname** in Front Door.
 
 ---
 
@@ -97,7 +130,7 @@ HTTP/1.1 200 OK
 
 ---
 
-## 3. Configure Azure Front Door (Portal‑Aligned)
+## 4. Configure Azure Front Door (Portal‑Aligned)
 
 ### 3.1 Create Front Door Profile (with Endpoint, Origin, and Route)
 
@@ -238,7 +271,7 @@ This forces all POPs (Points of Presence) to refresh their cached configuration 
 
 ---
 
-## 4. Validation & Troubleshooting
+## 5. Validation & Troubleshooting
 
 ### 4.1 Initial Behavior: 404 with `CONFIG_NOCACHE`
 
@@ -316,7 +349,7 @@ x-cache: TCP_MISS
 
 ---
 
-## 5. Lessons Learned
+## 6. Lessons Learned
 
 1. `CONFIG_NOCACHE` indicates no active route at the edge.  
 2. This is caused by propagation delay, not misconfiguration.  
@@ -338,3 +371,37 @@ x-cache: TCP_MISS
 15. Propagation delays and 404 errors do **not** generate data transfer charges.  
 
 ---
+
+## 7. Cleanup
+
+Delete resources in this order to avoid dependency errors.
+
+### Step 1 — Delete the Front Door Profile
+
+1. Go to **Azure Portal** → search **Front Door and CDN profiles**
+2. Select `fd-afd-eus-lab-web`
+3. Click **Delete** → confirm deletion
+
+> **Note:** Deleting the Front Door profile also removes all associated endpoints, origin groups, origins, and routes.
+
+### Step 2 — Delete the Resource Group
+
+Deleting the resource group removes the storage account, the `$web` container, and all blobs in one step.
+
+1. Go to **Resource groups**
+2. Select `rg-afd-eus-lab-web`
+3. Click **Delete resource group**
+4. Type the resource group name to confirm → **Delete**
+
+### Expected post-cleanup state
+
+| Resource | Expected state |
+| --- | --- |
+| Front Door profile | Deleted |
+| Storage account `stafdeuslab01` | Deleted (inside the resource group) |
+| `$web` container and blobs | Deleted |
+| Resource group `rg-afd-eus-lab-web` | Deleted |
+
+---
+
+[← Back to Azure Hands-On Engineering](../README.md)

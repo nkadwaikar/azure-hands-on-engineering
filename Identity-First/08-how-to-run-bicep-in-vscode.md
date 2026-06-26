@@ -1,11 +1,41 @@
-# 🚀 How to Deploy Bicep Files Using Visual Studio Code  
+# How to Deploy Bicep Files Using Visual Studio Code
 
-This guide shows you how to deploy Bicep templates **entirely inside Visual Studio Code**, using the Azure extensions. No Azure Portal. No CLI. No switching tools.  
-Just VS Code — clean, simple, and architect-friendly.
+> **Why this matters:** Switching between VS Code, the Azure Portal, and the CLI to deploy Bicep breaks the authoring loop and slows down iteration — this guide keeps the entire deploy, validate, and redeploy cycle inside VS Code using the Azure extensions.
+
+This guide shows you how to deploy Bicep templates **entirely inside Visual Studio Code**, using the Azure extensions. No Azure Portal. No CLI. No switching tools. Just VS Code — clean, simple, and architect-friendly.
+
+Last validated on: 2026-06-25  
+Portal experience note: Steps validated against VS Code with the Bicep and Azure Resources extensions as of June 2026.
+
+> **Note:** This guide covers the VS Code right-click deploy flow. For CLI-based deployment (`az deployment group create`), see [07-bicep-deployment-identity-stack.md](07-bicep-deployment-identity-stack.md).
 
 ---
 
-## 🧩 Prerequisites
+## Module Structure
+
+```text
+Identity-First/
+|-- 07-bicep-deployment-identity-stack.md
+|-- 08-how-to-run-bicep-in-vscode.md   ← this file
+```
+
+---
+
+## Quick Navigation
+
+- [Prerequisites](#prerequisites)
+- [Folder Structure](#folder-structure)
+- [Step 1 — Open the Bicep File](#step-1--open-the-bicep-file)
+- [Step 2 — Right-Click Deploy](#step-2--right-click--deploy-bicep-file)
+- [Step 3 — Select Subscription](#step-3--select-your-subscription)
+- [Step 4 — Provide Parameters](#step-4--provide-parameter-values-if-needed)
+- [Step 5 — Watch Deployment Logs](#step-5--watch-deployment-logs)
+- [Validate the Deployment](#validating-the-deployment)
+- [Redeploy or Update](#redeploying-or-updating)
+
+---
+
+## Prerequisites
 
 Before deploying Bicep files, make sure you have:
 
@@ -33,7 +63,7 @@ You should now see your subscriptions under the Azure Explorer.
 
 ---
 
-## 📁 Folder Structure (Example)
+## Folder Structure
 
 Your project may look like this:
 
@@ -50,7 +80,7 @@ Your project may look like this:
 
 ---
 
-## 🚀 Deploying a Bicep File from VS Code
+## Deploying a Bicep File from VS Code
 
 VS Code allows you to deploy any Bicep file with a simple right-click.
 
@@ -121,7 +151,7 @@ This gives you real-time visibility without leaving the editor.
 
 ---
 
-## 🧪 Validating the Deployment (Inside VS Code)
+## Validating the Deployment
 
 Open the **Azure** panel:
 
@@ -137,7 +167,7 @@ Everything can be validated directly inside VS Code.
 
 ---
 
-## 🔁 Redeploying or Updating
+## Redeploying or Updating
 
 To redeploy:
 
@@ -151,11 +181,4 @@ To delete resources:
 
 ---
 
-## 🎉 Summary
-
-Using VS Code, you can:
-
-- Deploy Bicep files at subscription or resource-group scope  
-- Provide parameters interactively  
-- Validate deployments directly in Azure Explorer  
-- Stay fully inside the VS Code ecosystem
+> **Expected state:** Bicep files deployable via right-click; resources visible in Azure Explorer; redeployment runs without leaving the editor.

@@ -1,12 +1,26 @@
-## 🔐 Identity-First Access Flow
+# Identity-First Access Flow
 
-How the UAMI Authenticates and Accesses Key Vault Without Secrets
+> **Why this matters:** Teams that can't trace how a workload obtains a Key Vault secret end up reverting to stored credentials — this diagram makes the UAMI token flow explicit so the zero-secrets pattern is understood and reproducible, not just trusted.
 
 This diagram illustrates the **end-to-end identity flow** used in your Week 1 stack. It shows how a workload uses a **User Assigned Managed Identity (UAMI)** to authenticate to Microsoft Entra ID and access Key Vault using RBAC — no secrets, no keys, no connection strings.
 
+Last validated on: 2026-06-25  
+Portal experience note: Diagram reflects the Week 1 identity stack deployed via Bicep in [07-bicep-deployment-identity-stack.md](07-bicep-deployment-identity-stack.md).
+
+> **Note:** This is a reference document, not a hands-on lab. No resources are created here.
+
 ---
 
-## 🧭 Identity Flow Diagram
+## Module Structure
+
+```text
+Identity-First/
+|-- 10-identity-first-access-flow.md   ← this file
+```
+
+---
+
+## Identity Flow Diagram
 
 ```plaintext
                          ┌──────────────────────────────┐
@@ -50,7 +64,7 @@ This diagram illustrates the **end-to-end identity flow** used in your Week 1 st
 
 ---
 
-## 🧠 What This Diagram Shows
+## What This Diagram Shows
 
 **✔ Identity-first authentication**  
 The workload never uses:
@@ -81,7 +95,7 @@ This is the modern, recommended pattern for:
 
 ---
 
-## 🎉 Summary
+## Key Takeaways
 
 This identity flow demonstrates:
 

@@ -1,8 +1,8 @@
 # Azure Policy Auto-Remediation Lab Guide
 
-A portal-only lab covering custom Azure Policy creation, managed identity-backed remediation, and compliance validation using a DeployIfNotExists workflow.
+> **Why this matters:** When a non-compliant resource slips through provisioning, manually remediating it at scale is impractical — this lab builds the DeployIfNotExists pipeline that auto-remediates violations the moment Azure Policy detects them.
 
-Navigation: [Lab Guide](../README.md)
+A portal-only lab covering custom Azure Policy creation, managed identity-backed remediation, and compliance validation using a DeployIfNotExists workflow.
 
 Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
@@ -22,14 +22,14 @@ This module is a focused single-lab guide for Policy DeployIfNotExists auto-reme
 
 ## Quick Navigation
 
-- Module Structure
-- Prerequisites
-- Learning Objectives
-- Scenario
-- Lab Architecture
-- Lab Steps
-- Validation and Monitoring
-- Cleanup
+- [Module Structure](#module-structure)
+- [Prerequisites](#1-prerequisites)
+- [Learning Objectives](#2-learning-objectives)
+- [Scenario](#3-scenario)
+- [Lab Architecture](#4-lab-architecture)
+- [Lab Steps](#5-lab-steps)
+- [Validation and Monitoring](#6-validation-and-monitoring)
+- [Cleanup](#7-cleanup)
 
 ---
 

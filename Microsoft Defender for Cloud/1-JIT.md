@@ -2,6 +2,22 @@
 
 Just-In-Time VM access adds a time-limited, on-demand approval layer on top of Azure Bastion. Port openings are temporary NSG rules managed by Microsoft Defender for Cloud — no standing inbound access exists between sessions.
 
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Microsoft Defender for Cloud as of June 2026; labels can vary slightly by subscription and feature rollout.
+
+> **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) first.
+
+---
+
+## Module Structure
+
+```text
+Microsoft Defender for Cloud/
+`-- 1-JIT.md
+```
+
+---
+
 ## Quick Navigation
 
 - [Prerequisites](#prerequisites)
@@ -17,11 +33,43 @@ Just-In-Time VM access adds a time-limited, on-demand approval layer on top of A
 
 ---
 
-## Prerequisites
+## 1. Prerequisites
 
-- Azure Bastion deployed and healthy — complete [1-Azure Bastion.md](../Azure%20Bastion/1-Azure%20Bastion.md) first
-- **Microsoft Defender for Cloud** enabled with the **Defender for Servers** plan active on the subscription
-- The requesting user must have both **Security Reader** and **Virtual Machine Contributor** roles on the target VM
+| Requirement | Detail |
+| --- | --- |
+| Azure Role | **Security Reader** + **Virtual Machine Contributor** on the target VM |
+| Subscription | **Defender for Servers** plan active on the subscription |
+| Dependency | Azure Bastion deployed — complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) first |
+| Estimated Time | 30–45 minutes |
+| Tools | Azure Portal only — no CLI required |
+
+Naming reference: [Naming Convention](../Naming-Convention.md)
+
+### Assumptions and Scope Boundaries
+
+- Lab assumes a running VM with Bastion deployed from the Azure Bastion track.
+- JIT NSG rules are auto-named and ephemeral — do not rename or modify them.
+- PIM-eligible roles may require just-in-time activation before making a JIT request — PIM is out of scope.
+
+---
+
+## 2. Learning Objectives
+
+By the end of this lab, you will have:
+
+- **JIT VM access** enabled on a VM via Microsoft Defender for Cloud
+- A **time-bounded NSG inbound rule** opened for a specific IP range and port
+- A **Bastion session** established after JIT approval with no public IP on the VM
+- Confirmed **automatic NSG rule removal** once the time window expires
+- An understanding of how JIT and Bastion compose into a zero-standing-access pattern
+
+---
+
+## 3. Scenario
+
+**Remove standing inbound access to your VM entirely, not just restrict it.**
+
+Even with an NSG, an always-open RDP rule is a standing target. JIT closes the port by default and opens it only when an approved request is submitted — scoped to a specific IP, a specific port, and a specific time window. Combined with Bastion, you get browser-based access with no public IP and no permanent NSG rules.
 
 ---
 

@@ -2,6 +2,22 @@
 
 Azure Bastion lets you RDP/SSH into a VM without exposing a public IP, using an in-browser session over TLS (port 443). It's the recommended enterprise pattern for secure VM access.
 
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
+
+> **Note:** The `AzureBastionSubnet` subnet (minimum `/26`) must exist in your VNet before deploying Bastion. The subnet name is case-sensitive and must be exact.
+
+---
+
+## Module Structure
+
+```text
+Azure Bastion/
+`-- 1-Azure Bastion.md
+```
+
+---
+
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)
@@ -20,16 +36,43 @@ Azure Bastion lets you RDP/SSH into a VM without exposing a public IP, using an 
 
 ## 1. Prerequisites
 
-Before connecting, ensure:
+| Requirement | Detail |
+| --- | --- |
+| Azure Role | **Owner** or **Contributor** on the target resource group |
+| Subscription | Pay-As-You-Go or Visual Studio subscription |
+| Estimated Time | 30–60 minutes |
+| VM | Deployed in a VNet with a private IP; no public IP required |
+| Subnet | VNet contains a subnet named exactly `AzureBastionSubnet` (minimum `/26`) |
+| NSG | If attached to `AzureBastionSubnet`, required inbound and outbound rules must be in place (see Section 2) |
 
-- The VM is deployed in a VNet
-- The VNet has a subnet named exactly: `AzureBastionSubnet`
-- A Bastion resource exists in the same VNet
-- The VM has:
-  - A NIC
-  - A private IP
-  - RDP/SSH enabled in the OS
-- NSG rules configured correctly *(see Section 2 for required rules)*
+Naming reference: [Naming Convention](../Naming-Convention.md)
+
+### Assumptions and Scope Boundaries
+
+- Lab uses a single-region VNet and one Bastion deployment.
+- Cross-VNet (peered) access requires the Standard tier with IP-based connection enabled (covered in Section 10).
+- Private endpoint architecture and custom DNS are out of scope.
+- Lab steps use the Azure Portal only; Azure CLI equivalents are not covered.
+
+---
+
+## 2. Learning Objectives
+
+By the end of this lab, you will have:
+
+- **Azure Bastion** deployed in a dedicated `/26` subnet with correct NSG rules
+- A **browser-based RDP/SSH session** to a VM that has no public IP
+- **VM credentials** retrieved from Azure Key Vault using the secretless access pattern
+- An understanding of Bastion versus Jumpbox versus Private Endpoint trade-offs
+- **VNet Peering** configured for cross-VNet Bastion access using the Standard tier
+
+---
+
+## 3. Scenario
+
+**Eliminate the public IP and the jumpbox from your VM access architecture.**
+
+Most teams expose RDP (port 3389) or SSH (port 22) directly to the internet to simplify access. This creates a standing attack surface that can't be audited cleanly. Azure Bastion removes the public IP entirely, routes all sessions over HTTPS (port 443), and logs every connection in Azure Activity Logs — without requiring a separate jumpbox VM.
 
 ---
 

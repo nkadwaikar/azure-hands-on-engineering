@@ -1,5 +1,7 @@
 # Identity‑First Bicep Deployment Identity Stack (Week 1 Capstone)
 
+> **Why this matters:** Deploying identity, Key Vault, RBAC, and locks as separate portal steps is error-prone and impossible to review or version — this lab assembles the same stack as modular Bicep so the entire foundation can be code-reviewed, diffed, and deployed in a single command.
+
 Day 7 brings together the full **identity‑first architecture** for Week 1 using modular Bicep.
 It forms the foundation of a secure, secretless, RBAC-driven Azure environment.
 

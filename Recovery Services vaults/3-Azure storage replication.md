@@ -1,10 +1,73 @@
 # Azure Storage Replication Lab — Step by Step
 
+> **Why this matters:** Choosing the wrong replication tier means either overpaying for durability you don't need or losing data when a datacenter fails — this lab creates storage accounts at LRS, ZRS, GRS, and GZRS so the redundancy trade-offs are directly observable, not theoretical.
+
+Last validated on: 2026-06-10  
+Portal experience note: Steps validated against Azure Portal as of June 2026; ZRS, GRS, and GZRS availability varies by region.
+
+> **Note:** Each storage account in this lab incurs separate charges. Delete all accounts when the lab is complete. ZRS, GRS, and GZRS cost more than LRS — this difference is visible in the pricing calculator.
+
+---
+
+## Track Structure
+
+```text
+Recovery Services vaults/
+|-- 1-VM Backup and Restore Procedure.md
+|-- 2-Azure Site Recovery.md
+`-- 3-Azure storage replication.md
+```
+
+## Quick Navigation
+
+- [Lab Prerequisites](#1-lab-prerequisites)
+- [Create LRS Storage Account](#3-create-first-storage-account-lrs)
+- [Create a Blob Container](#4-create-a-blob-container-and-upload-a-test-file)
+- [Observe LRS Characteristics](#5-observe-lrs-characteristics)
+- [Create ZRS Storage Account](#6-create-second-storage-account-zrs)
+- [Change Replication Tier](#7-change-replication-tier)
+- [Cleanup](#cleanup)
+
+---
+
 ## 1. Lab Prerequisites
 
-- **Role:** Owner or Contributor on the subscription
-- **Tools:** Azure Portal, (optional) Azure Storage Explorer
-- **Region choice:** Use a primary region that supports ZRS/GRS/GZRS (e.g., East US, West Europe)
+| Requirement | Detail |
+| --- | --- |
+| Azure Role | **Owner** or **Contributor** on the subscription |
+| Subscription | Pay-As-You-Go or Visual Studio subscription |
+| Estimated Time | 45–60 minutes |
+| Tools | Azure Portal; Azure Storage Explorer (optional) |
+| Region | Use a primary region that supports ZRS/GRS/GZRS (e.g., East US, West Europe) |
+
+Naming reference: [Naming Convention](../Naming-Convention.md)
+
+### Assumptions and Scope Boundaries
+
+- Lab uses standard Blob storage accounts at different redundancy tiers.
+- Object replication, immutability policies, and lifecycle management are out of scope.
+- Cost comparison is conceptual; exact pricing varies by region and usage.
+
+---
+
+## 2. Learning Objectives
+
+By the end of this lab, you will have:
+
+- **LRS, ZRS, GRS, and GZRS storage accounts** created and compared side by side
+- An understanding of how each tier handles datacenter, zone, and regional failures
+- Experience **changing the replication tier** on an existing storage account
+- A documented decision framework for choosing the right tier per workload
+
+---
+
+## 3. Scenario
+
+**Match your storage redundancy tier to your actual recovery requirements, not the cheapest default.**
+
+Teams often provision LRS because it is the default, then discover their SLA requires GRS after an incident. This lab creates accounts at each tier, uploads test data, and observes the characteristics of each so the trade-off between cost and durability is concrete.
+
+---
 
 ---
 

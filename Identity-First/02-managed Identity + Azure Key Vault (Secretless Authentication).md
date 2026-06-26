@@ -1,5 +1,7 @@
 # Managed Identity + Azure Key Vault (Secretless Authentication)
 
+> **Why this matters:** Storing connection strings or API keys in app settings means one leaked credential requires both a rotation and a redeployment — this lab replaces credentials entirely by assigning a Managed Identity to a VM and granting it scoped Key Vault access via RBAC.
+
 > **Prerequisites:** This lab continues from Day 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.

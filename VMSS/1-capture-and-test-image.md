@@ -1,6 +1,13 @@
 # VMSS Image Validation Track
 
-## Capture the Image + Deploy Test VM
+> **Why this matters:** Deploying a scale set from an unvalidated image means every instance could fail silently on boot — this lab captures the Sysprepped VM as a gallery version and boots a test VM from it to confirm IIS responds before the image is locked.
+
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Azure Portal as of June 2026.
+
+> **Note:** Image capture takes 10–25 minutes. If you select "Automatically delete this VM after creating the image," the source VM is permanently deleted — confirm you no longer need it before proceeding.
+
+---
 
 ## Track Structure
 
@@ -14,34 +21,49 @@ Flow: capture reusable image -> validate with a test VM -> deploy scale set from
 
 ## Quick Navigation
 
-- Track Structure
-- Capture the Image
-- Deploy a Test VM from the Image
-- Validate the Test VM
-- Validate IIS
-- Continue to VMSS Deployment
+- [Track Structure](#track-structure)
+- [Capture the Image](#1-capture-the-image)
+- [Deploy a Test VM](#2-deploy-a-test-vm-from-the-captured-image)
+- [Validate the Test VM](#3-validate-the-test-vm)
+- [Validate IIS](#4-validate-iis)
 
 This document covers capturing the custom image and validating it before using it in VMSS.
 
 ---
 
+## Learning Objectives
+
+By the end of this lab, you will have:
+
+- A **Shared Image Gallery version** created from the Sysprepped VM
+- A **test VM** deployed from that gallery version to verify the image boots correctly
+- **IIS confirmed** as responding on the test VM before the image is used in a scale set
+- The source VM deleted (or retained), with the gallery version as the durable artifact
+
+---
+
+## Scenario
+
+**Validate the captured image boots and serves traffic before committing it to scale.**
+
+An image version that looks correct in the gallery can still fail at boot if Sysprep was incomplete or the guest agent wasn't clean. This lab captures the image, boots a test VM from the gallery version, and confirms IIS responds — so any image defect is caught now, not when 10 instances in a scale set all fail simultaneously.
+
+---
+
 ## 1. Capture the Image
 
-**Portal Navigation:**
-
-1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machines** in the top search bar.
-2. Select your prepared VM from the list.
+1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machines**.
+2. Select your prepared VM.
 3. In the VM blade, click **Capture** from the top menu.
 4. Configure:
 
-   - **Shared Image Gallery** → ✔ Recommended  
+   - **Shared Image Gallery** → Recommended  
    - Create Image Definition (if needed)  
    - Create Image Version → e.g., `1.0.0`  
 
-5. (Optional, recommended):
-   **✔ Automatically delete this VM after creating the image**
+5. (Optional, recommended): Check **Automatically delete this VM after creating the image**.
 
-⏱ Capture time: **10–25 minutes**
+> **Expected state:** Gallery image version status shows **Succeeded** after 10–25 minutes.
 
 ---
 

@@ -1,29 +1,58 @@
-# **Azure Locks + Resource Policies (Hands-On Lab)**  
+# Azure Locks + Resource Policies
 
-## *Protect resources from accidental deletion and enforce governance at scale.*
+> **Why this matters:** Without locks and policy, even a privileged identity can accidentally delete critical resources or deploy a non-compliant VM — this lab applies Delete locks, Read-only locks, a custom Audit policy, and a Deny policy so governance controls are proven before a production Landing Zone depends on them.
 
-Day 4 introduces two foundational governance controls used in every enterprise Landing Zone:  
-**Resource Locks** (Delete / Read‑only) and **Azure Policy** (Deny / Audit / Modify).  
-These controls enforce consistency, prevent accidental changes, and shape compliant deployments.
+Day 4 introduces two foundational governance controls used in every enterprise Landing Zone: **Resource Locks** (Delete / Read-only) and **Azure Policy** (Deny / Audit / Modify). These controls enforce consistency, prevent accidental changes, and shape compliant deployments.
 
-## 🎯 **Learning Objectives**
+Last validated on: 2026-06-25  
+Portal experience note: Steps validated against Azure Portal as of June 2026; policy compliance evaluation can take up to 30 minutes after assignment.
 
-You will learn to:
-
-- Apply **Delete** and **Read‑only** locks  
-- Understand **lock inheritance**  
-- Assign **custom and built‑in Azure Policies**  
-- Enforce **tagging** and **SKU restrictions**  
-- Validate compliance  
-- Compare behavior between **policy‑restricted** and **policy‑free** resource groups  
+> **Note:** Remove all locks and policy assignments before cleanup — attempting to delete a locked resource group will fail.
 
 ---
 
-## 🧪 **Lab Steps**
+## Module Structure
+
+```text
+Identity-First/
+|-- 04-azurelocks-resource-policies.md
+```
 
 ---
 
-## **1. Create a Test Resource Group**
+## Quick Navigation
+
+- [Learning Objectives](#learning-objectives)
+- [Create Resource Group](#1-create-a-test-resource-group)
+- [Apply Delete Lock](#2-apply-a-delete-lock-at-resource-group-scope)
+- [Test Delete Lock](#3-test-the-delete-lock)
+- [Remove Delete Lock](#4-remove-the-delete-lock)
+- [Apply Read-Only Lock](#5-apply-a-read-only-lock-at-resource-scope)
+- [Remove Read-Only Lock](#6-remove-the-read-only-lock)
+- [Assign Custom Audit Policy](#7-assign-a-custom-policy--audit-resource-groups-missing-a-tag)
+- [Test the Custom Policy](#8-test-the-custom-policy)
+- [View Compliance](#9-view-compliance)
+- [Enforce VM SKU Governance](#10-enforce-vm-sku-governance-deny-policy)
+- [Governance and Identity Interaction](#governance-and-identity-interaction)
+- [Lessons Learned](#lessons-learned)
+- [Cleanup](#cleanup)
+
+---
+
+## Learning Objectives
+
+By the end of this lab, you will have:
+
+- **Delete and Read-only locks** applied at both resource group and individual resource scope
+- **Lock inheritance** observed: a lock at RG scope covers all child resources
+- A **custom Audit policy** assigned to detect resource groups missing a required tag
+- A **Deny policy** enforcing VM SKU restrictions on a specific resource group
+- Experience comparing **policy-restricted** versus **policy-free** resource group behavior
+- Compliance state validated in the Azure Policy portal
+
+---
+
+## 1. Create a Test Resource Group
 
 ### Azure Portal → Resource groups → Create
 
@@ -32,7 +61,7 @@ You will learn to:
 
 ---
 
-## **2. Apply a Delete Lock at Resource Group Scope**
+## 2. Apply a Delete Lock at Resource Group Scope
 
 ### rg-locks-demo → Settings → Locks → Add
 
@@ -47,14 +76,14 @@ You will learn to:
 
 ---
 
-## **3. Test the Delete Lock**
+## 3. Test the Delete Lock
 
 Try deleting the RG → blocked  
 Try deleting a resource → blocked  
 
 ---
 
-## **4. Remove the Delete Lock (Important)**
+## 4. Remove the Delete Lock
 
 To test Read‑only behavior correctly:
 
@@ -62,7 +91,7 @@ To test Read‑only behavior correctly:
 
 ---
 
-## **5. Apply a Read‑Only Lock at Resource Scope**
+## 5. Apply a Read-Only Lock at Resource Scope
 
 Choose any resource (e.g., storage account):
 
@@ -80,17 +109,15 @@ Choose any resource (e.g., storage account):
 
 ---
 
-## **6. Remove the Read‑Only Lock**
+## 6. Remove the Read-Only Lock
 
 ### Storage account → Locks → Delete
 
 ---
 
-## **Azure Policy Section**
-
 ---
 
-## **7. Assign a Custom Policy — Audit Resource Groups Missing a Tag**
+## 7. Assign a Custom Policy — Audit Resource Groups Missing a Tag
 
 Azure does **not** provide a built‑in policy that enforces tags specifically on resource groups.  
 Therefore, we created a custom Audit policy.
@@ -155,7 +182,7 @@ Therefore, we created a custom Audit policy.
 
 ---
 
-## **8. Test the Custom Policy**
+## 8. Test the Custom Policy
 
 Create:
 
@@ -164,7 +191,7 @@ Create:
 
 ---
 
-### 9. View Compliance
+## 9. View Compliance
 
 #### Azure Portal → Policy → Compliance → Select your custom policy
 
@@ -172,7 +199,7 @@ Audit policies provide visibility without enforcement.
 
 ---
 
-## **10. Enforce VM SKU Governance (Deny Policy)**
+## 10. Enforce VM SKU Governance (Deny Policy)
 
 Assign:
 
@@ -205,7 +232,7 @@ In `rg-identity-eus-lab-core` (no policy):
 
 ---
 
-## 🧩 **Governance + Identity Interaction**
+## Governance and Identity Interaction
 
 - **Locks override RBAC**  
 - **Policies override RBAC**  
@@ -215,7 +242,7 @@ In `rg-identity-eus-lab-core` (no policy):
 
 ---
 
-## 📘 **Lessons Learned — Day 4**
+## Lessons Learned
 
 ### 1. Locks enforce operational safety  
 
@@ -251,7 +278,7 @@ Your A/B comparison (`rg-identity-eus-lab-core` vs `rg-test-compliant`) demonstr
 
 ---
 
-## 🧹 Cleanup (Optional but Recommended)
+## Cleanup
 
 Perform these steps if you want to reset your environment before moving to Day 5.
 
@@ -308,7 +335,7 @@ Optional but helpful:
 
 ---
 
-## 📌 Day 4 Summary
+## Day 4 Summary
 
 Today you learned:
 
@@ -326,19 +353,19 @@ Today you learned:
   
 ---
 
-## ▶️ Next Lab
+## Next Lab
 
 **Day 5 — Access Validation (Portal + CLI)**  
 [05-access-validation.md](05-access-validation.md)
 
-## ⬅️ Previous Lab
+## Previous Lab
 
 **Day 3 — Azure AD Roles + RBAC Scopes**  
 [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
 
 ---
 
-## 🔗 Related Resources
+## Related Resources
 
 - **Day 1 — Identity Fundamentals + RBAC Basics**  
   [01-identity fundamentals.md](01-identity%20fundamentals.md)

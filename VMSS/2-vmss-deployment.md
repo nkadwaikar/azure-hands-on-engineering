@@ -1,4 +1,6 @@
-# 🚀 VMSS Deployment Using a Custom Windows Image
+# VMSS Deployment Using a Custom Windows Image
+
+> **Why this matters:** Scaling virtual machines manually means downtime, human error, and over-provisioned costs during variable load — this lab deploys a scale set from a validated golden image so Azure can add or remove identical instances automatically against a load balancer.
 
 This document covers the **end‑to‑end deployment** of an Azure **Virtual Machine Scale Set (VMSS)** using a **custom Windows Server image** stored in a **Shared Image Gallery**.
 
@@ -10,9 +12,56 @@ Your custom image already includes:
 
 This guide focuses **only on VMSS deployment, scaling, validation, and cleanup**.
 
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Azure Portal as of June 2026.
+
+> **Note:** VMSS deployment requires a validated image version in an Azure Compute Gallery. Complete [Capture and Test Image](1-capture-and-test-image.md) first.
+
 ---
 
-## 🏗️ **1. Prerequisites**
+## Track Structure
+
+```text
+VMSS/
+|-- 1-capture-and-test-image.md
+`-- 2-vmss-deployment.md
+```
+
+---
+
+## Quick Navigation
+
+- [Prerequisites](#1-prerequisites)
+- [Create Resource Group](#2-create-the-resource-group)
+- [Deploy VMSS](#3-deploy-the-vm-scale-set-vmss)
+- [Validate VMSS Deployment](#4-validate-vmss-deployment)
+- [Validate IIS](#5-validate-iis-through-load-balancer)
+- [Test Scaling](#6-test-vmss-scaling)
+- [Final Validation Checklist](#7-final-validation-checklist)
+- [Cleanup](#8-cleanup)
+
+---
+
+## Learning Objectives
+
+By the end of this lab, you will have:
+
+- A **VM Scale Set** deployed from a validated gallery image behind an Azure Load Balancer
+- **IIS responding** via the Load Balancer public IP across all instances
+- **Scale-out** (2 → 4 instances) and **scale-in** (4 → 2 instances) performed and validated
+- An understanding of how custom images enable consistent horizontal scale
+
+---
+
+## Scenario
+
+**Prove that your custom image scales horizontally before a real traffic event, not during one.**
+
+A golden image only delivers value when new instances boot correctly and serve traffic without manual configuration. This lab deploys two instances from your gallery image, confirms IIS serves the custom page through a load balancer, then scales out and back in to validate that every instance — at any scale count — behaves identically.
+
+---
+
+## 1. Prerequisites
 
 Before starting this VMSS deployment, ensure you have completed:
 
@@ -26,11 +75,9 @@ Your Shared Image Gallery should now contain a **validated image version** (e.g.
 
 ---
 
-## 📘 **2. Create the Resource Group**
+## 2. Create the Resource Group
 
-**Portal Navigation:**
-
-1. In the [Azure Portal](https://portal.azure.com), search for **Resource groups** in the top search bar.
+1. In the [Azure Portal](https://portal.azure.com), search for **Resource groups**.
 2. Click **+ Create**.
 3. Enter the following name:
 
@@ -44,11 +91,9 @@ This keeps all VMSS resources isolated and easy to delete later.
 
 ---
 
-## 📘 **3. Deploy the VM Scale Set (VMSS)**
+## 3. Deploy the VM Scale Set (VMSS)
 
-**Portal Navigation:**
-
-1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machine Scale Sets** in the top search bar.
+1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machine Scale Sets**.
 2. Click **+ Create** and select **Virtual Machine Scale Set**.
 3. Fill in the following details:
 
@@ -84,23 +129,20 @@ Click **Review + Create** → **Create**
 
 ---
 
-## 📘 **4. Validate VMSS Deployment**
-
-**Portal Navigation:**
+## 4. Validate VMSS Deployment
 
 1. In the [Azure Portal](https://portal.azure.com), go to **Virtual Machine Scale Sets** and select your VMSS.
-2. Use the left menu to navigate to **Instances** to check running VMs.
-3. In the same VMSS blade, find **Load Balancer** under **Networking** or search for **Load Balancers** and select the one linked to your VMSS.
-4. Use **Backend Pools** and **Health Probes** to validate instance registration and health.
+2. Navigate to **Instances** to check running VMs.
+3. Find the linked **Load Balancer** under **Networking** and verify backend pool health.
 
-### ✔ Check VMSS Instances
+### Check VMSS instances
 
 You should see:
 
 - **2 running instances**
 - Both in **Succeeded** state
 
-### ✔ Check Load Balancer
+### Check Load Balancer
 
 You should see:
 
@@ -109,13 +151,11 @@ You should see:
 
 ---
 
-## 📘 **5. Validate IIS Through Load Balancer**
-
-**Portal Navigation:**
+## 5. Validate IIS Through Load Balancer
 
 1. In the [Azure Portal](https://portal.azure.com), search for **Load Balancers** and select the one created for your VMSS.
-2. On the overview page, copy the **Public IP address**.
-3. Open in your browser:
+2. Copy the **Public IP address** from the overview page.
+3. Open a browser and navigate to:
 
 ```url
 http://<Public-IP>
@@ -131,47 +171,31 @@ This confirms:
 
 ---
 
-## 📘 **6. Test VMSS Scaling**
+## 6. Test VMSS Scaling
 
-This is the most important part of the lab — proving that your custom image works **across scaling events**.
+This is the most important part of the lab — proving that your custom image works across scaling events.
 
-## 🔹 **Scale Out (2 → 4 instances)**
-
-**Portal Navigation:**
+### Step 1 — Scale Out (2 → 4 instances)
 
 1. In the [Azure Portal](https://portal.azure.com), go to **Virtual Machine Scale Sets** and select your VMSS.
 2. In the left menu, click **Instances**.
-3. At the top, click **Scale** or **Capacity**.
-4. Change instance count from: 2 → 4
+3. Click **Scale** or **Capacity**.
+4. Change instance count from 2 to 4.
 5. Click **Save**.
 
-Azure will create **2 new instances**.
+> **Expected state:** All 4 instances show **Succeeded**; Load Balancer backend pool shows 4 healthy nodes; IIS page loads via Public IP.
 
-### Validate Scale Out
+### Step 2 — Scale In (4 → 2 instances)
 
-- All **4 instances** appear  
-- All show **Succeeded**  
-- Load Balancer backend pool shows **4 healthy nodes**  
-- IIS page loads successfully via Public IP  
-
-## 🔹 **Scale In (4 → 2 instances)**
-
-**Portal Navigation:**
-
-1. In the [Azure Portal](https://portal.azure.com), go to your VMSS, click **Instances**, then **Scale/Capacity** at the top.
-2. Change instance count from: 4 → 2
+1. Go to your VMSS, click **Instances**, then **Scale/Capacity**.
+2. Change instance count from 4 to 2.
 3. Click **Save**.
-4. Azure will delete **2 instances**
 
-### Validate
-
-- Only **2 instances** remain  
-- Load Balancer backend pool shows **2 healthy nodes**  
-- IIS still loads via Public IP  
+> **Expected state:** 2 instances remain; Load Balancer backend pool shows 2 healthy nodes; IIS still loads via Public IP.
 
 ---
 
-## 📘 **7. Final Validation Checklist**
+## 7. Final Validation Checklist
 
 | Validation | Status |
 | --- | --- |
@@ -186,9 +210,9 @@ This confirms your custom image is **VMSS‑ready and production‑aligned**.
 
 ---
 
-## 🧹 **8. Cleanup**
+## 8. Cleanup
 
-Delete the resource group:
+Delete the resource group to remove all VMSS resources:
 
 ```text
 rg-vmss-lab
@@ -206,10 +230,4 @@ This removes:
 
 ---
 
-You have successfully:
-
-✔ Deployed a VM Scale Set using a custom image  
-✔ Validated IIS across all instances  
-✔ Performed scale‑out and scale‑in  
-✔ Verified load balancing  
-✔ Built a real‑world, production‑aligned Azure workload  
+[← Back to Azure Hands-On Engineering](../README.md)

@@ -1,9 +1,15 @@
 # Create a Virtual Machine in Azure (Portal Guide)
 
-## 🎯 Purpose
+> **Why this matters:** Every higher-level Azure compute pattern — golden images, scale sets, web workloads — traces back to a single VM provisioned consistently; this lab establishes the baseline build with naming conventions, security settings, and post-deployment validation that all subsequent labs depend on.
 
-This guide walks you through creating a VM in Azure with consistent steps and naming conventions.
-Use it as a reference for labs, demos, or production-aligned builds.
+This guide walks you through creating a VM in Azure with consistent steps and naming conventions, and establishes the baseline build that all subsequent compute labs depend on.
+
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
+
+> **Note:** All resources created in this lab feed into the Sysprep and VMSS track. Delete the resource group when the full Compute track is complete to avoid ongoing charges.
+
+---
 
 ## Track Structure
 
@@ -18,13 +24,50 @@ Flow: build base VM -> sysprep the image source -> install/validate IIS for web 
 
 ## Quick Navigation
 
-- Purpose
-- Track Structure
-- Create Resource Group
-- Create Virtual Machine
-- Post-Deployment Steps
-- Optional IIS Installation
-- Cleanup
+- [Prerequisites](#prerequisites)
+- [Create Resource Group](#1-create-resource-group)
+- [Create Virtual Machine](#2-create-virtual-machine)
+- [Post-Deployment Steps](#3-post-deployment-steps)
+- [Optional: Install IIS](#4-optional-install-iis-windows-vm)
+- [Cleanup](#5-cleanup-optional)
+
+---
+
+## Prerequisites
+
+| Requirement | Detail |
+| --- | --- |
+| Azure Role | **Owner** or **Contributor** on the subscription |
+| Subscription | Pay-As-You-Go or Visual Studio subscription |
+| Estimated Time | 20–30 minutes |
+| Tools | Azure Portal only |
+
+Naming reference: [Naming Convention](../Naming-Convention.md)
+
+### Assumptions and Scope Boundaries
+
+- This VM is the starting point for the Sysprep and VMSS track.
+- Lab uses Windows Server 2022; Linux steps differ and are not covered.
+- Networking defaults (auto-created VNet/subnet) are used unless otherwise noted.
+
+---
+
+## Learning Objectives
+
+By the end of this lab, you will have:
+
+- A **Windows Server VM** created with consistent naming and region conventions
+- **Post-deployment validation** completed (boot diagnostics, OS access confirmed)
+- **IIS optionally installed** to provide a web workload for image capture and VMSS testing
+- The VM ready for the **Sysprep** step that enables image capture
+
+---
+
+## Scenario
+
+**Establish a consistent, repeatable VM baseline before any customization is applied.**
+
+Skipping this step and jumping straight to custom images means baking untested configurations into every instance at scale. This lab provisions the source VM that becomes the golden image: same name pattern, same settings, same validation checklist — so every downstream lab starts from a known-good state.
 
 ---
 
@@ -166,7 +209,4 @@ http://<public-ip>
 
 ---
 
-## 🎉 Base VM is ready for Sysprep
-
-**Next step:**
-➡ [Sysprep VM](2-sysprep-vm.md)
+> **Next step:** [Sysprep the VM](2-sysprep-vm.md)

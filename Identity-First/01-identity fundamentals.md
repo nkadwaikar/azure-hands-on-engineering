@@ -1,5 +1,7 @@
 # Identity Fundamentals (Entra ID, RBAC Scopes, Least Privilege)
 
+> **Why this matters:** Teams that bolt on identity controls after the fact end up with overprivileged service accounts, shared credentials, and no auditability — this lab builds the RBAC fundamentals (users, roles, scope inheritance, least privilege) that every subsequent governance control in this track depends on.
+
 > **Note:** All user accounts in this lab use the placeholder domain `@contoso.com` to avoid exposing my real Azure AD tenant domain.  
 > Steps **1**, **2**, and **3.2** are performed by administrators with elevated privileges.
 

@@ -1,10 +1,8 @@
 # Microsoft Entra Break‑Glass & Emergency Access Accounts
 
-## Updated Design for 2025: Production-Ready Identity Resilience
+> **Why this matters:** Every tenant lockout scenario — misconfigured CA policies, federated IdP failure, MFA service degradation — comes down to whether your emergency accounts actually work under zero-trust constraints; this lab builds FIDO2-backed break-glass accounts that comply with Microsoft's 2025 security baseline rather than bypassing it.
 
 A complete, portal-only lab implementing Microsoft's 2025 security baseline for emergency access accounts with phishing-resistant MFA and Conditional Access enforcement.
-
-Navigation: [Lab Guide](../README.md)
 
 Last validated on: 2026-06-20  
 Portal experience note: Steps validated against Entra Admin Center as of June 2026.
@@ -24,14 +22,14 @@ This module is a focused single-lab implementation guide for modern break-glass 
 
 ## Quick Navigation
 
-- Module Structure
-- Prerequisites
-- Learning Objectives
-- Scenario
-- Design Principles
-- Hands-On Implementation
-- Conditional Access Configuration
-- Testing, Monitoring, and Runbook
+- [Module Structure](#module-structure)
+- [Prerequisites](#prerequisites)
+- [Learning Objectives](#learning-objectives)
+- [Scenario](#scenario)
+- [Design Principles](#design-principles)
+- [Hands-On Implementation](#hands-on-implementation)
+- [Conditional Access Configuration](#conditional-access-configuration)
+- [Testing, Monitoring, and Runbook](#testing-monitoring-and-runbook)
 
 ---
 

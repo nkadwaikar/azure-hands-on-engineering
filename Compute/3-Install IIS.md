@@ -1,5 +1,33 @@
 # 🌐 Install IIS on the VM (Azure Portal + PowerShell)
 
+> **Why this matters:** A VM without a web server role is just a running OS with no workload — this lab installs IIS and writes a test page so the custom image used in VMSS serves verifiable HTTP traffic rather than just powering on.
+
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Azure Portal as of June 2026.
+
+> **Note:** This lab installs IIS on a Windows Server VM. Complete [Build Base VM](1-build-base-vm.md) first to have a running VM to connect to.
+
+---
+
+## Track Structure
+
+```text
+Compute/
+|-- 1-build-base-vm.md
+|-- 2-sysprep-vm.md
+`-- 3-Install IIS.md
+```
+
+## Quick Navigation
+
+- [Connect to the VM](#1-connect-to-the-vm)
+- [Open PowerShell](#2-open-powershell-as-administrator)
+- [Install IIS](#3-install-iis--common-features--custom-test-page)
+- [Verify IIS](#4-verify-iis)
+- [Cleanup](#5-cleanup)
+
+---
+
 ## 1. Connect to the VM
 
 ### Portal Navigation

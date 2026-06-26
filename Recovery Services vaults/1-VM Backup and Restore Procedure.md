@@ -1,9 +1,9 @@
 
 # Azure VM Backup Lab Guide
 
-A hands-on lab covering Enhanced VM backup, file-level recovery, full VM restore, and cleanup using the current Azure Backup experience.
+> **Why this matters:** A backup policy configured but never tested is indistinguishable from no backup at all — this lab runs a full Enhanced backup cycle and exercises both file-level and full-VM restore so the procedure is proven before it's ever needed in production.
 
-Navigation: [Lab Guide](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)
+A hands-on lab covering Enhanced VM backup, file-level recovery, full VM restore, and cleanup using the current Azure Backup experience.
 
 Last validated on: 2026-06-10
 Portal experience note: Steps validated against Azure Portal UI as of June 2026; labels can vary slightly by region and feature rollout.
@@ -25,14 +25,15 @@ Use this file first, then continue through Site Recovery and storage replication
 
 ## Quick Navigation
 
-- Track Structure
-- Learning Objectives
-- Prerequisites
-- Lab Architecture
-- Initial Setup
-- Configure Backup
-- Restore and Validation
-- Cleanup
+- [Track Structure](#track-structure)
+- [Learning Objectives](#1-learning-objectives)
+- [Prerequisites](#2-prerequisites)
+- [Lab Architecture](#lab-architecture)
+- [Initial Setup](#3-initial-setup)
+- [Configure Backup](#4-configure-backup)
+- [Full VM Restore Test](#5-full-vm-restore-test)
+- [File-Level Recovery Test](#6-file-level-recovery-test)
+- [Cleanup](#7-cleanup)
 
 ---
 
@@ -51,12 +52,13 @@ By the end of this lab, you will:
 
 ## 2. Prerequisites
 
-- Azure subscription with **Owner** or **Contributor** permissions
-- Ability to create:
-  - Resource groups
-  - Virtual machines
-  - Storage accounts
-  - Recovery Services Vault
+| Requirement | Detail |
+| --- | --- |
+| Azure Role | **Owner** or **Contributor** on the subscription |
+| Subscription | Pay-As-You-Go or Visual Studio subscription |
+| Estimated Time | 60–90 minutes (initial backup job can take additional time) |
+| VM | A running Azure VM to protect |
+| Tools | Azure Portal only |
 
 Naming reference: [Naming Convention](../Naming-Convention.md)
 

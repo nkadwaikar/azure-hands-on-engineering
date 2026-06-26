@@ -1,5 +1,7 @@
 # **Access Validation (Portal + CLI)**
 
+> **Why this matters:** Governance controls that have never been tested from the user's perspective — a different role, a different scope — provide a false sense of security; this lab proves the RBAC, lock, and policy stack actually blocks and permits the right operations before it goes anywhere near production.
+
 ## *Validate RBAC, Identity, Locks, and Policy Enforcement Across Real Access Paths*
 
 Day 5 is where you **prove** that everything you built in Days 1–4 works exactly as intended.

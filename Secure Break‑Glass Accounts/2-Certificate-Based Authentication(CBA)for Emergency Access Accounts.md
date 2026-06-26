@@ -1,10 +1,8 @@
 # Certificate-Based Authentication (CBA) for Emergency Access Accounts
 
-## CBA as Phishing-Resistant MFA for Break-Glass Scenarios
+> **Why this matters:** When physical FIDO2 security keys are unavailable or lost, certificate-based authentication provides hardware-independent phishing-resistant access — this lab provisions self-signed certs, uploads the root CA to Entra, and enforces CBA via Authentication Strength without excluding emergency accounts from Conditional Access.
 
 A portal-based and PowerShell-assisted lab implementing Certificate-Based Authentication as the primary phishing-resistant MFA method for emergency access accounts in Microsoft Entra ID.
-
-Navigation: [Lab Guide](../README.md) | [Lab 1 – Break-Glass Accounts](./1-Secure%20Break%E2%80%91Glass%20Accounts.md)
 
 Last validated on: 2026-06-22
 Portal experience note: Steps validated against Entra Admin Center as of June 2026.

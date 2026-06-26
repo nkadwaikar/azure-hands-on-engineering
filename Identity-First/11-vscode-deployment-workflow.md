@@ -1,14 +1,32 @@
-# 🔄 How Bicep Deploys from VS Code → Subscription → Resource Group → Modules
+# VS Code Deployment Workflow
 
-## Visual Studio Code Deployment Workflow for the Identity-First Lab Stack
+> **Why this matters:** Understanding how a right-click in VS Code translates to a subscription-scoped resource group creation followed by a resource-group-scoped module chain makes the Bicep deployment model concrete — and makes it reproducible without a CLI or Portal.
 
 This diagram maps how the Identity-First lab stack is deployed using VS Code only, without Azure CLI or the Portal.
 
-> Note: this workflow reflects the capstone architecture under `Identity-First/capstone/architecture/bicep/` with its own resource-group naming (`rg-identity-capstone`) and module layout.
+Last validated on: 2026-06-25  
+Portal experience note: Diagram reflects the capstone architecture under `Identity-First/capstone/architecture/bicep/`.
+
+> **Note:** This workflow uses the capstone stack with resource group `rg-identity-capstone` and its own module layout, distinct from the main `Identity-First/bicep/` stack.
 
 ---
 
-## 📐 Deployment Workflow Diagram
+## Module Structure
+
+```text
+Identity-First/
+|-- 11-vscode-deployment-workflow.md   ← this file
+capstone/architecture/bicep/
+|-- main.bicep
+`-- modules/
+    |-- create-rg.bicep
+    |-- create-uami.bicep
+    `-- create-keyvault.bicep
+```
+
+---
+
+## Deployment Workflow Diagram
 
 ```plaintext
 ┌──────────────────────────────────────────────────────────────┐
@@ -52,7 +70,7 @@ This diagram maps how the Identity-First lab stack is deployed using VS Code onl
 
 ---
 
-## 🧠 What This Diagram Shows
+## What This Diagram Shows
 
 **✔ VS Code is the control plane**  
 All deployments start from your editor — no CLI, no Portal.
@@ -79,7 +97,7 @@ Azure Explorer shows:
 
 ---
 
-## 🎉 Summary
+## Key Takeaways
 
 This workflow shows:
 

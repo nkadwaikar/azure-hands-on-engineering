@@ -1,5 +1,7 @@
 # App Service + Managed Identity + Deployment Slots + Azure DevOps
 
+> **Why this matters:** Hardcoded secrets in app settings or pipeline variables are one leaked token away from a breach — this lab removes every credential from the deployment chain by binding App Service to Key Vault through per-slot Managed Identity, with a staged CI/CD pipeline and manual approval gate controlling production promotion.
+
 A portal-first lab covering Azure App Service deployment with System-Assigned Managed Identity, deployment slots for blue-green deployments, Key Vault secret integration, and a full Azure DevOps CI/CD pipeline with manual approval gates.
 
 Last validated on: 2026-06-24

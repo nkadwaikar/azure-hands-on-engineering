@@ -1,8 +1,8 @@
 # Microsoft Entra Backup & Recovery Lab Guide
 
-A hands-on, portal-only lab covering Microsoft Entra Backup & Recovery difference reports, object-level recovery, and post-run cleanup using the current Entra admin experience.
+> **Why this matters:** A misconfigured Conditional Access policy or an accidentally deleted user can cause a tenant outage with no obvious rollback — this lab uses Entra's difference reports and object-level recovery to restore specific directory objects from daily snapshots.
 
-Navigation: [Lab Guide](../README.md)
+A hands-on, portal-only lab covering Microsoft Entra Backup & Recovery difference reports, object-level recovery, and post-run cleanup using the current Entra admin experience.
 
 Last validated on: 2026-06-19
 Portal experience note: Steps validated against Microsoft Entra admin center UI as of June 2026; labels can vary slightly by tenant, licensing, and feature rollout.
@@ -24,14 +24,14 @@ This module is a focused single-lab guide for Entra difference reports and objec
 
 ## Quick Navigation
 
-- Module Structure
-- Learning Objectives
-- Prerequisites
-- Service Behavior Overview
-- Generate a Difference Report
-- Perform a Recovery Operation
-- Post-Recovery Validation
-- Cleanup
+- [Module Structure](#module-structure)
+- [Learning Objectives](#1-learning-objectives)
+- [Prerequisites](#2-prerequisites)
+- [Service Behavior Overview](#3-service-behavior-overview)
+- [Generate a Difference Report](#4-generate-a-difference-report)
+- [Perform a Recovery Operation](#5-perform-a-recovery-operation)
+- [Post-Recovery Validation](#6-post-recovery-validation)
+- [Cleanup](#7-cleanup)
 
 ---
 

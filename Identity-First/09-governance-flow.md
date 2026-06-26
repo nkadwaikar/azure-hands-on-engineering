@@ -1,12 +1,26 @@
-## 🛡️ Governance Flow Diagram  
+# Governance Flow
 
-How RBAC and Locks Enforce Safe Operations in the Landing Zone
+> **Why this matters:** RBAC and Resource Locks only work together correctly if their interaction is understood — this diagram traces exactly how a request flows from identity through RBAC to a locked resource so the governance model is visible, not implied.
 
 This diagram highlights the governance controls applied in your Week 1 stack. It shows how **RBAC** and **Resource Locks** work together to enforce compliance, prevent accidental deletion, and preserve identity-first access.
 
+Last validated on: 2026-06-25  
+Portal experience note: Diagram reflects the Week 1 identity stack deployed via Bicep in [07-bicep-deployment-identity-stack.md](07-bicep-deployment-identity-stack.md).
+
+> **Note:** This is a reference document, not a hands-on lab. No resources are created here.
+
 ---
 
-## 🧭 Governance Flow Diagram
+## Module Structure
+
+```text
+Identity-First/
+|-- 09-governance-flow.md   ← this file
+```
+
+---
+
+## Governance Flow Diagram
 
 ```plaintext
                          ┌────────────────────────────────┐
@@ -56,7 +70,7 @@ This diagram highlights the governance controls applied in your Week 1 stack. It
 
 ---
 
-## 🧠 What This Diagram Shows
+## What This Diagram Shows
 
 **✔ RBAC controls who can do what**  
 Examples from your stack:
@@ -84,7 +98,7 @@ Governance is not an afterthought — it's part of the IaC.
 
 ---
 
-## 🎉 Summary
+## Key Takeaways
 
 This governance flow shows:
 

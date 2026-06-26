@@ -4,15 +4,15 @@ This module demonstrates how to design and deploy an Azure foundation where iden
 
 ## Quick Navigation
 
-- Business Challenge
-- Architecture Logic
-- Prerequisites
-- Deployment (Capstone)
-- Validation Checklist
-- Lab Sequence
-- Track Structure
-- Folder Map
-- Business Value Delivered
+- [Business Challenge](#business-challenge)
+- [Architecture Logic](#architecture-logic)
+- [Prerequisites](#prerequisites)
+- [Deployment (Capstone)](#deployment-capstone)
+- [Validation Checklist](#validation-checklist)
+- [Lab Sequence](#lab-sequence)
+- [Track Structure](#track-structure)
+- [Folder Map](#folder-map)
+- [Business Value Delivered](#business-value-delivered)
 
 ## Business Challenge
 
@@ -91,14 +91,14 @@ Identity-First/
 |-- 06-azuremonitor-activity-logs.md
 |-- 07-bicep-deployment-identity-stack.md
 |-- 08-how-to-run-bicep-in-vscode.md
+|-- 09-governance-flow.md
+|-- 10-identity-first-access-flow.md
+|-- 11-vscode-deployment-workflow.md
+|-- lessons-learned.md
 |-- bicep/
 |   |-- main.bicep
 |   `-- modules/
-|-- capstone/architecture/bicep/
-|-- governance-flow.md
-|-- identity-first-access-flow.md
-|-- lessons-learned.md
-`-- vscode-deployment-workflow.md
+`-- capstone/architecture/bicep/
 ```
 
 ## Folder Map
@@ -106,10 +106,10 @@ Identity-First/
 - [Bicep Root Template](bicep/main.bicep)
 - [Bicep Modules](bicep/modules)
 - [Capstone Architecture Templates](capstone/architecture/bicep)
-- [Governance Flow Notes](governance-flow.md)
-- [Identity Access Flow](identity-first-access-flow.md)
+- [Governance Flow Diagram](09-governance-flow.md)
+- [Identity-First Access Flow Diagram](10-identity-first-access-flow.md)
+- [VS Code Deployment Workflow Diagram](11-vscode-deployment-workflow.md)
 - [Lessons Learned](lessons-learned.md)
-- [VS Code Deployment Workflow](vscode-deployment-workflow.md)
 
 ## Business Value Delivered
 

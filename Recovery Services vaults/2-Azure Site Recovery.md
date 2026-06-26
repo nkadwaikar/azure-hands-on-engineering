@@ -1,23 +1,48 @@
 # Azure Site Recovery (ASR) Lab Guide
 
+> **Why this matters:** A primary-region outage with no pre-configured replication leaves your VM unrecoverable — this lab sets up Azure Site Recovery replication from East US to West US 2, validates a test failover, and walks through the commit and re-protect cycle.
+
 An East US to West US 2 disaster recovery lab.
 
-Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Guide](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)
+Last validated on: 2026-06-10  
+Portal experience note: Steps validated in Azure Portal June 2026; failover and re-protect labels may vary slightly across subscriptions.
 
-Last validated on: 2026-06-10
-Portal experience note: Steps validated in Azure Portal June 2026; failover/re-protect labels may vary slightly across subscriptions.
+> **Note:** This lab assumes a source VM is already running in East US. Failover to a secondary region incurs compute and storage costs in the target region for the duration of the test.
+
+---
+
+## Track Structure
+
+```text
+Recovery Services vaults/
+|-- 1-VM Backup and Restore Procedure.md
+|-- 2-Azure Site Recovery.md
+`-- 3-Azure storage replication.md
+```
+
+## Quick Navigation
+
+- [Prerequisites](#1-prerequisites)
+- [Lab Architecture](#lab-architecture)
+- [Initial Setup](#2-initial-setup)
+- [Enable Site Recovery Replication](#3-enable-site-recovery-replication)
+- [Monitor Replication](#4-monitor-replication-health)
+- [Test Failover](#5-test-failover)
+- [Planned Failover](#6-planned-failover)
+- [Re-protect and Failback](#7-re-protect-and-failback)
+- [Cleanup](#8-cleanup)
 
 ---
 
 ## 1. Prerequisites
 
-- Azure subscription with Contributor or Owner permissions in source and target subscriptions
-- Source VM running in East US
-- Target region capacity in West US 2
-- Existing source resource group: rg-fntech-eus-lab-core
-- Target resource group for DR resources: rg-fntech-wus2-lab-dr
-- Recovery Services vault name reserved: rsv-fntech-wus2-lab-dr
-- (Recommended) Existing target VNet and subnet in West US 2
+| Requirement | Detail |
+| --- | --- |
+| Azure Role | **Contributor** or **Owner** on source and target subscriptions |
+| Source VM | Running in East US |
+| Target Region | West US 2 capacity available |
+| Estimated Time | 90–120 minutes (replication initial sync can take additional time) |
+| Tools | Azure Portal only — no CLI required |
 
 Naming reference: [Naming Convention](../Naming-Convention.md)
 
@@ -29,7 +54,27 @@ Naming reference: [Naming Convention](../Naming-Convention.md)
 - Cross-subscription failback complexity and production runbook automation are out of scope.
 - Production hardening (change windows, CAB approvals, and app dependency mapping) is not fully covered.
 
-## Lab Architecture
+---
+
+## 2. Learning Objectives
+
+By the end of this lab, you will have:
+
+- **ASR replication** configured from East US to West US 2
+- A **Recovery Services Vault** in the DR region with replication health confirmed
+- A **test failover** completed without affecting the production VM
+- A **planned failover** committed and the replica confirmed as the new primary
+- **Re-protection** configured for reverse replication from West US 2 back to East US
+
+---
+
+## 3. Scenario
+
+**Ensure your VM is recoverable before the primary region fails, not after.**
+
+ASR replication must be running continuously before an outage. A region failure with no pre-configured replication leaves the VM unrecoverable from that point. This lab configures replication, runs a test failover in an isolated network (no production impact), and validates the full commit-and-re-protect cycle so the DR procedure is understood and tested before it is needed.
+
+---
 
 ```mermaid
 flowchart LR

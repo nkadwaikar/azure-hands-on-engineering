@@ -1,18 +1,42 @@
 # 🧼 Sysprep the Windows VM (Azure‑Safe Method)
 
+> **Why this matters:** Manually built VMs carry machine-specific SIDs, hostname state, and stale OS configuration that break image reuse — Sysprep generalizes the Windows installation so every downstream scale-set instance starts from a clean, identical state.
+
 This guide walks you through preparing the VM for image capture with the correct Sysprep command.
+
+Last validated on: 2026-06-19  
+Portal experience note: Steps validated against Azure Portal as of June 2026.
+
+> **Note:** Run Sysprep only on a VM you intend to capture as an image. The process is irreversible on that instance — the VM cannot be restarted as a normal workload after generalization.
 
 ---
 
-## 📘 **1. Clean the VM Before Sysprep**
+## Track Structure
 
-**Portal Navigation:**
+```text
+Compute/
+|-- 1-build-base-vm.md
+|-- 2-sysprep-vm.md
+`-- 3-Install IIS.md
+```
 
-1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machines** in the top search bar.
-2. Select your VM from the list to open its overview blade.
-3. Use the **Connect** button to open an RDP session and perform the following checks inside the VM.
+## Quick Navigation
 
-### ✔ Check for pending reboot
+- [Clean the VM Before Sysprep](#1-clean-the-vm-before-sysprep)
+- [Run Sysprep](#2-run-sysprep-correct-azure-command)
+- [Wait for Shutdown](#3-wait-for-vm-to-fully-shut-down)
+- [Panther Folder Warning](#panther-folder--do-not-delete)
+- [Known Issues](#known-issues-and-fixes)
+
+---
+
+## 1. Clean the VM Before Sysprep
+
+1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machines**.
+2. Select your VM to open its overview blade.
+3. Click **Connect** to open an RDP session and perform the following checks inside the VM.
+
+### Check for pending reboot
 
 ```powershell
 Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending"
@@ -20,11 +44,11 @@ Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servi
 
 If **True**, reboot.
 
-### ✔ Check Windows Updates  
+### Check Windows Updates
 
 Ensure **no pending updates**.
 
-### ✔ Check BitLocker status
+### Check BitLocker status
 
 ```powershell
 manage-bde -status
@@ -34,9 +58,7 @@ BitLocker must be **Off**.
 
 ---
 
-## 📘 **2. Run Sysprep (Correct Azure Command)**
-
-**Portal Navigation:**
+## 2. Run Sysprep (Correct Azure Command)
 
 1. In your RDP session to the VM, open **PowerShell as Administrator**.
 2. Navigate to the Sysprep directory and run the command below.
@@ -48,7 +70,7 @@ cd C:\Windows\System32\Sysprep
 .\sysprep.exe /generalize /oobe /shutdown /mode:vm
 ```
 
-## Why these switches matter
+### Why these switches matter
 
 - **/generalize** → resets SID  
 - **/oobe** → Azure can specialize the VM  
@@ -57,28 +79,16 @@ cd C:\Windows\System32\Sysprep
 
 ---
 
-## 📘 **3. Wait for VM to Fully Shut Down**
-
-**Portal Navigation:**
+## 3. Wait for VM to Fully Shut Down
 
 1. In the [Azure Portal](https://portal.azure.com), go to your VM's overview page.
 2. Wait until the **Status** shows **Stopped (deallocated)** before proceeding to image capture.
 
-In Azure Portal, the VM must show:
-
-## ✔ **Stopped (deallocated)**
-
-If it shows:
-
-- Stopping  
-- Shutting down  
-- Running  
-
-➡️ **Do NOT capture yet.**
+> **Expected state:** VM status shows **Stopped (deallocated)**. Do not capture if it shows Stopping, Shutting down, or Running.
 
 ---
 
-## 🚫 Do NOT Delete Panther Folder
+## 4. Panther Folder — Do Not Delete
 
 The Panther folder is required by **Azure Guest Agent** during provisioning.
 
@@ -90,9 +100,6 @@ Deleting it causes:
 
 ---
 
-## 🎉 Sysprep complete
-
-Proceed to:  
-➡ [Capture & Test Image](../VMSS/1-capture-and-test-image.md)
+> **Next step:** [Capture and Test Image](../VMSS/1-capture-and-test-image.md)
 
 ---

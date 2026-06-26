@@ -1,13 +1,39 @@
-# 📝 Lessons Learned  
+# Lessons Learned
 
-## Identity-First, Governance-Ready Landing Zone
+> **Why this matters:** Architectural decisions made in Week 1 become the defaults that every future lab inherits — capturing what broke, what simplified, and what surprised means the same mistakes aren't repeated and the same insights don't have to be re-discovered.
 
-Week 1 focused on building a secure, identity-driven foundation with modular Bicep and a VS Code-only workflow.  
-These lessons capture the architectural insights, the mistakes corrected, and the patterns validated during the lab.
+Week 1 focused on building a secure, identity-driven foundation with modular Bicep and a VS Code-only workflow. These lessons capture the architectural insights, the mistakes corrected, and the patterns validated during the lab.
+
+Last reviewed on: 2026-06-25
+
+> **Note:** This is a retrospective document, not a hands-on lab. No resources are created here.
 
 ---
 
-## 🔐 1. Identity-First Is Simpler, Cleaner, and More Secure
+## Module Structure
+
+```text
+Identity-First/
+|-- lessons-learned.md   ← this file
+```
+
+---
+
+## Quick Navigation
+
+- [1. Identity-First Design](#1-identity-first-is-simpler-cleaner-and-more-secure)
+- [2. Modular Bicep](#2-modular-bicep-makes-everything-easier)
+- [3. VS Code Deployment](#3-vs-code-only-deployment-is-fast-and-predictable)
+- [4. Governance Early](#4-governance-must-be-applied-early-not-later)
+- [5. Validation](#5-validation-is-a-first-class-citizen)
+- [6. Architecture Diagrams](#6-architecture-diagrams-clarify-thinking)
+- [7. Folder Structure](#7-clean-folder-structure-reduces-friction)
+- [8. Momentum](#8-small-wins-compound-into-big-momentum)
+- [Summary](#summary)
+
+---
+
+## 1. Identity-First Is Simpler, Cleaner, and More Secure
 
 **Key Insight**  
 Using **User Assigned Managed Identity (UAMI)** as the primary authentication mechanism eliminates:
@@ -27,7 +53,7 @@ This drastically reduces operational risk and aligns with zero-trust principles.
 
 ---
 
-## 🧩 2. Modular Bicep Makes Everything Easier
+## 2. Modular Bicep Makes Everything Easier
 
 **Key Insight**  
 Breaking infrastructure into modules (identity, keyvault, rbac, locks) creates:
@@ -46,7 +72,7 @@ Breaking infrastructure into modules (identity, keyvault, rbac, locks) creates:
 
 ---
 
-## 🖥️ 3. VS Code-Only Deployment Is Fast and Predictable
+## 3. VS Code-Only Deployment Is Fast and Predictable
 
 **Key Insight**  
 Deploying Bicep files directly from VS Code:
@@ -64,7 +90,7 @@ Deploying Bicep files directly from VS Code:
 
 ---
 
-## 🛡️ 4. Governance Must Be Applied Early, Not Later
+## 4. Governance Must Be Applied Early, Not Later
 
 **Key Insight**
 Governance is not something to add in a later week.  
@@ -78,7 +104,7 @@ It needs to be part of the foundation.
 
 ---
 
-## 🧪 5. Validation Is a First-Class Citizen
+## 5. Validation Is a First-Class Citizen
 
 **Key Insight**  
 A deployment is not "done" until it is validated.
@@ -91,7 +117,7 @@ A deployment is not "done" until it is validated.
 
 ---
 
-## 🧭 6. Architecture Diagrams Clarify Thinking
+## 6. Architecture Diagrams Clarify Thinking
 
 **Key Insight**  
 ASCII diagrams are simple but powerful.  
@@ -105,7 +131,7 @@ They force clarity and reveal gaps.
 
 ---
 
-## 🧹 7. Clean Folder Structure Reduces Friction
+## 7. Clean Folder Structure Reduces Friction
 
 **Key Insight**  
 A well-organized repo is a competitive advantage.
@@ -118,7 +144,7 @@ A well-organized repo is a competitive advantage.
 
 ---
 
-## 🚀 8. Small Wins Compound Into Big Momentum
+## 8. Small Wins Compound Into Big Momentum
 
 **Key Insight**
 Week 1 was not about complexity — it was about **foundations**.
@@ -131,7 +157,7 @@ Week 1 was not about complexity — it was about **foundations**.
 
 ---
 
-## 🎉 Summary
+## Summary
 
 Week 1 delivered:
 

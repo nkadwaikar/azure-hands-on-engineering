@@ -1,10 +1,24 @@
 # Azure Arc Hybrid Server Architecture (with Defender for Servers)
 
-> A hybrid landing zone for servers — Arc is the projection layer, Defender is the security brain.
+> **Why this matters:** Managing on-premises and multi-cloud servers without Azure Arc means separate toolchains for policy, patching, monitoring, and security — Arc projects every server into Azure Resource Manager so the same governance stack applies everywhere, with Defender for Servers as the security layer.
+
+Last validated on: 2026-06-19  
+Portal experience note: Validated against Azure Portal as of June 2026; agent installation steps apply to both Windows Server and supported Linux distributions.
+
+> **Note:** This document is an architecture reference and design guide. Hands-on agent installation steps require outbound HTTPS (port 443) connectivity from the target server to Azure endpoints.
 
 ---
 
-## Table of Contents
+## Module Structure
+
+```text
+Azure Arc Hybrid Server Architecture/
+`-- Azure Arc Hybrid Server Architecture.md
+```
+
+---
+
+## Quick Navigation
 
 - [Prerequisites](#0-prerequisites)
 - [High-Level Architecture](#1-high-level-architecture)
