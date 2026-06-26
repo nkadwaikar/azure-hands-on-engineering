@@ -131,8 +131,11 @@ I build things that future-me — and future teams — can pick up without unpac
 
 ---
 
+## Connect
 
-💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar) · 📧 nadeemkadwaikar@outlookcom
+- 💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar)
+- 📧 nadeemkadwaikar@outlook.com
 
 ---
+
 Last updated: June 2026
