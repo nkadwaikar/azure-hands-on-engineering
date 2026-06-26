@@ -2,7 +2,6 @@
 
 Cloud & Identity Engineer — Azure · Microsoft 365 · Zero Trust
 
-
 I design and build Azure environments that are secure by default, repeatable by design, and maintainable by the next engineer. My focus is identity-first architecture, infrastructure as code, and production-aligned governance — the kind of work that keeps regulated environments compliant and teams unblocked.
 
 ---
