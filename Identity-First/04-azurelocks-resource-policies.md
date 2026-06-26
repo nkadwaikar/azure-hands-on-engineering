@@ -11,15 +11,6 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; po
 
 ---
 
-## Module Structure
-
-```text
-Identity-First/
-|-- 04-azurelocks-resource-policies.md
-```
-
----
-
 ## Quick Navigation
 
 - [Learning Objectives](#learning-objectives)

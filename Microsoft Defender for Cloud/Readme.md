@@ -20,18 +20,6 @@ Microsoft Defender for Cloud/
 - Microsoft Defender for Cloud enabled with the **Defender for Servers** plan active on the subscription
 - The requesting user must have **Security Reader** + **Virtual Machine Contributor** roles on the target VM
 
-## Key Concepts Covered
-
-| Concept | Description |
-| --- | --- |
-| Just-In-Time (JIT) VM Access | Time-boxed NSG rule opening — no standing inbound access between sessions |
-| Defender for Servers | Prerequisite plan that enables JIT on VMs |
-| NSG Auto-Remediation | JIT rules are automatically removed when the time window expires |
-| IP-Scoped Access | NSG rule restricts the opened port to the requester's IP only |
-| Bastion + JIT Pattern | JIT controls *when* the port is open; Bastion controls *how* you connect |
-| JIT NSG Rule Naming | Auto-generated ephemeral names (`SecurityCenter-JITRule-{port}-{timestamp}`) — not subject to project naming convention |
-| Audit Trail | All JIT approvals and sessions are logged in Azure Activity Logs and Defender for Cloud |
-
 ---
 
 [← Back to Azure Hands-On Engineering](../README.md)

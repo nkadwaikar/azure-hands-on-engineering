@@ -11,15 +11,6 @@ Portal experience note: Steps validated in Azure Portal June 2026; failover and 
 
 ---
 
-## Track Structure
-
-```text
-Recovery Services vaults/
-|-- 1-VM Backup and Restore Procedure.md
-|-- 2-Azure Site Recovery.md
-`-- 3-Azure storage replication.md
-```
-
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)

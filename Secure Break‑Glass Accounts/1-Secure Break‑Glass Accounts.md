@@ -11,18 +11,8 @@ Portal experience note: Steps validated against Entra Admin Center as of June 20
 
 ---
 
-## Module Structure
-
-```text
-Secure Break‑Glass Accounts/
-`-- 1-Secure Break‑Glass Accounts.md
-```
-
-This module is a focused single-lab implementation guide for modern break-glass account design.
-
 ## Quick Navigation
 
-- [Module Structure](#module-structure)
 - [Prerequisites](#prerequisites)
 - [Learning Objectives](#learning-objectives)
 - [Scenario](#scenario)

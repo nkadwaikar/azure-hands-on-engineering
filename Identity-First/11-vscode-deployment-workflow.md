@@ -11,21 +11,6 @@ Portal experience note: Diagram reflects the capstone architecture under `Identi
 
 ---
 
-## Module Structure
-
-```text
-Identity-First/
-|-- 11-vscode-deployment-workflow.md   ← this file
-capstone/architecture/bicep/
-|-- main.bicep
-`-- modules/
-    |-- create-rg.bicep
-    |-- create-uami.bicep
-    `-- create-keyvault.bicep
-```
-
----
-
 ## Deployment Workflow Diagram
 
 ```plaintext

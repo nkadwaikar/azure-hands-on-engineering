@@ -10,15 +10,6 @@ Last reviewed on: 2026-06-25
 
 ---
 
-## Module Structure
-
-```text
-Identity-First/
-|-- lessons-learned.md   ← this file
-```
-
----
-
 ## Quick Navigation
 
 - [1. Identity-First Design](#1-identity-first-is-simpler-cleaner-and-more-secure)

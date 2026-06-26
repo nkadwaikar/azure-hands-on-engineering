@@ -11,15 +11,6 @@ Portal experience note: Diagram reflects the Week 1 identity stack deployed via 
 
 ---
 
-## Module Structure
-
-```text
-Identity-First/
-|-- 10-identity-first-access-flow.md   ← this file
-```
-
----
-
 ## Identity Flow Diagram
 
 ```plaintext

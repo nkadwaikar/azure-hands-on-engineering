@@ -36,21 +36,6 @@ Azure Bastion/
 - A Key Vault instance (for the secretless access pattern)
 - If attaching an NSG to `AzureBastionSubnet`: inbound rules for `Internet → 443`, `GatewayManager → 443`, `AzureLoadBalancer → 443`; outbound rules for `VirtualNetwork → 3389/22` and `AzureCloud → 443`
 
-## Key Concepts Covered
-
-| Concept | Description |
-| --- | --- |
-| Azure Bastion | Browser-based RDP/SSH proxy — no public IP on the VM required |
-| AzureBastionSubnet | Dedicated `/26` subnet required; must be named exactly `AzureBastionSubnet` |
-| Bastion Tiers | `Basic` for standard RDP/SSH; `Standard` for IP-based connection and tunneling |
-| NSG Rules | Specific inbound/outbound rules required on the Bastion subnet if an NSG is attached |
-| Key Vault Integration | Retrieve VM credentials from Key Vault instead of hardcoding them |
-| Just-In-Time (JIT) Access | Time-boxed NSG rule opening via Microsoft Defender for Cloud |
-| Bastion vs Jumpbox | Managed browser access vs self-managed VM proxy |
-| Private Endpoint | Private PaaS connectivity — complementary but distinct from Bastion |
-| VNet Peering | Hub-to-spoke peering required when Bastion and VM are in separate VNets |
-| Automatic Reverse Peering | Azure creates the spoke→hub peering automatically when both VNets share the same subscription/tenant |
-
 ---
 
 [← Back to Azure Hands-On Engineering](../README.md)

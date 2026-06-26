@@ -31,30 +31,6 @@ App Service + Managed Identity + Deployment Slots + Azure DevOps/
    | 13. Manual Approval Gates | Create `production` environment, add approver, link to SwapToProduction stage |
    | 14. Cleanup / Teardown | Delete `rg-appservice-wus2-lab`; Key Vault removed separately |
 
-## Scenario
-
-**Deploy a web application with zero secrets in code or pipelines.**
-
-The App Service reads secrets from Key Vault via Managed Identity. A CI/CD pipeline deploys to a staging slot first, and a manual approval gate controls the promotion to production. This is the standard enterprise deployment pattern for regulated environments.
-
-## Architecture Logic
-
-- Each deployment slot has its own System-Assigned Managed Identity in Microsoft Entra ID.
-- Both identities are granted the **Key Vault Secrets User** RBAC role independently.
-- Key Vault references resolve secrets at runtime — no credentials are stored in app settings or pipeline variables.
-- A multi-stage Azure DevOps YAML pipeline orchestrates Build → Staging → Production with a manual approval checkpoint.
-
-```mermaid
-flowchart LR
-    Pipeline[Azure DevOps Pipeline] --> Build[Build Stage]
-    Build --> Staging[Deploy to Staging Slot]
-    Staging --> KV[Key Vault via Managed Identity]
-    Staging --> Gate[Manual Approval Gate]
-    Gate --> Swap[Swap Staging → Production]
-    Swap --> Prod[App Service Production]
-    Prod --> KV
-```
-
 ## Prerequisites
 
 - Azure subscription with **Owner** or **Contributor** role on the target subscription
@@ -62,19 +38,6 @@ flowchart LR
 - Azure Portal access
 - Azure DevOps organization at `dev.azure.com`
 - Estimated time: 60–90 minutes
-
-## Key Concepts Covered
-
-| Concept | Description |
-| --- | --- |
-| System-Assigned Managed Identity | Per-resource identity managed by Azure; each slot gets its own principal |
-| Deployment Slots | Separate environments (staging/production) within a single App Service; requires S1 or higher SKU |
-| Slot Swap | Atomic promotion of staging to production with zero downtime |
-| Key Vault References | App settings that resolve secrets at runtime via `@Microsoft.KeyVault(SecretUri=...)` |
-| Azure RBAC | **Key Vault Secrets User** role grants read-only secret access without vault access policies |
-| Multi-Stage YAML Pipeline | Azure DevOps stages with `dependsOn` controlling deployment flow |
-| Manual Approval Gate | Environment-level checkpoint that pauses the pipeline until an approver confirms |
-| Secretless Architecture | No passwords or tokens in code, app settings, or pipeline variables |
 
 ---
 

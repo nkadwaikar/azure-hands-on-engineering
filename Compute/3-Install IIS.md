@@ -9,15 +9,6 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 ---
 
-## Track Structure
-
-```text
-Compute/
-|-- 1-build-base-vm.md
-|-- 2-sysprep-vm.md
-`-- 3-Install IIS.md
-```
-
 ## Quick Navigation
 
 - [Connect to the VM](#1-connect-to-the-vm)

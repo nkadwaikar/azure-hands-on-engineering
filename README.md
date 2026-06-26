@@ -6,7 +6,7 @@ I design and build Azure environments that are secure by default, repeatable by 
 
 ---
 
-## 🎯 What I Bring to Teams
+## 🎯 Skills
 
 | Area | What I Do |
 |---|---|
@@ -71,16 +71,19 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 ### 1. Identity-First Security & Zero Trust
 
+- [Identity-First Architecture — Full Track](Identity-First/README.md) — End-to-end track overview: Entra ID, Managed Identity, Key Vault, RBAC, governance locks, and modular Bicep IaC from fundamentals to capstone
 - [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md) — Modular Bicep stack: Managed Identity + Key Vault + RBAC + Governance Lock
 - [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md) — Secretless authentication; eliminates credential sprawl
-- [Azure AD Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md) — Least-privilege role assignments across scopes
+- [Entra ID Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md) — Least-privilege role assignments across scopes
 - [Break-Glass Accounts – FIDO2](Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) — Emergency access with FIDO2 hardware keys and Conditional Access enforcement
 - [Break-Glass Accounts – CBA](Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) — Certificate-based auth as phishing-resistant MFA for emergency accounts
 - [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/1-Microsoft%20Entra%20Backup%20%26%20Recovery.md) — Entra ID configuration export, versioning, and restore procedures
 
 ### 2. Azure Infrastructure as Code (IaC)
 
-- [VS Code Bicep Deployment Workflow](Identity-First/11-vscode-deployment-workflow.md)
+- [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md) — Modular Bicep stack: subscription-scoped resource group creation + resource-group-scoped modules for UAMI, Key Vault, RBAC assignments, and governance locks *(see also Section 1)*
+- [Deploy Bicep from VS Code](Identity-First/08-how-to-run-bicep-in-vscode.md) — Install the Bicep extension, authenticate, and run the full deploy-validate-redeploy cycle without leaving VS Code
+- [VS Code Bicep Deployment Workflow](Identity-First/11-vscode-deployment-workflow.md) — How a VS Code right-click maps to a subscription-scoped deploy followed by a resource-group-scoped module chain; no CLI or Portal required
 - [Naming Convention](Naming-Convention.md) — Resource abbreviations, segment pattern, and per-type naming rules used across all labs
 
 ### 3. Secure Access & Networking
@@ -93,13 +96,14 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 - [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md) — Custom policy definitions, assignments, and automated remediation tasks
 - [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md) — Audit trail and alerting for security events
-- [Governance Flow Diagram](Identity-First/09-governance-flow.md)
+- [Governance Flow Diagram](Identity-First/09-governance-flow.md) — Visual trace of how RBAC and Resource Locks interact; makes the governance control layer visible, not implied
 
 ### 5. Compute & Image Lifecycle
 
-- [Build Base VM](Compute/1-build-base-vm.md)
-- [Sysprep Azure VM](Compute/2-sysprep-vm.md)
-- [Capture & Test Image](VMSS/1-capture-and-test-image.md)
+- [Build Base VM](Compute/1-build-base-vm.md) — Provision a VM with consistent naming conventions, security defaults, and post-deployment validation; foundation for all Compute track labs
+- [Sysprep Azure VM](Compute/2-sysprep-vm.md) — Generalise the Windows installation for image capture; removes machine-specific SIDs and stale OS state
+- [Install IIS](Compute/3-Install%20IIS.md) — Install IIS web server role and write a test page; validates HTTP traffic before the image is locked for VMSS use
+- [Capture & Test Image](VMSS/1-capture-and-test-image.md) — Capture the Sysprepped VM to an Azure Compute Gallery and boot a test VM from it before locking the image version
 - [VMSS Deployment](VMSS/2-vmss-deployment.md) — Auto-scaling VM fleet from a golden image
 
 ### 6. App Service & DevOps
@@ -118,7 +122,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 ---
 
-## 🛠️ In Progress
+## 🛠️ Next
 
 - Defender for Cloud CSPM — security posture management across a hub-and-spoke architecture
 - Copilot Studio — AI agent with SharePoint knowledge source, secured with Entra ID

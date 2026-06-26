@@ -35,22 +35,6 @@ Azure Arc Hybrid Server Architecture/
 - Azure Portal access and Azure CLI or PowerShell (Az module) installed
 - Log Analytics Workspace and Automation Account pre-created in the platform resource group
 
-## Key Concepts Covered
-
-| Concept | Description |
-| --- | --- |
-| Azure Arc | Projects non-Azure servers into ARM — enables policy, RBAC, and extensions on any server |
-| Connected Machine Agent (CMA) | Lightweight outbound-HTTPS agent; no inbound firewall rules required |
-| Azure Monitor Agent (AMA) | Successor to MMA; collects OS metrics, events, and logs via DCRs |
-| Data Collection Rules (DCRs) | Scoped, filterable log ingestion configuration attached to servers via policy |
-| Guest Configuration | Audits and enforces OS-level settings and security baselines (CIS, Microsoft) |
-| Defender for Servers | EDR (MDE), vulnerability assessment, JIT VM access, and FIM on Arc machines |
-| Azure Update Manager | Agentless patch assessment and scheduled deployment for Windows and Linux |
-| Just-in-Time (JIT) Access | Time-boxed, approval-gated admin access; eliminates always-open RDP/SSH ports |
-| File Integrity Monitoring (FIM) | Alerts on unexpected changes to critical OS files and configuration paths |
-| Zero Trust | Identity (Entra ID + CA), device (MDE), network (outbound-only), and policy controls layered together |
-| Private Link for Arc | Routes Arc, Log Analytics, and Automation traffic over private endpoints — no public internet exposure |
-
 ---
 
 [← Back to Azure Hands-On Engineering](../README.md)

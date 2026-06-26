@@ -9,15 +9,6 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 
 ---
 
-## Module Structure
-
-```text
-Azure Bastion/
-`-- 1-Azure Bastion.md
-```
-
----
-
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)

@@ -10,16 +10,6 @@ Last validated on: 2026-06-24
 
 ---
 
-## Module Structure
-
-```text
-App Service + Managed Identity + Deployment Slots + Azure DevOps/
-├── App Service + Managed Identity + Deployment Slots + Azure DevOps.md
-└── README.md
-```
-
----
-
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)

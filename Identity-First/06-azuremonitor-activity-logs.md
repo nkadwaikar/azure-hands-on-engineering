@@ -14,15 +14,6 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; KQ
 
 ---
 
-## Module Structure
-
-```text
-Identity-First/
-|-- 06-azuremonitor-activity-logs.md   ← this file
-```
-
----
-
 ## Quick Navigation
 
 - [Prerequisites](#prerequisites)

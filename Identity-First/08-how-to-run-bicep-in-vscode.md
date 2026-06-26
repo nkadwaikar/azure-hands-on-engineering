@@ -11,16 +11,6 @@ Portal experience note: Steps validated against VS Code with the Bicep and Azure
 
 ---
 
-## Module Structure
-
-```text
-Identity-First/
-|-- 07-bicep-deployment-identity-stack.md
-|-- 08-how-to-run-bicep-in-vscode.md   ← this file
-```
-
----
-
 ## Quick Navigation
 
 - [Prerequisites](#prerequisites)

@@ -9,19 +9,8 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 ---
 
-## Track Structure
-
-```text
-VMSS/
-|-- 1-capture-and-test-image.md
-`-- 2-vmss-deployment.md
-```
-
-Flow: capture reusable image -> validate with a test VM -> deploy scale set from known-good image.
-
 ## Quick Navigation
 
-- [Track Structure](#track-structure)
 - [Capture the Image](#1-capture-the-image)
 - [Deploy a Test VM](#2-deploy-a-test-vm-from-the-captured-image)
 - [Validate the Test VM](#3-validate-the-test-vm)

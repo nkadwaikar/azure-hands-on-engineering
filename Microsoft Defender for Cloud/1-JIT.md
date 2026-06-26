@@ -9,15 +9,6 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 
 ---
 
-## Module Structure
-
-```text
-Microsoft Defender for Cloud/
-`-- 1-JIT.md
-```
-
----
-
 ## Quick Navigation
 
 - [Prerequisites](#prerequisites)

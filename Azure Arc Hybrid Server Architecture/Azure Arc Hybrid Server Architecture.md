@@ -9,15 +9,6 @@ Portal experience note: Validated against Azure Portal as of June 2026; agent in
 
 ---
 
-## Module Structure
-
-```text
-Azure Arc Hybrid Server Architecture/
-`-- Azure Arc Hybrid Server Architecture.md
-```
-
----
-
 ## Quick Navigation
 
 - [Prerequisites](#0-prerequisites)

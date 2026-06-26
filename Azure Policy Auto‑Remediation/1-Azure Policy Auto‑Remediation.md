@@ -11,18 +11,8 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 
 ---
 
-## Module Structure
-
-```text
-Azure Policy Auto‑Remediation/
-`-- 1-Azure Policy Auto‑Remediation.md
-```
-
-This module is a focused single-lab guide for Policy DeployIfNotExists auto-remediation.
-
 ## Quick Navigation
 
-- [Module Structure](#module-structure)
 - [Prerequisites](#1-prerequisites)
 - [Learning Objectives](#2-learning-objectives)
 - [Scenario](#3-scenario)

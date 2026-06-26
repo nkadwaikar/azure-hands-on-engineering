@@ -11,17 +11,6 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 
 ---
 
-## Track Structure
-
-```text
-Compute/
-|-- 1-build-base-vm.md
-|-- 2-sysprep-vm.md
-`-- 3-Install IIS.md
-```
-
-Flow: build base VM -> sysprep the image source -> install/validate IIS for web workload testing.
-
 ## Quick Navigation
 
 - [Prerequisites](#prerequisites)

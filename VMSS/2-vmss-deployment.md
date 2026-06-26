@@ -19,16 +19,6 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 ---
 
-## Track Structure
-
-```text
-VMSS/
-|-- 1-capture-and-test-image.md
-`-- 2-vmss-deployment.md
-```
-
----
-
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)

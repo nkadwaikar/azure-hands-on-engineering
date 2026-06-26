@@ -13,18 +13,8 @@ Portal experience note: Steps validated against Microsoft Entra admin center UI 
 
 ---
 
-## Module Structure
-
-```text
-Microsoft Entra Backup & Recovery/
-`-- 1-Microsoft Entra Backup & Recovery.md
-```
-
-This module is a focused single-lab guide for Entra difference reports and object-level recovery.
-
 ## Quick Navigation
 
-- [Module Structure](#module-structure)
 - [Learning Objectives](#1-learning-objectives)
 - [Prerequisites](#2-prerequisites)
 - [Service Behavior Overview](#3-service-behavior-overview)

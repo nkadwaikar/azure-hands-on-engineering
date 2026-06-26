@@ -12,20 +12,8 @@ Portal experience note: Steps validated against Azure Portal UI as of June 2026;
 
 ---
 
-## Track Structure
-
-```text
-Recovery Services vaults/
-|-- 1-VM Backup and Restore Procedure.md
-|-- 2-Azure Site Recovery.md
-`-- 3-Azure storage replication.md
-```
-
-Use this file first, then continue through Site Recovery and storage replication.
-
 ## Quick Navigation
 
-- [Track Structure](#track-structure)
 - [Learning Objectives](#1-learning-objectives)
 - [Prerequisites](#2-prerequisites)
 - [Lab Architecture](#lab-architecture)

@@ -9,15 +9,6 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; ZR
 
 ---
 
-## Track Structure
-
-```text
-Recovery Services vaults/
-|-- 1-VM Backup and Restore Procedure.md
-|-- 2-Azure Site Recovery.md
-`-- 3-Azure storage replication.md
-```
-
 ## Quick Navigation
 
 - [Lab Prerequisites](#1-lab-prerequisites)
