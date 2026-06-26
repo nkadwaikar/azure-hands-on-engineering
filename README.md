@@ -1,6 +1,7 @@
 # 👋 Hi, I'm Nadeem Kadwaikar
 
-*Cloud & Identity Engineer — Azure · Microsoft 365 · Zero Trust*
+Cloud & Identity Engineer — Azure · Microsoft 365 · Zero Trust
+
 
 I design and build Azure environments that are secure by default, repeatable by design, and maintainable by the next engineer. My focus is identity-first architecture, infrastructure as code, and production-aligned governance — the kind of work that keeps regulated environments compliant and teams unblocked.
 
@@ -20,9 +21,6 @@ I design and build Azure environments that are secure by default, repeatable by 
 ---
 
 ## 🗺️ Platform Architecture
-
-<details>
-<summary>View architecture diagram</summary>
 
 ```mermaid
 flowchart TD
@@ -66,8 +64,6 @@ flowchart TD
     Arc --> VM & Monitor
 ```
 
-</details>
-
 ---
 
 ## 📌 Labs & Guides
@@ -75,6 +71,7 @@ flowchart TD
 Each lab reflects a real Azure engineering pattern — not a tutorial walkthrough, but a production-aligned implementation with documented reasoning.
 
 ### 1. Identity-First Security & Zero Trust
+
 - [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md) — Modular Bicep stack: Managed Identity + Key Vault + RBAC + Governance Lock
 - [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md) — Secretless authentication; eliminates credential sprawl
 - [Azure AD Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md) — Least-privilege role assignments across scopes
@@ -83,34 +80,41 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 - [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/1-Microsoft%20Entra%20Backup%20%26%20Recovery.md) — Entra ID configuration export, versioning, and restore procedures
 
 ### 2. Azure Infrastructure as Code (IaC)
+
 - [VS Code Bicep Deployment Workflow](Identity-First/11-vscode-deployment-workflow.md)
 - [Naming Convention](Naming-Convention.md) — Resource abbreviations, segment pattern, and per-type naming rules used across all labs
 
 ### 3. Secure Access & Networking
+
 - [Azure Bastion](Azure%20Bastion/1-Azure%20Bastion.md) — Browser-based RDP/SSH, no public IP, hub-spoke VNet peering, secretless Key Vault auth
 - [Microsoft Defender for Cloud – JIT](Microsoft%20Defender%20for%20Cloud/1-JIT.md) — Time-bounded NSG rules, zero standing inbound access
 - [Azure Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — WAF at the edge, custom domain with TLS, static website origin
 
 ### 4. Governance & Compliance
+
 - [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md) — Custom policy definitions, assignments, and automated remediation tasks
 - [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md) — Audit trail and alerting for security events
 - [Governance Flow Diagram](Identity-First/09-governance-flow.md)
 
 ### 5. Compute & Image Lifecycle
+
 - [Build Base VM](Compute/1-build-base-vm.md)
 - [Sysprep Azure VM](Compute/2-sysprep-vm.md)
 - [Capture & Test Image](VMSS/1-capture-and-test-image.md)
 - [VMSS Deployment](VMSS/2-vmss-deployment.md) — Auto-scaling VM fleet from a golden image
 
 ### 6. App Service & DevOps
+
 - [App Service + Managed Identity + Deployment Slots + Azure DevOps](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps.md) — Secretless app config via Key Vault references, per-slot Managed Identity, multi-stage pipeline with manual approval gates
 
 ### 7. Business Continuity & Resilience
+
 - [Azure VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md) — RPO/RTO-aware backup configuration
 - [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md) — Cross-region failover for business continuity
 - [Storage Replication](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md) — LRS, ZRS, GRS, RA-GZRS — redundancy options and geo-failover
 
 ### 8. Hybrid & Arc
+
 - [Azure Arc Hybrid Server Architecture](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md) — Arc-enabled servers, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration
 
 ---
