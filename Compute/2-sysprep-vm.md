@@ -1,4 +1,4 @@
-# 🧼 Sysprep the Windows VM (Azure‑Safe Method)
+# Sysprep the Windows VM (Azure‑Safe Method)
 
 > **Why this matters:** Manually built VMs carry machine-specific SIDs, hostname state, and stale OS configuration that break image reuse — Sysprep generalizes the Windows installation so every downstream scale-set instance starts from a clean, identical state.
 
@@ -11,13 +11,24 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 ---
 
+## Prerequisites
+
+| Requirement | Detail |
+| --- | --- |
+| Prior lab | VM created and running from [Build Base VM](1-build-base-vm.md) |
+| Access | RDP session to the VM (Administrator credentials) |
+| VM state | Running, no pending Windows Updates, BitLocker Off |
+| Estimated Time | 10–15 minutes |
+
+---
+
 ## Quick Navigation
 
 - [Clean the VM Before Sysprep](#1-clean-the-vm-before-sysprep)
 - [Run Sysprep](#2-run-sysprep-correct-azure-command)
 - [Wait for Shutdown](#3-wait-for-vm-to-fully-shut-down)
-- [Panther Folder Warning](#panther-folder--do-not-delete)
-- [Known Issues](#known-issues-and-fixes)
+- [Generalize in Azure Portal](#4-generalize-the-vm-in-azure-portal)
+- [Panther Folder Warning](#5-panther-folder--do-not-delete)
 
 ---
 
@@ -79,7 +90,21 @@ cd C:\Windows\System32\Sysprep
 
 ---
 
-## 4. Panther Folder — Do Not Delete
+## 4. Generalize the VM in Azure Portal
+
+After the VM reaches **Stopped (deallocated)** state, you must mark it as generalized in Azure before capture:
+
+1. In the [Azure Portal](https://portal.azure.com), go to your VM's overview page.
+2. In the top menu, click **Capture**.
+3. Azure will prompt you to confirm the VM will be generalized — confirm and proceed.
+
+> **Note:** Skipping this step and attempting to create an image from a non-generalized VM will result in a failed or unusable image.
+
+---
+
+## 5. Panther Folder — Do Not Delete
+
+Location: `C:\Windows\Panther`
 
 The Panther folder is required by **Azure Guest Agent** during provisioning.
 

@@ -103,8 +103,8 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 - [Compute — Track Overview](Compute/README.md) — VM provisioning lifecycle: base build, Sysprep, and IIS validation
 - [Build Base VM](Compute/1-build-base-vm.md) — Provision a VM with consistent naming conventions, security defaults, and post-deployment validation; foundation for all Compute track labs
-- [Sysprep Azure VM](Compute/2-sysprep-vm.md) — Generalise the Windows installation for image capture; removes machine-specific SIDs and stale OS state
 - [Install IIS](Compute/3-Install%20IIS.md) — Install IIS web server role and write a test page; validates HTTP traffic before the image is locked for VMSS use
+- [Sysprep Azure VM](Compute/2-sysprep-vm.md) — Generalize the Windows installation for image capture; removes machine-specific SIDs and stale OS state
 - [VMSS — Track Overview](VMSS/README.md) — Full VM scale set lifecycle: image capture, test deployment, and scale set provisioning
 - [Capture & Test Image](VMSS/1-capture-and-test-image.md) — Capture the Sysprepped VM to an Azure Compute Gallery and boot a test VM from it before locking the image version
 - [VMSS Deployment](VMSS/2-vmss-deployment.md) — Auto-scaling VM fleet from a golden image

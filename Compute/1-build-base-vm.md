@@ -88,7 +88,7 @@ Configure:
 - **Region:** East US
 - **Availability options:** No infrastructure redundancy required
 - **Security type:** Standard
-- **Image:** Windows Server 2022 / Ubuntu LTS
+- **Image:** Windows Server 2022 Datacenter (Azure Edition)
 - **VM architecture:** x64
 - **Run with Azure Spot discount:** No
 - **Size:** Standard_B2s — 2 vCPUs, 4 GiB RAM
@@ -148,21 +148,29 @@ Leave defaults unless you need extensions or cloud-init.
 
 ## 3. Post-Deployment Steps
 
-### 3.1 Connect to VM
+### 3.1 Verify Boot via Diagnostics
+
+1. Go to **VM** → **Help** → **Boot diagnostics**
+2. Confirm the screenshot shows the Windows login screen (no BSOD or hang)
+3. Check **Overview** → **Status** shows **Running**
+
+---
+
+### 3.2 Connect to VM
 
 - **Windows:** Use RDP → Download RDP file
 - **Linux:** Use SSH from terminal or Azure Cloud Shell
 
 ---
 
-### 3.2 Add Inbound NSG Rules (Optional)
+### 3.3 Add Inbound NSG Rules (Optional)
 
 To allow HTTP (for IIS or web apps):
 
 1. Go to **VM** → **Networking** → **Network security group**
 2. **Inbound security rules** → **Add**
 3. Configure:
-   - **Source:** Any
+   - **Source:** Any *(restrict to your IP in non-lab environments)*
    - **Destination port:** 80
    - **Protocol:** TCP
    - **Action:** Allow
@@ -192,9 +200,9 @@ http://<public-ip>
 
 ## 5. Cleanup (Optional)
 
-- Delete VM
-- Delete NIC, disk, public IP
-- Delete resource group: `rg-fntech-vm-lab-eus-core`
+- Delete the resource group: `rg-fntech-vm-lab-eus-core`
+  - This removes all resources (VM, NIC, disk, public IP, VNet) at once
+  - The NIC, public IP, and OS disk are also individually deleted on VM deletion if the checkboxes in sections 2.2 and 2.3 were enabled
 
 ---
 

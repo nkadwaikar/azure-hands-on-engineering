@@ -1,4 +1,4 @@
-# 🌐 Install IIS on the VM (Azure Portal + PowerShell)
+# Install IIS on the VM (Azure Portal + PowerShell)
 
 > **Why this matters:** A VM without a web server role is just a running OS with no workload — this lab installs IIS and writes a test page so the custom image used in VMSS serves verifiable HTTP traffic rather than just powering on.
 
@@ -9,13 +9,25 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 ---
 
+## Prerequisites
+
+| Requirement | Detail |
+| --- | --- |
+| Prior lab | VM created and running from [Build Base VM](1-build-base-vm.md) |
+| Access | RDP session to the VM (Administrator credentials) |
+| VM state | Running, reachable via RDP |
+| Estimated Time | 10–15 minutes |
+
+---
+
 ## Quick Navigation
 
 - [Connect to the VM](#1-connect-to-the-vm)
 - [Open PowerShell](#2-open-powershell-as-administrator)
 - [Install IIS](#3-install-iis--common-features--custom-test-page)
 - [Verify IIS](#4-verify-iis)
-- [Cleanup](#5-cleanup)
+- [Troubleshooting](#5-troubleshooting)
+- [Cleanup](#6-cleanup)
 
 ---
 
@@ -94,9 +106,7 @@ You should see:
 - Your custom Hello World page, not the default IIS banner
 - The HTML you created via PowerShell
 
----
-
-## 5. Verify from Your Local Machine (Optional)
+### Option B — From Your Local Machine (Optional)
 
 If your VM has a Public IP and NSG rule allowing port 80:
 
@@ -106,7 +116,9 @@ If your VM has a Public IP and NSG rule allowing port 80:
 
 ---
 
-## 🛠 Troubleshooting
+---
+
+## 5. Troubleshooting
 
 **If the page does NOT load:**
 
@@ -114,3 +126,15 @@ If your VM has a Public IP and NSG rule allowing port 80:
 - Check Windows Firewall inside the VM: **Control Panel** → **Windows Defender Firewall** → **Allow an app** → ensure **World Wide Web Services** is allowed.
 - Restart IIS manually: `iisreset`
 - Confirm the file exists: `C:\inetpub\wwwroot\index.html`
+
+---
+
+## 6. Cleanup
+
+This lab does not require cleanup on its own — the VM should be kept running for the Sysprep step.
+
+> When the full Compute track is complete, delete the resource group `rg-fntech-vm-lab-eus-core` to remove all resources.
+
+---
+
+> **Next step:** [Sysprep the VM](2-sysprep-vm.md)
