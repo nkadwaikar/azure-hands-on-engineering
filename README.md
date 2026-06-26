@@ -82,9 +82,9 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 ### 2. Azure Infrastructure as Code (IaC)
 
-- [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md) — Modular Bicep stack: subscription-scoped resource group creation + resource-group-scoped modules for UAMI, Key Vault, RBAC assignments, and governance locks *(see also Section 1)*
-- [Deploy Bicep from VS Code](Identity-First/08-how-to-run-bicep-in-vscode.md) — Install the Bicep extension, authenticate, and run the full deploy-validate-redeploy cycle without leaving VS Code
-- [VS Code Bicep Deployment Workflow](Identity-First/11-vscode-deployment-workflow.md) — How a VS Code right-click maps to a subscription-scoped deploy followed by a resource-group-scoped module chain; no CLI or Portal required
+- [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md) — The full module stack: UAMI, Key Vault, RBAC assignments, and governance locks wired together *(also in Section 1)*
+- [Bicep in VS Code — Toolchain Setup](Identity-First/08-how-to-run-bicep-in-vscode.md) — Install the extension, authenticate, and step through the deploy-validate-redeploy cycle without touching the CLI
+- [Bicep in VS Code — Deployment Mechanics](Identity-First/11-vscode-deployment-workflow.md) — How a right-click deploy maps to subscription-scoped → resource-group-scoped module stages under the hood
 - [Naming Convention](Naming-Convention.md) — Resource abbreviations, segment pattern, and per-type naming rules used across all labs
 
 ### 3. Secure Access & Networking
