@@ -135,7 +135,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 ## 💡 Engineering Philosophy
 
-I build things that future-me — and future teams — can pick up without unpacking a mess. Every lab here is shaped by three principles: **clarity** (documented decisions, not just commands), **repeatability** (idempotent deployments, not one-time scripts), and **secure defaults** (identity-first, least privilege, no hardcoded credentials).
+I build things that future‑me — and future teams — can pick up without sorting through a mess. Every lab is shaped by three principles: clarity (document decisions, not just commands), repeatability (deployments that run cleanly every time), and secure defaults (identity‑first, least privilege, no hardcoded credentials).
 
 ---
 
