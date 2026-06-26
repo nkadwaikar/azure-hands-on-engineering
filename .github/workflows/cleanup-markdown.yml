@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Install PowerShell
-        uses: PowerShell/PowerShell@v1
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y powershell
 
       - name: Run Markdown Cleanup
         shell: pwsh
@@ -31,7 +31,6 @@ jobs:
           )
 
           $files = Get-ChildItem -Recurse -Filter "*.md"
-
           $modified = 0
 
           foreach ($file in $files) {
@@ -52,7 +51,6 @@ jobs:
           Write-Host "Modified $modified file(s)."
 
       - name: Commit and push changes
-        if: success()
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
