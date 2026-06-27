@@ -111,7 +111,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 ### 6. App Service & DevOps
 
-- [App Service + Managed Identity + Deployment Slots + Azure DevOps](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/ReadME.md) — Secretless app config via Key Vault references, per-slot Managed Identity, multi-stage pipeline with manual approval gates
+- [App Service + Managed Identity + Deployment Slots + Azure DevOps](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) — Secretless app config via Key Vault references, per-slot Managed Identity, multi-stage pipeline with manual approval gates
 
 ### 7. Business Continuity & Resilience
 
