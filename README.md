@@ -27,7 +27,7 @@ I build identity‑first Azure platforms that stay secure, compliant, and mainta
 ## 🎯 Skills
 
 | Area | What I Do |
-|------|-----------|
+| --- | --- |
 | Azure Infrastructure | VMs, VMSS, VNets, NSGs, Load Balancers, Front Door, Storage — built for resilience |
 | Identity & Zero Trust | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
 | IaC & Automation | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
@@ -100,8 +100,9 @@ flowchart TD
 3. Secure Access — Bastion, JIT, Front Door
 4. Governance Layer — Policy, locks, RBAC scopes
 5. Compute Lifecycle — VM → Sysprep → Image → VMSS
-6. Resilience — Backup, ASR, storage replication
-7. Hybrid — Arc + Defender for Servers
+6. App Service & DevOps — managed identity, deployment slots, pipelines
+7. Resilience — Backup, ASR, storage replication
+8. Hybrid — Arc + Defender for Servers
 
 > This mirrors how real Azure platforms are built in regulated environments.
 
@@ -114,7 +115,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 ### 1. 🔐 Identity-First Security & Zero Trust
 
 - [Identity-First Architecture — Full Track](Identity-First/README.md)
-- [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md)
+- [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
 - [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
 - [Entra ID Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md)
 - [Break-Glass Accounts (FIDO2 + CBA)](Secure%20Break%E2%80%91Glass%20Accounts/README.md)
@@ -122,9 +123,10 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ### 2. 🧱 Azure Infrastructure as Code (IaC)
 
-- [Identity-First Bicep Capstone](Identity-First/07-bicep-deployment-identity-stack.md)
-- [Bicep in VS Code — Toolchain Setup](Identity-First/08-how-to-run-bicep-in-vscode.md)
-- [Bicep Deployment Mechanics](Identity-First/11-vscode-deployment-workflow.md)
+- [Bicep Track — Full Overview](Bicep/README.md)
+- [Bicep Deployment — Identity Stack](Bicep/1-bicep-deployment-identity-stack.md)
+- [Bicep in VS Code — Toolchain Setup](Bicep/2-how-to-run-bicep-in-vscode.md)
+- [VS Code Deployment Workflow](Bicep/3-vscode-deployment-workflow.md)
 - [Naming Convention](Naming-Convention.md)
 
 ### 3. 🔒 Secure Access & Networking
@@ -136,11 +138,13 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 ### 4. 🛡️ Governance & Compliance
 
 - [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
+- [Azure Locks + Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
 - [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
 - [Governance Flow Diagram](Identity-First/09-governance-flow.md)
 
 ### 5. 🖥️ Compute & Image Lifecycle
 
+- [Compute Track Overview](Compute/README.md)
 - [Build Base VM](Compute/1-build-base-vm.md)
 - [Install IIS](Compute/3-Install%20IIS.md)
 - [Sysprep Azure VM](Compute/2-sysprep-vm.md)
@@ -150,23 +154,20 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ### 6. ⚙️ App Service & DevOps
 
-- [App Service + Managed Identity](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md)
-- [Deployment Slots](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps.md)
-- [Azure DevOps Multi-Stage Pipelines](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps.md)
+- [App Service + Managed Identity — Track Overview](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md)
+- [Deployment Slots & Azure DevOps Multi-Stage Pipelines](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps.md)
 
 ### 7. 🔄 Business Continuity & Resilience
 
+- [Recovery Services Track Overview](Recovery%20Services%20vaults/README.md)
 - [VM Backup](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
 - [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
 - [Storage Replication (LRS → ZRS → GRS → RA-GZRS)](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md)
 
 ### 8. 🌐 Hybrid & Arc
 
-- [Arc-enabled Servers](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md)
-- [Defender for Servers](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
-- [Azure Monitor Agent](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
-- [Update Manager](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
-- [Guest Configuration](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
+- [Arc-enabled Servers — Track Overview](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md)
+- [Arc Architecture — Full Lab](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
 
 ---
 
