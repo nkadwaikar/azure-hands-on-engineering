@@ -38,6 +38,8 @@ Last validated on: 2026-06-24
 | Subscription | Pay-As-You-Go or Visual Studio subscription |
 | Estimated Time | 60–90 minutes |
 | Tools | Azure Portal + Azure DevOps (dev.azure.com) |
+| Azure DevOps | An Azure DevOps **organization** and **project** — create one at [dev.azure.com](https://dev.azure.com) if you don't have one |
+| Repository | A Git repository inside that project (Azure Repos) or a connected GitHub repo with at least a placeholder app file committed |
 | Key Vault | An existing Key Vault with at least one secret (e.g., `app-secret`) |
 
 ---
@@ -174,11 +176,11 @@ Configure the following:
 | Runtime stack | `.NET`, `Node`, or `Python` (any) |
 | Region | `West US 2` (or your preferred region) |
 | App Service Plan | Create new → `asp-appservice-wus2-lab` |
-| Pricing plan | Premium V4 P0V4 (4 GB memory, 1 vCPU) |
+| Pricing plan | Standard S1 or higher (e.g., S1: 1.75 GB memory, 1 vCPU) |
 
 Click **Review + Create** → **Create**
 
-> **Note:** The Premium Plan is required — deployment slots are not available on the Free or Shared tiers.
+> **Note:** Deployment slots are available on **Standard (S1) tier and above**. They are not available on the Free or Shared tiers.
 
 ---
 
@@ -322,11 +324,18 @@ The App Service restarts automatically and resolves the reference on next startu
 4. Enter the same **Name** and **Value** (Key Vault reference) as above
 5. Click **Apply** → **Save**
 
-### Verify the Reference Resolves
+### Verify the Key Vault Reference (New Portal UI)
 
-After saving, return to **Settings** → **Environment variables** → **Application settings**. The value column for `MySecret` should show a green check icon and display `Key Vault Reference` instead of the raw URI.
+After saving, return to **App Service** → **Settings** → **Environment variables** and locate `MySecret`.
 
-If it shows a red error icon, work through the following checks in order:
+> **Note:** The new Azure Portal UI does not show green or red status icons next to Key Vault references. Instead, check the value displayed in the **Value** column:
+
+| Status | What you see |
+| --- | --- |
+| Working | The resolved secret value is shown |
+| Failing | A warning message is displayed next to the setting |
+
+If you see a warning message, work through the following checks in order:
 
 | Check | Action |
 | --- | --- |
@@ -372,14 +381,22 @@ The pipeline authenticates to Azure using a service connection. Create it before
 
 > **Note:** Automatic service principal creation requires the **Owner** role on the subscription. If you see a permission error, ask your subscription owner to create the service connection or use the **Manual** option with an existing service principal.
 
+> **Permissions granted:** When created automatically at resource group scope, Azure DevOps assigns the service principal the **Contributor** role on `rg-appservice-wus2-lab`. This grants the pipeline permission to deploy code and swap slots — no additional role assignment is needed.
+
 ### Step 2 — Open Azure DevOps
 
 1. Go to `dev.azure.com` → Your Project → **Pipelines**
 2. Click **New Pipeline**
 
-### Step 3 — Choose Your Code Source
+### Step 3 — Initialize a Repository and Choose Your Code Source
 
-Select **Azure Repos Git** (if your code is in Azure DevOps) or **GitHub** if applicable, then pick your repository.
+If you do not already have a repository with application code, initialize one now:
+
+1. In your Azure DevOps project, go to **Repos** → **Files**
+2. Click **Initialize** to create the repo with a default branch (`main`)
+3. Add at least a placeholder file (e.g., `index.html` or `app.py`) and commit it to `main` — the pipeline requires a non-empty repo to publish artifacts
+
+Once your repository is ready, in the pipeline creation wizard select **Azure Repos Git** (or **GitHub** if applicable), then pick your repository.
 
 ### Step 4 — Select Starter Pipeline
 
@@ -469,6 +486,18 @@ Click **Save** then **Run**. The pipeline completes the following flow:
 | --- | --- |
 | Staging | `https://app-appservice-wus2-lab-staging.azurewebsites.net` |
 | Production | `https://app-appservice-wus2-lab.azurewebsites.net` |
+
+### Step 7 — Create the `staging` Environment in Azure DevOps
+
+The pipeline YAML references `environment: staging` in the `Deploy_Staging` stage. Azure DevOps auto-creates environments on first use, but the pipeline may pause on its first run to request authorization. Create it manually beforehand to avoid this:
+
+1. Go to **Azure DevOps** → **Pipelines** → **Environments**
+2. Click **New Environment**
+3. Name it: `staging`
+4. Leave **Resource** as **None**
+5. Click **Create**
+
+> **Note:** The `production` environment with its approval gate is configured separately in [section 14](#14-add-manual-approval-gates-enterprise-pattern). Do not add approval checks to the `staging` environment.
 
 ---
 
