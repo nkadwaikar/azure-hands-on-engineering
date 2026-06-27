@@ -380,7 +380,6 @@ The pipeline authenticates to Azure using a service connection. Create it before
 7. Check **Grant access permission to all pipelines** → click **Save**
 
 > **Note:** Automatic service principal creation requires the **Owner** role on the subscription. If you see a permission error, ask your subscription owner to create the service connection or use the **Manual** option with an existing service principal.
-
 > **Permissions granted:** When created automatically at resource group scope, Azure DevOps assigns the service principal the **Contributor** role on `rg-appservice-wus2-lab`. This grants the pipeline permission to deploy code and swap slots — no additional role assignment is needed.
 
 ### Step 2 — Open Azure DevOps
