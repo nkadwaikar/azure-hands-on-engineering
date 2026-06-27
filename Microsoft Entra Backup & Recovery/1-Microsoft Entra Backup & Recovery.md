@@ -20,7 +20,7 @@ Portal experience note: Steps validated against Microsoft Entra admin center UI 
 - [Service Behavior Overview](#3-service-behavior-overview)
 - [Generate a Difference Report](#4-generate-a-difference-report)
 - [Perform a Recovery Operation](#5-perform-a-recovery-operation)
-- [Post-Recovery Validation](#6-post-recovery-validation)
+- [Post-Recovery Validation](#5-perform-a-recovery-operation)
 - [Cleanup](#7-cleanup)
 
 ---

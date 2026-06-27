@@ -18,10 +18,10 @@ Portal experience note: Steps validated against Azure Portal UI as of June 2026;
 - [Prerequisites](#2-prerequisites)
 - [Lab Architecture](#lab-architecture)
 - [Initial Setup](#3-initial-setup)
-- [Configure Backup](#4-configure-backup)
+- [Configure Backup](#4-configure-backup-new-azure-backup-experience)
 - [Full VM Restore Test](#5-full-vm-restore-test)
 - [File-Level Recovery Test](#6-file-level-recovery-test)
-- [Cleanup](#7-cleanup)
+- [Cleanup](#54-clean-up-restored-vm-lab)
 
 ---
 

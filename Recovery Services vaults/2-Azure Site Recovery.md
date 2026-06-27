@@ -14,10 +14,9 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; fa
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)
-- [Lab Architecture](#lab-architecture)
 - [Initial Setup](#2-initial-setup)
 - [Enable Site Recovery Replication](#3-enable-site-recovery-replication)
-- [Monitor Replication](#4-monitor-replication-health)
+- [Monitor Replication](#34-validate-replication-health)
 - [Test Failover](#6-test-failover-use-recovery-plan-only)
 - [Planned Failover](#7-planned-failover-east-us-to-west-us-2)
 - [Re-protect and Failback](#8-failback-west-us-2-to-east-us)

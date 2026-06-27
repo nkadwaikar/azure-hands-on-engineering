@@ -16,8 +16,8 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; ZR
 - [Create a Blob Container](#4-create-a-blob-container-and-upload-a-test-file)
 - [Observe LRS Characteristics](#5-observe-lrs-characteristics)
 - [Create ZRS Storage Account](#6-create-second-storage-account-zrs)
-- [Change Replication Tier](#7-change-replication-tier)
-- [Cleanup](#cleanup)
+- [Change Replication Tier](#11-trigger-a-manual-geo-failover-grs--gzrs-only)
+- [Cleanup](#14-cleanup)
 
 ---
 

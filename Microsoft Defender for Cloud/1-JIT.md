@@ -11,7 +11,7 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 
 ## Quick Navigation
 
-- [Prerequisites](#prerequisites)
+- [Prerequisites](#1-prerequisites)
 - [Enable JIT on a VM](#step-1--enable-jit-on-a-vm)
 - [Request JIT Access](#step-2--request-jit-access)
 - [Verify the NSG Rule Was Opened](#step-3--verify-the-nsg-rule-was-opened)
