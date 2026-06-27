@@ -1,12 +1,12 @@
 # Managed Identity + Azure Key Vault (Secretless Authentication)
 
 > **Why this matters:** Storing connection strings or API keys in app settings means one leaked credential requires both a rotation and a redeployment — this lab replaces credentials entirely by assigning a Managed Identity to a VM and granting it scoped Key Vault access via RBAC.
-
+>
 > **Prerequisites:** This lab continues from Day 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 By the end of this lab, you will:
 
@@ -21,7 +21,7 @@ This lab introduces the identity-first pattern used in modern cloud workloads.
 
 ---
 
-## 🧪 Lab Steps
+## Lab Steps
 
 ---
 
@@ -128,9 +128,9 @@ Grant the VM's managed identity permission to read secrets.
 
 The VM identity now has permissions to:
 
-✅ **Read** secrets  
-❌ **Not** write or delete secrets  
-❌ **Not** manage Key Vault settings  
+ **Read** secrets  
+ **Not** write or delete secrets  
+ **Not** manage Key Vault settings  
 
 This enforces the **principle of least privilege**.
 
@@ -220,7 +220,7 @@ az keyvault secret show \
 SuperSecretValue123
 ```
 
-### ✅ What This Validates
+### What This Validates
 
 - VM identity authentication
 - RBAC permissions are correctly configured
@@ -229,9 +229,9 @@ SuperSecretValue123
 
 ---
 
-## 🧠 Troubleshooting
+## Troubleshooting
 
-### ❌ Error: `ForbiddenByRbac`
+### Error: `ForbiddenByRbac`
 
 **Cause:** Missing or incorrect RBAC assignment  
 **Fix:**  
@@ -243,7 +243,7 @@ SuperSecretValue123
 
 ---
 
-## ❌ Error: `az: command not found`
+## Error: `az: command not found`
 
 **Cause:** Azure CLI not installed on the VM  
 **Fix:** Install Azure CLI:
@@ -260,7 +260,7 @@ az version
 
 ---
 
-### ❌ Error: `ResourceNotFound`
+### Error: `ResourceNotFound`
 
 **Cause:** Incorrect Key Vault name or the vault doesn't exist  
 **Fix:**  
@@ -271,7 +271,7 @@ az version
 
 ---
 
-### ❌ Error: `Forbidden` or Permission Denied
+### Error: `Forbidden` or Permission Denied
 
 **Cause:** RBAC propagation delay  
 **Fix:**  
@@ -282,7 +282,7 @@ az version
 
 ---
 
-### ❌ SSH Connection Issues
+### SSH Connection Issues
 
 **Cause:** Incorrect key permissions or incorrect path  
 **Fix:**  
@@ -299,7 +299,7 @@ chmod 400 ~/Downloads/bootcamp-key.pem
 
 ---
 
-### ❌ Error: `The client with object id does not have authorization`
+### Error: `The client with object id does not have authorization`
 
 **Cause:** Role assignment not completed or propagated  
 **Fix:**  
@@ -325,7 +325,7 @@ az group delete \
 
 ---
 
-## 📌 Day 2 Summary
+## Day 2 Summary
 
 Today you learned:
 

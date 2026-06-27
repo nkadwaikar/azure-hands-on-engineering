@@ -9,7 +9,7 @@
 > All user accounts use the placeholder domain `@contoso.com` to avoid exposing my real Microsoft Entra ID tenant domain.  
 > Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 By the end of this lab, you will:
 
@@ -21,7 +21,7 @@ By the end of this lab, you will:
 
 ---
 
-## 🧪 Lab Steps
+## Lab Steps
 
 ---
 
@@ -78,7 +78,7 @@ Sign in as: `emma.lee@contoso.com`
 3. Reset password for standard users (after MFA registration)
 4. Add user to a group
 
-### ❌ Denied Actions
+### Denied Actions
 
 Try to:
 
@@ -146,7 +146,7 @@ This demonstrates that **Reader adds visibility only**, while directory and data
 - Cannot manage users  
 - Cannot read Key Vault secrets  
 
-### 🧠 Key Insight
+### Key Insight
 
 - **Emma has broad visibility but zero resource power.**  
 - **Alex has limited visibility but full power inside his RG.**  
@@ -155,7 +155,7 @@ This demonstrates that **Reader adds visibility only**, while directory and data
 
 ---
 
-## 📌 Day 3 Summary
+## Day 3 Summary
 
 Today you learned:
 

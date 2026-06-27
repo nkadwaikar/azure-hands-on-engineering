@@ -359,7 +359,7 @@ If your `AzureBastionSubnet` (`10.0.1.0/26`) and your VM subnet (`172.16.0.0/24`
 4. Enable:
    - ✔ **Allow virtual network access**
    - ✔ **Allow forwarded traffic**
-   - ❌ Do **NOT** enable "Use remote gateway"
+   - Do **NOT** enable "Use remote gateway"
 5. Click **Add**
 
 ### Why You Cannot Create the Spoke-to-Hub Peering

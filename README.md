@@ -9,7 +9,7 @@ I design and build Azure environments that are secure by default, repeatable by 
 ## 🎯 Skills
 
 | Area | What I Do |
-|---|---|
+| --- | --- |
 | **Azure Infrastructure** | VMs, VMSS, VNets, NSGs, Load Balancers, Front Door, Storage — built for resilience |
 | **Identity & Zero Trust** | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
 | **IaC & Automation** | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
@@ -19,7 +19,7 @@ I design and build Azure environments that are secure by default, repeatable by 
 
 ---
 
-## 🗺️ Platform Architecture
+## Platform Architecture
 
 ```mermaid
 flowchart TD
@@ -28,7 +28,7 @@ flowchart TD
         MI["Managed Identity"]
         KV["Key Vault"]
     end
-    subgraph Governance["📋 Governance"]
+    subgraph Governance[" Governance"]
         Policy["Azure Policy"]
         Remediation["Auto-Remediation"]
     end
@@ -65,7 +65,7 @@ flowchart TD
 
 ---
 
-## 📌 Labs & Guides
+## Labs & Guides
 
 Each lab reflects a real Azure engineering pattern — not a tutorial walkthrough, but a production-aligned implementation with documented reasoning.
 
@@ -142,7 +142,7 @@ I build things that future‑me — and future teams — can pick up without sor
 ## Connect
 
 - 💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar)
-- 📧 nadeemkadwaikar@outlook.com
+- 📧 <nadeemkadwaikar@outlook.com>
 
 ---
 

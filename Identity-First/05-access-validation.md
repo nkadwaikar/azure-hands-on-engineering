@@ -37,7 +37,7 @@ This ensures Day 5 starts with a clean, consistent environment.
 
 ---
 
-## 🎯 **Learning Objectives**
+## **Learning Objectives**
 
 By the end of this lab, you will:
 
@@ -51,7 +51,7 @@ By the end of this lab, you will:
 
 ---
 
-## 🧪 **Lab Steps**
+## **Lab Steps**
 
 ---
 
@@ -63,9 +63,9 @@ Log in as a user with **Reader** on `rg-identity-eus-lab-core`.
 
 Try the following:
 
-- View resources → ✅ Allowed  
-- Modify a resource → ❌ Denied  
-- Delete a resource → ❌ Denied  
+- View resources →  Allowed  
+- Modify a resource →  Denied  
+- Delete a resource →  Denied  
 
 This confirms Reader = view-only.
 
@@ -77,9 +77,9 @@ Log in as a user with **Contributor** on `rg-identity-eus-lab-core`.
 
 Try:
 
-- Create a VM → ✅ Allowed  
-- Modify resources → ✅ Allowed  
-- Assign RBAC → ❌ Denied  
+- Create a VM →  Allowed  
+- Modify resources →  Allowed  
+- Assign RBAC →  Denied  
 
 Contributor cannot grant permissions — correct behavior.
 
@@ -91,8 +91,8 @@ Log in as **Owner** on `rg-locks-demo`.
 
 Try:
 
-- Delete a locked resource → ❌ Denied  
-- Modify a locked resource → ❌ Denied (if Read-only lock applied)
+- Delete a locked resource →  Denied  
+- Modify a locked resource →  Denied (if Read-only lock applied)
 
 This confirms:
 
@@ -182,7 +182,7 @@ curl 'http://169.254.169.254/metadata/identity/oauth2/token?...'
 az keyvault secret show --vault-name <kv> --name <secret>
 ```
 
-Expected: ✅ Allowed
+Expected:  Allowed
 
 ---
 
@@ -194,7 +194,7 @@ If MI has no access:
 az storage blob list ...
 ```
 
-Expected: ❌ Access denied
+Expected:  Access denied
 
 This validates identity-first access.
 
@@ -207,13 +207,13 @@ This validates identity-first access.
 #### **Test 1 — SKU Restriction (Deny)**
 
 Portal → Create VM → Choose disallowed SKU  
-Expected: ❌ Blocked
+Expected:  Blocked
 
 CLI → Same test  
-Expected: ❌ Blocked
+Expected:  Blocked
 
 ARM/Bicep → Same test  
-Expected: ❌ Blocked
+Expected:  Blocked
 
 ---
 
@@ -227,8 +227,8 @@ az group create -n rg-audit-test -l eastus
 
 Expected:
 
-- ✅ Created  
-- ✅ Marked **Non-compliant**
+- Created  
+- Marked **Non-compliant**
 
 Create RG with tag:
 
@@ -236,7 +236,7 @@ Create RG with tag:
 az group create -n rg-audit-pass -l eastus --tags environment=dev
 ```
 
-Expected: ✅ Compliant
+Expected:  Compliant
 
 ---
 
@@ -246,16 +246,16 @@ Expected: ✅ Compliant
 
 #### **Test 1 — Delete Lock**
 
-Portal → Delete RG → ❌ Blocked  
-CLI → `az group delete` → ❌ Blocked  
+Portal → Delete RG →  Blocked  
+CLI → `az group delete` →  Blocked  
 
 ---
 
 #### **Test 2 — Read-Only Lock**
 
-Portal → Modify resource → ❌ Blocked  
-CLI → Update resource → ❌ Blocked  
-Portal → View settings → ✅ Allowed  
+Portal → Modify resource →  Blocked  
+CLI → Update resource →  Blocked  
+Portal → View settings →  Allowed  
 
 This proves lock behavior is consistent across interfaces.
 
@@ -308,7 +308,7 @@ This mirrors real Landing Zone design.
 
 ---
 
-## 📌 Day 5 Summary
+## Day 5 Summary
 
 Today you learned:
 

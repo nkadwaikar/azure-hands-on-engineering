@@ -74,9 +74,9 @@ An image version that looks correct in the gallery can still fail at boot if Sys
 | Behavior | Meaning |
 | --------- | --------- |
 | ✔ Windows login screen | Image is healthy |
-| ❌ “Hi there” OOBE | Wrong capture process |
-| ❌ “Specializing…” | Sysprep failed |
-| ❌ Black screen | RDP disabled / firewall issue |
+|  “Hi there” OOBE | Wrong capture process |
+|  “Specializing…” | Sysprep failed |
+|  Black screen | RDP disabled / firewall issue |
 
 ---
 

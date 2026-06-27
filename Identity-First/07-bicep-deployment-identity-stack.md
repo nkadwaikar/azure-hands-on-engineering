@@ -15,7 +15,7 @@ bicep/
 
 ---
 
-## 🎯 Objective
+## Objective
 
 Build a modular Bicep stack that deploys:
 
@@ -29,7 +29,7 @@ This foundation carries forward into future capstones.
 
 ---
 
-## 🧱 Final Folder Structure
+## Final Folder Structure
 
 ```plaintext
 bicep/
@@ -45,7 +45,7 @@ Each module is small, focused, and reusable — following enterprise IaC pattern
 
 ---
 
-## 🗺️ Identity‑First Architecture Diagram
+## Identity‑First Architecture Diagram
 
 ```mermaid
 flowchart TD
@@ -69,7 +69,7 @@ This diagram shows the identity-first flow:
 
 ---
 
-## 🧩 Module Overview
+## Module Overview
 
 ### 1. identity.bicep  
 
@@ -120,7 +120,7 @@ This enforces governance and prevents accidental deletion.
 
 ---
 
-## 🧠 Composition Layer — main.bicep
+## Composition Layer — main.bicep
 
 The `main.bicep` file orchestrates the entire identity-first architecture:
 
@@ -133,7 +133,7 @@ The file references all modules inside the `modules/` folder, keeping the root c
 
 ---
 
-## 🧪 What Happens When You Deploy
+## What Happens When You Deploy
 
 The deployment creates:
 
@@ -146,7 +146,7 @@ This completes the identity-first foundation for Week 1.
 
 ---
 
-## 🎉 Day 7 Complete
+## Day 7 Complete
 
 You now have:
 

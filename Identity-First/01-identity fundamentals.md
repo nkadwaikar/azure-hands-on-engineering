@@ -1,13 +1,12 @@
 # Identity Fundamentals (Entra ID, RBAC Scopes, Least Privilege)
 
 > **Why this matters:** Teams that bolt on identity controls after the fact end up with overprivileged service accounts, shared credentials, and no auditability — this lab builds the RBAC fundamentals (users, roles, scope inheritance, least privilege) that every subsequent governance control in this track depends on.
-
 > **Note:** All user accounts in this lab use the placeholder domain `@contoso.com` to avoid exposing my real Azure AD tenant domain.  
 > Steps **1**, **2**, and **3.2** are performed by administrators with elevated privileges.
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before starting this lab, ensure you have:
 
@@ -19,7 +18,7 @@ Before starting this lab, ensure you have:
 
 **⏱️ Estimated Time:** 45–60 minutes
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 By the end of this lab, you will:
 
@@ -31,13 +30,13 @@ By the end of this lab, you will:
 
 ---
 
-## 🧪 Lab Steps
+## Lab Steps
 
 ---
 
 ## 1. Create BootCamp User (Admin)
 
-### 👨‍💼 Admin Task
+### Admin Task
 
 Create a non-admin user for RBAC testing:
 
@@ -174,9 +173,9 @@ alex.james@contoso.com       Contributor  /subscriptions/.../resourceGroups/rg-i
 
 When Alex signs in to Azure Portal:
 
-- ✅ Only `rg-identity-eus-lab-core` is visible under Resource Groups  
-- ❌ No other resource groups appear  
-- ❌ Attempts to access or create resources outside this RG result in **Access denied**  
+- Only `rg-identity-eus-lab-core` is visible under Resource Groups  
+- No other resource groups appear  
+- Attempts to access or create resources outside this RG result in **Access denied**  
 
 This validates **RBAC scoping** and **least-privilege** principles.
 
@@ -184,7 +183,7 @@ This validates **RBAC scoping** and **least-privilege** principles.
 
 ## 4. Validate RG-Level RBAC (Login as Test User)
 
-**👤 Sign in as:** `alex.james@contoso.com`
+**Sign in as:** `alex.james@contoso.com`
 
 ### Steps to Validate
 
@@ -201,7 +200,7 @@ This validates **RBAC scoping** and **least-privilege** principles.
 All attempts outside `rg-identity-eus-lab-core` should return:
 
 ```text
-❌ Access denied
+ Access denied
 ```
 
 This confirms **correct RBAC enforcement** at the Resource Group scope.
@@ -210,7 +209,7 @@ This confirms **correct RBAC enforcement** at the Resource Group scope.
 
 ## 5. Test RBAC Inheritance (Admin + Test User)
 
-### 👨‍💼 Admin: Create a Test Resource
+### Admin: Create a Test Resource
 
 Create a Storage Account inside `rg-identity-eus-lab-core` to test inheritance.
 
@@ -241,11 +240,11 @@ az storage account create \
 
 ---
 
-### 👤 Test User: Validate Inherited Permissions
+### Test User: Validate Inherited Permissions
 
 Sign in as `alex.james@contoso.com` and navigate to the storage account.
 
-#### ✅ Actions the User CAN Perform
+#### Actions the User CAN Perform
 
 - View the storage account details
 - Modify storage account configuration (e.g., change access tier)
@@ -253,7 +252,7 @@ Sign in as `alex.james@contoso.com` and navigate to the storage account.
 - Upload and manage blobs
 - View metrics and logs
 
-#### ❌ Actions the User CANNOT Perform
+#### Actions the User CANNOT Perform
 
 - Assign IAM roles on the storage account (requires Owner or User Access Administrator)
 - Access resources outside `rg-identity-eus-lab-core`
@@ -282,11 +281,11 @@ Test these scenarios to understand RBAC behavior:
 
 | Scenario | Expected Result | Reason |
 | --------- | --------------- | -------- |
-| User tries to access another RG | ❌ Access denied | No role assigned at that scope |
-| User tries to assign IAM roles | ❌ Access denied | Contributor cannot manage IAM (requires Owner) |
-| User tries to view subscription billing | ❌ Access denied | No subscription-level permissions |
-| User tries to delete the RG | ✅ Allowed | Contributor can delete resource groups |
-| User tries to create resources in the RG | ✅ Allowed | Contributor has full resource management rights |
+| User tries to access another RG | Access denied | No role assigned at that scope |
+| User tries to assign IAM roles | Access denied | Contributor cannot manage IAM (requires Owner) |
+| User tries to view subscription billing | Access denied | No subscription-level permissions |
+| User tries to delete the RG | Allowed | Contributor can delete resource groups |
+| User tries to create resources in the RG | Allowed | Contributor has full resource management rights |
 
 This reinforces the importance of **proper scope selection** when assigning roles.
 
@@ -367,7 +366,7 @@ az role assignment list \
 
 ## 8. Clean Up (Optional)
 
-### 👨‍💼 Admin Task: Clean Up Resources
+### Admin Task: Clean Up Resources
 
 ### Delete the Resource Group
 
@@ -396,7 +395,7 @@ az ad user show --id alex.james@contoso.com 2>/dev/null || echo "User deleted"
 
 ---
 
-## 📌 Day 1 Summary
+## Day 1 Summary
 
 Today you learned:
 
