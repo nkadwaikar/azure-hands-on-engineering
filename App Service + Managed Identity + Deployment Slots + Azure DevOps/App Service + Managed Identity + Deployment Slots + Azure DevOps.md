@@ -225,6 +225,21 @@ Assign the **Key Vault Secrets User** role to both identities via IAM.
 
 If you do not already have a secret in Key Vault, create one now before granting access.
 
+#### Prerequisite — Assign Key Vault Administrator Role
+
+You must have the **Key Vault Administrator** role to create secrets. Assign it to yourself before proceeding.
+
+1. Go to **Azure Portal** → **Key Vaults** → select `kv-appservice-wus2-lab`
+2. In the left menu, select **Access control (IAM)**
+3. Click **+ Add** → **Add role assignment**
+4. **Role tab:** search for and select **Key Vault Administrator** → click **Next**
+5. **Members tab:** click **+ Select members** → search for your user account → select it
+6. Click **Review + Assign** → **Assign**
+
+> **Note:** Role assignment propagation can take up to 5 minutes. Wait before proceeding to the secret creation steps below.
+
+#### Create the Secret
+
 1. Go to **Azure Portal** → **Key Vaults** → select `kv-appservice-wus2-lab`
 2. In the left menu, select **Objects** → **Secrets**
 3. Click **+ Generate/Import**
