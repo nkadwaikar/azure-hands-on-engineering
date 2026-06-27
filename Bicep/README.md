@@ -6,7 +6,7 @@ This track covers modular Bicep deployments for identity-first Azure infrastruct
 
 ## 📁 Folder Structure
 
-``` 
+```
 Bicep/
 ├── main.bicep                  # RG-scope orchestrator — wires identity, KV, RBAC, lock
 │
@@ -91,7 +91,23 @@ az deployment group create \
 
 ---
 
-## 💡 Design Principles
+## � Naming Convention
+
+All resources in this track follow the shared naming standard documented in [Naming-Convention.md](../Naming-Convention.md).
+
+Key patterns used in Bicep modules:
+
+| Resource | Pattern | Example |
+|---|---|---|
+| Resource Group | `rg-<workload>-<env>` | `rg-identity-lab` |
+| User-Assigned MI | `uami-<workload>-<env>` | `uami-identity-lab` |
+| Key Vault | `kv-<workload>-<env>` | `kv-identity-lab` |
+| Storage Account | `st<workload><env>` | `stidentitylab` |
+| Virtual Machine | `vm-<workload>-<env>` | `vm-identity-lab` |
+
+---
+
+## �💡 Design Principles
 
 - **Single-responsibility modules** — one resource per module, composed at the root
 - **Secretless by default** — Managed Identity replaces all service principal credentials
