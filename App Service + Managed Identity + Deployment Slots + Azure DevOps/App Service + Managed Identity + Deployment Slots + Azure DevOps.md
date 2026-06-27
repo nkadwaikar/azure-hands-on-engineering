@@ -283,14 +283,19 @@ Go to **Key Vault** → **Access control (IAM)** → **Role assignments**. You s
 
 Key Vault references allow the App Service to resolve secrets at runtime without storing credentials anywhere. Perform these steps for **both** the production slot and the staging slot.
 
-### Step 1 — Open Configuration
+### Step 1 — Open Environment Variables
 
-1. **Azure Portal** → **App Services** → `app-appservice-wus2-lab`
-2. Left menu → **Configuration**
+1. Go to **Azure Portal** → **App Services** → `app-appservice-wus2-lab`
+2. In the left menu, scroll to **Settings**
+3. Click **Environment variables**
+4. You will see the following tabs and controls:
+   - **Application settings** tab
+   - **+ Add** button
+   - **Save** button
 
-### Step 2 — Add Application Setting
+### Step 2 — Add the Key Vault Reference
 
-1. Click **+ New application setting**
+1. Click **+ Add** under the **Application settings** tab
 2. Fill in:
    - **Name:** `MySecret`
    - **Value:** Key Vault reference URI in the following format:
@@ -305,20 +310,30 @@ Example:
 @Microsoft.KeyVault(SecretUri=https://kv-appservice-wus2-lab.vault.azure.net/secrets/app-secret/)
 ```
 
-3. Click **OK** → **Save**
+3. Click **Apply** → **Save**
 
 The App Service restarts automatically and resolves the reference on next startup.
 
 ### Step 3 — Repeat for the Staging Slot
 
-1. **App Services** → `app-appservice-wus2-lab` → **Deployment slots** → **staging**
-2. Left menu → **Configuration**
-3. Add the same application setting with the same Key Vault reference
-4. Click **OK** → **Save**
+1. Go to **App Services** → `app-appservice-wus2-lab` → **Deployment slots** → **staging**
+2. In the left menu, scroll to **Settings** → click **Environment variables**
+3. Under the **Application settings** tab, click **+ Add**
+4. Enter the same **Name** and **Value** (Key Vault reference) as above
+5. Click **Apply** → **Save**
 
 ### Verify the Reference Resolves
 
-After saving, return to **Configuration**. The value column for `MySecret` should show a green check and `Key Vault Reference` instead of the raw URI. If it shows a red error icon, confirm the Managed Identity is enabled and the IAM role assignment has propagated (allow up to 5 minutes).
+After saving, return to **Settings** → **Environment variables** → **Application settings**. The value column for `MySecret` should show a green check icon and display `Key Vault Reference` instead of the raw URI.
+
+If it shows a red error icon, work through the following checks in order:
+
+| Check | Action |
+| --- | --- |
+| Managed Identity enabled | **App Service** → **Settings** → **Identity** → confirm **Status = On** for the slot |
+| Role assignment propagated | Wait up to 5 minutes after assigning **Key Vault Secrets User** |
+| RBAC permission model | **Key Vault** → **Settings** → **Access configuration** → confirm **Azure role-based access control** is selected |
+| Correct secret name in URI | Verify the secret name in the Key Vault reference URI matches exactly the name in **Key Vault** → **Objects** → **Secrets** |
 
 ### Reading the Secret in Code
 
