@@ -1,8 +1,8 @@
 # Lessons Learned
 
-> **Why this matters:** Architectural decisions made in Week 1 become the defaults that every future lab inherits — capturing what broke, what simplified, and what surprised means the same mistakes aren't repeated and the same insights don't have to be re-discovered.
+> **Why this matters:** Architectural decisions made early become the defaults that every future lab inherits — capturing what broke, what simplified, and what surprised means the same mistakes aren't repeated and the same insights don't have to be re-discovered.
 
-Week 1 focused on building a secure, identity-driven foundation with modular Bicep and a VS Code-only workflow. These lessons capture the architectural insights, the mistakes corrected, and the patterns validated during the lab.
+This track focused on building a secure, identity-driven foundation with modular Bicep and a VS Code-only workflow. These lessons capture the architectural insights, the mistakes corrected, and the patterns validated during the lab.
 
 Last reviewed on: 2026-06-25
 
@@ -129,16 +129,16 @@ A well-organized repo is a competitive advantage.
 
 ### What I Learned About Folder Structure  
 
-- Separating `bicep/` from the markdown labs keeps everything easier to navigate.  
-- Keeping validation evidence near the relevant lab reduces friction.  
-- A consistent structure sets the tone for future projects.
+- Keeping Bicep modules flat and colocating lab docs in the `Bicep/` folder makes the deployment context self-contained.
+  - Validation evidence near the relevant lab reduces context switching.
+  - A consistent structure sets the tone for future projects.
 
 ---
 
 ## 8. Small Wins Compound Into Big Momentum
 
 **Key Insight**
-Week 1 was not about complexity — it was about **foundations**.
+This track was not about complexity — it was about **foundations**.
 
 ### What I Learned About Momentum  
 
@@ -150,13 +150,13 @@ Week 1 was not about complexity — it was about **foundations**.
 
 ## Summary
 
-Week 1 delivered:
+This track delivered:
 
-- A secure identity-first landing zone  
-- Modular Bicep architecture  
-- Governance controls  
-- Observability foundations  
-- Clean documentation  
-- A repeatable VS Code deployment workflow  
+- A secure identity-first landing zone
+- Modular Bicep architecture
+- Governance controls
+- Observability foundations
+- Clean documentation
+- A repeatable VS Code deployment workflow
 
-These lessons set the stage for Week 2 and beyond.
+These lessons set the stage for every future capstone.

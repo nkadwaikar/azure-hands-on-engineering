@@ -2,7 +2,7 @@
 
 > **Why this matters:** Storing connection strings or API keys in app settings means one leaked credential requires both a rotation and a redeployment — this lab replaces credentials entirely by assigning a Managed Identity to a VM and granting it scoped Key Vault access via RBAC.
 >
-> **Prerequisites:** This lab continues from Day 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
+> **Prerequisites:** This lab continues from Lab 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
@@ -32,8 +32,8 @@ This lab introduces the identity-first pattern used in modern cloud workloads.
 
 Ensure you have completed:
 
-- **Day 1 — Identity Fundamentals + RBAC Basics** (see `01-identity fundamentals.md`)
-- Resource group: `rg-identity-eus-lab-core` (created in Day 1)
+- **Lab 1 — Identity Fundamentals + RBAC Basics** (see `01-identity fundamentals.md`)
+- Resource group: `rg-identity-eus-lab-core` (created in Lab 1)
 
 ---
 
@@ -324,13 +324,13 @@ az group delete \
   --no-wait
 ```
 
-**Warning:** This will delete the entire resource group and all resources within it, including resources from Day 1.
+**Warning:** This will delete the entire resource group and all resources within it, including resources from Lab 1.
 
 ---
 
-## Day 2 Summary
+## Lab Summary
 
-Today you learned:
+In this lab you learned:
 
 - How **system-assigned managed identities** provide automatic identity management for Azure resources
 - How **Azure Key Vault with RBAC** offers centralized secret management with granular access control
@@ -342,20 +342,20 @@ Today you learned:
 
 ## ▶️ Next Lab
 
-**Day 3 — Azure AD Roles + RBAC Scopes**  
+**Lab 3 — Azure AD Roles + RBAC Scopes**  
 [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
 
 ## ⬅️ Previous Lab
 
-**Day 1 — Identity Fundamentals + RBAC Basics**  
+**Lab 1 — Identity Fundamentals + RBAC Basics**  
 [01-identity fundamentals.md](01-identity%20fundamentals.md)
 
 ---
 
 ## 🔗 Related Resources
 
-- **Day 4 — Azure Locks + Resource Policies**  
+- **Lab 4 — Azure Locks + Resource Policies**  
   [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
-- **Day 5 — Access Validation (Portal + CLI)**  
+- **Lab 5 — Access Validation (Portal + CLI)**  
   [05-access-validation.md](05-access-validation.md)

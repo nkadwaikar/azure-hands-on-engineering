@@ -32,7 +32,7 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; KQ
 
 ## Prerequisites
 
-If you cleaned up after Day 5, recreate:
+If you cleaned up after Lab 5, recreate:
 
 - `rg-identity-eus-lab-core` (unrestricted RG)  
 - `rg-test-compliant` (policy‑restricted RG)  
@@ -289,9 +289,9 @@ From RGs, VMs, Key Vault.
 - Custom Audit Policy  
 - Allowed VM Size SKUs  
 
-## Day 6 Summary
+## Lab Summary
 
-Today you learned:
+In this lab you learned:
 
 - How to enable Activity Logs and Diagnostic Settings
 - How to route logs to a Log Analytics Workspace
@@ -306,15 +306,15 @@ Today you learned:
 
 ## Next Lab
 
-**Day 7 — Bicep Deployment: Identity Stack**  
-[07-bicep-deployment-identity-stack.md](07-bicep-deployment-identity-stack.md)
+**Lab 7 — Bicep Deployment: Identity Stack**  
+[1-bicep-deployment-identity-stack.md](../Bicep/1-bicep-deployment-identity-stack.md)
 
 ---
 
 ## Related Labs
 
-- **Day 4 — Azure Locks + Resource Policies**  
+- **Lab 4 — Azure Locks + Resource Policies**  
   [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
-- **Day 5 — Access Validation (Portal + CLI)**  
+- **Lab 5 — Access Validation (Portal + CLI)**  
   [05-access-validation.md](05-access-validation.md)

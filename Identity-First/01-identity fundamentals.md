@@ -47,7 +47,7 @@ Create a non-admin user for RBAC testing:
 - **Display name:** Alex James  
 - **Role:** No admin roles  
 
-This user will be used to validate RBAC behavior throughout Week 1.
+This user will be used to validate RBAC behavior throughout this track.
 
 ### Using Azure Portal
 
@@ -398,9 +398,9 @@ az ad user show --id alex.james@contoso.com 2>/dev/null || echo "User deleted"
 
 ---
 
-## Day 1 Summary
+## Lab Summary
 
-Today you learned:
+In this lab you learned:
 
 - How **Azure identity hierarchy** works (users → groups → service principals)
 - How **RBAC scopes** and **inheritance** behave (Subscription → RG → Resource)
@@ -412,17 +412,17 @@ Today you learned:
 
 ## ▶️ Next Lab
 
-**Day 2 — Managed Identity + Azure Key Vault**  
+**Lab 2 — Managed Identity + Azure Key Vault**  
 [02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
 
 ---
 
 ## 🔗 Related Resources
 
-- **Day 3 — Azure AD Roles + RBAC Scopes**  
+- **Lab 3 — Azure AD Roles + RBAC Scopes**  
   [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
 
-- **Day 4 — Azure Locks + Resource Policies**  
+- **Lab 4 — Azure Locks + Resource Policies**  
   [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Why this matters:** Without locks and policy, even a privileged identity can accidentally delete critical resources or deploy a non-compliant VM — this lab applies Delete locks, Read-only locks, a custom Audit policy, and a Deny policy so governance controls are proven before a production Landing Zone depends on them.
 
-Day 4 introduces two foundational governance controls used in every enterprise Landing Zone: **Resource Locks** (Delete / Read-only) and **Azure Policy** (Deny / Audit / Modify). These controls enforce consistency, prevent accidental changes, and shape compliant deployments.
+This lab introduces two foundational governance controls used in every enterprise Landing Zone: **Resource Locks** (Delete / Read-only) and **Azure Policy** (Deny / Audit / Modify). These controls enforce consistency, prevent accidental changes, and shape compliant deployments.
 
 Last validated on: 2026-06-25  
 Portal experience note: Steps validated against Azure Portal as of June 2026; policy compliance evaluation can take up to 30 minutes after assignment.
@@ -271,7 +271,7 @@ Your A/B comparison (`rg-identity-eus-lab-core` vs `rg-test-compliant`) demonstr
 
 ## Cleanup
 
-Perform these steps if you want to reset your environment before moving to Day 5.
+Perform these steps if you want to reset your environment before moving to Lab 5.
 
 ---
 
@@ -326,9 +326,9 @@ Optional but helpful:
 
 ---
 
-## Day 4 Summary
+## Lab Summary
 
-Today you learned:
+In this lab you learned:
 
 - How to apply **Delete** and **Read-only** locks at different scopes
 - How **lock inheritance** works and why resource-level tests must be isolated
@@ -346,20 +346,20 @@ Today you learned:
 
 ## Next Lab
 
-**Day 5 — Access Validation (Portal + CLI)**  
+**Lab 5 — Access Validation (Portal + CLI)**  
 [05-access-validation.md](05-access-validation.md)
 
 ## Previous Lab
 
-**Day 3 — Azure AD Roles + RBAC Scopes**  
+**Lab 3 — Azure AD Roles + RBAC Scopes**  
 [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
 
 ---
 
 ## Related Resources
 
-- **Day 1 — Identity Fundamentals + RBAC Basics**  
+- **Lab 1 — Identity Fundamentals + RBAC Basics**  
   [01-identity fundamentals.md](01-identity%20fundamentals.md)
 
-- **Day 2 — Managed Identity + Azure Key Vault**  
+- **Lab 2 — Managed Identity + Azure Key Vault**  
   [02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)

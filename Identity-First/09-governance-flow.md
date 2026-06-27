@@ -2,10 +2,10 @@
 
 > **Why this matters:** RBAC and Resource Locks only work together correctly if their interaction is understood — this diagram traces exactly how a request flows from identity through RBAC to a locked resource so the governance model is visible, not implied.
 
-This diagram highlights the governance controls applied in your Week 1 stack. It shows how **RBAC** and **Resource Locks** work together to enforce compliance, prevent accidental deletion, and preserve identity-first access.
+This diagram highlights the governance controls applied in your identity stack. It shows how **RBAC** and **Resource Locks** work together to enforce compliance, prevent accidental deletion, and preserve identity-first access.
 
 Last validated on: 2026-06-25  
-Portal experience note: Diagram reflects the Week 1 identity stack deployed via Bicep in [07-bicep-deployment-identity-stack.md](07-bicep-deployment-identity-stack.md).
+Portal experience note: Diagram reflects the identity stack deployed via Bicep in [1-bicep-deployment-identity-stack.md](../Bicep/1-bicep-deployment-identity-stack.md).
 
 > **Note:** This is a reference document, not a hands-on lab. No resources are created here.
 

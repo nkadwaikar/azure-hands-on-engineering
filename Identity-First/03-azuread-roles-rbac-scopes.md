@@ -7,7 +7,7 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 
 ## *Directory roles vs resource roles. Control plane vs data plane. Identity clarity unlocked.*
 
-> This lab builds on Day 1 (RBAC Basics) and Day 2 (Managed Identity + Key Vault).  
+> This lab builds on Lab 1 (RBAC Basics) and Lab 2 (Managed Identity + Key Vault).  
 > All user accounts use the placeholder domain `@contoso.com` to avoid exposing my real Microsoft Entra ID tenant domain.  
 > Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
@@ -123,7 +123,7 @@ Emma still cannot:
 
 This demonstrates that **Reader adds visibility only**, while directory and data-plane permissions remain separate.
 
-## **5. Compare Emma vs Alex (From Day 1)**
+## **5. Compare Emma vs Alex (From Lab 1)**
 
 | User | Microsoft Entra ID Role | RBAC Role | What They Can Do |
 | --- | --- | --- | --- |
@@ -157,9 +157,9 @@ This demonstrates that **Reader adds visibility only**, while directory and data
 
 ---
 
-## Day 3 Summary
+## Lab Summary
 
-Today you learned:
+In this lab you learned:
 
 - How **Microsoft Entra ID roles** and **Azure RBAC roles** differ
 - How **directory roles** affect identity management
@@ -176,20 +176,20 @@ These nuances reflect real enterprise identity governance and are essential for 
 
 ## ▶️ Next Lab
 
-**Day 4 — Azure Locks + Resource Policies**  
+**Lab 4 — Azure Locks + Resource Policies**  
 [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
 ## ⬅️ Previous Lab
 
-**Day 2 — Managed Identity + Azure Key Vault**  
+**Lab 2 — Managed Identity + Azure Key Vault**  
 [02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
 
 ---
 
 ## 🔗 Related Resources
 
-- **Day 1 — Identity Fundamentals + RBAC Basics**  
+- **Lab 1 — Identity Fundamentals + RBAC Basics**  
   [01-identity fundamentals.md](01-identity%20fundamentals.md)
 
-- **Day 5 — Access Validation (Portal + CLI)**  
+- **Lab 5 — Access Validation (Portal + CLI)**  
   [05-access-validation.md](05-access-validation.md)

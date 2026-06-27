@@ -2,10 +2,10 @@
 
 > **Why this matters:** Teams that can't trace how a workload obtains a Key Vault secret end up reverting to stored credentials — this diagram makes the UAMI token flow explicit so the zero-secrets pattern is understood and reproducible, not just trusted.
 
-This diagram illustrates the **end-to-end identity flow** used in your Week 1 stack. It shows how a workload uses a **User Assigned Managed Identity (UAMI)** to authenticate to Microsoft Entra ID and access Key Vault using RBAC — no secrets, no keys, no connection strings.
+This diagram illustrates the **end-to-end identity flow** used in your identity stack. It shows how a workload uses a **User Assigned Managed Identity (UAMI)** to authenticate to Microsoft Entra ID and access Key Vault using RBAC — no secrets, no keys, no connection strings.
 
 Last validated on: 2026-06-25  
-Portal experience note: Diagram reflects the Week 1 identity stack deployed via Bicep in [07-bicep-deployment-identity-stack.md](07-bicep-deployment-identity-stack.md).
+Portal experience note: Diagram reflects the identity stack deployed via Bicep in [1-bicep-deployment-identity-stack.md](../Bicep/1-bicep-deployment-identity-stack.md).
 
 > **Note:** This is a reference document, not a hands-on lab. No resources are created here.
 

@@ -18,7 +18,7 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 - [Scenario](#3-scenario)
 - [Lab Architecture](#4-lab-architecture)
 - [Lab Steps](#5-lab-steps)
-- [Validation and Monitoring](#6-validation-and-monitoring)
+- [Validation and Remediation](#step-5--validate-auto-remediation)
 - [Cleanup](#7-cleanup)
 
 ---
@@ -263,4 +263,4 @@ To avoid ongoing charges and clutter, remove resources after the lab:
 
 - [Azure Monitor and Activity Logs](../Identity-First/06-azuremonitor-activity-logs.md) — Monitor policy and resource changes
 - [Azure Locks and Resource Policies](../Identity-First/04-azurelocks-resource-policies.md) — Prevent accidental configuration drift
-- [Bicep Deployment — Identity Stack](../Identity-First/07-bicep-deployment-identity-stack.md) — Automate governance baselines with Bicep
+- [Bicep Deployment — Identity Stack](../Bicep/1-bicep-deployment-identity-stack.md) — Automate governance baselines with Bicep

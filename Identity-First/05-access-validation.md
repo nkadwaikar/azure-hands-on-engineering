@@ -7,12 +7,12 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 
 ## *Validate RBAC, Identity, Locks, and Policy Enforcement Across Real Access Paths*
 
-Day 5 is where you **prove** that everything you built in Days 1–4 works exactly as intended.
+This lab is where you **prove** that everything you built in Labs 1–4 works exactly as intended.
 This lab validates RBAC, Managed Identity, locks, and policies using both the **Azure Portal** and **Azure CLI** — the same way real cloud engineers test governance in production environments.
 
 ## 🔧 **Prerequisites (Rebuild Environment if Cleaned Up)**
 
-If you removed resources after Day 4, recreate the following:
+If you removed resources after Lab 4, recreate the following:
 
 ### **Resource Groups**
 
@@ -36,7 +36,7 @@ Deploy a VM with:
 
 - Create a Key Vault for MI access tests  
 
-This ensures Day 5 starts with a clean, consistent environment.
+This ensures the lab starts with a clean, consistent environment.
 
 ---
 
@@ -311,9 +311,9 @@ This mirrors real Landing Zone design.
 
 ---
 
-## Day 5 Summary
+## Lab Summary
 
-Today you learned:
+In this lab you learned:
 
 - How to validate **RBAC** using Portal and CLI
 - How **locks override RBAC** and block even Owners
@@ -329,23 +329,23 @@ Today you learned:
 
 ## ▶️ Next Lab
 
-**Day 6 — Azure Monitor + Activity Logs**  
+**Lab 6 — Azure Monitor + Activity Logs**  
 [06-azuremonitor-activity-logs.md](06-azuremonitor-activity-logs.md)
 
 ## ⬅️ Previous Lab
 
-**Day 4 — Azure Locks + Resource Policies**  
+**Lab 4 — Azure Locks + Resource Policies**  
 [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
 ---
 
 ## 🔗 Related Resources
 
-- **Day 1 — Identity Fundamentals + RBAC Basics**  
+- **Lab 1 — Identity Fundamentals + RBAC Basics**  
   [01-identity fundamentals.md](01-identity%20fundamentals.md)
 
-- **Day 2 — Managed Identity + Azure Key Vault**  
+- **Lab 2 — Managed Identity + Azure Key Vault**  
   [02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
 
-- **Day 3 — Azure AD Roles + RBAC Scopes**  
+- **Lab 3 — Azure AD Roles + RBAC Scopes**  
   [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
