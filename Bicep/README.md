@@ -30,17 +30,17 @@ Bicep/
 
 | File | Purpose |
 |---|---|
-| `main.bicep` | Orchestrates identity, Key Vault, RBAC, and lock at RG scope |
-| `create-rg.bicep` | Provisions a Resource Group at subscription scope |
-| `create-uami.bicep` | Creates a User-Assigned Managed Identity |
-| `create-keyvault.bicep` | Deploys Key Vault + inline RBAC assignment (standalone) |
-| `keyvault.bicep` | Deploys Key Vault (used as a module by `main.bicep`) |
-| `rbac.bicep` | Assigns a role to a principal at resource scope |
-| `locks.bicep` | Applies a CanNotDelete or ReadOnly resource lock |
-| `resourceGroup.bicep` | RG-scope orchestration module (called from subscription-scope deployments) |
-| `storage.bicep` | Deploys a Storage Account with secure defaults |
-| `vm.bicep` | Provisions a Linux VM with UAMI and SSH-only authentication |
-| `Diagnostics.bicep` | Routes Key Vault audit logs to a Log Analytics Workspace |
+| [`main.bicep`](main.bicep) | Orchestrates identity, Key Vault, RBAC, and lock at RG scope |
+| [`create-rg.bicep`](create-rg.bicep) | Provisions a Resource Group at subscription scope |
+| [`create-uami.bicep`](create-uami.bicep) | Creates a User-Assigned Managed Identity |
+| [`create-keyvault.bicep`](create-keyvault.bicep) | Deploys Key Vault + inline RBAC assignment (standalone) |
+| [`keyvault.bicep`](keyvault.bicep) | Deploys Key Vault (used as a module by `main.bicep`) |
+| [`rbac.bicep`](rbac.bicep) | Assigns a role to a principal at resource scope |
+| [`locks.bicep`](locks.bicep) | Applies a CanNotDelete or ReadOnly resource lock |
+| [`resourceGroup.bicep`](resourceGroup.bicep) | RG-scope orchestration module (called from subscription-scope deployments) |
+| [`storage.bicep`](storage.bicep) | Deploys a Storage Account with secure defaults |
+| [`vm.bicep`](vm.bicep) | Provisions a Linux VM with UAMI and SSH-only authentication |
+| [`diagnostics.bicep`](diagnostics.bicep) | Routes Key Vault audit logs to a Log Analytics Workspace |
 
 ---
 
@@ -91,7 +91,7 @@ az deployment group create \
 
 ---
 
-## � Naming Convention
+## 🏷️ Naming Convention
 
 All resources in this track follow the shared naming standard documented in [Naming-Convention.md](../Naming-Convention.md).
 
@@ -107,7 +107,7 @@ Key patterns used in Bicep modules:
 
 ---
 
-## �💡 Design Principles
+## 💡 Design Principles
 
 - **Single-responsibility modules** — one resource per module, composed at the root
 - **Secretless by default** — Managed Identity replaces all service principal credentials
