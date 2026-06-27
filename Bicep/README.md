@@ -6,7 +6,7 @@ This track covers modular Bicep deployments for identity-first Azure infrastruct
 
 ## 📁 Folder Structure
 
-```
+``` 
 Bicep/
 ├── main.bicep                  # RG-scope orchestrator — wires identity, KV, RBAC, lock
 │
@@ -82,7 +82,7 @@ az deployment group create \
 ## 🔗 Related Labs
 
 | Topic | Link |
-|---|---|
+| --- | --- |
 | Bicep Deployment — Identity Stack | [1-bicep-deployment-identity-stack.md](1-bicep-deployment-identity-stack.md) |
 | Bicep Toolchain Setup in VS Code | [2-how-to-run-bicep-in-vscode.md](2-how-to-run-bicep-in-vscode.md) |
 | VS Code Deployment Workflow | [3-vscode-deployment-workflow.md](3-vscode-deployment-workflow.md) |
