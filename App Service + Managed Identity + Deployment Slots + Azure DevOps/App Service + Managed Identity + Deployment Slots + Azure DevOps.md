@@ -121,10 +121,36 @@ A Key Vault stores and protects application secrets. If you already have a Key V
 
 > **Why RBAC:** The Azure RBAC model lets you assign Key Vault permissions using standard IAM role assignments, which is required for Managed Identity access in this lab. Selecting this now avoids having to switch the model later.
 
-### Step 3 — Verify the Key Vault is Active
+### Step 3 — Assign Yourself the Key Vault Administrator Role
+
+You must have the **Key Vault Administrator** role to create and manage secrets.
 
 1. Once deployment completes, click **Go to resource**
-2. Confirm the Key Vault shows **Active** in the overview pane
+2. In the left menu, select **Access control (IAM)**
+3. Click **+ Add** → **Add role assignment**
+4. **Role tab:** search for and select **Key Vault Administrator** → click **Next**
+5. **Members tab:** click **+ Select members** → search for your user account → select it
+6. Click **Review + Assign** → **Assign**
+
+> **Note:** Role assignment propagation can take up to 5 minutes. Wait before proceeding to the next step.
+
+### Step 4 — Create the Secret
+
+1. In the left menu, select **Objects** → **Secrets**
+2. Click **+ Generate/Import**
+3. Fill in:
+   - **Upload options:** `Manual`
+   - **Name:** `app-secret`
+   - **Secret value:** enter any value (e.g., `MySuperSecretValue123!`)
+   - Leave all other fields as default
+4. Click **Create**
+
+> **Note:** The secret name `app-secret` is what you reference in the Key Vault URI. The App Service config key (`MySecret`) is a separate name used inside your application code to read the value.
+
+### Step 5 — Copy the Vault URI
+
+1. In the left menu, select **Overview**
+2. Confirm the Key Vault shows **Active**
 3. Copy the **Vault URI** (e.g., `https://kv-appservice-wus2-lab.vault.azure.net`) — you will need it when adding Key Vault references in [section 11](#11-add-key-vault-references-in-app-service-configuration)
 
 ---
@@ -219,48 +245,13 @@ You need the Object ID from both slots to grant Key Vault access to each identit
 
 ## 10. Grant Key Vault Access to Both Slots
 
-Assign the **Key Vault Secrets User** role to both identities via IAM.
-
-### Step 0 — Create the Secret in Key Vault
-
-If you do not already have a secret in Key Vault, create one now before granting access.
-
-#### Prerequisite — Assign Key Vault Administrator Role
-
-You must have the **Key Vault Administrator** role to create secrets. Assign it to yourself before proceeding.
-
-1. Go to **Azure Portal** → **Key Vaults** → select `kv-appservice-wus2-lab`
-2. In the left menu, select **Access control (IAM)**
-3. Click **+ Add** → **Add role assignment**
-4. **Role tab:** search for and select **Key Vault Administrator** → click **Next**
-5. **Members tab:** click **+ Select members** → search for your user account → select it
-6. Click **Review + Assign** → **Assign**
-
-> **Note:** Role assignment propagation can take up to 5 minutes. Wait before proceeding to the secret creation steps below.
-
-#### Create the Secret
-
-1. Go to **Azure Portal** → **Key Vaults** → select `kv-appservice-wus2-lab`
-2. In the left menu, select **Objects** → **Secrets**
-3. Click **+ Generate/Import**
-4. Fill in:
-   - **Upload options:** `Manual`
-   - **Name:** `app-secret`
-   - **Secret value:** enter any value (e.g., `MySuperSecretValue123!`)
-   - Leave all other fields as default
-5. Click **Create**
-
-> **Note:** The secret name `app-secret` is what you reference in the Key Vault URI. The App Service config key (`MySecret`) is a separate name used inside your application code to read the value.
+Assign the **Key Vault Secrets User** role to both App Service slot identities via IAM. The secret and permission model were configured in [section 5](#5-create-the-key-vault).
 
 ### Step 1 — Open Key Vault IAM
 
 1. Go to **Azure Portal** → **Key Vaults** → select `kv-appservice-wus2-lab`
-2. In the left menu, select **Settings** → **Access configuration**
-3. Under **Permission model**, verify that **Azure role-based access control** is selected
-   - If it shows **Vault access policy**, click **Azure role-based access control** → **Apply** to switch models before continuing
-   > **Why this matters:** IAM role assignments only work when the Key Vault uses the Azure RBAC permission model. Vault access policies are a separate, older system and do not honour IAM role assignments.
-4. In the left menu, select **Access control (IAM)**
-5. Click **+ Add** → **Add role assignment**
+2. In the left menu, select **Access control (IAM)**
+3. Click **+ Add** → **Add role assignment**
 
 ### Step 2 — Assign to the Production Slot
 
