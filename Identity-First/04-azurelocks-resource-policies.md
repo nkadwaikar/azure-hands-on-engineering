@@ -184,7 +184,7 @@ Create:
 
 ## 9. View Compliance
 
-#### Azure Portal → Policy → Compliance → Select your custom policy
+### Azure Portal → Policy → Compliance → Select your custom policy
 
 Audit policies provide visibility without enforcement.
 

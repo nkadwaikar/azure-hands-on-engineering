@@ -90,7 +90,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 ### 3. Secure Access & Networking
 
 - [Azure Bastion](Azure%20Bastion/README.md) — Browser-based RDP/SSH, no public IP, hub-spoke VNet peering, secretless Key Vault auth
-- [Microsoft Defender for Cloud – JIT](Microsoft%20Defender%20for%20Cloud/Readme.md) — Time-bounded NSG rules, zero standing inbound access
+- [Microsoft Defender for Cloud – JIT](Microsoft%20Defender%20for%20Cloud/README.md) — Time-bounded NSG rules, zero standing inbound access
 - [Azure Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/README.md) — WAF at the edge, custom domain with TLS, static website origin
 
 ### 4. Governance & Compliance
@@ -122,7 +122,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial walkthroug
 
 ### 8. Hybrid & Arc
 
-- [Azure Arc Hybrid Server Architecture](Azure%20Arc%20Hybrid%20Server%20Architecture/Readme.md) — Arc-enabled servers, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration
+- [Azure Arc Hybrid Server Architecture](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) — Arc-enabled servers, Defender for Servers, Azure Monitor Agent, Update Manager, Guest Configuration
 
 ---
 
