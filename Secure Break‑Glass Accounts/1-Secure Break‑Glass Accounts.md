@@ -19,7 +19,9 @@ Portal experience note: Steps validated against Microsoft Entra admin center as 
 - [Design Principles](#design-principles)
 - [Hands-On Implementation](#hands-on-implementation)
 - [Conditional Access Configuration](#conditional-access-configuration)
-- [Testing, Monitoring, and Runbook](#testing-monitoring-and-runbook)
+- [Monitoring and Alerting](#monitoring-and-alerting)
+- [Test Break-Glass Scenario](#test-break-glass-scenario)
+- [Recovery Runbook](#recovery-runbook)
 
 ---
 
@@ -79,7 +81,7 @@ This lab walks through creating, testing, and validating this scenario
 
 ---
 
-## 1. Design Principles for Secure Break‑Glass Accounts
+## Design Principles
 
 ### 1.1 Two Cloud‑Only Emergency Accounts
 
@@ -113,7 +115,7 @@ This lab walks through creating, testing, and validating this scenario
 
 ---
 
-## 2. Hands‑On Lab: Create & Secure Break‑Glass Accounts
+## Hands-On Implementation
 
 ### 2.1 Create Two Cloud‑Only Emergency Accounts
 
@@ -165,7 +167,7 @@ Microsoft now requires MFA for all admins. Complete this step for each emergency
 
 ---
 
-## 3. Conditional Access Configuration
+## Conditional Access Configuration
 
 Break‑glass accounts must not be excluded from Conditional Access. Instead, they must be protected by a dedicated Authentication Strength policy.
 
@@ -223,7 +225,7 @@ Break‑glass accounts must not be excluded from Conditional Access. Instead, th
 
 ---
 
-## 4. Monitoring & Alerting
+## Monitoring and Alerting
 
 Every sign‑in by a break‑glass account must trigger an alert.
 
@@ -253,7 +255,7 @@ Set up alerts to trigger when:
 
 ---
 
-## 5. Test the Break‑Glass Scenario
+## Test Break-Glass Scenario
 
 Testing is required for compliance and operational readiness.
 
@@ -296,7 +298,7 @@ Testing is required for compliance and operational readiness.
 
 ---
 
-## 6. Recovery Runbook
+## Recovery Runbook
 
 If locked out due to a misconfigured Conditional Access policy:
 

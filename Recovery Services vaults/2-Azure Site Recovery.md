@@ -18,10 +18,10 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; fa
 - [Initial Setup](#2-initial-setup)
 - [Enable Site Recovery Replication](#3-enable-site-recovery-replication)
 - [Monitor Replication](#4-monitor-replication-health)
-- [Test Failover](#5-test-failover)
-- [Planned Failover](#6-planned-failover)
-- [Re-protect and Failback](#7-re-protect-and-failback)
-- [Cleanup] (#8-cleanup)
+- [Test Failover](#6-test-failover-use-recovery-plan-only)
+- [Planned Failover](#7-planned-failover-east-us-to-west-us-2)
+- [Re-protect and Failback](#8-failback-west-us-2-to-east-us)
+- [Cleanup](#9-cleanup)
 
 ---
 
