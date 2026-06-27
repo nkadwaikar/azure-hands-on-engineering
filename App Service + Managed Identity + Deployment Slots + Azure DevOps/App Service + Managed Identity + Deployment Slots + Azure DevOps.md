@@ -16,16 +16,17 @@ Last validated on: 2026-06-24
 - [Learning Objectives](#2-learning-objectives)
 - [Scenario](#3-scenario)
 - [Lab Architecture](#4-lab-architecture)
-- [Create the App Service](#5-create-the-app-service)
-- [Create a Deployment Slot](#6-create-a-deployment-slot)
-- [Enable Managed Identity](#7-enable-managed-identity)
-- [Copy Managed Identity Object IDs](#8-copy-the-managed-identity-object-id-for-each-slot)
-- [Grant Key Vault Access](#9-grant-key-vault-access-to-both-slots)
-- [Add Key Vault References](#10-add-key-vault-references-in-app-service-configuration)
-- [Azure DevOps Pipeline](#11-azure-devops-pipeline-setup)
-- [Test Slot Swap](#12-test-slot-swap)
-- [Add Manual Approval Gates](#13-add-manual-approval-gates-enterprise-pattern)
-- [Cleanup](#14-cleanup--teardown)
+- [Create the Key Vault](#5-create-the-key-vault)
+- [Create the App Service](#6-create-the-app-service)
+- [Create a Deployment Slot](#7-create-a-deployment-slot)
+- [Enable Managed Identity](#8-enable-managed-identity)
+- [Copy Managed Identity Object IDs](#9-copy-the-managed-identity-object-id-for-each-slot)
+- [Grant Key Vault Access](#10-grant-key-vault-access-to-both-slots)
+- [Add Key Vault References](#11-add-key-vault-references-in-app-service-configuration)
+- [Azure DevOps Pipeline](#12-azure-devops-pipeline-setup)
+- [Test Slot Swap](#13-test-slot-swap)
+- [Add Manual Approval Gates](#14-add-manual-approval-gates-enterprise-pattern)
+- [Cleanup](#15-cleanup--teardown)
 
 ---
 
@@ -93,7 +94,42 @@ Azure DevOps Pipeline
 
 ---
 
-## 5. Create the App Service
+## 5. Create the Key Vault
+
+A Key Vault stores and protects application secrets. If you already have a Key Vault in `rg-appservice-wus2-lab`, skip to [Grant Key Vault Access](#10-grant-key-vault-access-to-both-slots).
+
+### Step 1 — Create the Key Vault Resource
+
+1. Go to **Azure Portal** → **Key Vaults**
+2. Click **+ Create**
+3. Fill in the **Basics** tab:
+
+| Field | Value |
+| --- | --- |
+| Resource Group | `rg-appservice-wus2-lab` |
+| Key vault name | `kv-appservice-wus2-lab` |
+| Region | `West US 2` (match your App Service region) |
+| Pricing tier | `Standard` |
+
+4. Click **Next: Access configuration**
+
+### Step 2 — Set the Permission Model
+
+1. Under **Permission model**, select **Azure role-based access control**
+2. Leave all other settings as default
+3. Click **Review + Create** → **Create**
+
+> **Why RBAC:** The Azure RBAC model lets you assign Key Vault permissions using standard IAM role assignments, which is required for Managed Identity access in this lab. Selecting this now avoids having to switch the model later.
+
+### Step 3 — Verify the Key Vault is Active
+
+1. Once deployment completes, click **Go to resource**
+2. Confirm the Key Vault shows **Active** in the overview pane
+3. Copy the **Vault URI** (e.g., `https://kv-appservice-wus2-lab.vault.azure.net`) — you will need it when adding Key Vault references in [section 11](#11-add-key-vault-references-in-app-service-configuration)
+
+---
+
+## 6. Create the App Service
 
 ### Step 1 — Open App Services
 
@@ -120,7 +156,7 @@ Click **Review + Create** → **Create**
 
 ---
 
-## 6. Create a Deployment Slot
+## 7. Create a Deployment Slot
 
 1. Open **App Services** → **app-appservice-wus2-lab**
 2. In the left menu, select **Deployment slots**
@@ -137,7 +173,7 @@ You now have two slots:
 
 ---
 
-## 7. Enable Managed Identity
+## 8. Enable Managed Identity
 
 Each deployment slot has its own identity in Azure AD. Enable Managed Identity on both slots separately.
 
@@ -158,7 +194,7 @@ Each deployment slot has its own identity in Azure AD. Enable Managed Identity o
 
 ---
 
-## 8. Copy the Managed Identity Object ID for Each Slot
+## 9. Copy the Managed Identity Object ID for Each Slot
 
 You need the Object ID from both slots to grant Key Vault access to each identity independently.
 
@@ -181,7 +217,7 @@ You need the Object ID from both slots to grant Key Vault access to each identit
 
 ---
 
-## 9. Grant Key Vault Access to Both Slots
+## 10. Grant Key Vault Access to Both Slots
 
 Assign the **Key Vault Secrets User** role to both identities via IAM.
 
@@ -237,7 +273,7 @@ Go to **Key Vault** → **Access control (IAM)** → **Role assignments**. You s
 
 ---
 
-## 10. Add Key Vault References in App Service Configuration
+## 11. Add Key Vault References in App Service Configuration
 
 Key Vault references allow the App Service to resolve secrets at runtime without storing credentials anywhere. Perform these steps for **both** the production slot and the staging slot.
 
@@ -288,7 +324,7 @@ After saving, return to **Configuration**. The value column for `MySecret` shoul
 
 ---
 
-## 11. Azure DevOps Pipeline Setup
+## 12. Azure DevOps Pipeline Setup
 
 At this point, the environment includes:
 
@@ -415,7 +451,7 @@ Click **Save** then **Run**. The pipeline completes the following flow:
 
 ---
 
-## 12. Test Slot Swap
+## 13. Test Slot Swap
 
 Before testing, confirm all components are in place: production slot, staging slot, Azure DevOps pipeline, Key Vault reference, and Managed Identity.
 
@@ -459,7 +495,7 @@ The previous version should return to production after the rollback swap complet
 
 ---
 
-## 13. Add Manual Approval Gates (Enterprise Pattern)
+## 14. Add Manual Approval Gates (Enterprise Pattern)
 
 Manual approvals add a controlled checkpoint before production changes are released. With this gate, the pipeline pauses after staging deployment and waits for explicit approval before swapping to production.
 
@@ -533,7 +569,7 @@ The swap executes immediately after approval and the new version promotes to pro
 
 ---
 
-## 14. Cleanup / Teardown
+## 15. Cleanup / Teardown
 
 To avoid ongoing charges, delete the resources created in this lab:
 
