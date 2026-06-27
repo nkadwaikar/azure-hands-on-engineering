@@ -4,6 +4,9 @@
 > **Note:** All user accounts in this lab use the placeholder domain `@contoso.com` to avoid exposing my real Azure AD tenant domain.  
 > Steps **1**, **2**, and **3.2** are performed by administrators with elevated privileges.
 
+Last validated on: 2026-06-25  
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
+
 ---
 
 ## Prerequisites

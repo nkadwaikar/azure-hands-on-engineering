@@ -5,7 +5,7 @@
 An East US to West US 2 disaster recovery lab.
 
 Last validated on: 2026-06-10  
-Portal experience note: Steps validated in Azure Portal June 2026; failover and re-protect labels may vary slightly across subscriptions.
+Portal experience note: Steps validated against Azure Portal as of June 2026; failover and re-protect labels may vary slightly across subscriptions.
 
 > **Note:** This lab assumes a source VM is already running in East US. Failover to a secondary region incurs compute and storage costs in the target region for the duration of the test.
 
@@ -21,7 +21,7 @@ Portal experience note: Steps validated in Azure Portal June 2026; failover and 
 - [Test Failover](#5-test-failover)
 - [Planned Failover](#6-planned-failover)
 - [Re-protect and Failback](#7-re-protect-and-failback)
-- [Cleanup](#8-cleanup)
+- [Cleanup] (#8-cleanup)
 
 ---
 

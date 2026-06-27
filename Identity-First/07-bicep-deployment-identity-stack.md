@@ -2,6 +2,9 @@
 
 > **Why this matters:** Deploying identity, Key Vault, RBAC, and locks as separate portal steps is error-prone and impossible to review or version — this lab assembles the same stack as modular Bicep so the entire foundation can be code-reviewed, diffed, and deployed in a single command.
 
+Last validated on: 2026-06-25  
+Portal experience note: Steps validated against VS Code with the Bicep and Azure Resources extensions as of June 2026.
+
 Day 7 brings together the full **identity‑first architecture** for Week 1 using modular Bicep.
 It forms the foundation of a secure, secretless, RBAC-driven Azure environment.
 

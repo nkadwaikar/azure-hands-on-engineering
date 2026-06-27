@@ -6,6 +6,9 @@
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
+Last validated on: 2026-06-25  
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
+
 ## Learning Objectives
 
 By the end of this lab, you will:

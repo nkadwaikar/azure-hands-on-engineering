@@ -1,6 +1,9 @@
-# **Access Validation (Portal + CLI)**
+# Access Validation (Portal + CLI)
 
 > **Why this matters:** Governance controls that have never been tested from the user's perspective — a different role, a different scope — provide a false sense of security; this lab proves the RBAC, lock, and policy stack actually blocks and permits the right operations before it goes anywhere near production.
+
+Last validated on: 2026-06-25  
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
 
 ## *Validate RBAC, Identity, Locks, and Policy Enforcement Across Real Access Paths*
 

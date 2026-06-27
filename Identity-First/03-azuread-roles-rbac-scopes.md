@@ -1,7 +1,9 @@
-
-# **Azure AD Roles + RBAC Scopes (Hands‑On Lab)**  
+# Azure AD Roles + RBAC Scopes (Hands‑On Lab)
 
 > **Why this matters:** Assigning roles without understanding the boundary between Entra directory roles and Azure RBAC creates either access gaps or blast-radius that can't be cleanly audited — this lab maps both role systems, assigns roles at multiple scopes, and validates behavior from the user's perspective.
+
+Last validated on: 2026-06-25  
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
 
 ## *Directory roles vs resource roles. Control plane vs data plane. Identity clarity unlocked.*
 

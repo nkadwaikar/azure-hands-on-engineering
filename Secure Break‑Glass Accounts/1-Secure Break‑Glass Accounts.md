@@ -5,7 +5,7 @@
 A complete, portal-only lab implementing Microsoft's 2025 security baseline for emergency access accounts with phishing-resistant MFA and Conditional Access enforcement.
 
 Last validated on: 2026-06-20  
-Portal experience note: Steps validated against Entra Admin Center as of June 2026.
+Portal experience note: Steps validated against Microsoft Entra admin center as of June 2026; labels can vary slightly by tenant and feature rollout.
 
 > **Note:** This lab uses cloud-only emergency accounts with FIDO2/CBA and Authentication Strength policies. These accounts are NOT excluded from Conditional Access. The design follows Microsoft's 2025 identity security baseline requiring all admins to use phishing-resistant MFA.
 

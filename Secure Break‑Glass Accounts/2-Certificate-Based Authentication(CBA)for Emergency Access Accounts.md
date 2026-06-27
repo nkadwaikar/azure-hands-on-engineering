@@ -5,7 +5,7 @@
 A portal-based and PowerShell-assisted lab implementing Certificate-Based Authentication as the primary phishing-resistant MFA method for emergency access accounts in Microsoft Entra ID.
 
 Last validated on: 2026-06-22
-Portal experience note: Steps validated against Entra Admin Center as of June 2026.
+Portal experience note: Steps validated against Microsoft Entra admin center as of June 2026; labels can vary slightly by tenant and feature rollout.
 
 > **Note:** This lab focuses on CBA as the phishing-resistant MFA method and is independent of Lab 1. Lab 1 uses FIDO2 security keys as the primary credential; this lab uses X.509 certificates installed on secure devices. Both labs follow Microsoft's 2025 security baseline — emergency accounts are **never excluded from Conditional Access**.
 
