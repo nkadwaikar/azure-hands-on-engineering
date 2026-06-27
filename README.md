@@ -104,8 +104,6 @@ flowchart TD
 7. Resilience — Backup, ASR, storage replication
 8. Hybrid — Arc + Defender for Servers
 
-> This mirrors how real Azure platforms are built in regulated environments.
-
 ---
 
 ## 🔬 Labs & Engineering Tracks
