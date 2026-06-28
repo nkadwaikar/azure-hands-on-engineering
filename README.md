@@ -197,11 +197,11 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ### 9. 🏷️ Naming Convention
 
-- [Naming Convention](Naming%20Convention.md)
+**[Naming Convention](Naming%20Convention.md)**
 
 ### 10. 🏛️ Architecture Overview
 
-- [Architecture Overview](Architecture%20Overview.md)
+**[Architecture Overview](Architecture%20Overview.md)**
 
 ---
 
