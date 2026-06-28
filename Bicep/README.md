@@ -1,10 +1,10 @@
-# 🧱 Azure Infrastructure as Code — Bicep
+# Azure Infrastructure as Code — Bicep
 
 This track covers modular Bicep deployments for identity-first Azure infrastructure. Every module is scoped to a single responsibility, composed through a root `main.bicep`, and aligned to production governance standards.
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 Bicep/
@@ -26,10 +26,10 @@ Bicep/
 
 ---
 
-## 🔩 Modules
+## Modules
 
 | File | Purpose |
-|---|---|
+| --- | --- |
 | [`main.bicep`](main.bicep) | Orchestrates identity, Key Vault, RBAC, and lock at RG scope |
 | [`create-rg.bicep`](create-rg.bicep) | Provisions a Resource Group at subscription scope |
 | [`create-uami.bicep`](create-uami.bicep) | Creates a User-Assigned Managed Identity |
@@ -44,7 +44,7 @@ Bicep/
 
 ---
 
-## 🚀 Identity Stack — What `main.bicep` Deploys
+## Identity Stack — What `main.bicep` Deploys
 
 `main.bicep` wires together the foundational identity plane:
 
@@ -57,7 +57,7 @@ Run `create-rg.bicep` first to provision the Resource Group, then deploy `main.b
 
 ---
 
-## 🛠️ How to Deploy
+## How to Deploy
 
 **Prerequisites:** [Bicep toolchain setup in VS Code](2-how-to-run-bicep-in-vscode.md)
 
@@ -79,7 +79,7 @@ az deployment group create \
 
 ---
 
-## 🔗 Related Labs
+## Related Labs
 
 | Topic | Link |
 | --- | --- |
@@ -91,14 +91,14 @@ az deployment group create \
 
 ---
 
-## 🏷️ Naming Convention
+## Naming Convention
 
 All resources in this track follow the shared naming standard documented in [Naming-Convention.md](../Naming-Convention.md).
 
 Key patterns used in Bicep modules:
 
 | Resource | Pattern | Example |
-|---|---|---|
+| --- | --- | --- |
 | Resource Group | `rg-<workload>-<env>` | `rg-identity-lab` |
 | User-Assigned MI | `uami-<workload>-<env>` | `uami-identity-lab` |
 | Key Vault | `kv-<workload>-<env>` | `kv-identity-lab` |
@@ -107,7 +107,7 @@ Key patterns used in Bicep modules:
 
 ---
 
-## 💡 Design Principles
+## Design Principles
 
 - **Single-responsibility modules** — one resource per module, composed at the root
 - **Secretless by default** — Managed Identity replaces all service principal credentials

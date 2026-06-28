@@ -7,7 +7,7 @@ Cost governance is not an afterthought — it is a design constraint applied fro
 ## Cost Optimisation Practices
 
 | Practice | Detail |
-|---|---|
+| --- | --- |
 | **Right‑sizing** | Compute and storage are sized to workload baselines and utilisation metrics — not worst‑case estimates. |
 | **Auto‑shutdown** | Non‑production environments are scheduled to shut down outside business hours, eliminating idle consumption. |
 | **Consumption‑based services** | Functions, Logic Apps, and event‑driven components replace fixed‑cost resources wherever workloads are bursty or intermittent. |
@@ -23,7 +23,7 @@ Cost governance is not an afterthought — it is a design constraint applied fro
 Cost decisions are always weighed against security impact. The following controls are maintained regardless of cost pressure:
 
 | Control | Implementation |
-|---|---|
+| --- | --- |
 | **Least‑privilege access** | Managed Identities and service principals hold only the permissions their role requires — no standing admin access. |
 | **Network isolation** | Resources sit behind Virtual Networks with private endpoints, NSGs, and subnet segmentation. No unnecessary public exposure. |
 | **Secrets management** | Credentials and connection strings are never stored in code or config. All secrets live in Azure Key Vault, with access fully audited. |
@@ -35,6 +35,9 @@ Cost decisions are always weighed against security impact. The following control
 ---
 
 > No cost optimisation is applied if it weakens the security posture. Spend efficiency and security hardening are treated as complementary, not competing, goals.
-
 > **⚠️ Cost Notice**  
 > Following this lab will incur Azure costs. Use a personal or trial subscription and delete resources when finished.
+
+---
+
+[← Back to Azure Hands-On Engineering](./README.md)

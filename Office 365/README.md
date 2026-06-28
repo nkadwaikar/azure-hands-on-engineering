@@ -1,4 +1,4 @@
-# Modern Workplace (Microsoft 365): Scenario-Driven Lab Construction
+# Modern Workplace (Microsoft 365) Track
 
 ## Identity-First Security · Zero Trust · Collaboration · Compliance · Governance
 
@@ -115,10 +115,4 @@ This sequence mirrors a real enterprise Microsoft 365 rollout: establish messagi
 
 ---
 
-## Track Navigation
-
-| | |
-| --- | --- |
-| ← Back | [Repository Home](../README.md) |
-| Related track | [Identity-First Security & Zero Trust](../Identity-First/README.md) |
-| Related track | [Azure Policy & Governance](../Azure%20Policy%20Auto%E2%80%91Remediation/README.md) |
+[← Back to Azure Hands-On Engineering](../README.md)
