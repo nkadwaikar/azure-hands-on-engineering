@@ -47,12 +47,12 @@ flowchart TD
         KV["Key Vault"]
     end
     subgraph Governance["🛡️ Governance"]
-        Policy["Azure Policy"]
+        Policy["Azure Policy\nGuest Config"]
         Remediation["Auto-Remediation"]
     end
     subgraph Access["🔒 Secure Access"]
         Bastion["Azure Bastion"]
-        JIT["JIT · Defender for Cloud"]
+        JIT["JIT · Defender for Cloud\nDefender for Servers"]
         AFD["Front Door · WAF"]
     end
     subgraph Compute["🖥️ Compute"]
@@ -61,9 +61,9 @@ flowchart TD
     end
     subgraph Ops["🔄 Ops & Resilience"]
         DevOps["Azure DevOps"]
-        Monitor["Azure Monitor"]
+        Monitor["Azure Monitor\nLog Analytics"]
         Backup["Recovery Services"]
-        Arc["Azure Arc"]
+        Arc["Azure Arc\nHybrid Servers"]
     end
 
     EntraID --> MI
@@ -72,11 +72,14 @@ flowchart TD
     MI --> VM
     Policy --> Remediation
     Remediation --> VM & App
+    Policy --> Arc
     Bastion --> VM
     JIT --> VM
+    JIT --> Arc
     AFD --> App
     DevOps --> App
     Monitor --> VM & App
+    Monitor --> Arc
     Backup --> VM
     Arc --> VM & Monitor
 ```

@@ -56,6 +56,7 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `mg` | Management Group |
 | `dcr` | Data Collection Rule |
 | `pls` | Private Link Scope (Azure Monitor / Arc) |
+| `sc` | Azure DevOps Service Connection |
 
 ---
 
@@ -361,6 +362,36 @@ aa-arc-eus-prod                 Automation Account for Update Manager and runboo
 mg-hybrid-servers               Management Group housing the Arc landing zone subscription
 dcr-arc-eus-prod                Data Collection Rule — OS perf + events for Arc servers
 pls-arc-prod                    Private Link Scope for fully private Arc / Monitor connectivity
+```
+
+---
+
+### Azure DevOps
+
+Azure DevOps organizations and projects use existing business/tenant names and are not subject to the `{type}-{project}-{region}-{env}` pattern. Pipelines, service connections, and variable groups inside a project follow the convention below.
+
+```text
+sc-{project}-{env}          Service connection (ARM or workload-identity federation)
+```
+
+Examples:
+
+```text
+sc-appservice-lab           Service connection for the App Service deployment lab
+sc-identity-lab             Service connection scoped to the Identity-First lab subscription
+```
+
+Pipeline YAML files are stored in the repository and named by workload:
+
+```text
+azure-pipelines.yml         Default pipeline file at repository root
+azure-pipelines-{stage}.yml Stage-specific override (e.g., azure-pipelines-staging.yml)
+```
+
+Variable groups (Library) use a descriptive lowercase-hyphen name:
+
+```text
+{project}-{env}-vars        e.g., appservice-lab-vars
 ```
 
 ---

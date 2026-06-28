@@ -152,6 +152,26 @@ flowchart LR
 
 **Design note:** Both MFA methods are enforced by a dedicated Authentication Strength policy inside Conditional Access. Break-glass accounts are never excluded from CA — consistent with the Microsoft 2025 security baseline.
 
+### Azure Arc Hybrid Server Architecture
+
+Text flow: On-premises / multi-cloud server runs the Connected Machine Agent (CMA) -> CMA registers server into Azure Resource Manager -> RBAC + Tags + Policy apply to Arc machine -> Azure Monitor Agent (AMA) forwards logs via DCR to Log Analytics Workspace -> Microsoft Defender for Cloud (Servers plan) evaluates Secure Score and triggers alerts -> Azure Policy / Guest Configuration enforces baseline compliance -> Azure Automation / Update Manager handles patching and runbooks.
+
+```mermaid
+flowchart LR
+    Server["On-Prem / Multi-Cloud\nServer"] --> CMA["Connected Machine\nAgent (CMA)"]
+    CMA --> ARM["Azure Resource\nManager"]
+    ARM --> RBAC["RBAC + Tags\n+ Policy"]
+    ARM --> AMA["Azure Monitor\nAgent (AMA)"]
+    AMA --> DCR["Data Collection\nRule (DCR)"]
+    DCR --> LAW["Log Analytics\nWorkspace"]
+    ARM --> MDC["Microsoft Defender\nfor Cloud"]
+    MDC --> Score["Secure Score\n+ Alerts"]
+    ARM --> Policy["Azure Policy\nGuest Configuration"]
+    Policy --> Comply["Compliance\nBaseline"]
+    ARM --> Auto["Azure Automation\nUpdate Manager"]
+    Auto --> Patch["Patching\n+ Runbooks"]
+```
+
 ---
 
 ## Lab Tracks
@@ -170,5 +190,6 @@ flowchart LR
 | [Break-Glass – FIDO2 (Lab 1)](./Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) | Cloud-only emergency accounts with FIDO2 keys, Authentication Strength, CA enforcement |
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
+| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Defender for Servers, Policy/Guest Config compliance, Update Manager |
 
 [← Back to README](./README.md)
