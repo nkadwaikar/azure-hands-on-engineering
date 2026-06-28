@@ -1,6 +1,6 @@
 # Zero Trust Advanced Lab
 
-**Conditional Access · Risk-Based Policies · Session Controls · Passwordless · Phishing-Resistant MFA**
+## Conditional Access · Risk-Based Policies · Session Controls · Passwordless · Phishing-Resistant MFA
 
 ---
 
@@ -11,6 +11,7 @@ This lab implements advanced Zero Trust controls across Microsoft 365 using admi
 **Estimated time:** 4–5 hours  
 **License required:** Entra ID P2 for risk-based policies; Microsoft 365 E5 or Defender for Cloud Apps for session controls  
 **Portals used:**
+
 - [Entra Admin Center](https://entra.microsoft.com)
 - [Microsoft Defender portal](https://security.microsoft.com)
 - [Microsoft Intune Admin Center](https://intune.microsoft.com)
@@ -51,16 +52,16 @@ Break-glass accounts are used only if all Conditional Access policies lock out a
 Create two accounts:
 
 | Field | Account 1 | Account 2 |
-|-------|-----------|-----------|
+| ----- | --------- | --------- |
 | Display name | Break Glass 01 | Break Glass 02 |
-| UPN | breakglass01@yourdomain.com | breakglass02@yourdomain.com |
+| UPN | <breakglass01@yourdomain.com> | <breakglass02@yourdomain.com> |
 | Password | Generate a strong random password | Same |
 | Password expiration | ✅ Never expires | ✅ Never expires |
 
-2. Assign **Global Administrator** role to both accounts:
+1. Assign **Global Administrator** role to both accounts:
    - Open each account → **Assigned roles** → **+ Add assignments** → **Global Administrator**
 
-3. Create an exclusion group:
+2. Create an exclusion group:
    - **Entra Admin Center** → **Groups** → **+ New group**
    - Name: `CA-Exclusions-BreakGlass` | Type: Security
    - Add both break-glass accounts as members
@@ -77,7 +78,7 @@ All policies are created at:
 #### Policy 1: Require Passwordless MFA for Admins
 
 | Field | Value |
-|-------|-------|
+| --- | --- |
 | Name | CA001 - Require Passwordless for Admins |
 | Users | Include: **Directory roles** → select all admin roles (Global Admin, Security Admin, Exchange Admin, SharePoint Admin, Compliance Admin, etc.) |
 | Users | Exclude: **Groups** → `CA-Exclusions-BreakGlass` |
@@ -92,7 +93,7 @@ All policies are created at:
 > Requires Entra ID P2 (Identity Protection)
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Name | CA002 - Block High-Risk Sign-Ins |
 | Users | Include: **All users** |
 | Users | Exclude: `CA-Exclusions-BreakGlass` |
@@ -107,7 +108,7 @@ All policies are created at:
 #### Policy 3: Require Compliant Device or Approved App
 
 | Field | Value |
-|-------|-------|
+| --- | --- |
 | Name | CA003 - Require Compliant Device or Approved App |
 | Users | Include: **All users** |
 | Users | Exclude: `CA-Exclusions-BreakGlass` |
@@ -121,7 +122,7 @@ All policies are created at:
 #### Policy 4: Session Controls for SharePoint and Teams
 
 | Field | Value |
-|-------|-------|
+| --- | --- |
 | Name | CA004 - Session Controls for SharePoint and Teams |
 | Users | Include: **All users** |
 | Users | Exclude: `CA-Exclusions-BreakGlass` |
@@ -152,7 +153,7 @@ Authentication Strength defines which MFA methods are accepted. Custom strengths
 ### 2.1 Why Phishing-Resistant MFA
 
 | Method | Phishing Resistant | Notes |
-|--------|-------------------|-------|
+| --- | --- | --- |
 | FIDO2 Security Key | ✅ Yes | Hardware key; cryptographically bound to the site origin |
 | Windows Hello for Business | ✅ Yes | TPM-backed; PIN or biometric; domain-bound |
 | Certificate-Based Authentication | ✅ Yes | Smart card or software certificate; PKI-bound |
@@ -164,21 +165,21 @@ Authentication Strength defines which MFA methods are accepted. Custom strengths
 
 1. **Entra Admin Center** → **Protection** → **Authentication methods** → **Authentication strengths** → **+ New authentication strength**
 
-| Field | Value |
-|-------|-------|
-| Name | Phishing-Resistant MFA |
-| Description | Requires FIDO2, Windows Hello for Business, CBA, or Authenticator passwordless |
+| Field       | Value                                                                                |
+| ----------- | ------------------------------------------------------------------------------------ |
+| Name        | Phishing-Resistant MFA                                                               |
+| Description | Requires FIDO2, Windows Hello for Business, CBA, or Authenticator passwordless       |
 
-2. Under **Allowed method combinations**, select:
+1. Under **Allowed method combinations**, select:
    - ✅ FIDO2 security key
    - ✅ Windows Hello for Business
    - ✅ Microsoft Authenticator (passwordless phone sign-in)
    - ✅ Certificate-based authentication (multifactor)
    - Deselect all other combinations
 
-3. Click **Next** → **Create**
+2. Click **Next** → **Create**
 
-4. Return to **CA001** → **Grant** → change to **Require authentication strength** → select **Phishing-Resistant MFA** → **Save**
+3. Return to **CA001** → **Grant** → change to **Require authentication strength** → select **Phishing-Resistant MFA** → **Save**
 
 ### 2.3 Enable FIDO2 Security Keys
 
@@ -210,10 +211,10 @@ Session controls restrict what users can do after successful authentication — 
 
 1. Go to **Microsoft Defender portal** → **Cloud apps** → **Policies** → **Policy management** → **+ Create policy** → **Session policy**
 
-**Session Policy 1: Block Download of Confidential Files**
+### Session Policy 1: Block Download of Confidential Files
 
 | Field | Value |
-|-------|-------|
+| --- | --- |
 | Policy name | Block Download - Confidential Content |
 | Session control type | **Control file download (with inspection)** |
 | Activity source | App: **SharePoint Online**, **Microsoft Teams** |
@@ -225,10 +226,10 @@ Session controls restrict what users can do after successful authentication — 
 
 Click **Create**
 
-**Session Policy 2: Restrict Unmanaged Device Access**
+#### Session Policy 2: Restrict Unmanaged Device Access
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Policy name | Restrict Access - Unmanaged Devices |
 | Session control type | **Block activities** |
 | Device filter | Device management: **is not** Intune compliant AND **is not** hybrid Azure AD joined |
@@ -238,7 +239,7 @@ Click **Create**
 ### 3.3 Session Control Reference
 
 | Control | Purpose | When to apply |
-|---------|---------|---------------|
+| --- | --- | --- |
 | Block download | Prevents data exfiltration from browser | Unmanaged devices, high-risk users |
 | Restrict access | Read-only access to apps | BYOD, external users |
 | Sign-in frequency (8 hrs) | Forces re-authentication regularly | All users on sensitive apps |
@@ -250,7 +251,7 @@ Click **Create**
 
 ### 4.1 Zero Trust Pillars in Microsoft 365
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                     ZERO TRUST ARCHITECTURE                      │
 │                  "Never Trust, Always Verify"                    │
@@ -274,7 +275,7 @@ Click **Create**
 ### 4.2 Zero Trust Policy Matrix
 
 | User type | Device state | Risk level | Required controls |
-|-----------|-------------|------------|------------------|
+| --- | --- | --- | --- |
 | Admin | Compliant | Low | Phishing-resistant MFA (CA001) |
 | Admin | Any | Medium or High | Block (CA002) |
 | User | Compliant | Low | MFA (CA003) |
@@ -287,13 +288,13 @@ Click **Create**
 ## 5. Validation
 
 | Test | How to Test | Expected Result |
-|------|-------------|-----------------|
+| --- | --- | --- |
 | Passwordless for admins | Sign in to admin account with password + TOTP | Blocked; prompted for FIDO2, WHfB, or Authenticator passwordless |
 | Block high-risk sign-in | Check **Entra** → **Security** → **Identity Protection** → **Risky sign-ins** | High-risk sign-ins show blocked status |
 | Device compliance | Sign in from a non-Intune-enrolled device | Prompted to use compliant device or approved app |
 | Session frequency | Sign in to SharePoint; leave session idle 8+ hours | Re-authentication prompted on next action |
 | Block download | On an unmanaged device (browser), try to download a Confidential doc from SharePoint | Download blocked with custom message |
-| FIDO2 registration | Log in as test user → [aka.ms/mysecurityinfo](https://aka.ms/mysecurityinfo) → Add sign-in method → Security key | Key registered successfully |
+| FIDO2 registration | Log in as test user → My Security Info → Add sign-in method → Security key | Key registered successfully |
 | Persistent browser | Sign in on a browser | "Stay signed in?" prompt absent; session ends at browser close |
 | Break glass access | Sign in with break-glass account to any M365 app | Full access granted (excluded from all CA policies) |
 | What If tool | **Entra** → **Conditional Access** → **What If** → simulate admin sign-in | CA001 listed as applied policy |

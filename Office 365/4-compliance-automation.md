@@ -1,6 +1,6 @@
 # Compliance Automation Lab (Purview)
 
-**DLP · Auto-Labeling · Insider Risk · Compliance Manager**
+## DLP · Auto-Labeling · Insider Risk · Compliance Manager
 
 ---
 
@@ -41,10 +41,10 @@ All DLP policies are created in:
 5. **Policy settings:** choose **Create or customize advanced DLP rules** → **Next**
 6. Click **+ Create rule**
 
-**Rule 1: Block external sharing**
+#### Rule 1: Block external sharing
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Rule name | Financial Data - External Block |
 | Conditions | Content contains sensitive info types: **Credit Card Number** (min count: 1), **U.S. Bank Account Number** (min count: 1) |
 | Add condition | Content is shared: **With people outside my organization** |
@@ -53,7 +53,7 @@ All DLP policies are created in:
 | Policy tip text | *"This document contains financial data and cannot be shared externally. Contact the Compliance team with questions."* |
 | Incident reports | Severity: **High** → Send alert to compliance admins |
 
-7. Save rule → **Next** → **Turn on the policy now** → **Submit**
+1. Save rule → **Next** → **Turn on the policy now** → **Submit**
 
 ### 1.2 DLP Policy: Personally Identifiable Information (PII)
 
@@ -62,10 +62,10 @@ All DLP policies are created in:
 3. Locations: All → **Next**
 4. Choose **Create or customize advanced DLP rules** → create two rules:
 
-**Rule 1: PII - Internal Notify (low count)**
+#### Rule 1: PII - Internal Notify (low count)
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Rule name | PII - Internal Policy Tip |
 | Conditions | Content contains: **U.S. Social Security Number (SSN)** (min: 1), **U.S. Driver's License Number** (min: 1) |
 | Shared with | Inside my organization |
@@ -77,7 +77,7 @@ All DLP policies are created in:
 **Rule 2: PII - External Block**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Rule name | PII - External Block |
 | Conditions | Content contains: **U.S. Social Security Number (SSN)** (min: 1) |
 | Shared with | Outside my organization |
@@ -85,7 +85,7 @@ All DLP policies are created in:
 | Incident reports | Severity: High |
 | Priority | 0 (higher priority) |
 
-5. Submit → **Turn the policy on now**
+1. Submit → **Turn the policy on now**
 
 ### 1.3 DLP Policy: Health Data (HIPAA)
 
@@ -97,19 +97,19 @@ All DLP policies are created in:
 **Rule: HIPAA - Block and Alert**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Rule name | HIPAA - External Block |
 | Conditions | Content contains: **U.S. Health Insurance Claim Number**, **Drug Enforcement Agency (DEA) Number** |
 | Shared with | Outside my organization |
 | Actions | Block everyone |
 | Notifications | Notify user + Incident report (High severity) |
 
-5. Submit → Turn on
+1. Submit → Turn on
 
 ### 1.4 DLP Automated Actions Reference
 
 | Scenario | Recommended Action |
-|----------|--------------------|
+| ---------- | -------------------- |
 | PII shared externally (1–5 instances) | Block + notify user + alert |
 | Financial data emailed externally | Block + notify + high-severity alert |
 | Health data in SharePoint (any count) | Block external access + alert |
@@ -131,7 +131,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 **Label 1: Public**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Name | Public |
 | Display name | Public |
 | Description for users | Content that can be shared freely with anyone inside or outside the organization |
@@ -142,7 +142,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 **Label 2: Internal**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Name | Internal |
 | Description | For internal use only. Do not share externally without approval. |
 | Encryption | None |
@@ -151,7 +151,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 **Label 3: Confidential**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Name | Confidential |
 | Description | Sensitive business content. Share only with authorized personnel. |
 | Encryption | ✅ Apply encryption |
@@ -162,14 +162,14 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 **Label 4: Highly Confidential**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Name | Highly Confidential |
 | Description | Strictly controlled. Encryption required. Limited distribution. |
 | Encryption | ✅ Apply encryption |
 | Assign permissions now | Specific people/groups only |
 | Content marking | Watermark: **HIGHLY CONFIDENTIAL** + footer |
 
-2. After creating all labels, click **Publish labels** → add all four → scope to all users → submit
+1. After creating all labels, click **Publish labels** → add all four → scope to all users → submit
 
 > Labels appear in Office apps and SharePoint for users within 24–48 hours of publishing.
 
@@ -180,7 +180,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 **Policy 1: Auto-Label PII as Confidential**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Policy name | Auto-Label PII as Confidential |
 | Label to apply | Confidential |
 | Locations | SharePoint sites: All sites; OneDrive accounts: All accounts; Exchange: All |
@@ -188,16 +188,17 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 Rules:
 
 | Setting | Value |
-|---------|-------|
+| --------- | ------- |
 | Rule name | PII Detection |
 | Condition | Content contains sensitive info type: **U.S. Social Security Number (SSN)** (min: 1); **Credit Card Number** (min: 1) |
 
-2. Choose **Run policy in simulation mode** → **Save**
-3. After reviewing simulation results (usually 24–48 hours), return to the policy → **Turn on policy**
+1. Choose **Run policy in simulation mode** → **Save**
+2. After reviewing simulation results (usually 24–48 hours), return to the policy → **Turn on policy**
 
 **Policy 2: Auto-Label Health Data as Highly Confidential**
 
 Same process:
+
 - Label: **Highly Confidential**
 - Sensitive info type: **U.S. Health Insurance Claim Number**
 - Start in simulation mode → turn on after review
@@ -221,7 +222,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 2. Configure:
 
 | Setting | Value |
-|---------|-------|
+| --------- | ------- |
 | Privacy | Show anonymized versions of usernames (recommended for initial rollout) |
 | Policy indicators | Enable all: Office indicators, Device indicators, Physical access indicators |
 | Policy timeframes | Past activity detection: **90 days**; Future activity detection: **90 days** |
@@ -234,7 +235,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 **Policy 1: Data Theft by Departing Users**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Template | **Data theft by departing users** |
 | Name | Data Theft - Departing Users |
 | Users | All users |
@@ -243,12 +244,12 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 | Indicators | ✅ File downloads, copy to USB, email to external, cloud upload |
 | Alert threshold | Medium |
 
-2. Click **Submit**
+1. Click **Submit**
 
 **Policy 2: General Data Leaks**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Template | **General data leaks** |
 | Name | Data Leaks - All Users |
 | Triggering event | DLP policy match |
@@ -258,7 +259,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 **Policy 3: Privileged User Risk**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Template | **Security policy violations by users** |
 | Name | Privileged User Risk |
 | Users | Select specific users: all admin role members |
@@ -284,7 +285,7 @@ Compliance Manager provides a dashboard of your compliance posture across regula
 **NIST SP 800-53 Assessment:**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Select regulation | **NIST SP 800-53 Rev 5** |
 | Assessment name | NIST SP 800-53 — Microsoft 365 |
 | Assign group | Create new group: **Enterprise Compliance** |
@@ -294,7 +295,7 @@ Click **Create assessment**
 **ISO 27001 Assessment:**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Select regulation | **ISO/IEC 27001:2022** |
 | Assessment name | ISO 27001 — Microsoft 365 |
 | Group | Enterprise Compliance |
@@ -302,7 +303,7 @@ Click **Create assessment**
 **GDPR Assessment:**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Select regulation | **GDPR** |
 | Assessment name | GDPR — Microsoft 365 |
 | Group | Enterprise Compliance |
@@ -319,7 +320,7 @@ Click **Create assessment**
 **High-impact actions to prioritize first:**
 
 | Action | Frameworks | Typical points |
-|--------|-----------|---------------|
+| -------- | ----------- | --------------- |
 | Require MFA for all users (via Conditional Access) | All | High |
 | Deploy sensitivity labels + auto-labeling | All | High |
 | Enable unified audit log | NIST, ISO | Medium |
@@ -331,7 +332,7 @@ Click **Create assessment**
 
 Your compliance score is shown on the **Compliance Manager** home dashboard:
 
-```
+```text
 Score = (Points achieved / Total possible points) × 100
 ```
 
@@ -344,7 +345,7 @@ Score = (Points achieved / Total possible points) × 100
 ## 5. Validation
 
 | Test | How to Test | Expected Result |
-|------|-------------|-----------------|
+| --- | --- | --- |
 | DLP — Financial | Send email with credit card number to external address | Message blocked; policy tip shown |
 | DLP — PII external | Share SharePoint doc with SSN content externally | Sharing blocked; alert in Purview |
 | DLP — Audit | **Purview** → **Data loss prevention** → **Alerts** | Alerts visible with details |

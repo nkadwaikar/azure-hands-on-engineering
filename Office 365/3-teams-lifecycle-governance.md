@@ -1,6 +1,6 @@
 # Teams Lifecycle Governance Lab
 
-**Provisioning · Naming Policies · Templates · Channels · Expiration · Compliance**
+## Provisioning · Naming Policies · Templates · Channels · Expiration · Compliance
 
 ---
 
@@ -11,6 +11,7 @@ This lab builds a full Teams lifecycle governance model — from creation to del
 **Estimated time:** 3–4 hours  
 **License required:** Microsoft 365 E3 or E5; Entra ID P1 for creation restriction  
 **Portals used:**
+
 - [Teams Admin Center](https://admin.teams.microsoft.com)
 - [Entra Admin Center](https://entra.microsoft.com)
 - [Microsoft Purview portal](https://compliance.microsoft.com)
@@ -39,7 +40,7 @@ By default, any licensed user can create a Team. In regulated environments this 
 1. Go to **Entra Admin Center** → **Groups** → **All groups** → **+ New group**
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Group type | Security |
 | Group name | Teams Provisioning |
 | Description | Members of this group are authorized to create Microsoft Teams |
