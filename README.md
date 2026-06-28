@@ -1,13 +1,15 @@
 # 👋 Hi, I'm Nadeem Kadwaikar
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](https://github.com/nkadwaikar)
-[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](https://github.com/nkadwaikar)
-[![Microsoft 365](https://img.shields.io/badge/Microsoft%20365-00A1F1?style=flat-square&logo=microsoft&logoColor=white)](https://github.com/nkadwaikar)
-[![Zero Trust](https://img.shields.io/badge/Zero%20Trust-0052CC?style=flat-square&logo=security&logoColor=white)](https://github.com/nkadwaikar)
-[![IaC Bicep](https://img.shields.io/badge/IaC-Bicep-0078D4?style=flat-square&logo=azurepipelines&logoColor=white)](https://github.com/nkadwaikar)
-[![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](https://github.com/nkadwaikar)
+[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#-labs--engineering-tracks)
+[![Zero Trust](https://img.shields.io/badge/Zero%20Trust-0052CC?style=flat-square&logo=security&logoColor=white)](Identity-First/README.md)
+[![IaC Bicep](https://img.shields.io/badge/IaC-Bicep-0078D4?style=flat-square&logo=azurepipelines&logoColor=white)](Bicep/README.md)
+[![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
 
 I build identity‑first Azure platforms that stay secure, compliant, and maintainable long after deployment. My work focuses on Zero Trust, Infrastructure as Code, and production‑aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked.
+
+> **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.  
+> **Jumping in?** Go straight to [Labs & Engineering Tracks](#-labs--engineering-tracks) or the [Architecture Overview](Architecture%20Overview.md).
 
 ---
 
@@ -197,20 +199,24 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ### 9. 🏷️ Naming Convention
 
-**[Naming Convention](Naming%20Convention.md)**
-I use one clean naming style across my whole portfolio so everything stays organised and easy to work with
+**[Naming Convention — Full Overview](Naming-Convention.md)**
+
+- I use one clean naming style across my whole portfolio so everything stays organised and easy to work with
 
 ### 10. 🏛️ Architecture Overview
 
-**[Architecture Overview](Architecture%20Overview.md)**
-A high-level visual summary that shows how each component works together to form the complete architecture.
+**[Architecture Overview — Full Overview](Architecture%20Overview.md)**
+
+- A high-level visual summary that shows how each component works together to form the complete architecture.
 
 ---
 
 ## 🛠️ Next
 
-- Defender for Cloud CSPM — security posture management across hub-and-spoke
-- Copilot Studio — AI agent with SharePoint knowledge source, secured with Entra ID
+| Planned | Why |
+| --- | --- |
+| Defender for Cloud CSPM | Extend security posture management and recommendations across a hub-and-spoke topology |
+| Copilot Studio | AI agent backed by a SharePoint knowledge source, secured with Entra ID — applied AI on a Zero Trust foundation |
 
 ---
 
