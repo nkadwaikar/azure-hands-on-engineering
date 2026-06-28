@@ -26,7 +26,7 @@ Azure Bastion/
    | 9. Cleanup / Teardown | Delete Bastion, public IP, subnet, and optionally the full resource group |
    | 10. VNet Peering | Hub-to-spoke peering for cross-VNet Bastion access; explains automatic reverse peering |
 
-> **JIT VM Access** has moved to the [Microsoft Defender for Cloud track](../Microsoft%20Defender%20for%20Cloud/Readme.md).
+> **JIT VM Access** has moved to the [Microsoft Defender for Cloud track](../Microsoft%20Defender%20for%20Cloud/README.md).
 
 ## Prerequisites
 

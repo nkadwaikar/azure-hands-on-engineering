@@ -9,7 +9,7 @@
 I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production‑aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
 
 > **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.  
-> **Jumping in?** Go straight to [Labs & Engineering Tracks](#-labs--engineering-tracks), the [Modern Workplace Track](Office%20365/README.MD), or the [Architecture Overview](Architecture%20Overview.md).
+> **Jumping in?** Go straight to [Labs & Engineering Tracks](#-labs--engineering-tracks), the [Modern Workplace Track](Office%20365/README.md), or the [Architecture Overview](Architecture%20Overview.md).
 
 ---
 
@@ -45,7 +45,7 @@ All labs are designed to minimise Azure spend using right‑sizing, auto‑shutd
 | [Identity & Zero Trust](Identity-First/README.md) | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
 | [IaC & Automation](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
 | [Governance & Compliance](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
-| [Microsoft 365](Office%20365/README.MD) | Exchange Online, SharePoint, Teams governance, Purview compliance, Zero Trust, Identity Lifecycle |
+| [Microsoft 365](Office%20365/README.md) | Exchange Online, SharePoint, Teams governance, Purview compliance, Zero Trust, Identity Lifecycle |
 | [Business Continuity](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 
 ---
@@ -212,7 +212,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ### 9. 💼 Modern Workplace (Microsoft 365): Scenario‑Driven Lab Construction
 
-**[Modern Workplace Track — Full Overview](Office%20365/README.MD)**
+**[Modern Workplace Track — Full Overview](Office%20365/README.md)**
 
 - [Exchange Online Advanced](Office%20365/1-exchange-online-advanced.md)
 - [SharePoint Information Architecture](Office%20365/2-sharepoint-information-architecture.md)
