@@ -198,10 +198,12 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 ### 9. 🏷️ Naming Convention
 
 **[Naming Convention](Naming%20Convention.md)**
+I use one clean naming style across my whole portfolio so everything stays organised and easy to work with
 
 ### 10. 🏛️ Architecture Overview
 
 **[Architecture Overview](Architecture%20Overview.md)**
+A high-level visual summary that shows how each component works together to form the complete architecture.
 
 ---
 
