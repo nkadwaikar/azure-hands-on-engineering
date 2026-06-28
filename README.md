@@ -9,7 +9,7 @@
 I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production‑aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
 
 > **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.  
-> **Jumping in?** Go straight to [Labs & Engineering Tracks](#-labs--engineering-tracks) or the [Architecture Overview](Architecture%20Overview.md).
+> **Jumping in?** Go straight to [Labs & Engineering Tracks](#-labs--engineering-tracks), the [Modern Workplace Track](Office%20365/README.MD), or the [Architecture Overview](Architecture%20Overview.md).
 
 ---
 
@@ -27,7 +27,7 @@ Built for cloud engineers and identity architects who are evaluating production-
 | Reviewing identity & Zero Trust | [Identity-First Track](Identity-First/README.md) |
 | Assessing IaC & automation | [Bicep Track](Bicep/README.md) |
 | Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) |
-| Following the full learning path | [Recommended Lab Path](#-recommended-lab-path) |
+| Following the full learning path | [Recommended Engineering Path](#-recommended-engineering-path) |
 
 ---
 
@@ -45,7 +45,7 @@ All labs are designed to minimise Azure spend using right‑sizing, auto‑shutd
 | [Identity & Zero Trust](Identity-First/README.md) | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
 | [IaC & Automation](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
 | [Governance & Compliance](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
-| [Microsoft 365](Identity-First/01-identity%20fundamentals.md) | Tenant admin, users & groups, security & compliance, endpoint basics and much more |
+| [Microsoft 365](Office%20365/README.MD) | Exchange Online, SharePoint, Teams governance, Purview compliance, Zero Trust, Identity Lifecycle |
 | [Business Continuity](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 
 ---
@@ -210,13 +210,24 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 - [Arc Architecture — Full Lab](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
 
-### 9. 🏷️ Naming Convention
+### 9. 💼 Modern Workplace (Microsoft 365): Scenario‑Driven Lab Construction
+
+**[Modern Workplace Track — Full Overview](Office%20365/README.MD)**
+
+- [Exchange Online Advanced](Office%20365/1-exchange-online-advanced.md)
+- [SharePoint Information Architecture](Office%20365/2-sharepoint-information-architecture.md)
+- [Teams Lifecycle Governance](Office%20365/3-teams-lifecycle-governance.md)
+- [Compliance Automation (Purview)](Office%20365/4-compliance-automation.md)
+- [Zero Trust Advanced — Conditional Access](Office%20365/5-zero-trust-advanced.md)
+- [Identity Governance — Lifecycle Workflows](Office%20365/6-identity-governance-lifecycle-workflows.md)
+
+### 10. 🏷️ Naming Convention
 
 **[Naming Convention — Full Overview](Naming-Convention.md)**
 
 - I use one clean naming style across my whole portfolio so everything stays organised and easy to work with
 
-### 10. 🏛️ Architecture Overview
+### 11. 🏛️ Architecture Overview
 
 **[Architecture Overview — Full Overview](Architecture%20Overview.md)**
 

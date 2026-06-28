@@ -172,6 +172,24 @@ flowchart LR
     Auto --> Patch["Patching\n+ Runbooks"]
 ```
 
+### Modern Workplace (Microsoft 365)
+
+Text flow: User authenticates via Entra ID → Conditional Access evaluates Zero Trust policy (device compliance, sign-in risk, authentication strength) → Access granted to Microsoft 365 workloads (Exchange Online, SharePoint Online, Teams) → Purview enforces DLP, auto-labeling, and retention → Identity Governance automates Joiner–Mover–Leaver lifecycle, access reviews, and entitlement management.
+
+```mermaid
+flowchart LR
+    User[User] --> CA[Conditional Access\nZero Trust Policy]
+    CA --> EXO[Exchange Online\nMail Flow · Transport Rules]
+    CA --> SPO[SharePoint Online\nIA · Permissions · Retention]
+    CA --> Teams[Microsoft Teams\nLifecycle · Governance]
+    EXO --> Purview[Microsoft Purview\nDLP · Auto-Label · Audit]
+    SPO --> Purview
+    Teams --> Purview
+    Purview --> Compliance[Compliance Manager\nNIST · ISO · GDPR]
+    CA --> IGA[Identity Governance\nLifecycle Workflows]
+    IGA --> JML[Joiner · Mover · Leaver\nAccess Reviews · Entitlement]
+```
+
 ---
 
 ## Lab Tracks
@@ -191,5 +209,6 @@ flowchart LR
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
 | [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Defender for Servers, Policy/Guest Config compliance, Update Manager |
+| [Modern Workplace (Microsoft 365)](./Office%20365/README.MD) | Exchange Online advanced mail flow, SharePoint information architecture, Teams lifecycle governance, Purview compliance automation, Zero Trust Conditional Access, Identity Governance lifecycle workflows |
 
 [← Back to README](./README.md)
