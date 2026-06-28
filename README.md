@@ -195,13 +195,13 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 - [Arc Architecture — Full Lab](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
 
-## 9. 🏷️ Naming Convention
+### 9. 🏷️ Naming Convention
 
-- [Naming Convention](Naming%20Convention.md)**
+- [Naming Convention](Naming%20Convention.md)
 
-## 10. 🏛️ Architecture Overview
+### 10. 🏛️ Architecture Overview
 
-- [Architecture Overview](Architecture%20Overview.md)**
+- [Architecture Overview](Architecture%20Overview.md)
 
 ---
 
