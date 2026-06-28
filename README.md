@@ -237,11 +237,12 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ## � Next
 
-What I'm building next reflects where enterprise Azure is heading — AI-augmented operations and deeper security posture management, both on a Zero Trust foundation.
+What I'm building next reflects where enterprise Azure is heading — AI-augmented operations, deeper security posture management, and Copilot-native engineering — all on a Zero Trust foundation.
 
 | Planned | Why |
 | --- | --- |
 | Defender for Cloud CSPM | Extend security posture management and recommendations across a hub-and-spoke topology |
+| Copilot for Security | Integrate Microsoft Security Copilot into the incident response and identity investigation workflow |
 | Copilot Studio | AI agent backed by a SharePoint knowledge source, secured with Entra ID — applied AI on a Zero Trust foundation |
 
 ---
