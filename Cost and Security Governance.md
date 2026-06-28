@@ -35,3 +35,6 @@ Cost decisions are always weighed against security impact. The following control
 ---
 
 > No cost optimisation is applied if it weakens the security posture. Spend efficiency and security hardening are treated as complementary, not competing, goals.
+
+> **⚠️ Cost Notice**  
+> Following this lab will incur Azure costs. Use a personal or trial subscription and delete resources when finished.
