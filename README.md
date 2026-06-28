@@ -13,13 +13,13 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 
 ---
 
-## 👥 Who This Portfolio Is For
+## 👥 Who This Labs Is For
 
 Built for cloud engineers and identity architects who are evaluating production-aligned Azure engineering — specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
 
 ---
 
-## 🗺️ How to Use This Portfolio
+## 🗺️ How to Use This Labs
 
 | If you're… | Start here |
 | --- | --- |
@@ -61,7 +61,7 @@ All labs are designed to minimise Azure spend using right‑sizing, auto‑shutd
 | [Identity & Zero Trust](Identity-First/README.md) | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
 | [IaC & Automation](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
 | [Governance & Compliance](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
-| Microsoft 365 | Tenant admin, users & groups, security & compliance, endpoint basics — *covered outside this portfolio* |
+| [Microsoft 365](01-identity%20fundamentals.md) | Tenant admin, users & groups, security & compliance, endpoint basics — *covered outside this portfolio* |
 | [Business Continuity](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 
 ---
