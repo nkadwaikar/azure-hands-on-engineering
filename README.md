@@ -13,8 +13,35 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 
 ---
 
+## 👥 Who This Portfolio Is For
+
+Built for cloud engineers and identity architects who are evaluating production-aligned Azure engineering — specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
+
+---
+
+## 🗺️ How to Use This Portfolio
+
+| If you're… | Start here |
+| --- | --- |
+| Evaluating my architecture approach | [Architecture Overview](Architecture%20Overview.md) |
+| Reviewing identity & Zero Trust | [Identity-First Track](Identity-First/README.md) |
+| Assessing IaC & automation | [Bicep Track](Bicep/README.md) |
+| Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) |
+| Following the full learning path | [Recommended Lab Path](#-recommended-lab-path) |
+
+---
+
+## 💰 Cost Governance
+
+All labs are designed to minimise Azure spend using right‑sizing, auto‑shutdown, scoped logging, and consumption‑based services. Costs are kept predictable and low for learning environments.
+
+---
+
 ## 🧭 Navigation
 
+- [Who This Portfolio Is For](#-who-this-portfolio-is-for)
+- [How to Use This Portfolio](#️-how-to-use-this-portfolio)
+- [Cost Governance](#-cost-governance)
 - [Skills](#-skills)
 - [Featured Architecture](#️-featured-architecture)
 - [Why This Architecture Matters](#-why-this-architecture-matters)
@@ -30,12 +57,12 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 
 | Area | What I Do |
 | --- | --- |
-| Azure Infrastructure | VMs, VMSS, VNets, NSGs, Load Balancers, Front Door, Storage — built for resilience |
-| Identity & Zero Trust | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
-| IaC & Automation | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
-| Governance & Compliance | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
-| Microsoft 365 | Tenant admin, users & groups, security & compliance, endpoint basics |
-| Business Continuity | Azure Backup, Site Recovery, VMSS failover patterns |
+| [Azure Infrastructure](Architecture%20Overview.md) | VMs, VMSS, VNets, NSGs, Load Balancers, Front Door, Storage — built for resilience |
+| [Identity & Zero Trust](Identity-First/README.md) | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
+| [IaC & Automation](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
+| [Governance & Compliance](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
+| Microsoft 365 | Tenant admin, users & groups, security & compliance, endpoint basics — *covered outside this portfolio* |
+| [Business Continuity](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 
 ---
 
@@ -99,6 +126,8 @@ flowchart TD
 ---
 
 ## 🚀 Recommended Lab Path
+
+The full sequence from the [How to Use](#️-how-to-use-this-portfolio) table — each step builds on the last.
 
 1. Identity-First — foundation for everything
 2. IaC (Bicep) — deploy identity stack using modules
@@ -213,6 +242,8 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ## 🛠️ Next
 
+What I'm building next reflects where enterprise Azure is heading — AI-augmented operations and deeper security posture management, both on a Zero Trust foundation.
+
 | Planned | Why |
 | --- | --- |
 | Defender for Cloud CSPM | Extend security posture management and recommendations across a hub-and-spoke topology |
@@ -238,7 +269,3 @@ My work is shaped by three principles:
 - 📧 [nadeemkadwaikar@outlook.com](mailto:nadeemkadwaikar@outlook.com)
 
 [![Last Updated June 2026](https://img.shields.io/badge/Last%20Updated-June%202026-0078D4?style=flat-square&logo=github)](https://github.com/nkadwaikar/azure-hands-on-engineering)
-
-> ⚠️ Cost Notice
-Following this lab will incur Azure costs. Use a personal or trial subscription and delete resources when finished.
----
