@@ -6,7 +6,7 @@
 [![IaC Bicep](https://img.shields.io/badge/IaC-Bicep-0078D4?style=flat-square&logo=azurepipelines&logoColor=white)](Bicep/README.md)
 [![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
 
-I build identity‑first Azure platforms that stay secure, compliant, and maintainable long after deployment. My work focuses on Zero Trust, Infrastructure as Code, and production‑aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked.
+I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production‑aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20Governance.md) as a design constraint, not an afterthought.
 
 > **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.  
 > **Jumping in?** Go straight to [Labs & Engineering Tracks](#-labs--engineering-tracks) or the [Architecture Overview](Architecture%20Overview.md).
@@ -238,3 +238,7 @@ My work is shaped by three principles:
 - 📧 [nadeemkadwaikar@outlook.com](mailto:nadeemkadwaikar@outlook.com)
 
 [![Last Updated June 2026](https://img.shields.io/badge/Last%20Updated-June%202026-0078D4?style=flat-square&logo=github)](https://github.com/nkadwaikar/azure-hands-on-engineering)
+
+> **⚠️ Lab Disclaimer**  
+> These labs are for **learning purposes only** and should be run in a **personal or trial Azure subscription**. You are responsible for any costs incurred. Always delete or deallocate resources after each lab. The author accepts no liability for costs, security incidents, or misconfigurations. Do not run these labs in a production or corporate environment without explicit authorisation.
+---
