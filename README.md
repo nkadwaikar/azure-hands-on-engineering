@@ -13,13 +13,13 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 
 ---
 
-## 👥 Who This Labs Is For
+## 👥 Who This Is Designed For
 
 Built for cloud engineers and identity architects who are evaluating production-aligned Azure engineering — specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
 
 ---
 
-## 🗺️ How to Use This Labs
+## 🗺️ How to Follow These Tracks
 
 | If you're… | Start here |
 | --- | --- |
@@ -37,22 +37,6 @@ All labs are designed to minimise Azure spend using right‑sizing, auto‑shutd
 
 ---
 
-## 🧭 Navigation
-
-- [Who This Portfolio Is For](#-who-this-portfolio-is-for)
-- [How to Use This Portfolio](#️-how-to-use-this-portfolio)
-- [Cost Governance](#-cost-governance)
-- [Skills](#-skills)
-- [Featured Architecture](#️-featured-architecture)
-- [Why This Architecture Matters](#-why-this-architecture-matters)
-- [Recommended Lab Path](#-recommended-lab-path)
-- [Labs & Engineering Tracks](#-labs--engineering-tracks)
-- [Next](#️-next)
-- [Engineering Philosophy](#-engineering-philosophy)
-- [Connect](#-connect)
-
----
-
 ## 🎯 Skills
 
 | Area | What I Do |
@@ -61,7 +45,7 @@ All labs are designed to minimise Azure spend using right‑sizing, auto‑shutd
 | [Identity & Zero Trust](Identity-First/README.md) | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
 | [IaC & Automation](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
 | [Governance & Compliance](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
-| [Microsoft 365](01-identity%20fundamentals.md) | Tenant admin, users & groups, security & compliance, endpoint basics — *covered outside this portfolio* |
+| [Microsoft 365](Identity-First/01-identity%20fundamentals.md) | Tenant admin, users & groups, security & compliance, endpoint basics and much more |
 | [Business Continuity](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 
 ---
@@ -125,9 +109,9 @@ flowchart TD
 
 ---
 
-## 🚀 Recommended Lab Path
+## 🚀 Recommended Engineering Path
 
-The full sequence from the [How to Use](#️-how-to-use-this-portfolio) table — each step builds on the last.
+The full sequence — each step builds on the last.
 
 1. Identity-First — foundation for everything
 2. IaC (Bicep) — deploy identity stack using modules
@@ -240,7 +224,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 ---
 
-## 🛠️ Next
+## � Next
 
 What I'm building next reflects where enterprise Azure is heading — AI-augmented operations and deeper security posture management, both on a Zero Trust foundation.
 
