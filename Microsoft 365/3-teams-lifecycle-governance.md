@@ -138,8 +138,8 @@ Channels to add (click **+ Add** for each):
 
 | Channel name | Type | Set as favorite |
 | ----------- | ---- | --------------- |
-| Announcements | Standard | ✅ Yes |
-| Projects | Standard | ✅ Yes |
+| Announcements | Standard | Yes |
+| Projects | Standard | Yes |
 | Incidents | Standard | No |
 | Resources | Standard | No |
 
@@ -151,8 +151,8 @@ Click **Submit**
 
 | Channel         | Type     | Favorite |
 | --------------- | -------- | -------- |
-| Announcements   | Standard | ✅ Yes   |
-| Planning        | Standard | ✅ Yes   |
+| Announcements   | Standard |  Yes     |
+| Planning        | Standard |  Yes     |
 | Deliverables    | Standard | No       |
 | Risks & Issues  | Standard | No       |
 | Finance         | Private  | No       |
@@ -163,7 +163,7 @@ Apps: **Planner**, **SharePoint** (Projects site), **Forms**
 
 | Channel | Type | Favorite |
 | --- | --- | --- |
-| Executive Updates | Standard | ✅ Yes |
+| Executive Updates | Standard | Yes |
 | Strategy | Private | No |
 | Finance | Private | No |
 | HR Matters | Private | No |
@@ -198,7 +198,7 @@ Standard channels are visible to all Team members.
 2. Click **...** next to **Announcements** → **Manage channel**
 3. Under **Channel moderation** → toggle **On**
 4. Set **Who can post messages?** → **Only owners can post new messages**
-5. Set **Team members can reply to posts** → ✅ On
+5. Set **Team members can reply to posts** →  On
 6. Click **Save**
 
 ### 4.2 Private Channels
@@ -245,7 +245,7 @@ Archiving makes the Team read-only and removes it from the active Teams list whi
 1. Go to **Teams Admin Center** → **Teams** → **Manage teams**
 2. Select the Team to archive
 3. Click **Archive** in the top ribbon
-4. ✅ Check **Make the SharePoint site read-only for team members**
+4. Check **Make the SharePoint site read-only for team members**
 5. Click **Archive**
 
 **Archival checklist:**
@@ -291,9 +291,9 @@ Sensitivity labels control Teams privacy (Public/Private), guest access, and dev
 1. Go to **Microsoft Purview portal** → **Information protection** → **Labels**
 2. Select the **Internal** label → **Edit label** → **Groups & sites** scope
 3. Enable:
-   - ✅ Privacy and external user access settings
+   - Privacy and external user access settings
    - **Privacy:** Private
-   - ✅ Block external sharing
+   - Block external sharing
 4. Save
 
 **Apply the label when creating a Team:**
@@ -311,8 +311,8 @@ Sensitivity labels control Teams privacy (Public/Private), guest access, and dev
 | Description | Retains Teams channel messages and chats for 3 years  |
 
 1. **Locations** — toggle on:
-   - ✅ **Teams channel messages** — All teams
-   - ✅ **Teams chats** — All users
+   - **Teams channel messages** — All teams
+   - **Teams chats** — All users
 2. **Retention settings:**
    - Retain items for **3 years**
    - At end of period: **Do nothing** (or Delete, per your policy)

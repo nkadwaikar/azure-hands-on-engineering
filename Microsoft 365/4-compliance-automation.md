@@ -8,8 +8,8 @@
 
 This lab automates compliance across Microsoft 365 using Microsoft Purview — entirely through the portal. You will create Data Loss Prevention policies for financial, PII, and health data; configure auto-labeling to classify content without user intervention; enable Insider Risk Management policies to detect data theft and leaks; and set up Compliance Manager assessments for NIST, ISO, and GDPR.
 
-**Estimated time:** 4–5 hours  
-**License required:** Microsoft 365 E5 or E5 Compliance add-on  
+**Estimated time:** 4–5 hours
+**License required:** Microsoft 365 E5 or E5 Compliance add-on
 **Portal used:** [Microsoft Purview portal](https://compliance.microsoft.com)
 
 ---
@@ -49,7 +49,7 @@ All DLP policies are created in:
 | Conditions | Content contains sensitive info types: **Credit Card Number** (min count: 1), **U.S. Bank Account Number** (min count: 1) |
 | Add condition | Content is shared: **With people outside my organization** |
 | Actions | **Restrict access or encrypt the content** → Block everyone |
-| User notifications | ✅ Notify the user who sent, shared, or last modified the content |
+| User notifications | Notify the user who sent, shared, or last modified the content |
 | Policy tip text | *"This document contains financial data and cannot be shared externally. Contact the Compliance team with questions."* |
 | Incident reports | Severity: **High** → Send alert to compliance admins |
 
@@ -70,7 +70,7 @@ All DLP policies are created in:
 | Conditions | Content contains: **U.S. Social Security Number (SSN)** (min: 1), **U.S. Driver's License Number** (min: 1) |
 | Shared with | Inside my organization |
 | Actions | None (warning only) |
-| User notifications | ✅ On |
+| User notifications | On |
 | Policy tip | *"This content contains personal data. Handle in accordance with the Data Privacy Policy."* |
 | Priority | 1 (lower priority) |
 
@@ -154,7 +154,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 | ------- | ------- |
 | Name | Confidential |
 | Description | Sensitive business content. Share only with authorized personnel. |
-| Encryption | ✅ Apply encryption |
+| Encryption | Apply encryption |
 | Assign permissions now | Authenticated users — Co-Author |
 | Watermark | Add watermark: **CONFIDENTIAL** |
 | Footer | **CONFIDENTIAL** |
@@ -165,7 +165,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 | ------- | ------- |
 | Name | Highly Confidential |
 | Description | Strictly controlled. Encryption required. Limited distribution. |
-| Encryption | ✅ Apply encryption |
+| Encryption | Apply encryption |
 | Assign permissions now | Specific people/groups only |
 | Content marking | Watermark: **HIGHLY CONFIDENTIAL** + footer |
 
@@ -241,7 +241,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 | Users | All users |
 | Triggering event | Resignation or termination date from HR connector (or Manual triggering) |
 | Priority content | Sensitivity labels: Confidential, Highly Confidential |
-| Indicators | ✅ File downloads, copy to USB, email to external, cloud upload |
+| Indicators | File downloads, copy to USB, email to external, cloud upload |
 | Alert threshold | Medium |
 
 1. Click **Submit**
@@ -254,7 +254,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 | Name | Data Leaks - All Users |
 | Triggering event | DLP policy match |
 | Priority content | All sensitivity labels above Internal |
-| Indicators | ✅ Sharing externally, bulk download, printing sensitive content |
+| Indicators | Sharing externally, bulk download, printing sensitive content |
 
 ### Policy 3: Privileged User Risk
 
@@ -263,7 +263,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 | Template | **Security policy violations by users** |
 | Name | Privileged User Risk |
 | Users | Select specific users: all admin role members |
-| Indicators | ✅ Disabling audit logs, modifying DLP, bulk deletions |
+| Indicators | Disabling audit logs, modifying DLP, bulk deletions |
 
 ### 3.4 Trigger a Test Event
 

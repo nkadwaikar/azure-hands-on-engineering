@@ -8,8 +8,8 @@
 
 This lab implements advanced Zero Trust controls across Microsoft 365 using admin portals only. You will create a complete set of Conditional Access policies for admin protection, risk-based blocking, device compliance, and session controls. You will configure custom Authentication Strengths for phishing-resistant MFA, deploy session controls via Microsoft Defender for Cloud Apps, and validate the full Zero Trust posture.
 
-**Estimated time:** 4–5 hours  
-**License required:** Entra ID P2 for risk-based policies; Microsoft 365 E5 or Defender for Cloud Apps for session controls  
+**Estimated time:** 4–5 hours
+**License required:** Entra ID P2 for risk-based policies; Microsoft 365 E5 or Defender for Cloud Apps for session controls
 **Portals used:**
 
 - [Entra Admin Center](https://entra.microsoft.com)
@@ -56,7 +56,7 @@ Create two accounts:
 | Display name | Break Glass 01 | Break Glass 02 |
 | UPN | <breakglass01@yourdomain.com> | <breakglass02@yourdomain.com> |
 | Password | Generate a strong random password | Same |
-| Password expiration | ✅ Never expires | ✅ Never expires |
+| Password expiration | Never expires | Never expires |
 
 1. Assign **Global Administrator** role to both accounts:
    - Open each account → **Assigned roles** → **+ Add assignments** → **Global Administrator**
@@ -83,7 +83,7 @@ All policies are created at:
 | Users | Include: **Directory roles** → select all admin roles (Global Admin, Security Admin, Exchange Admin, SharePoint Admin, Compliance Admin, etc.) |
 | Users | Exclude: **Groups** → `CA-Exclusions-BreakGlass` |
 | Target resources | **All cloud apps** |
-| Grant | ✅ **Require authentication strength** → select **Phishing-resistant MFA** (create this in Section 2 first) |
+| Grant | **Require authentication strength** → select **Phishing-resistant MFA** (create this in Section 2 first) |
 | Enable policy | **On** |
 
 ---
@@ -113,7 +113,7 @@ All policies are created at:
 | Users | Include: **All users** |
 | Users | Exclude: `CA-Exclusions-BreakGlass` |
 | Target resources | **All cloud apps** |
-| Grant | ✅ **Require device to be marked as compliant** OR ✅ **Require approved client app** |
+| Grant | **Require device to be marked as compliant** OR  **Require approved client app** |
 | Grant operator | **Require one of the selected controls** (OR) |
 | Enable policy | **Report-only** (switch to On after validating device compliance coverage) |
 
@@ -127,10 +127,10 @@ All policies are created at:
 | Users | Include: **All users** |
 | Users | Exclude: `CA-Exclusions-BreakGlass` |
 | Target resources | **Select apps** → search and add **Office 365 SharePoint Online** and **Microsoft Teams** |
-| Grant | ✅ **Require multifactor authentication** |
-| Session | ✅ **Sign-in frequency** → **8 hours** |
-| Session | ✅ **Persistent browser session** → **Never persistent** |
-| Session | ✅ **Use app enforced restrictions** (enables SharePoint and Exchange to enforce session policy) |
+| Grant | **Require multifactor authentication** |
+| Session | **Sign-in frequency** → **8 hours** |
+| Session | **Persistent browser session** → **Never persistent** |
+| Session | **Use app enforced restrictions** (enables SharePoint and Exchange to enforce session policy) |
 | Enable policy | **On** |
 
 ---
@@ -154,32 +154,28 @@ Authentication Strength defines which MFA methods are accepted. Custom strengths
 
 | Method | Phishing Resistant | Notes |
 | --- | --- | --- |
-| FIDO2 Security Key | ✅ Yes | Hardware key; cryptographically bound to the site origin |
-| Windows Hello for Business | ✅ Yes | TPM-backed; PIN or biometric; domain-bound |
-| Certificate-Based Authentication | ✅ Yes | Smart card or software certificate; PKI-bound |
-| Microsoft Authenticator (Passwordless) | ✅ Yes | Number match; push notification; no password |
-| TOTP / Authenticator OTP | ❌ No | Interceptable in real-time AiTM phishing attacks |
-| SMS OTP | ❌ No | Highly susceptible to SIM-swap and phishing |
+| FIDO2 Security Key | Yes | Hardware key; cryptographically bound to the site origin |
+| Windows Hello for Business | Yes | TPM-backed; PIN or biometric; domain-bound |
+| Certificate-Based Authentication | Yes | Smart card or software certificate; PKI-bound |
+| Microsoft Authenticator (Passwordless) | Yes | Number match; push notification; no password |
+| TOTP / Authenticator OTP | No | Interceptable in real-time AiTM phishing attacks |
+| SMS OTP | No | Highly susceptible to SIM-swap and phishing |
 
 ### 2.2 Create Custom Authentication Strength
 
 1. **Entra Admin Center** → **Protection** → **Authentication methods** → **Authentication strengths** → **+ New authentication strength**
-
 | Field       | Value                                                                                |
 | ----------- | ------------------------------------------------------------------------------------ |
 | Name        | Phishing-Resistant MFA                                                               |
 | Description | Requires FIDO2, Windows Hello for Business, CBA, or Authenticator passwordless       |
-
-1. Under **Allowed method combinations**, select:
-   - ✅ FIDO2 security key
-   - ✅ Windows Hello for Business
-   - ✅ Microsoft Authenticator (passwordless phone sign-in)
-   - ✅ Certificate-based authentication (multifactor)
+2. Under **Allowed method combinations**, select:
+   - FIDO2 security key
+   - Windows Hello for Business
+   - Microsoft Authenticator (passwordless phone sign-in)
+   - Certificate-based authentication (multifactor)
    - Deselect all other combinations
-
-2. Click **Next** → **Create**
-
-3. Return to **CA001** → **Grant** → change to **Require authentication strength** → select **Phishing-Resistant MFA** → **Save**
+3. Click **Next** → **Create**
+4. Return to **CA001** → **Grant** → change to **Require authentication strength** → select **Phishing-Resistant MFA** → **Save**
 
 ### 2.3 Enable FIDO2 Security Keys
 
@@ -188,8 +184,8 @@ Authentication Strength defines which MFA methods are accepted. Custom strengths
 3. Toggle **Enable** → **On**
 4. Target: **All users** (or a pilot group first)
 5. Configure:
-   - ✅ Allow self-service setup
-   - ✅ Enforce attestation
+   - Allow self-service setup
+   - Enforce attestation
    - Key restrictions: leave open (or restrict to specific AAGUID if required)
 6. Click **Save**
 
@@ -218,11 +214,11 @@ Session controls restrict what users can do after successful authentication — 
 | Policy name | Block Download - Confidential Content |
 | Session control type | **Control file download (with inspection)** |
 | Activity source | App: **SharePoint Online**, **Microsoft Teams** |
-| Content inspection | ✅ Enable; match sensitivity label: **Confidential** or **Highly Confidential** |
+| Content inspection | Enable; match sensitivity label: **Confidential** or **Highly Confidential** |
 | Action | **Block** |
 | Customize block message | *"Downloading classified content is restricted on this device. Contact IT if you need access."* |
 | Severity | High |
-| Alerts | ✅ Send alert to admins |
+| Alerts | Send alert to admins |
 
 Click **Create**
 
@@ -233,7 +229,7 @@ Click **Create**
 | Policy name | Restrict Access - Unmanaged Devices |
 | Session control type | **Block activities** |
 | Device filter | Device management: **is not** Intune compliant AND **is not** hybrid Azure AD joined |
-| Activities to block | ✅ Download, ✅ Print, ✅ Copy |
+| Activities to block | Download,  Print,  Copy |
 | Action | Block |
 
 ### 3.3 Session Control Reference

@@ -8,8 +8,8 @@
 
 This lab automates user identity lifecycle and access governance using Entra ID Governance — entirely through the admin portal. You will create Lifecycle Workflows for joiner, mover, and leaver events; configure automated access reviews for admin roles, Teams, SharePoint, and apps; build entitlement management access packages with approval workflows; and implement a complete deprovisioning checklist.
 
-**Estimated time:** 4–5 hours  
-**License required:** Microsoft Entra ID Governance (add-on to Entra ID P2, or included in Entra Suite)  
+**Estimated time:** 4–5 hours
+**License required:** Microsoft Entra ID Governance (add-on to Entra ID P2, or included in Entra Suite)
 **Portal used:** [Entra Admin Center](https://entra.microsoft.com) → **Identity governance**
 
 ---
@@ -78,7 +78,7 @@ Workflows fire automatically based on user attribute changes synced from your HR
 | --- | --- |
 | Task | Generate Temporary Access Pass and send via email |
 | TAP lifetime | 480 minutes (8 hours) |
-| One-time use | ✅ Yes |
+| One-time use | Yes |
 | Recipient | Manager (to hand to new employee on Day 1) |
 
 > The TAP allows the new employee to sign in without a password and register their MFA methods (FIDO2, Authenticator) on Day 1.
@@ -216,10 +216,10 @@ All reviews are created at:
 | Setting | Value |
 | --- | --- |
 | If reviewers don't respond | **Deny access** (auto-deny on no action) |
-| At end of review, auto apply results | ✅ Yes |
-| Require reviewer justification | ✅ Yes |
-| Enable reviewer recommendations | ✅ Yes |
-| Show last sign-in info | ✅ Yes |
+| At end of review, auto apply results | Yes |
+| Require reviewer justification | Yes |
+| Enable reviewer recommendations | Yes |
+| Show last sign-in info | Yes |
 
 1. Click **Start**
 
@@ -259,7 +259,7 @@ All reviews are created at:
 
 ### 2.4 Reviewing Access as a Reviewer
 
-Reviewers receive email notifications with a direct link. They can also go to:  
+Reviewers receive email notifications with a direct link. They can also go to:
 [myaccess.microsoft.com](https://myaccess.microsoft.com) → **Access reviews**
 
 For each user listed, reviewers select **Approve** or **Deny**, provide justification if required, and submit. Results are applied automatically at the end of the review period.
@@ -278,8 +278,8 @@ Entitlement Management enables users to self-request access to bundles of resour
 | --- | --- |
 | Name | Enterprise Access Catalog |
 | Description | Centralized catalog for enterprise application and collaboration access packages |
-| Enabled | ✅ Yes |
-| Enabled for external users | ❌ No (internal only) |
+| Enabled | Yes |
+| Enabled for external users | No (internal only) |
 
 1. Click **Create**
 
@@ -321,11 +321,11 @@ Add each resource and set the role:
 
 | Field | Value |
 | --- | --- |
-| Who can request | ✅ For users in your directory: All members and connected orgs |
-| Require approval | ✅ Yes |
+| Who can request | For users in your directory: All members and connected orgs |
+| Require approval | Yes |
 | First approver | **Requestor's manager** |
 | Decision timeout | 14 days |
-| Require approver justification | ✅ Yes |
+| Require approver justification | Yes |
 | Alternative approver (if manager unavailable) | IT Manager |
 
 **Lifecycle:**
@@ -333,8 +333,8 @@ Add each resource and set the role:
 | Field | Value |
 | --- | --- |
 | Access package assignments expire | After 1 year |
-| Users can request specific timeline | ❌ No |
-| Require access reviews | ✅ Yes → Quarterly → Reviewer: Requestor's manager |
+| Users can request specific timeline | No |
+| Require access reviews | Yes → Quarterly → Reviewer: Requestor's manager |
 
 Click **Create**
 
@@ -353,8 +353,7 @@ Repeat the process with stricter approval:
 
 ### 3.5 Requesting Access (User Experience)
 
-Users can browse and request access packages at:  
-[myaccess.microsoft.com](https://myaccess.microsoft.com) → **Access packages**
+Users can browse and request access packages by navigating to My Access portal and selecting **Access packages** from the menu.
 
 They complete a request form → manager receives an approval email → upon approval, access is automatically granted to all resources in the package.
 
@@ -435,8 +434,8 @@ To permanently delete immediately:
 | Mover workflow | Change `department` attribute on a test user in Entra | Old group removed; new group added; notification sent to manager |
 | Leaver workflow | Set `employeeLeaveDateTime` to now on a test account | Account disabled; sessions revoked; groups removed; licenses removed |
 | Admin access review | **Entra** → **Identity governance** → **Access reviews** | Review listed; reviewer received email notification |
-| Group access review | As a group owner, open [myaccess.microsoft.com](https://myaccess.microsoft.com) → **Access reviews** | Members listed; Approve/Deny options visible |
-| Access package request | As a regular user, go to [myaccess.microsoft.com](https://myaccess.microsoft.com) → **Access packages** | Operations Team Access package visible; request form works |
+| Group access review | As a group owner, open myaccess.microsoft.com → **Access reviews** | Members listed; Approve/Deny options visible |
+| Access package request | As a regular user, go to myaccess.microsoft.com → **Access packages** | Operations Team Access package visible; request form works |
 | Access package approval | Manager checks email for approval request | Approval email received; one-click approve works; access granted |
 | Mailbox conversion | Open former employee's mailbox in Exchange Admin Center | Shows as Shared mailbox type |
 | Out-of-Office | Send email to former employee from external address | Auto-reply received with offboarding message |

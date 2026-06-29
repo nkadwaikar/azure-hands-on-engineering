@@ -8,8 +8,8 @@
 
 This lab builds an enterprise-grade Exchange Online foundation. You will validate DNS authentication records, design mail flow architecture, deploy transport rules, enable journaling and archiving, activate Defender for Office 365 threat protection, and govern shared mailboxes — all through the Microsoft admin portals.
 
-**Estimated time:** 3–4 hours  
-**License required:** Microsoft 365 E3 (Defender Plan 1) or E5 (Defender Plan 2)  
+**Estimated time:** 3–4 hours
+**License required:** Microsoft 365 E3 (Defender Plan 1) or E5 (Defender Plan 2)
 **Portals used:**
 
 - [Exchange Admin Center](https://admin.exchange.microsoft.com)
@@ -234,14 +234,14 @@ Safe Links rewrites URLs in email and Office documents, checking them against Mi
 | Setting | Value |
 | --------- | -------- |
 | Name | Enterprise Safe Links Policy |
-| On — rewrite URLs and check against known malicious links | ✅ On |
-| Apply real-time URL scanning | ✅ On |
-| Wait for URL scanning before delivering the message | ✅ On |
-| Apply Safe Links to email sent within the org | ✅ On |
-| Apply Safe Links to Microsoft Teams | ✅ On |
-| Apply Safe Links to Office 365 apps | ✅ On |
-| Track user clicks | ✅ On (do NOT disable — needed for threat investigation) |
-| Let users click through to the original URL | ❌ Off |
+| On — rewrite URLs and check against known malicious links | On |
+| Apply real-time URL scanning | On |
+| Wait for URL scanning before delivering the message | On |
+| Apply Safe Links to email sent within the org | On |
+| Apply Safe Links to Microsoft Teams | On |
+| Apply Safe Links to Office 365 apps | On |
+| Track user clicks | On (do NOT disable — needed for threat investigation) |
+| Let users click through to the original URL | Off |
 
 1. Under **Users and domains** → add `yourdomain.com`
 2. Click **Submit**
@@ -251,40 +251,37 @@ Safe Links rewrites URLs in email and Office documents, checking them against Mi
 Safe Attachments opens attachments in a sandbox before delivery.
 
 1. Click **Safe Attachments** → **+ Create**
-
 | Setting | Value |
 | --- | --- |
 | Name | Enterprise Safe Attachments Policy |
 | Safe Attachments unknown malware response | **Dynamic Delivery** (delivers body immediately; reattaches after scan) |
 | Redirect messages with detected attachments | Off (for lab; enable with SOC mailbox in production) |
-| Enable Safe Attachments for SharePoint, OneDrive, Teams | ✅ On |
-
-1. Under **Users and domains** → add `yourdomain.com`
-2. Click **Submit**
+| Enable Safe Attachments for SharePoint, OneDrive, Teams | On |
+2. Under **Users and domains** → add `yourdomain.com`
+3. Click **Submit**
 
 > **Dynamic Delivery** eliminates delivery delays while maintaining security — it's the recommended setting for most organizations.
 
 ### 4.3 Anti-Phishing
 
 1. Click **Anti-phishing** → **+ Create**
-
 | Setting | Value |
 | --- | --- |
 | Name | Enterprise Anti-Phishing Policy |
 | Phishing email threshold | **3 - More aggressive** |
-| Enable mailbox intelligence | ✅ On |
-| Enable intelligence for impersonation protection | ✅ On |
-| Enable spoof intelligence | ✅ On |
-| Show first contact safety tip | ✅ On |
-| Show user impersonation safety tip | ✅ On |
-| Show domain impersonation safety tip | ✅ On |
-| Show unusual characters safety tip | ✅ On |
+| Enable mailbox intelligence | On |
+| Enable intelligence for impersonation protection | On |
+| Enable spoof intelligence | On |
+| Show first contact safety tip | On |
+| Show user impersonation safety tip | On |
+| Show domain impersonation safety tip | On |
+| Show unusual characters safety tip | On |
 
-1. Under **Protected users** → **+ Add** → add executive email addresses (CEO, CFO, CTO)
-2. Under **Trusted senders and domains** → add any known partner domains
-3. Set **If message is detected as impersonation** → **Quarantine the message**
-4. Under **Users and domains** → add `yourdomain.com`
-5. Click **Submit**
+2. Under **Protected users** → **+ Add** → add executive email addresses (CEO, CFO, CTO)
+3. Under **Trusted senders and domains** → add any known partner domains
+4. Set **If message is detected as impersonation** → **Quarantine the message**
+5. Under **Users and domains** → add `yourdomain.com`
+6. Click **Submit**
 
 ---
 

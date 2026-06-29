@@ -245,14 +245,14 @@ For each team site (Operations, Projects, Leadership):
 | OneDrive external sharing | **Existing guests only** |
 | Default sharing link type | **Only people in your organization** |
 | Default link permission | **View** |
-| Allow guests to share items they don't own | ❌ Off |
-| Guest access expires automatically | ✅ On |
+| Allow guests to share items they don't own | Off |
+| Guest access expires automatically | On |
 | Guest access expires after | **180 days** |
 | People who use a verification code must reauthenticate after | **30 days** |
 
 1. Expand **More external sharing settings**:
-   - ✅ Guests must sign in using the same account to which sharing invitations are sent
-   - ✅ Allow only users in specific security groups to share externally → add `sg-approved-external-sharers`
+   - Guests must sign in using the same account to which sharing invitations are sent
+   - Allow only users in specific security groups to share externally → add `sg-approved-external-sharers`
 
 2. Click **Save**
 
@@ -305,8 +305,8 @@ Create four labels:
 1. **Data lifecycle management** → **Label policies** → **+ Publish labels**
 2. **Choose labels to publish** → add all four labels
 3. **Locations** → select:
-   - ✅ SharePoint sites — All sites
-   - ✅ OneDrive accounts — All accounts
+   - SharePoint sites — All sites
+   - OneDrive accounts — All accounts
 4. Name the policy: `SharePoint Retention Label Policy`
 5. Review and submit
 
