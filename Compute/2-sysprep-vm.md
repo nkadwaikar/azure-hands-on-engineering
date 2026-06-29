@@ -83,7 +83,7 @@ cd C:\Windows\System32\Sysprep
 
 ## 3. Wait for VM to Fully Shut Down
 
-1. In the [Azure Portal](https://portal.azure.com), go to your VM's overview page.
+1. In the [Azure Portal][portal], go to your VM's overview page.
 2. Wait until the **Status** shows **Stopped (deallocated)** before proceeding to image capture.
 
 > **Expected state:** VM status shows **Stopped (deallocated)**. Do not capture if it shows Stopping, Shutting down, or Running.
@@ -94,7 +94,7 @@ cd C:\Windows\System32\Sysprep
 
 After the VM reaches **Stopped (deallocated)** state, you must mark it as generalized in Azure before capture:
 
-1. In the [Azure Portal](https://portal.azure.com), go to your VM's overview page.
+1. In the [Azure Portal][portal], go to your VM's overview page.
 2. In the top menu, click **Capture**.
 3. Azure will prompt you to confirm the VM will be generalized — confirm and proceed.
 
@@ -119,3 +119,5 @@ Deleting it causes:
 > **Next step:** [Capture and Test Image](../VMSS/1-capture-and-test-image.md)
 
 ---
+
+[portal]: https://portal.azure.com

@@ -194,7 +194,7 @@ msiexec /i "$env:TEMP\AzureConnectedMachineAgent.msi" /l*v "$env:TEMP\azcm.log" 
 # Download and install the agent
 curl -L https://aka.ms/azcmagent-linux | sudo bash
 
-# Connect to Azure Arc
+# Connect the agent to Azure Arc
 sudo azcmagent connect \
   --subscription-id "<subscription-id>" \
   --resource-group  "rg-arc-servers-prod" \

@@ -117,9 +117,9 @@ A Key Vault stores and protects application secrets. If you already have a Key V
 
 ### Step 2 — Set the Permission Model
 
-1. Under **Permission model**, select **Azure role-based access control**
-2. Leave all other settings as default
-3. Click **Review + Create** → **Create**
+5. Under **Permission model**, select **Azure role-based access control**
+6. Leave all other settings as default
+7. Click **Review + Create** → **Create**
 
 > **Why RBAC:** The Azure RBAC model lets you assign Key Vault permissions using standard IAM role assignments, which is required for Managed Identity access in this lab. Selecting this now avoids having to switch the model later.
 

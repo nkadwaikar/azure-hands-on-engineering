@@ -130,7 +130,7 @@ HTTP/1.1 200 OK
 
 ---
 
-## 4. Configure Azure Front Door (Portal‑Aligned)
+## 4. Configure Azure Front Door (Portal-Aligned)
 
 ### 3.1 Create Front Door Profile (with Endpoint, Origin, and Route)
 
@@ -325,13 +325,7 @@ The 404 `CONFIG_NOCACHE` response is caused by **propagation delay**, not an err
 
 ### 4.3 Propagation Completion
 
-After waiting and periodically testing:
-
-```bash
-curl -I https://<frontdoor-endpoint>.z01.azurefd.net/
-```
-
-You will eventually receive:
+After waiting and periodically testing, you will eventually receive:
 
 ```http
 HTTP/2 200

@@ -404,7 +404,7 @@ Break-glass accounts must be protected by a dedicated Authentication Strength po
 
 ### 9.2 Attempt Sign-In
 
-1. On the secure device, navigate to **<https://entra.microsoft.com>** or **<https://portal.azure.com>**
+1. On the secure device, navigate to **<https://portal.azure.com>**
 2. Enter the emergency account UPN: `emergency-cba-01@tenant.onmicrosoft.com`
 3. When prompted for an authentication method, select **Sign in with a certificate**
 4. Select the installed user certificate from the list

@@ -6,13 +6,13 @@ This document covers the **end‑to‑end deployment** of an Azure **Virtual Mac
 
 Your custom image already includes:
 
-- IIS  
-- A custom “Hello World” webpage  
+- IIS
+- A custom “Hello World” webpage
 - All prep steps (Sysprep, cleanup, validation)
 
 This guide focuses **only on VMSS deployment, scaling, validation, and cleanup**.
 
-Last validated on: 2026-06-19  
+Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 > **Note:** VMSS deployment requires a validated image version in an Azure Compute Gallery. Complete [Capture and Test Image](1-capture-and-test-image.md) first.
@@ -67,7 +67,7 @@ Your Shared Image Gallery should now contain a **validated image version** (e.g.
 
 ## 2. Create the Resource Group
 
-1. In the [Azure Portal](https://portal.azure.com), search for **Resource groups**.
+1. In Azure Portal, search for**Resource groups**.
 2. Click **+ Create**.
 3. Enter the following name:
 
@@ -83,37 +83,37 @@ This keeps all VMSS resources isolated and easy to delete later.
 
 ## 3. Deploy the VM Scale Set (VMSS)
 
-1. In the [Azure Portal](https://portal.azure.com), search for **Virtual Machine Scale Sets**.
+1. In Azure Portal, search for **Virtual Machine Scale Sets**.
 2. Click **+ Create** and select **Virtual Machine Scale Set**.
 3. Fill in the following details:
 
 ### **Basics**
 
 - **Create a Virtual Machine Scale Set (VMSS)**
-- **Image** → Shared Image Gallery → Your Image Version  
-- **Authentication** → Password or SSH  
-- **Instance Count** → **2**  
-- **Region** → Same region as your image  
+- **Image** → Shared Image Gallery → Your Image Version
+- **Authentication** → Password or SSH
+- **Instance Count** → **2**
+- **Region** → Same region as your image
 - **VM Size** → `Standard_B2s` (recommended for labs)
 
 ### **Networking**
 
-- **Virtual Network** → Create new or use existing  
-- **Public IP** → **Enabled**  
-- **Load Balancer** → **Enabled**  
+- **Virtual Network** → Create new or use existing
+- **Public IP** → **Enabled**
+- **Load Balancer** → **Enabled**
 - **Inbound Rules** → Allow:
   - **HTTP (80)**
   - **HTTPS (443)**
 
 ### **Scaling**
 
-- Manual scaling is fine for this lab  
+- Manual scaling is fine for this lab
 - Autoscale rules can be added later
 
 ### **Management**
 
-- Boot diagnostics → Optional  
-- Monitoring → Optional  
+- Boot diagnostics → Optional
+- Monitoring → Optional
 
 Click **Review + Create** → **Create**
 
@@ -121,7 +121,7 @@ Click **Review + Create** → **Create**
 
 ## 4. Validate VMSS Deployment
 
-1. In the [Azure Portal](https://portal.azure.com), go to **Virtual Machine Scale Sets** and select your VMSS.
+1. In Azure Portal, go to **Virtual Machine Scale Sets** and select your VMSS.
 2. Navigate to **Instances** to check running VMs.
 3. Find the linked **Load Balancer** under **Networking** and verify backend pool health.
 
@@ -136,14 +136,14 @@ You should see:
 
 You should see:
 
-- Both VMSS instances registered  
+- Both VMSS instances registered
 - Health probe status: **Healthy**
 
 ---
 
 ## 5. Validate IIS Through Load Balancer
 
-1. In the [Azure Portal](https://portal.azure.com), search for **Load Balancers** and select the one created for your VMSS.
+1.In Azure Portal, search for, **Load Balancers** and select the one created for your VMSS.
 2. Copy the **Public IP address** from the overview page.
 3. Open a browser and navigate to:
 
@@ -155,9 +155,9 @@ You should see your **custom Hello World IIS page**.
 
 This confirms:
 
-- VMSS deployed correctly  
-- Custom image works  
-- Load Balancer routing is functional  
+- VMSS deployed correctly
+- Custom image works
+- Load Balancer routing is functional
 
 ---
 
@@ -210,13 +210,13 @@ rg-vmss-lab
 
 This removes:
 
-- VMSS  
-- Load Balancer  
-- Public IP  
-- VNet  
-- NICs  
-- Disks  
-- Supporting resources  
+- VMSS
+- Load Balancer
+- Public IP
+- VNet
+- NICs
+- Disks
+- Supporting resources
 
 ---
 
