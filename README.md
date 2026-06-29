@@ -1,7 +1,5 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
-## **Cloud & Identity Engineer • Azure Zero Trust • IaC (Bicep) • Microsoft 365 Governance**
-
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#-labs--engineering-tracks)
 [![Zero Trust](https://img.shields.io/badge/Zero%20Trust-0052CC?style=flat-square&logo=security&logoColor=white)](Identity-First/README.md)
