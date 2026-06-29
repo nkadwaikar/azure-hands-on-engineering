@@ -6,7 +6,7 @@ This track covers modular Bicep deployments for identity-first Azure infrastruct
 
 ## Folder Structure
 
-```
+```tree
 Bicep/
 ├── main.bicep                  # RG-scope orchestrator — wires identity, KV, RBAC, lock
 │
