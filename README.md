@@ -265,4 +265,4 @@ My work is shaped by three principles:
 - 💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar)
 - 📧 [nadeemkadwaikar@outlook.com](mailto:nadeemkadwaikar@outlook.com)
 
-[![Last Updated June 2026](https://img.shields.io/badge/Last%20Updated-June%202026-0078D4?style=flat-square&logo=github)](https://github.com/nkadwaikar/azure-hands-on-engineering)
+[![Last Updated](https://img.shields.io/github/last-commit/nkadwaikar/azure-hands-on-engineering?label=Last%20Updated&color=0078D4&style=flat-square&logo=github)](https://github.com/nkadwaikar/azure-hands-on-engineering)
