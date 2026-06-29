@@ -1,12 +1,11 @@
 # 👋 Hi, I'm Nadeem Kadwaikar
 
-[![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](https://github.com/nkadwaikar)
+[![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#-labs--engineering-tracks)
 [![Zero Trust](https://img.shields.io/badge/Zero%20Trust-0052CC?style=flat-square&logo=security&logoColor=white)](Identity-First/README.md)
 [![IaC Bicep](https://img.shields.io/badge/IaC-Bicep-0078D4?style=flat-square&logo=azurepipelines&logoColor=white)](Bicep/README.md)
 [![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
 [![Microsoft 365 Governance](https://img.shields.io/badge/Governance-Microsoft%20365-0052CC?style=flat-square&logo=microsoft&logoColor=white)](Microsoft%20365/README.md)
-
 
 I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production‑aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
 
@@ -212,7 +211,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 - [Arc Architecture — Full Lab](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
 
-### 9. 💼 Modern Workplace (Microsoft 365):
+### 9. 💼 Modern Workplace (Microsoft 365)
 
 **[Modern Workplace Track — Full Overview](Microsoft%20365/README.md)**
 
