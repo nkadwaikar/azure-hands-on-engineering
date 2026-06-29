@@ -3,8 +3,6 @@
 
 ## Identity Governance
 
-Text flow: Engineer/Admin -> Microsoft Entra ID -> Managed Identity -> RBAC -> Key Vault -> Resource Lock.
-
 ```mermaid
 flowchart LR
     User[Engineer / Admin] --> Entra[Microsoft Entra ID]
@@ -15,8 +13,6 @@ flowchart LR
 ```
 
 ### Compute Lifecycle
-
-Text flow: Base VM Build -> Sysprep -> Golden Image -> Gallery Version -> VMSS -> Validation.
 
 ```mermaid
 flowchart LR
@@ -29,8 +25,6 @@ flowchart LR
 
 ### Global Delivery
 
-Text flow: Client -> Front Door -> Origin Group -> Storage Static Website -> $web content.
-
 ```mermaid
 flowchart LR
     Client[Client] --> FD[Azure Front Door]
@@ -40,8 +34,6 @@ flowchart LR
 ```
 
 ### App Service Delivery
-
-Text flow: Azure DevOps Pipeline -> Build Stage -> Publish Artifact -> Deploy to Staging Slot (Managed Identity resolves Key Vault reference) -> Manual Approval Gate -> Swap Staging to Production -> App Service Production (Managed Identity resolves Key Vault reference). No secrets stored in code, app settings, or pipeline variables.
 
 ```mermaid
 flowchart LR
@@ -70,8 +62,6 @@ Managed Identity]
 
 ### Governance Automation
 
-Text flow: Policy Definition -> Assignment -> Compliance Evaluation -> Auto-remediation -> Compliant state.
-
 ```mermaid
 flowchart LR
     Def[Policy Definition] --> Assign[Policy Assignment]
@@ -81,8 +71,6 @@ flowchart LR
 ```
 
 ### Business Continuity
-
-Text flow: Production VM -> Recovery Services Vault -> Backup/ASR -> Restore or Failover.
 
 ```mermaid
 flowchart LR
@@ -94,8 +82,6 @@ flowchart LR
 ```
 
 ### Secure VM Access
-
-Text flow: Engineer retrieves VM credentials from Key Vault (secretless auth) -> Engineer browser (HTTPS 443) connects to Azure Bastion public IP -> Bastion sits in AzureBastionSubnet /26 with required NSG rules -> VNet Peering (hub-to-spoke) -> Target VM (private IP only, no public IP). JIT opens a time-bounded, IP-scoped NSG rule on the VM before the session is established.
 
 ```mermaid
 flowchart LR
@@ -120,8 +106,6 @@ flowchart LR
 
 ### JIT Access Lifecycle
 
-Text flow: Engineer submits JIT request -> Defender for Cloud evaluates and approves -> Time-bounded NSG rule opens -> Engineer connects via Bastion -> Time window expires -> NSG rule auto-removed.
-
 ```mermaid
 flowchart LR
     Req[Engineer\nJIT Request] --> MDC[Microsoft Defender\nfor Cloud]
@@ -133,8 +117,6 @@ flowchart LR
 ```
 
 ### Emergency Access
-
-Text flow: Standard identity fails during incident -> Break-glass account (FIDO2 or CBA) -> Authentication Strength enforced by Conditional Access -> Emergency Recovery Actions -> Post-Incident Audit.
 
 ```mermaid
 flowchart LR
@@ -154,8 +136,6 @@ flowchart LR
 
 ### Azure Arc Hybrid Server Architecture
 
-Text flow: On-premises / multi-cloud server runs the Connected Machine Agent (CMA) -> CMA registers server into Azure Resource Manager -> RBAC + Tags + Policy apply to Arc machine -> Azure Monitor Agent (AMA) forwards logs via DCR to Log Analytics Workspace -> Microsoft Defender for Cloud (Servers plan) evaluates Secure Score and triggers alerts -> Azure Policy / Guest Configuration enforces baseline compliance -> Azure Automation / Update Manager handles patching and runbooks.
-
 ```mermaid
 flowchart LR
     Server["On-Prem / Multi-Cloud\nServer"] --> CMA["Connected Machine\nAgent (CMA)"]
@@ -173,8 +153,6 @@ flowchart LR
 ```
 
 ### Modern Workplace (Microsoft 365)
-
-Text flow: User authenticates via Entra ID → Conditional Access evaluates Zero Trust policy (device compliance, sign-in risk, authentication strength) → Access granted to Microsoft 365 workloads (Exchange Online, SharePoint Online, Teams) → Purview enforces DLP, auto-labeling, and retention → Identity Governance automates Joiner–Mover–Leaver lifecycle, access reviews, and entitlement management.
 
 ```mermaid
 flowchart LR
