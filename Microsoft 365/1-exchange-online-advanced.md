@@ -351,6 +351,7 @@ Never assign mailbox permissions directly to individual users — use security g
 ## 7. Next Steps
 
 - [Lab 2: SharePoint Information Architecture](2-sharepoint-information-architecture.md)
+- [Lab 3: Lifecycle Governance](3-teams-lifecycle-governance.md)
 - [Lab 4: Compliance Automation](4-compliance-automation.md)
 - [Lab 5: Zero Trust Advanced](5-zero-trust-advanced.md)
 

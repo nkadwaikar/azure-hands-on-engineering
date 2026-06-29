@@ -207,7 +207,7 @@ All reviews are created at:
 | Start date | Today |
 | Frequency | Monthly |
 | Duration | 14 days |
-| Review type | **Teams + groups** or **Azure AD roles** |
+| Review type | **Teams + groups** or **Microsoft Entra roles** |
 | Scope | All directory roles |
 | Reviewers | Selected users: Security Admin or IT Manager |
 
@@ -446,8 +446,7 @@ To permanently delete immediately:
 
 ## 6. Next Steps
 
-- [Lab 5: Zero Trust Advanced](5-zero-trust-advanced.md)
-- [Lab 4: Compliance Automation](4-compliance-automation.md)
+[← Back to README](README.md)
 
 ---
 

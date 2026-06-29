@@ -281,7 +281,7 @@ Click **Create**
 | User | Compliant | Low | MFA (CA003) |
 | User | Unmanaged | Low | MFA + session restrictions (CA003 + CA004) |
 | User | Any | High | Block (CA002) |
-| Guest | Unmanaged | Any | MFA + download block (CA003 + MCAS session policy) |
+| Guest | Unmanaged | Any | MFA + download block (CA003 + Defender for Cloud Apps session policy) |
 
 ---
 
