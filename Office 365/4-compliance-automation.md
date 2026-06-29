@@ -74,7 +74,7 @@ All DLP policies are created in:
 | Policy tip | *"This content contains personal data. Handle in accordance with the Data Privacy Policy."* |
 | Priority | 1 (lower priority) |
 
-**Rule 2: PII - External Block**
+#### Rule 2: PII - External Block
 
 | Field | Value |
 | ------- | ------- |
@@ -94,7 +94,7 @@ All DLP policies are created in:
 3. Locations: All → **Next**
 4. **Create or customize advanced DLP rules** → create:
 
-**Rule: HIPAA - Block and Alert**
+### Rule: HIPAA - Block and Alert
 
 | Field | Value |
 | ------- | ------- |
@@ -128,7 +128,7 @@ Auto-labeling applies sensitivity labels to content automatically — without re
 
 Create four labels in sequence. For each, click **+ Create a label** and work through the wizard:
 
-**Label 1: Public**
+#### Label 1: Public
 
 | Field | Value |
 | ------- | ------- |
@@ -139,7 +139,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 | Encryption | None |
 | Content marking | None |
 
-**Label 2: Internal**
+#### Label 2: Internal
 
 | Field | Value |
 | ------- | ------- |
@@ -148,7 +148,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 | Encryption | None |
 | Footer | Add footer text: **INTERNAL — Not for external distribution** |
 
-**Label 3: Confidential**
+#### Label 3: Confidential
 
 | Field | Value |
 | ------- | ------- |
@@ -159,7 +159,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 | Watermark | Add watermark: **CONFIDENTIAL** |
 | Footer | **CONFIDENTIAL** |
 
-**Label 4: Highly Confidential**
+#### Label 4: Highly Confidential
 
 | Field | Value |
 | ------- | ------- |
@@ -177,7 +177,7 @@ Create four labels in sequence. For each, click **+ Create a label** and work th
 
 1. **Purview portal** → **Information protection** → **Auto-labeling** → **+ Create auto-labeling policy**
 
-**Policy 1: Auto-Label PII as Confidential**
+### Policy 1: Auto-Label PII as Confidential
 
 | Field | Value |
 | ------- | ------- |
@@ -195,7 +195,7 @@ Rules:
 1. Choose **Run policy in simulation mode** → **Save**
 2. After reviewing simulation results (usually 24–48 hours), return to the policy → **Turn on policy**
 
-**Policy 2: Auto-Label Health Data as Highly Confidential**
+### Policy 2: Auto-Label Health Data as Highly Confidential
 
 Same process:
 
@@ -232,7 +232,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 
 1. **Insider risk management** → **Policies** → **+ Create policy**
 
-**Policy 1: Data Theft by Departing Users**
+#### Policy 1: Data Theft by Departing Users
 
 | Field | Value |
 | ------- | ------- |
@@ -246,7 +246,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 
 1. Click **Submit**
 
-**Policy 2: General Data Leaks**
+### Policy 2: General Data Leaks
 
 | Field | Value |
 | ------- | ------- |
@@ -256,7 +256,7 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 | Priority content | All sensitivity labels above Internal |
 | Indicators | ✅ Sharing externally, bulk download, printing sensitive content |
 
-**Policy 3: Privileged User Risk**
+### Policy 3: Privileged User Risk
 
 | Field | Value |
 | ------- | ------- |

@@ -46,9 +46,9 @@ By default, any licensed user can create a Team. In regulated environments this 
 | Description | Members of this group are authorized to create Microsoft Teams |
 | Membership type | Assigned |
 
-2. Click **Create**
-3. Open the group → **Members** → **+ Add members**
-4. Add authorized users: IT admins, Operations managers, Leadership PAs
+1. Click **Create**
+2. Open the group → **Members** → **+ Add members**
+3. Add authorized users: IT admins, Operations managers, Leadership PAs
 
 ### 1.2 Restrict Microsoft 365 Group Creation
 
@@ -67,7 +67,7 @@ By default, any licensed user can create a Team. In regulated environments this 
 Communicate this process to the organization:
 
 | Stage | Actor | Action | SLA |
-|-------|-------|--------|-----|
+| ------- | ------- | -------- | ----- |
 | **Request** | Business user | Submit request via IT service portal: business purpose, Team type, initial owners | — |
 | **Approval** | IT Manager | Review naming convention; approve or reject | 24 hours |
 | **Creation** | IT Admin | Create Team using approved template | 4 hours |
@@ -83,7 +83,7 @@ Communicate this process to the organization:
 **Format:** `Dept-Location-TeamName`
 
 | Token | Example values |
-|-------|---------------|
+| ------ | --------------- |
 | Dept | OPS, PRJ, FIN, IT, HR, LEAD |
 | Location | SD, LA, NY, REMOTE |
 | TeamName | Short descriptive name (no spaces) |
@@ -95,7 +95,8 @@ Communicate this process to the organization:
 1. Go to **Entra Admin Center** → **Groups** → **Naming policy**
 2. Click the **Group naming policy** tab
 3. Under **Blocked words** → enter each word on a new line:
-   ```
+
+   ```text
    Internal
    Test
    Temp
@@ -103,6 +104,7 @@ Communicate this process to the organization:
    Old
    Pilot
    ```
+
 4. Click **Save**
 
 **Configure prefix/suffix (attribute-based):**
@@ -124,10 +126,10 @@ Teams templates ensure every Team launches with a consistent set of channels, ta
 
 1. Go to **Teams Admin Center** → **Teams** → **Team templates** → **+ Add**
 
-**Template 1: Operations Team**
+### Template 1: Operations Team
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | Template name | Operations Team |
 | Short description | Standard template for operational departments |
 | Locale | English (United States) |
@@ -135,7 +137,7 @@ Teams templates ensure every Team launches with a consistent set of channels, ta
 Channels to add (click **+ Add** for each):
 
 | Channel name | Type | Set as favorite |
-|-------------|------|-----------------|
+| ----------- | ---- | --------------- |
 | Announcements | Standard | ✅ Yes |
 | Projects | Standard | ✅ Yes |
 | Incidents | Standard | No |
@@ -145,22 +147,22 @@ Apps to pre-install: **Planner**, **SharePoint** (point to Operations site), **O
 
 Click **Submit**
 
-**Template 2: Projects Team**
+### Template 2: Projects Team
 
-| Channel | Type | Favorite |
-|---------|------|----------|
-| Announcements | Standard | ✅ Yes |
-| Planning | Standard | ✅ Yes |
-| Deliverables | Standard | No |
-| Risks & Issues | Standard | No |
-| Finance | Private | No |
+| Channel         | Type     | Favorite |
+| --------------- | -------- | -------- |
+| Announcements   | Standard | ✅ Yes   |
+| Planning        | Standard | ✅ Yes   |
+| Deliverables    | Standard | No       |
+| Risks & Issues  | Standard | No       |
+| Finance         | Private  | No       |
 
 Apps: **Planner**, **SharePoint** (Projects site), **Forms**
 
-**Template 3: Leadership Team**
+### Template 3: Leadership Team
 
 | Channel | Type | Favorite |
-|---------|------|----------|
+| --- | --- | --- |
 | Executive Updates | Standard | ✅ Yes |
 | Strategy | Private | No |
 | Finance | Private | No |
@@ -185,7 +187,7 @@ Apps: **SharePoint** (Leadership site), **Power BI**
 Standard channels are visible to all Team members.
 
 | Channel | Purpose | Who posts |
-|---------|---------|-----------|
+| --- | --- | --- |
 | General | Default; system messages | All members |
 | Announcements | Official updates only | Owners only (moderated) |
 | Projects | Active project coordination | All members |
@@ -225,12 +227,12 @@ The expiration policy automatically prompts Team owners to renew. If no action i
 2. Configure:
 
 | Setting | Value |
-|---------|-------|
+| --- | --- |
 | Group lifetime (in days) | **180** |
 | Email contact for groups with no owners | `it-helpdesk@yourdomain.com` |
 | Enable expiration for these Microsoft 365 groups | **All** |
 
-3. Click **Save**
+1. Click **Save**
 
 > Team owners receive email reminders at 30, 15, and 1 day before expiration. Renewing resets the 180-day clock.
 
@@ -303,20 +305,19 @@ Sensitivity labels control Teams privacy (Public/Private), guest access, and dev
 
 1. Go to **Microsoft Purview portal** → **Data lifecycle management** → **Microsoft 365** → **Retention policies** → **+ New retention policy**
 
-| Field | Value |
-|-------|-------|
-| Name | Teams Retention Policy - 3 Years |
-| Description | Retains Teams channel messages and chats for 3 years |
+| Field       | Value                                                 |
+|-------------|----------------------------------------------------   |
+| Name        | Teams Retention Policy - 3 Years                      |
+| Description | Retains Teams channel messages and chats for 3 years  |
 
-2. **Locations** — toggle on:
+1. **Locations** — toggle on:
    - ✅ **Teams channel messages** — All teams
    - ✅ **Teams chats** — All users
-
-3. **Retention settings:**
+2. **Retention settings:**
    - Retain items for **3 years**
    - At end of period: **Do nothing** (or Delete, per your policy)
 
-4. Submit
+3. Submit
 
 > Teams files are stored in SharePoint — apply the SharePoint retention policy from Lab 2 to cover file content.
 
@@ -325,7 +326,7 @@ Sensitivity labels control Teams privacy (Public/Private), guest access, and dev
 ## 7. Validation
 
 | Test | How to Test | Expected Result |
-|------|-------------|-----------------|
+| --- | --- | --- |
 | Creation restriction | Sign in as non-provisioning user → try to create a Team | Option unavailable or permission error |
 | Naming policy | Try to create a Team with a blocked word (e.g., "Test") | Creation fails with policy violation message |
 | Template | Create Team using Operations template | Channels pre-created; apps pinned |
