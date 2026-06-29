@@ -2,6 +2,14 @@
 
 Cost governance is not an afterthought — it is a design constraint applied from day one. Every architectural decision in this project was evaluated against its cost impact, ensuring predictable, controlled Azure spend without trading away security, reliability, or operational quality.
 
+## Cost Tracking Reminder
+
+To keep your Azure spend predictable, please use the Azure Pricing Calculator to estimate and track the cost of the services you deploy in this lab. Select each resource (VMs, Storage, Networking, App Services, etc.), adjust the configuration, and review the monthly estimate before you begin. This helps you stay within budget and ensures full cost visibility throughout the lab.
+
+Azure Pricing Calculator:
+
+[https://azure.microsoft.com/en-us/pricing/calculator/](https://azure.microsoft.com/en-us/pricing/calculator/) (azure.microsoft.com in Bing)
+
 ---
 
 ## Cost Optimisation Practices
@@ -35,7 +43,7 @@ Cost decisions are always weighed against security impact. The following control
 ---
 
 > No cost optimisation is applied if it weakens the security posture. Spend efficiency and security hardening are treated as complementary, not competing, goals.
-> **⚠️ Cost Notice**  
+> **⚠️ Cost Notice**
 > Following this lab will incur Azure costs. Use a personal or trial subscription and delete resources when finished.
 
 ---
