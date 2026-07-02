@@ -2,8 +2,8 @@
 
 > **Why this matters:** Managing on-premises and multi-cloud servers without Azure Arc means separate toolchains for policy, patching, monitoring, and security — Arc projects every server into Azure Resource Manager so the same governance stack applies everywhere, with Defender for Servers as the security layer.
 
-Last validated on: 2026-06-19  
-Portal experience note: Validated against Azure Portal as of June 2026; agent installation steps apply to both Windows Server and supported Linux distributions.
+Last validated on: 2026-07-02
+Portal experience note: Validated against Azure Portal as of July 2026; agent installation steps apply to both Windows Server and supported Linux distributions. Onboarding steps below use the **Azure Portal UI** (no CLI/PowerShell authoring required — the portal generates the scripts for you).
 
 > **Note:** This document is an architecture reference and design guide. Hands-on agent installation steps require outbound HTTPS (port 443) connectivity from the target server to Azure endpoints.
 
@@ -55,6 +55,53 @@ Before onboarding servers to Azure Arc, ensure the following are in place.
 - Log Analytics Workspace (e.g. `law-hybrid-ops`)
 - Automation Account (for Update Manager and runbooks)
 - Defender for Cloud with Servers plan enabled at subscription level
+
+### 0.1 Resource Provider Registration (Portal)
+
+Arc onboarding will fail silently on a fresh subscription if these aren't registered — check this **before** attempting any onboarding below.
+
+1. In the Azure Portal, go to **Subscriptions** → select your subscription → **Resource providers** (left nav, under *Settings*).
+2. Search for and confirm **Registered** status for:
+   - `Microsoft.HybridCompute`
+   - `Microsoft.GuestConfiguration`
+   - `Microsoft.HybridConnectivity`
+   - `Microsoft.AzureArcData` (only needed if you plan to use Arc-enabled data services later)
+3. If any provider shows **NotRegistered**, select it and click **Register** at the top of the page. Registration typically completes within a few minutes — refresh the page to confirm.
+
+### 0.2 Provision Supporting Azure Resources (Portal)
+
+Create these before onboarding any servers — several onboarding and monitoring steps later in this doc assume they already exist.
+
+#### Log Analytics Workspace
+
+1. Portal → **Log Analytics workspaces** → **+ Create**.
+2. Set subscription, resource group (e.g. `rg-arc-servers-prod`), name (e.g. `law-hybrid-ops`), and region.
+3. Review + Create. Note the workspace name — you'll select it when configuring the AMA Data Collection Rule in Section 4.1.
+
+#### Automation Account
+
+1. Portal → **Automation Accounts** → **+ Create**.
+2. Set subscription, resource group, name, and region.
+3. Under **Advanced**, enable **System-assigned managed identity** (used later for runbooks in Section 7.1 and remediation in Section 5.4).
+4. Review + Create.
+
+#### Key Vault
+
+(for break-glass credentials, Section 7.4)
+
+1. Portal → **Key Vaults** → **+ Create**.
+2. Set subscription, resource group, unique vault name, and region.
+3. On the **Access configuration** tab, use **Azure RBAC** as the permission model (aligns with the RBAC-first approach in Section 2.3).
+4. Review + Create. Once created, store the break-glass account credential as a secret and restrict access to a small, monitored group.
+
+#### Storage Account
+
+(for cold log archival, Section 4.5)
+
+1. Portal → **Storage accounts** → **+ Create**.
+2. Set subscription, resource group, unique account name, and region.
+3. Redundancy: choose per your compliance requirement (e.g. GRS for cross-region durability).
+4. Review + Create. This is the target you'll reference when configuring Log Analytics workspace **Data Export** rules for long-term retention tables (`SecurityAlert`, `AuditLogs`, `Syslog`).
 
 ---
 
@@ -150,84 +197,57 @@ Place the hybrid landing zone subscription under a dedicated **Management Group*
 For environments where direct outbound internet access is restricted, choose one of:
 
 - **Azure Private Link** — route Arc, Log Analytics, and Automation traffic over a private endpoint; requires a Private Link Scope resource (`azuremonitor`, `Arc`).
-- **HTTPS Proxy** — configure `--proxy-url` in the CMA installer and set `NO_PROXY` exceptions for local traffic.
+- **HTTPS Proxy** — the portal onboarding flow (Section 3.5) prompts for a proxy URL directly when you select *Proxy server* as the connectivity method, so no manual `--proxy-url` flag editing is required.
 - **ExpressRoute / VPN** — combine with private endpoints for fully private transit; no public endpoint exposure.
 
 Document the chosen approach per site in the network runbook.
 
+**Setting up Azure Arc Private Link Scope (Portal):**
+
+1. Portal → search **Azure Arc Private Link Scope** → **+ Create**.
+2. Set subscription, resource group, name (e.g. `pls-arc-hybrid`), and region.
+3. After creation, go to the resource → **Private endpoint connections** → **+ Private endpoint**.
+4. Choose the target **virtual network/subnet** where on-prem connectivity (via VPN/ExpressRoute) terminates.
+5. Under **DNS**, let the wizard auto-create/integrate with an **Azure Private DNS zone** (e.g. `privatelink.his.arc.azure.com`), or link to your existing custom DNS zone if you manage DNS on-prem — the private endpoint's IP needs to resolve correctly from the server's network for the endpoints listed in Section 3.2.
+6. Back on the Private Link Scope resource, go to **Azure Arc machines** (left nav) → **+ Add** → associate each Arc-onboarded server so its traffic routes privately.
+7. For on-prem custom DNS (not Azure Private DNS), add conditional forwarders on your DNS servers pointing the relevant `*.azure.com` zones from Section 3.2 to the Private DNS zone, or manually create A records matching the private endpoint IPs.
+
+Repeat the Private Link Scope + DNS setup per site/region as documented in your network runbook.
+
 ### 3.4 Agent Health & Extension Management
 
 - Monitor agent connectivity via the `Heartbeat` table — alert if a machine misses heartbeats for > 15 minutes.
-- Use **Arc extension inventory** (portal or `az connectedmachine extension list`) to audit installed extensions across all Arc machines.
+- Use **Azure Arc → Machines → [server] → Extensions** in the portal to audit installed extensions on an individual machine, or **Azure Arc → Machines → Extensions** (fleet view) to audit across all Arc machines at once.
 - Pin extension versions where possible and test new versions in non-prod before promoting to prod.
 - Define an **extension lifecycle policy**: which extensions are mandatory (AMA, MDE, Guest Config), which are optional, and who can approve additions.
 
-### 3.5 Agent Installation
+### 3.5 Onboarding a Single Server (Azure Portal)
 
-#### Windows (PowerShell — run as Administrator)
+1. In the Azure Portal, search **Azure Arc** → **Machines** → **+ Add/Create**.
+2. Choose **Add a single server** → **Generate script**.
+3. On the **Prerequisites** tab, confirm the resource providers from Section 0.1 show as registered (the portal will flag this automatically if something is missing).
+4. On the **Resource details** tab, fill in:
+   - Subscription
+   - Resource group (e.g. `rg-arc-servers-prod`)
+   - Region
+5. On the **Connectivity method** tab, choose:
+   - **Public endpoint** (default, direct outbound HTTPS), or
+   - **Proxy server** — enter the proxy URL if your environment routes through an HTTPS proxy (see Section 3.3)
+6. On the **Tags** tab, apply the mandatory tags from Section 2.2 (`Environment`, `Location`, `BusinessUnit`, `Criticality`) — applying them here means the server is tag-compliant from the moment it registers, rather than needing remediation afterward.
+7. Review + **Download** the generated script — the portal produces a `.ps1` (Windows) or `.sh` (Linux) file with your subscription ID, resource group, tenant ID, region, proxy settings, and tags already embedded. No manual variable editing needed.
+8. Copy the downloaded script to the target server and run it:
+   - **Windows:** right-click → *Run with PowerShell* (as Administrator)
+   - **Linux:** `sudo bash <script-name>.sh`
+9. The script handles agent download, silent install, and connection to Arc in one pass.
 
-```powershell
-# Set variables
-$SubscriptionId = "<subscription-id>"
-$ResourceGroup  = "rg-arc-servers-prod"
-$TenantId       = "<tenant-id>"
-$Location       = "eastus"
+### 3.6 Onboarding Verification (Portal)
 
-# Download the agent
-Invoke-WebRequest -Uri "https://aka.ms/AzureConnectedMachineAgent" `
-  -OutFile "$env:TEMP\AzureConnectedMachineAgent.msi"
-
-# Install silently
-msiexec /i "$env:TEMP\AzureConnectedMachineAgent.msi" /l*v "$env:TEMP\azcm.log" /qn
-
-# Connect to Azure Arc
-& "$env:ProgramFiles\AzureConnectedMachineAgent\azcmagent.exe" connect `
-  --subscription-id $SubscriptionId `
-  --resource-group  $ResourceGroup `
-  --tenant-id       $TenantId `
-  --location        $Location
-```
-
-#### Linux (bash — run as root or with sudo)
-
-```bash
-# Download and install the agent
-curl -L https://aka.ms/azcmagent-linux | sudo bash
-
-# Connect the agent to Azure Arc
-sudo azcmagent connect \
-  --subscription-id "<subscription-id>" \
-  --resource-group  "rg-arc-servers-prod" \
-  --tenant-id       "<tenant-id>" \
-  --location        "eastus"
-```
-
-> **At-scale / unattended:** Use a service principal with the `Azure Connected Machine Onboarding` role and pass `--client-id` and `--client-secret` flags. Alternatively, generate an onboarding script from **Azure Arc → Add machines → Add multiple servers** in the portal.
-
-### 3.6 Onboarding Verification
-
-**On the server:**
-
-```powershell
-# Windows — check agent status and connectivity
-azcmagent show
-azcmagent check
-```
-
-```bash
-# Linux — check agent status and connectivity
-sudo azcmagent show
-sudo azcmagent check
-```
-
-Expected output: `Agent Status: Connected`
-
-**In the Azure Portal:**
-
-1. Navigate to **Azure Arc → Machines** — confirm the server appears with **Status: Connected**
-2. Verify the correct **Resource Group**, **Region**, and **Tags** are applied
-3. Check the **Extensions** tab — AMA should appear after policy assignment executes
-4. Navigate to **Defender for Cloud → Inventory** — the server should appear within ~15 minutes
+1. In the Azure Portal, go to **Azure Arc → Machines**.
+2. Locate the server (filter by resource group or tag if the list is large) — confirm **Status: Connected**. Allow a few minutes after the script completes.
+3. Select the machine resource and verify the **Overview** pane shows the correct **Resource Group**, **Region**, and **Tags**.
+4. Open the **Extensions** tab — the Azure Monitor Agent (AMA) should appear here once the relevant policy assignment executes (may take up to 30 minutes on first onboarding).
+5. Go to **Microsoft Defender for Cloud → Inventory**, filter by resource type *Arc Machine* — the server should appear within ~15 minutes of connecting.
+6. If the server does not show **Connected** after 10–15 minutes, open **Azure Arc → Machines → [server] → Redeploy agent troubleshooter** (portal-guided diagnostics) or check that the outbound endpoints in Section 3.2 are reachable from the server.
 
 ---
 
@@ -399,11 +419,39 @@ Use **Azure Automation** (or Logic Apps) for:
 
 **Triggers:** Defender alerts, policy non-compliance, scheduled jobs.
 
-### 7.2 Onboarding at Scale
+### 7.2 Onboarding Multiple Servers at Scale (Azure Portal)
 
-- Arc at-scale onboarding scripts
-- Configuration management tools (SCCM, Ansible, Puppet) to deploy CMA
-- Azure Policy machine enrollment (preview) for auto-config of monitoring & security
+1. In the Azure Portal, go to **Azure Arc → Machines → + Add/Create → Add multiple servers**.
+2. Choose a deployment method based on your existing tooling:
+   - **SCCM** — generates a Configuration Manager package for your existing SCCM deployment
+   - **Group Policy** — generates a GPO logon script for AD-joined on-prem machines
+   - **Ansible / Chef / Puppet** — generates the corresponding role/playbook/manifest
+   - **Custom script (PowerShell/bash)** — generates a standalone bulk script for any other distribution method
+3. On the **Resource details** tab, set the subscription, resource group, and region that all onboarded servers will share.
+4. On the **Tags** tab, apply the mandatory tags from Section 2.2 — these will be stamped on every server onboarded through this batch.
+5. On the **Authentication** tab, the portal defaults to generating a **service principal** automatically, scoped to the `Azure Connected Machine Onboarding` role on your target resource group — you don't need to pre-create one in Entra ID. Set an **expiration** on the credential (shorter is better for a one-time bulk rollout; e.g. 7–30 days).
+6. Review + **Download** the generated package/script and distribute it via your chosen method (SCCM package deployment, GPO, Ansible playbook run, etc.).
+7. Monitor rollout: **Azure Arc → Machines**, filter by resource group or tag, and compare the **Connected** count against the number of servers targeted in the batch.
+
+**At-scale caution:** if onboarding hundreds of servers in one batch, stagger the rollout (e.g., a few hundred at a time). Bulk registration can throttle against Azure Resource Manager request limits — the portal itself won't surface a warning about this in advance; throttled registrations simply show as failed in the deployment/onboarding log for that batch, so check the log rather than assuming a clean run.
+
+**Service principal cleanup:** once the batch finishes and all servers show **Connected**, go to **Entra ID → App registrations**, locate the auto-generated onboarding service principal, and either delete it or confirm its credential expiration date (set in step 5) is short. Leaving a long-lived onboarding credential active after rollout is unnecessary standing access — treat it the same as any other service principal under your RBAC review process (Section 2.3).
+
+**Sizing guidance:**
+
+| Server count | Recommended approach |
+| --- | --- |
+| 1–10 | Single-server onboarding (Section 3.5), or one small multi-server batch |
+| ~10–100 | Pilot with 5–10 servers first, then one bulk batch for the remainder |
+| Several hundred | Split into batches of a few hundred at a time to avoid ARM throttling |
+| 1,000+ | Batch by site/wave; monitor onboarding logs per batch before starting the next |
+
+**Splitting by resource group (prod vs non-prod):** the **Add multiple servers** wizard only accepts one resource group per batch, so if your fleet spans both `rg-arc-servers-prod` and `rg-arc-servers-nonprod` (Section 2.1), sort your server list by environment first and run **one batch per resource group**:
+
+1. Run the wizard once targeting `rg-arc-servers-prod`, applying `Environment: Prod` (and other Section 2.2 tags) to that batch.
+2. Run it again targeting `rg-arc-servers-nonprod`, applying `Environment: Dev`/`Test` tags to that batch.
+
+This keeps tagging accurate per server without manual fix-up afterward, and lets RBAC (Section 2.3) and policy initiatives (Section 5.1) apply correctly since both are assigned at the resource-group level.
 
 ### 7.3 Runbook Version Control & Testing
 
@@ -425,24 +473,28 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 
 ## Check List
 
-1. **Validate prerequisites** — confirm all Azure roles, subscriptions, and OS support are in place.
-2. **Provision Azure resources** — create Log Analytics Workspace, Automation account, Key Vault, and Storage account.
-3. **Configure networking & DNS** — set up private endpoints, firewall rules, and custom DNS resolution for on-prem environment.
-4. **Deploy Arc Connected Machine Agent** — use manual, scripted, or bulk deployment methods; verify agent registration in Azure.
+1. **Validate prerequisites** — confirm all Azure roles, subscriptions, resource provider registration, and OS support are in place.
+2. **Provision Azure resources** — create Log Analytics Workspace, Automation account, Key Vault, and Storage account (Section 0.2).
+3. **Configure networking & DNS** — set up Private Link Scope, private endpoints, firewall rules, and custom DNS resolution for on-prem environment (Section 3.3).
+4. **Deploy Arc Connected Machine Agent** — use the Azure Portal's single-server or multiple-server onboarding flow; verify agent registration in Azure Arc → Machines.
 5. **Onboard Defender for Servers** — enable Defender plans, configure monitoring policy, and validate data ingestion.
 6. **Test policies & automations** — apply policies at scale, validate remediation runbooks, and monitor audit logs.
 7. **Establish monitoring dashboard** — create alerting rules in Azure Monitor, KQL queries for incident detection.
 8. **Document runbook version control** — set up CI/CD pipeline and source control for lifecycle automation.
 9. **Conduct rollout in phased waves** — start with pilot group, expand to production with documented success criteria.
 10. **Conduct break-glass procedure test** — validate emergency access and incident response playbook quarterly.
+11. **Validate decommissioning process** — confirm portal-based teardown steps are documented and tested before relying on them at scale.
 
-### 7.5 Decommissioning
+### 7.5 Decommissioning (Azure Portal)
 
-Standard pattern:
-
-1. Remove from CMDB
-2. Stop Defender monitoring
-3. Unregister Arc machine
-4. Archive logs for compliance
+1. In the Azure Portal, go to **Azure Arc → Machines** and select the server(s) to decommission.
+2. If Defender for Servers is enabled, go to **Microsoft Defender for Cloud → Environment settings**, locate the subscription/resource group, and confirm the plan assignment — Defender coverage is tied to the Arc machine resource, so it's automatically removed once the Arc resource itself is deleted in step 4.
+3. On the server itself, uninstall the Connected Machine Agent:
+   - **Windows:** *Settings → Apps → Installed apps* → find **Azure Connected Machine Agent** → Uninstall
+   - **Linux:** remove via your distro's package manager (e.g. `apt remove azcmagent` / `yum remove azcmagent`)
+4. Back in the Azure Portal, with the machine(s) still selected in **Azure Arc → Machines**, click **Delete** at the top of the list to remove the ARM resource. This step is required — uninstalling the agent locally disconnects the server but does **not** remove the stale resource from Azure Resource Manager.
+5. Confirm removal: refresh **Azure Arc → Machines** and verify the server no longer appears; check **Microsoft Defender for Cloud → Inventory** to confirm it has dropped out of Defender coverage as well.
+6. Review **Log Analytics workspace → Logs** — retention/archival settings from Section 4.5 are workspace-level, not per-machine, so historical data for the decommissioned server remains available for the configured retention window without any extra action.
+7. Remove the server from your CMDB and any tag-based inventory dashboards or workbooks.
 
 ---
