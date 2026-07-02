@@ -105,21 +105,19 @@ A Key Vault stores and protects application secrets. If you already have a Key V
 1. Go to **Azure Portal** → **Key Vaults**
 2. Click **+ Create**
 3. Fill in the **Basics** tab:
-
 | Field | Value |
 | --- | --- |
 | Resource Group | `rg-appservice-wus2-lab` |
 | Key vault name | `kv-appservice-wus2-lab` |
 | Region | `West US 2` (match your App Service region) |
 | Pricing tier | `Standard` |
-
 4. Click **Next: Access configuration**
 
 ### Step 2 — Set the Permission Model
 
-5. Under **Permission model**, select **Azure role-based access control**
-6. Leave all other settings as default
-7. Click **Review + Create** → **Create**
+1. Under **Permission model**, select **Azure role-based access control**
+2. Leave all other settings as default
+3. Click **Review + Create** → **Create**
 
 > **Why RBAC:** The Azure RBAC model lets you assign Key Vault permissions using standard IAM role assignments, which is required for Managed Identity access in this lab. Selecting this now avoids having to switch the model later.
 
@@ -301,6 +299,7 @@ Key Vault references allow the App Service to resolve secrets at runtime without
 2. Fill in:
    - **Name:** `MySecret`
    - **Value:** Key Vault reference URI in the following format:
+3. Click **Apply** → **Save**
 
 ```text
 @Microsoft.KeyVault(SecretUri=https://<your-key-vault-name>.vault.azure.net/secrets/<secret-name>/)
@@ -311,8 +310,6 @@ Example:
 ```text
 @Microsoft.KeyVault(SecretUri=https://kv-appservice-wus2-lab.vault.azure.net/secrets/app-secret/)
 ```
-
-3. Click **Apply** → **Save**
 
 The App Service restarts automatically and resolves the reference on next startup.
 
