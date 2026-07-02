@@ -153,7 +153,7 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 - [Bicep Deployment — Identity Stack](Bicep/1-bicep-deployment-identity-stack.md)
 - [Bicep in VS Code — Toolchain Setup](Bicep/2-how-to-run-bicep-in-vscode.md)
 - [VS Code Deployment Workflow](Bicep/3-vscode-deployment-workflow.md)
-- [Naming Convention](Bicep/README.md#-naming-convention)
+- [Naming Convention](Bicep/README.md#naming-convention)
 
 ### 3. 🔒 Secure Access & Networking
 
