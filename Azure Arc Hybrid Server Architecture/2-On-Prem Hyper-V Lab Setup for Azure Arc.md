@@ -125,27 +125,27 @@ Same checks as Section 3.6 of the architecture doc:
 
 To make this a real end-to-end test, exercise the same RBAC, policy, and automation patterns from the architecture doc — just scoped to `rg-arc-lab` only, never by reusing the literal production role assignments, initiative assignments, or Automation account targets.
 
-**RBAC (mirrors Section 2.3)**
+### RBAC (mirrors Section 2.3)
 
 1. Portal → `rg-arc-lab` → **Access control (IAM)** → **+ Add role assignment**.
 2. Assign `Hybrid-Server-Reader`, `Hybrid-Server-Operator`, and `Security-Operator` here, scoped to this resource group only — do **not** add `rg-arc-lab` as an extra scope on the existing production role assignments.
 3. Test with a low-privilege test account: confirm a `Hybrid-Server-Reader` can view but not restart a lab VM, and an `Operator` can restart/manage extensions but not touch policy.
 
-**Policy initiative (mirrors Section 5.1)**
+#### Policy initiative (mirrors Section 5.1)
 
 1. Portal → **Policy → Definitions** → find your `Arc-Server-Baseline` initiative (or the built-ins it's composed of).
 2. **Assignments** → **Assign initiative** → scope = `rg-arc-lab` specifically (not subscription-wide, so it can't cascade to prod RGs). This is a genuine assignment of the same initiative, just scoped narrowly — not a copy, but scoping prevents any spillover.
 3. Confirm the AMA/Guest Configuration/tagging policies actually evaluate and remediate against your lab VMs: **Policy → Compliance**, filter to `rg-arc-lab`.
 4. This validates the real initiative logic end-to-end without ever touching prod resources, since scope is the isolation boundary here — not a separate copy.
 
-**Automation / runbooks (mirrors Section 7.1, 4.2)**
+#### Automation / runbooks (mirrors Section 7.1, 4.2)
 
 1. Use a **non-prod Automation Account** (Section 7.3 already recommends maintaining one for staging) — point it at `rg-arc-lab`, not the production account.
 2. Create/import a test runbook (e.g. a simple restart or tag-remediation runbook) and target it explicitly by resource group (`rg-arc-lab`) or tag (`Environment: Lab`) — never by "all Arc machines in subscription," which is the mistake that would let a Lab test reach prod.
 3. Run it against the lab VMs, confirm behavior, then check the run history/logs.
 4. Optionally test **Update Manager** patch assessment against the lab VMs the same way (Section 4.2) — same resource-group scoping rule applies.
 
-**Defender for Servers (mirrors Section 6.1)**
+#### Defender for Servers (mirrors Section 6.1)
 
 1. If you want to test Defender end-to-end too, enable the plan at subscription level (it applies broadly — there's no RG-level opt-in for the base plan), but note this does add cost for the duration of the Lab.
 2. Confirm lab VMs pick up Secure Score recommendations and, if desired, test JIT access (Section 6.5) against a lab VM specifically.
