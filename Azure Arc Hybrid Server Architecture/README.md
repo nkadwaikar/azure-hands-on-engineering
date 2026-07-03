@@ -6,12 +6,13 @@ This track covers designing and operating a hybrid server landing zone using **A
 
 ```text
 Azure Arc Hybrid Server Architecture/
-`-- Azure Arc Hybrid Server Architecture.md
+├── 1-Azure Arc Hybrid Server Architecture.md
+└── 2-On-Prem Hyper-V Lab Setup for Azure Arc.md
 ```
 
 ## Lab Sequence
 
-1. [Azure Arc Hybrid Server Architecture](Azure%20Arc%20Hybrid%20Server%20Architecture.md)
+1. [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md)
 
    | Section | What It Covers |
    | --- | --- |
@@ -25,6 +26,20 @@ Azure Arc Hybrid Server Architecture/
    | 7. Automation & Lifecycle Management | Automation runbooks, at-scale onboarding, runbook version control and CI/CD, decommissioning, break-glass procedure |
    | 8. Rollout Model | Four-phase rollout (Foundation → Pilot → Scale-Out → Optimization) with success criteria and sign-off owners |
    | Next Steps | Prioritised action checklist |
+
+2. [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md)
+
+   | Step | What It Covers |
+   | --- | --- |
+   | Why a Lab | Why Hyper-V VMs (not Azure VMs) are required to exercise real Arc onboarding |
+   | 1. Hyper-V Host Prerequisites | Host OS, Hyper-V role enablement, BIOS/UEFI virtualisation, sizing guidance |
+   | 1a. Optional VMs | Decision guide for Domain Controller (GPO onboarding) and File Server (FIM testing) |
+   | 2. Networking | External vs. Internal + NAT virtual switch; inserting a proxy to simulate restricted on-prem |
+   | 3. Create Lab VMs | Windows Server 2022 + Linux, Generation 2, Arc-ready hostname conventions, connectivity check |
+   | 4. Azure Side (Isolated Scope) | `rg-arc-lab`, optional `law-arc-lab`, resource provider registration, lab-specific tags |
+   | 5. Onboard Lab VMs | Single-server onboarding script from portal, targeting `rg-arc-lab` |
+   | 6. Verify | Connected status, tags, AMA extension, Defender for Cloud inventory checks |
+   | 7. Governance End-to-End | Lab-scoped RBAC, policy initiative assignment, Automation account wiring |
 
 ## Prerequisites
 

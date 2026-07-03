@@ -144,6 +144,7 @@ flowchart LR
     ARM --> AMA["Azure Monitor\nAgent (AMA)"]
     AMA --> DCR["Data Collection\nRule (DCR)"]
     DCR --> LAW["Log Analytics\nWorkspace"]
+    LAW --> Sentinel["Microsoft Sentinel\nSIEM + SOAR"]
     ARM --> MDC["Microsoft Defender\nfor Cloud"]
     MDC --> Score["Secure Score\n+ Alerts"]
     ARM --> Policy["Azure Policy\nGuest Configuration"]
@@ -187,7 +188,7 @@ flowchart LR
 | [Break-Glass – FIDO2 (Lab 1)](./Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) | Cloud-only emergency accounts with FIDO2 keys, Authentication Strength, CA enforcement |
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
-| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Defender for Servers, Policy/Guest Config compliance, Update Manager |
+| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Defender for Servers, Policy/Guest Config compliance, Update Manager, Automation runbooks, lifecycle management, Hyper-V lab for Arc validation |
 | [Modern Workplace (Microsoft 365)](./Microsoft%20365/README.md) | Exchange Online advanced mail flow, SharePoint information architecture, Teams lifecycle governance, Purview compliance automation, Zero Trust Conditional Access, Identity Governance lifecycle workflows |
 
 [← Back to Azure Hands-On Engineering](./README.md)

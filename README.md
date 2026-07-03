@@ -209,7 +209,8 @@ Each lab reflects a real Azure engineering pattern — not a tutorial, but a pro
 
 **[Arc-enabled Servers — Track Overview](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md)**
 
-- [Arc Architecture — Full Lab](Azure%20Arc%20Hybrid%20Server%20Architecture/Azure%20Arc%20Hybrid%20Server%20Architecture.md)
+- [Arc Hybrid Server Architecture — Architecture & Design](Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md)
+- [On-Prem Hyper-V Lab Setup for Azure Arc](Azure%20Arc%20Hybrid%20Server%20Architecture/2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md)
 
 ### 9. 💼 Modern Workplace (Microsoft 365)
 

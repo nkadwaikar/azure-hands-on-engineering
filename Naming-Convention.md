@@ -285,6 +285,7 @@ Policy assignments and resource locks use descriptive names without abbreviation
 ```text
 Enforce Secure Transfer on Storage Accounts    DeployIfNotExists custom policy
 audit-missing-environment-tag                  Audit tag-compliance policy
+Arc-Server-Baseline                            Policy initiative — AMA deployment, Guest Configuration, and mandatory tag enforcement for Arc-enabled servers
 rg-delete-lock                                 Delete lock on a Resource Group
 sa-readonly-lock                               Read-only lock on a Storage Account
 ```
@@ -356,13 +357,31 @@ Examples:
 ```text
 rg-arc-servers-prod             Arc landing zone (production)
 rg-arc-servers-nonprod         Arc landing zone (non-production)
+rg-arc-lab                      Arc lab resource group — disposable, isolated from prod/nonprod
 law-hybrid-ops                  Central Log Analytics workspace for hybrid telemetry
+law-arc-lab                     Lab-only workspace — keeps lab telemetry out of production dashboards
 arcm-srv-dc01                   On-prem domain controller projected into Azure Arc
+arcm-lab-lab-win01              Hyper-V lab VM (Windows) onboarded to Arc for lab validation
+arcm-lab-lab-lnx01              Hyper-V lab VM (Linux) onboarded to Arc for lab validation
 aa-arc-eus-prod                 Automation Account for Update Manager and runbooks
+aa-arc-eus-nonprod              Non-prod Automation Account for staging runbook changes (never target prod)
 mg-hybrid-servers               Management Group housing the Arc landing zone subscription
 dcr-arc-eus-prod                Data Collection Rule — OS perf + events for Arc servers
-pls-arc-prod                    Private Link Scope for fully private Arc / Monitor connectivity
+pls-arc-hybrid                  Private Link Scope for Arc / Azure Monitor (‘hybrid’ used when env segment reflects mixed connectivity scope rather than a single deployment tier)
+pls-arc-prod                    Private Link Scope — production-only variant
 ```
+
+#### RBAC role names
+
+Custom roles for the Arc landing zone follow a descriptive `{Scope}-{PermissionLevel}` pattern rather than the `{type}-` prefix convention used for Azure resources:
+
+| Role name | Permissions |
+| --- | --- |
+| `Hybrid-Server-Reader` | Read-only view of Arc machines, no control-plane operations |
+| `Hybrid-Server-Operator` | Restart, manage extensions — no policy changes |
+| `Security-Operator` | Defender for Cloud, alerts, recommendations |
+
+Assign at resource group or subscription scope. Avoid per-resource RBAC sprawl. In the lab, scope each role assignment to `rg-arc-lab` only — do not add the lab RG as an extra scope on existing production role assignments.
 
 ---
 
