@@ -134,13 +134,28 @@ flowchart LR
 
 **Design note:** Both MFA methods are enforced by a dedicated Authentication Strength policy inside Conditional Access. Break-glass accounts are never excluded from CA — consistent with the Microsoft 2025 security baseline.
 
+## Microsoft Entra Backup & Recovery
+
+```mermaid
+flowchart LR
+    EntraDir["Microsoft Entra\nDirectory"] --> Snapshot["Daily Snapshot\nMicrosoft-Managed\n(Last 5 retained)"]
+    Snapshot --> DiffReport["Difference Report\nAdded · Deleted · Modified"]
+    DiffReport --> Filter["Filter by\nObject Type"]
+    Filter --> Review["Admin Review\n(Global Admin / PRA)"]
+    Review --> Recover["Object Recovery\nCloud-Managed Only"]
+    Recover --> Validate["Post-Recovery\nValidation"]
+    Validate --> Audit["Audit Log\nReview & Cleanup"]
+```
+
+**Design note:** Recovery scope is limited to cloud-managed objects only — on-premises synchronized objects appear in difference reports but cannot be recovered through this service. Backup cadence and retention (5 daily snapshots) are Microsoft-managed and not configurable.
+
 ## Azure Arc Hybrid Server Architecture
 
 ```mermaid
 flowchart LR
     Server["On-Prem / Multi-Cloud\nServer"] --> CMA["Connected Machine\nAgent (CMA)"]
     CMA --> ARM["Azure Resource\nManager"]
-    ARM --> RBAC["RBAC + Tags\n+ Policy"]
+    ARM --> RBAC["RBAC + Tags"]
     ARM --> AMA["Azure Monitor\nAgent (AMA)"]
     AMA --> DCR["Data Collection\nRule (DCR)"]
     DCR --> LAW["Log Analytics\nWorkspace"]

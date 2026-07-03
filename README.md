@@ -7,47 +7,22 @@
 [![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
 [![Microsoft 365 Governance](https://img.shields.io/badge/Governance-Microsoft%20365-0078D4?style=flat-square&logo=microsoft&logoColor=white)](Microsoft%20365/README.md)
 
-I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production‑aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
+I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production aligned governance the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
 
 > **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.
-> **Jumping in?** Go straight to [Labs & Engineering Tracks](#-labs--engineering-tracks), the [Modern Workplace Track](Microsoft%20365/README.md), or the [Architecture Overview](Architecture%20Overview.md).
+> **Jumping in?** Use the [track navigator below](#%EF%B8%8F-how-to-follow-these-tracks), or go straight to the [Modern Workplace Track](Microsoft%20365/README.md) or [Architecture Overview](Architecture%20Overview.md).
 
 ---
 
 ## 👥 Who This Is Designed For
 
-Built for cloud engineers and identity architects who are evaluating production-aligned Azure engineering — specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
-
----
-
-## 🗺️ How to Follow These Tracks
-
-| If you're… | Start here |
-| --- | --- |
-| Evaluating my architecture approach | [Architecture Overview](Architecture%20Overview.md) |
-| Reviewing identity & Zero Trust | [Identity-First Track](Identity-First/README.md) |
-| Assessing IaC & automation | [Bicep Track](Bicep/README.md) |
-| Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) |
-| Following the full learning path | [Recommended Engineering Path](#-recommended-engineering-path) |
+Built for cloud engineers and identity architects who are evaluating production aligned Azure engineering specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
 
 ---
 
 ## 💰 Cost Governance
 
 All labs are designed to minimise Azure spend using right‑sizing, auto‑shutdown, scoped logging, and consumption‑based services. Costs are kept predictable and low for learning environments.
-
----
-
-## 🎯 Skills
-
-| Area | What I Do |
-| --- | --- |
-| [Azure Infrastructure](Architecture%20Overview.md) | VMs, VMSS, VNets, NSGs, Load Balancers, Front Door, Storage — built for resilience |
-| [Identity & Zero Trust](Identity-First/README.md) | Microsoft Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
-| [IaC & Automation](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
-| [Governance & Compliance](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor — aligned to regulated environments |
-| [Microsoft 365](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams governance, Purview compliance, Zero Trust, Identity Lifecycle |
-| [Business Continuity](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 
 ---
 
@@ -59,6 +34,7 @@ flowchart TD
         EntraID["Entra ID"]
         MI["Managed Identity"]
         KV["Key Vault"]
+        BG["Break-Glass\nFIDO2 · CBA"]
     end
     subgraph Governance["🛡️ Governance"]
         Policy["Azure Policy\nGuest Config"]
@@ -74,13 +50,19 @@ flowchart TD
         App["App Service"]
     end
     subgraph Ops["🔄 Ops & Resilience"]
-        DevOps["Azure DevOps"]
+        DevOps["Azure DevOps · Bicep"]
         Monitor["Azure Monitor\nLog Analytics"]
         Backup["Recovery Services"]
         Arc["Azure Arc\nHybrid Servers"]
+        Sentinel["Microsoft Sentinel\nSIEM · SOAR"]
+    end
+    subgraph M365["💼 Modern Workplace"]
+        ExO["Exchange Online\nTeams · SharePoint"]
+        Purview["Microsoft Purview\nCompliance · DLP"]
     end
 
     EntraID --> MI
+    EntraID --> BG
     MI --> KV
     MI --> App
     MI --> VM
@@ -94,8 +76,10 @@ flowchart TD
     DevOps --> App
     Monitor --> VM & App
     Monitor --> Arc
+    Monitor --> Sentinel
     Backup --> VM
     Arc --> VM & Monitor
+    EntraID --> ExO & Purview
 ```
 
 ---
@@ -110,136 +94,29 @@ flowchart TD
 
 ---
 
-## 🚀 Recommended Engineering Path
+## 🗺️ How to Follow These Tracks
 
-The full sequence — each step builds on the last.
-
-1. Identity-First — foundation for everything
-2. IaC (Bicep) — deploy identity stack using modules
-3. Secure Access — Bastion, JIT, Front Door
-4. Governance Layer — Policy, locks, RBAC scopes
-5. Compute Lifecycle — VM → Sysprep → Image → VMSS
-6. App Service & DevOps — managed identity, deployment slots, pipelines
-7. Resilience — Backup, ASR, storage replication
-8. Hybrid — Arc + Defender for Servers
-
----
-
-## 🔬 Labs & Engineering Tracks
-
-Each lab reflects a real Azure engineering pattern — not a tutorial, but a production-aligned implementation with documented reasoning.
-
-### 1. 🔐 Identity-First Security & Zero Trust
-
-**[Identity-First Architecture — Full Track](Identity-First/README.md)**
-
-- [Identity Fundamentals](Identity-First/01-identity%20fundamentals.md)
-- [Managed Identity + Key Vault](Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
-- [Entra ID Roles & RBAC](Identity-First/03-azuread-roles-rbac-scopes.md)
-
-**[Break-Glass Accounts — Track Overview](Secure%20Break%E2%80%91Glass%20Accounts/README.md)**
-
-- [Break-Glass & Emergency Access Accounts (FIDO2)](Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md)
-- [Certificate-Based Authentication (CBA) for Emergency Accounts](Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md)
-
-**[Entra Backup & Recovery — Track Overview](Microsoft%20Entra%20Backup%20%26%20Recovery/README.md)**
-
-- [Microsoft Entra Backup & Recovery Lab](Microsoft%20Entra%20Backup%20%26%20Recovery/1-Microsoft%20Entra%20Backup%20%26%20Recovery.md)
-
-### 2. 🧱 Azure Infrastructure as Code (IaC)
-
-**[Bicep Track — Full Overview](Bicep/README.md)**
-
-- [Bicep Deployment — Identity Stack](Bicep/1-bicep-deployment-identity-stack.md)
-- [Bicep in VS Code — Toolchain Setup](Bicep/2-how-to-run-bicep-in-vscode.md)
-- [VS Code Deployment Workflow](Bicep/3-vscode-deployment-workflow.md)
-- [Naming Convention](Bicep/README.md#naming-convention)
-
-### 3. 🔒 Secure Access & Networking
-
-**[Azure Bastion — Track Overview](Azure%20Bastion/README.md)**
-
-- [Azure Bastion — Secure VM Access](Azure%20Bastion/1-Azure%20Bastion.md)
-
-**[Defender for Cloud — Track Overview](Microsoft%20Defender%20for%20Cloud/README.md)**
-
-- [Bastion + Just-In-Time (JIT) VM Access](Microsoft%20Defender%20for%20Cloud/1-JIT.md)
-
-**[Azure Front Door + WAF — Track Overview](Azure%20Front%20Door-Static%20Website%20Hosting/README.md)**
-
-- [Front Door Static Website Hosting Lab](Azure%20Front%20Door-Static%20Website%20Hosting/Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md)
-
-### 4. 🛡️ Governance & Compliance
-
-**[Azure Policy Auto-Remediation — Track Overview](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)**
-
-- [Azure Policy Auto-Remediation Lab](Azure%20Policy%20Auto%E2%80%91Remediation/1-Azure%20Policy%20Auto%E2%80%91Remediation.md)
-- [Azure Locks + Resource Policies](Identity-First/04-azurelocks-resource-policies.md)
-- [Azure Monitor & Activity Logs](Identity-First/06-azuremonitor-activity-logs.md)
-- [Governance Flow Diagram](Identity-First/09-governance-flow.md)
-
-### 5. 🖥️ Compute & Image Lifecycle
-
-**[Compute Track Overview](Compute/README.md)**
-
-- [Build Base VM](Compute/1-build-base-vm.md)
-- [Sysprep Azure VM](Compute/2-sysprep-vm.md)
-- [Install IIS](Compute/3-Install%20IIS.md)
-
-**[VMSS Track Overview](VMSS/README.md)**
-
-- [Capture & Test Image](VMSS/1-capture-and-test-image.md)
-- [VMSS Deployment](VMSS/2-vmss-deployment.md)
-
-### 6. ⚙️ App Service & DevOps
-
-**[App Service + Managed Identity — Track Overview](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md)**
-
-- [Deployment Slots & Azure DevOps Multi-Stage Pipelines](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps.md)
-
-### 7. 🔄 Business Continuity & Resilience
-
-**[Recovery Services Track Overview](Recovery%20Services%20vaults/README.md)**
-
-- [VM Backup & Restore](Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md)
-- [Azure Site Recovery](Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md)
-- [Storage Replication (LRS → ZRS → GRS → RA-GZRS)](Recovery%20Services%20vaults/3-Azure%20storage%20replication.md)
-
-### 8. 🌐 Hybrid & Arc
-
-**[Arc-enabled Servers — Track Overview](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md)**
-
-- [Arc Hybrid Server Architecture — Architecture & Design](Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md)
-- [On-Prem Hyper-V Lab Setup for Azure Arc](Azure%20Arc%20Hybrid%20Server%20Architecture/2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md)
-
-### 9. 💼 Modern Workplace (Microsoft 365)
-
-**[Modern Workplace Track — Full Overview](Microsoft%20365/README.md)**
-
-- [Exchange Online Advanced](Microsoft%20365/1-exchange-online-advanced.md)
-- [SharePoint Information Architecture](Microsoft%20365/2-sharepoint-information-architecture.md)
-- [Teams Lifecycle Governance](Microsoft%20365/3-teams-lifecycle-governance.md)
-- [Compliance Automation (Purview)](Microsoft%20365/4-compliance-automation.md)
-- [Zero Trust Advanced — Conditional Access](Microsoft%20365/5-zero-trust-advanced.md)
-- [Identity Governance — Lifecycle Workflows](Microsoft%20365/6-identity-governance-lifecycle-workflows.md)
-
-### 10. 🏷️ Naming Convention
-
-**[Naming Convention — Full Overview](Naming-Convention.md)**
-
-- I use one clean naming style across my whole portfolio so everything stays organised and easy to work with
-
-### 11. 🏛️ Architecture Overview
-
-**[Architecture Overview — Full Overview](Architecture%20Overview.md)**
-
-- A high-level visual summary that shows how each component works together to form the complete architecture.
+| If you're… | Start here | What's covered |
+| --- | --- | --- |
+| Evaluating my architecture approach | [Architecture Overview](Architecture%20Overview.md) | High-level visual of how every component connects |
+| Reviewing identity & Zero Trust | [Identity-First Track](Identity-First/README.md) | Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
+| Reviewing break-glass & emergency access | [Break-Glass Accounts](Secure%20Break%E2%80%91Glass%20Accounts/README.md) | FIDO2 emergency accounts, Certificate-Based Authentication (CBA) |
+| Reviewing Entra backup & recovery | [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID backup strategies and recovery procedures |
+| Assessing IaC & automation | [Bicep Track](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
+| Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor |
+| Reviewing secure access & networking | [Azure Bastion](Azure%20Bastion/README.md) · [JIT](Microsoft%20Defender%20for%20Cloud/README.md) · [Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | Zero standing access, WAF, inbound exposure removal |
+| Following compute & image lifecycle | [Compute Track](Compute/README.md) · [VMSS](VMSS/README.md) | VMs, VMSS, VNets, NSGs, Load Balancers — built for resilience |
+| Assessing App Service & DevOps pipelines | [App Service + Managed Identity](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | Deployment slots, multi-stage pipelines, secretless auth |
+| Reviewing business continuity & resilience | [Recovery Services Track](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
+| Exploring hybrid & Arc-enabled servers | [Azure Arc Track](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Arc-enabled servers, Defender for Servers, Hyper-V lab |
+| Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Identity Lifecycle |
+| Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
 
 ---
 
 ## � Next
 
-What I'm building next reflects where enterprise Azure is heading — AI-augmented operations, deeper security posture management, and Copilot-native engineering — all on a Zero Trust foundation.
+What I'm building next reflects where enterprise Azure is heading AI augmented operations, deeper security posture management, and Copilot-native engineering all on a Zero Trust foundation.
 
 | Planned | Why |
 | --- | --- |
@@ -266,4 +143,4 @@ My work is shaped by three principles:
 - 💼 [LinkedIn](https://linkedin.com/in/nadeemkadwaikar)
 - 📧 [nadeemkadwaikar@outlook.com](mailto:nadeemkadwaikar@outlook.com)
 
-[![Last Updated](https://img.shields.io/github/last-commit/nkadwaikar/azure-hands-on-engineering?label=Last%20Updated&color=0078D4&style=flat-square&logo=github)](https://github.com/nkadwaikar/azure-hands-on-engineering)
+[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?style=flat-square&logo=github)](https://github.com/nkadwaikar/azure-hands-on-engineering)

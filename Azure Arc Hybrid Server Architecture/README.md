@@ -16,16 +16,15 @@ Azure Arc Hybrid Server Architecture/
 
    | Section | What It Covers |
    | --- | --- |
-   | 0. Prerequisites | Required RBAC roles, supported OS matrix, server requirements, and Azure resources to pre-create |
+   | 0. Prerequisites | Required RBAC roles, supported OS matrix, server requirements, resource provider registration, and Azure resources to pre-create |
    | 1. High-Level Architecture | Core components: Arc, Log Analytics, AMA, Update Manager, Policy, Defender, Sentinel |
    | 2. Resource Organization & Governance | Subscription layout, mandatory tagging strategy, RBAC model, management group hierarchy |
-   | 3. Connectivity & Agent Architecture | Connected Machine Agent (CMA), outbound endpoint table, private link/proxy options, extension management, agent installation (Windows + Linux), onboarding verification |
+   | 3. Connectivity & Agent Architecture | Connected Machine Agent (CMA), outbound endpoint table, private link/proxy options, agent health & extension management, single-server onboarding (Windows + Linux), onboarding verification |
    | 4. Monitoring & Operations | AMA + DCR pipeline, Update Manager, KQL workbooks, alerting rules, log retention and archival policy |
    | 5. Policy, Configuration & Compliance | Arc-enabled server policy initiatives, Guest Configuration baselines, exemption management, drift detection |
    | 6. Security Architecture | Defender for Servers integration, security data flow, Secure Score, Zero Trust alignment, JIT access, File Integrity Monitoring, Defender plan cost management |
-   | 7. Automation & Lifecycle Management | Automation runbooks, at-scale onboarding, runbook version control and CI/CD, decommissioning, break-glass procedure |
-   | 8. Rollout Model | Four-phase rollout (Foundation → Pilot → Scale-Out → Optimization) with success criteria and sign-off owners |
-   | Next Steps | Prioritised action checklist |
+   | 7. Automation & Lifecycle Management | Automation runbooks, at-scale onboarding, runbook version control and CI/CD, break-glass procedure, decommissioning |
+   | Check List | End-to-end rollout checklist covering prerequisites through decommissioning validation |
 
 2. [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md)
 
@@ -39,7 +38,10 @@ Azure Arc Hybrid Server Architecture/
    | 4. Azure Side (Isolated Scope) | `rg-arc-lab`, optional `law-arc-lab`, resource provider registration, lab-specific tags |
    | 5. Onboard Lab VMs | Single-server onboarding script from portal, targeting `rg-arc-lab` |
    | 6. Verify | Connected status, tags, AMA extension, Defender for Cloud inventory checks |
-   | 7. Governance End-to-End | Lab-scoped RBAC, policy initiative assignment, Automation account wiring |
+   | 7. Governance End-to-End | Lab-scoped RBAC, policy initiative assignment, Automation account wiring, Defender for Servers |
+   | 8. What to Actually Test | Checklist of architecture components to validate: tagging, AMA, Defender, FIM, proxy, RBAC, runbooks |
+   | 9. Teardown | Portal-based Arc resource deletion, CMA uninstall, RBAC/policy cleanup, resource group removal |
+   | Notes | Isolation principle (scope not copies), bulk onboarding in the lab, VM snapshot strategy |
 
 ## Prerequisites
 
@@ -52,4 +54,8 @@ Azure Arc Hybrid Server Architecture/
 
 ---
 
-[← Back to Azure Hands-On Engineering](../README.md)
+## Related
+
+- [1 — Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — architecture reference and production design guide
+- [2 — On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — disposable lab to validate onboarding before production
+- [Back to Azure Hands-On Engineering](../README.md)

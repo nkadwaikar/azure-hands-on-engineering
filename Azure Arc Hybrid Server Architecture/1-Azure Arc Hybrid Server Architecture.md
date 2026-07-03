@@ -19,6 +19,9 @@ Portal experience note: Validated against Azure Portal as of July 2026; agent in
 - [Policy, Configuration & Compliance](#5-policy-configuration--compliance)
 - [Security Architecture with Defender for Servers](#6-security-architecture-with-defender-for-servers)
 - [Automation & Lifecycle Management](#7-automation--lifecycle-management)
+- [Check List](#check-list)
+
+> **Lab companion:** [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — build a disposable Hyper-V environment to validate the onboarding flow before rolling out to production.
 
 ---
 
@@ -223,6 +226,8 @@ Repeat the Private Link Scope + DNS setup per site/region as documented in your 
 
 ### 3.5 Onboarding a Single Server (Azure Portal)
 
+> **Practice first:** Use the [On-Prem Hyper-V Lab Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) to validate this flow on a disposable VM before rolling out to production servers.
+
 1. In the Azure Portal, search **Azure Arc** → **Machines** → **+ Add/Create**.
 2. Choose **Add a single server** → **Generate script**.
 3. On the **Prerequisites** tab, confirm the resource providers from Section 0.1 show as registered (the portal will flag this automatically if something is missing).
@@ -392,6 +397,8 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.6 File Integrity Monitoring (FIM)
 
+> **Lab note:** The [Hyper-V Lab Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) covers testing FIM on a disposable VM — useful if you want to simulate file-share workloads before enabling on production.
+
 - Enable **FIM** (available in Defender for Servers Plan 2) on critical servers.
 - Monitor high-value paths: system binaries (`/bin`, `/sbin`, `C:\Windows\System32`), configuration files (`/etc`, web server configs), and startup locations.
 - Alert on unexpected changes; investigate before approving.
@@ -420,6 +427,8 @@ Use **Azure Automation** (or Logic Apps) for:
 **Triggers:** Defender alerts, policy non-compliance, scheduled jobs.
 
 ### 7.2 Onboarding Multiple Servers at Scale (Azure Portal)
+
+> **Practice first:** Validate the single-server flow in the [Hyper-V Lab](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) before running a bulk rollout — the lab also covers the Group Policy bulk-onboarding method if you need to test AD-joined machines.
 
 1. In the Azure Portal, go to **Azure Arc → Machines → + Add/Create → Add multiple servers**.
 2. Choose a deployment method based on your existing tooling:
@@ -460,7 +469,7 @@ This keeps tagging accurate per server without manual fix-up afterward, and lets
 - Maintain a non-prod Automation account for staging runbook changes before promoting to production.
 - Tag each runbook with version, owner, and last-tested date.
 
-### 7.4  Emergency Break-Glass Procedure
+### 7.4 Emergency Break-Glass Procedure
 
 Define a documented break-glass process for scenarios where normal Arc/Automation access is unavailable:
 
@@ -468,22 +477,6 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 - Document direct OS-level access paths (IPMI/iDRAC, out-of-band console) for on-prem servers.
 - Test the break-glass procedure quarterly; log every use as a security event.
 - Alert immediately if break-glass credentials are accessed outside a declared incident.
-
----
-
-## Check List
-
-1. **Validate prerequisites** — confirm all Azure roles, subscriptions, resource provider registration, and OS support are in place.
-2. **Provision Azure resources** — create Log Analytics Workspace, Automation account, Key Vault, and Storage account (Section 0.2).
-3. **Configure networking & DNS** — set up Private Link Scope, private endpoints, firewall rules, and custom DNS resolution for on-prem environment (Section 3.3).
-4. **Deploy Arc Connected Machine Agent** — use the Azure Portal's single-server or multiple-server onboarding flow; verify agent registration in Azure Arc → Machines.
-5. **Onboard Defender for Servers** — enable Defender plans, configure monitoring policy, and validate data ingestion.
-6. **Test policies & automations** — apply policies at scale, validate remediation runbooks, and monitor audit logs.
-7. **Establish monitoring dashboard** — create alerting rules in Azure Monitor, KQL queries for incident detection.
-8. **Document runbook version control** — set up CI/CD pipeline and source control for lifecycle automation.
-9. **Conduct rollout in phased waves** — start with pilot group, expand to production with documented success criteria.
-10. **Conduct break-glass procedure test** — validate emergency access and incident response playbook quarterly.
-11. **Validate decommissioning process** — confirm portal-based teardown steps are documented and tested before relying on them at scale.
 
 ### 7.5 Decommissioning (Azure Portal)
 
@@ -494,7 +487,27 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
    - **Linux:** remove via your distro's package manager (e.g. `apt remove azcmagent` / `yum remove azcmagent`)
 4. Back in the Azure Portal, with the machine(s) still selected in **Azure Arc → Machines**, click **Delete** at the top of the list to remove the ARM resource. This step is required — uninstalling the agent locally disconnects the server but does **not** remove the stale resource from Azure Resource Manager.
 5. Confirm removal: refresh **Azure Arc → Machines** and verify the server no longer appears; check **Microsoft Defender for Cloud → Inventory** to confirm it has dropped out of Defender coverage as well.
-6. Review **Log Analytics workspace → Logs** — retention/archival settings from Section 4.5 are workspace-level, not per-machine, so historical data for the decommissioned server remains available for the configured retention window without any extra action.
+6. Review **Log Analytics workspace → Logs** — retention/archival settings from [Section 4.5](#45-log-retention--archival-policy) are workspace-level, not per-machine, so historical data for the decommissioned server remains available for the configured retention window without any extra action.
 7. Remove the server from your CMDB and any tag-based inventory dashboards or workbooks.
 
 ---
+
+## Check List
+
+1. **Validate prerequisites** — confirm all Azure roles, subscriptions, resource provider registration, and OS support are in place.
+2. **Provision Azure resources** — create Log Analytics Workspace, Automation account, Key Vault, and Storage account ([Section 0.2](#02-provision-supporting-azure-resources-portal)).
+3. **Configure networking & DNS** — set up Private Link Scope, private endpoints, firewall rules, and custom DNS resolution for on-prem environment ([Section 3.3](#33-private-connectivity-options)).
+4. **Deploy Arc Connected Machine Agent** — use the Azure Portal's single-server or multiple-server onboarding flow; verify agent registration in Azure Arc → Machines ([Section 3.5](#35-onboarding-a-single-server-azure-portal), [3.6](#36-onboarding-verification-portal)).
+5. **Onboard Defender for Servers** — enable Defender plans, configure monitoring policy, and validate data ingestion ([Section 6.1](#61-defender-for-cloud-integration)).
+6. **Test policies & automations** — apply policies at scale, validate remediation runbooks, and monitor audit logs ([Section 5.1](#51-azure-policy-for-arc-servers), [7.1](#71-runbooks--workflows)).
+7. **Establish monitoring dashboard** — create alerting rules in Azure Monitor, KQL queries for incident detection ([Section 4.3](#43-workbooks--kql), [4.4](#44-alerting--notification)).
+8. **Document runbook version control** — set up CI/CD pipeline and source control for lifecycle automation ([Section 7.3](#73-runbook-version-control--testing)).
+9. **Conduct rollout in phased waves** — start with pilot group, expand to production with documented success criteria ([Section 7.2](#72-onboarding-multiple-servers-at-scale-azure-portal)).
+10. **Conduct break-glass procedure test** — validate emergency access and incident response playbook quarterly ([Section 7.4](#74-emergency-break-glass-procedure)).
+11. **Validate decommissioning process** — confirm portal-based teardown steps are documented and tested before relying on them at scale ([Section 7.5](#75-decommissioning-azure-portal)).
+
+## Related
+
+- [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — disposable Hyper-V lab to validate onboarding, policy, Defender, and FIM before production rollout
+- [Azure Arc Track Overview](README.md)
+- [Back to Azure Hands-On Engineering](../README.md)
