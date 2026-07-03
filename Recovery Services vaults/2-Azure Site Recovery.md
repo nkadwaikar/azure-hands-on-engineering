@@ -4,7 +4,7 @@
 
 An East US to West US 2 disaster recovery lab.
 
-Last validated on: 2026-06-10  
+Last validated on: 2026-06-10
 Portal experience note: Steps validated against Azure Portal as of June 2026; failover and re-protect labels may vary slightly across subscriptions.
 
 > **Note:** This lab assumes a source VM is already running in East US. Failover to a secondary region incurs compute and storage costs in the target region for the duration of the test.
@@ -157,7 +157,7 @@ flowchart LR
 
 ### 4.1 Install IIS on Source VM
 
-1. Follow instructions from [../Compute/3-Install IIS.md](../Compute/3-Install%20IIS.md).
+1. Follow instructions from [Install IIS](../Compute/3-Install%20IIS.md).
 
 ### 4.2 Allow HTTP on Source VM
 

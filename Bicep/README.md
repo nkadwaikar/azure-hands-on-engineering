@@ -2,6 +2,8 @@
 
 This track covers modular Bicep deployments for identity-first Azure infrastructure. Every module is scoped to a single responsibility, composed through a root `main.bicep`, and aligned to production governance standards.
 
+> **Identity-First Track connection:** The three lab guides in this folder are **Labs 7, 8, and 11** of the [Identity-First Track](../Identity-First/README.md). They form the IaC capstone that codifies the portal-built stack from Labs 1–6. Start at the [Identity-First README](../Identity-First/README.md) if you are following the track in sequence.
+
 ---
 
 ## Folder Structure

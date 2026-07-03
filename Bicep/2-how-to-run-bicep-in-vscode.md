@@ -1,10 +1,12 @@
 # How to Deploy Bicep Files Using Visual Studio Code
 
+> **Identity-First Track — Lab 8 of 11.** Continues from [1-bicep-deployment-identity-stack.md](1-bicep-deployment-identity-stack.md). See [Identity-First README](../Identity-First/README.md) for the full track sequence.
+
 > **Why this matters:** Switching between VS Code, the Azure Portal, and the CLI to deploy Bicep breaks the authoring loop and slows down iteration — this guide keeps the entire deploy, validate, and redeploy cycle inside VS Code using the Azure extensions.
 
 This guide shows you how to deploy Bicep templates **entirely inside Visual Studio Code**, using the Azure extensions. No Azure Portal. No CLI. No switching tools. Just VS Code — clean, simple, and architect-friendly.
 
-Last validated on: 2026-06-25  
+Last validated on: 2026-06-25
 Portal experience note: Steps validated against VS Code with the Bicep and Azure Resources extensions as of June 2026.
 
 > **Note:** This guide covers the VS Code right-click deploy flow. For CLI-based deployment (`az deployment group create`), see [1-bicep-deployment-identity-stack.md](1-bicep-deployment-identity-stack.md).
@@ -29,7 +31,7 @@ Portal experience note: Steps validated against VS Code with the Bicep and Azure
 
 Before deploying Bicep files, make sure you have:
 
-### 1. Visual Studio Code Installed  
+### 1. Visual Studio Code Installed
 
 <https://code.visualstudio.com/>
 
@@ -37,17 +39,17 @@ Before deploying Bicep files, make sure you have:
 
 Install these from the Extensions panel:
 
-- **Azure Account**  
-- **Azure Resources**  
+- **Azure Account**
+- **Azure Resources**
 - **Bicep**
 
 ### 3. Sign in to Azure
 
 In VS Code:
 
-1. Open the **Azure** panel (left sidebar)  
-2. Click **Sign in to Azure**  
-3. Complete the login flow  
+1. Open the **Azure** panel (left sidebar)
+2. Click **Sign in to Azure**
+3. Complete the login flow
 
 You should now see your subscriptions under the Azure Explorer.
 
@@ -89,12 +91,12 @@ Open the file you want to deploy:
 
 Inside the editor:
 
-1. Right-click anywhere in the Bicep file  
+1. Right-click anywhere in the Bicep file
 2. Select **Deploy Bicep File…**
 
 VS Code automatically detects the deployment scope based on:
 
-- `targetScope = 'subscription'`  
+- `targetScope = 'subscription'`
 - `targetScope = 'resourceGroup'`
 
 ---
@@ -103,9 +105,9 @@ VS Code automatically detects the deployment scope based on:
 
 VS Code will prompt you to choose:
 
-- The Azure subscription  
-- (If RG-level) the Resource Group  
-- (If subscription-level) the deployment location  
+- The Azure subscription
+- (If RG-level) the Resource Group
+- (If subscription-level) the deployment location
 
 ---
 
@@ -120,9 +122,9 @@ param location string
 
 VS Code will ask you to:
 
-- Enter values manually  
+- Enter values manually
 **or**
-- Select a `.parameters.json` file  
+- Select a `.parameters.json` file
 
 If your parameters have default values, VS Code will skip this step.
 
@@ -132,10 +134,10 @@ If your parameters have default values, VS Code will skip this step.
 
 VS Code opens the **Output** panel and shows:
 
-- Deployment start  
-- ARM template compilation  
-- Resource creation  
-- Success or error messages  
+- Deployment start
+- ARM template compilation
+- Resource creation
+- Success or error messages
 
 This gives you real-time visibility without leaving the editor.
 
@@ -145,13 +147,13 @@ This gives you real-time visibility without leaving the editor.
 
 Open the **Azure** panel:
 
-- Expand your subscription  
-- Expand the Resource Group  
+- Expand your subscription
+- Expand the Resource Group
 - Confirm resources such as:
-  - Managed Identity  
-  - Key Vault  
-  - RBAC Assignments  
-  - Locks  
+  - Managed Identity
+  - Key Vault
+  - RBAC Assignments
+  - Locks
 
 Everything can be validated directly inside VS Code.
 
@@ -161,12 +163,12 @@ Everything can be validated directly inside VS Code.
 
 To redeploy:
 
-- Open the Bicep file  
+- Open the Bicep file
 - Right-click → **Deploy Bicep File…**
 
 To delete resources:
 
-- Right-click the Resource Group in Azure Explorer  
+- Right-click the Resource Group in Azure Explorer
 - Select **Delete Resource Group**
 
 ---

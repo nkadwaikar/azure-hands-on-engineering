@@ -1,10 +1,12 @@
 # VS Code Deployment Workflow
 
+> **Identity-First Track — Lab 11 of 11.** Final reference diagram. See [Identity-First README](../Identity-First/README.md) for the full track sequence.
+
 > **Why this matters:** Understanding how a right-click in VS Code translates to a subscription-scoped resource group creation followed by a resource-group-scoped module chain makes the Bicep deployment model concrete — and makes it reproducible without a CLI or Portal.
 
 This diagram maps how the Identity-First lab stack is deployed using VS Code only, without Azure CLI or the Portal.
 
-Last validated on: 2026-06-25  
+Last validated on: 2026-06-25
 Portal experience note: Diagram reflects the identity stack deployed via Bicep in [1-bicep-deployment-identity-stack.md](1-bicep-deployment-identity-stack.md).
 
 > **Note:** This workflow uses the `create-rg.bicep`, `create-uami.bicep`, and `create-keyvault.bicep` modules in the `Bicep/` folder.
@@ -57,23 +59,23 @@ Portal experience note: Diagram reflects the identity stack deployed via Bicep i
 
 ## What This Diagram Shows
 
-**✔ VS Code is the control plane**  
+**✔ VS Code is the control plane**
 All deployments start from your editor — no CLI, no Portal.
 
-**✔ Subscription-level deployment**  
+**✔ Subscription-level deployment**
 `create-rg.bicep` runs at subscription scope to create the Resource Group `rg-identity-capstone`.
 
-**✔ Resource-group-level deployment**  
+**✔ Resource-group-level deployment**
 `main.bicep` deploys all modules into `rg-identity-capstone`.
 
-**✔ Module orchestration**  
+**✔ Module orchestration**
 Each module is deployed in sequence with outputs feeding into the next:
 
 - `create-rg.bicep` → outputs `rgName` and `location`
 - `create-uami.bicep` → outputs `principalId`
 - `create-keyvault.bicep` → uses UAMI principal ID for KV access policy
 
-**✔ Validation happens inside VS Code**  
+**✔ Validation happens inside VS Code**
 Azure Explorer shows:
 
 - UAMI (`wk1-uami`)
