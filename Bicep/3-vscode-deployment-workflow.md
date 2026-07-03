@@ -1,7 +1,6 @@
 # VS Code Deployment Workflow
 
 > **Identity-First Track — Lab 11 of 11.** Final reference diagram. See [Identity-First README](../Identity-First/README.md) for the full track sequence.
-
 > **Why this matters:** Understanding how a right-click in VS Code translates to a subscription-scoped resource group creation followed by a resource-group-scoped module chain makes the Bicep deployment model concrete — and makes it reproducible without a CLI or Portal.
 
 This diagram maps how the Identity-First lab stack is deployed using VS Code only, without Azure CLI or the Portal.

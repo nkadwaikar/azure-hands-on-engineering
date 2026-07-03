@@ -1,7 +1,6 @@
 # How to Deploy Bicep Files Using Visual Studio Code
 
 > **Identity-First Track — Lab 8 of 11.** Continues from [1-bicep-deployment-identity-stack.md](1-bicep-deployment-identity-stack.md). See [Identity-First README](../Identity-First/README.md) for the full track sequence.
-
 > **Why this matters:** Switching between VS Code, the Azure Portal, and the CLI to deploy Bicep breaks the authoring loop and slows down iteration — this guide keeps the entire deploy, validate, and redeploy cycle inside VS Code using the Azure extensions.
 
 This guide shows you how to deploy Bicep templates **entirely inside Visual Studio Code**, using the Azure extensions. No Azure Portal. No CLI. No switching tools. Just VS Code — clean, simple, and architect-friendly.

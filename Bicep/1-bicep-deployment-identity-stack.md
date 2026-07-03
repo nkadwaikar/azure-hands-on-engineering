@@ -1,7 +1,6 @@
 # Identity‑First Bicep Deployment — Identity Stack (Capstone)
 
 > **Identity-First Track — Lab 7 of 11.** Continues from [06-azuremonitor-activity-logs.md](../Identity-First/06-azuremonitor-activity-logs.md). Returns to [09-governance-flow.md](../Identity-First/09-governance-flow.md) after completion.
-
 > **Why this matters:** Deploying identity, Key Vault, RBAC, and locks as separate portal steps is error-prone and impossible to review or version — this lab assembles the same stack as modular Bicep so the entire foundation can be code-reviewed, diffed, and deployed in a single command.
 
 Last validated on: 2026-06-25
