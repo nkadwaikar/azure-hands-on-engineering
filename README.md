@@ -1,7 +1,7 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
-[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#-labs--engineering-tracks)
+[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#%EF%B8%8F-how-to-follow-these-tracks)
 [![Zero Trust](https://img.shields.io/badge/Zero%20Trust-0052CC?style=flat-square&logo=security&logoColor=white)](Identity-First/README.md)
 [![IaC Bicep](https://img.shields.io/badge/IaC-Bicep-0078D4?style=flat-square&logo=azurepipelines&logoColor=white)](Bicep/README.md)
 [![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
@@ -122,7 +122,7 @@ What I'm building next reflects where enterprise Azure is heading AI augmented o
 | --- | --- |
 | Defender for Cloud CSPM | Extend security posture management and recommendations across a hub-and-spoke topology |
 | Copilot for Security | Integrate Microsoft Security Copilot into the incident response and identity investigation workflow |
-| Copilot Studio | AI agent backed by a SharePoint knowledge source, secured with Entra ID — applied AI on a Zero Trust foundation |
+| Copilot Studio | AI agent backed by a SharePoint knowledge source, secured with Entra ID applied AI on a Zero Trust foundation |
 
 ---
 
