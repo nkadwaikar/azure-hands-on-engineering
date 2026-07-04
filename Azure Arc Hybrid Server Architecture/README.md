@@ -92,8 +92,8 @@ Azure Arc Hybrid Server Architecture/
 
 ## Related
 
-- [1 — Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — architecture reference and production design guide
-- [2 — On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — disposable Hyper-V environment to validate onboarding before production
+- [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — architecture reference and production design guide
+- [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — disposable Hyper-V environment to validate onboarding before production
 - [Microsoft Defender for Cloud — JIT Access](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) — complements the Defender for Servers integration covered in Section 6
 - [Identity-First Track](../Identity-First/README.md) — RBAC and managed identity patterns referenced in the Arc governance model
 - [Back to Azure Hands-On Engineering](../README.md)
