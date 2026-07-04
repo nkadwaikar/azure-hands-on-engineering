@@ -91,11 +91,17 @@ flowchart TD
 
 ## 🧠 Why This Architecture Matters
 
-- 🔐 Identity-first access eliminates credential sprawl
-- 🚫 Zero standing access (Bastion + JIT) removes inbound exposure
-- 🛡️ Governance-as-code enforces compliance automatically
-- 🔑 Managed Identity + Key Vault ensures secretless authentication
-- 📈 VMSS + Azure DevOps enables repeatable, scalable deployments
+- 🔐 **Identity-first access** eliminates credential sprawl — Managed Identity + Key Vault enforces secretless authentication at every layer
+- 🚫 **Zero standing access** (Bastion + JIT) removes all inbound exposure and eliminates persistent privileged sessions
+- � **Break-Glass accounts** (FIDO2 + Certificate-Based Auth) guarantee emergency access without bypassing Zero Trust controls
+- 🛡️ **Governance-as-code** (Azure Policy + Auto-Remediation) enforces compliance continuously across cloud and hybrid resources — no manual audits
+- 🌍 **Secure public ingress** (Front Door + WAF) protects internet-facing workloads at the edge before traffic reaches the application layer
+- 🏢 **AD DS in Azure** provides a production-grade domain fabric, built on Availability Sets with no public IPs and DSRM secrets sealed in Key Vault
+- 🌐 **Hybrid reach via Azure Arc** extends unified policy, monitoring, and Defender for Servers to on-premises and multi-cloud workloads
+- 🔭 **Microsoft Sentinel (SIEM + SOAR)** centralises threat detection and automated response across the full identity, compute, and governance surface
+- 📈 **VMSS + Azure DevOps + Bicep** delivers repeatable, scalable deployments with multi-stage pipelines and deployment slot promotion
+- 💼 **Modern Workplace governance** (Exchange Online, Teams, SharePoint, Purview) extends Zero Trust and compliance into M365 workloads
+- ♻️ **Built-in resilience** (Azure Backup, Site Recovery, VMSS failover) ensures business continuity without sacrificing security posture
 
 ---
 
@@ -120,7 +126,7 @@ flowchart TD
 
 ---
 
-## � Next
+## 🚀 Next
 
 What I'm building next reflects where enterprise Azure is heading AI augmented operations, deeper security posture management, and Copilot-native engineering all on a Zero Trust foundation.
 
