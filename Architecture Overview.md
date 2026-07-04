@@ -184,6 +184,40 @@ flowchart LR
     IGA --> JML[Joiner · Mover · Leaver\nAccess Reviews · Entitlement]
 ```
 
+## Deploying a Domain Controller in Azure
+
+```mermaid
+flowchart LR
+    subgraph Network["VNet: vnet-addc"]
+        Subnet["snet-addc\n10.0.0.0/24"]
+        NSG["NSG: nsg-addc\nAD DS ports — VNet-scoped"]
+        Bastion["Azure Bastion\nbas-addc\n(No public IP on DCs)"]
+        NSG --> Subnet
+    end
+
+    subgraph AvailSet["Availability Set / Zones"]
+        DC1["dc01\nWindows Server 2022\nPDC Emulator"]
+        DC2["dc02\nWindows Server 2022\nAdditional DC"]
+    end
+
+    Subnet --> DC1 & DC2
+    Bastion -->|"Private RDP"| DC1 & DC2
+
+    DC1 -->|"AD DS Promotion\nInstall-ADDSForest"| Forest["corp.contoso.com\nNew AD DS Forest"]
+    DC2 -->|"AD DS Promotion\nInstall-ADDSDomainController"| Forest
+    DC1 <-->|"AD DS Replication\n(automatic via KCC)"| DC2
+
+    Forest --> DNS["Integrated DNS\n+ Azure DNS Forwarder\n168.63.129.16"]
+    Forest --> FSMO["FSMO Roles\nPDC · RID · Infra · Schema · DN"]
+
+    DC1 & DC2 --> DataDisk["Dedicated Data Disk\nNTDS · SYSVOL\nHost Caching: None"]
+    DC1 & DC2 --> KV["Azure Key Vault\nkv-addc\nDSRM Passwords"]
+
+    VNetDNS["VNet DNS Servers\nCustom → dc01 · dc02 IPs"] --> DC1 & DC2
+```
+
+**Design note:** Domain controllers have no public IP — all administrative access is via Azure Bastion. Static private IPs are assigned before promotion to prevent DNS and replication failures after VM restarts. The VNet's DNS server setting is updated to the DC IPs after promotion so all workloads in the VNet automatically use the domain for name resolution. DSRM passwords are stored in Key Vault rather than local notes.
+
 ---
 
 ## Lab Tracks
@@ -204,6 +238,7 @@ flowchart LR
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
 | [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Defender for Servers, Policy/Guest Config compliance, Update Manager, Automation runbooks, lifecycle management, Hyper-V lab for Arc validation |
+| [Deploying a Domain Controller in Azure](./Deploying%20a%20Domain%20Controller%20in%20Azure/1-DeployingDomain%20Controller%20in%20Azure.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG with AD DS port rules, Availability Set, static private IPs, dedicated data disk (host caching: None), forest creation, second DC promotion, automatic replication, FSMO role distribution, Azure DNS forwarder, Key Vault for DSRM secrets |
 | [Modern Workplace (Microsoft 365)](./Microsoft%20365/README.md) | Exchange Online advanced mail flow, SharePoint information architecture, Teams lifecycle governance, Purview compliance automation, Zero Trust Conditional Access, Identity Governance lifecycle workflows |
 
 [← Back to Azure Hands-On Engineering](./README.md)

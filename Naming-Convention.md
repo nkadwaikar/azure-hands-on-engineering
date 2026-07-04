@@ -53,6 +53,7 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `imgver` | Gallery image version (semver `major.minor.patch`) |
 | `arcm` | Azure Arc-enabled Server (Connected Machine) |
 | `aa` | Automation Account |
+| `avset` | Availability Set |
 | `mg` | Management Group |
 | `dcr` | Data Collection Rule |
 | `pls` | Private Link Scope (Azure Monitor / Arc) |
@@ -382,6 +383,41 @@ Custom roles for the Arc landing zone follow a descriptive `{Scope}-{PermissionL
 | `Security-Operator` | Defender for Cloud, alerts, recommendations |
 
 Assign at resource group or subscription scope. Avoid per-resource RBAC sprawl. In the lab, scope each role assignment to `rg-arc-lab` only — do not add the lab RG as an extra scope on existing production role assignments.
+
+---
+
+### Domain Controller (Active Directory DS)
+
+Resources deployed for the Azure-hosted domain controller lab follow the standard pattern. Domain controller VMs use short, role-indicating hostnames (`dc01`, `dc02`) rather than the full `{type}-{project}-{region}-{env}` pattern — this mirrors on-premises DC naming conventions and prevents overly long computer names that can cause AD registration issues.
+
+```text
+rg-addc-{region}-{env}              Resource group scoping all DC lab resources
+vnet-addc-{region}-{env}            Virtual network for the DC workload
+snet-addc                           Subnet for domain controller VMs (no hyphens after the subnet type — role is self-describing)
+nsg-addc-{region}-{env}             NSG attached to the DC subnet
+bas-addc-{region}-{env}             Azure Bastion host (admin access — no public IPs on DCs)
+pip-bas-addc-{region}-{env}         Public IP for the Bastion host
+avset-addc-{region}-{env}           Availability Set distributing the two DCs across fault/update domains
+dc01 / dc02                         Domain controller VM hostnames (short — matches AD computer account name)
+kv-addc-{region}-{env}              Key Vault storing DSRM passwords and local admin credentials
+```
+
+Examples:
+
+```text
+rg-addc-eus-lab                     DC lab resource group (East US)
+vnet-addc-eus-lab                   Lab VNet (10.0.0.0/16)
+snet-addc                           DC subnet (/24)
+nsg-addc-eus-lab                    NSG — AD DS port rules (VNet-scoped inbound only)
+bas-addc-eus-lab                    Bastion host for RDP access to DCs
+pip-bas-addc-eus-lab                Bastion public IP
+avset-addc-eus-lab                  Availability Set (2 fault domains, 5 update domains)
+dc01                                First domain controller VM (Primary DC / PDC Emulator)
+dc02                                Second domain controller VM (Additional DC)
+kv-addc-eus-lab                     Key Vault — DSRM passwords for dc01 and dc02
+```
+
+> **Note:** The data disk on each DC VM (for NTDS/SYSVOL) is not separately named — it is labelled `NTDS` at the OS level (volume label) and identified in the portal as `dc01-data-disk-01` / `dc02-data-disk-01` (portal auto-naming). Host caching must be set to **None**.
 
 ---
 

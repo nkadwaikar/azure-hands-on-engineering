@@ -35,6 +35,7 @@ flowchart TD
         MI["Managed Identity"]
         KV["Key Vault"]
         BG["Break-Glass\nFIDO2 · CBA"]
+        ADDS["AD DS\nDomain Controllers\ndc01 · dc02"]
     end
     subgraph Governance["🛡️ Governance"]
         Policy["Azure Policy\nGuest Config"]
@@ -69,16 +70,20 @@ flowchart TD
     Policy --> Remediation
     Remediation --> VM & App
     Policy --> Arc
+    Policy --> ADDS
     Bastion --> VM
+    Bastion --> ADDS
     JIT --> VM
     JIT --> Arc
     AFD --> App
     DevOps --> App
     Monitor --> VM & App
     Monitor --> Arc
+    Monitor --> ADDS
     Monitor --> Sentinel
     Backup --> VM
     Arc --> VM & Monitor
+    ADDS --> KV
     EntraID --> ExO & Purview
 ```
 
@@ -109,6 +114,7 @@ flowchart TD
 | Assessing App Service & DevOps pipelines | [App Service + Managed Identity](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | Deployment slots, multi-stage pipelines, secretless auth |
 | Reviewing business continuity & resilience | [Recovery Services Track](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 | Exploring hybrid & Arc-enabled servers | [Azure Arc Track](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Arc-enabled servers, Defender for Servers, Hyper-V lab |
+| Standing up AD DS in Azure | [DC in Azure Track](Deploying%20a%20Domain%20Controller%20in%20Azure/README.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG AD DS rules, Availability Set, forest creation, replication, FSMO roles, Key Vault for DSRM secrets |
 | Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Identity Lifecycle |
 | Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
 
