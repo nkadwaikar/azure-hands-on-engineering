@@ -20,7 +20,7 @@ Portal experience note: Validated against Azure Portal as of July 2026; agent in
 - [Automation & Lifecycle Management](#7-automation--lifecycle-management)
 - [Check List](#check-list)
 
-> **Lab companion:** [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — build a disposable Hyper-V environment to validate the onboarding flow before rolling out to production.
+> **Companion guide:** [On-Prem Hyper-V Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — step-by-step Hyper-V environment setup to validate the onboarding flow.
 
 ---
 
@@ -225,7 +225,7 @@ Repeat the Private Link Scope + DNS setup per site/region as documented in your 
 
 ### 3.5 Onboarding a Single Server (Azure Portal)
 
-> **Practice first:** Use the [On-Prem Hyper-V Lab Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) to validate this flow on a disposable VM before rolling out to production servers.
+> **See also:** [On-Prem Hyper-V Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — covers the full onboarding flow in a Hyper-V environment.
 
 1. In the Azure Portal, search **Azure Arc** → **Machines** → **+ Add/Create**.
 2. Choose **Add a single server** → **Generate script**.
@@ -396,7 +396,7 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.6 File Integrity Monitoring (FIM)
 
-> **Lab note:** The [Hyper-V Lab Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) covers testing FIM on a disposable VM — useful if you want to simulate file-share workloads before enabling on production.
+> **See also:** The [On-Prem Hyper-V Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) covers validating FIM with file-share workloads.
 
 - Enable **FIM** (available in Defender for Servers Plan 2) on critical servers.
 - Monitor high-value paths: system binaries (`/bin`, `/sbin`, `C:\Windows\System32`), configuration files (`/etc`, web server configs), and startup locations.
@@ -427,7 +427,7 @@ Use **Azure Automation** (or Logic Apps) for:
 
 ### 7.2 Onboarding Multiple Servers at Scale (Azure Portal)
 
-> **Practice first:** Validate the single-server flow in the [Hyper-V Lab](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) before running a bulk rollout — the lab also covers the Group Policy bulk-onboarding method if you need to test AD-joined machines.
+> **See also:** The [On-Prem Hyper-V Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) covers the Group Policy bulk-onboarding method for AD-joined machines.
 
 1. In the Azure Portal, go to **Azure Arc → Machines → + Add/Create → Add multiple servers**.
 2. Choose a deployment method based on your existing tooling:
@@ -507,6 +507,6 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 
 ## Related
 
-- [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — disposable Hyper-V lab to validate onboarding, policy, Defender, and FIM before production rollout
+- [On-Prem Hyper-V Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — Hyper-V environment setup to validate onboarding, policy, Defender, and FIM
 - [Azure Arc Track Overview](README.md)
 - [Back to Azure Hands-On Engineering](../README.md)
