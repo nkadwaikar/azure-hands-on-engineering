@@ -104,7 +104,7 @@ The VMs must be able to reach the required outbound HTTPS endpoints (see [Archit
 
 Follow the single-server onboarding flow from the architecture doc, targeting your resource group:
 
-1. Portal → **Azure Arc → Machines → + Add/Create → Add a single server → Generate script**.
+1. Portal → **Azure Arc → Machines → + Add/Create → Any environment → Generate script**.
 2. Subscription = your subscription; Resource group = `rg-arc-servers-prod`; Region = your choice.
 3. Connectivity method: **Public endpoint**, or **Proxy server** if you built the proxy path in Step 2.
 4. Tags: apply `Environment: Prod` plus any additional tags (e.g. `Criticality: Tier1`).
