@@ -87,6 +87,15 @@ The VMs must be able to reach the required outbound HTTPS endpoints (see [Archit
    - `Microsoft.HybridCompute`
    - `Microsoft.GuestConfiguration`
    - `Microsoft.HybridConnectivity`
+
+   To register via the portal:
+
+   1. Go to **Subscriptions** → select your subscription → **Resource providers** (under *Settings*).
+   2. Search for each namespace, select it, then click **Register**:
+      - `Microsoft.HybridCompute`
+      - `Microsoft.GuestConfiguration`
+      - `Microsoft.HybridConnectivity`
+   3. Refresh the list — wait until each shows **Status: Registered** before proceeding (can take a few minutes).
 4. **Tag:** Use `Environment: Prod` so resources are filterable and correctly scoped by policy initiatives.
 
 ---
