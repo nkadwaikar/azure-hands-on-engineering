@@ -55,7 +55,6 @@ Create an NSG and attach it to the DC subnet. Do **not** open RDP (3389) from th
 1. Search for and select **Network security groups** → **+ Create**.
 2. Set subscription, resource group, name (e.g., `nsg-addc`), and region.
 3. After creation, go to **Inbound security rules** and add rules to allow AD DS traffic **from the VNet address space only** (source: VNet or your specific subnet range, not "Any"):
-
 | Port | Protocol | Purpose |
 | --- | --- | --- |
 | 53 | TCP/UDP | DNS |
@@ -141,6 +140,7 @@ Do **not** install the AD database, logs, or SYSVOL on the OS disk. Use a separa
 2. Size appropriately (e.g., 32–64 GB is generous for a small/medium domain).
 3. Set **Host caching: None** — this is the critical setting; the default "Read/Write" caching is not safe for the NTDS database.
 4. Save, then connect to the VM via Bastion and initialize/format the new disk. In an elevated PowerShell session:
+
    ```powershell
    # List disks to identify the new uninitialized disk (RAW, no partition)
    Get-Disk
@@ -150,6 +150,7 @@ Do **not** install the AD database, logs, or SYSVOL on the OS disk. Use a separa
    New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter F
    Format-Volume -DriveLetter F -FileSystem NTFS -NewFileSystemLabel "NTDS" -Confirm:$false
    ```
+
    You'll point AD DS at this volume (`F:`) during promotion in Step 6.
 
 ### 4.2 Configure a Static Private IP Address (both VMs)
@@ -175,6 +176,7 @@ Azure assigns dynamic private IPs by default. If a DC's IP changes after a reboo
 
 1. On the first VM (e.g., `dc01`), in **Server Manager**, click the notification flag → **Promote this server to a domain controller**.
    - Alternatively, in an elevated PowerShell session:
+
      ```powershell
      Install-ADDSForest `
        -DomainName "corp.lab.com" `  # replace with your preferred domain name
@@ -184,6 +186,7 @@ Azure assigns dynamic private IPs by default. If a DC's IP changes after a reboo
        -LogPath "F:\NTDS" `
        -SysvolPath "F:\SYSVOL"
      ```
+
 2. In the wizard, choose **Add a new forest** and specify a routable, unique domain name (avoid single-label names like `corp`; avoid `.local` if you may ever federate with public DNS — use something like `corp.contoso.com`).
 3. Set the **Directory Services Restore Mode (DSRM)** password — store this in Azure Key Vault (see Step 8) rather than only in a password manager or note.
 4. On the **Additional Options** and **Paths** screens, point the **Database folder**, **Log files folder**, and **SYSVOL folder** at the dedicated data disk from Step 4.1 (e.g., `F:\NTDS`, `F:\SYSVOL`), not the default `C:\Windows\NTDS`.
@@ -217,14 +220,18 @@ After `dc01` is promoted and verified, update the **Virtual Network's** DNS serv
 1. On the second VM (e.g., `dc02`), first set its **DNS client settings**: primary DNS = `dc01`'s static IP, secondary = its own static IP (temporarily, until it's promoted).
 2. Confirm `dc02` can resolve the domain: `nslookup corp.contoso.com` should return `dc01`'s IP.
 3. In **Server Manager** (AD DS role already installed in Step 5) → **Promote this server to a domain controller**, or via PowerShell:
+
    ```powershell
+
    Install-ADDSDomainController `
      -DomainName "corp.contoso.com" `
      -InstallDns:$true `
      -DatabasePath "F:\NTDS" `
      -LogPath "F:\NTDS" `
      -SysvolPath "F:\SYSVOL"
+
    ```
+
 4. Choose **Add a domain controller to an existing domain**, authenticate with domain admin credentials, and set the DSRM password for this DC (store in Key Vault — see Step 8).
 5. Point database/log/SYSVOL paths at `dc02`'s own data disk (Step 4.1) — each DC has its own local copy, not a shared disk.
 6. Complete the wizard; the VM reboots.
@@ -236,10 +243,12 @@ After `dc01` is promoted and verified, update the **Virtual Network's** DNS serv
 AD DS replication between the two DCs is **automatic** once both are domain controllers in the same domain — no additional Azure service is required. (Azure AD Connect and Azure Site Recovery are unrelated to this: Azure AD Connect syncs on-prem AD to Microsoft Entra ID/cloud identity, and Azure Site Recovery is VM-level disaster recovery replication — neither performs AD DS directory replication between two domain controllers.)
 
 1. On either DC, open an elevated PowerShell session and run:
+
    ```powershell
    repadmin /replsummary
    dcdiag /v
    ```
+
 2. Confirm no errors are reported and both DCs appear as replication partners.
 3. In **Active Directory Sites and Services**, confirm both DCs appear under the default site and a connection object exists between them (created automatically by the KCC).
 
@@ -248,14 +257,18 @@ AD DS replication between the two DCs is **automatic** once both are domain cont
 When the forest is created, all five FSMO roles land on the first DC (`dc01`). For resilience, transfer two of the domain-level roles to `dc02`.
 
 1. Check current role holders:
+
    ```powershell
    Get-ADDomain | Select-Object PDCEmulator, RIDMaster, InfrastructureMaster
    Get-ADForest | Select-Object SchemaMaster, DomainNamingMaster
    ```
+
 2. Transfer the **RID Master** and **Infrastructure Master** to `dc02` (keeping PDC Emulator on `dc01` is conventional — it handles time sync and password changes):
+
    ```powershell
    Move-ADDirectoryServerOperationMasterRole -Identity "dc02" -OperationMasterRole RIDMaster, InfrastructureMaster
    ```
+
 3. Re-run Step 1 to confirm the transfer.
 4. **Do not** place the Infrastructure Master on a DC that also hosts the Global Catalog if your domain has multiple domains — in a single-domain forest this rule does not apply.
 

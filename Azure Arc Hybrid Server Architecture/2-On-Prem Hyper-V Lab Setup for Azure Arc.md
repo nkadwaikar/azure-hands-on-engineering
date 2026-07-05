@@ -113,32 +113,40 @@ Follow the single-server onboarding flow from the architecture doc, targeting yo
 7. **Select deployment method:** Select Basic Script.
 8. **Download** the script.
 9. Get the script onto each VM — easiest options:
+
    - Windows VM: RDP in and copy-paste, or re-download the script directly inside the VM.
    - Validate `$ServicePrincipalId` and `$ServicePrincipalClientSecret` (create a new secret and update it in your script; otherwise it will fail).
+
 10. Run it:
-   - **Windows:** right-click → *Run with PowerShell* (as Administrator)
-   if you get timeout error then
-   Fix: Disable IPv6 on the VM NIC
-This is the fastest and cleanest fix.
 
-Run this inside the VM:
+    - **Windows:** right-click → *Run with PowerShell* (as Administrator)
 
-powershell
-Disable-NetAdapterBinding -Name "Ethernet" -ComponentID ms_tcpip6
-Then reboot:
+    If you get a timeout error, disable IPv6 on the VM NIC (the fastest and cleanest fix):
 
-powershell
-Restart-Computer
-After reboot, test again:
+    ```powershell
+    Disable-NetAdapterBinding -Name "Ethernet" -ComponentID ms_tcpip6
+    ```
 
-powershell
-Test-NetConnection www.microsoft.com -Port 443
-You should now see IPv4 addresses like:
+    Then reboot:
 
-Code
-RemoteAddress : 23.45.xxx.xxx
-TcpTestSucceeded : True
-11.  Run Onboaring Script Again
+    ```powershell
+    Restart-Computer
+    ```
+
+    After reboot, test again:
+
+    ```powershell
+    Test-NetConnection www.microsoft.com -Port 443
+    ```
+
+    You should now see IPv4 addresses like:
+
+    ```text
+    RemoteAddress : 23.45.xxx.xxx
+    TcpTestSucceeded : True
+    ```
+
+11. Run Onboarding Script Again
 
 ---
 
