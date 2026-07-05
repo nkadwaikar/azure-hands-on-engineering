@@ -107,14 +107,38 @@ Follow the single-server onboarding flow from the architecture doc, targeting yo
 1. Portal → **Azure Arc → Machines → + Add/Create → Any environment → Generate script**.
 2. Subscription = your subscription; Resource group = `rg-arc-servers-prod`; Region = your choice.
 3. Connectivity method: **Public endpoint**, or **Proxy server** if you built the proxy path in Step 2.
-4. Tags: apply `Environment: Prod` plus any additional tags (e.g. `Criticality: Tier1`).
-5. **Download** the script.
-6. Get the script onto each VM — easiest options:
+4. **Arc gateway resource:** Create new.
+5. **Authentication:** Authenticate machine automatically. This creates a new Azure Arc service principal for onboarding the machine.
+6. **Tags:** Apply `Environment: Prod` plus any additional tags (e.g. `Criticality: Tier1`).
+7. **Select deployment method:** Select Basic Script.
+8. **Download** the script.
+9. Get the script onto each VM — easiest options:
    - Windows VM: RDP in and copy-paste, or re-download the script directly inside the VM.
-   - Linux VM: `scp` it in, or `curl`/`wget` it directly if you host it somewhere reachable.
-7. Run it:
+   - Validate `$ServicePrincipalId` and `$ServicePrincipalClientSecret` (create a new secret and update it in your script; otherwise it will fail).
+10. Run it:
    - **Windows:** right-click → *Run with PowerShell* (as Administrator)
-   - **Linux:** `sudo bash <script-name>.sh`
+   if you get timeout error then
+   Fix: Disable IPv6 on the VM NIC
+This is the fastest and cleanest fix.
+
+Run this inside the VM:
+
+powershell
+Disable-NetAdapterBinding -Name "Ethernet" -ComponentID ms_tcpip6
+Then reboot:
+
+powershell
+Restart-Computer
+After reboot, test again:
+
+powershell
+Test-NetConnection www.microsoft.com -Port 443
+You should now see IPv4 addresses like:
+
+Code
+RemoteAddress : 23.45.xxx.xxx
+TcpTestSucceeded : True
+11.  Run Onboaring Script Again
 
 ---
 
@@ -166,7 +190,7 @@ The isolation principle throughout: **scope, not separate copies** — every ass
 
 Use the lab to validate the parts of the architecture that are risky to get wrong in production:
 
-| What to test | Notes |
+ | What to test | Notes |
 | --- | --- |
 | Tagging and policy compliance | Tags set at onboarding drive policy scope and cost attribution |
 | AMA data flow into Log Analytics | Confirms the monitoring pipeline is wired correctly |
