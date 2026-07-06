@@ -26,7 +26,6 @@ Built for cloud engineers and identity architects evaluating production-aligned 
 | **Identity & Security Engineer** | Zero Trust, Managed Identity, Key Vault, RBAC, Conditional Access, Break-Glass accounts, JIT |
 | **Governance / Compliance Engineer** | Azure Policy + auto-remediation, Resource Locks, Purview DLP, Compliance Manager, Activity Logs |
 | **Modern Workplace Engineer** | Exchange Online, Teams lifecycle, SharePoint IA, Purview, Entra ID Governance lifecycle workflows |
-| **Hiring Manager / Recruiter** | Use the [track navigator](#%EF%B8%8F-how-to-follow-these-tracks) below to jump directly to the area you're evaluating |
 
 ---
 
