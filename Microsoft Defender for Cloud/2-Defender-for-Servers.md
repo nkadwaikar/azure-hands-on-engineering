@@ -115,6 +115,7 @@ Misconfigured services, outdated software with known CVEs, and unauthorized file
 ### 2.3 Track Recommendation Changes
 
 After remediating a recommendation:
+
 1. Return to **Secure Score** — note the current score.
 2. Score updates are not real-time; expect 30–60 minutes for the score to reflect remediated items.
 3. Remediated recommendations move to the **Completed** tab in **Recommendations** — check there to confirm your fix registered.
