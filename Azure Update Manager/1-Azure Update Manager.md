@@ -122,8 +122,8 @@ A **maintenance configuration** (maintenance window) defines **when** updates ar
 1. In Azure Update Manager, go to **Maintenance configurations** (left nav) → **+ Create**.
 2. Fill in:
 
-   |Field  |Example Value|
-   | ---   |---           |
+   | Field | Example Value |
+   | --- | --- |
    | Subscription | Your subscription |
    | Resource group | `rg-compute-prod` |
    | Configuration name | `mc-windows-prod-weekly` |
