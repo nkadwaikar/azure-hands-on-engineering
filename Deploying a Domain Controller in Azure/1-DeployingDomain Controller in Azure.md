@@ -161,6 +161,7 @@ Create an NSG and attach it to the DC subnet. Do **not** open RDP (3389) from th
 1. Search for and select **Network security groups** → **+ Create**.
 2. Set subscription, resource group, name (e.g., `nsg-addc`), and region.
 3. After creation, go to **Inbound security rules** and add rules to allow AD DS traffic **from the VNet address space only** (source: VNet or your specific subnet range, not "Any"):
+
 | Port | Protocol | Purpose |
 | --- | --- | --- |
 | 53 | TCP/UDP | DNS |
@@ -175,7 +176,8 @@ Create an NSG and attach it to the DC subnet. Do **not** open RDP (3389) from th
 | 49152–65535 | TCP | Dynamic RPC range (used by AD replication) |
 
 4. Associate the NSG with the DC subnet: **Virtual network → Subnets → [subnet] → Network security group**.
-5. Note: traffic *within* the same VNet is allowed by the default `AllowVnetInBound` rule, so these explicit rules mainly matter if the DCs sit in different subnets/VNets (peered) or if you extend to an on-premises network via VPN/ExpressRoute — see 2.4.
+
+Note: traffic *within* the same VNet is allowed by the default `AllowVnetInBound` rule, so these explicit rules mainly matter if the DCs sit in different subnets/VNets (peered) or if you extend to an on-premises network via VPN/ExpressRoute — see 2.4.
 
 ### 2.4 (Optional) Extend to an On-Premises Network
 
