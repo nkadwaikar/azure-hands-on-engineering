@@ -1,5 +1,7 @@
 # Microsoft Entra Backup & Recovery Track
 
+Last validated on: July 2026
+
 This track covers Entra directory backup, difference reports, and object-level recovery using the Microsoft Entra admin center — portal-only.
 
 ## Track Structure

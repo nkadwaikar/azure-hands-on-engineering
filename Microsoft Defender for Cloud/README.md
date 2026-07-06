@@ -1,5 +1,7 @@
 # Microsoft Defender for Cloud Track
 
+Last validated on: July 2026
+
 This track covers workload protection and secure access controls using Microsoft Defender for Cloud — enabling Just-In-Time VM access, managing security recommendations, and integrating with Azure Bastion for zero-standing-access VM connectivity.
 
 ## Track Structure

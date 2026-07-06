@@ -1,5 +1,7 @@
 # Identity-First Track
 
+Last validated on: July 2026
+
 A portal-first, then Bicep-driven track that builds a secure, secretless, RBAC-governed Azure foundation from scratch — covering Entra ID fundamentals, Managed Identity, Key Vault integration, Resource Locks, Azure Policy, and observability. Labs 7, 8, and 11 continue in the `Bicep/` folder as the IaC capstone.
 
 ## Track Structure

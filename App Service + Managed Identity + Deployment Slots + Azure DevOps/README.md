@@ -1,5 +1,7 @@
 # App Service + Managed Identity + Deployment Slots + Azure DevOps Track
 
+Last validated on: July 2026
+
 A portal-first lab covering Azure App Service deployment with System-Assigned Managed Identity, deployment slots for blue-green deployments, Key Vault secret integration, and a full Azure DevOps CI/CD pipeline with manual approval gates.
 
 ## Track Structure

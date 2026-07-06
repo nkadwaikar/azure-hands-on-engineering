@@ -1,8 +1,115 @@
-# Steps for Deploying a Domain Controller in Azure
+# Deploying a Domain Controller in Azure
+
+Last validated on: July 2026 | Azure Portal · PowerShell
+
+> **Note:** This lab deploys a two-DC Active Directory Domain Services forest in Azure. All resources are self-contained in a single subscription and resource group. DSRM passwords and local admin credentials are stored in Azure Key Vault — no secrets are stored locally or in documentation.
+
+> **Why this matters:** On-premises workloads migrating to Azure, hybrid identity scenarios, and applications that require Kerberos or NTLM authentication all depend on a healthy, highly available domain controller infrastructure. Deploying DCs in Azure — with no public IPs, Bastion-only access, static private IPs, and Key Vault-stored secrets — demonstrates the secure-by-default posture required in enterprise environments. This lab bridges traditional Active Directory engineering with Azure's identity and governance model.
+
+## Module / Track Structure
+
+```text
+Deploying a Domain Controller in Azure/
+├── 1-DeployingDomain Controller in Azure.md   ← this file
+└── README.md
+```
+
+**Track context:** This lab complements the [Azure Bastion](../Azure%20Bastion/README.md) and [Identity-First](../Identity-First/README.md) tracks. Bastion provides secure access to the DCs; the Identity-First track covers cloud-only Managed Identity patterns that exist alongside (not instead of) AD DS.
+
+## Quick Navigation
+
+- [Scenario](#scenario)
+- [Learning Objectives](#learning-objectives)
+- [Prerequisites](#prerequisites)
+- [1 — Create a Resource Group](#1-create-a-resource-group)
+- [2 — Set Up Networking](#2-set-up-networking)
+- [3 — Availability Set / Zones](#3-create-an-availability-set-or-availability-zones)
+- [4 — Deploy Virtual Machines](#4-deploy-virtual-machines)
+- [5 — Install AD DS Role](#5-install-active-directory-domain-services-ad-ds--both-vms)
+- [6 — Promote First DC](#6-promote-the-first-vm-to-a-domain-controller)
+- [7 — Promote Second DC](#7-promote-the-second-vm-as-an-additional-domain-controller)
+- [8 — Secure the Environment](#8-secure-the-environment)
+- [9 — Test and Monitor](#9-test-and-monitor)
+- [10 — Troubleshooting](#10-errors-and-troubleshooting)
+
+---
+
+## Scenario
+
+Your organization is migrating a line-of-business application to Azure IaaS. The application requires Kerberos authentication and Group Policy support, so a cloud-hosted AD DS forest is needed. You are tasked with deploying two highly available domain controllers with no public IP exposure, Bastion-only admin access, static private IPs, dedicated data disks with write-back caching disabled, and DSRM secrets stored in Azure Key Vault.
+
+---
+
+## Learning Objectives
+
+By the end of this lab you will be able to:
+
+- Design an Azure VNet topology for AD DS with a hardened NSG (all AD DS ports scoped to VNet, no public RDP)
+- Deploy Azure Bastion as the sole administrative access path to domain controllers
+- Configure static private IP addresses before DC promotion to prevent DNS and replication failures
+- Add and configure a dedicated managed disk with host caching disabled for the NTDS database
+- Promote a Windows Server 2022 VM to a new AD DS forest using `Install-ADDSForest`
+- Promote a second VM as an additional DC using `Install-ADDSDomainController`
+- Verify replication with `repadmin /replsummary` and `dcdiag`
+- Distribute FSMO roles between two domain controllers
+- Configure the VNet's custom DNS setting to use the DC IPs
+- Store DSRM passwords in Azure Key Vault
+
+---
+
+## Prerequisites
+
+| Requirement | Detail |
+|---|---|
+| Azure subscription | Contributor rights on the target resource group |
+| Region | Any region supporting Availability Zones (recommended) |
+| Compute quota | 2× `Standard_D2s_v5` (or equivalent general-purpose SKU) |
+| OS image | Windows Server 2022 Datacenter (Azure Marketplace) |
+| Tools | Azure Portal; elevated PowerShell (on the DC VMs via Bastion) |
+| Key Vault | Pre-existing or created in Step 8 — used to store DSRM passwords |
+| Estimated time | 90–120 minutes |
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+    subgraph Network["VNet: vnet-addc"]
+        Subnet["snet-addc\n10.0.0.0/24"]
+        NSG["NSG: nsg-addc\nAD DS ports — VNet-scoped"]
+        Bastion["Azure Bastion\nbas-addc\n(No public IP on DCs)"]
+        NSG --> Subnet
+    end
+
+    subgraph AvailSet["Availability Set / Zones"]
+        DC1["dc01\nWindows Server 2022\nPDC Emulator"]
+        DC2["dc02\nWindows Server 2022\nAdditional DC"]
+    end
+
+    Subnet --> DC1 & DC2
+    Bastion -->|"Private RDP"| DC1 & DC2
+
+    DC1 -->|"AD DS Promotion\nInstall-ADDSForest"| Forest["corp.contoso.com\nNew AD DS Forest"]
+    DC2 -->|"AD DS Promotion\nInstall-ADDSDomainController"| Forest
+    DC1 <-->|"AD DS Replication\n(automatic via KCC)"| DC2
+
+    Forest --> DNS["Integrated DNS\n+ Azure DNS Forwarder\n168.63.129.16"]
+    Forest --> FSMO["FSMO Roles\nPDC · RID · Infra · Schema · DN"]
+
+    DC1 & DC2 --> DataDisk["Dedicated Data Disk\nNTDS · SYSVOL\nHost Caching: None"]
+    DC1 & DC2 --> KV["Azure Key Vault\nkv-addc\nDSRM Passwords"]
+
+    VNetDNS["VNet DNS Servers\nCustom → dc01 · dc02 IPs"] --> DC1 & DC2
+```
+
+**Design note:** Domain controllers have no public IP — all administrative access is via Azure Bastion. Static private IPs are assigned before promotion to prevent DNS and replication failures after VM restarts. The VNet's DNS server setting is updated to the DC IPs after promotion so all workloads in the VNet automatically use the domain for name resolution. DSRM passwords are stored in Key Vault rather than local notes.
+
+---
 
 ## Introduction
 
-This document provides a detailed guide on how to deploy a domain controller in Azure, using the Azure Portal.
+This lab deploys a two-domain-controller Active Directory Domain Services forest in Azure using the Azure Portal and PowerShell. All steps follow the secure-by-default pattern: no public IPs, Bastion-only access, static private IPs, host-caching disabled data disks, and secrets stored in Key Vault.
 
 ---
 
@@ -315,3 +422,17 @@ When the forest is created, all five FSMO roles land on the first DC (`dc01`). F
 | NTDS database corruption after an unexpected reboot | Data disk host caching set to Read/Write | Recreate the disk with **Host caching: None** (Step 4.1) — this cannot be changed safely on a disk already in use without a maintenance window. |
 | Kerberos authentication failures with "clock skew" errors | Time sync misconfiguration | Verify PDC emulator time source with `w32tm /query /status` (Step 9, item 4). |
 | Can't RDP/Bastion into a DC | Public IP was assigned, or NSG blocks Bastion subnet | Confirm no public IP exists on the DC NIC (Step 4) and that Bastion's subnet (`AzureBastionSubnet`) has its required rules intact (created automatically — don't manually edit it). |
+
+---
+
+## What I Learned
+
+- **Host caching is a silent killer.** The default "Read/Write" cache setting on a data disk looks harmless but can corrupt the NTDS database after an unexpected VM restart. Setting **Host caching: None** before ever writing to that disk is a non-negotiable step — it cannot be safely changed after the fact without a maintenance window.
+- **`127.0.0.1` as a DC's DNS server causes the "DNS island" problem.** The correct pattern is to point a DC's primary DNS at its *own static IP*, not the loopback address. On the second DC, primary DNS = `dc01`'s IP before promotion, then its own IP after.
+- **Promotion order matters for replication health.** All five FSMO roles land on the first DC by default. Distributing RID Master and Infrastructure Master to `dc02` immediately after promotion — before any production workload depends on the forest — avoids a manual role-transfer operation later under pressure.
+- **The VNet DNS setting is the lever that governs all future VMs.** Updating `Virtual Network → DNS servers → Custom → [dc01 IP, dc02 IP]` is the single most impactful post-promotion step: every new VM deployed into the VNet inherits the DC IPs as its DNS resolver automatically.
+- **Azure DNS forwarder to 168.63.129.16 is essential in hybrid-adjacent environments.** Without it, the DCs cannot resolve Azure-internal FQDNs (Key Vault, Storage private endpoints, etc.), which silently breaks Key Vault secret retrieval and any private-endpoint-based service your domain-joined VMs need.
+
+---
+
+[← Back to README](./README.md) | [Azure Bastion →](../Azure%20Bastion/README.md) | [Back to Portfolio](../README.md)

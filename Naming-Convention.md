@@ -1,5 +1,7 @@
 # Naming Convention
 
+Last validated on: July 2026
+
 All resources across these labs follow a consistent pattern aligned with the Azure Cloud Adoption Framework (CAF). This page is the single reference for the abbreviations, segment order, and per-resource-type rules used throughout every lab guide.
 
 ---

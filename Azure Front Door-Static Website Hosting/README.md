@@ -1,17 +1,19 @@
 # Azure Front Door — Static Website Hosting Track
 
+Last validated on: July 2026
+
 This track covers global static website delivery through Azure Front Door — origin configuration, routing rules, caching behaviour, and WAF at the edge.
 
 ## Track Structure
 
 ```text
 Azure Front Door-Static Website Hosting/
-`-- Azure Front Door-Static Website Hosting Lab.md
+`-- 1-Azure Front Door-Static Website Hosting Lab.md
 ```
 
 ## Lab Sequence
 
-1. [Azure Front Door + Static Website Hosting Lab](Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — deploy a static site on Azure Storage, publish it through a Front Door Standard/Premium endpoint, and validate caching and routing
+1. [Azure Front Door + Static Website Hosting Lab](1-Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — deploy a static site on Azure Storage, publish it through a Front Door Standard/Premium endpoint, and validate caching and routing
 
 ## What it covers
 

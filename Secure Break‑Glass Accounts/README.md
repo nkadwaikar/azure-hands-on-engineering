@@ -1,5 +1,7 @@
 # Secure Break‑Glass Accounts Track
 
+Last validated on: July 2026
+
 This track covers the design, implementation, and monitoring of emergency access accounts in Microsoft Entra ID — following Microsoft's 2025 security baseline with phishing-resistant MFA and Conditional Access enforcement, ensuring tenant recovery is possible without bypassing zero-trust controls.
 
 ## Track Structure

@@ -1,5 +1,7 @@
 # Compute Track
 
+Last validated on: July 2026
+
 This track covers VM provisioning from scratch through to a deployable web workload — base build, image preparation via Sysprep, and IIS installation for server role validation.
 
 ## Track Structure

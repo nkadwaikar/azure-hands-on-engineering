@@ -2,14 +2,18 @@
 
 ## Metadata · Content Types · Hub Sites · Permissions · Retention Governance
 
+> **Why this matters:** SharePoint sprawl — uncontrolled sites, inconsistent permissions, and undiscoverable content — is one of the most common compliance failures in Microsoft 365 tenants; this lab builds a governed hub-site topology with a metadata taxonomy, least-privilege permissions, and Purview retention labels so content is findable, classifiable, and defensible before an audit.
+
+Last validated on: July 2026
+
 ---
 
 ## Summary
 
 This lab builds a scalable, governed SharePoint Online information architecture entirely through the admin portals. You will create a hub site topology, design a metadata and content type taxonomy, implement a least-privilege permissions model, configure external sharing governance, and apply Purview retention labels.
 
-**Estimated time:** 3–4 hours  
-**License required:** Microsoft 365 E3 or E5  
+**Estimated time:** 3–4 hours
+**License required:** Microsoft 365 E3 or E5
 **Portals used:**
 
 - [SharePoint Admin Center](https://tenant-admin.sharepoint.com)

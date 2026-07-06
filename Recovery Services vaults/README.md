@@ -1,5 +1,7 @@
 # Recovery Services Vaults Track
 
+Last validated on: July 2026
+
 This track covers the full Azure resilience stack — VM backup and restore, cross-region replication with Azure Site Recovery, and storage-level redundancy options.
 
 ## Track Structure

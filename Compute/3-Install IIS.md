@@ -2,7 +2,7 @@
 
 > **Why this matters:** A VM without a web server role is just a running OS with no workload — this lab installs IIS and writes a test page so the custom image used in VMSS serves verifiable HTTP traffic rather than just powering on.
 
-Last validated on: 2026-06-19  
+Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 > **Note:** This lab installs IIS on a Windows Server VM. Complete [Build Base VM](1-build-base-vm.md) first to have a running VM to connect to.
@@ -17,6 +17,18 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 | Access | RDP session to the VM (Administrator credentials) |
 | VM state | Running, reachable via RDP |
 | Estimated Time | 10–15 minutes |
+
+---
+
+## Learning Objectives
+
+By the end of this lab you will be able to:
+
+- Install the IIS web server role and common HTTP features on a Windows Server VM using PowerShell
+- Write a custom HTML index page to `C:\inetpub\wwwroot` so image validation serves identifiable content rather than the default IIS banner
+- Verify IIS is serving traffic from both inside the VM (`localhost`) and optionally from a remote browser via the VM's public IP
+- Diagnose common IIS connectivity failures (NSG port 80, Windows Firewall, IIS service state)
+- Explain why IIS must be installed **before** Sysprep — installing software after generalization contaminates the golden image
 
 ---
 
@@ -134,6 +146,16 @@ If your VM has a Public IP and NSG rule allowing port 80:
 This lab does not require cleanup on its own — the VM should be kept running for the Sysprep step.
 
 > When the full Compute track is complete, delete the resource group `rg-fntech-vm-lab-eus-core` to remove all resources.
+
+---
+
+## What I Learned
+
+- The order matters: IIS must be installed and validated **before** Sysprep — reversing the order produces a generalized image with no web role, breaking every VMSS instance
+- `Install-WindowsFeature -IncludeManagementTools` is the critical flag for IIS Manager access; skipping it means you can't troubleshoot IIS from within the VM after deployment
+- A custom `index.html` is essential for VMSS validation — without it, you cannot distinguish a live VMSS instance from a freshly provisioned one with the default IIS page
+- NSG rules for port 80 need to be opened at the **NIC-level NSG and the subnet-level NSG** — having only one of them is a common source of failed HTTP validation from outside the VM
+- `iisreset` after writing the custom page is often needed; IIS caches the default page and won't serve the new file until the service refreshes
 
 ---
 

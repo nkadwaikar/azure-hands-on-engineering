@@ -1,5 +1,7 @@
 # Cost and Security Governance
 
+Last validated on: July 2026
+
 Cost governance is not an afterthought — it is a design constraint applied from day one. Every architectural decision in this project was evaluated against its cost impact, ensuring predictable, controlled Azure spend without trading away security, reliability, or operational quality.
 
 ## Cost Tracking Reminder

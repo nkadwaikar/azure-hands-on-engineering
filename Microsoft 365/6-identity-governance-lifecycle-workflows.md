@@ -2,6 +2,10 @@
 
 ## Lifecycle Workflows · Access Reviews · Entitlement Management · Automated Deprovisioning
 
+> **Why this matters:** Manual Joiner/Mover/Leaver processes are slow, error-prone, and leave orphaned access that passes undetected through audits — this lab automates identity lifecycle events with Entra ID Governance Lifecycle Workflows, enforces periodic access reviews for admin roles and sensitive groups, and builds access packages with approval workflows so the principle of least privilege is maintained without a helpdesk ticket for every change.
+
+Last validated on: July 2026
+
 ---
 
 ## Summary

@@ -155,15 +155,71 @@ This completes the identity-first foundation.
 
 ---
 
-## Lab Complete
+## Deploy the Stack
 
-You now have:
+> All commands are run from the `Bicep/` folder. Ensure you are logged in (`az login`) and have set the correct subscription (`az account set --subscription <id>`).
 
-- A fully modular identity-first Bicep stack
-- Clean, validated modules
-- A composition layer ready for deployment
-- Enterprise-grade RBAC and governance patterns
-- Documentation that is clean, readable, and recruiter-ready
+### Step 1 — Create the Resource Group
+
+```bash
+az deployment sub create \
+  --location eastus \
+  --template-file create-rg.bicep
+```
+
+### Step 2 — Deploy the Identity Stack
+
+```bash
+az deployment group create \
+  --resource-group rg-fntech-identity-eus-core \
+  --template-file main.bicep
+```
+
+**Expected output (abbreviated):**
+
+```json
+{
+  "properties": {
+    "provisioningState": "Succeeded",
+    "outputs": {
+      "uamiPrincipalId": { "value": "<guid>" },
+      "kvId": { "value": "/subscriptions/.../resourceGroups/rg-fntech-identity-eus-core/providers/Microsoft.KeyVault/vaults/kv-fntech-eus-lab" }
+    }
+  }
+}
+```
+
+### Step 3 — Validate Resources in Portal
+
+After deployment succeeds, confirm in the Azure Portal:
+
+1. **Resource group** `rg-fntech-identity-eus-core` contains:
+   - User-Assigned Managed Identity
+   - Key Vault (RBAC mode — confirm `Access configuration` shows **Azure role-based access control**)
+   - Resource lock visible under `rg-fntech-identity-eus-core` → **Locks**
+2. **Key Vault → Access control (IAM)** → confirm the UAMI appears as **Key Vault Secrets User**
+3. **CLI validation:**
+
+```bash
+# Confirm RBAC assignment exists
+az role assignment list \
+  --scope /subscriptions/<sub-id>/resourceGroups/rg-fntech-identity-eus-core \
+  --query "[?roleDefinitionName=='Key Vault Secrets User']" \
+  --output table
+
+# Confirm lock exists
+az lock list --resource-group rg-fntech-identity-eus-core --output table
+```
+
+---
+
+## What I Learned
+
+- Splitting subscription-scope deployment (`create-rg.bicep`) from resource-group-scope deployment (`main.bicep`) into two separate `az deployment` commands is required because Bicep cannot change scope mid-file; trying to do both in a single `az deployment group create` fails silently or throws a misleading error
+- `principalType: ServicePrincipal` on the RBAC module is mandatory for managed identities — omitting it causes role assignments to apply correctly at the API level but show as "Unknown" in the portal IAM blade, creating false audit alerts
+- Using `guid()` with deterministic inputs for role assignment names ensures idempotency — re-running `main.bicep` doesn't create duplicate assignments, which makes the stack safe to redeploy for updates
+- `enableRbacAuthorization: true` on the Key Vault module disables the old access policy model entirely; access policies set before the flag was flipped become inaccessible and must be recreated as role assignments
+- Modular Bicep is significantly easier to review in a pull request than a monolithic template — each module maps to a single responsibility and a single test scenario
 
 ---
 

@@ -4,7 +4,7 @@
 
 This guide walks you through preparing the VM for image capture with the correct Sysprep command.
 
-Last validated on: 2026-06-19  
+Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 > **Note:** Run Sysprep only on a VM you intend to capture as an image. The process is irreversible on that instance — the VM cannot be restarted as a normal workload after generalization.
@@ -19,6 +19,18 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 | Access | RDP session to the VM (Administrator credentials) |
 | VM state | Running, no pending Windows Updates, BitLocker Off |
 | Estimated Time | 10–15 minutes |
+
+---
+
+## Learning Objectives
+
+By the end of this lab you will be able to:
+
+- Explain why machine-specific state (SID, hostname, agent registration) breaks VMSS image reuse and how Sysprep resolves it
+- Run the correct Azure-safe Sysprep command with the `/mode:vm` switch to prevent the OOBE loop
+- Confirm the VM reaches **Stopped (deallocated)** status before triggering the generalize step in the portal
+- Identify the Panther folder's role during Guest Agent provisioning and why it must not be deleted
+- Distinguish between the Sysprep state and the Azure "Generalized" flag — both are required before image capture
 
 ---
 
@@ -74,10 +86,10 @@ cd C:\Windows\System32\Sysprep
 
 ### Why these switches matter
 
-- **/generalize** → resets SID  
-- **/oobe** → Azure can specialize the VM  
-- **/shutdown** → required before capture  
-- **/mode:vm** → prevents the “Hi there” OOBE loop  
+- **/generalize** → resets SID
+- **/oobe** → Azure can specialize the VM
+- **/shutdown** → required before capture
+- **/mode:vm** → prevents the “Hi there” OOBE loop
 
 ---
 
@@ -110,9 +122,17 @@ The Panther folder is required by **Azure Guest Agent** during provisioning.
 
 Deleting it causes:
 
-- OOBE loops  
-- Specialization failures  
-- VMSS deployment failures  
+- OOBE loops
+- Specialization failures
+- VMSS deployment failures
+
+## What I Learned
+
+- `/mode:vm` is a non-obvious but mandatory switch — without it the VM enters an OOBE loop on first boot from the image, breaking every VMSS instance silently
+- The Azure "Generalize" flag and the Sysprep generalization are two separate state changes; missing the portal step means image capture succeeds but every VM deployed from it fails to specialize
+- Waiting for **Stopped (deallocated)** — not just **Stopped** — is critical; capturing from a "Stopping" state produces a corrupted or unusable image
+- The Panther folder is the most commonly misunderstood Sysprep artifact; deleting it "to clean up" is a recurring cause of provisioning failures in VMSS deployments
+- Running Sysprep on a VM with pending Windows Updates causes unpredictable failures that are hard to diagnose; always clear updates first
 
 ---
 

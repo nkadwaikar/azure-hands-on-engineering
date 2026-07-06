@@ -1,5 +1,7 @@
 # VMSS Track
 
+Last validated on: July 2026
+
 This track covers the full VM scale set lifecycle — capturing a generalised image from a prepared VM, validating it with a test deployment, and deploying a scale set from the known-good image.
 
 ## Track Structure

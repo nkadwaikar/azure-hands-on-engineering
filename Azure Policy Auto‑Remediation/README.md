@@ -1,5 +1,7 @@
 # Azure Policy Auto-Remediation Track
 
+Last validated on: July 2026
+
 This track covers custom Azure Policy authoring with a DeployIfNotExists effect, managed identity-backed remediation tasks, and compliance validation — portal-only.
 
 ## Track Structure

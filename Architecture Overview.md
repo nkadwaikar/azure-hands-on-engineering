@@ -1,7 +1,11 @@
 
 # Architecture Overview
 
+Last validated on: July 2026
+
 ## Identity Governance
+
+The identity control plane uses a fully secretless chain — no hardcoded credentials flow through any resource. A User-Assigned Managed Identity is granted **Key Vault Secrets User** at resource scope via RBAC, and a Resource Lock on the Key Vault prevents accidental deletion. This pattern eliminates static credentials from all compute and automation workloads.
 
 ```mermaid
 flowchart LR
@@ -14,6 +18,8 @@ flowchart LR
 
 ## Compute Lifecycle
 
+VM images are built once and promoted through a quality gate before scaling. A base VM is provisioned and configured with IIS, then generalized with Sysprep to produce a golden image stored in Azure Compute Gallery. VM Scale Sets draw from that versioned image so every instance in the fleet is bit-identical and can be replaced without configuration drift.
+
 ```mermaid
 flowchart LR
     Build[Base VM Build] --> Prep[Sysprep]
@@ -25,6 +31,8 @@ flowchart LR
 
 ## Global Delivery
 
+Static content is served from Azure Blob Storage (`$web` container) with Azure Front Door in front for global CDN, WAF, and custom domain/TLS termination. The origin group handles health probes and automatic failover; caching rules at the Front Door layer reduce origin load and improve latency for geographically distributed users.
+
 ```mermaid
 flowchart LR
     Client[Client] --> FD[Azure Front Door]
@@ -34,6 +42,8 @@ flowchart LR
 ```
 
 ## App Service Delivery
+
+A multi-stage Azure DevOps pipeline builds the artifact, deploys to a staging slot, and waits at a manual approval gate before swapping to production. Each slot holds its own System-Assigned Managed Identity with independent Key Vault access — secrets resolve at runtime and never appear in pipeline YAML or environment variables.
 
 ```mermaid
 flowchart LR
@@ -62,6 +72,8 @@ Managed Identity]
 
 ## Governance Automation
 
+Policy definitions are assigned at subscription or management group scope and evaluated against all in-scope resources. Non-compliant resources trigger auto-remediation tasks via the **DeployIfNotExists** effect — closing the gap between policy intent and enforced resource state without manual intervention or ticket-driven remediation.
+
 ```mermaid
 flowchart LR
     Def[Policy Definition] --> Assign[Policy Assignment]
@@ -71,6 +83,8 @@ flowchart LR
 ```
 
 ## Business Continuity
+
+A Recovery Services Vault sits centrally across both backup and site recovery scenarios. Backup creates configurable recovery points for point-in-time restore; Azure Site Recovery replicates VMs to a secondary region and enables test, planned, and unplanned failover with near-zero RPO targets — all governed by a single vault policy.
 
 ```mermaid
 flowchart LR
@@ -82,6 +96,8 @@ flowchart LR
 ```
 
 ## Secure VM Access
+
+No VM in this architecture carries a public IP. All RDP and SSH access is brokered through Azure Bastion, connecting over VNet Peering between hub and spoke VNets. Credentials are retrieved from Key Vault at session time; JIT policies layer on top to restrict NSG rules to a time-bounded, IP-scoped window — combining two independent zero-trust controls.
 
 ```mermaid
 flowchart LR
@@ -105,6 +121,8 @@ flowchart LR
 ```
 
 ## JIT Access Lifecycle
+
+Just-In-Time VM access integrates Defender for Cloud with NSG automation to eliminate standing inbound access. An engineer submits a scoped request; Defender evaluates it, opens a time-bounded NSG rule, and automatically removes it when the window expires. No manual cleanup is required — the attack surface returns to zero after every session.
 
 ```mermaid
 flowchart LR
@@ -151,6 +169,8 @@ flowchart LR
 
 ## Azure Arc Hybrid Server Architecture
 
+Azure Arc extends the Azure control plane to servers running outside Azure — on-premises, in other clouds, or at the edge. The Connected Machine Agent projects each server as an Azure resource, enabling RBAC, Tags, Azure Monitor (via AMA + DCR), Defender for Cloud, Azure Policy/Guest Configuration, and Update Manager to apply uniformly across the entire hybrid estate without migrating workloads to Azure.
+
 ```mermaid
 flowchart LR
     Server["On-Prem / Multi-Cloud\nServer"] --> CMA["Connected Machine\nAgent (CMA)"]
@@ -169,6 +189,8 @@ flowchart LR
 ```
 
 ## Modern Workplace (Microsoft 365)
+
+All Microsoft 365 workloads are gated behind a single Zero Trust Conditional Access policy enforcing device compliance and phishing-resistant MFA. Data flowing through Exchange, SharePoint, and Teams is captured by Microsoft Purview for DLP, auto-labeling, and audit. Identity Governance lifecycle workflows automate Joiner/Mover/Leaver processes and drive Access Reviews and Entitlement Management at scale.
 
 ```mermaid
 flowchart LR

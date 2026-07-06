@@ -1,8 +1,39 @@
 # On-Prem Hyper-V Lab Setup for Azure Arc
 
+> **Why this matters:** Azure Arc's value is in bringing non-Azure machines under unified management — but you cannot validate the Connected Machine Agent (CMA) onboarding flow, outbound-endpoint connectivity model, or policy/Defender enrollment using Azure VMs, because those are already native ARM resources. A Hyper-V lab gives you genuinely "outside Azure" machines to exercise the full Arc pipeline against before committing to a production rollout.
+
 > **Companion to:** [Azure Arc Hybrid Server Architecture (with Defender for Servers)](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — the production design guide this lab validates.
 >
 > This guide walks through building a disposable Hyper-V lab that behaves like an on-prem environment, so you can validate the full Arc onboarding flow before rolling out to production.
+
+Last validated on: July 2026
+Portal experience note: Steps validated against Azure Portal and Azure Arc onboarding script as of July 2026.
+
+---
+
+## Learning Objectives
+
+By the end of this lab you will be able to:
+
+- Build a disposable Hyper-V environment that replicates on-premises network topology for Azure Arc testing
+- Onboard Windows and Linux VMs to Azure Arc using the Connected Machine Agent script
+- Validate the full governance pipeline: RBAC, policy initiative, Defender for Servers, and Automation runbooks scoped to Arc machines
+- Diagnose the most common Arc onboarding failure (IPv6 timeout) and apply the permanent fix
+- Decommission Arc resources cleanly without leaving orphaned RBAC assignments or active Defender plans
+
+---
+
+## Prerequisites
+
+| Requirement | Detail |
+| --- | --- |
+| Hyper-V host | Windows Server (Datacenter/Standard) with virtualization enabled in BIOS/UEFI (Intel VT-x / AMD-V) |
+| Host hardware | Minimum 2 vCPU + 4–8 GB RAM + 60 GB disk **per VM**; plan for 2–4 VMs |
+| Host outbound internet | Required — VMs inherit connectivity via virtual switch; confirm before building |
+| Azure subscription | Contributor or Owner role; resource providers registered (see Step 4) |
+| OS media | Windows Server 2022 Evaluation ISO and/or Ubuntu Server ISO |
+| Prior reading | [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — review before starting |
+| Estimated Time | 2–4 hours (build + onboard + governance wiring) |
 
 ---
 
@@ -254,6 +285,14 @@ All section references point to [Azure Arc Hybrid Server Architecture](1-Azure%2
 | Bulk onboarding (GPO/script) | Section 7.2 — Onboarding Multiple Servers at Scale |
 | Runbook version control & testing | Section 7.3 — Runbook Version Control & Testing |
 | Decommissioning | Section 7.5 — Decommissioning |
+
+## What I Learned
+
+- IPv6 is the single most common Arc onboarding failure in Hyper-V labs — the CMA script times out attempting IPv6 resolution before falling back to IPv4; disabling IPv6 on the VM NIC (`Disable-NetAdapterBinding -ComponentID ms_tcpip6`) resolves it permanently
+- Service principal client secrets in the generated onboarding script expire or are invalidated if you re-download the script without checking the `$ServicePrincipalClientSecret` value — always regenerate the secret before running
+- Snapshot each VM immediately after OS install and before running the onboarding script; this eliminates the rebuild-from-ISO cost when re-testing different onboarding paths (GPO, custom script, bulk)
+- Azure VMs cannot substitute for this lab — they already have ARM resource IDs and bypass the CMA flow entirely; the distinction between "Arc-enabled" and "natively ARM-managed" only becomes clear when you build a machine Arc genuinely doesn't know about
+- Scope isolation is the key principle throughout governance wiring: every RBAC, policy, and Automation runbook assignment must target `rg-arc-servers-prod` or a tag filter — not the subscription — or lab governance bleeds into production resources
 
 ---
 

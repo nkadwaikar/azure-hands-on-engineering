@@ -41,7 +41,7 @@ An image version that looks correct in the gallery can still fail at boot if Sys
 
 ## 1. Capture the Image
 
-1. In Azure Portal, search for, search for **Virtual Machines**.
+1. In Azure Portal, search for **Virtual Machines**.
 2. Select your prepared VM.
 3. In the VM blade, click **Capture** from the top menu.
 4. Configure:

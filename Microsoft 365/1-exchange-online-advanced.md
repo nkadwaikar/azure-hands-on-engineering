@@ -2,6 +2,10 @@
 
 ## Enterprise Mail Flow · Transport Rules · Threat Protection · Journaling · Governance
 
+> **Why this matters:** An Exchange Online environment without transport rules, journaling, and threat protection is an open relay waiting for a data breach — this lab hardens enterprise mail flow end-to-end so SPF/DKIM/DMARC authentication, Defender for Office 365 policies, and compliance archiving are all provably in place before a single sensitive email leaves the tenant.
+
+Last validated on: July 2026
+
 ---
 
 ## Summary

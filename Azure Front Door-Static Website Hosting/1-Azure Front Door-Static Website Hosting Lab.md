@@ -7,12 +7,12 @@
 
 ```text
 Azure Front Door-Static Website Hosting/
-`-- Azure Front Door-Static Website Hosting Lab.md
+`-- 1-Azure Front Door-Static Website Hosting Lab.md
 ```
 
 This module is a focused single-lab walkthrough for global static website delivery through Azure Front Door.
 
-Last validated on: 2026-06-19  
+Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026; Front Door propagation typically takes 5–15 minutes after configuration changes.
 
 > **Note:** Azure Front Door Standard/Premium incurs hourly and data transfer charges. The origin storage static website endpoint remains accessible directly unless locked down with Private Link — origin lock-down is out of scope for this lab.
@@ -55,12 +55,12 @@ By the end of this lab, you will have:
 
 ### 2.1 Create a Resource Group
 
-Create a new resource group dedicated to this lab.  
+Create a new resource group dedicated to this lab.
 This ensures:
 
-- Clean isolation of resources  
-- Easier cleanup  
-- Accurate cost tracking  
+- Clean isolation of resources
+- Easier cleanup
+- Accurate cost tracking
 
 **Steps:**
 
@@ -109,12 +109,12 @@ Copy this URL — you will use it as the **Origin hostname** in Front Door.
 
 ### 2.3 Upload Website Content
 
-1. Navigate to **Containers → `$web`**  
-2. Upload `index.html` into the root of the `$web` container  
+1. Navigate to **Containers → `$web`**
+2. Upload `index.html` into the root of the `$web` container
 3. Verify:
-   - File name is **exactly** `index.html`  
-   - Blob type is **Block blob**  
-   - File size matches your intended content  
+   - File name is **exactly** `index.html`
+   - Blob type is **Block blob**
+   - File size matches your intended content
 
 ### Test the origin directly
 
@@ -138,15 +138,15 @@ Using **Custom Create**, Azure guides you through configuring all major componen
 
 #### Profile Details
 
-- **Name:** Choose a descriptive name  
-- **Tier:** Standard or Premium  
-- **Resource group location:** e.g., East US 2  
+- **Name:** Choose a descriptive name
+- **Tier:** Standard or Premium
+- **Resource group location:** e.g., East US 2
 
 ---
 
 #### Endpoint Settings
 
-- **Endpoint name:** Choose a unique name  
+- **Endpoint name:** Choose a unique name
 - Azure generates:
 
   ```text
@@ -157,25 +157,25 @@ Using **Custom Create**, Azure guides you through configuring all major componen
 
 #### Origin Settings
 
-- **Origin type:** Storage (Static website)  
-- **Origin host name:**  
+- **Origin type:** Storage (Static website)
+- **Origin host name:**
   Use the storage account's actual static website hostname:
 
   ```text
   <storage-account>.zXX.web.core.windows.net
   ```
 
-- **Origin host header:** Same as hostname  
-- **HTTPS port:** 443  
-- **Health probe:** Default settings  
+- **Origin host header:** Same as hostname
+- **HTTPS port:** 443
+- **Health probe:** Default settings
 
 ---
 
 #### Caching and Compression
 
-- **Enable caching:** Yes  
-- **Query string caching behavior:** Ignore Query String  
-- **Enable compression:** Optional  
+- **Enable caching:** Yes
+- **Query string caching behavior:** Ignore Query String
+- **Enable compression:** Optional
 
 ---
 
@@ -199,24 +199,24 @@ Configure the route during creation:
 
 #### Why “HTTPS only” is required
 
-Azure Storage Static Website Hosting should be reached over HTTPS from Front Door.  
+Azure Storage Static Website Hosting should be reached over HTTPS from Front Door.
 Keep the route's forwarding protocol set to HTTPS only so the origin is always contacted securely.
 
 ---
 
 #### Review + Create
 
-- Click **Review + Create**  
-- Ensure validation passes  
-- Deploy the Front Door profile  
+- Click **Review + Create**
+- Ensure validation passes
+- Deploy the Front Door profile
 
 Azure provisions:
 
-- Front Door profile  
-- Endpoint  
-- Origin group  
-- Origin  
-- Route  
+- Front Door profile
+- Endpoint
+- Origin group
+- Origin
+- Route
 
 ---
 
@@ -235,9 +235,9 @@ After deployment, update the **origin group health probe** for accuracy.
 
 #### Why this matters
 
-- Ensures the probe checks the root of your static site  
-- Matches the origin’s HTTPS endpoint  
-- Keeps the origin in a **Healthy** state  
+- Ensures the probe checks the root of your static site
+- Matches the origin’s HTTPS endpoint
+- Keeps the origin in a **Healthy** state
 
 ---
 
@@ -245,12 +245,12 @@ After deployment, update the **origin group health probe** for accuracy.
 
 Confirm the route settings match:
 
-- Patterns to match: `/*`  
-- Redirect to HTTPS: Enabled  
-- Forwarding protocol: **HTTPS only**  
-- Caching: Enabled  
-- Query string behavior: Ignore Query String  
-- Origin path: Empty  
+- Patterns to match: `/*`
+- Redirect to HTTPS: Enabled
+- Forwarding protocol: **HTTPS only**
+- Caching: Enabled
+- Query string behavior: Ignore Query String
+- Origin path: Empty
 
 ---
 
@@ -307,18 +307,18 @@ Produces the same result, confirming the route has not propagated.
 
 Verify the following to ensure the configuration is correct:
 
-- The static website endpoint returns **200 OK**.  
-- The `$web` container contains `index.html`.  
-- The route is **enabled** and provisioning state is **Succeeded**.  
-- The domain is correctly associated with the endpoint.  
-- The forwarding protocol is set to **HTTPS only**.  
-- The origin group is properly linked.  
-- No origin path is set.  
-- No private endpoints or firewalls are blocking traffic.  
+- The static website endpoint returns **200 OK**.
+- The `$web` container contains `index.html`.
+- The route is **enabled** and provisioning state is **Succeeded**.
+- The domain is correctly associated with the endpoint.
+- The forwarding protocol is set to **HTTPS only**.
+- The origin group is properly linked.
+- No origin path is set.
+- No private endpoints or firewalls are blocking traffic.
 
 #### Conclusion
 
-The configuration is correct.  
+The configuration is correct.
 The 404 `CONFIG_NOCACHE` response is caused by **propagation delay**, not an error.
 
 ---
@@ -335,34 +335,34 @@ x-cache: TCP_MISS
 
 #### Interpretation
 
-- The route is now active.  
-- The origin is serving content.  
-- Azure Front Door is delivering the static website globally.  
-- `TCP_MISS` indicates the first request fetched content from the origin.  
-- Subsequent requests will return `TCP_HIT` once cached at the edge.  
+- The route is now active.
+- The origin is serving content.
+- Azure Front Door is delivering the static website globally.
+- `TCP_MISS` indicates the first request fetched content from the origin.
+- Subsequent requests will return `TCP_HIT` once cached at the edge.
 
 ---
 
 ## 6. Lessons Learned
 
-1. `CONFIG_NOCACHE` indicates no active route at the edge.  
-2. This is caused by propagation delay, not misconfiguration.  
-3. Always validate the origin independently.  
-4. If the static website endpoint returns **200 OK**, the storage configuration is correct.  
-5. Forwarding protocol must match the origin.  
-6. Static website endpoints require **HTTPS**.  
-7. Leave **Origin Path** empty for static websites.  
-8. Static website hosting automatically maps `/` → `/index.html`.  
-9. Propagation delays can be longer than expected.  
-10. After multiple edits, purges, or recreations, Front Door may enter a lengthy global sync.  
-11. Do not modify settings during propagation.  
-12. Once the configuration is correct, wait for propagation to complete.  
-13. Response headers provide valuable insight:  
-    - `CONFIG_NOCACHE` → No route has propagated.  
-    - `TCP_MISS` → Route active; content fetched from origin.  
-    - `TCP_HIT` → Content cached at the edge.  
-14. Costs remain predictable.  
-15. Propagation delays and 404 errors do **not** generate data transfer charges.  
+1. `CONFIG_NOCACHE` indicates no active route at the edge.
+2. This is caused by propagation delay, not misconfiguration.
+3. Always validate the origin independently.
+4. If the static website endpoint returns **200 OK**, the storage configuration is correct.
+5. Forwarding protocol must match the origin.
+6. Static website endpoints require **HTTPS**.
+7. Leave **Origin Path** empty for static websites.
+8. Static website hosting automatically maps `/` → `/index.html`.
+9. Propagation delays can be longer than expected.
+10. After multiple edits, purges, or recreations, Front Door may enter a lengthy global sync.
+11. Do not modify settings during propagation.
+12. Once the configuration is correct, wait for propagation to complete.
+13. Response headers provide valuable insight:
+    - `CONFIG_NOCACHE` → No route has propagated.
+    - `TCP_MISS` → Route active; content fetched from origin.
+    - `TCP_HIT` → Content cached at the edge.
+14. Costs remain predictable.
+15. Propagation delays and 404 errors do **not** generate data transfer charges.
 
 ---
 

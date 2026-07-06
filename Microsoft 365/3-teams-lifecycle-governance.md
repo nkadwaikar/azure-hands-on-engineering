@@ -2,14 +2,18 @@
 
 ## Provisioning · Naming Policies · Templates · Channels · Expiration · Compliance
 
+> **Why this matters:** Without lifecycle governance, every employee can spin up an ungoverned Team — resulting in thousands of abandoned groups, sensitive data in unmonitored channels, and no audit trail; this lab restricts creation, enforces naming, templates consistent provisioning, and wires expiration and retention so the Teams estate remains compliant and manageable at scale.
+
+Last validated on: July 2026
+
 ---
 
 ## Summary
 
 This lab builds a full Teams lifecycle governance model — from creation to deletion — using admin portals only. You will restrict Team creation to authorized users, enforce a naming convention, deploy Teams templates for consistent provisioning, configure channel architecture, set up expiration and archival policies, and integrate sensitivity labels and retention.
 
-**Estimated time:** 3–4 hours  
-**License required:** Microsoft 365 E3 or E5; Entra ID P1 for creation restriction  
+**Estimated time:** 3–4 hours
+**License required:** Microsoft 365 E3 or E5; Entra ID P1 for creation restriction
 **Portals used:**
 
 - [Teams Admin Center](https://admin.teams.microsoft.com)

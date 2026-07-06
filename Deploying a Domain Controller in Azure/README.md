@@ -1,5 +1,7 @@
 # Deploying a Domain Controller in Azure
 
+Last validated on: July 2026
+
 This track covers deploying a production-ready Active Directory Domain Services (AD DS) environment in Azure — two domain controllers on Windows Server 2022, secured with Azure Bastion (no public IPs), resilient across an Availability Set, and integrated with Azure Key Vault, Azure Monitor, and Azure Backup.
 
 ## Track Structure
