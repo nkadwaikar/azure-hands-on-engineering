@@ -55,6 +55,7 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `imgver` | Gallery image version (semver `major.minor.patch`) |
 | `arcm` | Azure Arc-enabled Server (Connected Machine) |
 | `aa` | Automation Account |
+| `mc` | Maintenance Configuration (Azure Update Manager) |
 | `avset` | Availability Set |
 | `mg` | Management Group |
 | `dcr` | Data Collection Rule |
@@ -278,6 +279,30 @@ RootCA.cer                  Root CA public certificate (uploaded to Entra ID)
 EmergencyCBA01.pfx          User certificate + private key for device installation
 EmergencyCBA02.pfx
 ```
+
+---
+
+## Azure Update Manager
+
+Maintenance configurations are the primary named resource in Azure Update Manager. Name them to convey OS type, environment, and patching cadence so the intent is readable directly in the portal list.
+
+```text
+mc-{os}-{env}-{frequency}    Maintenance configuration
+```
+
+Examples:
+
+```text
+mc-windows-prod-weekly           Weekly maintenance window for production Windows servers
+mc-linux-prod-weekly             Weekly window for production Linux servers
+mc-windows-nonprod-weekly        Weekly window for non-production Windows servers
+mc-arc-prod-emergency            Emergency / one-time patching window for Arc-enabled servers
+```
+
+**Maintenance window naming conventions:**
+- Use `weekly`, `monthly`, or `emergency` as the `{frequency}` segment.
+- Minimum window duration is 2 hours (update download + install + reboot cycle).
+- Create one configuration per OS type per environment — mixing Windows and Linux in a single configuration is not supported.
 
 ---
 

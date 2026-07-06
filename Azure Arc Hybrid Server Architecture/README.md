@@ -90,10 +90,15 @@ Azure Arc Hybrid Server Architecture/
 
 ---
 
-## Related
+## Related Tracks
 
-- [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — architecture reference and production design guide
-- [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — disposable Hyper-V environment to validate onboarding before production
-- [Microsoft Defender for Cloud — JIT Access](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) — complements the Defender for Servers integration covered in Section 6
-- [Identity-First Track](../Identity-First/README.md) — RBAC and managed identity patterns referenced in the Arc governance model
+This track covers the Arc projection and governance layer. The security and patching capabilities referenced in the Arc Architecture guide (Sections 4.2 and 6) each have their own dedicated track:
+
+| Track | What it covers | Arc Architecture doc reference |
+| --- | --- | --- |
+| [Microsoft Defender for Cloud](../Microsoft%20Defender%20for%20Cloud/README.md) | Enable Defender for Servers Plan 2, Secure Score, vulnerability assessment, FIM, alerts | Section 6 — Security Architecture |
+| [Bastion + JIT VM Access](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) | Time-bounded NSG port openings via Defender for Cloud | Section 6.5 — JIT Admin Access |
+| [Azure Update Manager](../Azure%20Update%20Manager/README.md) | Patch assessment, maintenance windows, update deployments, compliance reporting | Section 4.2 — Update Management |
+| [Identity-First Track](../Identity-First/README.md) | RBAC and managed identity patterns referenced in the Arc governance model | Section 2.3 — RBAC Model |
+
 - [Back to Azure Hands-On Engineering](../README.md)

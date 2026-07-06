@@ -183,9 +183,28 @@ flowchart LR
     MDC --> Score["Secure Score\n+ Alerts"]
     ARM --> Policy["Azure Policy\nGuest Configuration"]
     Policy --> Comply["Compliance\nBaseline"]
-    ARM --> Auto["Azure Automation\nUpdate Manager"]
-    Auto --> Patch["Patching\n+ Runbooks"]
+    ARM --> Auto["Azure Automation\nRunbooks"]
+    ARM --> UpdMgr["Azure Update\nManager"]
+    Auto --> Patch["Runbooks &\nRemediation"]
+    UpdMgr --> Patch2["Patching &\nCompliance"]
 ```
+
+## Azure Update Manager
+
+Azure Update Manager provides a unified, agent-free patch orchestration layer for both Azure VMs and Arc-enabled servers. Assessment scans surface available updates without installing anything; maintenance configurations gate when deployments are permitted; compliance reporting identifies overdue machines across the fleet without routing data through Log Analytics as a dependency.
+
+```mermaid
+flowchart LR
+    Machine["Azure VM or\nArc-Enabled Server"] --> Assess["On-Demand\nPatch Assessment"]
+    Assess --> Findings["Update Findings\nClassified by Severity"]
+    Findings --> MC["Maintenance\nConfiguration\n(Scheduled Window)"]
+    MC --> Deploy["Update Deployment\nScheduled / One-Time"]
+    Deploy --> Outcome["Install Result\nSucceeded · Failed · N/A"]
+    Outcome --> Comply["Compliance Dashboard\nPatch Status by Fleet"]
+    Comply --> KQL["Azure Resource Graph\nKQL Queries"]
+```
+
+**Design note:** Agent-free for Azure VMs (uses the VM Agent already present) and Arc-enabled servers (uses the Connected Machine Agent installed during Arc onboarding). Dynamic scoping by subscription, resource group, or tag keeps fleet membership accurate automatically. Maintenance configurations gate deployment windows — updates cannot be installed outside the defined window, making patching change-controlled by design.
 
 ## Modern Workplace (Microsoft 365)
 
@@ -246,7 +265,7 @@ flowchart LR
 | Track | Description |
 | --- | --- |
 | [Azure Bastion](./Azure%20Bastion/README.md) | Browser-based RDP/SSH with no public IP, NSG rules for Bastion subnet, Key Vault secretless auth, hub-spoke VNet Peering, troubleshooting guide |
-| [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/README.md) | Just-In-Time VM access, time-bounded IP-scoped NSG rules, zero standing access, audit trail |
+| [Microsoft Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/README.md) | Defender for Servers Plan 2: Secure Score, vulnerability assessment, File Integrity Monitoring, alert investigation, MDE integration · JIT VM access — time-bounded, IP-scoped NSG rules, zero standing access, audit trail |
 | [Identity-First](./Identity-First/README.md) | Managed Identity, Key Vault, RBAC, Locks, Policy, Bicep |
 | [Bicep](./Bicep/README.md) | Modular IaC: UAMI, Key Vault, RBAC, Resource Lock, Storage, VM, Diagnostics — composed via main.bicep |
 | [App Service + Managed Identity + Deployment Slots + Azure DevOps](./App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | System-Assigned Managed Identity per slot, Key Vault references (secretless), deployment slots, multi-stage Azure DevOps YAML pipeline, manual approval gates |
@@ -258,7 +277,8 @@ flowchart LR
 | [Break-Glass – FIDO2 (Lab 1)](./Secure%20Break%E2%80%91Glass%20Accounts/1-Secure%20Break%E2%80%91Glass%20Accounts.md) | Cloud-only emergency accounts with FIDO2 keys, Authentication Strength, CA enforcement |
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
-| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Defender for Servers, Policy/Guest Config compliance, Update Manager, Automation runbooks, lifecycle management, Hyper-V lab for Arc validation |
+| [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Policy/Guest Config compliance, Automation runbooks, lifecycle management, Hyper-V lab for Arc validation — dedicated tracks for [Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/README.md) and [Update Manager](./Azure%20Update%20Manager/README.md) |
+| [Azure Update Manager](./Azure%20Update%20Manager/README.md) | Patch assessment, maintenance configurations, scheduled and one-time update deployments, compliance dashboard — covers Azure VMs and Arc-enabled servers |
 | [Deploying a Domain Controller in Azure](./Deploying%20a%20Domain%20Controller%20in%20Azure/1-DeployingDomain%20Controller%20in%20Azure.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG with AD DS port rules, Availability Set, static private IPs, dedicated data disk (host caching: None), forest creation, second DC promotion, automatic replication, FSMO role distribution, Azure DNS forwarder, Key Vault for DSRM secrets |
 | [Modern Workplace (Microsoft 365)](./Microsoft%20365/README.md) | Exchange Online advanced mail flow, SharePoint information architecture, Teams lifecycle governance, Purview compliance automation, Zero Trust Conditional Access, Identity Governance lifecycle workflows |
 

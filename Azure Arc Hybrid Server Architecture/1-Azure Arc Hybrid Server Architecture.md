@@ -267,13 +267,15 @@ Repeat the Private Link Scope + DNS setup per site/region as documented in your 
 
 ### 4.2 Update Management
 
-Use **Azure Update Manager** (via Automation) for:
+> **Dedicated track:** Full hands-on lab for Azure Update Manager lives in [Azure Update Manager → 1-Azure Update Manager.md](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md). This section summarises how it fits into the Arc architecture.
 
-- Patch assessment
-- Scheduled deployments
-- Compliance reporting for Windows & Linux
+Use **Azure Update Manager** for:
 
-Separate Prod vs Non-Prod maintenance windows; integrate with change management.
+- Patch assessment (on-demand or scheduled)
+- Scheduled deployments with maintenance windows
+- Compliance reporting for Windows & Linux across Azure VMs and Arc-enabled servers
+
+Separate Prod vs Non-Prod maintenance windows; integrate with change management. Target machines by resource group or tag (dynamic scope) so fleet membership stays accurate as servers are added or retired.
 
 ### 4.3 Workbooks & KQL
 
@@ -346,6 +348,8 @@ Not every server fits every policy. Establish a formal exemption process:
 ---
 
 ## 6. Security Architecture with Defender for Servers
+
+> **Dedicated track:** Hands-on Defender for Servers labs (enable plan, Secure Score, vulnerability assessment, FIM, alert investigation) live in the [Microsoft Defender for Cloud track](../Microsoft%20Defender%20for%20Cloud/README.md). JIT VM access is covered separately in [1-JIT.md](../Microsoft%20Defender%20for%20Cloud/1-JIT.md). This section documents the security architecture as it relates to Arc.
 
 ### 6.1 Defender for Cloud Integration
 
