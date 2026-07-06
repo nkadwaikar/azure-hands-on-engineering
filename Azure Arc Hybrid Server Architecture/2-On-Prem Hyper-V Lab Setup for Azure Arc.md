@@ -1,7 +1,6 @@
 # On-Prem Hyper-V Lab Setup for Azure Arc
 
 > **Why this matters:** Azure Arc's value is in bringing non-Azure machines under unified management — but you cannot validate the Connected Machine Agent (CMA) onboarding flow, outbound-endpoint connectivity model, or policy/Defender enrollment using Azure VMs, because those are already native ARM resources. A Hyper-V lab gives you genuinely "outside Azure" machines to exercise the full Arc pipeline against before committing to a production rollout.
-
 > **Companion to:** [Azure Arc Hybrid Server Architecture (with Defender for Servers)](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — the production design guide this lab validates.
 >
 > This guide walks through building a disposable Hyper-V lab that behaves like an on-prem environment, so you can validate the full Arc onboarding flow before rolling out to production.

@@ -3,7 +3,6 @@
 Last validated on: July 2026 | Azure Portal · PowerShell
 
 > **Note:** This lab deploys a two-DC Active Directory Domain Services forest in Azure. All resources are self-contained in a single subscription and resource group. DSRM passwords and local admin credentials are stored in Azure Key Vault — no secrets are stored locally or in documentation.
-
 > **Why this matters:** On-premises workloads migrating to Azure, hybrid identity scenarios, and applications that require Kerberos or NTLM authentication all depend on a healthy, highly available domain controller infrastructure. Deploying DCs in Azure — with no public IPs, Bastion-only access, static private IPs, and Key Vault-stored secrets — demonstrates the secure-by-default posture required in enterprise environments. This lab bridges traditional Active Directory engineering with Azure's identity and governance model.
 
 ## Module / Track Structure
@@ -60,7 +59,7 @@ By the end of this lab you will be able to:
 ## Prerequisites
 
 | Requirement | Detail |
-|---|---|
+| --- | --- |
 | Azure subscription | Contributor rights on the target resource group |
 | Region | Any region supporting Availability Zones (recommended) |
 | Compute quota | 2× `Standard_D2s_v5` (or equivalent general-purpose SKU) |

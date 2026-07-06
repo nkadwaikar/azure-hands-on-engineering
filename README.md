@@ -1,5 +1,7 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
+Last validated on: July 2026
+
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#%EF%B8%8F-how-to-follow-these-tracks)
 [![Zero Trust](https://img.shields.io/badge/Zero%20Trust-0052CC?style=flat-square&logo=security&logoColor=white)](Identity-First/README.md)
@@ -16,13 +18,21 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 
 ## 👥 Who This Is Designed For
 
-Built for cloud engineers and identity architects who are evaluating production aligned Azure engineering specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
+Built for cloud engineers and identity architects evaluating production-aligned Azure engineering — specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
+
+| Role | What you'll find here |
+|---|---|
+| **Cloud / Platform Engineer** | End-to-end IaC (Bicep), VM lifecycle, VMSS, App Service pipelines, Arc hybrid management |
+| **Identity & Security Engineer** | Zero Trust, Managed Identity, Key Vault, RBAC, Conditional Access, Break-Glass accounts, JIT |
+| **Governance / Compliance Engineer** | Azure Policy + auto-remediation, Resource Locks, Purview DLP, Compliance Manager, Activity Logs |
+| **Modern Workplace Engineer** | Exchange Online, Teams lifecycle, SharePoint IA, Purview, Entra ID Governance lifecycle workflows |
+| **Hiring Manager / Recruiter** | Use the [track navigator](#%EF%B8%8F-how-to-follow-these-tracks) below to jump directly to the area you're evaluating |
 
 ---
 
 ## 💰 Cost Governance
 
-All labs are designed to minimise Azure spend using right‑sizing, auto‑shutdown, scoped logging, and consumption‑based services. Costs are kept predictable and low for learning environments.
+All labs are designed to minimise Azure spend using right-sizing, auto-shutdown, scoped logging, and consumption-based services. Costs are kept predictable and low for learning environments. See the full [Cost and Security Governance](Cost%20and%20Security%20Governance.md) reference for cost optimisation practices and security non-negotiables applied across every track.
 
 ---
 
@@ -156,3 +166,23 @@ My work is shaped by three principles:
 - 📧 [nadeemkadwaikar@outlook.com](mailto:nadeemkadwaikar@outlook.com)
 
 [![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?style=flat-square&logo=github)](https://github.com/nkadwaikar/azure-hands-on-engineering)
+
+---
+
+## 🛠️ Skills & Technology Coverage
+
+| Domain | Technologies Demonstrated |
+| --- | --- |
+| **Identity & Access** | Microsoft Entra ID, Managed Identity (UAMI + SAMI), RBAC, Conditional Access, Authentication Strength, FIDO2, CBA, Privileged Identity Management |
+| **Secrets & Key Management** | Azure Key Vault (RBAC mode), secretless app authentication, Key Vault references in App Service |
+| **Infrastructure as Code** | Bicep (modular, parameterised), Azure CLI, PowerShell, ARM deployment scopes |
+| **Compute** | Azure Virtual Machines, VM Scale Sets, Compute Gallery, golden image pipeline (Sysprep → capture → VMSS) |
+| **Networking & Secure Access** | Azure Bastion, JIT VM access, NSG design, VNet Peering, Azure Front Door, WAF |
+| **App Delivery & DevOps** | Azure App Service, deployment slots, system-assigned Managed Identity per slot, Azure DevOps YAML pipelines, multi-stage approvals |
+| **Governance & Policy** | Azure Policy (Audit, Deny, DeployIfNotExists), auto-remediation, Resource Locks, Activity Logs, KQL queries |
+| **Resilience & DR** | Azure Backup, Azure Site Recovery (failover/failback), storage replication tiers (LRS → GZRS) |
+| **Hybrid & Arc** | Azure Arc Connected Machine Agent, AMA + DCR, Defender for Servers, Guest Configuration, Update Manager |
+| **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |
+| **Microsoft 365** | Exchange Online, SharePoint IA, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk), Zero Trust CA, Entra ID Governance lifecycle workflows |
+| **Monitoring & SIEM** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings, Microsoft Sentinel (SIEM + SOAR) |
+| **Certification Alignment** | AZ-104 · AZ-500 · SC-300 · SC-400 · MS-700 · MS-102 |
