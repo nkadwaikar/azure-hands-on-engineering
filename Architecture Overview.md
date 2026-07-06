@@ -179,7 +179,6 @@ flowchart LR
     ARM --> AMA["Azure Monitor\nAgent (AMA)"]
     AMA --> DCR["Data Collection\nRule (DCR)"]
     DCR --> LAW["Log Analytics\nWorkspace"]
-    LAW --> Sentinel["Microsoft Sentinel\nSIEM + SOAR"]
     ARM --> MDC["Microsoft Defender\nfor Cloud"]
     MDC --> Score["Secure Score\n+ Alerts"]
     ARM --> Policy["Azure Policy\nGuest Configuration"]

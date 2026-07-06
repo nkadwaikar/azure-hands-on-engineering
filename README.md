@@ -65,7 +65,6 @@ flowchart TD
         Monitor["Azure Monitor\nLog Analytics"]
         Backup["Recovery Services"]
         Arc["Azure Arc\nHybrid Servers"]
-        Sentinel["Microsoft Sentinel\nSIEM · SOAR"]
     end
     subgraph M365["💼 Modern Workplace"]
         ExO["Exchange Online\nTeams · SharePoint"]
@@ -90,7 +89,6 @@ flowchart TD
     Monitor --> VM & App
     Monitor --> Arc
     Monitor --> ADDS
-    Monitor --> Sentinel
     Backup --> VM
     Arc --> VM & Monitor
     ADDS --> KV
@@ -108,8 +106,7 @@ flowchart TD
 - 🌍 **Secure public ingress** (Front Door + WAF) protects internet-facing workloads at the edge before traffic reaches the application layer
 - 🏢 **AD DS in Azure** provides a production-grade domain fabric, built on Availability Sets with no public IPs and DSRM secrets sealed in Key Vault
 - 🌐 **Hybrid reach via Azure Arc** extends unified policy, monitoring, and Defender for Servers to on-premises and multi-cloud workloads
-- 🔭 **Microsoft Sentinel (SIEM + SOAR)** centralises threat detection and automated response across the full identity, compute, and governance surface
-- 📈 **VMSS + Azure DevOps + Bicep** delivers repeatable, scalable deployments with multi-stage pipelines and deployment slot promotion
+-  **VMSS + Azure DevOps + Bicep** delivers repeatable, scalable deployments with multi-stage pipelines and deployment slot promotion
 - 💼 **Modern Workplace governance** (Exchange Online, Teams, SharePoint, Purview) extends Zero Trust and compliance into M365 workloads
 - ♻️ **Built-in resilience** (Azure Backup, Site Recovery, VMSS failover) ensures business continuity without sacrificing security posture
 
@@ -184,5 +181,4 @@ My work is shaped by three principles:
 | **Hybrid & Arc** | Azure Arc Connected Machine Agent, AMA + DCR, Defender for Servers, Guest Configuration, Update Manager |
 | **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |
 | **Microsoft 365** | Exchange Online, SharePoint IA, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk), Zero Trust CA, Entra ID Governance lifecycle workflows |
-| **Monitoring & SIEM** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings, Microsoft Sentinel (SIEM + SOAR) |
-| **Certification Alignment** | AZ-104 · AZ-500 · SC-300 · SC-400 · MS-700 · MS-102 |
+| **Monitoring** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings |

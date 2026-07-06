@@ -449,7 +449,6 @@ Set up alerts to trigger when:
 | --- | --- |
 | **Entra ID Sign-In Logs** | Native monitoring, visible in portal immediately |
 | **Microsoft Defender for Cloud Apps** | Advanced anomaly detection and risk signals |
-| **Microsoft Sentinel** | SIEM integration, automated alerting and playbooks |
 | **Log Analytics** | Custom KQL queries and long-term dashboards |
 
 ---

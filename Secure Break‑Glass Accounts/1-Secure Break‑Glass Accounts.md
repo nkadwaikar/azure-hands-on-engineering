@@ -4,7 +4,7 @@
 
 A complete, portal-only lab implementing Microsoft's 2025 security baseline for emergency access accounts with phishing-resistant MFA and Conditional Access enforcement.
 
-Last validated on: 2026-06-20  
+Last validated on: 2026-06-20
 Portal experience note: Steps validated against Microsoft Entra admin center as of June 2026; labels can vary slightly by tenant and feature rollout.
 
 > **Note:** This lab uses cloud-only emergency accounts with FIDO2/CBA and Authentication Strength policies. These accounts are NOT excluded from Conditional Access. The design follows Microsoft's 2025 identity security baseline requiring all admins to use phishing-resistant MFA.
@@ -40,7 +40,7 @@ Portal experience note: Steps validated against Microsoft Entra admin center as 
 - This lab uses a non-production or isolated Entra ID tenant for testing.
 - Break‑glass accounts are cloud-only with no federation or external IdP.
 - PIM (Privileged Identity Management) is NOT used; roles are Active assignments.
-- Monitoring is discussed but full Sentinel/Log Analytics integration is out of scope.
+- Monitoring is discussed but full Log Analytics integration is out of scope.
 - This follows Microsoft's 2025 baseline; legacy break‑glass designs (with MFA bypass) are deprecated.
 
 ---
@@ -241,7 +241,6 @@ Every sign‑in by a break‑glass account must trigger an alert.
 
 - **Entra ID** — Native sign-in and audit logs
 - **Defender for Cloud Apps** — Advanced threat detection
-- **Sentinel** — SIEM integration and automation
 - **Log Analytics** — Custom queries and dashboards
 
 ### 4.3 Alert Configuration

@@ -121,7 +121,6 @@ Non-Azure servers (on-prem, VMware, Hyper-V, AWS, GCP) are **projected into Azur
 - Azure Automation / Update Manager
 - Azure Policy & Guest Configuration
 - Microsoft Defender for Cloud (Servers plan)
-- Optional: Microsoft Sentinel for SIEM
 
 ---
 
@@ -363,8 +362,7 @@ Arc Server
   └─ AMA → Log Analytics Workspace
                └─ Defender for Cloud
                      ├─ Recommendations
-                     ├─ Security Alerts
-                     └─ (Optional) Microsoft Sentinel → Incident Response
+                     └─ Security Alerts
 ```
 
 ### 6.3 Secure Score & Recommendations
@@ -385,7 +383,7 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 | Device | Defender for Endpoint on Arc servers |
 | Network | Outbound-only, micro-segmentation on-prem |
 | Policy | Azure Policy + Guest Configuration for hardening |
-| Telemetry | Centralized in Log Analytics + Defender + Sentinel |
+| Telemetry | Centralized in Log Analytics + Defender for Cloud |
 
 ### 6.5 Just-in-Time (JIT) Admin Access
 

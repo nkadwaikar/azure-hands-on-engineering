@@ -34,7 +34,7 @@ Azure Arc Hybrid Server Architecture/
    | Section | What It Covers |
    | --- | --- |
    | 0. Prerequisites | Required RBAC roles, supported OS matrix, server requirements, resource provider registration, and Azure resources to pre-create |
-   | 1. High-Level Architecture | Core components: Arc, Log Analytics, AMA, Update Manager, Policy, Defender, Sentinel |
+   | 1. High-Level Architecture | Core components: Arc, Log Analytics, AMA, Update Manager, Policy, Defender |
    | 2. Resource Organization & Governance | Subscription layout, mandatory tagging strategy, RBAC model, management group hierarchy |
    | 3. Connectivity & Agent Architecture | Connected Machine Agent (CMA), outbound endpoint table, private link/proxy options, agent health & extension management, single-server onboarding (Windows + Linux), onboarding verification |
    | 4. Monitoring & Operations | AMA + DCR pipeline, Update Manager, KQL workbooks, alerting rules, log retention and archival policy |
