@@ -177,7 +177,7 @@ Create an NSG and attach it to the DC subnet. Do **not** open RDP (3389) from th
 
 4. Associate the NSG with the DC subnet: **Virtual network → Subnets → [subnet] → Network security group**.
 
-Note: traffic *within* the same VNet is allowed by the default `AllowVnetInBound` rule, so these explicit rules mainly matter if the DCs sit in different subnets/VNets (peered) or if you extend to an on-premises network via VPN/ExpressRoute — see 2.4.
+   Note: traffic *within* the same VNet is allowed by the default `AllowVnetInBound` rule, so these explicit rules mainly matter if the DCs sit in different subnets/VNets (peered) or if you extend to an on-premises network via VPN/ExpressRoute — see 2.4.
 
 ### 2.4 (Optional) Extend to an On-Premises Network
 
