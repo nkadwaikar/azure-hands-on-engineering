@@ -141,7 +141,7 @@ flowchart TD
 | **Resilience & DR** | Azure Backup, Azure Site Recovery (failover/failback), storage replication tiers (LRS → GZRS) |
 | **Hybrid & Arc** | Azure Arc Connected Machine Agent, AMA + DCR, Defender for Servers, Guest Configuration, Update Manager |
 | **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |
-| **Microsoft 365** | Exchange Online, SharePoint IA, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk), Zero Trust CA, Entra ID Governance lifecycle workflows |
+| **Microsoft 365** | Exchange Online, SharePoint Online, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk), Zero Trust CA, Entra ID Governance lifecycle workflows |
 | **Monitoring** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings |
 
 ---
