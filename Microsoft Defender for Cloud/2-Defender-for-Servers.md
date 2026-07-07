@@ -2,10 +2,21 @@
 
 > **Why this matters:** Defender for Servers is the security brain layered on top of Azure Arc and Azure VMs. It provides threat detection, vulnerability assessment, File Integrity Monitoring, and Secure Score recommendations — all without deploying a separate SIEM agent. Enabling Defender for Servers on Arc-enabled machines brings on-premises and multi-cloud servers into the same security posture view as native Azure VMs.
 
-Last validated on: July 2026
-Portal experience note: Steps validated against Microsoft Defender for Cloud as of July 2026. Defender for Servers is available in two plan tiers (Plan 1 and Plan 2) — this lab focuses on Plan 2 features (FIM, vulnerability assessment, JIT) since those represent the full workload protection story.
+Last validated on: 2026-07-06
+Portal experience note: Steps validated against Microsoft Defender for Cloud as of July 2026; labels can vary slightly by subscription tier and feature rollout. Defender for Servers is available in two plan tiers (Plan 1 and Plan 2) — this lab focuses on Plan 2 features (FIM, vulnerability assessment, JIT) since those represent the full workload protection story.
 
 > **Note:** This lab assumes at least one running Azure VM or Arc-enabled server. For Arc server coverage, complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first. For Just-In-Time VM access, see [Bastion + JIT VM Access](1-JIT.md) — JIT is covered as a standalone lab in this track.
+
+---
+
+## Module / Track Structure
+
+```text
+Microsoft Defender for Cloud/
+├── README.md                          ← Track entry point
+├── 1-JIT.md                           ← Lab 1: Bastion + JIT VM Access
+└── 2-Defender-for-Servers.md          ← Lab 2: Workload Protection (you are here)
+```
 
 ---
 
@@ -14,12 +25,14 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 - [Prerequisites](#1-prerequisites)
 - [Learning Objectives](#2-learning-objectives)
 - [Scenario](#3-scenario)
+
 - [Step 1 — Enable Defender for Servers Plan](#step-1--enable-defender-for-servers-plan)
 - [Step 2 — Review Secure Score and Recommendations](#step-2--review-secure-score-and-recommendations)
 - [Step 3 — Run Vulnerability Assessment](#step-3--run-vulnerability-assessment)
 - [Step 4 — Enable File Integrity Monitoring](#step-4--enable-file-integrity-monitoring)
 - [Step 5 — Investigate a Security Alert](#step-5--investigate-a-security-alert)
 - [Step 6 — Review Defender for Endpoint Integration](#step-6--review-defender-for-endpoint-integration)
+
 - [Troubleshooting](#troubleshooting)
 - [Why Defender for Servers Matters](#why-defender-for-servers-matters-engineering-justification)
 - [Cleanup](#cleanup)
@@ -35,6 +48,7 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 | Arc prerequisite | For Arc servers: complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first |
 | Log Analytics Workspace | Required for FIM data storage — workspace must exist before enabling FIM (Step 4) |
 | Plan selection | **Plan 2** required for File Integrity Monitoring and vulnerability assessment (Qualys / Defender VA); Plan 1 covers foundational posture only |
+| JIT prerequisite | Optional but recommended — complete [1-JIT.md](1-JIT.md) to understand how Defender for Cloud controls inbound access alongside workload protection |
 | Estimated Time | 60–90 minutes |
 | Tools | Azure Portal only — no CLI required |
 
@@ -244,7 +258,7 @@ Defender for Cloud generates security alerts based on behavioral analytics and t
 
 ## Step 6 — Review Defender for Endpoint Integration
 
-Defender for Servers Plan 2 automatically deploys **Microsoft Defender for Endpoint (MDE)** as an extension on covered machines. This provides EDR (endpoint detection and response) capabilities beyond what AV alone offers.
+Defender for Servers Plan 2 automatically deploys **Microsoft Defender for Endpoint (MDE)** as an extension on covered machines. This provides EDR (endpoint detection and response) capabilities beyond what AV alone offers — including device health tracking, software inventory CVE mapping, and behavioural alert investigation in the Microsoft Defender portal.
 
 ### 6.1 Confirm MDE Extension Installed
 
@@ -252,14 +266,80 @@ Defender for Servers Plan 2 automatically deploys **Microsoft Defender for Endpo
 2. Look for the extension **MDE.Windows** or **MDE.Linux** — it should show as **Provisioning succeeded**.
 3. For Arc-enabled servers: **Azure Arc → Machines → [machine] → Extensions** tab — same extension name applies.
 
-### 6.2 Access the MDE Portal
+> **If the extension is in a failed state:** Delete it from the Extensions blade and allow Defender for Cloud policy to re-deploy it (30–60 minutes). See Troubleshooting for details.
 
-1. Go to **https://security.microsoft.com** (Microsoft Defender portal).
+### 6.2 Confirm Device Onboarding in the MDE Portal
+
+1. Go to [https://security.microsoft.com](https://security.microsoft.com) → sign in with your Azure credentials.
 2. In the left nav, go to **Assets → Devices**.
-3. Confirm your target machine appears in the device inventory.
-4. Click on the machine to view its **Device page**: health state, active alerts, software inventory, and vulnerability findings (same data surfaced in Defender for Cloud vulnerability assessment in Step 3, but with more detail).
+3. Confirm your target machine appears with:
+   - **Status:** Active
+   - **Onboarding status:** Onboarded
+   - **Health state:** No sensor issues
+4. If the machine is missing, wait 15–30 minutes — MDE extension deployment and portal onboarding are asynchronous.
 
-> **Note:** The MDE portal is separate from the Azure Portal. Security operations teams typically use the MDE portal for day-to-day investigation; platform teams use the Azure Portal (Defender for Cloud) for posture management and recommendations.
+### 6.3 Review Device Health and Active Alerts
+
+1. Click on your machine in the **Devices** list to open its **Device page**.
+2. Review the **Security status** panel at the top:
+   - **Active alerts** — number of open alerts scoped to this machine
+   - **Exposure level** — aggregated risk score based on CVEs and configuration weaknesses
+3. Go to the **Alerts** tab on the device page:
+   - Sample alerts generated in Step 5 may appear here — each maps to a MITRE ATT&CK tactic
+   - Click an alert → **Alert story** to see the full process tree and timeline leading to the detection
+4. Go to the **Timeline** tab:
+   - This shows a raw event stream for the machine — process launches, file writes, network connections, registry changes
+   - Use the search box to filter by a process name (e.g., `powershell.exe`) to see all associated activity
+
+### 6.4 Review Software Inventory
+
+1. On the device page, click the **Software inventory** tab.
+2. Review the installed software list — each entry shows:
+   - **Product name and version**
+   - **Vendor**
+   - **Weaknesses** — CVE count associated with the installed version
+3. Click a software entry with **Weaknesses > 0** to see the full CVE list — this is the same data surfaced in the vulnerability assessment from Step 3, but browseable by product here.
+4. Note any **End-of-support** flags — software past vendor EOL with known CVEs is the highest-risk category and the first remediation target for [Azure Update Manager](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md).
+
+### 6.5 Run a Baseline Advanced Hunting Query
+
+1. In the Microsoft Defender portal, go to **Hunting → Advanced hunting** (left nav).
+2. Run the following query to confirm the machine is actively sending telemetry:
+
+```kql
+DeviceInfo
+| where DeviceName == "<your-machine-name>"
+| project Timestamp, DeviceName, OSPlatform, OSVersion, OnboardingStatus, HealthStatus
+| order by Timestamp desc
+| take 5
+```
+
+3. Confirm `OnboardingStatus` shows `Onboarded` and `HealthStatus` shows `Active`.
+4. Run a second query to validate network telemetry is flowing:
+
+```kql
+DeviceNetworkEvents
+| where DeviceName == "<your-machine-name>"
+| where Timestamp > ago(1h)
+| summarize ConnectionCount = count() by RemoteIPType, RemotePort, ActionType
+| order by ConnectionCount desc
+```
+
+> **Note:** Replace `<your-machine-name>` with the exact hostname shown in the **Devices** list. Advanced hunting queries run against up to 30 days of MDE telemetry.
+
+### 6.6 Defender for Cloud vs. MDE Portal — When to Use Each
+
+| Task | Portal |
+| --- | --- |
+| Enable / disable Defender plans | Azure Portal → Defender for Cloud |
+| Review Secure Score and recommendations | Azure Portal → Defender for Cloud |
+| Manage policy and auto-remediation | Azure Portal → Defender for Cloud / Policy |
+| Day-to-day alert triage and investigation | [security.microsoft.com](https://security.microsoft.com) |
+| Device inventory, health state, onboarding | [security.microsoft.com](https://security.microsoft.com) |
+| Advanced hunting and threat investigation | [security.microsoft.com](https://security.microsoft.com) |
+| Software inventory and CVE detail by product | [security.microsoft.com](https://security.microsoft.com) |
+| FIM event queries | Azure Portal → Log Analytics |
+| Arc machine onboarding and extensions | Azure Portal → Azure Arc |
 
 ---
 

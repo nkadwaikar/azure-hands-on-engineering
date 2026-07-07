@@ -11,6 +11,18 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; fa
 
 ---
 
+## Module / Track Structure
+
+```text
+Recovery Services vaults/
+├── README.md                          ← Track entry point
+├── 1-VM Backup and Restore Procedure.md ← Lab 1: VM Backup
+├── 2-Azure Site Recovery.md           ← Lab 2: Cross-Region Failover (you are here)
+└── 3-Azure storage replication.md     ← Lab 3: Storage Replication
+```
+
+---
+
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)

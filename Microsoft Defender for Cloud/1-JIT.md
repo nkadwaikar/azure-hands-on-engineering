@@ -2,10 +2,21 @@
 
 Just-In-Time VM access adds a time-limited, on-demand approval layer on top of Azure Bastion. Port openings are temporary NSG rules managed by Microsoft Defender for Cloud — no standing inbound access exists between sessions.
 
-Last validated on: 2026-06-19  
+Last validated on: 2026-06-19
 Portal experience note: Steps validated against Microsoft Defender for Cloud as of June 2026; labels can vary slightly by subscription and feature rollout.
 
 > **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) first.
+
+---
+
+## Module / Track Structure
+
+```text
+Microsoft Defender for Cloud/
+├── README.md                          ← Track entry point
+├── 1-JIT.md                           ← Lab 1: Bastion + JIT VM Access (you are here)
+└── 2-Defender-for-Servers.md          ← Lab 2: Workload Protection
+```
 
 ---
 
@@ -97,7 +108,7 @@ Even with an NSG, an always-open RDP rule is a standing target. JIT closes the p
 
 1. Go to **Virtual Machines** → Select your VM
 2. Click **Connect** → Choose **Bastion**
-3. Enter your credentials (or retrieve from Key Vault — see [1-Azure Bastion.md § Password from Key Vault](../Azure%20Bastion/1-Azure%20Bastion.md#6-password-from-azure-key-vault-secretless-access-pattern))
+3. Enter your credentials (or retrieve from Key Vault — see [1-Azure Bastion.md § Password from Key Vault](../Azure%20Bastion/1-Azure%20Bastion.md#8-password-from-azure-key-vault-secretless-access-pattern))
 4. Click **Connect** — a browser-based session opens
 5. Confirm the session is active
 
@@ -195,4 +206,4 @@ See [Naming Convention — JIT NSG Rules](../Naming-Convention.md#jit-nsg-rules)
 
 ---
 
-[← Azure Bastion — Secure VM Access](../Azure%20Bastion/1-Azure%20Bastion.md) | [↑ Track README](Readme.md) | [↑ Repo README](../README.md)
+[← Azure Bastion — Secure VM Access](../Azure%20Bastion/1-Azure%20Bastion.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

@@ -1,6 +1,7 @@
 # Deploying a Domain Controller in Azure
 
-Last validated on: July 2026 | Azure Portal · PowerShell
+Last validated on: 2026-07-06
+Portal experience note: Steps validated against Azure Portal and PowerShell as of July 2026; labels can vary slightly by region and feature rollout.
 
 > **Note:** This lab deploys a two-DC Active Directory Domain Services forest in Azure. All resources are self-contained in a single subscription and resource group. DSRM passwords and local admin credentials are stored in Azure Key Vault — no secrets are stored locally or in documentation.
 > **Why this matters:** On-premises workloads migrating to Azure, hybrid identity scenarios, and applications that require Kerberos or NTLM authentication all depend on a healthy, highly available domain controller infrastructure. Deploying DCs in Azure — with no public IPs, Bastion-only access, static private IPs, and Key Vault-stored secrets — demonstrates the secure-by-default posture required in enterprise environments. This lab bridges traditional Active Directory engineering with Azure's identity and governance model.

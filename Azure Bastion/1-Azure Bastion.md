@@ -2,25 +2,37 @@
 
 Azure Bastion lets you RDP/SSH into a VM without exposing a public IP, using an in-browser session over TLS (port 443). It's the recommended enterprise pattern for secure VM access.
 
-Last validated on: 2026-06-19  
+Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
 
 > **Note:** The `AzureBastionSubnet` subnet (minimum `/26`) must exist in your VNet before deploying Bastion. The subnet name is case-sensitive and must be exact.
 
 ---
 
+## Module / Track Structure
+
+```text
+Azure Bastion/
+├── README.md                          ← Track entry point
+└── 1-Azure Bastion.md                 ← Lab 1: Secure VM Access (you are here)
+```
+
+---
+
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)
-- [Deploy Azure Bastion](#2-deploy-azure-bastion-if-not-already-deployed)
-- [Connect to the VM](#3-connect-to-the-vm-using-bastion)
-- [Troubleshooting](#4-troubleshooting-real-world-fixes)
-- [Why Bastion Matters](#5-why-bastion-matters-engineering-justification)
-- [Password from Key Vault](#6-password-from-azure-key-vault-secretless-access-pattern)
-- [Bastion Access Diagram](#7-bastion-access-diagram)
-- [Bastion vs Jumpbox vs Private Endpoint](#8-bastion-vs-jumpbox-vs-private-endpoint--comparison)
-- [Cleanup / Teardown](#9-cleanup--teardown)
-- [VNet Peering for Cross-VNet Bastion Access](#10-vnet-peering-for-cross-vnet-bastion-access)
+- [Learning Objectives](#2-learning-objectives)
+- [Scenario](#3-scenario)
+- [Deploy Azure Bastion](#4-deploy-azure-bastion-if-not-already-deployed)
+- [Connect to the VM](#5-connect-to-the-vm-using-bastion)
+- [Troubleshooting](#6-troubleshooting-real-world-fixes)
+- [Why Bastion Matters](#7-why-bastion-matters-engineering-justification)
+- [Password from Key Vault](#8-password-from-azure-key-vault-secretless-access-pattern)
+- [Bastion Access Diagram](#9-bastion-access-diagram)
+- [Bastion vs Jumpbox vs Private Endpoint](#10-bastion-vs-jumpbox-vs-private-endpoint--comparison)
+- [Cleanup / Teardown](#11-cleanup--teardown)
+- [VNet Peering for Cross-VNet Bastion Access](#12-vnet-peering-for-cross-vnet-bastion-access)
 - [Bastion + JIT Lab](../Microsoft%20Defender%20for%20Cloud/1-JIT.md)
 
 ---
@@ -34,14 +46,14 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 | Estimated Time | 30–60 minutes |
 | VM | Deployed in a VNet with a private IP; no public IP required |
 | Subnet | VNet contains a subnet named exactly `AzureBastionSubnet` (minimum `/26`) |
-| NSG | If attached to `AzureBastionSubnet`, required inbound and outbound rules must be in place (see Section 2) |
+| NSG | If attached to `AzureBastionSubnet`, required inbound and outbound rules must be in place (see Section 4) |
 
 Naming reference: [Naming Convention](../Naming-Convention.md)
 
 ### Assumptions and Scope Boundaries
 
 - Lab uses a single-region VNet and one Bastion deployment.
-- Cross-VNet (peered) access requires the Standard tier with IP-based connection enabled (covered in Section 10).
+- Cross-VNet (peered) access requires the Standard tier with IP-based connection enabled (covered in Section 12).
 - Private endpoint architecture and custom DNS are out of scope.
 - Lab steps use the Azure Portal only; Azure CLI equivalents are not covered.
 
@@ -67,7 +79,7 @@ Most teams expose RDP (port 3389) or SSH (port 22) directly to the internet to s
 
 ---
 
-## 2. Deploy Azure Bastion (If Not Already Deployed)
+## 4. Deploy Azure Bastion (If Not Already Deployed)
 
 ### Step 1 — Create the Resource Group
 
@@ -134,7 +146,7 @@ The subnet must exist in your VNet **before** deploying Bastion.
 
 ---
 
-## 3. Connect to the VM Using Bastion
+## 5. Connect to the VM Using Bastion
 
 ### Method A — From the VM Blade (Recommended)
 
@@ -151,7 +163,7 @@ A browser-based RDP/SSH session opens instantly.
 
 ---
 
-## 4. Troubleshooting (Real World Fixes)
+## 6. Troubleshooting (Real World Fixes)
 
 ### Issue: Bastion button missing
 
@@ -198,7 +210,7 @@ A browser-based RDP/SSH session opens instantly.
 
 ---
 
-## 5. Why Bastion Matters (Engineering Justification)
+## 7. Why Bastion Matters (Engineering Justification)
 
 - No public IP exposure
 - No inbound NSG rules from the Internet
@@ -211,7 +223,7 @@ A browser-based RDP/SSH session opens instantly.
 
 ---
 
-## 6. Password from Azure Key Vault (Secretless Access Pattern)
+## 8. Password from Azure Key Vault (Secretless Access Pattern)
 
 Instead of typing a password manually when connecting via Bastion, retrieve it securely from Azure Key Vault.
 
@@ -250,7 +262,7 @@ Instead of typing a password manually when connecting via Bastion, retrieve it s
 
 ---
 
-## 7. Bastion Access Diagram
+## 9. Bastion Access Diagram
 
 The following describes the secure access flow when using Azure Bastion:
 
@@ -275,7 +287,7 @@ The following describes the secure access flow when using Azure Bastion:
 
 ---
 
-## 8. Bastion vs Jumpbox vs Private Endpoint — Comparison
+## 10. Bastion vs Jumpbox vs Private Endpoint — Comparison
 
 | Feature | Azure Bastion | Jumpbox VM | Private Endpoint |
 | --- | --- | --- | --- |
@@ -311,7 +323,7 @@ The following describes the secure access flow when using Azure Bastion:
 
 ---
 
-## 9. Cleanup / Teardown
+## 11. Cleanup / Teardown
 
 When you are done with the lab, remove resources to avoid ongoing charges.
 
@@ -345,7 +357,7 @@ When you are done with the lab, remove resources to avoid ongoing charges.
 
 ---
 
-## 10. VNet Peering for Cross-VNet Bastion Access
+## 12. VNet Peering for Cross-VNet Bastion Access
 
 If your `AzureBastionSubnet` (`10.0.1.0/26`) and your VM subnet (`172.16.0.0/24`) are in separate VNets, you must create VNet Peering so Bastion (in the hub VNet) can reach the VM (in the spoke VNet).
 

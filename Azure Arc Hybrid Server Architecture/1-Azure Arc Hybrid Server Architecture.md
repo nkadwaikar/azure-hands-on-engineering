@@ -2,9 +2,21 @@
 
 > **Why this matters:** Managing on-premises and multi-cloud servers without Azure Arc means separate toolchains for policy, patching, monitoring, and security — Arc projects every server into Azure Resource Manager so the same governance stack applies everywhere, with Defender for Servers as the security layer.
 
+Last validated on: 2026-07-06
 Portal experience note: Validated against Azure Portal as of July 2026; agent installation steps apply to both Windows Server and supported Linux distributions. Onboarding steps below use the **Azure Portal UI** (no CLI/PowerShell authoring required — the portal generates the scripts for you).
 
 > **Note:** This document is an architecture reference and design guide. Hands-on agent installation steps require outbound HTTPS (port 443) connectivity from the target server to Azure endpoints.
+
+---
+
+## Module / Track Structure
+
+```text
+Azure Arc Hybrid Server Architecture/
+├── README.md                          ← Track entry point
+├── 1-Azure Arc Hybrid Server Architecture.md ← Architecture + governance reference (you are here)
+└── 2-On-Prem Hyper-V Lab Setup for Azure Arc.md ← Lab: Hyper-V onboarding
+```
 
 ---
 

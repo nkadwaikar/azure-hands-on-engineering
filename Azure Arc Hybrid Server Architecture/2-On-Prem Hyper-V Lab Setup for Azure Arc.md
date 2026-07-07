@@ -5,8 +5,19 @@
 >
 > This guide walks through building a disposable Hyper-V lab that behaves like an on-prem environment, so you can validate the full Arc onboarding flow before rolling out to production.
 
-Last validated on: July 2026
+Last validated on: 2026-07-06
 Portal experience note: Steps validated against Azure Portal and Azure Arc onboarding script as of July 2026.
+
+---
+
+## Module / Track Structure
+
+```text
+Azure Arc Hybrid Server Architecture/
+├── README.md                          ← Track entry point
+├── 1-Azure Arc Hybrid Server Architecture.md ← Architecture + governance reference
+└── 2-On-Prem Hyper-V Lab Setup for Azure Arc.md ← Lab: Hyper-V onboarding (you are here)
+```
 
 ---
 

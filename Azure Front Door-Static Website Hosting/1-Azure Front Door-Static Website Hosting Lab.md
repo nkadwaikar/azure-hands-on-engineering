@@ -3,11 +3,12 @@
 
 > **Why this matters:** Without an edge layer, a storage-hosted site has no DDoS protection, no global caching, and no clean custom domain — this lab puts Azure Front Door in front of a static website so the origin endpoint is never directly reachable by clients.
 
-## Quick Orientation
+## Module / Track Structure
 
 ```text
 Azure Front Door-Static Website Hosting/
-`-- 1-Azure Front Door-Static Website Hosting Lab.md
+├── README.md                          ← Track entry point
+└── 1-Azure Front Door-Static Website Hosting Lab.md ← Lab 1: CDN + Static Hosting (you are here)
 ```
 
 This module is a focused single-lab walkthrough for global static website delivery through Azure Front Door.

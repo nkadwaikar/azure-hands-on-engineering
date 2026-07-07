@@ -11,7 +11,17 @@ Portal experience note: Steps validated against Azure Portal UI as of June 2026;
 > **Note:** This lab uses Azure Backup defaults. Adjust retention, encryption, and security settings based on your organization’s governance and compliance requirements.
 
 ---
+## Module / Track Structure
 
+```text
+Recovery Services vaults/
+├── README.md                          ← Track entry point
+├── 1-VM Backup and Restore Procedure.md ← Lab 1: VM Backup (you are here)
+├── 2-Azure Site Recovery.md           ← Lab 2: Cross-Region Failover
+└── 3-Azure storage replication.md     ← Lab 3: Storage Replication
+```
+
+---
 ## Quick Navigation
 
 - [Learning Objectives](#1-learning-objectives)

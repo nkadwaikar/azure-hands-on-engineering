@@ -9,6 +9,17 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 ---
 
+## Module / Track Structure
+
+```text
+VMSS/
+├── README.md                          ← Track entry point
+├── 1-capture-and-test-image.md        ← Lab 1: Image Capture + Validation (you are here)
+└── 2-vmss-deployment.md               ← Lab 2: Scale Set Deployment
+```
+
+---
+
 ## Quick Navigation
 
 - [Capture the Image](#1-capture-the-image)
@@ -57,8 +68,6 @@ An image version that looks correct in the gallery can still fail at boot if Sys
 ---
 
 ## 2. Deploy a Test VM from the Captured Image
-
-**Portal Navigation:**
 
 1. In Azure Portal, search for **Shared Image Gallery**.
 2. Select your gallery, then your **Image Definition**.

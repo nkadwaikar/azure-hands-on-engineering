@@ -19,6 +19,17 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 
 ---
 
+## Module / Track Structure
+
+```text
+VMSS/
+├── README.md                          ← Track entry point
+├── 1-capture-and-test-image.md        ← Lab 1: Image Capture + Validation
+└── 2-vmss-deployment.md               ← Lab 2: Scale Set Deployment (you are here)
+```
+
+---
+
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)

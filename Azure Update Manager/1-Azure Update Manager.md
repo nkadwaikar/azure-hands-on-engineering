@@ -2,10 +2,20 @@
 
 > **Why this matters:** Unpatched systems are the most exploited attack surface in enterprise environments. Azure Update Manager replaces the legacy Log Analytics-based Update Management solution and provides a single, agent-free control plane for assessing and deploying OS updates across Azure VMs, Arc-enabled on-premises servers, and multi-cloud machines — without routing telemetry through Log Analytics as a dependency.
 
-Last validated on: July 2026
+Last validated on: 2026-07-06
 Portal experience note: Steps validated against Azure Portal (Update Manager blade) as of July 2026. The Update Manager blade is accessed via **Search → Azure Update Manager** or via the **Operations** section of individual VM resources.
 
 > **Note:** This lab targets the standalone Azure Update Manager service (generally available). If your subscription still uses the legacy Update Management solution embedded in Azure Automation accounts, you will need to migrate to Update Manager before proceeding — the two solutions conflict when managing the same machine.
+
+---
+
+## Module / Track Structure
+
+```text
+Azure Update Manager/
+├── README.md                          ← Track entry point
+└── 1-Azure Update Manager.md          ← Lab 1: Patch Orchestration (you are here)
+```
 
 ---
 

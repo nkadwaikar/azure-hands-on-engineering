@@ -11,6 +11,16 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 
 ---
 
+## Module / Track Structure
+
+```text
+Azure Policy Auto‑Remediation/
+├── README.md                          ← Track entry point
+└── 1-Azure Policy Auto‑Remediation.md ← Lab 1: DINE Auto-Remediation (you are here)
+```
+
+---
+
 ## Quick Navigation
 
 - [Prerequisites](#1-prerequisites)
@@ -19,6 +29,7 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 - [Lab Architecture](#4-lab-architecture)
 - [Lab Steps](#5-lab-steps)
 - [Validation and Remediation](#step-5--validate-auto-remediation)
+- [What Makes This Lab Production-Ready](#6-what-makes-this-lab-production-ready)
 - [Cleanup](#7-cleanup)
 
 ---

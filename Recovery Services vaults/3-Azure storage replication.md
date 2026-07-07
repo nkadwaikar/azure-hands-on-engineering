@@ -2,10 +2,22 @@
 
 > **Why this matters:** Choosing the wrong replication tier means either overpaying for durability you don't need or losing data when a datacenter fails — this lab creates storage accounts at LRS, ZRS, GRS, and GZRS so the redundancy trade-offs are directly observable, not theoretical.
 
-Last validated on: 2026-06-10  
+Last validated on: 2026-06-10
 Portal experience note: Steps validated against Azure Portal as of June 2026; ZRS, GRS, and GZRS availability varies by region.
 
 > **Note:** Each storage account in this lab incurs separate charges. Delete all accounts when the lab is complete. ZRS, GRS, and GZRS cost more than LRS — this difference is visible in the pricing calculator.
+
+---
+
+## Module / Track Structure
+
+```text
+Recovery Services vaults/
+├── README.md                          ← Track entry point
+├── 1-VM Backup and Restore Procedure.md ← Lab 1: VM Backup
+├── 2-Azure Site Recovery.md           ← Lab 2: Cross-Region Failover
+└── 3-Azure storage replication.md     ← Lab 3: Storage Replication (you are here)
+```
 
 ---
 

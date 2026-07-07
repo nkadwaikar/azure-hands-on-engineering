@@ -4,7 +4,7 @@
 
 > **Why this matters:** SharePoint sprawl — uncontrolled sites, inconsistent permissions, and undiscoverable content — is one of the most common compliance failures in Microsoft 365 tenants; this lab builds a governed hub-site topology with a metadata taxonomy, least-privilege permissions, and Purview retention labels so content is findable, classifiable, and defensible before an audit.
 
-Last validated on: July 2026
+Last validated on: 2026-07-06
 
 ---
 

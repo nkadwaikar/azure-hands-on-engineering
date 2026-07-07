@@ -4,7 +4,7 @@
 
 > **Why this matters:** Without lifecycle governance, every employee can spin up an ungoverned Team — resulting in thousands of abandoned groups, sensitive data in unmonitored channels, and no audit trail; this lab restricts creation, enforces naming, templates consistent provisioning, and wires expiration and retention so the Teams estate remains compliant and manageable at scale.
 
-Last validated on: July 2026
+Last validated on: 2026-07-06
 
 ---
 

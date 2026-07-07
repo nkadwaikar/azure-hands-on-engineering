@@ -13,6 +13,16 @@ Portal experience note: Steps validated against Microsoft Entra admin center UI 
 
 ---
 
+## Module / Track Structure
+
+```text
+Microsoft Entra Backup & Recovery/
+├── README.md                          ← Track entry point
+└── 1-Microsoft Entra Backup & Recovery.md ← Lab 1: Difference Reports + Recovery (you are here)
+```
+
+---
+
 ## Quick Navigation
 
 - [Learning Objectives](#1-learning-objectives)
@@ -20,7 +30,7 @@ Portal experience note: Steps validated against Microsoft Entra admin center UI 
 - [Service Behavior Overview](#3-service-behavior-overview)
 - [Generate a Difference Report](#4-generate-a-difference-report)
 - [Perform a Recovery Operation](#5-perform-a-recovery-operation)
-- [Post-Recovery Validation](#5-perform-a-recovery-operation)
+- [Validation Checklist](#6-validation-checklist)
 - [Cleanup](#7-cleanup)
 
 ---

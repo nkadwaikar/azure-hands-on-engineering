@@ -4,7 +4,7 @@
 
 > **Why this matters:** Manual classification and reactive compliance reviews cannot scale in an enterprise Microsoft 365 tenant — this lab automates data protection through DLP policies that prevent exfiltration, auto-labeling that classifies content without user intervention, Insider Risk Management for detecting data theft patterns, and Compliance Manager assessments mapped to NIST, ISO, and GDPR frameworks.
 
-Last validated on: July 2026
+Last validated on: 2026-07-06
 
 ---
 

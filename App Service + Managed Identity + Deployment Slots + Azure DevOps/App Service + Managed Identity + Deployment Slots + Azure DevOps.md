@@ -5,8 +5,19 @@
 A portal-first lab covering Azure App Service deployment with System-Assigned Managed Identity, deployment slots for blue-green deployments, Key Vault secret integration, and a full Azure DevOps CI/CD pipeline with manual approval gates.
 
 Last validated on: 2026-06-24
+Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
 
 > **Note:** This lab uses placeholder resource names such as `app-appservice-wus2-lab` and `kv-appservice-wus2-lab`. Substitute your own names following your naming convention.
+
+---
+
+## Module / Track Structure
+
+```text
+App Service + Managed Identity + Deployment Slots + Azure DevOps/
+├── README.md                          ← Track entry point
+└── App Service + Managed Identity + Deployment Slots + Azure DevOps.md ← Lab 1 (you are here)
+```
 
 ---
 

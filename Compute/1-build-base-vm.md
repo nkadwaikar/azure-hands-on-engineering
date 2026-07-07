@@ -4,10 +4,22 @@
 
 This guide walks you through creating a VM in Azure with consistent steps and naming conventions, and establishes the baseline build that all subsequent compute labs depend on.
 
-Last validated on: 2026-06-19  
+Last validated on: 2026-06-19
 Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
 
 > **Note:** All resources created in this lab feed into the Sysprep and VMSS track. Delete the resource group when the full Compute track is complete to avoid ongoing charges.
+
+---
+
+## Module / Track Structure
+
+```text
+Compute/
+├── README.md                          ← Track entry point
+├── 1-build-base-vm.md                 ← Lab 1: Build a Base VM (you are here)
+├── 2-sysprep-vm.md                    ← Lab 2: Sysprep (Azure-safe)
+└── 3-Install IIS.md                   ← Lab 3: Install IIS
+```
 
 ---
 

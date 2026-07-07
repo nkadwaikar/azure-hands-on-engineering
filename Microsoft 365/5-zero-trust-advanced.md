@@ -4,7 +4,7 @@
 
 > **Why this matters:** Legacy Conditional Access configurations that only check "is the user licensed?" leave the tenant wide open to token theft, impossible travel, and compromised credentials — this lab implements risk-based blocking, device compliance gates, session controls via Defender for Cloud Apps, and custom Authentication Strengths so access decisions are continuously evaluated against real-time identity risk signals.
 
-Last validated on: July 2026
+Last validated on: 2026-07-06
 
 ---
 
