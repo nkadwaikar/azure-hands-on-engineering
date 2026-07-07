@@ -1,23 +1,10 @@
 # On-Prem Hyper-V Lab Setup for Azure Arc
 
-> **Why this matters:** Azure Arc's value is in bringing non-Azure machines under unified management — but you cannot validate the Connected Machine Agent (CMA) onboarding flow, outbound-endpoint connectivity model, or policy/Defender enrollment using Azure VMs, because those are already native ARM resources. A Hyper-V lab gives you genuinely "outside Azure" machines to exercise the full Arc pipeline against before committing to a production rollout.
-> **Companion to:** [Azure Arc Hybrid Server Architecture (with Defender for Servers)](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — the production design guide this lab validates.
->
-> This guide walks through building a disposable Hyper-V lab that behaves like an on-prem environment, so you can validate the full Arc onboarding flow before rolling out to production.
+Azure VMs are already native ARM resources — they bypass the Connected Machine Agent (CMA) flow entirely. This lab builds a disposable Hyper-V environment that behaves like on-premises infrastructure, so you can validate the full Arc onboarding pipeline (CMA install, outbound connectivity, policy, Defender, RBAC) before a production rollout.
 
-Last validated on: 2026-07-06
-Portal experience note: Steps validated against Azure Portal and Azure Arc onboarding script as of July 2026.
+> **Validated:** Azure Portal and Azure Arc onboarding script as of July 2026.
 
----
-
-## Module / Track Structure
-
-```text
-Azure Arc Hybrid Server Architecture/
-├── README.md                          ← Track entry point
-├── 1-Azure Arc Hybrid Server Architecture.md ← Architecture + governance reference
-└── 2-On-Prem Hyper-V Lab Setup for Azure Arc.md ← Lab: Hyper-V onboarding (you are here)
-```
+**Companion guide:** [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — the production design reference this lab validates.
 
 ---
 
@@ -67,7 +54,7 @@ By the end of this lab you will be able to:
 
 ## Why a Lab, Not Just Azure VMs
 
-Azure VMs are already native ARM resources with built-in ARM resource IDs and never go through the CMA onboarding flow. To actually exercise the Connected Machine Agent, the outbound-endpoint connectivity model, tagging-at-onboarding, and policy/Defender enrollment described in the architecture doc, you need machines that Azure does **not** already know about — that's what a Hyper-V lab gives you: disposable "on-prem" VMs.
+Azure VMs already have ARM resource IDs and skip the CMA flow — you need machines Azure has never seen to exercise the full onboarding pipeline. Hyper-V gives you exactly that.
 
 ---
 
@@ -124,19 +111,10 @@ The VMs must be able to reach the required outbound HTTPS endpoints (see [Archit
 
 1. **Resource group:** Portal → **Resource groups → + Create** → name it `rg-arc-servers-prod`.
 2. **(Optional) Dedicated Log Analytics workspace:** Portal → **Log Analytics workspaces → + Create** → `law-arc-servers-prod`, so telemetry is kept separate from other workspaces.
-3. **Resource provider registration:** Confirm the following are registered on the subscription:
+3. **Resource provider registration:** Portal → **Subscriptions** → your subscription → **Resource providers** → search and **Register** each of the following, then wait until each shows **Status: Registered** before proceeding:
    - `Microsoft.HybridCompute`
    - `Microsoft.GuestConfiguration`
    - `Microsoft.HybridConnectivity`
-
-   To register via the portal:
-
-   1. Go to **Subscriptions** → select your subscription → **Resource providers** (under *Settings*).
-   2. Search for each namespace, select it, then click **Register**:
-      - `Microsoft.HybridCompute`
-      - `Microsoft.GuestConfiguration`
-      - `Microsoft.HybridConnectivity`
-   3. Refresh the list — wait until each shows **Status: Registered** before proceeding (can take a few minutes).
 4. **Tag:** Use `Environment: Prod` so resources are filterable and correctly scoped by policy initiatives.
 
 ---
@@ -227,9 +205,7 @@ Exercise the same RBAC, policy, and automation patterns from the architecture do
 
 ### Defender for Servers
 
-1. To test Defender end-to-end, enable the plan at subscription level (note: it applies broadly and adds cost for the duration of the lab).
-2. Confirm lab VMs pick up Secure Score recommendations, and optionally test JIT access against a lab VM specifically.
-3. When you decommission in Step 9, remember Defender coverage disappears with the Arc resource, but the subscription-level plan itself stays enabled — disable it manually if no longer needed.
+> Full Defender for Servers setup, Secure Score, FIM, and JIT testing is covered in the [Microsoft Defender for Cloud track](../Microsoft%20Defender%20for%20Cloud/2-Defender-for-Servers.md). Arc machines onboard automatically once the plan is enabled at subscription level — no extra steps needed here beyond what Step 6 verifies.
 
 The isolation principle throughout: **scope, not separate copies** — every assignment above targets `rg-arc-servers-prod` (or a tag/RG filter) explicitly.
 
@@ -264,11 +240,14 @@ Use the lab to validate the parts of the architecture that are risky to get wron
 
 ---
 
-## Notes
+## Notes & Lessons Learned
 
-- The isolation boundary is **scope** (resource group and tag filters), not separate copies — Step 7 reuses your real RBAC roles, policy initiatives, and Automation account, narrowly scoped to `rg-arc-servers-prod`.
-- To test **at-scale / bulk onboarding** rather than single-server, clone 5–10 VMs and run the "Add multiple servers" custom script method — Hyper-V checkpoints make this fast to reset between runs.
-- Snapshot each VM immediately after OS install, before running the onboarding script — makes it trivial to reset and re-test without rebuilding from ISO.
+- **Snapshot early:** Take a VM snapshot after OS install, before onboarding — eliminates the rebuild-from-ISO cost when re-testing different paths (GPO, custom script, bulk).
+- **IPv6 is the most common failure:** The CMA script times out on IPv6 resolution before falling back to IPv4. Fix: `Disable-NetAdapterBinding -ComponentID ms_tcpip6` on the VM NIC, then reboot.
+- **Service principal secrets expire:** If you re-download the portal-generated onboarding script, regenerate `$ServicePrincipalClientSecret` before running — stale secrets fail silently.
+- **Azure VMs can't substitute:** They already have ARM resource IDs and bypass the CMA flow entirely.
+- **Scope isolation:** Every RBAC, policy, and Automation assignment must target `rg-arc-servers-prod` or a tag filter — not the subscription — or lab governance bleeds into production.
+- **Bulk onboarding test:** Clone 5–10 VMs and run the "Add multiple servers" custom script method; Hyper-V checkpoints make this fast to reset between runs.
 
 ---
 
@@ -295,14 +274,6 @@ All section references point to [Azure Arc Hybrid Server Architecture](1-Azure%2
 | Bulk onboarding (GPO/script) | Section 7.2 — Onboarding Multiple Servers at Scale |
 | Runbook version control & testing | Section 7.3 — Runbook Version Control & Testing |
 | Decommissioning | Section 7.5 — Decommissioning |
-
-## What I Learned
-
-- IPv6 is the single most common Arc onboarding failure in Hyper-V labs — the CMA script times out attempting IPv6 resolution before falling back to IPv4; disabling IPv6 on the VM NIC (`Disable-NetAdapterBinding -ComponentID ms_tcpip6`) resolves it permanently
-- Service principal client secrets in the generated onboarding script expire or are invalidated if you re-download the script without checking the `$ServicePrincipalClientSecret` value — always regenerate the secret before running
-- Snapshot each VM immediately after OS install and before running the onboarding script; this eliminates the rebuild-from-ISO cost when re-testing different onboarding paths (GPO, custom script, bulk)
-- Azure VMs cannot substitute for this lab — they already have ARM resource IDs and bypass the CMA flow entirely; the distinction between "Arc-enabled" and "natively ARM-managed" only becomes clear when you build a machine Arc genuinely doesn't know about
-- Scope isolation is the key principle throughout governance wiring: every RBAC, policy, and Automation runbook assignment must target `rg-arc-servers-prod` or a tag filter — not the subscription — or lab governance bleeds into production resources
 
 ---
 

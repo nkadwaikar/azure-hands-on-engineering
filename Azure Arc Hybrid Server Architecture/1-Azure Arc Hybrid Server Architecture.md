@@ -1,38 +1,24 @@
-# Azure Arc Hybrid Server Architecture (with Defender for Servers)
+# Azure Arc Hybrid Server Architecture
 
-> **Why this matters:** Managing on-premises and multi-cloud servers without Azure Arc means separate toolchains for policy, patching, monitoring, and security — Arc projects every server into Azure Resource Manager so the same governance stack applies everywhere, with Defender for Servers as the security layer.
+Azure Arc projects on-premises and multi-cloud servers into Azure Resource Manager so the same governance stack — policy, patching, monitoring, and security — applies everywhere. Onboarding steps use the **Azure Portal UI** (the portal generates scripts for you; no manual CLI authoring required).
 
-Last validated on: 2026-07-06
-Portal experience note: Validated against Azure Portal as of July 2026; agent installation steps apply to both Windows Server and supported Linux distributions. Onboarding steps below use the **Azure Portal UI** (no CLI/PowerShell authoring required — the portal generates the scripts for you).
+> **Requirements:** Outbound HTTPS (port 443) from each target server to Azure endpoints. Validated against Azure Portal as of July 2026; applies to both Windows Server and supported Linux distributions.
 
-> **Note:** This document is an architecture reference and design guide. Hands-on agent installation steps require outbound HTTPS (port 443) connectivity from the target server to Azure endpoints.
-
----
-
-## Module / Track Structure
-
-```text
-Azure Arc Hybrid Server Architecture/
-├── README.md                          ← Track entry point
-├── 1-Azure Arc Hybrid Server Architecture.md ← Architecture + governance reference (you are here)
-└── 2-On-Prem Hyper-V Lab Setup for Azure Arc.md ← Lab: Hyper-V onboarding
-```
+**Companion guide:** [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — step-by-step Hyper-V onboarding walkthrough.
 
 ---
 
-## Quick Navigation
+## Contents
 
-- [Prerequisites](#0-prerequisites)
-- [High-Level Architecture](#1-high-level-architecture)
-- [Resource Organization & Governance](#2-resource-organization--governance)
-- [Connectivity & Agent Architecture](#3-connectivity--agent-architecture)
-- [Monitoring & Operations](#4-monitoring--operations)
-- [Policy, Configuration & Compliance](#5-policy-configuration--compliance)
-- [Security Architecture with Defender for Servers](#6-security-architecture-with-defender-for-servers)
-- [Automation & Lifecycle Management](#7-automation--lifecycle-management)
+- [0. Prerequisites](#0-prerequisites)
+- [1. High-Level Architecture](#1-high-level-architecture)
+- [2. Resource Organization & Governance](#2-resource-organization--governance)
+- [3. Connectivity & Agent Architecture](#3-connectivity--agent-architecture)
+- [4. Monitoring & Operations](#4-monitoring--operations)
+- [5. Policy, Configuration & Compliance](#5-policy-configuration--compliance)
+- [6. Security Architecture with Defender for Servers](#6-security-architecture-with-defender-for-servers)
+- [7. Automation & Lifecycle Management](#7-automation--lifecycle-management)
 - [Check List](#check-list)
-
-> **Companion guide:** [On-Prem Hyper-V Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — step-by-step Hyper-V environment setup to validate the onboarding flow.
 
 ---
 
@@ -166,7 +152,7 @@ Mandatory tags — enforced via Azure Policy (deny or modify) so Arc servers are
 
 Assign at RG or subscription level — avoid per-resource RBAC sprawl.
 
-### 2.4  Management Group Hierarchy
+### 2.4 Management Group Hierarchy
 
 Place the hybrid landing zone subscription under a dedicated **Management Group** (e.g., `mg-hybrid-servers`) so Azure Policy initiatives and RBAC can be inherited rather than re-applied per subscription. Align with the broader CAF (Cloud Adoption Framework) management group design if one exists.
 
@@ -217,15 +203,13 @@ Document the chosen approach per site in the network runbook.
 
 **Setting up Azure Arc Private Link Scope (Portal):**
 
-1. Portal → search **Azure Arc Private Link Scope** → **+ Create**.
-2. Set subscription, resource group, name (e.g. `pls-arc-hybrid`), and region.
-3. After creation, go to the resource → **Private endpoint connections** → **+ Private endpoint**.
-4. Choose the target **virtual network/subnet** where on-prem connectivity (via VPN/ExpressRoute) terminates.
-5. Under **DNS**, let the wizard auto-create/integrate with an **Azure Private DNS zone** (e.g. `privatelink.his.arc.azure.com`), or link to your existing custom DNS zone if you manage DNS on-prem — the private endpoint's IP needs to resolve correctly from the server's network for the endpoints listed in Section 3.2.
-6. Back on the Private Link Scope resource, go to **Azure Arc machines** (left nav) → **+ Add** → associate each Arc-onboarded server so its traffic routes privately.
-7. For on-prem custom DNS (not Azure Private DNS), add conditional forwarders on your DNS servers pointing the relevant `*.azure.com` zones from Section 3.2 to the Private DNS zone, or manually create A records matching the private endpoint IPs.
+1. Portal → search **Azure Arc Private Link Scope** → **+ Create**. Set subscription, resource group, name (e.g. `pls-arc-hybrid`), and region.
+2. Go to the resource → **Private endpoint connections** → **+ Private endpoint**. Choose the VNet/subnet where on-prem VPN/ExpressRoute terminates.
+3. Under **DNS**, let the wizard auto-create an **Azure Private DNS zone** (e.g. `privatelink.his.arc.azure.com`), or link your existing zone. The private endpoint's IP must resolve correctly from the server's network.
+4. On the Private Link Scope resource → **Azure Arc machines** → **+ Add** — associate each Arc server so its traffic routes privately.
+5. For on-prem custom DNS, add conditional forwarders for the `*.azure.com` zones from Section 3.2 pointing to the Private DNS zone, or create matching A records manually.
 
-Repeat the Private Link Scope + DNS setup per site/region as documented in your network runbook.
+> Repeat per site/region and document each in your network runbook.
 
 ### 3.4 Agent Health & Extension Management
 
@@ -350,7 +334,7 @@ Not every server fits every policy. Establish a formal exemption process:
 - Review all exemptions quarterly — auto-expire after 12 months unless renewed.
 - Track exemptions centrally (e.g., in a tagged Azure resource or a spreadsheet linked from the CMDB).
 
-### 5.4  Configuration Drift Detection
+### 5.4 Configuration Drift Detection
 
 - Schedule Guest Configuration assessments to run daily.
 - Alert on newly non-compliant machines using a **Policy compliance change** event alert.
@@ -455,9 +439,9 @@ Use **Azure Automation** (or Logic Apps) for:
 6. Review + **Download** the generated package/script and distribute it via your chosen method (SCCM package deployment, GPO, Ansible playbook run, etc.).
 7. Monitor rollout: **Azure Arc → Machines**, filter by resource group or tag, and compare the **Connected** count against the number of servers targeted in the batch.
 
-**At-scale caution:** if onboarding hundreds of servers in one batch, stagger the rollout (e.g., a few hundred at a time). Bulk registration can throttle against Azure Resource Manager request limits — the portal itself won't surface a warning about this in advance; throttled registrations simply show as failed in the deployment/onboarding log for that batch, so check the log rather than assuming a clean run.
+> **At-scale caution:** Stagger large rollouts (a few hundred at a time). Bulk registration can hit ARM request throttling — the portal won't warn you in advance; check the onboarding log rather than assuming a clean run.
 
-**Service principal cleanup:** once the batch finishes and all servers show **Connected**, go to **Entra ID → App registrations**, locate the auto-generated onboarding service principal, and either delete it or confirm its credential expiration date (set in step 5) is short. Leaving a long-lived onboarding credential active after rollout is unnecessary standing access — treat it the same as any other service principal under your RBAC review process (Section 2.3).
+> **Service principal cleanup:** Once all servers show **Connected**, go to **Entra ID → App registrations**, find the auto-generated onboarding service principal, and delete it or confirm the credential expiry (set in step 5) is short. Treat it like any other service principal under your RBAC review process (Section 2.3).
 
 **Sizing guidance:**
 
