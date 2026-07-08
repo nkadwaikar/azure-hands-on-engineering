@@ -89,7 +89,7 @@ By the end of this guide, you will have:
 - Created a **maintenance window** and understood how it gates when updates are permitted
 - Scheduled and executed an **update deployment** with classification and exclusion filters
 - Reviewed **compliance reporting** and identified machines overdue for patching
-- Written KQL queries to pull patch state from **Azure Resource Graph** and the `UpdateSummary` table
+- Written KQL queries to pull patch state from **Azure Resource Graph** using the `patchassessmentresources` table (and understood why the legacy `UpdateSummary` table does not apply to Update Manager)
 - Set up the full **Arc → Defender for Servers → Update Manager** pipeline for hybrid fleets
 - Applied a **patch group tagging strategy** for large-scale scheduled patching
 
@@ -408,7 +408,7 @@ After each monthly patching cycle, validate results per tag group:
 
 1. Open **Azure Update Manager → Failed updates** and note affected machines.
 2. For each failed machine:
-   - Check the **error code** in the deployment log (common codes: `0x8024200D` = download failure, `0x80070005` = permissions, `WU_E_NO_SERVICE` = Windows Update service stopped).
+   - Check the **error code** in the deployment log — see [Troubleshooting](#troubleshooting) for common error codes and causes.
    - Re-run deployment: select the machine → **One-time update** → select the missing/failed KBs → **Install now**.
 3. If reboot is required but was blocked: coordinate with the server owner and perform a manual reboot, then re-check compliance.
 4. Validate the **Azure Arc agent health**:
@@ -429,9 +429,10 @@ After each monthly patching cycle, validate results per tag group:
 
 **Generate CVE Reports in Defender for Cloud**
 
-1. Open **Defender for Cloud → Recommendations** → filter to vulnerability findings.
-2. Export the recommendations to CSV (Download button, top of the list).
-3. Filter by **Severity: High / Critical** to produce the high-risk server list.
+Using the **Defender for Cloud → Recommendations** view from [Section 2](#2--review-security--cve-exposure) above:
+
+1. Click **Download** at the top of the recommendations list to export to CSV.
+2. Filter by **Severity: High / Critical** to produce the high-risk server list.
 
 **Archive and Distribute**
 
