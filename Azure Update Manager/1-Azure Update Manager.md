@@ -43,7 +43,7 @@ Azure Update Manager/
 | Azure Role | **Contributor** on the target resource group (or **Azure Update Manager Contributor** built-in role) |
 | Target machines | At least one running Azure VM or Arc-enabled server in a supported OS |
 | Arc requirement | If targeting Arc servers: Azure Connected Machine Agent installed and status **Connected** — complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first |
-| Supported OS | Windows Server 2008 R2+, Windows 10/11; RHEL 7+, SLES 12+, Ubuntu 16.04+, Debian 9+, Amazon Linux 2 |
+| Supported OS | **Azure VMs:** Windows Server 2012 R2+, Windows Server 2016/2019/2022/2025; RHEL 7/8/9, SLES 12/15, Ubuntu 16.04–24.04 LTS, Debian 10/11/12, Amazon Linux 2/2023, Rocky Linux 8/9, Alma Linux 8/9 <br>**Arc servers:** Windows Server 2012 R2+; same Linux distros above |
 | No conflicting solution | Legacy Update Management (Log Analytics-based) must not be active on the same machines |
 | Estimated Time | 45–60 minutes |
 | Tools | Azure Portal only — no CLI required |
@@ -91,14 +91,15 @@ Azure Update Manager requires no agent installation on Azure VMs (it uses the VM
 
 ### 1.2 Add Machines to the Scope
 
-1. Go to **Machines** (left nav) — this lists all Azure VMs and Arc-enabled servers in the selected scope.
+1. Go to **Resources** > **Machines** (left nav) — this lists all Azure VMs and Arc-enabled servers in the selected scope.
 2. Confirm your target machine(s) appear in the list.
 3. If a machine shows **Not assessed**, it has never had an Update Manager assessment run. That's fine — you'll fix that in Step 2.
-4. Note the **Patch orchestration** column:
-   - **Azure-managed** — Azure controls patching automatically (not our scope in this lab)
-   - **Customer managed schedules** — update deployments are controlled by your defined schedules
+4. Note the **Patch orchestration** column (applies to Azure VMs; Arc-enabled servers have no patch orchestration prerequisite):
+   - **Azure-managed** — Azure controls patching automatically via AutomaticByPlatform (not our scope in this lab)
+   - **OS-managed** — Windows Update or the Linux package manager handles patches automatically (AutomaticByOS); Update Manager scheduled deployments do not apply
+   - **Customer managed schedules** — update deployments are controlled by your defined maintenance configurations; **required** for Azure VMs before scheduled patching
    - **Manual updates** — no schedule defined; updates must be triggered on-demand
-   - For Arc-enabled servers, this shows **Customer managed schedules** once a maintenance configuration is assigned
+   - For Arc-enabled servers, patch orchestration is not enforced — there is no prerequisite mode required to use scheduled patching
 
 ---
 
@@ -107,7 +108,7 @@ Azure Update Manager requires no agent installation on Azure VMs (it uses the VM
 An assessment scans the machine and surfaces available updates **without installing anything**. Always run an assessment before scheduling a deployment so you know what's pending.
 
 1. In the **Machines** list, select one or more target machines (checkbox).
-2. Click **Assess now** at the top of the list.
+2. Click **Check for updates** at the top of the list → select **Assess now** from the dropdown.
 3. Confirm the dialog — the assessment is submitted as an asynchronous job.
 4. Refresh after 2–5 minutes. The machine's **Last assessment time** and **Pending updates** count should update.
 5. Click on a machine name → go to the **Updates** tab to see the full list of pending updates, grouped by:
@@ -138,7 +139,7 @@ A **maintenance configuration** (maintenance window) defines **when** updates ar
    | Resource group | `rg-compute-prod` |
    | Configuration name | `mc-windows-prod-weekly` |
    | Region | Same region as target machines |
-   | OS type | Windows (or Linux — create one per OS type) |
+   | Maintenance scope | **Guest (Azure VM, Azure Arc-enabled VMs/servers)** — a single configuration covers both OS types |
 
 3. On the **Schedule** tab:
    - **Start date/time:** pick a time in the near future (e.g. next Saturday 02:00 AM local)
@@ -175,9 +176,9 @@ Use this path in the lab to validate the end-to-end flow without waiting for the
    - Optionally include specific KB numbers if you only want to test with a narrow set
 4. On the **Properties** tab:
    - **Reboot option:** `Reboot if required` (recommended) — Update Manager will only reboot if an update requires it; set to `Never reboot` for non-disruptive lab testing on production-adjacent machines
-   - **Maintenance window duration:** 2 hours
+   - **Maximum duration:** 120 minutes (2 hours) — the portal maximum is 235 minutes; keep at 120 for lab use
 5. Review + **Install** — the deployment is submitted.
-6. Go to **History** (left nav in Update Manager) to monitor the deployment run. Refresh every 2–3 minutes.
+6. Go to **Manage** > **History** (left nav in Update Manager) to monitor the deployment run. Refresh every 2–3 minutes.
 7. When the run completes, click on the run record to see per-machine results: **Succeeded**, **Failed**, or **Not applicable**.
 
 ### 4.2 Validate Scheduled Deployment (Optional — Observe Pattern)
@@ -228,7 +229,9 @@ patchassessmentresources
 | order by pendingCritical desc
 ```
 
-### 6.2 Log Analytics — UpdateSummary (Legacy Agent Path)
+### 6.2 Log Analytics — UpdateSummary (Legacy Agent Path — Deprecated)
+
+> **Note:** The `UpdateSummary` table is populated only by the legacy Microsoft Monitoring Agent (MMA/OMS). Azure Update Manager is agent-free and does **not** write to this table. Use the Resource Graph queries above (6.1, 6.3) for Update Manager data. This query applies only if the legacy MMA agent is still deployed alongside Update Manager.
 
 ```kql
 UpdateSummary
@@ -280,7 +283,7 @@ patchassessmentresources
 
 ### Issue: Arc machine shows "No updates available" immediately after onboarding
 
-- The first assessment after onboarding may return zero results if the machine's local update cache hasn't been refreshed. Run `wuauclt /detectnow` (Windows) or `apt-get update` (Debian/Ubuntu) inside the machine, then re-run the assessment from Update Manager.
+- The first assessment after onboarding may return zero results if the machine's local update cache hasn't been refreshed. Run `usoclient StartScan` (Windows Server 2016+ / Windows 10+) or `wuauclt /detectnow` (Windows Server 2012 R2 only), or `apt-get update` / `yum check-update` (Linux) inside the machine, then re-run the assessment from Update Manager.
 
 ---
 
