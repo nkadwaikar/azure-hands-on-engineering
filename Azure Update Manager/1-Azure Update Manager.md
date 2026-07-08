@@ -43,7 +43,7 @@ Azure Update Manager/
 | Azure Role | **Contributor** on the target resource group (or **Azure Update Manager Contributor** built-in role) |
 | Target machines | At least one running Azure VM or Arc-enabled server in a supported OS |
 | Arc requirement | If targeting Arc servers: Azure Connected Machine Agent installed and status **Connected** — complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first |
-| Supported OS | **Azure VMs:** Windows Server 2012 R2+, Windows Server 2016/2019/2022/2025; RHEL 7/8/9, SLES 12/15, Ubuntu 16.04–24.04 LTS, Debian 10/11/12, Amazon Linux 2/2023, Rocky Linux 8/9, Alma Linux 8/9 <br>**Arc servers:** Windows Server 2012 R2+; same Linux distros above |
+| Supported OS | **Azure VMs:** Windows Server 2012 R2+, Windows Server 2016/2019/2022/2025; RHEL 7/8/9, SLES 12/15, Ubuntu 16.04–24.04 LTS, Debian 10/11/12, Amazon Linux 2/2023, Rocky Linux 8/9, Alma Linux 8/9 **Arc servers:** Windows Server 2012 R2+; same Linux distros above |
 | No conflicting solution | Legacy Update Management (Log Analytics-based) must not be active on the same machines |
 | Estimated Time | 45–60 minutes |
 | Tools | Azure Portal only — no CLI required |
@@ -108,7 +108,7 @@ Azure Update Manager requires no agent installation on Azure VMs (it uses the VM
 An assessment scans the machine and surfaces available updates **without installing anything**. Always run an assessment before scheduling a deployment so you know what's pending.
 
 1. In the **Machines** list, select one or more target machines (checkbox).
-2. Click **Check for updates** at the top of the list → select **Assess now** from the dropdown.
+2. Click **Check for updates** at the top of the list
 3. Confirm the dialog — the assessment is submitted as an asynchronous job.
 4. Refresh after 2–5 minutes. The machine's **Last assessment time** and **Pending updates** count should update.
 5. Click on a machine name → go to the **Updates** tab to see the full list of pending updates, grouped by:
