@@ -88,6 +88,9 @@ flowchart TD
     UpdateMgr --> VM & Arc
     ADDS --> KV
     EntraID --> ExO & Purview
+    Policy --> Purview
+    Monitor --> Purview
+    ExO --> Purview
 ```
 
 ---

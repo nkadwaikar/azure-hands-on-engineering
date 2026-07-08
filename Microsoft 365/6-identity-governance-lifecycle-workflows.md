@@ -16,6 +16,8 @@ This lab automates user identity lifecycle and access governance using Entra ID 
 **License required:** Microsoft Entra ID Governance (add-on to Entra ID P2, or included in Entra Suite)
 **Portal used:** [Entra Admin Center](https://entra.microsoft.com) → **Identity governance**
 
+> **Cross-track reference:** This lab extends the identity foundation built in the [Identity-First track](../Identity-First/README.md). Labs 1–3 of that track establish the Entra ID user model, RBAC scopes, and group management patterns that Lifecycle Workflows and Access Reviews operate on. The RBAC assignments, Managed Identities, and Key Vault access patterns from Identity-First apply equally to the Azure resources and M365 workloads governed here — same identity plane, extended to M365.
+
 ---
 
 ## Table of Contents
@@ -449,8 +451,8 @@ To permanently delete immediately:
 
 ## 6. Next Steps
 
-[← Back to README](README.md)
-
 ---
+
+[← Lab 5: Zero Trust Advanced](5-zero-trust-advanced.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
 
 *This lab completes the Modern Workplace engineering track. You now have a fully governed, Zero Trust-secured, compliance-automated Microsoft 365 environment with automated identity lifecycle management — built and configured entirely through the Microsoft admin portals.*

@@ -280,6 +280,8 @@ Insider Risk Management correlates Microsoft 365 activity signals to detect patt
 
 ## 4. Compliance Manager
 
+> **Cross-track reference:** Compliance Manager tracks M365 control coverage for NIST, ISO, and GDPR. For the Azure infrastructure side of the same frameworks, [Defender for Cloud's Secure Score](../Microsoft%20Defender%20for%20Cloud/README.md) surfaces misconfigurations and prioritised recommendations across Azure VMs, Arc servers, and cloud resources. Together they give you end-to-end compliance posture — M365 data plane via Purview, Azure infrastructure plane via Defender for Cloud.
+
 Compliance Manager provides a dashboard of your compliance posture across regulatory frameworks, assigns control ownership, and tracks your improvement score.
 
 ### 4.1 Create Assessments
@@ -364,3 +366,7 @@ Score = (Points achieved / Total possible points) × 100
 ## 6. Next Steps
 
 - [Lab 5: Zero Trust Advanced](5-zero-trust-advanced.md)
+
+---
+
+[← Lab 3: Teams Lifecycle Governance](3-teams-lifecycle-governance.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

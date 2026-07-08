@@ -347,3 +347,7 @@ Sensitivity labels control Teams privacy (Public/Private), guest access, and dev
 - [Lab 4: Compliance Automation](4-compliance-automation.md)
 - [Lab 5: Zero Trust Advanced](5-zero-trust-advanced.md)
 - [Lab 6: Identity Governance](6-identity-governance-lifecycle-workflows.md)
+
+---
+
+[← Lab 2: SharePoint Information Architecture](2-sharepoint-information-architecture.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

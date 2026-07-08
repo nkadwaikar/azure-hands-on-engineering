@@ -54,6 +54,45 @@ By completing this track, you will be able to:
 
 ---
 
+## How This Track Connects to the Azure Architecture
+
+This track does not stand alone — it extends the same identity plane, governance model, and Zero Trust framework established in the Azure tracks across this repo.
+
+| Dependency | Connection |
+| --- | --- |
+| [Identity-First Track](../Identity-First/README.md) | Entra ID fundamentals, RBAC, and Conditional Access are the prerequisite foundation. Lab 5 (Zero Trust Advanced) builds directly on the identity patterns from Identity-First Labs 1–3. Complete those labs before this track if you haven't already. |
+| [Secure Break-Glass Accounts](../Secure%20Break%E2%80%91Glass%20Accounts/README.md) | Lab 5 requires break-glass accounts excluded from Conditional Access policies. The dedicated Break-Glass track covers FIDO2 and Certificate-Based Authentication (CBA) emergency accounts in full — the patterns used for Azure admin accounts apply identically here. |
+| [Microsoft Defender for Cloud](../Microsoft%20Defender%20for%20Cloud/README.md) | Defender for Office 365 threat protection (Lab 1) and Defender for Cloud Apps session controls (Lab 5) surface in the same Microsoft Defender portal used in the Defender for Servers track. Alerts from Azure VMs and M365 workloads are unified in Microsoft Defender XDR for end-to-end incident investigation. |
+| [Azure Policy Auto-Remediation](../Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Compliance Manager (Lab 4) maps M365 controls to NIST, ISO, and GDPR. Azure Policy governs Azure resource compliance; Purview governs M365 data compliance. Together they provide a unified posture across the full estate. |
+| [Naming Convention](../Naming-Convention.md) | Group, site, and Teams naming conventions in this track follow the same naming standard applied to Azure resources across the repo. |
+
+```mermaid
+flowchart LR
+    subgraph Azure["Azure Platform (Identity-First · Defender · Policy)"]
+        EntraID["Entra ID\nRBAC · CA · RBAC"]
+        Policy["Azure Policy\nGovernance"]
+        Monitor["Azure Monitor\nLog Analytics"]
+        DefCloud["Microsoft Defender\nfor Cloud"]
+    end
+    subgraph M365["Modern Workplace (This Track)"]
+        CA["Conditional Access\nZero Trust Policies"]
+        ExO["Exchange Online\nMail Flow · EOP · Safe Links"]
+        SPO["SharePoint Online\nIA · Retention · Permissions"]
+        Teams["Microsoft Teams\nLifecycle · Governance"]
+        Purview["Microsoft Purview\nDLP · Auto-Label · IRM"]
+        IGA["Entra ID Governance\nLifecycle Workflows · Reviews"]
+    end
+    EntraID --> CA
+    CA --> ExO & SPO & Teams
+    ExO & SPO & Teams --> Purview
+    Policy --> Purview
+    Monitor --> Purview
+    DefCloud -->|"Defender for Office 365\nDefender for Cloud Apps"| ExO & CA
+    EntraID --> IGA
+```
+
+---
+
 ## Architecture Philosophy
 
 This track is built on an **Identity-First, Zero Trust, Governance-Driven** engineering model:

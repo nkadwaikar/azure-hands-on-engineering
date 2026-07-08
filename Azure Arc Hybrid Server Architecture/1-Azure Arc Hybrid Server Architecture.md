@@ -440,7 +440,7 @@ Use **Azure Automation** (or Logic Apps) for:
 7. Monitor rollout: **Azure Arc → Machines**, filter by resource group or tag, and compare the **Connected** count against the number of servers targeted in the batch.
 
 > **At-scale caution:** Stagger large rollouts (a few hundred at a time). Bulk registration can hit ARM request throttling — the portal won't warn you in advance; check the onboarding log rather than assuming a clean run.
-
+>
 > **Service principal cleanup:** Once all servers show **Connected**, go to **Entra ID → App registrations**, find the auto-generated onboarding service principal, and delete it or confirm the credential expiry (set in step 5) is short. Treat it like any other service principal under your RBAC review process (Section 2.3).
 
 **Sizing guidance:**

@@ -350,3 +350,7 @@ Automatically applies the **Retain 7 Years** label to Finance Documents without 
 
 - [Lab 3: Teams Lifecycle Governance](3-teams-lifecycle-governance.md)
 - [Lab 4: Compliance Automation](4-compliance-automation.md)
+
+---
+
+[← Lab 1: Exchange Online Advanced](1-exchange-online-advanced.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

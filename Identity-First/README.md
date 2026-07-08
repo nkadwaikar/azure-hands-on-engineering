@@ -7,21 +7,22 @@ A portal-first, then Bicep-driven track that builds a secure, secretless, RBAC-g
 ## Track Structure
 
 ```text
-Identity-First/                    ← Portal-first foundation (Labs 1–6 + reference diagrams)
-|—— 01-identity fundamentals.md
-|—— 02-managed Identity + Azure Key Vault (Secretless Authentication).md
-|—— 03-azuread-roles-rbac-scopes.md
-|—— 04-azurelocks-resource-policies.md
-|—— 05-access-validation.md
-|—— 06-azuremonitor-activity-logs.md
-|—— 09-governance-flow.md
-|—— 10-identity-first-access-flow.md
-`—— lessons-learned.md
+Identity-First/                    ← Portal-first foundation (Labs 1–6) + reference docs (Labs 9–10)
+|—— 01-identity fundamentals.md                                            ← Lab 1
+|—— 02-managed Identity + Azure Key Vault (Secretless Authentication).md  ← Lab 2
+|—— 03-azuread-roles-rbac-scopes.md                                       ← Lab 3
+|—— 04-azurelocks-resource-policies.md                                    ← Lab 4
+|—— 05-access-validation.md                                               ← Lab 5
+|—— 06-azuremonitor-activity-logs.md                                      ← Lab 6
+│                (→ Labs 7 & 8 continue in Bicep/ below; return here for Lab 9)
+|—— 09-governance-flow.md                                                 ← Lab 9  (reference)
+|—— 10-identity-first-access-flow.md                                      ← Lab 10 (reference)
+`—— lessons-learned.md             (→ Lab 11 continues in Bicep/ below)
 
-Bicep/                             ← IaC capstone (Labs 7, 8, 11)
-|—— 1-bicep-deployment-identity-stack.md
-|—— 2-how-to-run-bicep-in-vscode.md
-`—— 3-vscode-deployment-workflow.md
+Bicep/                             ← IaC capstone
+|—— 1-bicep-deployment-identity-stack.md  ← Lab 7
+|—— 2-how-to-run-bicep-in-vscode.md       ← Lab 8
+`—— 3-vscode-deployment-workflow.md       ← Lab 11
 ```
 
 ## Lab Sequence

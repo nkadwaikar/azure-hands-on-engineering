@@ -71,6 +71,7 @@ Create two accounts:
    - Add both break-glass accounts as members
 
 > Store break-glass credentials in an offline vault (printed and sealed, or hardware-encrypted USB). Monitor their use via alerts in Entra ID.
+> **Cross-track reference:** For production-grade break-glass accounts using FIDO2 hardware keys and Certificate-Based Authentication (CBA), see the [Secure Break-Glass Accounts track](../Secure%20Break%E2%80%91Glass%20Accounts/README.md). The accounts created here are sufficient for this lab — the Break-Glass track covers CBA enrollment, monitoring alert configuration, and Key Vault secret storage patterns required in regulated environments. The same accounts and exclusion group protect both Azure and M365 admin access.
 
 ### 1.3 Conditional Access Policies
 
@@ -304,3 +305,7 @@ Click **Create**
 ## 6. Next Steps
 
 - [Lab 6: Identity Governance (Lifecycle Workflows)](6-identity-governance-lifecycle-workflows.md)
+
+---
+
+[← Lab 4: Compliance Automation](4-compliance-automation.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

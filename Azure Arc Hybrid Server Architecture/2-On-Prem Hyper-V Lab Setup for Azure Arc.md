@@ -38,7 +38,7 @@ By the end of this lab you will be able to:
 
 - [Why a Lab, Not Just Azure VMs](#why-a-lab-not-just-azure-vms)
 - [Step 1: Hyper-V Host Prerequisites](#step-1-hyper-v-host-prerequisites)
-- [Step 1a: Domain Controller or File Server?](#step-1a-do-you-need-a-domain-controller-or-file-server)
+- [Step 1a: Do You Need a Domain Controller or File Server?](#step-1a-do-you-need-a-domain-controller-or-file-server)
 - [Step 2: Networking](#step-2-networking)
 - [Step 3: Create the VMs](#step-3-create-the-vms)
 - [Step 4: Prepare the Azure Side](#step-4-prepare-the-azure-side)
@@ -47,7 +47,7 @@ By the end of this lab you will be able to:
 - [Step 7: Wire Up Governance End-to-End](#step-7-wire-up-governance-end-to-end)
 - [Step 8: What to Actually Test](#step-8-what-to-actually-test)
 - [Step 9: Decommission](#step-9-decommission)
-- [Notes](#notes)
+- [Notes & Lessons Learned](#notes--lessons-learned)
 - [Architecture Doc Reference Map](#architecture-doc-reference-map)
 
 ---

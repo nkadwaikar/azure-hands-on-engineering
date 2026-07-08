@@ -10,8 +10,7 @@ Portal experience note: Steps validated against Azure Portal UI as of June 2026;
 
 > **Note:** This lab uses Azure Backup defaults. Adjust retention, encryption, and security settings based on your organization’s governance and compliance requirements.
 
----
-## Module / Track Structure
+---## Module / Track Structure
 
 ```text
 Recovery Services vaults/
@@ -22,6 +21,7 @@ Recovery Services vaults/
 ```
 
 ---
+
 ## Quick Navigation
 
 - [Learning Objectives](#1-learning-objectives)
