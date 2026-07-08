@@ -215,7 +215,7 @@ ConfigurationChange
 | order by TimeGenerated desc
 ```
 
-4. Confirm the file creation/deletion event appears for your machine.
+1. Confirm the file creation/deletion event appears for your machine.
 
 ---
 
@@ -314,8 +314,8 @@ DeviceInfo
 | take 5
 ```
 
-3. Confirm `OnboardingStatus` shows `Onboarded` and `HealthStatus` shows `Active`.
-4. Run a second query to validate network telemetry is flowing:
+1. Confirm `OnboardingStatus` shows `Onboarded` and `HealthStatus` shows `Active`.
+2. Run a second query to validate network telemetry is flowing:
 
 ```kql
 DeviceNetworkEvents
@@ -334,10 +334,10 @@ DeviceNetworkEvents
 | Enable / disable Defender plans | Azure Portal → Defender for Cloud |
 | Review Secure Score and recommendations | Azure Portal → Defender for Cloud |
 | Manage policy and auto-remediation | Azure Portal → Defender for Cloud / Policy |
-| Day-to-day alert triage and investigation | [security.microsoft.com](https://security.microsoft.com) |
-| Device inventory, health state, onboarding | [security.microsoft.com](https://security.microsoft.com) |
-| Advanced hunting and threat investigation | [security.microsoft.com](https://security.microsoft.com) |
-| Software inventory and CVE detail by product | [security.microsoft.com](https://security.microsoft.com) |
+| Day-to-day alert triage and investigation | MDE Portal |
+| Device inventory, health state, onboarding | MDE Portal |
+| Advanced hunting and threat investigation | MDE Portal |
+| Software inventory and CVE detail by product | MDE Portal |
 | FIM event queries | Azure Portal → Log Analytics |
 | Arc machine onboarding and extensions | Azure Portal → Azure Arc |
 
