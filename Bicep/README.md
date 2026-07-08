@@ -85,6 +85,74 @@ az deployment group create \
 
 ---
 
+## CI — Automated Validation
+
+Every PR touching `Bicep/**.bicep` runs two jobs via [`.github/workflows/bicep-lint.yml`](../.github/workflows/bicep-lint.yml):
+
+| Job | What it checks |
+| --- | --- |
+| **Lint and build** | `az bicep lint` — linter rules (unused params, missing descriptions, etc.) · `az bicep build` — type and syntax errors. No Azure credentials required. |
+| **What-if** | `az deployment group what-if` against a live CI resource group — catches runtime errors that compile-only checks miss: invalid role definition IDs, unsupported API versions, missing resource providers. Requires Azure credentials (OIDC). |
+
+The `what-if` job runs only when `CI_RESOURCE_GROUP` is set — it skips automatically on forks and repos without credentials configured.
+
+### One-Time Setup for the What-If Job
+
+**1. Create the CI resource group and Log Analytics workspace**
+
+```bash
+az group create --name rg-bicep-ci --location eastus
+
+az monitor log-analytics workspace create \
+  --resource-group rg-bicep-ci \
+  --workspace-name law-bicep-ci
+```
+
+**2. Create a service principal with federated credentials (OIDC — no stored secret)**
+
+```bash
+# Create the app registration
+az ad app create --display-name "github-bicep-ci"
+
+# Note the appId from the output, then create the service principal
+az ad sp create --id <appId>
+
+# Assign Owner on the CI resource group
+# (Owner required — what-if validates role assignments which needs Microsoft.Authorization/write)
+az role assignment create \
+  --role Owner \
+  --assignee <appId> \
+  --scope $(az group show --name rg-bicep-ci --query id -o tsv)
+```
+
+**3. Add the federated credential for GitHub Actions**
+
+In the Azure portal: **App registrations → github-bicep-ci → Certificates & secrets → Federated credentials → Add credential**
+
+| Field | Value |
+| --- | --- |
+| Federated credential scenario | GitHub Actions |
+| Organisation | `nkadwaikar` |
+| Repository | `azure-hands-on-engineering` |
+| Entity type | Branch |
+| Branch | `main` |
+
+Add a second credential with **Entity type: Pull request** to cover PR runs.
+
+**4. Configure GitHub repository secrets and variables**
+
+Go to **Settings → Secrets and variables → Actions**:
+
+| Type | Name | Value |
+| --- | --- | --- |
+| Secret | `AZURE_CLIENT_ID` | App registration **Application (client) ID** |
+| Secret | `AZURE_TENANT_ID` | Your Entra **Tenant ID** |
+| Secret | `AZURE_SUBSCRIPTION_ID` | Target subscription ID |
+| Variable | `CI_RESOURCE_GROUP` | `rg-bicep-ci` |
+| Variable | `CI_WORKSPACE_ID` | Full resource ID of `law-bicep-ci` — copy from portal or run `az monitor log-analytics workspace show --resource-group rg-bicep-ci --workspace-name law-bicep-ci --query id -o tsv` |
+
+---
+
 ## Related Labs
 
 | Topic | Link |
