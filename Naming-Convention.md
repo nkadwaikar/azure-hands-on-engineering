@@ -300,6 +300,7 @@ mc-arc-prod-emergency            Emergency / one-time patching window for Arc-en
 ```
 
 **Maintenance window naming conventions:**
+
 - Use `weekly`, `monthly`, or `emergency` as the `{frequency}` segment.
 - Minimum window duration is 2 hours (update download + install + reboot cycle).
 - Create one configuration per OS type per environment — mixing Windows and Linux in a single configuration is not supported.
