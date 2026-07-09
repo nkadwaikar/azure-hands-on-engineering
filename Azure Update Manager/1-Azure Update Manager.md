@@ -421,20 +421,20 @@ After each monthly patching cycle, validate results per tag group:
 
 #### 5 — Export Monthly Reports
 
-**Generate Reports in Azure Update Manager**
+##### Generate Reports in Azure Update Manager
 
 1. Open **Azure Update Manager → Update compliance**.
 2. Use the **Download** or **Export** option to save a CSV of the current compliance state.
 3. Apply tag filters to export per-environment reports (Prod, UAT, Dev).
 
-**Generate CVE Reports in Defender for Cloud**
+##### Generate CVE Reports in Defender for Cloud
 
 Using the **Defender for Cloud → Recommendations** view from [Section 2](#2--review-security--cve-exposure) above:
 
 1. Click **Download** at the top of the recommendations list to export to CSV.
 2. Filter by **Severity: High / Critical** to produce the high-risk server list.
 
-**Archive and Distribute**
+##### Archive and Distribute
 
 | Report | Audience |
 | --- | --- |
@@ -449,7 +449,7 @@ Store archived reports in a shared location (e.g. SharePoint, Azure Blob Storage
 
 ---
 
-### Patch Group Tagging Strategy
+## Patch Group Tagging Strategy
 
 Tag servers at Arc onboarding time to enable automated patch group targeting in Update Manager maintenance configurations. Enforced via Azure Policy (deny or modify effect) so servers are compliant from the moment they register.
 

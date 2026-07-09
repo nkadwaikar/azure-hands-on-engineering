@@ -246,7 +246,7 @@ Document the chosen approach per site in the network runbook.
 3. Select the machine resource and verify the **Overview** pane shows the correct **Resource Group**, **Region**, and **Tags**.
 4. Open the **Extensions** tab — the Azure Monitor Agent (AMA) should appear here once the relevant policy assignment executes (may take up to 30 minutes on first onboarding).
 5. Go to **Microsoft Defender for Cloud → Inventory**, filter by resource type *Arc Machine* — the server should appear within ~15 minutes of connecting.
-6. If the server does not show **Connected** after 10–15 minutes, open **Azure Arc → Machines → [server] → Redeploy agent troubleshooter** (portal-guided diagnostics) or check that the outbound endpoints in Section 3.2 are reachable from the server.
+6. If the server does not show **Connected** after 10–15 minutes, open the machine resource in the portal → **Diagnose and solve problems** (left nav, portal-guided diagnostics) or check that the outbound endpoints in Section 3.2 are reachable from the server. You can also run `azcmagent check` directly on the server to diagnose connectivity issues.
 
 ---
 
@@ -387,7 +387,9 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.5 Just-in-Time (JIT) Admin Access
 
-- Enable **JIT VM access** in Defender for Cloud for all production Arc servers.
+> **See also:** [1-JIT.md](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) — hands-on lab for enabling and using JIT VM access in Defender for Cloud.
+
+- Enable [**JIT VM access**](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) in Defender for Cloud for all production Arc servers.
 - Require explicit JIT request approval before any administrative session (RDP/SSH) is permitted.
 - Set maximum session duration (e.g., 2 hours) and restrict source IPs to known admin ranges or Azure Bastion.
 - Log all JIT approvals and sessions to Log Analytics for audit trail.
@@ -403,7 +405,7 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.7 Defender Plan Cost Management
 
-- **Plan 2** (full EDR + FIM + JIT + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
+- **Plan 2** (full EDR + FIM + [JIT](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
 - **Plan 1** (foundational posture only) is sufficient for Tier3 / dev/test servers — apply via subscription filter or resource tag.
 - Review the **Defender for Cloud cost estimate** monthly; use the `microsoft.security/pricings` resource to apply granular plan overrides per resource group.
 - Set **budget alerts** in Azure Cost Management for the Defender spend envelope.
@@ -480,7 +482,8 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 1. In the Azure Portal, go to **Azure Arc → Machines** and select the server(s) to decommission.
 2. If Defender for Servers is enabled, go to **Microsoft Defender for Cloud → Environment settings**, locate the subscription/resource group, and confirm the plan assignment — Defender coverage is tied to the Arc machine resource, so it's automatically removed once the Arc resource itself is deleted in step 4.
 3. On the server itself, uninstall the Connected Machine Agent:
-   - **Windows:** *Settings → Apps → Installed apps* → find **Azure Connected Machine Agent** → Uninstall
+   - **Windows (Server 2022 / Windows 11):** *Settings → Apps → Installed apps* → find **Azure Connected Machine Agent** → Uninstall
+   - **Windows (Server 2016 / 2019):** *Control Panel → Programs and Features* → find **Azure Connected Machine Agent** → Uninstall
    - **Linux:** remove via your distro's package manager (e.g. `apt remove azcmagent` / `yum remove azcmagent`)
 4. Back in the Azure Portal, with the machine(s) still selected in **Azure Arc → Machines**, click **Delete** at the top of the list to remove the ARM resource. This step is required — uninstalling the agent locally disconnects the server but does **not** remove the stale resource from Azure Resource Manager.
 5. Confirm removal: refresh **Azure Arc → Machines** and verify the server no longer appears; check **Microsoft Defender for Cloud → Inventory** to confirm it has dropped out of Defender coverage as well.
