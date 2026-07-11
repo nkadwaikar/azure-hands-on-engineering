@@ -55,23 +55,5 @@ Azure Update Manager/
 
 ---
 
-## Update Log
-
-### 2026-07-10 revision (this file)
-
-- Aligned "Last validated on" precision (`July 2026` → `2026-07-10`) to match both linked docs.
-- Added **Periodic Assessment** and **Hotpatching** to the Key Concepts table — both became first-class concepts in the Lab guide after its content refresh and weren't represented here.
-- Expanded the Lab Sequence description for doc 1 to mention periodic assessment, hotpatching, and Arc-enabled server pricing.
-- Added a Prerequisites callout noting that staged/ring-based rollout is not natively enforced by Update Manager, cross-referencing the caveat and workaround now documented in both linked guides.
-- No changes to Track Structure, doc 2's Lab Sequence description, or Related Tracks — verified these still accurately reflect the current content.
-
-### 2026-07-11 revision (this file)
-
-- **Updated Track Structure and Lab Sequence** to include `3-operational-workflow.md` and `4-operational-runbooks.md`, which were missing entirely — the track had been split into 4 files, but this README was never updated past the original 2-file structure.
-- Narrowed doc 1's Lab Sequence description back to its actual current scope (Part 1 lab only) now that hybrid-fleet pipeline/hotpatching/pricing content has moved to doc 3.
-- **Fixed a broken cross-file link**: the staged/ring-based patching note pointed to `1-Azure Update Manager.md#staged--ring-based-patching-known-limitation`, but that section was relocated to `3-operational-workflow.md` during the 4-file split and the reference was never updated. Repointed to the correct file and anchor.
-- Verified via automated link-and-anchor audit across all 4 track documents plus this README: all internal anchors and cross-file references now resolve correctly (2 broken anchors found and fixed here and in doc 2; see doc 2's own Update Log for its fix).
-
----
 
 [← Back to Azure Hands-On Engineering](../README.md)
