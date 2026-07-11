@@ -392,17 +392,4 @@ Use this to confirm the Part 1 lab is complete before moving on to [Operational 
 
 ---
 
-## Update Log
-
-### 2026-07-10 revision (this file)
-
-- **Reorganized this document to match the 4-file track split.** The Table of Contents and "Continue to" links had already been updated to point to `3-operational-workflow.md` and `4-operational-runbooks.md`, but the underlying body content had not actually been removed — roughly 640 lines of Pipeline Setup, Patch Group Tagging, Maintenance Window Design, Hotpatching, Pricing & Licensing, Staged Patching, Monthly Patch Review, Troubleshooting, "Why Update Manager Matters," and all of Part 3 (Operational Runbooks, Standardized Maintenance Configuration, Maintenance Configuration Option-by-Option) were duplicated here as orphaned content below the "Next" callout. Verified this content already exists correctly in `3-operational-workflow.md` and `4-operational-runbooks.md`, then removed the duplicate from this file — no content was lost, only de-duplicated.
-- Renamed the "Additional Permissions for Hybrid Fleets (Part 2)" heading, since "Part 2" no longer exists as a concept — retitled to reference `3-operational-workflow.md` directly.
-- Fixed two `[Troubleshooting](#troubleshooting)` links (Step 2.2 and Step 5.2) that pointed to a local anchor which no longer exists in this file now that Troubleshooting lives in `3-operational-workflow.md`; repointed both to `3-operational-workflow.md#troubleshooting`.
-- Replaced the old fleet-wide Checklist (which mixed Part 1 lab steps with Arc onboarding, tagging, Defender Plan 2, hotpatch enrollment, monthly review, DC procedure, and report-archiving items that belong to the operational workflow) with a **Part 1-scoped checklist** covering only what this document teaches. The fleet-readiness items were preserved, not deleted — see the corresponding update in `3-operational-workflow.md`.
-- Added this Update Log section — the Table of Contents referenced `#update-log` before this revision, but no such section existed in the file.
-- Cleanup section left unchanged — it's generic lab teardown guidance and still belongs here.
-
----
-
 [← Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) | [→ Operational Workflow](3-operational-workflow.md) | [→ Operational Runbooks](4-operational-runbooks.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
