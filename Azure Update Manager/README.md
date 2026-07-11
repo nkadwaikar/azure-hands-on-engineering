@@ -1,6 +1,6 @@
 # Azure Update Manager Track
 
-Last validated on: July 2026
+Last validated on: 2026-07-10
 
 This track covers OS patch orchestration for Azure VMs and Arc-enabled servers using **Azure Update Manager** — the successor to the legacy Log Analytics Update Management solution. Labs walk through patch assessment, maintenance window scheduling, update deployments, and compliance reporting, all via the Azure Portal.
 
@@ -12,8 +12,10 @@ This track covers OS patch orchestration for Azure VMs and Arc-enabled servers u
 | --- | --- |
 | **Azure Update Manager** | Native Azure service for assessing and deploying OS updates across Azure VMs and Arc-enabled servers |
 | **Patch Assessment** | On-demand or scheduled scan that surfaces which updates are available without deploying them |
+| **Periodic Assessment** | Automatic 24-hour re-assessment (per-machine or via Azure Policy at scale) that keeps compliance data current without manual "Check for updates" runs |
 | **Maintenance Window** | Defined time window during which updates are permitted — keeps patching predictable and change-controlled |
 | **Update Deployment** | Orchestrated installation run scoped by machine, schedule, and update classification |
+| **Hotpatching** | Reboot-free security patching for eligible Arc-enabled Windows Server 2025 machines — reduces routine reboots from monthly to quarterly |
 | **Compliance Report** | Rollup view of patch state across your fleet — surfaces machines that are overdue for patching |
 | **Dynamic Scope** | Target machines by subscription, resource group, or tag rather than a static list — fleet membership stays accurate automatically |
 
@@ -28,7 +30,7 @@ Azure Update Manager/
 
 ## Lab Sequence
 
-1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](1-Azure%20Update%20Manager.md) — enable Update Manager, run on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, and review the compliance dashboard
+1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](1-Azure%20Update%20Manager.md) — enable Update Manager, enable periodic assessment and run an on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, review the compliance dashboard, and understand hotpatching and Arc-enabled server pricing
 2. [Azure Update Manager — Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) — pre/post maintenance scripts, rollback procedures, patch exemptions, compliance workbooks, advanced KQL queries, CVE-to-KB mapping, zero-day response, patch SLA policy, DC staggered reboot runbook, Windows Server 2012 R2 ESU, and Bicep IaC for maintenance configurations
 
 ## Prerequisites
@@ -36,6 +38,8 @@ Azure Update Manager/
 - Azure subscription with **Contributor** rights on the target resource group
 - At least one running Azure VM **or** Arc-enabled server (see [Azure Arc track](../Azure%20Arc%20Hybrid%20Server%20Architecture/README.md))
 - No legacy Update Management solution (Log Analytics-based) active on the same machines — the two conflict; migrate first if applicable
+
+> **Note:** Update Manager does not natively enforce staged/ring-based rollout (test → pre-prod → prod using only the exact patch versions validated earlier). If that guarantee matters for your environment, see the staged-patching workaround in [Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) and the caveat in the [Lab guide](1-Azure%20Update%20Manager.md#staged--ring-based-patching-known-limitation).
 
 ## Related Tracks
 

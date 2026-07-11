@@ -184,7 +184,6 @@ Periodic assessment runs automatic update scans every 24 hours, keeping complian
 4. Confirm each machine shows **Periodic assessment: Enabled** in the **Machines** list.
 
 > Periodic assessment is a prerequisite for the Defender for Cloud recommendation *"Periodic assessment should be enabled on your machines"* to show healthy.
-
 > **Arc-enabled servers:** periodic assessment and on-demand/scheduled patch installation are handled by **two separate extensions** that are both expected to be present and healthy — this is normal, not a misconfiguration:
 > - `Microsoft.CPlat.Core.WindowsPatchExtension` — handles assessment and compliance-state reporting.
 > - `Microsoft.SoftwareUpdateManagement.WindowsOsUpdateExtension` — handles update installation for one-time and scheduled deployments.
@@ -1041,6 +1040,5 @@ Recommended tag-based assignment:
 2. Check **History** to confirm no pending deployments are queued.
 
 ---
-
 
 [← Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

@@ -30,6 +30,7 @@ Azure Update Manager/
 - [Domain Controller Staggered Reboot Runbook](#9-domain-controller-staggered-reboot-runbook)
 - [Windows Server 2012 R2 ESU with Azure Arc](#10-windows-server-2012-r2-esu-with-azure-arc)
 - [Bicep Templates for Maintenance Configurations](#11-bicep-templates-for-maintenance-configurations)
+- [Update Log](#update-log)
 
 ---
 
@@ -579,22 +580,32 @@ Write-Output "All DCs patched and validated successfully."
 
 ## 10. Windows Server 2012 R2 ESU with Azure Arc
 
-Windows Server 2012 and 2012 R2 reached end of support on **October 10, 2023**. Extended Security Updates (ESU) are available at no additional cost for machines enrolled in Azure Arc.
+Windows Server 2012 and 2012 R2 reached end of support on **October 10, 2023**. Extended Security Updates (ESU) are available through Azure Arc.
+
+> **Timing check:** As of this guide's last validation date (2026-07-10), the **final ESU coverage ends October 13, 2026 — roughly 3 months away.** After that date, no security updates are issued for Windows Server 2012/2012 R2 at any price, regardless of Arc enrollment. If you still have machines on this OS, treat migration to Windows Server 2022/2025 (or an Azure Arc-managed retirement plan) as an active, time-boxed project now, not a "someday" item.
 
 ### Eligibility
 
 | Requirement | Detail |
 | --- | --- |
 | Azure Arc onboarded | Machine must show **Status: Connected** in Azure Arc |
-| Arc agent version | 1.28 or later — update via `azcmagent upgrade` if needed |
-| ESU license type | Set to `Windows Server 2012` ESU on the Arc machine resource |
+| Arc agent version | **1.34 or later** — this is a hard prerequisite for ESU delivery. Check the installed version in **Azure Arc → Machines → [server] → Overview**. |
+| Core minimums | Physical core (pCore) licensing requires **16 cores minimum** per machine; virtual core (vCore) licensing requires **8 vCores minimum** per VM |
+| ESU license type | An ESU license (SKU: Standard or Datacenter) must be provisioned and linked to the Arc machine resource |
+
+> **Upgrading the Arc agent:** If the agent is already running version **1.62 or later**, you can upgrade in place with `azcmagent upgrade` (add `--version 1.63` to target a specific release). If the agent is **older than 1.62**, that command isn't supported — instead run the MSI installer silently on Windows (`msiexec.exe /i AzureConnectedMachineAgent.msi /qn`) or, on Linux, update via the package manager (e.g. `apt update && apt upgrade azcmagent`). Either path can be scripted for at-scale upgrades; no server restart is required.
 
 ### 10.1 Enroll in ESU via Azure Portal
 
-1. In **Azure Arc → Machines**, select the 2012/2012 R2 server.
-2. Go to the **Overview** tab → look for the **Windows Server ESU** section.
-3. Click **Enable ESU** → confirm the license type: `Windows Server 2012/2012 R2`.
-4. Azure activates ESU eligibility — no additional license key is required.
+ESU enrollment is a two-step process: provision a license, then link eligible Arc machines to it.
+
+1. In the Azure Portal service menu, under **Licenses**, select **Windows Server ESU licenses**.
+2. Select **+ Create** to provision a new ESU license — specify the SKU (**Standard** or **Datacenter**), core type (**Physical** or **vCore**), and number of cores. You can create the license in a deactivated state if you don't want billing to start immediately.
+3. Once the license is active, go to the **Eligible resources** tab to see all Arc-enabled servers running Windows Server 2012/2012 R2.
+4. Select the target machine(s) → **Enable ESUs** → choose the license to link → **Enable**.
+5. The machine's ESU status changes to **Enabled** once linking completes — no additional key or activation step is required on the server itself.
+
+> **Late enrollment billing:** If you enroll a machine in ESU after its end-of-support date, Azure back-bills for the months missed since that date (charged in the first billing cycle after enrollment). Enrolling sooner avoids an unexpected lump-sum charge.
 
 ### 10.2 Verify ESU Patch Delivery via Update Manager
 
@@ -609,7 +620,7 @@ Windows Server 2012 and 2012 R2 reached end of support on **October 10, 2023**. 
 | Windows Server 2012 R2 | October 13, 2026 |
 | Windows Server 2012 | October 13, 2026 |
 
-> Plan migration to Windows Server 2022 or 2025 before the ESU end date. After October 2026, no security updates will be issued regardless of Arc enrollment.
+> **This is now a near-term deadline, not a planning horizon.** Given today's date, roughly 3 months remain before ESU coverage ends permanently — after which no security updates will be issued regardless of Arc enrollment or payment. Prioritize migration to Windows Server 2022 or 2025 (or retirement of the workload) over extending ESU further, since October 13, 2026 is the **final** renewal; there is no Year 4.
 
 ---
 
