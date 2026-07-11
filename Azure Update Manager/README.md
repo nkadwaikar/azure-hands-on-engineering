@@ -21,12 +21,15 @@ This track covers OS patch orchestration for Azure VMs and Arc-enabled servers u
 
 ```text
 Azure Update Manager/
-└── 1-Azure Update Manager.md   # Hands-on lab: assessment, scheduling, deployment, and compliance
+├── README.md
+├── 1-Azure Update Manager.md          # Hands-on lab: assessment, scheduling, deployment, and compliance
+└── 2-Azure Update Advance Topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, Bicep IaC
 ```
 
 ## Lab Sequence
 
 1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](1-Azure%20Update%20Manager.md) — enable Update Manager, run on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, and review the compliance dashboard
+2. [Azure Update Manager — Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) — pre/post maintenance scripts, rollback procedures, patch exemptions, compliance workbooks, advanced KQL queries, CVE-to-KB mapping, zero-day response, patch SLA policy, DC staggered reboot runbook, Windows Server 2012 R2 ESU, and Bicep IaC for maintenance configurations
 
 ## Prerequisites
 

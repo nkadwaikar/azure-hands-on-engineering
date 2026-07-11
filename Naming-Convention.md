@@ -1,6 +1,6 @@
 # Naming Convention
 
-Last validated on: July 2026
+Last validated on: 2026-07-10
 
 All resources across these labs follow a consistent pattern aligned with the Azure Cloud Adoption Framework (CAF). This page is the single reference for the abbreviations, segment order, and per-resource-type rules used throughout every lab guide.
 
@@ -61,6 +61,9 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `dcr` | Data Collection Rule |
 | `pls` | Private Link Scope (Azure Monitor / Arc) |
 | `sc` | Azure DevOps Service Connection |
+| `alert` | Azure Monitor Alert Rule |
+| `ag` | Azure Monitor Action Group |
+| `rb` | Automation Runbook |
 
 ---
 
@@ -284,26 +287,79 @@ EmergencyCBA02.pfx
 
 ## Azure Update Manager
 
-Maintenance configurations are the primary named resource in Azure Update Manager. Name them to convey OS type, environment, and patching cadence so the intent is readable directly in the portal list.
+Maintenance configurations are the primary named resource in Azure Update Manager. Name them to convey environment and patching cadence so the intent is readable directly in the portal list.
 
 ```text
-mc-{os}-{env}-{frequency}    Maintenance configuration
+mc-{env}-{frequency}    Maintenance configuration
 ```
 
 Examples:
 
 ```text
-mc-windows-prod-weekly           Weekly maintenance window for production Windows servers
-mc-linux-prod-weekly             Weekly window for production Linux servers
-mc-windows-nonprod-weekly        Weekly window for non-production Windows servers
-mc-arc-prod-emergency            Emergency / one-time patching window for Arc-enabled servers
+mc-dev-monthly               Monthly window for Dev servers (Week 1, Saturday 01:00)
+mc-uat-monthly               Monthly window for UAT servers (Week 2, Saturday 01:00)
+mc-prod-monthly              Monthly window for Prod servers (Week 3, Tuesday 02:00)
+mc-dc-monthly                Monthly window for Domain Controllers (Week 3, Sunday 03:00 — manual staggered reboot)
+mc-prod-emergency            Emergency / one-time patching window for out-of-band zero-day response
 ```
 
-**Maintenance window naming conventions:**
+**Maintenance configuration naming conventions:**
 
-- Use `weekly`, `monthly`, or `emergency` as the `{frequency}` segment.
-- Minimum window duration is 2 hours (update download + install + reboot cycle).
-- Create one configuration per OS type per environment — mixing Windows and Linux in a single configuration is not supported.
+- Use `monthly`, `weekly`, or `emergency` as the `{frequency}` segment.
+- The `{env}` segment maps directly to the `PatchGroup` tag value (`dev`, `uat`, `prod`, `dc`).
+- A separate configuration per environment prevents a single failed deployment from affecting all patch groups simultaneously.
+- Minimum window duration is 2 hours; recommended production default is 3 hours 55 minutes.
+- Domain Controller configurations use `Never reboot` — reboots are performed manually one DC at a time after the window closes.
+
+### Automation Runbooks (Pre/Post Patch Scripts)
+
+Runbooks attached to maintenance configurations follow a verb-based pattern that describes the action and the resource being acted on:
+
+```text
+rb-{verb}-{target}-{env}    Automation runbook
+```
+
+Examples:
+
+```text
+rb-pre-patch-drain-lb-prod       Pre-maintenance: remove servers from load balancer before patching
+rb-post-patch-restore-lb-prod    Post-maintenance: re-add servers to load balancer after patching
+rb-dc-staggered-reboot-prod      Domain Controller staggered reboot with AD health validation
+```
+
+The Automation Account hosting these runbooks follows the standard `aa-` prefix:
+
+```text
+aa-patchscripts-{region}-{env}    e.g., aa-patchscripts-eus-prod
+```
+
+---
+
+## Azure Monitor — Alerts and Action Groups
+
+Alert rules and action groups use a descriptive pattern that identifies what is being monitored and for which environment.
+
+```text
+alert-{condition}-{resource-type}-{env}    Alert rule
+ag-{team}-{env}                            Action group
+```
+
+Examples:
+
+```text
+alert-heartbeat-missing-arc-prod           Arc agent heartbeat gap > 15 minutes
+alert-arc-disconnected-prod                Arc machine status changed to Disconnected
+alert-extension-failed-arc-prod            WindowsOsUpdateExtension provisioning failure
+alert-guest-config-noncompliant-prod       Guest Configuration policy non-compliance
+ag-infra-oncall-prod                       Action group — infrastructure on-call email + Teams webhook
+ag-security-team-prod                      Action group — security team notifications
+```
+
+**Alert naming conventions:**
+
+- The `{condition}` segment is a short slug describing what triggered the alert (e.g. `heartbeat-missing`, `arc-disconnected`, `patch-failed`).
+- Each alert rule is linked to an action group — do not embed notification details in the alert rule name.
+- Use one action group per team per environment; avoid one action group per alert rule.
 
 ---
 

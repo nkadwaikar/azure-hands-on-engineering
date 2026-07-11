@@ -1,7 +1,7 @@
 
 # Architecture Overview
 
-Last validated on: July 2026
+Last validated on: 2026-07-10
 
 ## Identity Governance
 
@@ -191,20 +191,53 @@ flowchart LR
 
 ## Azure Update Manager
 
-Azure Update Manager provides a unified, agent-free patch orchestration layer for both Azure VMs and Arc-enabled servers. Assessment scans surface available updates without installing anything; maintenance configurations gate when deployments are permitted; compliance reporting identifies overdue machines across the fleet without routing data through Log Analytics as a dependency.
+Azure Update Manager provides a unified, agent-free patch orchestration layer for both Azure VMs and Arc-enabled servers. Assessment scans surface available updates without installing anything; maintenance configurations gate when deployments are permitted; pre/post scripts via Automation Account handle workload preparation and recovery; compliance reporting and Azure Monitor alerts identify overdue machines and Arc agent disconnects across the fleet.
 
 ```mermaid
-flowchart LR
-    Machine["Azure VM or\nArc-Enabled Server"] --> Assess["On-Demand\nPatch Assessment"]
-    Assess --> Findings["Update Findings\nClassified by Severity"]
-    Findings --> MC["Maintenance\nConfiguration\n(Scheduled Window)"]
-    MC --> Deploy["Update Deployment\nScheduled / One-Time"]
-    Deploy --> Outcome["Install Result\nSucceeded · Failed · N/A"]
-    Outcome --> Comply["Compliance Dashboard\nPatch Status by Fleet"]
-    Comply --> KQL["Azure Resource Graph\nKQL Queries"]
+flowchart TD
+    subgraph Sources["Patch Intelligence"]
+        MDC["Microsoft Defender\nfor Cloud\nCVE · Missing KB"]
+        ARG["Azure Resource Graph\nKQL Compliance Queries"]
+    end
+
+    subgraph Fleet["Managed Fleet"]
+        AzVM["Azure VM\n(VM Agent)"]
+        ArcSrv["Arc-Enabled Server\n(Connected Machine Agent)"]
+    end
+
+    subgraph Orchestration["Update Manager Orchestration"]
+        Assess["Patch Assessment\nOn-Demand / Periodic"]
+        MC["Maintenance Configuration\nScheduled Window · Classifications · Reboot Policy"]
+        Deploy["Update Deployment\nScheduled / One-Time / Emergency"]
+        Outcome["Install Result\nSucceeded · Failed · N/A"]
+    end
+
+    subgraph Automation["Automation Account"]
+        PreScript["Pre-Script\nDrain LB · Snapshot VM"]
+        PostScript["Post-Script\nRestore LB · Validate Services"]
+    end
+
+    subgraph Observability["Monitoring & Alerting"]
+        Monitor["Azure Monitor\nAlert Rules"]
+        Comply["Compliance Dashboard\nPatch Status by Fleet"]
+        Logs["Extension Logs · Arc Agent\nWindows Update Logs"]
+    end
+
+    Fleet --> Assess
+    MDC --> Assess
+    Assess --> MC
+    MC --> PreScript
+    PreScript --> Deploy
+    Deploy --> Outcome
+    Outcome --> PostScript
+    Outcome --> Comply
+    Outcome --> Logs
+    Comply --> ARG
+    Comply --> Monitor
+    Monitor -->|"Heartbeat missing\nArc disconnect\nExtension failure"| Logs
 ```
 
-**Design note:** Agent-free for Azure VMs (uses the VM Agent already present) and Arc-enabled servers (uses the Connected Machine Agent installed during Arc onboarding). Dynamic scoping by subscription, resource group, or tag keeps fleet membership accurate automatically. Maintenance configurations gate deployment windows — updates cannot be installed outside the defined window, making patching change-controlled by design.
+**Design note:** Agent-free for Azure VMs (uses the VM Agent already present) and Arc-enabled servers (uses the Connected Machine Agent installed during Arc onboarding). Separate maintenance configurations per patch group (`dev` → `uat` → `prod` → `dc`) enforce staged rollout — a regression in Dev is caught before it reaches production. Domain Controller configurations use `Never reboot` to enforce manual staggered reboots with AD health validation between each DC. Dynamic scoping by tag keeps fleet membership accurate automatically as machines are added or retired.
 
 ## Modern Workplace (Microsoft 365)
 
@@ -278,7 +311,7 @@ flowchart LR
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
 | [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Policy/Guest Config compliance, Automation runbooks, lifecycle management, Hyper-V lab for Arc validation — dedicated tracks for [Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/README.md) and [Update Manager](./Azure%20Update%20Manager/README.md) |
-| [Azure Update Manager](./Azure%20Update%20Manager/README.md) | Patch assessment, maintenance configurations, scheduled and one-time update deployments, compliance dashboard — covers Azure VMs and Arc-enabled servers |
+| [Azure Update Manager](./Azure%20Update%20Manager/README.md) | Patch assessment, maintenance configurations (per patch group: dev → uat → prod → dc), scheduled and one-time deployments, pre/post Automation runbooks, compliance dashboard, advanced KQL, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, Azure Monitor alerting for Arc disconnects, Bicep IaC — covers Azure VMs and Arc-enabled servers |
 | [Deploying a Domain Controller in Azure](./Deploying%20a%20Domain%20Controller%20in%20Azure/1-DeployingDomain%20Controller%20in%20Azure.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG with AD DS port rules, Availability Set, static private IPs, dedicated data disk (host caching: None), forest creation, second DC promotion, automatic replication, FSMO role distribution, Azure DNS forwarder, Key Vault for DSRM secrets |
 | [Modern Workplace (Microsoft 365)](./Microsoft%20365/README.md) | Exchange Online advanced mail flow, SharePoint information architecture, Teams lifecycle governance, Purview compliance automation, Zero Trust Conditional Access, Identity Governance lifecycle workflows |
 

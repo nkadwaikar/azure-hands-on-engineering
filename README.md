@@ -1,6 +1,6 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
-Last validated on: 2026-07-06
+Last validated on: 2026-07-10
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#%EF%B8%8F-how-to-follow-these-tracks)
@@ -9,7 +9,7 @@ Last validated on: 2026-07-06
 [![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
 [![Microsoft 365 Governance](https://img.shields.io/badge/Governance-Microsoft%20365-0078D4?style=flat-square&logo=microsoft&logoColor=white)](Microsoft%20365/README.md)
 
-I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production aligned governance the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
+I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production-aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
 
 > **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.
 > **Jumping in?** Use the [track navigator below](#%EF%B8%8F-how-to-follow-these-tracks), or go straight to the [Modern Workplace Track](Microsoft%20365/README.md) or [Architecture Overview](Architecture%20Overview.md).
@@ -55,10 +55,11 @@ flowchart TD
     end
     subgraph Ops["🔄 Ops & Resilience"]
         DevOps["Azure DevOps · Bicep"]
-        Monitor["Azure Monitor\nLog Analytics"]
+        Monitor["Azure Monitor\nLog Analytics · Alerts"]
         Backup["Recovery Services"]
         Arc["Azure Arc\nHybrid Servers"]
         UpdateMgr["Azure Update\nManager"]
+        Automation["Azure Automation\nPre/Post Scripts · Runbooks"]
     end
     subgraph M365["💼 Modern Workplace"]
         ExO["Exchange Online\nTeams · SharePoint"]
@@ -78,14 +79,18 @@ flowchart TD
     Bastion --> ADDS
     JIT --> VM
     JIT --> Arc
+    JIT -->|"CVE · Missing KB"| UpdateMgr
     AFD --> App
     DevOps --> App
     Monitor --> VM & App
     Monitor --> Arc
     Monitor --> ADDS
+    Monitor -->|"Heartbeat · Disconnect\nPatch Failure Alerts"| UpdateMgr
     Backup --> VM
     Arc --> VM & Monitor
     UpdateMgr --> VM & Arc
+    UpdateMgr <-->|"Pre/Post\nScript Triggers"| Automation
+    Automation --> MI
     ADDS --> KV
     EntraID --> ExO & Purview
     Policy --> Purview
@@ -99,12 +104,12 @@ flowchart TD
 
 - 🔐 **Identity-first access** eliminates credential sprawl — Managed Identity + Key Vault enforces secretless authentication at every layer
 - 🚫 **Zero standing access** (Bastion + JIT) removes all inbound exposure and eliminates persistent privileged sessions
-- � **Break-Glass accounts** (FIDO2 + Certificate-Based Auth) guarantee emergency access without bypassing Zero Trust controls
+- 🔑 **Break-Glass accounts** (FIDO2 + Certificate-Based Auth) guarantee emergency access without bypassing Zero Trust controls
 - 🛡️ **Governance-as-code** (Azure Policy + Auto-Remediation) enforces compliance continuously across cloud and hybrid resources — no manual audits
 - 🌍 **Secure public ingress** (Front Door + WAF) protects internet-facing workloads at the edge before traffic reaches the application layer
 - 🏢 **AD DS in Azure** provides a production-grade domain fabric, built on Availability Sets with no public IPs and DSRM secrets sealed in Key Vault
 - 🌐 **Hybrid reach via Azure Arc** extends unified policy, monitoring, and Defender for Servers to on-premises and multi-cloud workloads
-- **VMSS + Azure DevOps + Bicep** delivers repeatable, scalable deployments with multi-stage pipelines and deployment slot promotion
+- ⚙️ **VMSS + Azure DevOps + Bicep** delivers repeatable, scalable deployments with multi-stage pipelines and deployment slot promotion
 - 💼 **Modern Workplace governance** (Exchange Online, Teams, SharePoint, Purview) extends Zero Trust and compliance into M365 workloads
 - ♻️ **Built-in resilience** (Azure Backup, Site Recovery, VMSS failover) ensures business continuity without sacrificing security posture
 
@@ -125,14 +130,14 @@ flowchart TD
 | Assessing App Service & DevOps pipelines | [App Service + Managed Identity](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | Deployment slots, multi-stage pipelines, secretless auth |
 | Reviewing business continuity & resilience | [Recovery Services Track](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 | Exploring hybrid & Arc-enabled servers | [Azure Arc Track](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Arc projection, CMA onboarding, AMA + DCR monitoring, hybrid governance, Hyper-V lab |
-| Assessing patch compliance & update orchestration | [Azure Update Manager](Azure%20Update%20Manager/README.md) | Patch assessment, maintenance windows, update deployments, compliance dashboard for Azure VMs and Arc servers |
+| Assessing patch compliance & update orchestration | [Azure Update Manager](Azure%20Update%20Manager/README.md) | Patch assessment, maintenance windows, update deployments, compliance dashboard, pre/post scripts, rollback, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, and Bicep IaC for maintenance configurations — for Azure VMs and Arc servers |
 | Standing up AD DS in Azure | [DC in Azure Track](Deploying%20a%20Domain%20Controller%20in%20Azure/README.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG AD DS rules, Availability Set, forest creation, replication, FSMO roles, Key Vault for DSRM secrets |
 | Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Identity Lifecycle |
 | Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
 
 ---
 
-## �️ Skills & Technology Coverage
+## 🛠️ Skills & Technology Coverage
 
 | Domain | Technologies Demonstrated |
 | --- | --- |
@@ -145,9 +150,10 @@ flowchart TD
 | **Governance & Policy** | Azure Policy (Audit, Deny, DeployIfNotExists), auto-remediation, Resource Locks, Activity Logs, KQL queries |
 | **Resilience & DR** | Azure Backup, Azure Site Recovery (failover/failback), storage replication tiers (LRS → GZRS) |
 | **Hybrid & Arc** | Azure Arc Connected Machine Agent, AMA + DCR, Defender for Servers, Guest Configuration, Update Manager |
+| **Patch Management** | Azure Update Manager, maintenance configurations (staged: dev → uat → prod → dc), pre/post Automation runbooks, CVE-to-KB mapping, zero-day response, compliance reporting, Azure Resource Graph KQL |
 | **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |
 | **Microsoft 365** | Exchange Online, SharePoint Online, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk), Zero Trust CA, Entra ID Governance lifecycle workflows |
-| **Monitoring** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings |
+| **Monitoring & Alerting** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings, Alert Rules, Action Groups, Azure Resource Graph |
 
 ---
 
