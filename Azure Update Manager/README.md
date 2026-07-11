@@ -24,14 +24,18 @@ This track covers OS patch orchestration for Azure VMs and Arc-enabled servers u
 ```text
 Azure Update Manager/
 ├── README.md
-├── 1-Azure Update Manager.md          # Hands-on lab: assessment, scheduling, deployment, and compliance
-└── 2-Azure Update Advance Topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, Bicep IaC
+├── 1-Azure Update Manager.md          # Hands-on lab: enable Update Manager, assessment, maintenance window, deployment, compliance
+├── 2-Azure Update Advance Topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, ESU, Bicep IaC
+├── 3-operational-workflow.md          # Hybrid fleet pipeline, tagging, maintenance window design, hotpatching, pricing, monthly review
+└── 4-operational-runbooks.md          # Runbooks: monitor patch runs, log validation, prod/non-prod strategy, alerting, config reference
 ```
 
 ## Lab Sequence
 
-1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](1-Azure%20Update%20Manager.md) — enable Update Manager, enable periodic assessment and run an on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, review the compliance dashboard, and understand hotpatching and Arc-enabled server pricing
+1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](1-Azure%20Update%20Manager.md) — enable Update Manager, enable periodic assessment and run an on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, and review the compliance dashboard
 2. [Azure Update Manager — Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) — pre/post maintenance scripts, rollback procedures, patch exemptions, compliance workbooks, advanced KQL queries, CVE-to-KB mapping, zero-day response, patch SLA policy, DC staggered reboot runbook, Windows Server 2012 R2 ESU, and Bicep IaC for maintenance configurations
+3. [Operational Workflow for Hybrid Fleets](3-operational-workflow.md) — Arc → Defender for Servers → Update Manager pipeline setup, patch group tagging strategy, maintenance window design, hotpatching, pricing and licensing, the staged/ring-based patching limitation, and the monthly patch review workflow
+4. [Operational Runbooks](4-operational-runbooks.md) — monitoring a live patch run, post-run log validation, prod vs non-prod patching strategy, Arc agent disconnect alerting, the standardized maintenance configuration template, and the full option-by-option maintenance configuration reference
 
 ## Prerequisites
 
@@ -39,7 +43,7 @@ Azure Update Manager/
 - At least one running Azure VM **or** Arc-enabled server (see [Azure Arc track](../Azure%20Arc%20Hybrid%20Server%20Architecture/README.md))
 - No legacy Update Management solution (Log Analytics-based) active on the same machines — the two conflict; migrate first if applicable
 
-> **Note:** Update Manager does not natively enforce staged/ring-based rollout (test → pre-prod → prod using only the exact patch versions validated earlier). If that guarantee matters for your environment, see the staged-patching workaround in [Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) and the caveat in the [Lab guide](1-Azure%20Update%20Manager.md#staged--ring-based-patching-known-limitation).
+> **Note:** Update Manager does not natively enforce staged/ring-based rollout (test → pre-prod → prod using only the exact patch versions validated earlier). If that guarantee matters for your environment, see the staged-patching workaround and caveat in [Operational Workflow for Hybrid Fleets](3-operational-workflow.md#staged--ring-based-patching-known-limitation).
 
 ## Related Tracks
 
