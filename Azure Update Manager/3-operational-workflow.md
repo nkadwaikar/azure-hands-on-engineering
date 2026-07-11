@@ -12,7 +12,6 @@ Last validated on: 2026-07-10
 - [Patch Group Tagging Strategy](#patch-group-tagging-strategy)
 - [Maintenance Window Design](#maintenance-window-design)
 - [Hotpatching on Arc-Enabled Servers](#hotpatching-on-arc-enabled-servers)
-- [Pricing & Licensing](#pricing--licensing)
 - [Staged / Ring-Based Patching (Known Limitation)](#staged--ring-based-patching-known-limitation)
 - [Monthly Patch Review Workflow](#monthly-patch-review-workflow)
 - [Troubleshooting](#troubleshooting)
@@ -111,16 +110,6 @@ Hotpatching installs security updates without requiring a reboot, reducing sched
 - **Enabling it:** Azure Update Manager → **Machines** → select the Arc-enabled server → **Recommended updates** → **Hotpatch** → **Change** → **Receive monthly Hotpatch updates** → **Confirm**. To enable at scale, use **Machines** → **Update settings** → **+Add machine** → set the **Hotpatch** dropdown to **Enable** → **Save**.
 - **Monitoring:** add the **Hotpatch status** column to the Machines grid (**Edit columns** → **Hotpatch status**) to see enrollment and patch state across Azure and Arc-enabled machines in one view.
 - Hotpatches only carry security fixes (not feature or reliability fixes), so a baseline Latest Cumulative Update is still applied quarterly to deliver the rest of the payload — this is what drives the 4/year reboot cadence rather than zero reboots.
-
----
-
-## Pricing & Licensing
-
-- **Azure VMs:** Update Manager is included at no additional charge.
-- **Arc-enabled servers:** billed per server, prorated daily (based on a 31-day month), for any day the server is both Connected and has an update operation triggered on it or is associated with an active schedule.
-- **No-charge scenarios for Arc-enabled servers:** the server is Arc-enabled Azure Local, has Extended Security Updates (ESUs) enabled by Azure Arc, or the hosting subscription has **Defender for Servers Plan 2** enabled (in that case Update Manager and Azure Policy guest configuration are bundled in).
-- Servers already using Automation Update Management for free as of September 1, 2023 keep that free status in the same subscription until the legacy Log Analytics agent is retired; any new Arc onboarding is billed under current pricing.
-- Confirm current per-server pricing and any regional variance directly on the Azure Update Manager pricing page before budgeting, since rates are subject to change.
 
 ---
 
