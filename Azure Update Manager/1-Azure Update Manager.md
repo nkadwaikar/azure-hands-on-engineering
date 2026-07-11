@@ -41,6 +41,9 @@ Azure Update Manager/
   - [Pipeline Setup: Azure Arc → Defender for Servers → Azure Update Manager](#pipeline-setup-azure-arc--defender-for-servers--azure-update-manager)
   - [Patch Group Tagging Strategy](#patch-group-tagging-strategy)
   - [Maintenance Window Design](#maintenance-window-design)
+  - [Hotpatching on Arc-Enabled Servers](#hotpatching-on-arc-enabled-servers)
+  - [Pricing & Licensing](#pricing--licensing)
+  - [Staged / Ring-Based Patching (Known Limitation)](#staged--ring-based-patching-known-limitation)
   - [Monthly Patch Review Workflow](#monthly-patch-review-workflow)
 - [Troubleshooting](#troubleshooting)
 - [Why Update Manager Matters](#why-update-manager-matters-engineering-justification)
@@ -53,6 +56,7 @@ Azure Update Manager/
   - [Maintenance Configuration — Option by Option Explained](#maintenance-configuration--option-by-option-explained)
 - [Checklist](#checklist)
 - [Cleanup](#cleanup)
+- [Update Log](#update-log)
 
 ---
 
@@ -77,7 +81,7 @@ Azure Update Manager/
 | `Log Analytics Contributor` | Log Analytics Workspace | Configure monitoring |
 | `Security Admin` | Subscription | Enable Defender for Cloud |
 
-Naming reference: [Naming Convention](../Naming-Convention.md)
+Naming reference: use your organization's internal naming convention document for resource group, maintenance configuration, and tag naming.
 
 ### Assumptions and Scope Boundaries
 
@@ -100,6 +104,7 @@ By the end of this guide, you will have:
 - Written KQL queries to pull patch state from **Azure Resource Graph** using the `patchassessmentresources` table (and understood why the legacy `UpdateSummary` table does not apply to Update Manager)
 - Set up the full **Arc → Defender for Servers → Update Manager** pipeline for hybrid fleets
 - Applied a **patch group tagging strategy** for large-scale scheduled patching
+- Understood current pricing for Arc-enabled servers and where hotpatching now applies at no additional cost
 
 ---
 
@@ -120,8 +125,9 @@ On-Prem / Multi-Cloud Servers
   └─ Azure Arc (Connected Machine Agent)
         └─ Azure Resource Manager
               ├─ Azure Update Manager
-              │     ├─ Patch Assessment
+              │     ├─ Patch Assessment (on-demand or periodic/24h)
               │     ├─ Scheduled Deployments
+              │     ├─ Hotpatching (Arc-enabled Windows Server 2025)
               │     └─ Compliance Reporting
               └─ Defender for Servers (Plan 2)
                     ├─ CVE / Vulnerability Exposure
@@ -156,10 +162,11 @@ Azure Update Manager requires no agent installation on Azure VMs (it uses the VM
 1. Go to **Resources** > **Machines** (left nav) — this lists all Azure VMs and Arc-enabled servers in the selected scope.
 2. Confirm your target machine(s) appear in the list.
 3. If a machine shows **Not assessed**, it has never had an Update Manager assessment run. That's fine — you'll fix that in Step 2.
-4. Note the **Patch orchestration** column (applies to Azure VMs; Arc-enabled servers have no patch orchestration prerequisite):
-   - **Azure-managed** — Azure controls patching automatically via AutomaticByPlatform (not our scope in this lab)
-   - **OS-managed** — Windows Update or the Linux package manager handles patches automatically (AutomaticByOS); Update Manager scheduled deployments do not apply
-   - **Customer managed schedules** — update deployments are controlled by your defined maintenance configurations; **required** for Azure VMs before scheduled patching
+4. Note the **Patch orchestration** column (applies to Azure VMs; Arc-enabled servers have no patch orchestration prerequisite). Current options are:
+   - **Customer Managed Schedules** — update deployments are controlled by your defined maintenance configurations; **required** for Azure VMs before scheduled patching
+   - **Azure Managed – Safe Deployment** — Azure controls patching automatically and rolls updates out in waves across regions
+   - **Windows automatic updates** — Windows Update handles patching automatically on the guest OS; Update Manager scheduled deployments do not apply
+   - **Image Default** — Linux-only; the distro's own package-manager defaults control patch behavior
    - **Manual updates** — no schedule defined; updates must be triggered on-demand
    - For Arc-enabled servers, patch orchestration is not enforced — there is no prerequisite mode required to use scheduled patching
 
@@ -167,19 +174,22 @@ Azure Update Manager requires no agent installation on Azure VMs (it uses the VM
 
 ### Step 2 — Enable Periodic Assessment and Run an On-Demand Assessment
 
-> **New in 2026:** The Azure Update Manager portal now prominently flags machines that do not have periodic assessment enabled. If you see a banner such as *"2 out of 2 machines do not have periodic assessment enabled"*, address this before running assessments. Periodic assessment replaces the old OMS Update Compliance engine.
+Periodic assessment runs automatic update scans every 24 hours, keeping compliance data fresh and the **Pending updates** view accurate — instead of relying solely on manually triggered checks.
 
 ### 2.1 Enable Periodic Assessment
 
-Periodic assessment runs automatic update scans every 24 hours, keeping compliance data fresh and the **Pending updates** view accurate. It is required for reliable reporting in the current Update Manager model.
+1. In **Azure Update Manager → Machines**, look for the periodic assessment status column, or open a specific machine → **Updates** → **Change periodic assessment**.
+2. Select the machine(s) that are not yet enabled and set periodic assessment to **On**.
+3. At scale: apply the built-in **Azure Policy** initiative for periodic assessment across a subscription or management group so new machines are enrolled automatically as they're created or onboarded.
+4. Confirm each machine shows **Periodic assessment: Enabled** in the **Machines** list.
 
-1. In **Azure Update Manager → Machines**, look for the **"machines do not have periodic assessment enabled"** banner at the top of the view.
-2. Click **Enable now** inside the banner.
-3. Select all machines that are not yet enabled.
-4. Click **Enable** — the setting is applied per machine via the Azure Connected Machine Agent (Arc) or VM Agent (Azure VM).
-5. Confirm the banner disappears and each machine shows **Periodic assessment: Enabled** in the **Machines** list.
+> Periodic assessment is a prerequisite for the Defender for Cloud recommendation *"Periodic assessment should be enabled on your machines"* to show healthy.
 
-> **Arc-enabled servers:** Periodic assessment is delivered through the `WindowsOsUpdateExtension` (not the legacy `WindowsAgent.AzureUpdateManager`). Confirm the extension is present and healthy under **Azure Arc → Machines → [server] → Extensions** before enabling.
+> **Arc-enabled servers:** periodic assessment and on-demand/scheduled patch installation are handled by **two separate extensions** that are both expected to be present and healthy — this is normal, not a misconfiguration:
+> - `Microsoft.CPlat.Core.WindowsPatchExtension` — handles assessment and compliance-state reporting.
+> - `Microsoft.SoftwareUpdateManagement.WindowsOsUpdateExtension` — handles update installation for one-time and scheduled deployments.
+>
+> Confirm both extensions are present and healthy under **Azure Arc → Machines → [server] → Extensions** before enabling periodic assessment at scale.
 
 ### 2.2 Run an On-Demand Patch Assessment
 
@@ -198,7 +208,7 @@ An assessment scans the machine and surfaces available updates **without install
 
 - At least one machine shows a **Last assessment time** within the last few minutes
 - The **Updates** tab shows a breakdown by classification — confirm Critical and Security updates are surfaced if any exist
-- **Periodic assessment: Enabled** is visible for all machines (new 2026 requirement)
+- **Periodic assessment: Enabled** is visible for machines you enrolled in Step 2.1
 - If a machine shows `Assessment failed`, check agent connectivity (Arc) or VM Agent status (Azure VM) — see [Troubleshooting](#troubleshooting)
 
 ---
@@ -272,19 +282,23 @@ Use this path in the lab to validate the end-to-end flow without waiting for the
 
 #### 5.1 Compliance Dashboard
 
-> **New UI (2026):** The compliance view is now the primary **Azure Update Manager → Machines** blade. The old "Update compliance" blade has been replaced.
-
-1. In Azure Update Manager → **Machines** — the list shows per-machine compliance at a glance:
+1. In Azure Update Manager → **Overview** — review the **Summary** panel:
+   - **Compliant machines**: assessed and no critical/security updates pending
+   - **Non-compliant machines**: have pending critical/security updates past the defined SLA
+   - **Not assessed**: never had an Update Manager assessment
+   - Use the **Compliance by resource group** chart to identify which environment (prod, dev, non-prod) has the most exposure.
+2. In Azure Update Manager → **Machines**, the list also shows per-machine compliance at a glance:
    - **Pending updates** count (e.g. *6*)
    - **Pending reboot** count (should be *0* after a completed patch run)
    - **Arc status** (should be *Connected* for all managed servers)
    - **Associated schedules** (e.g. *1 — mc-windows-weekly-standard*)
    - **Periodic assessment** (should be *Enabled* for all machines)
-2. Use the **Tag** filter to scope the view by environment:
+3. Use the **Tag** filter on the Machines view to scope by environment:
    - Filter `Environment = Prod` → confirm **0 pending updates** (or documented exceptions).
    - Filter `Environment = NonProd` → pending updates are expected between patch cycles.
-3. Use the **Compliance by resource group** chart on the **Overview** blade to identify which environment has the most exposure.
 4. Click a non-compliant machine → **Updates** tab → note the specific pending KBs and their severity.
+
+> The Update Manager reporting experience provides dedicated views for overall compliance, recommendations, pending updates, update history, schedules, and operation history — use these instead of building custom workbooks for routine reviews.
 
 #### 5.2 Patch History per Machine
 
@@ -431,6 +445,34 @@ Separate maintenance configurations prevent a single schedule from patching all 
 
 ---
 
+### Hotpatching on Arc-Enabled Servers
+
+Hotpatching installs security updates without requiring a reboot, reducing scheduled restarts on eligible Windows Server workloads from roughly monthly (12/year) to quarterly baseline reboots (4/year).
+
+- **Eligibility:** Windows Server 2025 Standard or Datacenter, Arc-enabled, with Virtualization Based Security (VBS) enabled. (Windows Server Datacenter: Azure Edition has supported hotpatching for years and is unaffected by the licensing changes below.)
+- **Cost:** Hotpatching on Arc-enabled Windows Server 2025 machines was a paid preview at $1.50 per CPU core per month; as of **May 19, 2026**, it is available at **no additional cost** — no per-core meter, no hourly charge, and no separate line item on the invoice. Servers previously enrolled in the paid preview stop being billed automatically; no action is required to keep receiving hotpatches.
+- **Enabling it:** Azure Update Manager → **Machines** → select the Arc-enabled server → **Recommended updates** → **Hotpatch** → **Change** → **Receive monthly Hotpatch updates** → **Confirm**. To enable at scale, use **Machines** → **Update settings** → **+Add machine** → set the **Hotpatch** dropdown to **Enable** → **Save**.
+- **Monitoring:** add the **Hotpatch status** column to the Machines grid (**Edit columns** → **Hotpatch status**) to see enrollment and patch state across Azure and Arc-enabled machines in one view.
+- Hotpatches only carry security fixes (not feature or reliability fixes), so a baseline Latest Cumulative Update is still applied quarterly to deliver the rest of the payload — this is what drives the 4/year reboot cadence rather than zero reboots.
+
+---
+
+### Pricing & Licensing
+
+- **Azure VMs:** Update Manager is included at no additional charge.
+- **Arc-enabled servers:** billed per server, prorated daily (based on a 31-day month), for any day the server is both Connected and has an update operation triggered on it or is associated with an active schedule.
+- **No-charge scenarios for Arc-enabled servers:** the server is Arc-enabled Azure Local, has Extended Security Updates (ESUs) enabled by Azure Arc, or the hosting subscription has **Defender for Servers Plan 2** enabled (in that case Update Manager and Azure Policy guest configuration are bundled in).
+- Servers already using Automation Update Management for free as of September 1, 2023 keep that free status in the same subscription until the legacy Log Analytics agent is retired; any new Arc onboarding is billed under current pricing.
+- Confirm current per-server pricing and any regional variance directly on the Azure Update Manager pricing page before budgeting, since rates are subject to change.
+
+---
+
+### Staged / Ring-Based Patching (Known Limitation)
+
+Update Manager does **not** include a built-in feature for staged (ring-based) rollout — there's no native way to guarantee that only the exact patch versions validated in a test ring are the ones applied in pre-production and production. Where that guarantee matters (e.g. regulated environments), the current workaround is to drive Update Manager through an **Azure Automation runbook** (PowerShell + Azure Resource Graph) that stages machines into resource groups or tags per ring and gates promotion between rings on the previous ring's results. Treat the "staged rollout" language in [Prod vs Non-Prod Patching Strategy](#3-prod-vs-non-prod-patching-strategy) as a deliberate addition you build on top of the maintenance-configuration model in this guide, not as something Update Manager enforces for you.
+
+---
+
 ### Monthly Patch Review Workflow
 
 #### 1 — Review Update Compliance
@@ -480,7 +522,7 @@ After each monthly patching cycle, validate results per tag group:
 4. Validate the **Azure Arc agent health**:
    - Portal: **Azure Arc → Machines → [server] → Overview** — confirm **Status: Connected** and recent heartbeat.
    - If disconnected, re-run the onboarding script or restart the `himds` service on the server.
-5. Validate the **Azure Update Manager extension** is installed: **Azure Arc → Machines → [server] → Extensions** — look for `WindowsOsUpdateExtension` (this is the current extension; the legacy `WindowsAgent.AzureUpdateManager` was replaced in the 2026 model).
+5. Validate the **Azure Update Manager extensions** are installed: **Azure Arc → Machines → [server] → Extensions** — look for both `WindowsPatchExtension` (assessment) and `WindowsOsUpdateExtension` (installation); both should show **Succeeded**.
 6. Review OS-level update logs for additional diagnostics:
    - **Windows:** `C:\Windows\WindowsUpdate.log` or `Get-WindowsUpdateLog` (PowerShell)
 7. If patches consistently exceed the maintenance window, extend the window duration in the maintenance configuration settings.
@@ -563,24 +605,22 @@ Store archived reports in a shared location (e.g. SharePoint, Azure Blob Storage
 
 ## Part 3: Operational Runbooks
 
-## 1. Monitor Tonight's Patch Run (22:00 PT)
+### 1. Monitor Tonight's Patch Run (22:00 PT)
 
 To properly monitor the run, these steps must happen:
 
-### Track the Maintenance Configuration Execution
+#### Track the Maintenance Configuration Execution
 
 1. In the Azure Portal, open **Azure Update Manager → History** at 22:00 PT.
 2. Confirm a new deployment run record appears for the maintenance configuration scheduled for 22:00 PT.
 3. Click the run record to open the per-machine execution detail view.
 
-### Watch the WindowsOsUpdateExtension Activity ID
+#### Watch the WindowsOsUpdateExtension Activity ID
 
-> **2026 model:** Azure Update Manager now uses `WindowsOsUpdateExtension` exclusively. The legacy `WindowsAgent.AzureUpdateManager` extension is no longer used for new deployments.
-
-1. In **Azure Arc → Machines → [server] → Extensions**, confirm `WindowsOsUpdateExtension` is present, shows the current version, and status is **Succeeded** (or **Transitioning** while a run is in progress).
+1. In **Azure Arc → Machines → [server] → Extensions**, note the `WindowsOsUpdateExtension` version and status — this is the extension that executes the install; `WindowsPatchExtension` runs alongside it for assessment. Confirm status is **Succeeded** (or **Transitioning** while a run is in progress).
 2. In the deployment run record, copy the **Activity ID** for the extension invocation — use this to correlate portal events with on-machine logs.
 
-### Capture Key Milestones
+#### Capture Key Milestones
 
 | Milestone | Where to Observe |
 | --- | --- |
@@ -591,7 +631,7 @@ To properly monitor the run, these steps must happen:
 | Reboot completion | Machine heartbeat resumes in Arc portal; extension status returns to **Succeeded** |
 | Extension finalization | Extension status changes from **Transitioning** → **Succeeded** or **Failed** |
 
-### Detect Issues During the Run
+#### Detect Issues During the Run
 
 | Issue | Detection Method |
 | --- | --- |
@@ -600,7 +640,7 @@ To properly monitor the run, these steps must happen:
 | **Maintenance window overruns** | Run start + duration > window end time; remaining machines are skipped |
 | **Arc agent disconnects during patching** | Arc portal shows **Status: Disconnected**; heartbeat gap in Log Analytics |
 
-### Confirm Run Completion
+#### Confirm Run Completion
 
 - Verify the deployment run record shows a completed status before **01:55 AM PT**.
 - Confirm no machines remain in **In progress** state after 01:55 AM PT.
@@ -610,11 +650,11 @@ To properly monitor the run, these steps must happen:
 
 ---
 
-## 2. Validate Logs After the Run
+### 2. Validate Logs After the Run
 
 After the patch window ends, collect and analyze the following log sources to build a complete post-patching health report.
 
-### Arc Agent Logs
+#### Arc Agent Logs
 
 **Path:** `C:\ProgramData\AzureConnectedMachineAgent\Log\himds.log`
 
@@ -632,7 +672,7 @@ Get-Content 'C:\ProgramData\AzureConnectedMachineAgent\Log\himds.log' |
   Select-Object -Last 100
 ```
 
-### Update Extension Logs
+#### Update Extension Logs
 
 **Path:** `C:\Packages\Plugins\Microsoft.SoftwareUpdateManagement.WindowsOsUpdateExtension\Logs`
 
@@ -651,7 +691,7 @@ Get-ChildItem 'C:\Packages\Plugins\Microsoft.SoftwareUpdateManagement.WindowsOsU
   Select-Object Name, LastWriteTime, Length
 ```
 
-### Windows Update Logs
+#### Windows Update Logs
 
 **Path:** `C:\Windows\WindowsUpdate.log`
 
@@ -667,7 +707,7 @@ Check for:
 - Install failures (search for `Installation Failure`)
 - Pending reboot flags (search for `reboot required`)
 
-### Compliance Results
+#### Compliance Results
 
 Azure Portal → **Azure Update Manager → Update compliance**
 
@@ -680,11 +720,11 @@ Azure Portal → **Azure Update Manager → Update compliance**
 
 ---
 
-## 3. Prod vs Non-Prod Patching Strategy
+### 3. Prod vs Non-Prod Patching Strategy
 
 A proper enterprise patching strategy separates production and non-production environments to catch patch regressions before they reach production systems.
 
-### Production
+#### Production
 
 | Setting | Value |
 | --- | --- |
@@ -694,9 +734,9 @@ A proper enterprise patching strategy separates production and non-production en
 | **Reboot** | Allowed (reboot if required) |
 | **Update Classifications** | Security, Critical, Update Rollup |
 | **Pre/Post Scripts** | Azure Automation runbooks: drain load balancer before patching, validate services after |
-| **Staged rollout** | Non-prod → UAT → Prod; Domain Controllers patched last, one at a time |
+| **Staged rollout** | Non-prod → UAT → Prod; Domain Controllers patched last, one at a time (built via the Automation-runbook approach in [Staged / Ring-Based Patching](#staged--ring-based-patching-known-limitation) — not natively enforced by Update Manager) |
 
-### Non-Production
+#### Non-Production
 
 | Setting | Value |
 | --- | --- |
@@ -707,7 +747,7 @@ A proper enterprise patching strategy separates production and non-production en
 | **Update Classifications** | Security, Critical, Update Rollup, Definition, and optionally Optional updates |
 | **Purpose** | Validate patch stability before promoting to Prod; catch regressions early |
 
-### Tagging Model
+#### Tagging Model
 
 Maintenance configurations auto-assign machines based on tags — no manual membership management required.
 
@@ -730,15 +770,13 @@ Maintenance configurations auto-assign machines based on tags — no manual memb
 
 ---
 
-## 4. Alerting for Arc Agent Disconnects
+### 4. Alerting for Arc Agent Disconnects
 
 Arc agent disconnects block Update Manager from delivering patches. Detect them proactively with Azure Monitor alerts.
 
-### Azure Monitor Alert Rules
+#### Azure Monitor Alert Rules
 
 Create the following alert rules in **Azure Monitor → Alerts → + Create → Alert rule**:
-
-> **2026 signals:** Use these four Arc-native signals. They replace the old Log Analytics heartbeat alerts used with the OMS Update Management solution.
 
 | Alert | Signal Type | Condition | Severity |
 | --- | --- | --- | --- |
@@ -747,9 +785,9 @@ Create the following alert rules in **Azure Monitor → Alerts → + Create → 
 | **Guest Configuration Non-compliant** | Azure Policy compliance | Non-compliant assignment | Sev 2 |
 | **Extension Failure** | Activity Log | Extension provisioning state = Failed | Sev 2 |
 
-### Log Analytics KQL Alerts
+#### Log Analytics KQL Alerts
 
-#### Heartbeat Missing (>15 Minutes)
+##### Heartbeat Missing (>15 Minutes)
 
 ```kql
 Heartbeat
@@ -759,7 +797,7 @@ Heartbeat
 | order by MinutesSilent desc
 ```
 
-#### Arc Agent Disconnect for Specific Machine
+##### Arc Agent Disconnect for Specific Machine
 
 ```kql
 Heartbeat
@@ -769,7 +807,7 @@ Heartbeat
 
 > If this query returns zero rows, the agent is disconnected or not sending heartbeats.
 
-#### Extension Failures (Last 24 Hours)
+##### Extension Failures (Last 24 Hours)
 
 ```kql
 AzureActivity
@@ -780,7 +818,7 @@ AzureActivity
 | order by TimeGenerated desc
 ```
 
-### Notification Channels
+#### Notification Channels
 
 1. In **Azure Monitor → Alerts → Action groups**, create an action group with:
    - **Email** notifications to the infrastructure on-call distribution list
@@ -790,7 +828,7 @@ AzureActivity
 
 ---
 
-## Standardized Maintenance Configuration (Recommended)
+### Standardized Maintenance Configuration (Recommended)
 
 Use this configuration as the baseline template for all new maintenance configurations.
 
@@ -805,27 +843,28 @@ Use this configuration as the baseline template for all new maintenance configur
 | **Classifications** | Security, Critical, Update Rollup, Definition |
 | **Assignments** | All Arc-enabled Windows Servers — Prod and Non-Prod separated by `Environment` tag via dynamic scope |
 
-### Configuration Notes
+#### Configuration Notes
 
 - **Duration:** 3 hours 55 minutes keeps the window under 4 hours, which is the recommended ceiling for most fleets. Machines still in progress when the window closes will complete their current patch but no new patches will be started.
 - **Reboot inside window:** Ensures reboots happen during the approved change window, not after business hours the next day.
 - **Tag-based assignment:** Use the `PatchGroup` tag with dynamic scoping — manually assigning machines does not scale and leads to coverage gaps as the fleet changes.
 - **Definition updates:** Including Definition (antimalware signature) updates ensures Defender signatures stay current on every patching cycle without a separate schedule.
+- **Hotpatch-eligible machines:** for Arc-enabled Windows Server 2025 machines enrolled in hotpatching, most monthly security fixes install without a reboot inside this same window — see [Hotpatching on Arc-Enabled Servers](#hotpatching-on-arc-enabled-servers).
 
 ---
 
-## Maintenance Configuration — Option by Option Explained
+### Maintenance Configuration — Option by Option Explained
 
 Every setting inside an Azure Update Manager Maintenance Configuration is explained below. Each entry covers what the option does and how it affects patching on Arc-enabled Windows Servers.
 
-### 1. Schedule Enabled
+#### 1. Schedule Enabled
 
 Activates or deactivates the maintenance configuration.
 
 - **Enabled** — patching runs according to the defined schedule.
 - **Disabled** — no patching occurs; the configuration is preserved for future use.
 
-### 2. Start Time
+#### 2. Start Time
 
 The exact clock time at which Azure Update Manager begins the patching workflow. At this moment Azure will:
 
@@ -836,7 +875,7 @@ The exact clock time at which Azure Update Manager begins the patching workflow.
 
 Example: `22:00 PT` — patching begins at 10:00 PM Pacific Time.
 
-### 3. Repeats
+#### 3. Repeats
 
 Defines how often the schedule fires.
 
@@ -849,7 +888,7 @@ Defines how often the schedule fires.
 
 Example: **On Friday every week** → patching runs every Friday at 22:00 PT.
 
-### 4. Ends On
+#### 4. Ends On
 
 Defines when the recurring schedule stops.
 
@@ -858,7 +897,7 @@ Defines when the recurring schedule stops.
 | No end date | Schedule runs indefinitely |
 | Specific date | Schedule stops after the configured date; no further deployments are triggered |
 
-### 5. Maintenance Window
+#### 5. Maintenance Window
 
 The **maximum allowed duration** for the entire patching operation. The window covers:
 
@@ -873,19 +912,19 @@ If patching does not finish within this window, Azure stops starting new patch o
 
 > **Why this matters:** Exceeding the maintenance window produces `maintenanceWindowExceeded: true` and `InstallationOfAnUpdateWasInterruptedDueToTimeExpired` errors in the extension logs. A window of **3 hours 55 minutes** provides sufficient headroom for most Windows Server workloads.
 
-### 6. Next Maintenance Times
+#### 6. Next Maintenance Times
 
 Azure pre-calculates and displays the next upcoming patch run timestamps based on the configured schedule. Use this to confirm the schedule is active and correctly set before the window opens.
 
 Example output:
 
 ```
-Fri Jul 10 2026 22:00
 Fri Jul 17 2026 22:00
 Fri Jul 24 2026 22:00
+Fri Jul 31 2026 22:00
 ```
 
-### 7. Reboot Options
+#### 7. Reboot Options
 
 Controls when (or whether) Azure is permitted to reboot the machine after installing updates.
 
@@ -898,7 +937,7 @@ Controls when (or whether) Azure is permitted to reboot the machine after instal
 
 > If extension logs show `rebootNeeded: true` and `rebootStatus: Required`, reboot must be permitted inside the window or patching will report as incomplete.
 
-### 8. Patch Classifications
+#### 8. Patch Classifications
 
 Defines which categories of updates are installed during the patching run.
 
@@ -913,7 +952,7 @@ Defines which categories of updates are installed during the patching run.
 | Tools | ✗ No | Utility updates; rarely security-relevant |
 | Optional | ✗ No | Not validated for automated deployment |
 
-### 9. Patch Source
+#### 9. Patch Source
 
 Defines where the machine retrieves update packages.
 
@@ -929,7 +968,7 @@ Arc-enabled server extension logs confirm the active source:
 patchServiceUsed: WU
 ```
 
-### 10. Assignments
+#### 10. Assignments
 
 Defines which machines receive this maintenance configuration.
 
@@ -949,7 +988,7 @@ Recommended tag-based assignment:
 
 > Dynamic scope membership updates automatically as machines are added or retired — no manual reassignment required.
 
-### Quick Reference Summary
+#### Quick Reference Summary
 
 | Option | What It Controls |
 | --- | --- |
@@ -969,16 +1008,17 @@ Recommended tag-based assignment:
 ## Checklist
 
 1. **Arc onboarding complete** — all target servers show **Status: Connected** in **Azure Arc → Machines** with correct tags applied ([Pipeline Setup](#pipeline-setup-azure-arc--defender-for-servers--azure-update-manager)).
-2. **Periodic assessment enabled** — all machines show **Periodic assessment: Enabled** in Azure Update Manager → Machines; no banner warning present ([Step 2 — Enable Periodic Assessment](#step-2--enable-periodic-assessment-and-run-an-on-demand-assessment)).
+2. **Periodic assessment enabled** — all machines show **Periodic assessment: Enabled** in Azure Update Manager → Machines ([Step 2 — Enable Periodic Assessment](#step-2--enable-periodic-assessment-and-run-an-on-demand-assessment)).
 3. **Tagging validated** — `PatchGroup`, `Environment`, `Criticality` tags present and accurate on all Arc machines ([Patch Group Tagging Strategy](#patch-group-tagging-strategy)).
 4. **Defender for Servers Plan 2 enabled** — subscription-level plan active; MDE and vulnerability assessment auto-provisioned ([Step 2 — Enable Defender for Servers](#step-2--enable-defender-for-servers)).
 5. **Defender inventory confirmed** — servers visible in [security.microsoft.com](https://security.microsoft.com) with exposure levels and CVE data populated ([Step 3 — Verify Defender for Servers Activation](#step-3--verify-defender-for-servers-activation)).
 6. **Maintenance configurations created** — separate schedules per patch group; window durations, reboot settings, and update classifications configured ([Maintenance Window Design](#maintenance-window-design)).
 7. **Machines assigned to schedules** — all Arc machines and VMs assigned to the correct maintenance configuration via tag-based selection.
-8. **First compliance baseline captured** — Update Manager assessment run completed; export and archive initial compliance state.
-9. **Monthly review process documented** — team knows which portal views to check, which KQL queries to run, and who receives which reports ([Monthly Patch Review Workflow](#monthly-patch-review-workflow)).
-10. **DC patching procedure confirmed** — staggered reboot runbook or manual procedure documented and tested ([Maintenance Window Design](#maintenance-window-design)).
-11. **Report archive location established** — compliance and CVE reports stored with 12-month retention for audit evidence ([5 — Export Monthly Reports](#5--export-monthly-reports)).
+8. **Hotpatch eligibility reviewed** — eligible Windows Server 2025 Arc machines enrolled where reboot reduction is a priority ([Hotpatching on Arc-Enabled Servers](#hotpatching-on-arc-enabled-servers)).
+9. **First compliance baseline captured** — Update Manager assessment run completed; export and archive initial compliance state.
+10. **Monthly review process documented** — team knows which portal views to check, which KQL queries to run, and who receives which reports ([Monthly Patch Review Workflow](#monthly-patch-review-workflow)).
+11. **DC patching procedure confirmed** — staggered reboot runbook or manual procedure documented and tested ([Maintenance Window Design](#maintenance-window-design)).
+12. **Report archive location established** — compliance and CVE reports stored with 12-month retention for audit evidence ([5 — Export Monthly Reports](#5--export-monthly-reports)).
 
 ---
 
@@ -1001,5 +1041,6 @@ Recommended tag-based assignment:
 2. Check **History** to confirm no pending deployments are queued.
 
 ---
+
 
 [← Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
