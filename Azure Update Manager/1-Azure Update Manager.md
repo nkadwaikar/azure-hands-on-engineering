@@ -727,10 +727,12 @@ Maintenance configurations auto-assign machines based on tags — no manual memb
 | `PatchGroup` | `Prod` | `Dev` / `UAT` |
 
 **Dynamic scope filter example (Prod):**
+
 - Tag key: `Environment`
 - Tag value: `Prod`
 
 **Dynamic scope filter example (Non-Prod):**
+
 - Tag key: `Environment`
 - Tag value: `NonProd`
 
