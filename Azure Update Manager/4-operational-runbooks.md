@@ -8,13 +8,12 @@ Last validated on: 2026-07-12
 
 ## Quick Navigation
 
-- [1. Monitor Tonight's Patch Run (22:00 PT)](#1-monitor-tonights-patch-run-2200-pt)
+- [1. Monitor Tonight's Patch Run](#1-monitor-tonights-patch-run-2200-pt-1)
 - [2. Validate Logs After the Run](#2-validate-logs-after-the-run)
 - [3. Prod vs Non-Prod Patching Strategy](#3-prod-vs-non-prod-patching-strategy)
 - [4. Alerting for Arc Agent Disconnects](#4-alerting-for-arc-agent-disconnects)
 - [Standardized Maintenance Configuration (Recommended)](#standardized-maintenance-configuration-recommended)
-- [Maintenance Configuration — Option by Option Explained](#maintenance-configuration--option-by-option-explained)
-- [Update Log](#update-log)
+- [Maintenance Configuration — Option by Option Explained](#maintenance-configuration--option-by-option-explained-1)
 
 ---
 

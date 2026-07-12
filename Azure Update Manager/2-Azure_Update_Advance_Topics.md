@@ -32,7 +32,6 @@ Azure Update Manager/
 - [Bicep Templates for Maintenance Configurations](#11-bicep-templates-for-maintenance-configurations)
 - [Cross-Subscription Patching](#12-cross-subscription-patching)
 - [Quick Alerts (Native Update Manager Alerting)](#13-quick-alerts-native-update-manager-alerting)
-- [Update Log](#update-log)
 
 ---
 
@@ -829,7 +828,6 @@ For ad-hoc deployments (e.g. zero-day emergency patches) across subscriptions:
 Quick Alerts (preview, August 2025) is a simplified alerting experience built directly into the Update Manager portal. It creates **Azure Resource Graph (ARG)-backed alert rules** without requiring you to navigate to Azure Monitor — useful for patch operations teams that want alerting set up as part of their Update Manager configuration, not as a separate observability task.
 
 > **Relationship to Azure Monitor alerts (Lab 4):** Quick Alerts and the Azure Monitor alert rules in [4-operational-runbooks.md](4-operational-runbooks.md#4-alerting-for-arc-agent-disconnects) are complementary, not mutually exclusive. Quick Alerts covers patch-specific events (missing updates, failed deployments) using predefined ARG queries. Azure Monitor alerts cover infrastructure-level events (Arc agent heartbeat, extension failures) using Log Analytics KQL. Use both.
-
 > **Note:** Quick Alerts is not available in Azure US Government or Azure operated by 21Vianet.
 
 ### 13.1 Create a Quick Alert Rule

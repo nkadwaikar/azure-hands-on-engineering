@@ -58,5 +58,4 @@ Azure Update Manager/
 
 ---
 
-
 [← Back to Azure Hands-On Engineering](../README.md)

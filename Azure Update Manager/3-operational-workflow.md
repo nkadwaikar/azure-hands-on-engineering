@@ -17,7 +17,6 @@ Last validated on: 2026-07-12
 - [Troubleshooting](#troubleshooting)
 - [Why Update Manager Matters](#why-update-manager-matters-engineering-justification)
 - [Checklist](#checklist)
-- [Update Log](#update-log)
 
 ---
 
@@ -138,7 +137,9 @@ Update Manager does **not** include a built-in feature for staged (ring-based) r
 4. Check **Missing KBs mapped to CVEs** — cross-reference with the Update Manager missing updates list from Step 1.
 5. Prioritize **Exploitable vulnerabilities** (flagged as actively exploited in the wild by Microsoft threat intelligence).
 6. Review the **Secure Score** impact — patch-related findings typically contribute significantly to overall score.
+
 > **Shortcut — Updates Pane:** Instead of pivoting from Defender recommendation → machine → Update Manager, use **Azure Update Manager → Updates** (the Updates pane) to go directly from a KB or CVE-linked patch to the list of affected machines and deploy from there. See [Step 7 of the lab guide](1-Azure%20Update%20Manager.md#step-7--use-the-updates-pane-cve-centric-view).
+
 ### 3 — Validate Patch Groups
 
 After each monthly patching cycle, validate results per tag group:
