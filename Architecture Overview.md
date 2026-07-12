@@ -1,7 +1,7 @@
 
 # Architecture Overview
 
-Last validated on: 2026-07-10
+Last validated on: 2026-07-12
 
 ## Identity Governance
 
@@ -191,7 +191,7 @@ flowchart LR
 
 ## Azure Update Manager
 
-Azure Update Manager provides a unified, agent-free patch orchestration layer for both Azure VMs and Arc-enabled servers. Assessment scans surface available updates without installing anything; maintenance configurations gate when deployments are permitted; pre/post scripts via Automation Account handle workload preparation and recovery; compliance reporting and Azure Monitor alerts identify overdue machines and Arc agent disconnects across the fleet.
+Azure Update Manager provides a unified, agent-free patch orchestration layer for Azure VMs, Arc-enabled servers, Arc-enabled VMware vSphere VMs, SCVMM-managed VMs, and Azure Local clusters. Assessment scans surface available updates without installing anything; maintenance configurations gate when deployments are permitted; pre/post scripts via Automation Account handle workload preparation and recovery. The **Updates pane** offers a CVE/KB-centric view so security teams can act on a vulnerability without pivoting through individual machines. **Quick Alerts** (preview, August 2025) creates ARG-backed alert rules directly from within Update Manager for patch-specific events, complementing Azure Monitor alerts for infrastructure-level events. **Cross-subscription patching** allows a single maintenance configuration to target machines across multiple Azure subscriptions, enabling centralized patch governance over distributed landing zones.
 
 ```mermaid
 flowchart TD
@@ -218,7 +218,9 @@ flowchart TD
     end
 
     subgraph Observability["Monitoring & Alerting"]
-        Monitor["Azure Monitor\nAlert Rules"]
+        Monitor["Azure Monitor\nAlert Rules\nArc heartbeat · Extension failure"]
+        QuickAlerts["Quick Alerts\nARG-backed\nMissing updates · Failed deploy"]
+        UpdatesPane["Updates Pane\nCVE / KB-Centric View"]
         Comply["Compliance Dashboard\nPatch Status by Fleet"]
         Logs["Extension Logs · Arc Agent\nWindows Update Logs"]
     end
@@ -234,10 +236,13 @@ flowchart TD
     Outcome --> Logs
     Comply --> ARG
     Comply --> Monitor
-    Monitor -->|"Heartbeat missing\nArc disconnect\nExtension failure"| Logs
+    Comply --> QuickAlerts
+    MDC --> UpdatesPane
+    Comply --> UpdatesPane
+    Monitor -->|"Infrastructure alerts"| Logs
 ```
 
-**Design note:** Agent-free for Azure VMs (uses the VM Agent already present) and Arc-enabled servers (uses the Connected Machine Agent installed during Arc onboarding). Separate maintenance configurations per patch group (`dev` → `uat` → `prod` → `dc`) enforce staged rollout — a regression in Dev is caught before it reaches production. Domain Controller configurations use `Never reboot` to enforce manual staggered reboots with AD health validation between each DC. Dynamic scoping by tag keeps fleet membership accurate automatically as machines are added or retired.
+**Design note:** Agent-free for Azure VMs (uses the VM Agent already present) and Arc-enabled servers (uses the Connected Machine Agent installed during Arc onboarding). Platform support extends beyond Azure VMs and traditional Arc servers to Arc-enabled VMware vSphere VMs, SCVMM-managed VMs, Azure Local clusters, and Windows IoT Enterprise (preview). Separate maintenance configurations per patch group (`dev` → `uat` → `prod` → `dc`) enforce staged rollout — a regression in Dev is caught before it reaches production. Domain Controller configurations use `Never reboot` to enforce manual staggered reboots with AD health validation between each DC. Dynamic scoping by tag keeps fleet membership accurate automatically as machines are added or retired. The **Updates pane** allows a security-first workflow: start from a CVE or KB, identify every affected machine, and deploy — without navigating through individual machine records. **Quick Alerts** (preview) creates ARG-backed alert rules directly from within Update Manager covering missing updates, failed deployments, stale assessments, and pending reboots — complementing Azure Monitor alerts that handle Arc agent disconnects and extension failures. **Cross-subscription patching** extends a single maintenance configuration's dynamic scope across multiple subscriptions, enabling centralized patch governance across distributed landing-zone subscriptions.
 
 ## Modern Workplace (Microsoft 365)
 
@@ -311,7 +316,7 @@ flowchart LR
 | [Break-Glass – CBA (Lab 2)](./Secure%20Break%E2%80%91Glass%20Accounts/2-Certificate-Based%20Authentication%28CBA%29for%20Emergency%20Access%20Accounts.md) | Certificate-based authentication as phishing-resistant MFA for emergency access |
 | [Microsoft Entra Backup & Recovery](./Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra directory backup and object-level recovery |
 | [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Policy/Guest Config compliance, Automation runbooks, lifecycle management, Hyper-V lab for Arc validation — dedicated tracks for [Defender for Cloud](./Microsoft%20Defender%20for%20Cloud/README.md) and [Update Manager](./Azure%20Update%20Manager/README.md) |
-| [Azure Update Manager](./Azure%20Update%20Manager/README.md) | Patch assessment, maintenance configurations (per patch group: dev → uat → prod → dc), scheduled and one-time deployments, pre/post Automation runbooks, compliance dashboard, advanced KQL, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, Azure Monitor alerting for Arc disconnects, Bicep IaC — covers Azure VMs and Arc-enabled servers |
+| [Azure Update Manager](./Azure%20Update%20Manager/README.md) | Patch assessment, maintenance configurations (per patch group: dev → uat → prod → dc), scheduled and one-time deployments, pre/post Automation runbooks, compliance dashboard, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed native alerting), cross-subscription patching, advanced KQL, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, Azure Monitor alerting for Arc disconnects, Bicep IaC — covers Azure VMs, Arc-enabled servers, VMware vSphere (Arc), SCVMM (Arc), and Azure Local |
 | [Deploying a Domain Controller in Azure](./Deploying%20a%20Domain%20Controller%20in%20Azure/1-DeployingDomain%20Controller%20in%20Azure.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG with AD DS port rules, Availability Set, static private IPs, dedicated data disk (host caching: None), forest creation, second DC promotion, automatic replication, FSMO role distribution, Azure DNS forwarder, Key Vault for DSRM secrets |
 | [Modern Workplace (Microsoft 365)](./Microsoft%20365/README.md) | Exchange Online advanced mail flow, SharePoint information architecture, Teams lifecycle governance, Purview compliance automation, Zero Trust Conditional Access, Identity Governance lifecycle workflows |
 

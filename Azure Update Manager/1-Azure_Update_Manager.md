@@ -2,7 +2,7 @@
 
 > **Why this matters:** Unpatched systems are the most exploited attack surface in enterprise environments. Azure Update Manager provides a single, agent-free control plane for assessing and deploying OS updates across Azure VMs, Arc-enabled on-premises servers, and multi-cloud machines. Combined with Azure Arc and Defender for Servers, it turns patching into a measurable, auditable, and automatable operation that scales from 10 to 10,000 servers — without routing telemetry through Log Analytics as a dependency.
 
-Last validated on: 2026-07-10
+Last validated on: 2026-07-12
 Portal experience note: Steps validated against Azure Portal (Update Manager blade) as of July 2026. The Update Manager blade is accessed via **Search → Azure Update Manager** or via the **Operations** section of individual VM resources. Applies to both Azure VMs and Azure Arc-enabled Windows/Linux servers.
 
 > **Note:** This guide targets the standalone Azure Update Manager service (generally available). If your subscription still uses the legacy Update Management solution embedded in Azure Automation accounts, you will need to migrate to Update Manager before proceeding — the two solutions conflict when managing the same machine.
@@ -40,9 +40,9 @@ Azure Update Manager/
   - [Step 4 — Schedule and Execute an Update Deployment](#step-4--schedule-and-execute-an-update-deployment)
   - [Step 5 — Review Compliance and Patch History](#step-5--review-compliance-and-patch-history)
   - [Step 6 — KQL Queries for Patch State](#step-6--kql-queries-for-patch-state)
+  - [Step 7 — Use the Updates Pane (CVE-Centric View)](#step-7--use-the-updates-pane-cve-centric-view)
 - [Checklist](#checklist)
 - [Cleanup](#cleanup)
-- [Update Log](#update-log)
 
 **Continue to:**
 - [Operational Workflow for Hybrid Fleets →](3-operational-workflow.md)
@@ -93,9 +93,11 @@ By the end of this guide, you will have:
 - Scheduled and executed an **update deployment** with classification and exclusion filters
 - Reviewed **compliance reporting** and identified machines overdue for patching
 - Written KQL queries to pull patch state from **Azure Resource Graph** using the `patchassessmentresources` table (and understood why the legacy `UpdateSummary` table does not apply to Update Manager)
+- Used the **Updates pane** (CVE/KB-centric view) to review vulnerabilities without pivoting through individual machines
 - Set up the full **Arc → Defender for Servers → Update Manager** pipeline for hybrid fleets
 - Applied a **patch group tagging strategy** for large-scale scheduled patching
 - Understood current pricing for Arc-enabled servers and where hotpatching now applies at no additional cost
+- Understood the breadth of platform support: Azure VMs, Arc-enabled on-premises servers, VMware vSphere (Arc), SCVMM-managed VMs (Arc), and Azure Local clusters
 
 ---
 
@@ -148,11 +150,25 @@ Azure Update Manager requires no agent installation on Azure VMs (it uses the VM
 2. The **Overview** blade shows a fleet summary: total machines, assessment status, and pending update counts grouped by severity.
 3. Select your **Subscription** and **Resource Group** using the filters at the top to scope the view to your target machines.
 
-### 1.2 Add Machines to the Scope
+### 1.2 Understand Supported Platforms
+
+Azure Update Manager covers a broader set of targets than just Azure VMs and traditional Arc servers:
+
+| Platform | Requirement |
+| --- | --- |
+| **Azure VMs** | VM Agent installed and running (present by default on Azure marketplace images) |
+| **Arc-enabled on-premises / multi-cloud servers** | Azure Connected Machine Agent; see [Arc track](../Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) |
+| **Arc-enabled VMware vSphere VMs** | Arc-enabled VMware extension installed on the vSphere VM |
+| **Arc-enabled SCVMM VMs** | Arc-enabled SCVMM agent installed on the managed VM |
+| **Azure Local (HCI) clusters** | Azure Local instance managed via Update Manager for host OS patching |
+| **Windows IoT Enterprise (Arc)** | Preview — Arc-enabled Windows IoT Enterprise on Arc servers |
+| **SQL Server (Azure VMs)** | SQL Server patching supported alongside OS patches |
+
+### 1.3 Add Machines to the Scope
 
 1. Go to **Resources** > **Machines** (left nav) — this lists all Azure VMs and Arc-enabled servers in the selected scope.
 2. Confirm your target machine(s) appear in the list.
-3. If a machine shows **Not assessed**, it has never had an Update Manager assessment run. That's fine — you'll fix that in Step 2.
+3. If a machine shows **Not assessed**, it has never had an Update Manager assessment run. That’s fine — you’ll fix that in Step 2.
 4. Note the **Patch orchestration** column (applies to Azure VMs; Arc-enabled servers have no patch orchestration prerequisite). Current options are:
    - **Customer Managed Schedules** — update deployments are controlled by your defined maintenance configurations; **required** for Azure VMs before scheduled patching
    - **Azure Managed – Safe Deployment** — Azure controls patching automatically and rolls updates out in waves across regions
@@ -357,6 +373,38 @@ Heartbeat
 
 ---
 
+### Step 7 — Use the Updates Pane (CVE-Centric View)
+
+The **Updates pane** (generally available since May 2024) presents update data grouped by KB/package rather than by machine. This is the preferred entry point for security admins who receive a CVE advisory and need to find every affected machine and remediate from a single workflow — without clicking through each machine individually.
+
+#### 7.1 Open the Updates Pane
+
+1. In **Azure Update Manager**, select **Updates** in the left navigation (below **Machines**).
+2. The pane shows all **pending updates** grouped by KB/package name, with columns for:
+   - **Update name / KB number**
+   - **Classification** (Critical, Security, etc.)
+   - **Affected machines** count
+   - **Last published** date
+3. Use the **Classification** filter to narrow to **Security** or **Critical** only.
+
+#### 7.2 Act on a Specific Update
+
+1. Click a KB or package name to open the affected machines list for that specific update.
+2. Review which machines have this update pending.
+3. Select one or more machines in the list → click **One-time update** to deploy that KB immediately without creating a maintenance configuration.
+4. Alternatively, add the machines to an existing maintenance configuration so the update is deployed in the next scheduled window.
+
+#### 7.3 Cross-Reference with Defender for Cloud
+
+1. In Defender for Cloud → **Recommendations**, find the CVE recommendation.
+2. Note the KB linked in the recommendation details.
+3. Switch to Update Manager → **Updates pane** → search by that KB number to confirm it appears as a pending update on the affected machines.
+4. This confirms Update Manager has assessed the machine and will deploy the patch — eliminating the need to build a custom workbook for CVE-to-KB-to-machine tracing.
+
+> **When to use the Updates pane vs the Machines view:** Use the **Updates pane** when starting from a CVE or KB (security-first workflow). Use the **Machines view** when starting from a server (operations-first workflow — e.g. “what’s pending on this server?”).
+
+---
+
 ## Checklist
 
 Use this to confirm the Part 1 lab is complete before moving on to [Operational Workflow for Hybrid Fleets](3-operational-workflow.md). A comprehensive fleet-readiness checklist (Arc onboarding, tagging, Defender Plan 2, hotpatch enrollment, monthly review process, DC procedure, report archiving) lives in that document instead, since those steps span the pipeline covered there.
@@ -369,6 +417,7 @@ Use this to confirm the Part 1 lab is complete before moving on to [Operational 
 6. **Deployment executed and reviewed** — a one-time or scheduled update deployment ran to completion, and per-machine results (Succeeded/Failed/Not applicable) were reviewed in **History** ([Step 4](#step-4--schedule-and-execute-an-update-deployment)).
 7. **Compliance dashboard reviewed** — Overview and Machines views checked for compliant/non-compliant/not-assessed counts ([Step 5](#step-5--review-compliance-and-patch-history)).
 8. **KQL queries validated** — Resource Graph queries against `patchassessmentresources` return expected results for your subscription ([Step 6](#step-6--kql-queries-for-patch-state)).
+9. **Updates pane reviewed** — opened the Updates pane, filtered to Security/Critical updates, and confirmed the CVE-to-machine workflow ([Step 7](#step-7--use-the-updates-pane-cve-centric-view)).
 
 ---
 

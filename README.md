@@ -1,6 +1,6 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
-Last validated on: 2026-07-10
+Last validated on: 2026-07-12
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#%EF%B8%8F-how-to-follow-these-tracks)
@@ -130,7 +130,7 @@ flowchart TD
 | Assessing App Service & DevOps pipelines | [App Service + Managed Identity](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | Deployment slots, multi-stage pipelines, secretless auth |
 | Reviewing business continuity & resilience | [Recovery Services Track](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 | Exploring hybrid & Arc-enabled servers | [Azure Arc Track](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Arc projection, CMA onboarding, AMA + DCR monitoring, hybrid governance, Hyper-V lab |
-| Assessing patch compliance & update orchestration | [Azure Update Manager](Azure%20Update%20Manager/README.md) | Patch assessment, periodic (24-hour) assessment, maintenance windows, update deployments, compliance dashboard, hotpatching, pricing and licensing, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), patch group tagging strategy, prod vs non-prod patching strategy, Arc agent disconnect alerting, pre/post scripts, rollback, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, and Bicep IaC for maintenance configurations — for Azure VMs and Arc servers |
+| Assessing patch compliance & update orchestration | [Azure Update Manager](Azure%20Update%20Manager/README.md) | Patch assessment, periodic (24-hour) assessment, maintenance windows, update deployments, compliance dashboard, **Updates pane** (CVE/KB-centric view), **Quick Alerts** (ARG-backed native alerting), **cross-subscription patching**, hotpatching, pricing and licensing, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), patch group tagging strategy, prod vs non-prod patching strategy, Arc agent disconnect alerting, pre/post scripts, rollback, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, and Bicep IaC — covers Azure VMs, Arc-enabled servers, VMware vSphere (Arc), SCVMM (Arc), and Azure Local |
 | Standing up AD DS in Azure | [DC in Azure Track](Deploying%20a%20Domain%20Controller%20in%20Azure/README.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG AD DS rules, Availability Set, forest creation, replication, FSMO roles, Key Vault for DSRM secrets |
 | Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Identity Lifecycle |
 | Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
@@ -150,7 +150,7 @@ flowchart TD
 | **Governance & Policy** | Azure Policy (Audit, Deny, DeployIfNotExists), auto-remediation, Resource Locks, Activity Logs, KQL queries |
 | **Resilience & DR** | Azure Backup, Azure Site Recovery (failover/failback), storage replication tiers (LRS → GZRS) |
 | **Hybrid & Arc** | Azure Arc Connected Machine Agent, AMA + DCR, Defender for Servers, Guest Configuration, Update Manager |
-| **Patch Management** | Azure Update Manager, periodic assessment, hotpatching, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), maintenance configurations (staged: dev → uat → prod → dc), Arc agent disconnect alerting, pre/post Automation runbooks, CVE-to-KB mapping, zero-day response, compliance reporting, Azure Resource Graph KQL |
+| **Patch Management** | Azure Update Manager, periodic assessment, hotpatching, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed), cross-subscription patching, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), maintenance configurations (staged: dev → uat → prod → dc), Arc agent disconnect alerting, pre/post Automation runbooks, CVE-to-KB mapping, zero-day response, compliance reporting, Azure Resource Graph KQL — Azure VMs, Arc servers, VMware vSphere (Arc), SCVMM (Arc), Azure Local |
 | **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |
 | **Microsoft 365** | Exchange Online, SharePoint Online, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk), Zero Trust CA, Entra ID Governance lifecycle workflows |
 | **Monitoring & Alerting** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings, Alert Rules, Action Groups, Azure Resource Graph |

@@ -1,6 +1,6 @@
 # Azure Update Manager Track
 
-Last validated on: 2026-07-10
+Last validated on: 2026-07-12
 
 This track covers OS patch orchestration for Azure VMs and Arc-enabled servers using **Azure Update Manager** — the successor to the legacy Log Analytics Update Management solution. Labs walk through patch assessment, maintenance window scheduling, update deployments, and compliance reporting, all via the Azure Portal.
 
@@ -18,14 +18,17 @@ This track covers OS patch orchestration for Azure VMs and Arc-enabled servers u
 | **Hotpatching** | Reboot-free security patching for eligible Arc-enabled Windows Server 2025 machines — reduces routine reboots from monthly to quarterly |
 | **Compliance Report** | Rollup view of patch state across your fleet — surfaces machines that are overdue for patching |
 | **Dynamic Scope** | Target machines by subscription, resource group, or tag rather than a static list — fleet membership stays accurate automatically |
+| **Updates Pane** | CVE/KB-centric view (in addition to the machine-centric Machines view) — lets security admins browse by vulnerability and act on it directly without pivoting to a machine first |
+| **Quick Alerts** | Simplified ARG-backed alerting created from within Update Manager (**Monitoring → New alerts rule**) using predefined or custom KQL queries — no Azure Monitor navigation required |
+| **Cross-Subscription Patching** | Manage and deploy patches across multiple Azure subscriptions from a single maintenance configuration — useful for organizations with distributed landing zones |
 
 ## Track Structure
 
 ```text
 Azure Update Manager/
 ├── README.md
-├── 1-Azure Update Manager.md          # Hands-on lab: enable Update Manager, assessment, maintenance window, deployment, compliance
-├── 2-Azure Update Advance Topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, ESU, Bicep IaC
+├── 1-Azure Update Manager.md          # Hands-on lab: enable Update Manager, assessment, maintenance window, deployment, compliance, Updates pane
+├── 2-Azure Update Advance Topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, ESU, Bicep IaC, cross-subscription patching, quick alerts
 ├── 3-operational-workflow.md          # Hybrid fleet pipeline, tagging, maintenance window design, hotpatching, pricing, monthly review
 └── 4-operational-runbooks.md          # Runbooks: monitor patch runs, log validation, prod/non-prod strategy, alerting, config reference
 ```
@@ -33,7 +36,7 @@ Azure Update Manager/
 ## Lab Sequence
 
 1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](./1-Azure_Update_Manager.md) — enable Update Manager, enable periodic assessment and run an on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, and review the compliance dashboard
-2. [Azure Update Manager — Advanced Topics](./2-Azure%20Update%20Advance%20Topics.md) — pre/post maintenance scripts, rollback procedures, patch exemptions, compliance workbooks, advanced KQL queries, CVE-to-KB mapping, zero-day response, patch SLA policy, DC staggered reboot runbook, Windows Server 2012 R2 ESU, and Bicep IaC for maintenance configurations
+2. [Azure Update Manager — Advanced Topics](./2-Azure%20Update%20Advance%20Topics.md) — pre/post maintenance scripts, rollback procedures, patch exemptions, compliance workbooks, advanced KQL queries, CVE-to-KB mapping, zero-day response, patch SLA policy, DC staggered reboot runbook, Windows Server 2012 R2 ESU, Bicep IaC for maintenance configurations, cross-subscription patching, and native quick alerts
 3. [Operational Workflow for Hybrid Fleets](3-operational-workflow.md) — Arc → Defender for Servers → Update Manager pipeline setup, patch group tagging strategy, maintenance window design, hotpatching, pricing and licensing, the staged/ring-based patching limitation, and the monthly patch review workflow
 4. [Operational Runbooks](4-operational-runbooks.md) — monitoring a live patch run, post-run log validation, prod vs non-prod patching strategy, Arc agent disconnect alerting, the standardized maintenance configuration template, and the full option-by-option maintenance configuration reference
 

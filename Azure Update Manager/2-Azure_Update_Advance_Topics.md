@@ -2,7 +2,7 @@
 
 > **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure%20Update%20Manager.md) before working through this guide. This document assumes Update Manager is already enabled, machines are assessed, and at least one maintenance configuration exists.
 
-Last validated on: 2026-07-10
+Last validated on: 2026-07-12
 
 ---
 
@@ -30,6 +30,8 @@ Azure Update Manager/
 - [Domain Controller Staggered Reboot Runbook](#9-domain-controller-staggered-reboot-runbook)
 - [Windows Server 2012 R2 ESU with Azure Arc](#10-windows-server-2012-r2-esu-with-azure-arc)
 - [Bicep Templates for Maintenance Configurations](#11-bicep-templates-for-maintenance-configurations)
+- [Cross-Subscription Patching](#12-cross-subscription-patching)
+- [Quick Alerts (Native Update Manager Alerting)](#13-quick-alerts-native-update-manager-alerting)
 - [Update Log](#update-log)
 
 ---
@@ -772,6 +774,110 @@ Or from the [Bicep track VS Code workflow](../Bicep/2-how-to-run-bicep-in-vscode
 
 ---
 
+## 12. Cross-Subscription Patching
+
+Cross-subscription patching lets you target machines across multiple Azure subscriptions from a single maintenance configuration or one-time update operation. This is critical for enterprises that deploy workloads into separate landing-zone subscriptions (prod, dev, shared-services) but want a centralized patching team to own the schedule.
+
+### How It Works
+
+- A maintenance configuration lives in one **home subscription** but its **dynamic scope** can reference machines in other subscriptions that your identity has access to.
+- Permissions are evaluated per-resource: the principal running the deployment needs at least **Azure Update Manager Operator** (or **Contributor**) on each target resource group across the subscriptions.
+- Rate limits apply when managing large numbers of assets via API/SPN. Distribute load across multiple service principals if you have thousands of machines.
+
+### 12.1 Pre-Requisites for Cross-Subscription
+
+| Requirement | Detail |
+| --- | --- |
+| Role | **Azure Update Manager Operator** (or **Contributor**) on each target subscription / resource group |
+| Managed Identity | If using a service principal for automation, assign **Reader** on target resources for ARG-based alert rules |
+| Supported resources | Azure VMs and Arc-enabled servers (same supported OS matrix as single-subscription patching) |
+
+### 12.2 Configure a Dynamic Scope Spanning Multiple Subscriptions
+
+1. In **Azure Update Manager → Maintenance configurations**, open or create a maintenance configuration.
+2. Go to the **Dynamic scopes** tab.
+3. Click **+ Add a scope**.
+4. In the scope editor, change the **Subscription** dropdown from the home subscription to a target subscription.
+5. Optionally add a **Resource group** or **Tag** filter to narrow the scope within that subscription.
+6. Repeat for each additional subscription.
+7. Save the configuration — the dynamic scope now resolves machines across all added subscriptions at deployment time.
+
+> When the maintenance window fires, Update Manager enumerates all machines matching every scope entry across all subscriptions. Machines that no longer exist or whose tags changed are automatically excluded.
+
+### 12.3 One-Time Update Across Subscriptions
+
+For ad-hoc deployments (e.g. zero-day emergency patches) across subscriptions:
+
+1. In **Azure Update Manager → Machines**, use the **Subscription** filter at the top to select **All subscriptions**.
+2. The machine list now shows machines from every subscription your identity has access to.
+3. Select the affected machines (regardless of which subscription they belong to) → click **One-time update** → configure classifications and reboot options as usual.
+4. The deployment runs concurrently across all selected machines.
+
+### 12.4 Limitations
+
+| Limitation | Detail |
+| --- | --- |
+| Rate limiting | Large multi-subscription operations via API/SPN can hit Azure Resource Manager rate limits; distribute load across multiple service principals if batching > 1,000 machines |
+| Unsupported images | Machines running unsupported OS images included in a cross-subscription schedule will cause the maintenance configuration to fail for those machines; confirm OS support before adding machines |
+| ARG query row limit | ARG-based queries return a maximum of 1,000 rows — paginate queries for fleets exceeding this size |
+| Azure Government / 21Vianet | Cross-subscription patching is supported in Azure Government and Azure operated by 21Vianet |
+
+---
+
+## 13. Quick Alerts (Native Update Manager Alerting)
+
+Quick Alerts (preview, August 2025) is a simplified alerting experience built directly into the Update Manager portal. It creates **Azure Resource Graph (ARG)-backed alert rules** without requiring you to navigate to Azure Monitor — useful for patch operations teams that want alerting set up as part of their Update Manager configuration, not as a separate observability task.
+
+> **Relationship to Azure Monitor alerts (Lab 4):** Quick Alerts and the Azure Monitor alert rules in [4-operational-runbooks.md](4-operational-runbooks.md#4-alerting-for-arc-agent-disconnects) are complementary, not mutually exclusive. Quick Alerts covers patch-specific events (missing updates, failed deployments) using predefined ARG queries. Azure Monitor alerts cover infrastructure-level events (Arc agent heartbeat, extension failures) using Log Analytics KQL. Use both.
+
+> **Note:** Quick Alerts is not available in Azure US Government or Azure operated by 21Vianet.
+
+### 13.1 Create a Quick Alert Rule
+
+1. In the Azure Portal, open **Azure Update Manager**.
+2. In the left navigation, under **Monitoring**, select **New alerts rule (Preview)**.
+3. Configure the scope:
+   - **Subscription** — the subscription the alert rule will be created in.
+   - **Resource Group** — the resource group where the alert rule resource will live.
+   - **Location** — region for the alert rule resource.
+4. In the **Azure Resource Graph query** dropdown, select one of the predefined alert queries:
+
+| Predefined Query | Fires When |
+| --- | --- |
+| Machines with critical/security updates pending | One or more machines have uninstalled critical or security updates |
+| Failed update deployments | An update deployment completes with one or more machine failures |
+| Machines not assessed in 30 days | A machine has not had an assessment run in the last 30 days |
+| Machines pending reboot | One or more machines have installed updates but are waiting for a reboot |
+
+5. Alternatively, select **Custom query** to write your own ARG KQL query.
+6. Click **Preview or edit query in Logs** to validate the query returns expected results.
+7. Configure:
+   - **Scope and filters** — subscription/resource group filter for the query.
+   - **Threshold and frequency** — how often the query runs and at what result count the alert fires.
+   - **Notify me** — email, SMS, or action group.
+8. Click **Quick create a new rule** to create the alert.
+
+### 13.2 Recommended Quick Alert Ruleset
+
+Create one rule for each of the following to build a baseline patch-operations alerting posture:
+
+| Rule | Predefined Query | Severity | Frequency |
+| --- | --- | --- | --- |
+| Critical patches pending | Machines with critical/security updates pending | Sev 2 | Every 24 hours |
+| Failed deployments | Failed update deployments | Sev 1 | Every 1 hour |
+| Stale assessments | Machines not assessed in 30 days | Sev 2 | Every 24 hours |
+| Pending reboots | Machines pending reboot | Sev 2 | Every 12 hours |
+
+### 13.3 View and Manage Alerts
+
+1. In **Azure Update Manager → Monitoring → New alerts rule (Preview)**, click **Go to alerts**.
+2. The **Monitor | Alerts** page shows all fired alerts, with source, severity, and time.
+3. To edit a quick alert rule: click the alert rule name → **Edit** → modify the query, threshold, or notification target.
+
+> The ARG query used for Quick Alerts returns up to **1,000 rows**. If your fleet exceeds that, add subscription/resource group filters in the **Scope and filters** step to keep results within the limit.
+
+---
+
 ## Update Log
 
 ### 2026-07-10 revision
@@ -788,6 +894,13 @@ Or from the [Bicep track VS Code workflow](../Bicep/2-how-to-run-bicep-in-vscode
 
 - **Added this Update Log section** — the Table of Contents referenced `#update-log` since the 2026-07-10 revision, but the section itself had never actually been added to the file body. Found during a full link-and-anchor audit across the track.
 - **Fixed a broken cross-file link**: the post-run log validation reference in Section 9 pointed to `1-Azure Update Manager.md#2-validate-logs-after-the-run`, but that content moved to `4-operational-runbooks.md` when the track was split into 4 files, and this reference was never updated. Repointed to `4-operational-runbooks.md#2-validate-logs-after-the-run`.
+
+### 2026-07-12 revision
+
+- **Added Section 12: Cross-Subscription Patching** — covers multi-subscription dynamic scope configuration, one-time cross-subscription updates for zero-day response, pre-requisites (per-subscription RBAC), and ARG row-limit and rate-limit caveats. Feature was generally available before this guide was written but had not been documented in the track.
+- **Added Section 13: Quick Alerts (Native Update Manager Alerting)** — covers the simplified ARG-backed alerting UX introduced in August 2025 preview; explains predefined alert queries, recommended ruleset, and its complementary (not replacement) relationship to the Azure Monitor alerts in Lab 4. Not available in Azure Government / 21Vianet.
+- Updated Quick Navigation to include Sections 12 and 13.
+- Updated `Last validated on` to 2026-07-12.
 
 ---
 

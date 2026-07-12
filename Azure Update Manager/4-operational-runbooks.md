@@ -2,7 +2,7 @@
 
 > **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure%20Update%20Manager.md) and review [3-operational-workflow.md](3-operational-workflow.md) before using these runbooks. This document assumes maintenance configurations are created, machines are tagged, and the Arc → Defender → Update Manager pipeline is active.
 
-Last validated on: 2026-07-10
+Last validated on: 2026-07-12
 
 ---
 
@@ -186,6 +186,8 @@ Maintenance configurations auto-assign machines based on tags — no manual memb
 ## 4. Alerting for Arc Agent Disconnects
 
 Arc agent disconnects block Update Manager from delivering patches. Detect them proactively with Azure Monitor alerts.
+
+> **Quick Alerts alternative:** For patch-specific events (missing updates, failed deployments, stale assessments, pending reboots), use the **Quick Alerts** feature built directly into Update Manager: **Azure Update Manager → Monitoring → New alerts rule (Preview)**. It creates ARG-backed alert rules without requiring you to navigate to Azure Monitor. See [Section 13 of the Advanced Topics guide](2-Azure_Update_Advance_Topics.md#13-quick-alerts-native-update-manager-alerting). The Azure Monitor alert rules below are complementary — they cover infrastructure-level events (Arc heartbeat, extension failures) that Quick Alerts does not address.
 
 ### Azure Monitor Alert Rules
 
@@ -423,6 +425,7 @@ Recommended tag-based assignment:
 | Date | Change |
 | --- | --- |
 | 2026-07-10 | Extracted from 1-Azure Update Manager.md into standalone runbooks guide. Covers patch run monitoring, log validation, prod vs non-prod strategy, Arc disconnect alerting, standardized maintenance configuration template, and maintenance configuration option-by-option reference. |
+| 2026-07-12 | Added Quick Alerts callout to Section 4 explaining the complementary relationship between Quick Alerts (patch-specific, ARG-backed, native to Update Manager UI) and Azure Monitor alert rules (infrastructure-level, Log Analytics-backed). Updated `Last validated on` to 2026-07-12. |
 
 ---
 
