@@ -420,13 +420,4 @@ Recommended tag-based assignment:
 
 ---
 
-## Update Log
-
-| Date | Change |
-| --- | --- |
-| 2026-07-10 | Extracted from 1-Azure Update Manager.md into standalone runbooks guide. Covers patch run monitoring, log validation, prod vs non-prod strategy, Arc disconnect alerting, standardized maintenance configuration template, and maintenance configuration option-by-option reference. |
-| 2026-07-12 | Added Quick Alerts callout to Section 4 explaining the complementary relationship between Quick Alerts (patch-specific, ARG-backed, native to Update Manager UI) and Azure Monitor alert rules (infrastructure-level, Log Analytics-backed). Updated `Last validated on` to 2026-07-12. |
-
----
-
 [← Operational Workflow](3-operational-workflow.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

@@ -878,30 +878,4 @@ Create one rule for each of the following to build a baseline patch-operations a
 
 ---
 
-## Update Log
-
-### 2026-07-10 revision
-
-- Corrected the Arc agent version prerequisite for ESU delivery (Section 10, Eligibility): `1.28 or later` was outdated — current Microsoft documentation requires **1.34 or later**. Below that version, ESU license linking will not succeed.
-- Rewrote **Section 10.1 (Enroll in ESU via Azure Portal)**: the previous steps described enabling ESU from a single **Overview** tab toggle on the Arc machine. The current portal workflow is a two-step **Licenses** experience — provision a Windows Server ESU license first (specifying SKU, core type, and core count), then link eligible Arc machines to that license from the **Eligible resources** tab. Added a note on late-enrollment back-billing.
-- Added **core count minimums** to the Eligibility table: 16 physical cores minimum per machine (pCore licensing), 8 vCores minimum per VM (vCore licensing) — not previously mentioned.
-- Removed the claim that ESU via Azure Arc is available "at no additional cost" — this is only true for workloads migrated to Azure (VMs, AVS, Azure Local, etc.); on-premises Arc-enabled servers are billed per core.
-- Added guidance distinguishing `azcmagent upgrade` (only supported on agent versions 1.62+) from the manual MSI/package-manager upgrade path needed for older agents, since a reader on a pre-1.34 agent is likely also below the 1.62 floor for the upgrade command itself.
-- Added an urgency callout in Section 10 and reframed the ESU End Date note: October 13, 2026 is now roughly 3 months away from this guide's validation date, and is the **final** ESU renewal — there is no Year 4. Verified the October 13, 2026 date itself against current Microsoft lifecycle documentation; it is accurate.
-- No changes made to the Bicep templates, KQL queries, PowerShell runbooks, or Azure Policy definitions in other sections — spot-checked the Bicep API version (`2023-04-01`) and Resource Graph table names (`patchinstallationresources`, `patchassessmentresources`) against current documentation and confirmed both are still valid and current.
-
-### 2026-07-11 revision
-
-- **Added this Update Log section** — the Table of Contents referenced `#update-log` since the 2026-07-10 revision, but the section itself had never actually been added to the file body. Found during a full link-and-anchor audit across the track.
-- **Fixed a broken cross-file link**: the post-run log validation reference in Section 9 pointed to `1-Azure Update Manager.md#2-validate-logs-after-the-run`, but that content moved to `4-operational-runbooks.md` when the track was split into 4 files, and this reference was never updated. Repointed to `4-operational-runbooks.md#2-validate-logs-after-the-run`.
-
-### 2026-07-12 revision
-
-- **Added Section 12: Cross-Subscription Patching** — covers multi-subscription dynamic scope configuration, one-time cross-subscription updates for zero-day response, pre-requisites (per-subscription RBAC), and ARG row-limit and rate-limit caveats. Feature was generally available before this guide was written but had not been documented in the track.
-- **Added Section 13: Quick Alerts (Native Update Manager Alerting)** — covers the simplified ARG-backed alerting UX introduced in August 2025 preview; explains predefined alert queries, recommended ruleset, and its complementary (not replacement) relationship to the Azure Monitor alerts in Lab 4. Not available in Azure Government / 21Vianet.
-- Updated Quick Navigation to include Sections 12 and 13.
-- Updated `Last validated on` to 2026-07-12.
-
----
-
 [← Azure Update Manager Lab](1-Azure%20Update%20Manager.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

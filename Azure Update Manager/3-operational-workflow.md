@@ -267,12 +267,4 @@ Use this to confirm the hybrid fleet operational workflow is fully in place. Com
 
 ---
 
-## Update Log
-
-| Date | Change |
-| --- | --- |
-| 2026-07-10 | Extracted from 1-Azure Update Manager.md into standalone operational workflow guide. Covers hybrid fleet pipeline setup, tagging strategy, maintenance window design, hotpatching, pricing, staged patching, monthly review workflow, troubleshooting, and engineering justification. |
-| 2026-07-10 | Added a fleet-readiness **Checklist** section, migrated from 1-Azure Update Manager.md — that document's checklist had mixed Part 1 lab steps with fleet-level items (Arc onboarding, tagging, Defender Plan 2, hotpatch enrollment, monthly review, DC procedure, report archiving) that belong here instead. No content was lost, only relocated to match the current file split. || 2026-07-12 | Monthly review Section 2 updated with a callout pointing to the Updates pane as a shortcut for CVE-to-machine remediation. Updated `Last validated on` to 2026-07-12. |
----
-
 [← Lab Guide](1-Azure%20Update%20Manager.md) | [→ Operational Runbooks](4-operational-runbooks.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
