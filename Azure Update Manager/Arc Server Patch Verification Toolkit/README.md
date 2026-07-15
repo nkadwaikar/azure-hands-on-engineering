@@ -14,7 +14,7 @@ These came out of a real troubleshooting session where a server's assessment sho
 
 ## Scripts
 
-### 1. `Azure_Only_Patching_Mode.ps1`
+### 1. [Azure_Only_Patching_Mode.ps1](Azure_Only_Patching_Mode.ps1)
 
 Locks a server into "Azure-only" patching by disabling native Windows Update auto-install. Run this once, typically as part of Arc onboarding.
 
@@ -30,7 +30,7 @@ Locks a server into "Azure-only" patching by disabling native Windows Update aut
 .\Azure_Only_Patching_Mode.ps1
 ```
 
-## 2. `Verifying_Azure-only_patching_mode.ps1`
+## 2. [Verifying_Azure-only_patching_mode.ps1](Verifying_Azure-only_patching_mode.ps1)
 
 Read-only check that confirms the settings from script 1 are actually in place. Safe to run any time, including on a schedule.
 
@@ -40,7 +40,7 @@ Read-only check that confirms the settings from script 1 are actually in place. 
 
 Checks: `NoAutoUpdate`, `AUOptions`, Automatic Maintenance state, `wuauserv` status, and the two core Arc services (`himds`, `GCArcService`, `ExtensionService`). Every check prints `PASS` or `FAIL` - a clean run should be all green.
 
-### 3. `Verify-AUM-Patch-Source.ps1`
+### 3. [Verify-AUM-Patch-Source.ps1](Verify-AUM-Patch-Source.ps1)
 
 The main verification script. After a patch cycle completes, this confirms *which* KBs actually installed and whether they came in through Update Manager.
 
@@ -63,7 +63,7 @@ It checks four things:
 Get-MpComputerStatus | Select-Object AntivirusSignatureLastUpdated, AntivirusSignatureVersion
 ```
 
-### 4. `Monitor_Azure_patching.ps1`
+### 4. [Monitor_Azure_patching.ps1](Monitor_Azure_patching.ps1)
 
 A live-tail style monitor for watching a patch job happen in real time. Useful for testing an on-demand run or watching a scheduled maintenance window.
 
