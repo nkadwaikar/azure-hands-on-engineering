@@ -24,6 +24,7 @@ Azure Update Manager/
 >
 > - [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — architecture and onboarding reference; complete this before targeting Arc servers with Update Manager.
 > - [On-Prem Hyper-V Lab Setup for Azure Arc](../Azure%20Arc%20Hybrid%20Server%20Architecture/2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — set up a disposable lab to validate the full patching pipeline end-to-end before production rollout.
+> - [Arc Server Patch Verification Toolkit](Arc%20Server%20Patch%20Verification%20Toolkit/README.md) — PowerShell toolkit to enforce and verify Azure-only patching mode on Arc-enabled servers before configuring Azure Update Manager.
 
 ---
 
@@ -73,6 +74,15 @@ Azure Update Manager/
 | `Security Admin` | Subscription | Enable Defender for Cloud |
 
 Naming reference: use your organization's internal naming convention document for resource group, maintenance configuration, and tag naming.
+
+### Pre-Configuration: Verify Azure-Only Patching Mode (Arc Servers)
+
+> **Before configuring Azure Update Manager on Arc-enabled servers**, run the following scripts from the [Arc Server Patch Verification Toolkit](Arc%20Server%20Patch%20Verification%20Toolkit/README.md) to ensure the servers are operating in Azure-only patching mode. This prevents conflicts between local Windows Update/package-manager policies and Update Manager-controlled deployments.
+>
+> 1. **`Azure_Only_Patching_Mode.ps1`** — Enforces Azure-only patching mode on the Arc-enabled server by disabling local OS update sources.
+> 2. **`Verifying_Azure-only_patching_mode.ps1`** — Validates that Azure-only patching mode is correctly applied and the server is ready for Update Manager scheduling.
+>
+> Run both scripts and confirm a clean output before proceeding to [Step 1 — Enable and Scope Update Manager](#step-1--enable-and-scope-update-manager).
 
 ### Assumptions and Scope Boundaries
 
@@ -243,7 +253,7 @@ A **maintenance configuration** (maintenance window) defines **when** updates ar
 4. On the **Updates** tab, set the **Update classifications** to include:
    - Critical Updates
    - Security Updates
-   - (optional) UpdateRollup, ServicePack — add based on policy
+   - (optional) UpdateRollup, ServicePack — add based as per your policy standar
 5. Optionally set **KB/package exclusions** for any updates you need to hold back.
 6. Review + **Create**.
 

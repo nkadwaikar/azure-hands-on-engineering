@@ -30,7 +30,8 @@ Azure Update Manager/
 ├── 1-Azure Update Manager.md          # Hands-on lab: enable Update Manager, assessment, maintenance window, deployment, compliance, Updates pane
 ├── 2-Azure Update Advance Topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, ESU, Bicep IaC, cross-subscription patching, quick alerts
 ├── 3-operational-workflow.md          # Hybrid fleet pipeline, tagging, maintenance window design, hotpatching, pricing, monthly review
-└── 4-operational-runbooks.md          # Runbooks: monitor patch runs, log validation, prod/non-prod strategy, alerting, config reference
+├── 4-operational-runbooks.md          # Runbooks: monitor patch runs, log validation, prod/non-prod strategy, alerting, config reference
+└── Arc Server Patch Verification Toolkit/  # PowerShell scripts to enforce and verify Azure-only patching mode on Arc-enabled servers before configuring Update Manager
 ```
 
 ## Lab Sequence
@@ -45,6 +46,7 @@ Azure Update Manager/
 - Azure subscription with **Contributor** rights on the target resource group
 - At least one running Azure VM **or** Arc-enabled server (see [Azure Arc track](../Azure%20Arc%20Hybrid%20Server%20Architecture/README.md))
 - No legacy Update Management solution (Log Analytics-based) active on the same machines — the two conflict; migrate first if applicable
+- **Arc-enabled servers:** before configuring Update Manager, run `Azure_Only_Patching_Mode.ps1` and `Verifying_Azure-only_patching_mode.ps1` from the [Arc Server Patch Verification Toolkit](Arc%20Server%20Patch%20Verification%20Toolkit/README.md) to confirm Azure-only patching mode is enforced
 
 > **Note:** Update Manager does not natively enforce staged/ring-based rollout (test → pre-prod → prod using only the exact patch versions validated earlier). If that guarantee matters for your environment, see the staged-patching workaround and caveat in [Operational Workflow for Hybrid Fleets](3-operational-workflow.md#staged--ring-based-patching-known-limitation).
 
