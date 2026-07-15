@@ -1,6 +1,6 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
-Last validated on: 2026-07-12
+Last validated on: 2026-07-15
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#%EF%B8%8F-how-to-follow-these-tracks)
@@ -121,7 +121,7 @@ flowchart TD
 | --- | --- | --- |
 | Evaluating my architecture approach | [Architecture Overview](Architecture%20Overview.md) | High-level visual of how every component connects |
 | Reviewing identity & Zero Trust | [Identity-First Track](Identity-First/README.md) | Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
-| Reviewing break-glass & emergency access | [Break-Glass Accounts](Secure%20Break-Glass%20Accounts/README.md) | FIDO2 emergency accounts, Certificate-Based Authentication (CBA) |
+| Reviewing break-glass & emergency access | [Break-Glass Accounts](Secure%20Break%E2%80%91Glass%20Accounts/README.md) | FIDO2 emergency accounts, Certificate-Based Authentication (CBA) |
 | Reviewing Entra backup & recovery | [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID backup strategies and recovery procedures |
 | Assessing IaC & automation | [Bicep Track](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
 | Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor |

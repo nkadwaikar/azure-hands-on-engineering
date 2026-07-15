@@ -8,13 +8,15 @@ This track covers the design, configuration, and validation of emergency access 
 
 ```text
 Secure Break-Glass Accounts/
-├── README.md                          ← Track entry point
-└── 1-Secure-Break-Glass-Accounts.md  ← Lab Guide: design, configure, validate, and alert on break-glass accounts
+├── README.md                                                                  ← Track entry point
+├── 1-Secure-Break-Glass-Accounts.md                                          ← Lab Guide: design, configure, validate, and alert on break-glass accounts
+└── 2-Certificate-Based Authentication(CBA)for Emergency Access Accounts.md  ← Lab Guide: configure CBA as a second independent credential path for emergency access
 ```
 
 ## Lab Sequence
 
 1. [Secure Break-Glass Accounts](1-Secure-Break-Glass-Accounts.md) — create cloud-only emergency access accounts, register FIDO2 security keys, exclude accounts from all Conditional Access policies, configure sign-in alerting, validate access end-to-end, and seal credentials offline
+2. [Certificate-Based Authentication (CBA) for Emergency Access Accounts](2-Certificate-Based%20Authentication(CBA)for%20Emergency%20Access%20Accounts.md) — configure CBA as a second independent credential path using a client certificate, providing access if FIDO2 keys are lost or damaged
 
 ## Key Concepts
 
@@ -47,6 +49,8 @@ Secure Break-Glass Accounts/
 | [Identity-First](../Identity-First/README.md) | Foundation track — RBAC, Managed Identity, and governance patterns that break-glass accounts operate within |
 | [Microsoft Entra Backup & Recovery](../Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Directory-level recovery procedures; break-glass accounts are the access path when recovery operations are required |
 | [Microsoft Defender for Cloud](../Microsoft%20Defender%20for%20Cloud/README.md) | Defender for Cloud surfaces risky sign-ins — break-glass usage triggers high-severity alerts there as well |
+| [Azure Policy Auto-Remediation](../Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Policy-driven enforcement of authentication and Conditional Access requirements across the tenant |
+| [Bicep](../Bicep/README.md) | Infrastructure-as-code for provisioning the Log Analytics workspace and alert rules used for break-glass sign-in monitoring |
 
 ---
 
