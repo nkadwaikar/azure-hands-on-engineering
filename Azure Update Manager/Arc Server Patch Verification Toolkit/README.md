@@ -15,9 +15,11 @@ These came out of a real troubleshooting session where a server's assessment sho
 ## Scripts
 
 ### 1. `Azure_Only_Patching_Mode.ps1`
+
 Locks a server into "Azure-only" patching by disabling native Windows Update auto-install. Run this once, typically as part of Arc onboarding.
 
 **What it does:**
+
 - Sets `NoAutoUpdate = 1` (blocks WU's own scan/download/install cycle)
 - Sets `AUOptions = 2` (notify-only, no silent installs)
 - Disables Automatic Maintenance (stops the classic silent 2 AM WU install path)
@@ -28,7 +30,8 @@ Locks a server into "Azure-only" patching by disabling native Windows Update aut
 .\Azure_Only_Patching_Mode.ps1
 ```
 
-### 2. `Verifying_Azure-only_patching_mode.ps1`
+## 2. `Verifying_Azure-only_patching_mode.ps1`
+
 Read-only check that confirms the settings from script 1 are actually in place. Safe to run any time, including on a schedule.
 
 ```powershell
@@ -38,6 +41,7 @@ Read-only check that confirms the settings from script 1 are actually in place. 
 Checks: `NoAutoUpdate`, `AUOptions`, Automatic Maintenance state, `wuauserv` status, and the two core Arc services (`himds`, `GCArcService`, `ExtensionService`). Every check prints `PASS` or `FAIL` - a clean run should be all green.
 
 ### 3. `Verify-AUM-Patch-Source.ps1`
+
 The main verification script. After a patch cycle completes, this confirms *which* KBs actually installed and whether they came in through Update Manager.
 
 ```powershell
@@ -47,17 +51,20 @@ The main verification script. After a patch cycle completes, this confirms *whic
 Edit the `$kbList` array at the top of the script to match the KBs you're checking (copy them from the "Updates summary" view in the Azure Portal for that machine).
 
 It checks four things:
+
 1. Orchestration mode (`NoAutoUpdate` still enforced)
 2. Each KB's `Get-HotFix` record - specifically whether `InstalledBy` is `NT AUTHORITY\SYSTEM` (platform-driven) vs. blank or a named account
 3. Correlates KBs against Update Manager's JSON event files (note: these are often cleaned up shortly after upload to Azure, so an empty result here isn't necessarily bad news - it just means the Portal's History tab is the better source for that particular KB)
 4. Pending reboot state
 
 **Important limitation:** `Get-HotFix` only reads `Win32_QuickFixEngineering`, which covers classic CBS-based patches (Security/Cumulative updates). It will *not* show Defender definition updates, Defender platform updates, or MSRT (Malicious Software Removal Tool) - those install via their own mechanisms. If those show as "NOT FOUND," that's expected, not a failure. For those, cross-check with:
+
 ```powershell
 Get-MpComputerStatus | Select-Object AntivirusSignatureLastUpdated, AntivirusSignatureVersion
 ```
 
 ### 4. `Monitor_Azure_patching.ps1`
+
 A live-tail style monitor for watching a patch job happen in real time. Useful for testing an on-demand run or watching a scheduled maintenance window.
 
 ```powershell
@@ -65,6 +72,7 @@ A live-tail style monitor for watching a patch job happen in real time. Useful f
 ```
 
 It polls every 5 seconds and only prints when something actually changes:
+
 - `GCArcService` status transitions
 - New lines appended to the extension log (`WindowsUpdateExtension.log`), tagged as activity, completion, or failure
 - Reboot-pending flag transitions

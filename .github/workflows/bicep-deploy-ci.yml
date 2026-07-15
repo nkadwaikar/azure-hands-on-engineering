@@ -1,0 +1,186 @@
+name: Bicep End-to-End Deploy and Teardown
+
+# Runs on manual trigger or weekly schedule.
+# Deploys the full Bicep identity stack, validates all outputs,
+# then tears the resource group down — proving the IaC is deployable
+# end-to-end, not just lint-clean.
+#
+# Prerequisites (one-time setup — see Bicep/README.md#one-time-setup-for-the-what-if-job):
+#   Secrets: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+#   Variables: CI_RESOURCE_GROUP (e.g. rg-bicep-ci), CI_WORKSPACE_ID (Log Analytics resource ID)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'   # Weekly — Monday 03:00 UTC
+
+permissions:
+  id-token: write   # Required for OIDC login
+  contents: read
+
+env:
+  AZURE_LOCATION: eastus
+
+jobs:
+  deploy-and-teardown:
+    name: Deploy → Validate → Teardown
+    runs-on: ubuntu-latest
+    # Skip on forks or when CI variables are not configured
+    if: vars.CI_RESOURCE_GROUP != '' && vars.CI_WORKSPACE_ID != ''
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure login (OIDC — no stored secret)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Install Bicep CLI
+        run: az bicep install
+
+      # -----------------------------------------------------------------------
+      # Deploy
+      # -----------------------------------------------------------------------
+      - name: Create CI resource group
+        run: |
+          az group create \
+            --name "${{ vars.CI_RESOURCE_GROUP }}" \
+            --location "${{ env.AZURE_LOCATION }}"
+
+      - name: Deploy Bicep identity stack
+        id: deploy
+        run: |
+          # Key Vault names must be globally unique — suffix with run ID
+          KV_NAME="kv-bci-${{ github.run_id }}"
+          echo "kv_name=$KV_NAME" >> "$GITHUB_OUTPUT"
+
+          result=$(az deployment group create \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --template-file Bicep/main.bicep \
+            --parameters \
+                identityName=ci-uami \
+                kvName="$KV_NAME" \
+                workspaceId="${{ vars.CI_WORKSPACE_ID }}" \
+            --output json)
+
+          state=$(echo "$result" | jq -r '.properties.provisioningState')
+          echo "provisioning_state=$state" >> "$GITHUB_OUTPUT"
+
+      # -----------------------------------------------------------------------
+      # Validate
+      # -----------------------------------------------------------------------
+      - name: Validate — deployment succeeded
+        run: |
+          state="${{ steps.deploy.outputs.provisioning_state }}"
+          echo "Provisioning state: $state"
+          if [ "$state" != "Succeeded" ]; then
+            echo "::error::Deployment did not succeed — state: $state"
+            exit 1
+          fi
+
+      - name: Validate — Key Vault exists with RBAC authorization enabled
+        run: |
+          kv="${{ steps.deploy.outputs.kv_name }}"
+          rbac=$(az keyvault show \
+            --name "$kv" \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --query "properties.enableRbacAuthorization" \
+            --output tsv)
+          echo "Key Vault RBAC authorization: $rbac"
+          if [ "$rbac" != "true" ]; then
+            echo "::error::Key Vault RBAC authorization is not enabled"
+            exit 1
+          fi
+
+      - name: Validate — User-Assigned Managed Identity was created
+        run: |
+          count=$(az identity list \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --query "length([?name=='ci-uami'])" \
+            --output tsv)
+          echo "Managed Identity count: $count"
+          if [ "$count" -lt 1 ]; then
+            echo "::error::Managed Identity 'ci-uami' not found in resource group"
+            exit 1
+          fi
+
+      - name: Validate — RBAC role assignment exists on Key Vault
+        run: |
+          kv_id=$(az keyvault show \
+            --name "${{ steps.deploy.outputs.kv_name }}" \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --query id --output tsv)
+
+          uami_principal=$(az identity show \
+            --name ci-uami \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --query principalId --output tsv)
+
+          # Key Vault Secrets User role definition ID
+          count=$(az role assignment list \
+            --scope "$kv_id" \
+            --assignee "$uami_principal" \
+            --query "length([?roleDefinitionId contains '4633458b-17de-408a-b874-0445c86b69e6'])" \
+            --output tsv)
+          echo "Role assignments (Key Vault Secrets User): $count"
+          if [ "$count" -lt 1 ]; then
+            echo "::error::Expected Key Vault Secrets User role assignment not found"
+            exit 1
+          fi
+
+      - name: Validate — CanNotDelete resource lock is in place
+        run: |
+          count=$(az lock list \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --query "length([?level=='CanNotDelete'])" \
+            --output tsv)
+          echo "CanNotDelete locks: $count"
+          if [ "$count" -lt 1 ]; then
+            echo "::error::Expected CanNotDelete resource lock not found"
+            exit 1
+          fi
+
+      - name: Validate — Diagnostic settings linked to Log Analytics
+        run: |
+          kv="${{ steps.deploy.outputs.kv_name }}"
+          kv_id=$(az keyvault show \
+            --name "$kv" \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --query id --output tsv)
+
+          count=$(az monitor diagnostic-settings list \
+            --resource "$kv_id" \
+            --query "length([?workspaceId!=null])" \
+            --output tsv)
+          echo "Diagnostic settings with Log Analytics target: $count"
+          if [ "$count" -lt 1 ]; then
+            echo "::error::No diagnostic settings pointing to Log Analytics found on Key Vault"
+            exit 1
+          fi
+
+      # -----------------------------------------------------------------------
+      # Teardown — always runs, even if validation fails
+      # -----------------------------------------------------------------------
+      - name: Teardown — remove resource locks (required before group deletion)
+        if: always()
+        run: |
+          lock_ids=$(az lock list \
+            --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
+            --query "[].id" --output tsv)
+          for id in $lock_ids; do
+            echo "Removing lock: $id"
+            az lock delete --ids "$id"
+          done
+
+      - name: Teardown — delete CI resource group
+        if: always()
+        run: |
+          az group delete \
+            --name "${{ vars.CI_RESOURCE_GROUP }}" \
+            --yes \
+            --no-wait
+          echo "Resource group deletion queued: ${{ vars.CI_RESOURCE_GROUP }}"
