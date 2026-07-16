@@ -48,7 +48,7 @@ Secure Break-Glass Accounts/
 | --- | --- |
 | [Identity-First](../Identity-First/README.md) | Foundation track — RBAC, Managed Identity, and governance patterns that break-glass accounts operate within |
 | [Microsoft Entra Backup & Recovery](../Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Directory-level recovery procedures; break-glass accounts are the access path when recovery operations are required |
-| [Microsoft Defender for Cloud](../Microsoft%20Defender%20for%20Cloud/README.md) | Defender for Cloud surfaces risky sign-ins — break-glass usage triggers high-severity alerts there as well |
+| [Defender for Servers](../Defender%20for%20Servers/README.md) | Defender for Cloud surfaces risky sign-ins — break-glass usage triggers high-severity alerts there as well |
 | [Azure Policy Auto-Remediation](../Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Policy-driven enforcement of authentication and Conditional Access requirements across the tenant |
 | [Bicep](../Bicep/README.md) | Infrastructure-as-code for provisioning the Log Analytics workspace and alert rules used for break-glass sign-in monitoring |
 

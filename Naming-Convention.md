@@ -1,6 +1,6 @@
 # Naming Convention
 
-Last validated on: 2026-07-10
+Last validated on: 2026-07-15
 
 All resources across these labs follow a consistent pattern aligned with the Azure Cloud Adoption Framework (CAF). This page is the single reference for the abbreviations, segment order, and per-resource-type rules used throughout every lab guide.
 
@@ -300,7 +300,7 @@ mc-dev-monthly               Monthly window for Dev servers (Week 1, Saturday 01
 mc-uat-monthly               Monthly window for UAT servers (Week 2, Saturday 01:00)
 mc-prod-monthly              Monthly window for Prod servers (Week 3, Tuesday 02:00)
 mc-dc-monthly                Monthly window for Domain Controllers (Week 3, Sunday 03:00 — manual staggered reboot)
-mc-prod-emergency            Emergency / one-time patching window for out-of-band zero-day response
+Azure Update Managerut-of-band zero-day response
 ```
 
 **Maintenance configuration naming conventions:**

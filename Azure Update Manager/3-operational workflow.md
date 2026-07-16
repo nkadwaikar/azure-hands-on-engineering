@@ -1,6 +1,6 @@
 # Azure Update Manager — Operational Workflow for Hybrid Fleets
 
-> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) before working through this guide. This document assumes Update Manager is enabled, machines are assessed, and at least one maintenance configuration exists.
+> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure%20Update%20Manager.md) before working through this guide. This document assumes Update Manager is enabled, machines are assessed, and at least one maintenance configuration exists.
 
 Last validated on: 2026-07-12
 
@@ -57,7 +57,7 @@ This pipeline extends the lab walkthrough into a production-grade monthly patchi
 
 ### Step 4 — Configure Azure Update Manager for Production Scale
 
-For production maintenance configurations targeting patch groups, refer to [Maintenance Window Design](#maintenance-window-design) for the recommended schedule structure. The creation steps follow the same flow as [Step 3 — Configure a Maintenance Window](1-Azure_Update_Manager.md#step-3--configure-a-maintenance-window) in the lab guide, with these additional considerations:
+For production maintenance configurations targeting patch groups, refer to [Maintenance Window Design](#maintenance-window-design) for the recommended schedule structure. The creation steps follow the same flow as [Step 3 — Configure a Maintenance Window](1-Azure%20Update%20Manager.md#step-3--configure-a-maintenance-window) in the lab guide, with these additional considerations:
 
 - **Naming convention:** use `mc-<env>-<cadence>` (e.g. `mc-prod-monthly`, `mc-dc-monthly`).
 - **Tag-based machine assignment:** filter by `PatchGroup` tag rather than selecting machines individually — this keeps assignments accurate as the fleet scales.
@@ -114,7 +114,7 @@ Hotpatching installs security updates without requiring a reboot, reducing sched
 
 ## Staged / Ring-Based Patching (Known Limitation)
 
-Update Manager does **not** include a built-in feature for staged (ring-based) rollout — there's no native way to guarantee that only the exact patch versions validated in a test ring are the ones applied in pre-production and production. Where that guarantee matters (e.g. regulated environments), the current workaround is to drive Update Manager through an **Azure Automation runbook** (PowerShell + Azure Resource Graph) that stages machines into resource groups or tags per ring and gates promotion between rings on the previous ring's results. Treat the "staged rollout" language in [Prod vs Non-Prod Patching Strategy](4-operational-runbooks.md#3-prod-vs-non-prod-patching-strategy) as a deliberate addition you build on top of the maintenance-configuration model in this guide, not as something Update Manager enforces for you.
+Update Manager does **not** include a built-in feature for staged (ring-based) rollout — there's no native way to guarantee that only the exact patch versions validated in a test ring are the ones applied in pre-production and production. Where that guarantee matters (e.g. regulated environments), the current workaround is to drive Update Manager through an **Azure Automation runbook** (PowerShell + Azure Resource Graph) that stages machines into resource groups or tags per ring and gates promotion between rings on the previous ring's results. Treat the "staged rollout" language in [Prod vs Non-Prod Patching Strategy](4-operational%20runbooks.md#3-prod-vs-non-prod-patching-strategy) as a deliberate addition you build on top of the maintenance-configuration model in this guide, not as something Update Manager enforces for you.
 
 ---
 
@@ -138,7 +138,7 @@ Update Manager does **not** include a built-in feature for staged (ring-based) r
 5. Prioritize **Exploitable vulnerabilities** (flagged as actively exploited in the wild by Microsoft threat intelligence).
 6. Review the **Secure Score** impact — patch-related findings typically contribute significantly to overall score.
 
-> **Shortcut — Updates Pane:** Instead of pivoting from Defender recommendation → machine → Update Manager, use **Azure Update Manager → Updates** (the Updates pane) to go directly from a KB or CVE-linked patch to the list of affected machines and deploy from there. See [Step 7 of the lab guide](1-Azure_Update_Manager.md#step-7--use-the-updates-pane-cve-centric-view).
+> **Shortcut — Updates Pane:** Instead of pivoting from Defender recommendation → machine → Update Manager, use **Azure Update Manager → Updates** (the Updates pane) to go directly from a KB or CVE-linked patch to the list of affected machines and deploy from there. See [Step 7 of the lab guide](1-Azure%20Update%20Manager.md#step-7--use-the-updates-pane-cve-centric-view).
 
 ### 3 — Validate Patch Groups
 
@@ -210,7 +210,7 @@ Store archived reports in a shared location (e.g. SharePoint, Azure Blob Storage
 
 - For **Azure VMs**: confirm the **Azure VM Agent** is installed and status is **Ready** — go to VM → **Overview** → check Agent status.
 - For **Arc-enabled servers**: confirm **Status: Connected** in **Azure Arc → Machines** — disconnected agents cannot receive Update Manager instructions.
-- Confirm the machine's OS is in the [supported list](1-Azure_Update_Manager.md#1-prerequisites).
+- Confirm the machine's OS is in the [supported list](1-Azure%20Update%20Manager.md#1-prerequisites).
 
 ### Issue: Assessment fails or returns stale results
 
@@ -252,7 +252,7 @@ Store archived reports in a shared location (e.g. SharePoint, Azure Blob Storage
 
 ## Checklist
 
-Use this to confirm the hybrid fleet operational workflow is fully in place. Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) first if you haven't already.
+Use this to confirm the hybrid fleet operational workflow is fully in place. Complete [1-Azure Update Manager.md](1-Azure%20Update%20Manager.md) first if you haven't already.
 
 1. **Arc onboarding complete** — all target servers show **Status: Connected** in **Azure Arc → Machines** with correct tags applied ([Pipeline Setup](#pipeline-setup-azure-arc--defender-for-servers--azure-update-manager)).
 2. **Tagging validated** — `PatchGroup`, `Environment`, `Criticality` tags present and accurate on all Arc machines ([Patch Group Tagging Strategy](#patch-group-tagging-strategy)).
@@ -268,4 +268,4 @@ Use this to confirm the hybrid fleet operational workflow is fully in place. Com
 
 ---
 
-[← Lab Guide](1-Azure_Update_Manager.md) | [→ Operational Runbooks](4-operational-runbooks.md) | [→ Advanced Topics](2-Azure_Update_Advance_Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[← Lab Guide](1-Azure%20Update%20Manager.md) | [→ Operational Runbooks](4-operational%20runbooks.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

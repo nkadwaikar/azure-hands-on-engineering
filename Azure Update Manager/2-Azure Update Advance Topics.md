@@ -1,6 +1,6 @@
 # Azure Update Manager — Advanced Topics
 
-> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) before working through this guide. This document assumes Update Manager is already enabled, machines are assessed, and at least one maintenance configuration exists.
+> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure%20Update%20Manager.md) before working through this guide. This document assumes Update Manager is already enabled, machines are assessed, and at least one maintenance configuration exists.
 
 Last validated on: 2026-07-12
 
@@ -407,7 +407,7 @@ When a zero-day CVE is published and requires immediate patching outside the reg
 ### Step 4 — Validate and Close
 
 1. Monitor the deployment run in **Update Manager → History** to completion.
-2. Collect log evidence (extension logs, Windows Update log) per the post-run validation workflow in [4-operational-runbooks.md — Section 2](4-operational-runbooks.md#2-validate-logs-after-the-run).
+2. Collect log evidence (extension logs, Windows Update log) per the post-run validation workflow in [4-operational-runbooks.md — Section 2](4-operational%20runbooks.md#2-validate-logs-after-the-run).
 3. Confirm the CVE recommendation clears in Defender for Cloud (allow up to 24 hours).
 4. Update the change record with completion evidence and close.
 
@@ -827,7 +827,7 @@ For ad-hoc deployments (e.g. zero-day emergency patches) across subscriptions:
 
 Quick Alerts (preview, August 2025) is a simplified alerting experience built directly into the Update Manager portal. It creates **Azure Resource Graph (ARG)-backed alert rules** without requiring you to navigate to Azure Monitor — useful for patch operations teams that want alerting set up as part of their Update Manager configuration, not as a separate observability task.
 
-> **Relationship to Azure Monitor alerts (Lab 4):** Quick Alerts and the Azure Monitor alert rules in [4-operational-runbooks.md](4-operational-runbooks.md#4-alerting-for-arc-agent-disconnects) are complementary, not mutually exclusive. Quick Alerts covers patch-specific events (missing updates, failed deployments) using predefined ARG queries. Azure Monitor alerts cover infrastructure-level events (Arc agent heartbeat, extension failures) using Log Analytics KQL. Use both.
+> **Relationship to Azure Monitor alerts (Lab 4):** Quick Alerts and the Azure Monitor alert rules in [4-operational-runbooks.md](4-operational%20runbooks.md#4-alerting-for-arc-agent-disconnects) are complementary, not mutually exclusive. Quick Alerts covers patch-specific events (missing updates, failed deployments) using predefined ARG queries. Azure Monitor alerts cover infrastructure-level events (Arc agent heartbeat, extension failures) using Log Analytics KQL. Use both.
 > **Note:** Quick Alerts is not available in Azure US Government or Azure operated by 21Vianet.
 
 ### 13.1 Create a Quick Alert Rule
@@ -876,4 +876,4 @@ Create one rule for each of the following to build a baseline patch-operations a
 
 ---
 
-[← Azure Update Manager Lab](1-Azure_Update_Manager.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[← Azure Update Manager Lab](1-Azure%20Update%20Manager.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

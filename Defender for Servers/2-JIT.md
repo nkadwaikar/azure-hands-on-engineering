@@ -5,7 +5,7 @@ Just-In-Time VM access adds a time-limited, on-demand approval layer on top of A
 Last validated on: 2026-06-19
 Portal experience note: Steps validated against Microsoft Defender for Cloud as of June 2026; labels can vary slightly by subscription and feature rollout.
 
-> **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) first.
+> **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) and [Microsoft Defender for Servers](1-Defender-for-Servers.md) (Lab 1 in this track) first.
 
 ---
 
@@ -14,8 +14,8 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 ```text
 Microsoft Defender for Cloud/
 ├── README.md                          ← Track entry point
-├── 1-JIT.md                           ← Lab 1: Bastion + JIT VM Access (you are here)
-└── 2-Defender-for-Servers.md          ← Lab 2: Workload Protection
+├── 1-Defender-for-Servers.md          ← Lab 1: Workload Protection
+└── 2-JIT.md                           ← Lab 2: Bastion + JIT VM Access (you are here)
 ```
 
 ---
@@ -40,7 +40,7 @@ Microsoft Defender for Cloud/
 | Requirement | Detail |
 | --- | --- |
 | Azure Role | **Security Reader** + **Virtual Machine Contributor** on the target VM |
-| Subscription | **Defender for Servers** plan active on the subscription |
+| Dependency | **Defender for Servers** plan active on the subscription — complete [Microsoft Defender for Servers](1-Defender-for-Servers.md) (Lab 1 in this track) first |
 | Dependency | Azure Bastion deployed — complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) first |
 | Estimated Time | 30–45 minutes |
 | Tools | Azure Portal only — no CLI required |
@@ -49,7 +49,7 @@ Naming reference: [Naming Convention](../Naming-Convention.md)
 
 ### Assumptions and Scope Boundaries
 
-- Lab assumes a running VM with Bastion deployed from the Azure Bastion track.
+- Lab assumes a running VM with Bastion deployed from the Azure Bastion track and the Defender for Servers plan already enabled from Lab 1.
 - JIT NSG rules are auto-named and ephemeral — do not rename or modify them.
 - PIM-eligible roles may require just-in-time activation before making a JIT request — PIM is out of scope.
 
@@ -206,4 +206,4 @@ See [Naming Convention — JIT NSG Rules](../Naming-Convention.md#jit-nsg-rules)
 
 ---
 
-[← Azure Bastion — Secure VM Access](../Azure%20Bastion/1-Azure%20Bastion.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[← Microsoft Defender for Servers](1-Defender-for-Servers.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md) | [Azure Bastion — Secure VM Access](../Azure%20Bastion/1-Azure%20Bastion.md)

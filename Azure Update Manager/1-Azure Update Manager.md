@@ -16,8 +16,8 @@ Azure Update Manager/
 ├── README.md                          ← Track entry point
 ├── 1-Azure Update Manager.md          ← Lab Guide: overview, architecture, lab walkthrough (you are here)
 ├── 2-Azure Update Advance Topics.md   ← Advanced: pre/post scripts, rollback, workbooks, Bicep
-├── 3-operational-workflow.md          ← Hybrid fleet pipeline, tagging, maintenance windows, monthly review
-└── 4-operational-runbooks.md          ← Runbooks: monitor runs, log validation, alerting, config reference
+├── 3-operational workflow.md          ← Hybrid fleet pipeline, tagging, maintenance windows, monthly review
+└── 4-operational runbooks.md          ← Runbooks: monitor runs, log validation, alerting, config reference
 ```
 
 > **Companion guides:**
@@ -46,9 +46,9 @@ Azure Update Manager/
 - [Cleanup](#cleanup)
 
 **Continue to:**
-- [Operational Workflow for Hybrid Fleets →](3-operational-workflow.md)
-- [Operational Runbooks →](4-operational-runbooks.md)
-- [Advanced Topics →](2-Azure_Update_Advance_Topics.md)
+- [Operational Workflow for Hybrid Fleets →](3-operational%20workflow.md)
+- [Operational Runbooks →](4-operational%20runbooks.md)
+- [Advanced Topics →](2-Azure%20Update%20Advance%20Topics.md)
 
 ---
 
@@ -64,7 +64,7 @@ Azure Update Manager/
 | Estimated Time | 45–60 minutes (lab); additional time for operational workflow setup |
 | Tools | Azure Portal only — no CLI required |
 
-### Additional Permissions for Hybrid Fleets (Required for 3-operational-workflow.md)
+### Additional Permissions for Hybrid Fleets (Required for 3-operational workflow.md)
 
 | Role | Scope | Purpose |
 | --- | --- | --- |
@@ -225,7 +225,7 @@ An assessment scans the machine and surfaces available updates **without install
 - At least one machine shows a **Last assessment time** within the last few minutes
 - The **Updates** tab shows a breakdown by classification — confirm Critical and Security updates are surfaced if any exist
 - **Periodic assessment: Enabled** is visible for machines you enrolled in Step 2.1
-- If a machine shows `Assessment failed`, check agent connectivity (Arc) or VM Agent status (Azure VM) — see [Troubleshooting](3-operational-workflow.md#troubleshooting)
+- If a machine shows `Assessment failed`, check agent connectivity (Arc) or VM Agent status (Azure VM) — see [Troubleshooting](3-operational%20workflow.md#troubleshooting)
 
 ---
 
@@ -323,7 +323,7 @@ Use this path in the lab to validate the end-to-end flow without waiting for the
    - Updates installed (KB/package, severity, classification)
    - Installation status (Succeeded / Failed)
    - Reboot performed (Yes/No)
-3. For failed updates, note the error code — see [Troubleshooting](3-operational-workflow.md#troubleshooting) for common failures.
+3. For failed updates, note the error code — see [Troubleshooting](3-operational%20workflow.md#troubleshooting) for common failures.
 
 ---
 
@@ -379,7 +379,7 @@ Heartbeat
 
 ---
 
-> **Next:** [Operational Workflow for Hybrid Fleets →](3-operational-workflow.md) — continue to the production pipeline setup, tagging strategy, maintenance window design, and monthly review workflow.
+> **Next:** [Operational Workflow for Hybrid Fleets →](3-operational%20workflow.md) — continue to the production pipeline setup, tagging strategy, maintenance window design, and monthly review workflow.
 
 ---
 
@@ -417,7 +417,7 @@ The **Updates pane** (generally available since May 2024) presents update data g
 
 ## Checklist
 
-Use this to confirm the Part 1 lab is complete before moving on to [Operational Workflow for Hybrid Fleets](3-operational-workflow.md). A comprehensive fleet-readiness checklist (Arc onboarding, tagging, Defender Plan 2, hotpatch enrollment, monthly review process, DC procedure, report archiving) lives in that document instead, since those steps span the pipeline covered there.
+Use this to confirm the Part 1 lab is complete before moving on to [Operational Workflow for Hybrid Fleets](3-operational%20workflow.md). A comprehensive fleet-readiness checklist (Arc onboarding, tagging, Defender Plan 2, hotpatch enrollment, monthly review process, DC procedure, report archiving) lives in that document instead, since those steps span the pipeline covered there.
 
 1. **Patch orchestration reviewed** — target machines show the correct **Patch orchestration** mode in the Machines list, or Arc-enabled servers confirmed to have no orchestration prerequisite ([Step 1](#step-1--enable-and-scope-update-manager)).
 2. **Periodic assessment enabled** — target machine(s) show **Periodic assessment: Enabled** ([Step 2 — Enable Periodic Assessment](#step-2--enable-periodic-assessment-and-run-an-on-demand-assessment)).
@@ -451,4 +451,4 @@ Use this to confirm the Part 1 lab is complete before moving on to [Operational 
 
 ---
 
-[← Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) | [→ Operational Workflow](3-operational-workflow.md) | [→ Operational Runbooks](4-operational-runbooks.md) | [→ Advanced Topics](2-Azure_Update_Advance_Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[← Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) | [→ Operational Workflow](3-operational%20workflow.md) | [→ Operational Runbooks](4-operational%20runbooks.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

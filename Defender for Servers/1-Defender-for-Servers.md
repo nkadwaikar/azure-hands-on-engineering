@@ -5,7 +5,7 @@
 Last validated on: 2026-07-06
 Portal experience note: Steps validated against Microsoft Defender for Cloud as of July 2026; labels can vary slightly by subscription tier and feature rollout. Defender for Servers is available in two plan tiers (Plan 1 and Plan 2) — this lab focuses on Plan 2 features (FIM, vulnerability assessment, JIT) since those represent the full workload protection story.
 
-> **Note:** This lab assumes at least one running Azure VM or Arc-enabled server. For Arc server coverage, complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first. For Just-In-Time VM access, see [Bastion + JIT VM Access](1-JIT.md) — JIT is covered as a standalone lab in this track.
+> **Note:** This lab assumes at least one running Azure VM or Arc-enabled server. For Arc server coverage, complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first. For Just-In-Time VM access, see [Bastion + JIT VM Access](2-JIT.md) — the next lab in this track, which depends on the Defender for Servers plan enabled here.
 
 ---
 
@@ -14,8 +14,8 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 ```text
 Microsoft Defender for Cloud/
 ├── README.md                          ← Track entry point
-├── 1-JIT.md                           ← Lab 1: Bastion + JIT VM Access
-└── 2-Defender-for-Servers.md          ← Lab 2: Workload Protection (you are here)
+├── 1-Defender-for-Servers.md          ← Lab 1: Workload Protection (you are here)
+└── 2-JIT.md                           ← Lab 2: Bastion + JIT VM Access
 ```
 
 ---
@@ -48,7 +48,7 @@ Microsoft Defender for Cloud/
 | Arc prerequisite | For Arc servers: complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first |
 | Log Analytics Workspace | Required for FIM data storage — workspace must exist before enabling FIM (Step 4) |
 | Plan selection | **Plan 2** required for File Integrity Monitoring and vulnerability assessment (Qualys / Defender VA); Plan 1 covers foundational posture only |
-| JIT prerequisite | Optional but recommended — complete [1-JIT.md](1-JIT.md) to understand how Defender for Cloud controls inbound access alongside workload protection |
+| Next lab | Not required for this lab — [2-JIT.md](2-JIT.md) is the next lab in this track and depends on the Defender for Servers plan enabled here |
 | Estimated Time | 60–90 minutes |
 | Tools | Azure Portal only — no CLI required |
 
@@ -58,7 +58,7 @@ Naming reference: [Naming Convention](../Naming-Convention.md)
 
 - This lab enables Defender for Servers at **subscription level** — it will apply to all VMs and Arc machines in the subscription for the duration of the lab. Disable the plan during cleanup if testing on a production subscription.
 - Defender for Endpoint (MDE) integration is automatic once Defender for Servers Plan 2 is enabled — no separate MDE deployment step is required for supported OS versions.
-- Just-In-Time (JIT) VM Access is covered separately in [1-JIT.md](1-JIT.md).
+- Just-In-Time (JIT) VM Access is covered separately in [2-JIT.md](2-JIT.md), the next lab in this track.
 
 ---
 
@@ -386,7 +386,7 @@ DeviceNetworkEvents
 - **Secure Score as operational KPI** — recommendations are scored and prioritized; teams have a clear, measurable target rather than an unbounded backlog of hardening tasks
 - **Alert quality over quantity** — behavioral analytics and MITRE ATT&CK mapping reduce alert noise compared to signature-only detection; each alert includes actionable context
 
-> Combined with JIT VM Access (covered in [1-JIT.md](1-JIT.md)) and Azure Update Manager (covered in the [Azure Update Manager track](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md)), Defender for Servers completes the three-layer posture: *access control + patch currency + runtime protection*.
+> Combined with JIT VM Access (covered in [2-JIT.md](2-JIT.md)) and Azure Update Manager (covered in the [Azure Update Manager track](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md)), Defender for Servers completes the three-layer posture: *access control + patch currency + runtime protection*.
 
 ---
 
@@ -414,4 +414,4 @@ DeviceNetworkEvents
 
 ---
 
-[← Bastion + JIT VM Access](1-JIT.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[↑ Track README](README.md) | [↑ Repo README](../README.md) | [Bastion + JIT VM Access →](2-JIT.md)

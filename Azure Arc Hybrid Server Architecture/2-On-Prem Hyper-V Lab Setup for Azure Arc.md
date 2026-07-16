@@ -205,7 +205,7 @@ Exercise the same RBAC, policy, and automation patterns from the architecture do
 
 ### Defender for Servers
 
-> Full Defender for Servers setup, Secure Score, FIM, and JIT testing is covered in the [Microsoft Defender for Cloud track](../Microsoft%20Defender%20for%20Cloud/2-Defender-for-Servers.md). Arc machines onboard automatically once the plan is enabled at subscription level — no extra steps needed here beyond what Step 6 verifies.
+> Full Defender for Servers setup, Secure Score, FIM, and JIT testing is covered in the [Defender for Servers track](../Defender%20for%20Servers/1-Defender-for-Servers.md). Arc machines onboard automatically once the plan is enabled at subscription level — no extra steps needed here beyond what Step 6 verifies.
 
 The isolation principle throughout: **scope, not separate copies** — every assignment above targets `rg-arc-servers-prod` (or a tag/RG filter) explicitly.
 

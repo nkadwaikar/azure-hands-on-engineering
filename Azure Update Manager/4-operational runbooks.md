@@ -1,6 +1,6 @@
 # Azure Update Manager — Operational Runbooks
 
-> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) and review [3-operational-workflow.md](3-operational-workflow.md) before using these runbooks. This document assumes maintenance configurations are created, machines are tagged, and the Arc → Defender → Update Manager pipeline is active.
+> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure%20Update%20Manager.md) and review [3-operational workflow.md](3-operational%20workflow.md) before using these runbooks. This document assumes maintenance configurations are created, machines are tagged, and the Arc → Defender → Update Manager pipeline is active.
 
 Last validated on: 2026-07-12
 
@@ -93,7 +93,7 @@ Check for:
 - Patch installation success/failure per KB
 - Reboot status (`RebootRequired`, `RebootCompleted`)
 - Maintenance window exceeded warnings
-- Error codes (cross-reference with [Troubleshooting](3-operational-workflow.md#troubleshooting))
+- Error codes (cross-reference with [Troubleshooting](3-operational%20workflow.md#troubleshooting))
 - Activity ID results matching the run record from the portal
 
 ```powershell
@@ -146,7 +146,7 @@ A proper enterprise patching strategy separates production and non-production en
 | **Reboot** | Allowed (reboot if required) |
 | **Update Classifications** | Security, Critical, Update Rollup |
 | **Pre/Post Scripts** | Azure Automation runbooks: drain load balancer before patching, validate services after |
-| **Staged rollout** | Non-prod → UAT → Prod; Domain Controllers patched last, one at a time (built via the Automation-runbook approach in [Staged / Ring-Based Patching](3-operational-workflow.md#staged--ring-based-patching-known-limitation) — not natively enforced by Update Manager) |
+| **Staged rollout** | Non-prod → UAT → Prod; Domain Controllers patched last, one at a time (built via the Automation-runbook approach in [Staged / Ring-Based Patching](3-operational%20workflow.md#staged--ring-based-patching-known-limitation) — not natively enforced by Update Manager) |
 
 ### Non-Production
 
@@ -186,7 +186,7 @@ Maintenance configurations auto-assign machines based on tags — no manual memb
 
 Arc agent disconnects block Update Manager from delivering patches. Detect them proactively with Azure Monitor alerts.
 
-> **Quick Alerts alternative:** For patch-specific events (missing updates, failed deployments, stale assessments, pending reboots), use the **Quick Alerts** feature built directly into Update Manager: **Azure Update Manager → Monitoring → New alerts rule (Preview)**. It creates ARG-backed alert rules without requiring you to navigate to Azure Monitor. See [Section 13 of the Advanced Topics guide](2-Azure_Update_Advance_Topics.md#13-quick-alerts-native-update-manager-alerting). The Azure Monitor alert rules below are complementary — they cover infrastructure-level events (Arc heartbeat, extension failures) that Quick Alerts does not address.
+> **Quick Alerts alternative:** For patch-specific events (missing updates, failed deployments, stale assessments, pending reboots), use the **Quick Alerts** feature built directly into Update Manager: **Azure Update Manager → Monitoring → New alerts rule (Preview)**. It creates ARG-backed alert rules without requiring you to navigate to Azure Monitor. See [Section 13 of the Advanced Topics guide](2-Azure%20Update%20Advance%20Topics.md#13-quick-alerts-native-update-manager-alerting). The Azure Monitor alert rules below are complementary — they cover infrastructure-level events (Arc heartbeat, extension failures) that Quick Alerts does not address.
 
 ### Azure Monitor Alert Rules
 
@@ -263,7 +263,7 @@ Use this configuration as the baseline template for all new maintenance configur
 - **Reboot inside window:** Ensures reboots happen during the approved change window, not after business hours the next day.
 - **Tag-based assignment:** Use the `PatchGroup` tag with dynamic scoping — manually assigning machines does not scale and leads to coverage gaps as the fleet changes.
 - **Definition updates:** Including Definition (antimalware signature) updates ensures Defender signatures stay current on every patching cycle without a separate schedule.
-- **Hotpatch-eligible machines:** for Arc-enabled Windows Server 2025 machines enrolled in hotpatching, most monthly security fixes install without a reboot inside this same window — see [Hotpatching on Arc-Enabled Servers](3-operational-workflow.md#hotpatching-on-arc-enabled-servers).
+- **Hotpatch-eligible machines:** for Arc-enabled Windows Server 2025 machines enrolled in hotpatching, most monthly security fixes install without a reboot inside this same window — see [Hotpatching on Arc-Enabled Servers](3-operational%20workflow.md#hotpatching-on-arc-enabled-servers).
 
 ---
 
@@ -419,4 +419,4 @@ Recommended tag-based assignment:
 
 ---
 
-[← Operational Workflow](3-operational-workflow.md) | [→ Advanced Topics](2-Azure_Update_Advance_Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[← Operational Workflow](3-operational%20workflow.md) | [→ Advanced Topics](2-Azure%20Update%20Advance%20Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

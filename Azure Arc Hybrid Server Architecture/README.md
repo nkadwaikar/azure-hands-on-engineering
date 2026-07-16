@@ -96,8 +96,8 @@ This track covers the Arc projection and governance layer. The security and patc
 
 | Track | What it covers | Arc Architecture doc reference |
 | --- | --- | --- |
-| [Microsoft Defender for Cloud](../Microsoft%20Defender%20for%20Cloud/README.md) | Enable Defender for Servers Plan 2, Secure Score, vulnerability assessment, FIM, alerts | Section 6 — Security Architecture |
-| [Bastion + JIT VM Access](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) | Time-bounded NSG port openings via Defender for Cloud | Section 6.5 — JIT Admin Access |
+| [Defender for Servers](../Defender%20for%20Servers/README.md) | Enable Defender for Servers Plan 2, Secure Score, vulnerability assessment, FIM, alerts | Section 6 — Security Architecture |
+| [Bastion + JIT VM Access](../Defender%20for%20Servers/2-JIT.md) | Time-bounded NSG port openings via Defender for Cloud | Section 6.5 — JIT Admin Access |
 | [Azure Update Manager](../Azure%20Update%20Manager/README.md) | Patch assessment, maintenance windows, update deployments, compliance reporting | Section 4.2 — Update Management |
 | [Identity-First Track](../Identity-First/README.md) | RBAC and managed identity patterns referenced in the Arc governance model | Section 2.3 — RBAC Model |
 

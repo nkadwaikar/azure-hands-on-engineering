@@ -125,7 +125,7 @@ flowchart TD
 | Reviewing Entra backup & recovery | [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID backup strategies and recovery procedures |
 | Assessing IaC & automation | [Bicep Track](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
 | Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor |
-| Reviewing secure access & networking | [Azure Bastion](Azure%20Bastion/README.md) · [Defender for Cloud](Microsoft%20Defender%20for%20Cloud/README.md) · [Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | Zero standing access, JIT + Defender for Servers workload protection, WAF, inbound exposure removal |
+| Reviewing secure access & networking | [Azure Bastion](Azure%20Bastion/README.md) · [Defender for Servers](Defender%20for%20Servers/README.md) · [Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | Zero standing access, JIT + Defender for Servers workload protection, WAF, inbound exposure removal |
 | Following compute & image lifecycle | [Compute Track](Compute/README.md) · [VMSS](VMSS/README.md) | VMs, VMSS, VNets, NSGs, Load Balancers — built for resilience |
 | Assessing App Service & DevOps pipelines | [App Service + Managed Identity](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | Deployment slots, multi-stage pipelines, secretless auth |
 | Reviewing business continuity & resilience | [Recovery Services Track](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
@@ -169,7 +169,7 @@ What I'm building next reflects where enterprise Azure is heading AI augmented o
 
 | Planned | Why |
 | --- | --- |
-| Defender for Cloud CSPM | Extend cloud security posture management at scale across a hub-and-spoke topology — building on the Defender for Servers foundation already covered in the [Defender for Cloud track](Microsoft%20Defender%20for%20Cloud/README.md) |
+| Defender for Cloud CSPM | Extend cloud security posture management at scale across a hub-and-spoke topology — building on the Defender for Servers foundation already covered in the [Defender for Servers track](Defender%20for%20Servers/README.md) |
 | Copilot for Security | Integrate Microsoft Security Copilot into the incident response and identity investigation workflow |
 | Copilot Studio | AI agent backed by a SharePoint knowledge source, secured with Entra ID applied AI on a Zero Trust foundation |
 

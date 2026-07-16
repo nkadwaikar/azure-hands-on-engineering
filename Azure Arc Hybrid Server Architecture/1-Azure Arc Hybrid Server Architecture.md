@@ -39,8 +39,10 @@ Before onboarding servers to Azure Arc, ensure the following are in place.
 
 | Platform | Supported Versions |
 | --- | --- |
-| Windows Server | 2008 R2 SP1, 2012, 2016, 2019, 2022 |
-| Linux | RHEL 7+, SLES 12+, Ubuntu 16.04+, Debian 9+, Amazon Linux 2 |
+| Windows Server | 2012, 2012 R2, 2016, 2019, 2022, 2025 |
+| Linux | RHEL 7+, SLES 12 SP5+, Ubuntu 18.04+, Debian 11+, Amazon Linux 2 / 2023 |
+
+> **Note:** Windows Server 2008 R2 is no longer supported by Azure Arc. Some listed Linux versions (e.g., Ubuntu 18.04, Debian 11, Amazon Linux 2, SLES 15 SP3/SP4) are approaching or already in **limited support** — newer agent releases won't support them. Check the [current supported OS list](https://learn.microsoft.com/en-us/azure/azure-arc/servers/prerequisites) before onboarding, since this list changes over time.
 
 **Server requirements:**
 
@@ -66,6 +68,7 @@ Arc onboarding will fail silently on a fresh subscription if these aren't regist
    - `Microsoft.GuestConfiguration`
    - `Microsoft.HybridConnectivity`
    - `Microsoft.AzureArcData` (only needed if you plan to use Arc-enabled data services later)
+   - `Microsoft.Compute` (required for Azure Update Manager and automatic extension upgrades)
 3. If any provider shows **NotRegistered**, select it and click **Register** at the top of the page. Registration typically completes within a few minutes — refresh the page to confirm.
 
 ### 0.2 Provision Supporting Azure Resources (Portal)
@@ -345,7 +348,7 @@ Not every server fits every policy. Establish a formal exemption process:
 
 ## 6. Security Architecture with Defender for Servers
 
-> **Dedicated track:** Hands-on Defender for Servers labs (enable plan, Secure Score, vulnerability assessment, FIM, alert investigation) live in the [Microsoft Defender for Cloud track](../Microsoft%20Defender%20for%20Cloud/README.md). JIT VM access is covered separately in [1-JIT.md](../Microsoft%20Defender%20for%20Cloud/1-JIT.md). This section documents the security architecture as it relates to Arc.
+> **Dedicated track:** Hands-on Defender for Servers labs (enable plan, Secure Score, vulnerability assessment, FIM, alert investigation) live in the [Defender for Servers track](../Defender%20for%20Servers/README.md). JIT VM access is covered separately in [2-JIT.md](../Defender%20for%20Servers/2-JIT.md). This section documents the security architecture as it relates to Arc.
 
 ### 6.1 Defender for Cloud Integration
 
@@ -387,9 +390,9 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.5 Just-in-Time (JIT) Admin Access
 
-> **See also:** [1-JIT.md](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) — hands-on lab for enabling and using JIT VM access in Defender for Cloud.
+> **See also:** [2-JIT.md](../Defender%20for%20Servers/2-JIT.md) — hands-on lab for enabling and using JIT VM access in Defender for Cloud.
 
-- Enable [**JIT VM access**](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) in Defender for Cloud for all production Arc servers.
+- Enable [**JIT VM access**](../Defender%20for%20Servers/2-JIT.md) in Defender for Cloud for all production Arc servers.
 - Require explicit JIT request approval before any administrative session (RDP/SSH) is permitted.
 - Set maximum session duration (e.g., 2 hours) and restrict source IPs to known admin ranges or Azure Bastion.
 - Log all JIT approvals and sessions to Log Analytics for audit trail.
@@ -405,7 +408,7 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.7 Defender Plan Cost Management
 
-- **Plan 2** (full EDR + FIM + [JIT](../Microsoft%20Defender%20for%20Cloud/1-JIT.md) + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
+- **Plan 2** (full EDR + FIM + [JIT](../Defender%20for%20Servers/2-JIT.md) + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
 - **Plan 1** (foundational posture only) is sufficient for Tier3 / dev/test servers — apply via subscription filter or resource tag.
 - Review the **Defender for Cloud cost estimate** monthly; use the `microsoft.security/pricings` resource to apply granular plan overrides per resource group.
 - Set **budget alerts** in Azure Cost Management for the Defender spend envelope.
