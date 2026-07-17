@@ -4,7 +4,7 @@ Azure Arc projects on-premises and multi-cloud servers into Azure Resource Manag
 
 > **Requirements:** Outbound HTTPS (port 443) from each target server to Azure endpoints. Validated against Azure Portal as of July 2026; applies to both Windows Server and supported Linux distributions.
 
-**Companion guide:** [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — step-by-step Hyper-V onboarding walkthrough.
+**Companion guide:** [On-Prem Hyper-V Lab Setup for Azure Arc](2-on-prem-hyperv-lab-setup-for-azure-arc.md) — step-by-step Hyper-V onboarding walkthrough.
 
 ---
 
@@ -223,7 +223,7 @@ Document the chosen approach per site in the network runbook.
 
 ### 3.5 Onboarding a Single Server (Azure Portal)
 
-> **See also:** [On-Prem Hyper-V Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — covers the full onboarding flow in a Hyper-V environment.
+> **See also:** [On-Prem Hyper-V Setup](2-on-prem-hyperv-lab-setup-for-azure-arc.md) — covers the full onboarding flow in a Hyper-V environment.
 
 1. In the Azure Portal, search **Azure Arc** → **Machines** → **+ Add/Create**.
 2. Choose **Add a single server** → **Generate script**.
@@ -266,7 +266,7 @@ Document the chosen approach per site in the network runbook.
 
 ### 4.2 Update Management
 
-> **Dedicated track:** Full hands-on lab for Azure Update Manager lives in [Azure Update Manager → 1-Azure_Update_Manager.md](../Azure%20Update%20Manager/1-Azure_Update_Manager.md). This section summarises how it fits into the Arc architecture.
+> **Dedicated track:** Full hands-on lab for Azure Update Manager lives in [Azure Update Manager → 1-azure-update-manager.md](../Azure%20Update%20Manager/1-azure-update-manager.md). This section summarises how it fits into the Arc architecture.
 
 Use **Azure Update Manager** for:
 
@@ -348,7 +348,7 @@ Not every server fits every policy. Establish a formal exemption process:
 
 ## 6. Security Architecture with Defender for Servers
 
-> **Dedicated track:** Hands-on Defender for Servers labs (enable plan, Secure Score, vulnerability assessment, FIM, alert investigation) live in the [Defender for Servers track](../Defender%20for%20Servers/README.md). JIT VM access is covered separately in [2-JIT.md](../Defender%20for%20Servers/2-JIT.md). This section documents the security architecture as it relates to Arc.
+> **Dedicated track:** Hands-on Defender for Servers labs (enable plan, Secure Score, vulnerability assessment, FIM, alert investigation) live in the [Defender for Servers track](../Defender%20for%20Servers/README.md). JIT VM access is covered separately in [2-jit.md](../Defender%20for%20Servers/2-jit.md). This section documents the security architecture as it relates to Arc.
 
 ### 6.1 Defender for Cloud Integration
 
@@ -390,16 +390,16 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.5 Just-in-Time (JIT) Admin Access
 
-> **See also:** [2-JIT.md](../Defender%20for%20Servers/2-JIT.md) — hands-on lab for enabling and using JIT VM access in Defender for Cloud.
+> **See also:** [2-jit.md](../Defender%20for%20Servers/2-jit.md) — hands-on lab for enabling and using JIT VM access in Defender for Cloud.
 
-- Enable [**JIT VM access**](../Defender%20for%20Servers/2-JIT.md) in Defender for Cloud for all production Arc servers.
+- Enable [**JIT VM access**](../Defender%20for%20Servers/2-jit.md) in Defender for Cloud for all production Arc servers.
 - Require explicit JIT request approval before any administrative session (RDP/SSH) is permitted.
 - Set maximum session duration (e.g., 2 hours) and restrict source IPs to known admin ranges or Azure Bastion.
 - Log all JIT approvals and sessions to Log Analytics for audit trail.
 
 ### 6.6 File Integrity Monitoring (FIM)
 
-> **See also:** The [On-Prem Hyper-V Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) covers validating FIM with file-share workloads.
+> **See also:** The [On-Prem Hyper-V Setup](2-on-prem-hyperv-lab-setup-for-azure-arc.md) covers validating FIM with file-share workloads.
 
 - Enable **FIM** (available in Defender for Servers Plan 2) on critical servers.
 - Monitor high-value paths: system binaries (`/bin`, `/sbin`, `C:\Windows\System32`), configuration files (`/etc`, web server configs), and startup locations.
@@ -408,7 +408,7 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.7 Defender Plan Cost Management
 
-- **Plan 2** (full EDR + FIM + [JIT](../Defender%20for%20Servers/2-JIT.md) + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
+- **Plan 2** (full EDR + FIM + [JIT](../Defender%20for%20Servers/2-jit.md) + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
 - **Plan 1** (foundational posture only) is sufficient for Tier3 / dev/test servers — apply via subscription filter or resource tag.
 - Review the **Defender for Cloud cost estimate** monthly; use the `microsoft.security/pricings` resource to apply granular plan overrides per resource group.
 - Set **budget alerts** in Azure Cost Management for the Defender spend envelope.
@@ -430,7 +430,7 @@ Use **Azure Automation** (or Logic Apps) for:
 
 ### 7.2 Onboarding Multiple Servers at Scale (Azure Portal)
 
-> **See also:** The [On-Prem Hyper-V Setup](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) covers the Group Policy bulk-onboarding method for AD-joined machines.
+> **See also:** The [On-Prem Hyper-V Setup](2-on-prem-hyperv-lab-setup-for-azure-arc.md) covers the Group Policy bulk-onboarding method for AD-joined machines.
 
 1. In the Azure Portal, go to **Azure Arc → Machines → + Add/Create → Add multiple servers**.
 2. Choose a deployment method based on your existing tooling:
@@ -511,6 +511,6 @@ Define a documented break-glass process for scenarios where normal Arc/Automatio
 
 ## Related
 
-- [On-Prem Hyper-V Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — Hyper-V environment setup to validate onboarding, policy, Defender, and FIM
+- [On-Prem Hyper-V Setup for Azure Arc](2-on-prem-hyperv-lab-setup-for-azure-arc.md) — Hyper-V environment setup to validate onboarding, policy, Defender, and FIM
 - [Azure Arc Track Overview](README.md)
 - [Back to Azure Hands-On Engineering](../README.md)

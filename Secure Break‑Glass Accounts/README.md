@@ -10,7 +10,7 @@ This track covers the design, configuration, and validation of emergency access 
 Secure Break-Glass Accounts/
 ├── README.md                                                                  ← Track entry point
 ├── 1-Secure-Break-Glass-Accounts.md                                          ← Lab Guide: design, configure, validate, and alert on break-glass accounts
-└── 2-Certificate-Based Authentication(CBA)for Emergency Access Accounts.md  ← Lab Guide: configure CBA as a second independent credential path for emergency access
+└── 2-certificate-based-auth-cba.md  ← Lab Guide: configure CBA as a second independent credential path for emergency access
 ```
 
 ## Lab Sequence

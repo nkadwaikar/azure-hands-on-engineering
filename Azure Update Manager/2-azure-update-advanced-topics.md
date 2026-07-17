@@ -1,6 +1,6 @@
 # Azure Update Manager — Advanced Topics
 
-> **Prerequisite:** Complete [1-Azure_Update_Manager.md](1-Azure_Update_Manager.md) before working through this guide. This document assumes Update Manager is already enabled, machines are assessed, and at least one maintenance configuration exists.
+> **Prerequisite:** Complete [1-azure-update-manager.md](1-azure-update-manager.md) before working through this guide. This document assumes Update Manager is already enabled, machines are assessed, and at least one maintenance configuration exists.
 
 Last validated on: 2026-07-12
 
@@ -11,8 +11,8 @@ Last validated on: 2026-07-12
 ```text
 Azure Update Manager/
 ├── README.md
-├── 1-Azure_Update_Manager.md          ← Lab + Operational Guide
-└── 2-Azure_Update_Advance_Topics.md   ← Advanced Topics (you are here)
+├── 1-azure-update-manager.md          ← Lab + Operational Guide
+└── 2-azure-update-advanced-topics.md   ← Advanced Topics (you are here)
 ```
 
 ---
@@ -876,4 +876,4 @@ Create one rule for each of the following to build a baseline patch-operations a
 
 ---
 
-[← Azure Update Manager Lab](1-Azure_Update_Manager.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[← Azure Update Manager Lab](1-azure-update-manager.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

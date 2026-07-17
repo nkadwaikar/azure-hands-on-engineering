@@ -14,16 +14,16 @@ Portal experience note: Steps validated against Azure Portal (Update Manager bla
 ```text
 Azure Update Manager/
 ├── README.md                          ← Track entry point
-├── 1-Azure_Update_Manager.md          ← Lab Guide: overview, architecture, lab walkthrough (you are here)
-├── 2-Azure_Update_Advance_Topics.md   ← Advanced: pre/post scripts, rollback, workbooks, Bicep
+├── 1-azure-update-manager.md          ← Lab Guide: overview, architecture, lab walkthrough (you are here)
+├── 2-azure-update-advanced-topics.md   ← Advanced: pre/post scripts, rollback, workbooks, Bicep
 ├── 3-operational-workflow.md          ← Hybrid fleet pipeline, tagging, maintenance windows, monthly review
 └── 4-operational-runbooks.md          ← Runbooks: monitor runs, log validation, alerting, config reference
 ```
 
 > **Companion guides:**
 >
-> - [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — architecture and onboarding reference; complete this before targeting Arc servers with Update Manager.
-> - [On-Prem Hyper-V Lab Setup for Azure Arc](../Azure%20Arc%20Hybrid%20Server%20Architecture/2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — set up a disposable lab to validate the full patching pipeline end-to-end before production rollout.
+> - [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) — architecture and onboarding reference; complete this before targeting Arc servers with Update Manager.
+> - [On-Prem Hyper-V Lab Setup for Azure Arc](../Azure%20Arc%20Hybrid%20Server%20Architecture/2-on-prem-hyperv-lab-setup-for-azure-arc.md) — set up a disposable lab to validate the full patching pipeline end-to-end before production rollout.
 > - [Arc Server Patch Verification Toolkit](Arc%20Server%20Patch%20Verification%20Toolkit/README.md) — PowerShell toolkit to enforce and verify Azure-only patching mode on Arc-enabled servers before configuring Azure Update Manager.
 
 ---
@@ -49,7 +49,7 @@ Azure Update Manager/
 
 - [Operational Workflow for Hybrid Fleets →](3-operational-workflow.md)
 - [Operational Runbooks →](4-operational-runbooks.md)
-- [Advanced Topics →](2-Azure_Update_Advance_Topics.md)
+- [Advanced Topics →](2-azure-update-advanced-topics.md)
 
 ---
 
@@ -59,7 +59,7 @@ Azure Update Manager/
 | --- | --- |
 | Azure Role | **Contributor** on the target resource group (or **Azure Update Manager Contributor** built-in role) |
 | Target machines | At least one running Azure VM or Arc-enabled server in a supported OS |
-| Arc requirement | If targeting Arc servers: Azure Connected Machine Agent installed and status **Connected** — complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) first |
+| Arc requirement | If targeting Arc servers: Azure Connected Machine Agent installed and status **Connected** — complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) first |
 | Supported OS | **Azure VMs:** Windows Server 2012 R2+, Windows Server 2016/2019/2022/2025; RHEL 7/8/9, SLES 12/15, Ubuntu 16.04–24.04 LTS, Debian 10/11/12, Amazon Linux 2/2023, Rocky Linux 8/9, Alma Linux 8/9 **Arc servers:** Windows Server 2012 R2+; same Linux distros above |
 | No conflicting solution | Legacy Update Management (Log Analytics-based) must not be active on the same machines |
 | Estimated Time | 45–60 minutes (lab); additional time for operational workflow setup |
@@ -453,4 +453,4 @@ Use this to confirm the Part 1 lab is complete before moving on to [Operational 
 
 ---
 
-[← Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) | [→ Operational Workflow](3-operational-workflow.md) | [→ Operational Runbooks](4-operational-runbooks.md) | [→ Advanced Topics](2-Azure_Update_Advance_Topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)
+[← Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) | [→ Operational Workflow](3-operational-workflow.md) | [→ Operational Runbooks](4-operational-runbooks.md) | [→ Advanced Topics](2-azure-update-advanced-topics.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md)

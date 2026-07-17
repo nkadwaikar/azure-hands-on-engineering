@@ -18,7 +18,7 @@ Portal experience note: Steps validated against Microsoft Entra admin center UI 
 ```text
 Microsoft Entra Backup & Recovery/
 ├── README.md                          ← Track entry point
-└── 1-Microsoft Entra Backup & Recovery.md ← Lab 1: Difference Reports + Recovery (you are here)
+└── 1-microsoft-entra-backup-recovery.md ← Lab 1: Difference Reports + Recovery (you are here)
 ```
 
 ---
@@ -280,6 +280,6 @@ This cleanup removes recovery history entries from the interface. It does not re
 
 ## 9. Next Steps
 
-- [Azure VM Backup](../Recovery%20Services%20vaults/1-VM%20Backup%20and%20Restore%20Procedure.md) — Extend the recovery theme into workload-level backup and restore
-- [Azure Site Recovery](../Recovery%20Services%20vaults/2-Azure%20Site%20Recovery.md) — Compare configuration recovery with cross-region failover
+- [Azure VM Backup](../Recovery%20Services%20vaults/1-vm-backup-restore.md) — Extend the recovery theme into workload-level backup and restore
+- [Azure Site Recovery](../Recovery%20Services%20vaults/2-azure-site-recovery.md) — Compare configuration recovery with cross-region failover
 - [Azure Monitor and Activity Logs](../Identity-First/06-azuremonitor-activity-logs.md) — Add audit visibility around directory and platform changes

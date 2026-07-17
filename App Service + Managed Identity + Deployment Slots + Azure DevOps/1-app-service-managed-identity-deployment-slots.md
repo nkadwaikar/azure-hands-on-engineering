@@ -16,7 +16,7 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 ```text
 App Service + Managed Identity + Deployment Slots + Azure DevOps/
 ├── README.md                          ← Track entry point
-└── App Service + Managed Identity + Deployment Slots + Azure DevOps.md ← Lab 1 (you are here)
+└── 1-app-service-managed-identity-deployment-slots.md ← Lab 1 (you are here)
 ```
 
 ---

@@ -15,9 +15,9 @@ Portal experience note: Steps validated against Azure Portal UI as of June 2026;
 ```text
 Recovery Services vaults/
 ├── README.md                          ← Track entry point
-├── 1-VM Backup and Restore Procedure.md ← Lab 1: VM Backup (you are here)
-├── 2-Azure Site Recovery.md           ← Lab 2: Cross-Region Failover
-└── 3-Azure storage replication.md     ← Lab 3: Storage Replication
+├── 1-vm-backup-restore.md ← Lab 1: VM Backup (you are here)
+├── 2-azure-site-recovery.md           ← Lab 2: Cross-Region Failover
+└── 3-azure-storage-replication.md     ← Lab 3: Storage Replication
 ```
 
 ---
@@ -417,4 +417,4 @@ Note: Container and item names can differ by environment; confirm exact values w
 
 ---
 
-Navigation: [Lab Guide](../README.md) | [Next: Azure Site Recovery](2-Azure%20Site%20Recovery.md)
+Navigation: [Lab Guide](../README.md) | [Next: Azure Site Recovery](2-azure-site-recovery.md)

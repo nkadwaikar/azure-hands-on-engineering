@@ -413,7 +413,7 @@ In this lab you learned:
 ## ▶️ Next Lab
 
 **Lab 2 — Managed Identity + Azure Key Vault**  
-[02-managed Identity + Azure Key Vault (Secretless Authentication).md](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
+[02-managed-identity-keyvault-secretless-auth.md](02-managed-identity-keyvault-secretless-auth.md)
 
 ---
 

@@ -8,18 +8,18 @@ This track covers the full Azure resilience stack — VM backup and restore, cro
 
 ```text
 Recovery Services vaults/
-|-- 1-VM Backup and Restore Procedure.md
-|-- 2-Azure Site Recovery.md
-`-- 3-Azure storage replication.md
+|-- 1-vm-backup-restore.md
+|-- 2-azure-site-recovery.md
+`-- 3-azure-storage-replication.md
 ```
 
 Flow: configure VM backup → set up site recovery replication → validate storage replication tiers.
 
 ## Lab Sequence
 
-1. [VM Backup and Restore](1-VM%20Backup%20and%20Restore%20Procedure.md) — configure Enhanced backup policy, perform file-level recovery and full VM restore
-2. [Azure Site Recovery](2-Azure%20Site%20Recovery.md) — replicate a VM to a secondary region and validate failover readiness
-3. [Azure Storage Replication](3-Azure%20storage%20replication.md) — compare LRS, ZRS, GRS, and GZRS replication options
+1. [VM Backup and Restore](1-vm-backup-restore.md) — configure Enhanced backup policy, perform file-level recovery and full VM restore
+2. [Azure Site Recovery](2-azure-site-recovery.md) — replicate a VM to a secondary region and validate failover readiness
+3. [Azure Storage Replication](3-azure-storage-replication.md) — compare LRS, ZRS, GRS, and GZRS replication options
 
 ## Prerequisites
 

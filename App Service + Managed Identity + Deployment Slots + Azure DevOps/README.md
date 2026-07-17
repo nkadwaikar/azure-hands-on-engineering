@@ -8,13 +8,13 @@ A portal-first lab covering Azure App Service deployment with System-Assigned Ma
 
 ```text
 App Service + Managed Identity + Deployment Slots + Azure DevOps/
-|-- App Service + Managed Identity + Deployment Slots + Azure DevOps.md
+|-- 1-app-service-managed-identity-deployment-slots.md
 `-- README.md
 ```
 
 ## Lab Sequence
 
-1. [App Service + Managed Identity + Deployment Slots + Azure DevOps](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps.md)
+1. [App Service + Managed Identity + Deployment Slots + Azure DevOps](1-app-service-managed-identity-deployment-slots.md)
 
    | Section | What It Covers |
    | --- | --- |

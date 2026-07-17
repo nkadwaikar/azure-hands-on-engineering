@@ -10,7 +10,7 @@ Portal experience note: Steps validated against Azure Portal and PowerShell as o
 
 ```text
 Deploying a Domain Controller in Azure/
-├── 1-DeployingDomain Controller in Azure.md   ← this file
+├── 1-deploying-domain-controller-in-azure.md   ← this file
 └── README.md
 ```
 

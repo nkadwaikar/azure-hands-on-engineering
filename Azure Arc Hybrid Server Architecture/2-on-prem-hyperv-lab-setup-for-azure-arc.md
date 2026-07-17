@@ -4,7 +4,7 @@ Azure VMs are already native ARM resources — they bypass the Connected Machine
 
 > **Validated:** Azure Portal and Azure Arc onboarding script as of July 2026.
 
-**Companion guide:** [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — the production design reference this lab validates.
+**Companion guide:** [Azure Arc Hybrid Server Architecture](1-azure-arc-hybrid-server-architecture.md) — the production design reference this lab validates.
 
 ---
 
@@ -29,7 +29,7 @@ By the end of this lab you will be able to:
 | Host outbound internet | Required — VMs inherit connectivity via virtual switch; confirm before building |
 | Azure subscription | Contributor or Owner role; resource providers registered (see Step 4) |
 | OS media | Windows Server 2022 Evaluation ISO and/or Ubuntu Server ISO |
-| Prior reading | [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — review before starting |
+| Prior reading | [Azure Arc Hybrid Server Architecture](1-azure-arc-hybrid-server-architecture.md) — review before starting |
 | Estimated Time | 2–4 hours (build + onboard + governance wiring) |
 
 ---
@@ -205,7 +205,7 @@ Exercise the same RBAC, policy, and automation patterns from the architecture do
 
 ### Defender for Servers
 
-> Full Defender for Servers setup, Secure Score, FIM, and JIT testing is covered in the [Defender for Servers track](../Defender%20for%20Servers/1-Defender-for-Servers.md). Arc machines onboard automatically once the plan is enabled at subscription level — no extra steps needed here beyond what Step 6 verifies.
+> Full Defender for Servers setup, Secure Score, FIM, and JIT testing is covered in the [Defender for Servers track](../Defender%20for%20Servers/1-defender-for-servers.md). Arc machines onboard automatically once the plan is enabled at subscription level — no extra steps needed here beyond what Step 6 verifies.
 
 The isolation principle throughout: **scope, not separate copies** — every assignment above targets `rg-arc-servers-prod` (or a tag/RG filter) explicitly.
 
@@ -253,7 +253,7 @@ Use the lab to validate the parts of the architecture that are risky to get wron
 
 ## Architecture Doc Reference Map
 
-All section references point to [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md).
+All section references point to [Azure Arc Hybrid Server Architecture](1-azure-arc-hybrid-server-architecture.md).
 
 | This guide | Architecture doc section |
 | --- | --- |
@@ -279,6 +279,6 @@ All section references point to [Azure Arc Hybrid Server Architecture](1-Azure%2
 
 ## Related
 
-- [Azure Arc Hybrid Server Architecture (with Defender for Servers)](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — production design guide this lab validates
+- [Azure Arc Hybrid Server Architecture (with Defender for Servers)](1-azure-arc-hybrid-server-architecture.md) — production design guide this lab validates
 - [Azure Arc Track Overview](README.md)
 - [Back to Azure Hands-On Engineering](../README.md)

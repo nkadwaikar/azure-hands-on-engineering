@@ -16,9 +16,9 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; fa
 ```text
 Recovery Services vaults/
 ├── README.md                          ← Track entry point
-├── 1-VM Backup and Restore Procedure.md ← Lab 1: VM Backup
-├── 2-Azure Site Recovery.md           ← Lab 2: Cross-Region Failover (you are here)
-└── 3-Azure storage replication.md     ← Lab 3: Storage Replication
+├── 1-vm-backup-restore.md ← Lab 1: VM Backup
+├── 2-azure-site-recovery.md           ← Lab 2: Cross-Region Failover (you are here)
+└── 3-azure-storage-replication.md     ← Lab 3: Storage Replication
 ```
 
 ---
@@ -169,7 +169,7 @@ flowchart LR
 
 ### 4.1 Install IIS on Source VM
 
-1. Follow instructions from [Install IIS](../Compute/3-Install%20IIS.md).
+1. Follow instructions from [Install IIS](../Compute/3-install-iis.md).
 
 ### 4.2 Allow HTTP on Source VM
 
@@ -370,4 +370,4 @@ Note: ASR CLI commands vary by scenario and API version. Use CLI for inventory/v
 
 ---
 
-Navigation: [Previous: Azure VM Backup](1-VM%20Backup%20and%20Restore%20Procedure.md) | [Lab Guide](../README.md) | [Next: Azure Storage Replication](3-Azure%20storage%20replication.md)
+Navigation: [Previous: Azure VM Backup](1-vm-backup-restore.md) | [Lab Guide](../README.md) | [Next: Azure Storage Replication](3-azure-storage-replication.md)

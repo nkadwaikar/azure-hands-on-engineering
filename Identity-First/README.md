@@ -8,8 +8,8 @@ A portal-first, then Bicep-driven track that builds a secure, secretless, RBAC-g
 
 ```text
 Identity-First/                    ← Portal-first foundation (Labs 1–6) + reference docs (Labs 9–10)
-|—— 01-identity fundamentals.md                                            ← Lab 1
-|—— 02-managed Identity + Azure Key Vault (Secretless Authentication).md  ← Lab 2
+|—— 01-identity-fundamentals.md                                            ← Lab 1
+|—— 02-managed-identity-keyvault-secretless-auth.md  ← Lab 2
 |—— 03-azuread-roles-rbac-scopes.md                                       ← Lab 3
 |—— 04-azurelocks-resource-policies.md                                    ← Lab 4
 |—— 05-access-validation.md                                               ← Lab 5
@@ -27,7 +27,7 @@ Bicep/                             ← IaC capstone
 
 ## Lab Sequence
 
-1. [Identity Fundamentals](01-identity%20fundamentals.md)
+1. [Identity Fundamentals](01-identity-fundamentals.md)
 
    | Section | What It Covers |
    | --- | --- |
@@ -37,7 +37,7 @@ Bicep/                             ← IaC capstone
    | Assign RBAC Roles | Assign Reader at resource group scope; observe inheritance |
    | Validate Access | Confirm the test user can view but not modify resources |
 
-2. [Managed Identity + Azure Key Vault (Secretless Authentication)](02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
+2. [Managed Identity + Azure Key Vault (Secretless Authentication)](02-managed-identity-keyvault-secretless-auth.md)
 
    | Section | What It Covers |
    | --- | --- |

@@ -8,7 +8,7 @@
 ```text
 Azure Front Door-Static Website Hosting/
 ├── README.md                          ← Track entry point
-└── 1-Azure Front Door-Static Website Hosting Lab.md ← Lab 1: CDN + Static Hosting (you are here)
+└── 1-azure-front-door-static-website-hosting.md ← Lab 1: CDN + Static Hosting (you are here)
 ```
 
 This module is a focused single-lab walkthrough for global static website delivery through Azure Front Door.

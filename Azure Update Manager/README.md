@@ -27,8 +27,8 @@ This track covers OS patch orchestration for Azure VMs and Arc-enabled servers u
 ```text
 Azure Update Manager/
 ├── README.md
-├── 1-Azure_Update_Manager.md          # Hands-on lab: enable Update Manager, assessment, maintenance window, deployment, compliance, Updates pane
-├── 2-Azure_Update_Advance_Topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, ESU, Bicep IaC, cross-subscription patching, quick alerts
+├── 1-azure-update-manager.md          # Hands-on lab: enable Update Manager, assessment, maintenance window, deployment, compliance, Updates pane
+├── 2-azure-update-advanced-topics.md   # Advanced topics: pre/post scripts, rollback, KQL, CVE mapping, ESU, Bicep IaC, cross-subscription patching, quick alerts
 ├── 3-operational-workflow.md          # Hybrid fleet pipeline, tagging, maintenance window design, hotpatching, pricing, monthly review
 ├── 4-operational-runbooks.md          # Runbooks: monitor patch runs, log validation, prod/non-prod strategy, alerting, config reference
 └── Arc Server Patch Verification Toolkit/  # PowerShell scripts to enforce and verify Azure-only patching mode on Arc-enabled servers before configuring Update Manager
@@ -36,8 +36,8 @@ Azure Update Manager/
 
 ## Lab Sequence
 
-1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](./1-Azure_Update_Manager.md) — enable Update Manager, enable periodic assessment and run an on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, and review the compliance dashboard
-2. [Azure Update Manager — Advanced Topics](./2-Azure_Update_Advance_Topics.md) — pre/post maintenance scripts, rollback procedures, patch exemptions, compliance workbooks, advanced KQL queries, CVE-to-KB mapping, zero-day response, patch SLA policy, DC staggered reboot runbook, Windows Server 2012 R2 ESU, Bicep IaC for maintenance configurations, cross-subscription patching, and native quick alerts
+1. [Azure Update Manager — Patch Orchestration for Azure and Arc Servers](./1-azure-update-manager.md) — enable Update Manager, enable periodic assessment and run an on-demand patch assessment, configure a maintenance window, schedule and execute an update deployment, and review the compliance dashboard
+2. [Azure Update Manager — Advanced Topics](./2-azure-update-advanced-topics.md) — pre/post maintenance scripts, rollback procedures, patch exemptions, compliance workbooks, advanced KQL queries, CVE-to-KB mapping, zero-day response, patch SLA policy, DC staggered reboot runbook, Windows Server 2012 R2 ESU, Bicep IaC for maintenance configurations, cross-subscription patching, and native quick alerts
 3. [Operational Workflow for Hybrid Fleets](3-operational-workflow.md) — Arc → Defender for Servers → Update Manager pipeline setup, patch group tagging strategy, maintenance window design, hotpatching, pricing and licensing, the staged/ring-based patching limitation, and the monthly patch review workflow
 4. [Operational Runbooks](4-operational-runbooks.md) — monitoring a live patch run, post-run log validation, prod vs non-prod patching strategy, Arc agent disconnect alerting, the standardized maintenance configuration template, and the full option-by-option maintenance configuration reference
 

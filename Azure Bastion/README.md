@@ -8,12 +8,12 @@ This track covers secure VM access using Azure Bastion — connecting to virtual
 
 ```text
 Azure Bastion/
-`-- 1-Azure Bastion.md
+`-- 1-azure-bastion.md
 ```
 
 ## Lab Sequence
 
-1. [Azure Bastion — Secure VM Access](1-Azure%20Bastion.md)
+1. [Azure Bastion — Secure VM Access](1-azure-bastion.md)
 
    | Section | What It Covers |
    | --- | --- |

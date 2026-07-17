@@ -8,12 +8,12 @@ This track covers global static website delivery through Azure Front Door — or
 
 ```text
 Azure Front Door-Static Website Hosting/
-`-- 1-Azure Front Door-Static Website Hosting Lab.md
+`-- 1-azure-front-door-static-website-hosting.md
 ```
 
 ## Lab Sequence
 
-1. [Azure Front Door + Static Website Hosting Lab](1-Azure%20Front%20Door-Static%20Website%20Hosting%20Lab.md) — deploy a static site on Azure Storage, publish it through a Front Door Standard/Premium endpoint, and validate caching and routing
+1. [Azure Front Door + Static Website Hosting Lab](1-azure-front-door-static-website-hosting.md) — deploy a static site on Azure Storage, publish it through a Front Door Standard/Premium endpoint, and validate caching and routing
 
 ## What it covers
 

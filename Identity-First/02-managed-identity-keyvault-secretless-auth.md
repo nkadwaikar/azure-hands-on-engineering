@@ -2,7 +2,7 @@
 
 > **Why this matters:** Storing connection strings or API keys in app settings means one leaked credential requires both a rotation and a redeployment — this lab replaces credentials entirely by assigning a Managed Identity to a VM and granting it scoped Key Vault access via RBAC.
 >
-> **Prerequisites:** This lab continues from Lab 1 (see `01-identity fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
+> **Prerequisites:** This lab continues from Lab 1 (see `01-identity-fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
 > **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.
 
@@ -32,7 +32,7 @@ This lab introduces the identity-first pattern used in modern cloud workloads.
 
 Ensure you have completed:
 
-- **Lab 1 — Identity Fundamentals + RBAC Basics** (see `01-identity fundamentals.md`)
+- **Lab 1 — Identity Fundamentals + RBAC Basics** (see `01-identity-fundamentals.md`)
 - Resource group: `rg-identity-eus-lab-core` (created in Lab 1)
 
 ---
@@ -348,7 +348,7 @@ In this lab you learned:
 ## ⬅️ Previous Lab
 
 **Lab 1 — Identity Fundamentals + RBAC Basics**  
-[01-identity fundamentals.md](01-identity%20fundamentals.md)
+[01-identity-fundamentals.md](01-identity-fundamentals.md)
 
 ---
 

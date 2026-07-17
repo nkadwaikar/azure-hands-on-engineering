@@ -10,7 +10,7 @@ This track covers VM provisioning from scratch through to a deployable web workl
 Compute/
 |-- 1-build-base-vm.md
 |-- 2-sysprep-vm.md
-`-- 3-Install IIS.md
+`-- 3-install-iis.md
 ```
 
 Flow: build base VM → install and validate IIS → Sysprep the image source → VMSS deployment.
@@ -18,7 +18,7 @@ Flow: build base VM → install and validate IIS → Sysprep the image source �
 ## Lab Sequence
 
 1. [Build Base VM](1-build-base-vm.md) — provision a VM with consistent naming conventions and post-deployment configuration
-2. [Install IIS](3-Install%20IIS.md) — install the IIS web server role and validate the default site before image capture
+2. [Install IIS](3-install-iis.md) — install the IIS web server role and validate the default site before image capture
 3. [Sysprep the VM](2-sysprep-vm.md) — generalize the VM for image capture and reuse
 
 ## Prerequisites

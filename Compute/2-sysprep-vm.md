@@ -18,7 +18,7 @@ Compute/
 ├── README.md                          ← Track entry point
 ├── 1-build-base-vm.md                 ← Lab 1: Build a Base VM
 ├── 2-sysprep-vm.md                    ← Lab 2: Sysprep (Azure-safe) (you are here)
-└── 3-Install IIS.md                   ← Lab 3: Install IIS
+└── 3-install-iis.md                   ← Lab 3: Install IIS
 ```
 
 ---

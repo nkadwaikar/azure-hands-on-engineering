@@ -5,7 +5,7 @@ Just-In-Time VM access adds a time-limited, on-demand approval layer on top of A
 Last validated on: 2026-06-19
 Portal experience note: Steps validated against Microsoft Defender for Cloud as of June 2026; labels can vary slightly by subscription and feature rollout.
 
-> **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) and [Microsoft Defender for Servers](1-Defender-for-Servers.md) (Lab 1 in this track) first.
+> **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-azure-bastion.md) and [Microsoft Defender for Servers](1-defender-for-servers.md) (Lab 1 in this track) first.
 
 ---
 
@@ -14,8 +14,8 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 ```text
 Microsoft Defender for Cloud/
 ├── README.md                          ← Track entry point
-├── 1-Defender-for-Servers.md          ← Lab 1: Workload Protection
-└── 2-JIT.md                           ← Lab 2: Bastion + JIT VM Access (you are here)
+├── 1-defender-for-servers.md          ← Lab 1: Workload Protection
+└── 2-jit.md                           ← Lab 2: Bastion + JIT VM Access (you are here)
 ```
 
 ---
@@ -40,8 +40,8 @@ Microsoft Defender for Cloud/
 | Requirement | Detail |
 | --- | --- |
 | Azure Role | **Security Reader** + **Virtual Machine Contributor** on the target VM |
-| Dependency | **Defender for Servers** plan active on the subscription — complete [Microsoft Defender for Servers](1-Defender-for-Servers.md) (Lab 1 in this track) first |
-| Dependency | Azure Bastion deployed — complete [Azure Bastion](../Azure%20Bastion/1-Azure%20Bastion.md) first |
+| Dependency | **Defender for Servers** plan active on the subscription — complete [Microsoft Defender for Servers](1-defender-for-servers.md) (Lab 1 in this track) first |
+| Dependency | Azure Bastion deployed — complete [Azure Bastion](../Azure%20Bastion/1-azure-bastion.md) first |
 | Estimated Time | 30–45 minutes |
 | Tools | Azure Portal only — no CLI required |
 
@@ -108,7 +108,7 @@ Even with an NSG, an always-open RDP rule is a standing target. JIT closes the p
 
 1. Go to **Virtual Machines** → Select your VM
 2. Click **Connect** → Choose **Bastion**
-3. Enter your credentials (or retrieve from Key Vault — see [1-Azure Bastion.md § Password from Key Vault](../Azure%20Bastion/1-Azure%20Bastion.md#8-password-from-azure-key-vault-secretless-access-pattern))
+3. Enter your credentials (or retrieve from Key Vault — see [1-azure-bastion.md § Password from Key Vault](../Azure%20Bastion/1-azure-bastion.md#8-password-from-azure-key-vault-secretless-access-pattern))
 4. Click **Connect** — a browser-based session opens
 5. Confirm the session is active
 
@@ -206,4 +206,4 @@ See [Naming Convention — JIT NSG Rules](../Naming-Convention.md#jit-nsg-rules)
 
 ---
 
-[← Microsoft Defender for Servers](1-Defender-for-Servers.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md) | [Azure Bastion — Secure VM Access](../Azure%20Bastion/1-Azure%20Bastion.md)
+[← Microsoft Defender for Servers](1-defender-for-servers.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md) | [Azure Bastion — Secure VM Access](../Azure%20Bastion/1-azure-bastion.md)

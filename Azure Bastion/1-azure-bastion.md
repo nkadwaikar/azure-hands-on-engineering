@@ -14,7 +14,7 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 ```text
 Azure Bastion/
 ├── README.md                          ← Track entry point
-└── 1-Azure Bastion.md                 ← Lab 1: Secure VM Access (you are here)
+└── 1-azure-bastion.md                 ← Lab 1: Secure VM Access (you are here)
 ```
 
 ---
@@ -33,7 +33,7 @@ Azure Bastion/
 - [Bastion vs Jumpbox vs Private Endpoint](#10-bastion-vs-jumpbox-vs-private-endpoint--comparison)
 - [Cleanup / Teardown](#11-cleanup--teardown)
 - [VNet Peering for Cross-VNet Bastion Access](#12-vnet-peering-for-cross-vnet-bastion-access)
-- [Bastion + JIT Lab](../Defender%20for%20Servers/2-JIT.md)
+- [Bastion + JIT Lab](../Defender%20for%20Servers/2-jit.md)
 
 ---
 

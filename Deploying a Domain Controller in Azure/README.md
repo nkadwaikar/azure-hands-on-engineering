@@ -8,12 +8,12 @@ This track covers deploying a production-ready Active Directory Domain Services 
 
 ```text
 Deploying a Domain Controller in Azure/
-└── 1-DeployingDomain Controller in Azure.md
+└── 1-deploying-domain-controller-in-azure.md
 ```
 
 ## Lab Sequence
 
-1. [Deploying a Domain Controller in Azure](1-DeployingDomain%20Controller%20in%20Azure.md)
+1. [Deploying a Domain Controller in Azure](1-deploying-domain-controller-in-azure.md)
 
    | Step | What It Covers |
    | --- | --- |

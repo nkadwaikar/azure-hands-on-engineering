@@ -8,12 +8,12 @@ This track covers custom Azure Policy authoring with a DeployIfNotExists effect,
 
 ```text
 Azure Policy Auto‑Remediation/
-`-- 1-Azure Policy Auto‑Remediation.md
+`-- 1-azure-policy-auto-remediation.md
 ```
 
 ## Lab Sequence
 
-1. [Azure Policy Auto-Remediation](1-Azure%20Policy%20Auto%E2%80%91Remediation.md) — author a custom policy, assign it with a managed identity, trigger remediation, and validate compliance state
+1. [Azure Policy Auto-Remediation](1-azure-policy-auto-remediation.md) — author a custom policy, assign it with a managed identity, trigger remediation, and validate compliance state
 
 ## What it covers
 

@@ -8,12 +8,12 @@ This track covers Entra directory backup, difference reports, and object-level r
 
 ```text
 Microsoft Entra Backup & Recovery/
-`-- 1-Microsoft Entra Backup & Recovery.md
+`-- 1-microsoft-entra-backup-recovery.md
 ```
 
 ## Lab Sequence
 
-1. [Microsoft Entra Backup & Recovery](1-Microsoft%20Entra%20Backup%20%26%20Recovery.md) — generate a difference report, perform an object-level recovery, and validate the restored state
+1. [Microsoft Entra Backup & Recovery](1-microsoft-entra-backup-recovery.md) — generate a difference report, perform an object-level recovery, and validate the restored state
 
 ## What it covers
 

@@ -16,7 +16,7 @@ Portal experience note: Steps validated against Azure Portal as of June 2026; la
 ```text
 Azure Policy Auto‑Remediation/
 ├── README.md                          ← Track entry point
-└── 1-Azure Policy Auto‑Remediation.md ← Lab 1: DINE Auto-Remediation (you are here)
+└── 1-azure-policy-auto-remediation.md ← Lab 1: DINE Auto-Remediation (you are here)
 ```
 
 ---

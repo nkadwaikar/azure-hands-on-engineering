@@ -21,15 +21,15 @@ This track covers designing and operating a hybrid server landing zone using **A
 
 ```text
 Azure Arc Hybrid Server Architecture/
-├── 1-Azure Arc Hybrid Server Architecture.md   # Architecture reference & production design guide
-└── 2-On-Prem Hyper-V Lab Setup for Azure Arc.md  # Disposable environment to validate onboarding flow
+├── 1-azure-arc-hybrid-server-architecture.md   # Architecture reference & production design guide
+└── 2-on-prem-hyperv-lab-setup-for-azure-arc.md  # Disposable environment to validate onboarding flow
 ```
 
 ## Guide Sequence
 
 > **Recommended order:** Complete Guide 1 (architecture + design decisions) before Guide 2. The Hyper-V environment in Guide 2 validates every design choice documented in Guide 1.
 
-1. [Azure Arc Hybrid Server Architecture](1-Azure%20Arc%20Hybrid%20Server%20Architecture.md) — *Estimated effort: 3–4 hours* (Guide 1)
+1. [Azure Arc Hybrid Server Architecture](1-azure-arc-hybrid-server-architecture.md) — *Estimated effort: 3–4 hours* (Guide 1)
 
    | Section | What It Covers |
    | --- | --- |
@@ -43,7 +43,7 @@ Azure Arc Hybrid Server Architecture/
    | 7. Automation & Lifecycle Management | Automation runbooks, at-scale onboarding, runbook version control and CI/CD, break-glass procedure, decommissioning |
    | Check List | End-to-end rollout checklist covering prerequisites through decommissioning validation |
 
-2. [On-Prem Hyper-V Lab Setup for Azure Arc](2-On-Prem%20Hyper-V%20Lab%20Setup%20for%20Azure%20Arc.md) — *Estimated effort: 2–3 hours* (Guide 2)
+2. [On-Prem Hyper-V Lab Setup for Azure Arc](2-on-prem-hyperv-lab-setup-for-azure-arc.md) — *Estimated effort: 2–3 hours* (Guide 2)
 
    > **Why Hyper-V, not Azure VMs?** Azure VMs are already native ARM resources and never go through the CMA onboarding flow. A Hyper-V environment gives you disposable "on-prem" machines that Arc does not already know about — the only way to exercise real onboarding.
 
@@ -97,7 +97,7 @@ This track covers the Arc projection and governance layer. The security and patc
 | Track | What it covers | Arc Architecture doc reference |
 | --- | --- | --- |
 | [Defender for Servers](../Defender%20for%20Servers/README.md) | Enable Defender for Servers Plan 2, Secure Score, vulnerability assessment, FIM, alerts | Section 6 — Security Architecture |
-| [Bastion + JIT VM Access](../Defender%20for%20Servers/2-JIT.md) | Time-bounded NSG port openings via Defender for Cloud | Section 6.5 — JIT Admin Access |
+| [Bastion + JIT VM Access](../Defender%20for%20Servers/2-jit.md) | Time-bounded NSG port openings via Defender for Cloud | Section 6.5 — JIT Admin Access |
 | [Azure Update Manager](../Azure%20Update%20Manager/README.md) | Patch assessment, maintenance windows, update deployments, compliance reporting | Section 4.2 — Update Management |
 | [Identity-First Track](../Identity-First/README.md) | RBAC and managed identity patterns referenced in the Arc governance model | Section 2.3 — RBAC Model |
 

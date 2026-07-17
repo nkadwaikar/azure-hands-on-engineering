@@ -18,17 +18,17 @@ This track covers workload protection and secure access controls using Microsoft
 
 ```text
 Microsoft Defender for Cloud/
-├── 1-Defender-for-Servers.md  # Hands-on: Enable plan, Secure Score, vulnerability assessment, FIM, alerts
-└── 2-JIT.md                   # Hands-on: JIT VM access + Azure Bastion zero-standing-access pattern
+├── 1-defender-for-servers.md  # Hands-on: Enable plan, Secure Score, vulnerability assessment, FIM, alerts
+└── 2-jit.md                   # Hands-on: JIT VM access + Azure Bastion zero-standing-access pattern
 ```
 
 ## Lab Sequence
 
 Complete these in order — Lab 2 (JIT) depends on the Defender for Servers plan being active on the subscription, which Lab 1 enables.
 
-1. [Microsoft Defender for Servers — Workload Protection for Azure and Arc Servers](1-Defender-for-Servers.md) — enable Defender for Servers Plan 2, review Secure Score and recommendations, run vulnerability assessment, enable File Integrity Monitoring, and investigate a test security alert
+1. [Microsoft Defender for Servers — Workload Protection for Azure and Arc Servers](1-defender-for-servers.md) — enable Defender for Servers Plan 2, review Secure Score and recommendations, run vulnerability assessment, enable File Integrity Monitoring, and investigate a test security alert
 
-2. [Bastion + Just-In-Time (JIT) VM Access](2-JIT.md) — configure JIT access via Microsoft Defender for Cloud, request time-bounded port openings, connect through Azure Bastion, and validate NSG rule auto-removal
+2. [Bastion + Just-In-Time (JIT) VM Access](2-jit.md) — configure JIT access via Microsoft Defender for Cloud, request time-bounded port openings, connect through Azure Bastion, and validate NSG rule auto-removal
 
 ## Prerequisites
 

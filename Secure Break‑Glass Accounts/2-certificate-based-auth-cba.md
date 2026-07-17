@@ -17,7 +17,7 @@ Portal experience note: Steps validated against Microsoft Entra admin center as 
 Secure Break‑Glass Accounts/
 ├── README.md                          ← Track entry point
 ├── 1-Secure Break‑Glass Accounts.md   ← Lab 1: Emergency Accounts + FIDO2
-└── 2-Certificate-Based Authentication(CBA)for Emergency Access Accounts.md ← Lab 2: CBA (you are here)
+└── 2-certificate-based-auth-cba.md ← Lab 2: CBA (you are here)
 ```
 
 ---

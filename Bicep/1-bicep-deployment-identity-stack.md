@@ -226,10 +226,10 @@ az lock list --resource-group rg-fntech-identity-eus-core --output table
 ## 🔗 Related Labs
 
 - **Lab 1 — Identity Fundamentals + RBAC Basics**
-  [01-identity fundamentals.md](../Identity-First/01-identity%20fundamentals.md)
+  [01-identity-fundamentals.md](../Identity-First/01-identity-fundamentals.md)
 
 - **Lab 2 — Managed Identity + Azure Key Vault**
-  [02-managed Identity + Azure Key Vault (Secretless Authentication).md](../Identity-First/02-managed%20Identity%20%2B%20Azure%20Key%20Vault%20%28Secretless%20Authentication%29.md)
+  [02-managed-identity-keyvault-secretless-auth.md](../Identity-First/02-managed-identity-keyvault-secretless-auth.md)
 
 - **Lab 3 — Azure AD Roles + RBAC Scopes**
   [03-azuread-roles-rbac-scopes.md](../Identity-First/03-azuread-roles-rbac-scopes.md)
