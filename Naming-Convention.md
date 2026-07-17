@@ -6,6 +6,48 @@ All resources across these labs follow a consistent pattern aligned with the Azu
 
 ---
 
+## Repository File & Folder Naming
+
+Lab documents inside each module folder follow a consistent lowercase kebab-case pattern.
+
+### Lab files
+
+```text
+{N}-{lowercase-kebab-description}.md
+```
+
+| Rule | Detail |
+| --- | --- |
+| Prefix | Single digit for folders with ≤ 9 files (`1-`, `2-`, …); zero-padded for larger sequences (`01-`, `02-`, …) |
+| Separator | Hyphens only — no spaces, underscores, `+`, `&`, `(`, `)` or other special characters |
+| Case | All lowercase |
+| README | Always `README.md` (uppercase, no number prefix) |
+| Reference files | Lowercase kebab, no number prefix — e.g., `lessons-learned.md` |
+
+### Examples
+
+```text
+1-azure-bastion.md
+2-azure-site-recovery.md
+01-identity-fundamentals.md
+lessons-learned.md
+README.md
+```
+
+### Non-compliant patterns to avoid
+
+| ❌ Avoid | ✅ Use instead |
+| --- | --- |
+| `1-Azure_Update_Manager.md` (underscores) | `1-azure-update-manager.md` |
+| `3-Install IIS.md` (spaces + Title Case) | `3-install-iis.md` |
+| `1-Azure Bastion.md` (spaces) | `1-azure-bastion.md` |
+| `02-managed Identity + Azure Key Vault (Secretless Authentication).md` | `02-managed-identity-keyvault-secretless-auth.md` |
+| `2-JIT.md` (all-caps) | `2-jit.md` |
+
+> **Tip:** Run `rename-labs.sh` from the repo root (requires a local clone) to apply all renames with `git mv`, preserving file history.
+
+---
+
 ## Pattern
 
 ```text
