@@ -42,7 +42,6 @@ Azure Update Manager/
   - [Step 5 — Review Compliance and Patch History](#step-5--review-compliance-and-patch-history)
   - [Step 6 — KQL Queries for Patch State](#step-6--kql-queries-for-patch-state)
   - [Step 7 — Use the Updates Pane (CVE-Centric View)](#step-7--use-the-updates-pane-cve-centric-view)
-- [Checklist](#checklist)
 - [Cleanup](#cleanup)
 
 **Continue to:**
@@ -414,22 +413,6 @@ The **Updates pane** (generally available since May 2024) presents update data g
 4. This confirms Update Manager has assessed the machine and will deploy the patch — eliminating the need to build a custom workbook for CVE-to-KB-to-machine tracing.
 
 > **When to use the Updates pane vs the Machines view:** Use the **Updates pane** when starting from a CVE or KB (security-first workflow). Use the **Machines view** when starting from a server (operations-first workflow — e.g. “what’s pending on this server?”).
-
----
-
-## Checklist
-
-Use this to confirm the Part 1 lab is complete before moving on to [Operational Workflow for Hybrid Fleets](3-operational-workflow.md). A comprehensive fleet-readiness checklist (Arc onboarding, tagging, Defender Plan 2, hotpatch enrollment, monthly review process, DC procedure, report archiving) lives in that document instead, since those steps span the pipeline covered there.
-
-1. **Patch orchestration reviewed** — target machines show the correct **Patch orchestration** mode in the Machines list, or Arc-enabled servers confirmed to have no orchestration prerequisite ([Step 1](#step-1--enable-and-scope-update-manager)).
-2. **Periodic assessment enabled** — target machine(s) show **Periodic assessment: Enabled** ([Step 2 — Enable Periodic Assessment](#step-2--enable-periodic-assessment-and-run-an-on-demand-assessment)).
-3. **On-demand assessment completed** — at least one machine shows a recent **Last assessment time** and a populated **Updates** tab ([Step 2.2](#22-run-an-on-demand-patch-assessment)).
-4. **Maintenance configuration created** — schedule, window duration, and update classifications configured ([Step 3](#step-3--configure-a-maintenance-window)).
-5. **Machines assigned** — target machine(s) linked to the maintenance configuration, via direct assignment or dynamic scope ([Step 3.2](#32-assign-machines-to-the-maintenance-configuration)).
-6. **Deployment executed and reviewed** — a one-time or scheduled update deployment ran to completion, and per-machine results (Succeeded/Failed/Not applicable) were reviewed in **History** ([Step 4](#step-4--schedule-and-execute-an-update-deployment)).
-7. **Compliance dashboard reviewed** — Overview and Machines views checked for compliant/non-compliant/not-assessed counts ([Step 5](#step-5--review-compliance-and-patch-history)).
-8. **KQL queries validated** — Resource Graph queries against `patchassessmentresources` return expected results for your subscription ([Step 6](#step-6--kql-queries-for-patch-state)).
-9. **Updates pane reviewed** — opened the Updates pane, filtered to Security/Critical updates, and confirmed the CVE-to-machine workflow ([Step 7](#step-7--use-the-updates-pane-cve-centric-view)).
 
 ---
 
