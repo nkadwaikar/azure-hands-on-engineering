@@ -1,6 +1,6 @@
 # Azure Update Manager — Operational Runbooks
 
-> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) and review [3-operational-workflow.md](3-operational-workflow.md) before using these runbooks. This document assumes maintenance configurations are created, machines are tagged, and the Arc → Defender → Update Manager pipeline is active.
+> **Prerequisite:** Complete [1-Azure_Update_Manager.md](1-Azure_Update_Manager.md) and review [3-operational-workflow.md](3-operational-workflow.md) before using these runbooks. This document assumes maintenance configurations are created, machines are tagged, and the Arc → Defender → Update Manager pipeline is active.
 
 Last validated on: 2026-07-12
 

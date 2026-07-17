@@ -266,7 +266,7 @@ Document the chosen approach per site in the network runbook.
 
 ### 4.2 Update Management
 
-> **Dedicated track:** Full hands-on lab for Azure Update Manager lives in [Azure Update Manager → 1-Azure Update Manager.md](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md). This section summarises how it fits into the Arc architecture.
+> **Dedicated track:** Full hands-on lab for Azure Update Manager lives in [Azure Update Manager → 1-Azure_Update_Manager.md](../Azure%20Update%20Manager/1-Azure_Update_Manager.md). This section summarises how it fits into the Arc architecture.
 
 Use **Azure Update Manager** for:
 

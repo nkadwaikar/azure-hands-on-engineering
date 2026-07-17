@@ -1,6 +1,6 @@
 # Azure Update Manager — Operational Workflow for Hybrid Fleets
 
-> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) before working through this guide. This document assumes Update Manager is enabled, machines are assessed, and at least one maintenance configuration exists.
+> **Prerequisite:** Complete [1-Azure_Update_Manager.md](1-Azure_Update_Manager.md) before working through this guide. This document assumes Update Manager is enabled, machines are assessed, and at least one maintenance configuration exists.
 
 Last validated on: 2026-07-12
 
@@ -252,7 +252,7 @@ Store archived reports in a shared location (e.g. SharePoint, Azure Blob Storage
 
 ## Checklist
 
-Use this to confirm the hybrid fleet operational workflow is fully in place. Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) first if you haven't already.
+Use this to confirm the hybrid fleet operational workflow is fully in place. Complete [1-Azure_Update_Manager.md](1-Azure_Update_Manager.md) first if you haven't already.
 
 1. **Arc onboarding complete** — all target servers show **Status: Connected** in **Azure Arc → Machines** with correct tags applied ([Pipeline Setup](#pipeline-setup-azure-arc--defender-for-servers--azure-update-manager)).
 2. **Tagging validated** — `PatchGroup`, `Environment`, `Criticality` tags present and accurate on all Arc machines ([Patch Group Tagging Strategy](#patch-group-tagging-strategy)).

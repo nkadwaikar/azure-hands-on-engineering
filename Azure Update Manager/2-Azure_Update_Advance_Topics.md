@@ -1,6 +1,6 @@
 # Azure Update Manager — Advanced Topics
 
-> **Prerequisite:** Complete [1-Azure Update Manager.md](1-Azure_Update_Manager.md) before working through this guide. This document assumes Update Manager is already enabled, machines are assessed, and at least one maintenance configuration exists.
+> **Prerequisite:** Complete [1-Azure_Update_Manager.md](1-Azure_Update_Manager.md) before working through this guide. This document assumes Update Manager is already enabled, machines are assessed, and at least one maintenance configuration exists.
 
 Last validated on: 2026-07-12
 
@@ -11,8 +11,8 @@ Last validated on: 2026-07-12
 ```text
 Azure Update Manager/
 ├── README.md
-├── 1-Azure Update Manager.md          ← Lab + Operational Guide
-└── 2-Azure Update Advance Topics.md   ← Advanced Topics (you are here)
+├── 1-Azure_Update_Manager.md          ← Lab + Operational Guide
+└── 2-Azure_Update_Advance_Topics.md   ← Advanced Topics (you are here)
 ```
 
 ---
@@ -86,7 +86,7 @@ if ($nic) {
 }
 ```
 
-4. **Publish** the runbook.
+1. **Publish** the runbook.
 
 ### 1.3 Create a Post-Maintenance Runbook
 
@@ -118,7 +118,7 @@ if ($nic -and $backendPool) {
 }
 ```
 
-3. **Publish** the runbook.
+1. **Publish** the runbook.
 
 ### 1.4 Attach Runbooks to a Maintenance Configuration
 
@@ -847,13 +847,13 @@ Quick Alerts (preview, August 2025) is a simplified alerting experience built di
 | Machines not assessed in 30 days | A machine has not had an assessment run in the last 30 days |
 | Machines pending reboot | One or more machines have installed updates but are waiting for a reboot |
 
-5. Alternatively, select **Custom query** to write your own ARG KQL query.
-6. Click **Preview or edit query in Logs** to validate the query returns expected results.
-7. Configure:
+1. Alternatively, select **Custom query** to write your own ARG KQL query.
+2. Click **Preview or edit query in Logs** to validate the query returns expected results.
+3. Configure:
    - **Scope and filters** — subscription/resource group filter for the query.
    - **Threshold and frequency** — how often the query runs and at what result count the alert fires.
    - **Notify me** — email, SMS, or action group.
-8. Click **Quick create a new rule** to create the alert.
+4. Click **Quick create a new rule** to create the alert.
 
 ### 13.2 Recommended Quick Alert Ruleset
 

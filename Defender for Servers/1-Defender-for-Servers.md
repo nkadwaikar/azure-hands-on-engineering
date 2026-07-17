@@ -156,7 +156,7 @@ Vulnerability assessment in Defender for Servers Plan 2 scans installed software
    - **Severity** (Critical / High / Medium / Low)
    - **Affected software and version**
    - **Fix available** — whether a patch or upgrade resolves the CVE
-5. Note the total count of Critical and High findings — these are the priority targets for [Azure Update Manager](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md).
+5. Note the total count of Critical and High findings — these are the priority targets for [Azure Update Manager](../Azure%20Update%20Manager/1-Azure_Update_Manager.md).
 
 ### 3.3 Filter to a Specific Machine
 
@@ -299,7 +299,7 @@ Defender for Servers Plan 2 automatically deploys **Microsoft Defender for Endpo
    - **Vendor**
    - **Weaknesses** — CVE count associated with the installed version
 3. Click a software entry with **Weaknesses > 0** to see the full CVE list — this is the same data surfaced in the vulnerability assessment from Step 3, but browseable by product here.
-4. Note any **End-of-support** flags — software past vendor EOL with known CVEs is the highest-risk category and the first remediation target for [Azure Update Manager](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md).
+4. Note any **End-of-support** flags — software past vendor EOL with known CVEs is the highest-risk category and the first remediation target for [Azure Update Manager](../Azure%20Update%20Manager/1-Azure_Update_Manager.md).
 
 ### 6.5 Run a Baseline Advanced Hunting Query
 
@@ -386,7 +386,7 @@ DeviceNetworkEvents
 - **Secure Score as operational KPI** — recommendations are scored and prioritized; teams have a clear, measurable target rather than an unbounded backlog of hardening tasks
 - **Alert quality over quantity** — behavioral analytics and MITRE ATT&CK mapping reduce alert noise compared to signature-only detection; each alert includes actionable context
 
-> Combined with JIT VM Access (covered in [2-JIT.md](2-JIT.md)) and Azure Update Manager (covered in the [Azure Update Manager track](../Azure%20Update%20Manager/1-Azure%20Update%20Manager.md)), Defender for Servers completes the three-layer posture: *access control + patch currency + runtime protection*.
+> Combined with JIT VM Access (covered in [2-JIT.md](2-JIT.md)) and Azure Update Manager (covered in the [Azure Update Manager track](../Azure%20Update%20Manager/1-Azure_Update_Manager.md)), Defender for Servers completes the three-layer posture: *access control + patch currency + runtime protection*.
 
 ---
 

@@ -226,7 +226,7 @@ Places a legal hold on mailbox content so items cannot be permanently deleted.
 
 All threat protection settings are configured in the **Microsoft Defender portal** at [security.microsoft.com](https://security.microsoft.com).
 
-> **Cross-track reference:** This is the same Microsoft Defender portal used in the [Microsoft Defender for Cloud track](../Microsoft%20Defender%20for%20Cloud/README.md). Defender for Office 365 (Safe Links, Safe Attachments, Anti-Phishing) alerts are unified with Azure VM and Arc server alerts in Microsoft Defender XDR — a single portal for end-to-end incident investigation across Azure and M365 workloads.
+> **Cross-track reference:** This is the same Microsoft Defender portal used in the [Microsoft Defender for Cloud track](../Defender%20for%20Servers/README.md). Defender for Office 365 (Safe Links, Safe Attachments, Anti-Phishing) alerts are unified with Azure VM and Arc server alerts in Microsoft Defender XDR — a single portal for end-to-end incident investigation across Azure and M365 workloads.
 
 Navigate to: **Email & collaboration** → **Policies & rules** → **Threat policies**
 

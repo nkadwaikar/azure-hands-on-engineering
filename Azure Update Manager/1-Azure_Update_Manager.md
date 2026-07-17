@@ -14,8 +14,8 @@ Portal experience note: Steps validated against Azure Portal (Update Manager bla
 ```text
 Azure Update Manager/
 ├── README.md                          ← Track entry point
-├── 1-Azure Update Manager.md          ← Lab Guide: overview, architecture, lab walkthrough (you are here)
-├── 2-Azure Update Advance Topics.md   ← Advanced: pre/post scripts, rollback, workbooks, Bicep
+├── 1-Azure_Update_Manager.md          ← Lab Guide: overview, architecture, lab walkthrough (you are here)
+├── 2-Azure_Update_Advance_Topics.md   ← Advanced: pre/post scripts, rollback, workbooks, Bicep
 ├── 3-operational-workflow.md          ← Hybrid fleet pipeline, tagging, maintenance windows, monthly review
 └── 4-operational-runbooks.md          ← Runbooks: monitor runs, log validation, alerting, config reference
 ```
@@ -46,6 +46,7 @@ Azure Update Manager/
 - [Cleanup](#cleanup)
 
 **Continue to:**
+
 - [Operational Workflow for Hybrid Fleets →](3-operational-workflow.md)
 - [Operational Runbooks →](4-operational-runbooks.md)
 - [Advanced Topics →](2-Azure_Update_Advance_Topics.md)
@@ -202,6 +203,7 @@ Periodic assessment runs automatic update scans every 24 hours, keeping complian
 
 > Periodic assessment is a prerequisite for the Defender for Cloud recommendation *"Periodic assessment should be enabled on your machines"* to show healthy.
 > **Arc-enabled servers:** periodic assessment and on-demand/scheduled patch installation are handled by **two separate extensions** that are both expected to be present and healthy — this is normal, not a misconfiguration:
+>
 > - `Microsoft.CPlat.Core.WindowsPatchExtension` — handles assessment and compliance-state reporting.
 > - `Microsoft.SoftwareUpdateManagement.WindowsOsUpdateExtension` — handles update installation for one-time and scheduled deployments.
 >
