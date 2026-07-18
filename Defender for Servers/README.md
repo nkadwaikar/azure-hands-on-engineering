@@ -22,7 +22,7 @@ This track covers workload protection and secure access controls using Microsoft
 ```text
 Microsoft Defender for Cloud/
 ├── 1-defender-for-servers-part1.md  # Hands-on: Enable plan, Arc agent health, Secure Score, Recommendations
-├── 1-defender-for-servers-part2.md  # Hands-on: Vulnerability assessment, FIM, alerts, MDE integration
+├── 2-defender-for-servers-part2.md  # Hands-on: Vulnerability assessment, FIM, alerts, MDE integration
 └── 3-jit.md                         # Hands-on: JIT VM access + Azure Bastion zero-standing-access pattern
 ```
 
@@ -32,7 +32,7 @@ Complete these in order — Lab 2 (JIT) depends on the Defender for Servers plan
 
 1. [Microsoft Defender for Servers, Part 1 — Setup and Security Posture](1-defender-for-servers-part1.md) — verify Arc agent health, enable Defender for Servers Plan 2, and review Secure Score and Recommendations (including diagnosing "Not evaluated" status and scaling recommendations across a large fleet)
 
-2. [Microsoft Defender for Servers, Part 2 — Vulnerability Assessment, FIM, Alerts & MDE Integration](1-defender-for-servers-part2.md) — run vulnerability assessment, enable File Integrity Monitoring, investigate a test security alert, and confirm Defender for Endpoint / Guest Configuration extension integration
+2. [Microsoft Defender for Servers, Part 2 — Vulnerability Assessment, FIM, Alerts & MDE Integration](2-defender-for-servers-part2.md) — run vulnerability assessment, enable File Integrity Monitoring, investigate a test security alert, and confirm Defender for Endpoint / Guest Configuration extension integration
 
 3. [Bastion + Just-In-Time (JIT) VM Access](3-jit.md) — configure JIT access via Microsoft Defender for Cloud, request time-bounded port openings, connect through Azure Bastion, and validate NSG rule auto-removal
 
