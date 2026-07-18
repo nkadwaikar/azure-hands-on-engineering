@@ -13,7 +13,7 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 Microsoft Defender for Cloud/
 ├── README.md                            ← Track entry point
 ├── 1-defender-for-servers-part1.md       ← Lab 1a: Setup & Security Posture
-├── 1-defender-for-servers-part2.md       ← Lab 1b: Vulnerability Assessment, FIM, Alerts, MDE (you are here)
+├── 2-defender-for-servers-part2.md       ← Lab 1b: Vulnerability Assessment, FIM, Alerts, MDE (you are here)
 └── 3-jit.md                              ← Lab 2: Bastion + JIT VM Access
 ```
 

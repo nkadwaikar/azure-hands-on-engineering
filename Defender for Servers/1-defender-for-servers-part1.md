@@ -2,13 +2,13 @@
 
 > **Why this matters:** Defender for Servers is the security brain layered on top of Azure Arc and Azure VMs. It provides threat detection, vulnerability assessment, File Integrity Monitoring, and Secure Score recommendations — all without deploying a separate SIEM agent. Enabling Defender for Servers on Arc-enabled machines brings on-premises and multi-cloud servers into the same security posture view as native Azure VMs.
 
-**This is Part 1 of 2.** Part 1 covers Prerequisites through Step 2 (enabling the plan, verifying Arc/coverage, and working the Secure Score / Recommendations experience — including diagnosing "Not evaluated" status and scaling recommendations across a large fleet). **Part 2** ([1-defender-for-servers-part2.md](1-defender-for-servers-part2.md)) picks up at Step 3 (Vulnerability Assessment) through Cleanup.
+**This is Part 1 of 2.** Part 1 covers Prerequisites through Step 2 (enabling the plan, verifying Arc/coverage, and working the Secure Score / Recommendations experience — including diagnosing "Not evaluated" status and scaling recommendations across a large fleet). **Part 2** ([2-defender-for-servers-part2.md](2-defender-for-servers-part2.md)) picks up at Step 3 (Vulnerability Assessment) through Cleanup.
 
 Last validated on: 2026-07-17
 Portal experience note: Steps validated against Microsoft Defender for Cloud as of July 2026; labels can vary slightly by subscription tier and feature rollout. Secure Score and Recommendations live under **Defender for Cloud → Cloud Security → Security posture** / **Recommendations** in current portal versions (see Step 2). Defender for Servers is available in two plan tiers (Plan 1 and Plan 2) — this lab focuses on Plan 2 features (FIM, vulnerability assessment, JIT) since those represent the full workload protection story.
 
 > **Important — recommendations model transition:** Defender for Cloud is moving from **grouped recommendations** (one row aggregating all findings per resource) to **individual recommendations** (one row per finding — e.g., per vulnerable software package, per secret, per rule). Grouped recommendations are tagged **"Set for deprecation"** and are being removed from the Azure portal on **July 31, 2026**. Individual recommendations are tagged **"New version"** and are the model to build workflows around going forward. Both may appear side by side during the transition — see Step 2.4 for what this changes operationally, especially at fleet scale.
-> **Note:** This lab assumes at least one running Azure VM or Arc-enabled server. For Arc server coverage, complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) first. For Just-In-Time VM access, see [Bastion + JIT VM Access](2-jit.md) — the next lab in this track, which depends on the Defender for Servers plan enabled here.
+> **Note:** This lab assumes at least one running Azure VM or Arc-enabled server. For Arc server coverage, complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) first. For Just-In-Time VM access, see [Bastion + JIT VM Access](3-jit.md) — the next lab in this track, which depends on the Defender for Servers plan enabled here.
 
 ---
 
@@ -18,7 +18,7 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 Microsoft Defender for Cloud/
 ├── README.md                            ← Track entry point
 ├── 1-defender-for-servers-part1.md       ← Lab 1a: Setup & Security Posture (you are here)
-├── 1-defender-for-servers-part2.md       ← Lab 1b: Vulnerability Assessment, FIM, Alerts, MDE
+├── 2-defender-for-servers-part2.md       ← Lab 1b: Vulnerability Assessment, FIM, Alerts, MDE
 └── 3-jit.md                              ← Lab 2: Bastion + JIT VM Access
 ```
 
@@ -34,51 +34,7 @@ Microsoft Defender for Cloud/
   - [2.2a — Diagnosing "Not Evaluated" Status](#22a-diagnosing-not-evaluated-status)
   - [2.4 — Scaling Recommendations Beyond a Single Machine](#24-scaling-recommendations-beyond-a-single-machine)
 
-**Continue to Part 2** → [Step 3 (Vulnerability Assessment) through Cleanup](1-defender-for-servers-part2.md)
-
----
-
-## Microsoft Defender for Servers — Workload Protection for Azure and Arc Servers
-
-> **Why this matters:** Defender for Servers is the security brain layered on top of Azure Arc and Azure VMs. It provides threat detection, vulnerability assessment, File Integrity Monitoring, and Secure Score recommendations — all without deploying a separate SIEM agent. Enabling Defender for Servers on Arc-enabled machines brings on-premises and multi-cloud servers into the same security posture view as native Azure VMs.
-
-Last validated on: 2026-07-17
-Portal experience note: Steps validated against Microsoft Defender for Cloud as of July 2026; labels can vary slightly by subscription tier and feature rollout. Secure Score and Recommendations live under **Defender for Cloud → Cloud Security → Security posture** / **Recommendations** in current portal versions (see Step 2). Defender for Servers is available in two plan tiers (Plan 1 and Plan 2) — this lab focuses on Plan 2 features (FIM, vulnerability assessment, JIT) since those represent the full workload protection story.
-
-> **Important — recommendations model transition:** Defender for Cloud is moving from **grouped recommendations** (one row aggregating all findings per resource) to **individual recommendations** (one row per finding — e.g., per vulnerable software package, per secret, per rule). Grouped recommendations are tagged **"Set for deprecation"** and are being removed from the Azure portal on **July 31, 2026**. Individual recommendations are tagged **"New version"** and are the model to build workflows around going forward. Both may appear side by side during the transition — see Step 2.4 for what this changes operationally, especially at fleet scale.
-> **Note:** This lab assumes at least one running Azure VM or Arc-enabled server. For Arc server coverage, complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) first. For Just-In-Time VM access, see [Bastion + JIT VM Access](2-jit.md) — the next lab in this track, which depends on the Defender for Servers plan enabled here.
-
----
-
-## Module /Track Structure
-
-```text
-Microsoft Defender for Cloud/
-├── README.md                          ← Track entry point
-├── 1-defender-for-servers.md          ← Lab 1: Workload Protection (you are here)
-└── 2-jit.md                           ← Lab 2: Bastion + JIT VM Access
-```
-
----
-
-## Quick Navigation
-
-- [Prerequisites](#1-prerequisites)
-- [Learning Objectives](#2-learning-objectives)
-- [Scenario](#3-scenario)
-
-- [Step 1 — Enable Defender for Servers Plan](#step-1--enable-defender-for-servers-plan)
-- [Step 2 — Review Secure Score and Recommendations](#step-2--review-secure-score-and-recommendations)
-  - [2.2a — Diagnosing "Not Evaluated" Status](#22a-diagnosing-not-evaluated-status)
-  - [2.4 — Scaling Recommendations Beyond a Single Machine](#24-scaling-recommendations-beyond-a-single-machine)
-- [Step 3 — Run Vulnerability Assessment](#step-3--run-vulnerability-assessment)
-- [Step 4 — Enable File Integrity Monitoring](#step-4--enable-file-integrity-monitoring)
-- [Step 5 — Investigate a Security Alert](#step-5--investigate-a-security-alert)
-- [Step 6 — Review Defender for Endpoint Integration](#step-6--review-defender-for-endpoint-integration)
-  - [6.7 — Confirm the Guest Configuration Extension](#67-confirm-the-guest-configuration-extension-for-local-policy-recommendations)
-- [Troubleshooting](#troubleshooting)
-- [Why Defender for Servers Matters](#why-defender-for-servers-matters-engineering-justification)
-- [Cleanup](#cleanup)
+**Continue to Part 2** → [Step 3 (Vulnerability Assessment) through Cleanup](2-defender-for-servers-part2.md)
 
 ---
 
@@ -332,8 +288,8 @@ The single-machine workflow above (Steps 2.2–2.3) is fine for validating the l
 
 Part 1 ends here. **Part 2** picks up at Step 3 — Run Vulnerability Assessment, and continues through Step 4 (File Integrity Monitoring), Step 5 (Security Alerts), Step 6 (Defender for Endpoint Integration), Troubleshooting, Why Defender for Servers Matters, and Cleanup.
 
-**→ [Continue to Part 2: 1-defender-for-servers-part2.md](1-defender-for-servers-part2.md)**
+**→ [Continue to Part 2: 2-defender-for-servers-part2.md](2-defender-for-servers-part2.md)**
 
 ---
 
-[↑ Track README](README.md) | [↑ Repo README](../README.md) | [Continue to Part 2 →](1-defender-for-servers-part2.md)
+[↑ Track README](README.md) | [↑ Repo README](../README.md) | [Continue to Part 2 →](2-defender-for-servers-part2.md)
