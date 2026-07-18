@@ -19,7 +19,7 @@ Microsoft Defender for Cloud/
 ├── README.md                            ← Track entry point
 ├── 1-defender-for-servers-part1.md       ← Lab 1a: Setup & Security Posture (you are here)
 ├── 1-defender-for-servers-part2.md       ← Lab 1b: Vulnerability Assessment, FIM, Alerts, MDE
-└── 2-jit.md                              ← Lab 2: Bastion + JIT VM Access
+└── 3-jit.md                              ← Lab 2: Bastion + JIT VM Access
 ```
 
 ---
@@ -38,7 +38,7 @@ Microsoft Defender for Cloud/
 
 ---
 
-# Microsoft Defender for Servers — Workload Protection for Azure and Arc Servers
+## Microsoft Defender for Servers — Workload Protection for Azure and Arc Servers
 
 > **Why this matters:** Defender for Servers is the security brain layered on top of Azure Arc and Azure VMs. It provides threat detection, vulnerability assessment, File Integrity Monitoring, and Secure Score recommendations — all without deploying a separate SIEM agent. Enabling Defender for Servers on Arc-enabled machines brings on-premises and multi-cloud servers into the same security posture view as native Azure VMs.
 
@@ -46,12 +46,11 @@ Last validated on: 2026-07-17
 Portal experience note: Steps validated against Microsoft Defender for Cloud as of July 2026; labels can vary slightly by subscription tier and feature rollout. Secure Score and Recommendations live under **Defender for Cloud → Cloud Security → Security posture** / **Recommendations** in current portal versions (see Step 2). Defender for Servers is available in two plan tiers (Plan 1 and Plan 2) — this lab focuses on Plan 2 features (FIM, vulnerability assessment, JIT) since those represent the full workload protection story.
 
 > **Important — recommendations model transition:** Defender for Cloud is moving from **grouped recommendations** (one row aggregating all findings per resource) to **individual recommendations** (one row per finding — e.g., per vulnerable software package, per secret, per rule). Grouped recommendations are tagged **"Set for deprecation"** and are being removed from the Azure portal on **July 31, 2026**. Individual recommendations are tagged **"New version"** and are the model to build workflows around going forward. Both may appear side by side during the transition — see Step 2.4 for what this changes operationally, especially at fleet scale.
-
 > **Note:** This lab assumes at least one running Azure VM or Arc-enabled server. For Arc server coverage, complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) first. For Just-In-Time VM access, see [Bastion + JIT VM Access](2-jit.md) — the next lab in this track, which depends on the Defender for Servers plan enabled here.
 
 ---
 
-## Module / Track Structure
+## Module /Track Structure
 
 ```text
 Microsoft Defender for Cloud/
@@ -77,7 +76,6 @@ Microsoft Defender for Cloud/
 - [Step 5 — Investigate a Security Alert](#step-5--investigate-a-security-alert)
 - [Step 6 — Review Defender for Endpoint Integration](#step-6--review-defender-for-endpoint-integration)
   - [6.7 — Confirm the Guest Configuration Extension](#67-confirm-the-guest-configuration-extension-for-local-policy-recommendations)
-
 - [Troubleshooting](#troubleshooting)
 - [Why Defender for Servers Matters](#why-defender-for-servers-matters-engineering-justification)
 - [Cleanup](#cleanup)
@@ -93,7 +91,7 @@ Microsoft Defender for Cloud/
 | Arc prerequisite | For Arc servers: complete [Azure Arc Hybrid Server Architecture](../Azure%20Arc%20Hybrid%20Server%20Architecture/1-azure-arc-hybrid-server-architecture.md) first, and confirm agent status is **Connected** (not just installed) before starting this lab — see Step 1.0 |
 | Log Analytics Workspace | Required for FIM data storage — workspace must exist before enabling FIM (Step 4) |
 | Plan selection | **Plan 2** required for File Integrity Monitoring and vulnerability assessment (Qualys / Defender VA); Plan 1 covers foundational posture only |
-| Next lab | Not required for this lab — [2-jit.md](2-jit.md) is the next lab in this track and depends on the Defender for Servers plan enabled here |
+| Next lab | Not required for this lab — [3-jit.md](3-jit.md) is the next lab in this track and depends on the Defender for Servers plan enabled here |
 | Estimated Time | 60–90 minutes (add 15–30 minutes if an Arc agent reconnect/reinstall is needed) |
 | Tools | Azure Portal, plus local shell access (PowerShell or bash) on the target machine if Arc agent troubleshooting is required |
 
@@ -107,7 +105,7 @@ Naming reference: [Naming Convention](../Naming-Convention.md)
 - Defender for Endpoint (MDE) integration is automatic once Defender for Servers Plan 2 is enabled **and the target machine's Arc agent is healthy and Connected** — no separate MDE deployment step is required for supported OS versions under normal conditions. If the Arc agent is disconnected or has stale identity info, the MDE extension will not deploy until that's resolved — see Step 1.0 and Troubleshooting.
 - A large batch of Recommendations (particularly Guest Configuration / local-policy audit checks such as "Audit Credential Validation," "Audit PNP Activity," etc.) depend on the **Guest Configuration extension**, a separate extension from MDE. If these stay stuck at **Not evaluated**, check that extension specifically — see Step 6.7.
 - **This lab was validated against a single target machine.** If you're rolling this out across a larger fleet (10, 50, 100+ servers), see Step 2.4 for how the individual-recommendations model and Azure Resource Graph change the practical workflow at scale — the per-machine steps in this lab still apply for initial validation, but aren't how you'd operate day-to-day across a large fleet.
-- Just-In-Time (JIT) VM Access is covered separately in [2-jit.md](2-jit.md), the next lab in this track.
+- Just-In-Time (JIT) VM Access is covered separately in [3-jit.md](3-jit.md), the next lab in this track.
 
 ---
 

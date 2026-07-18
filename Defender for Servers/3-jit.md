@@ -5,7 +5,7 @@ Just-In-Time VM access adds a time-limited, on-demand approval layer on top of A
 Last validated on: 2026-06-19
 Portal experience note: Steps validated against Microsoft Defender for Cloud as of June 2026; labels can vary slightly by subscription and feature rollout.
 
-> **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-azure-bastion.md) and [Microsoft Defender for Servers](1-defender-for-servers.md) (Lab 1 in this track) first.
+> **Note:** This lab requires Azure Bastion deployed and the Defender for Servers plan active on the subscription. Complete [Azure Bastion](../Azure%20Bastion/1-azure-bastion.md) and [Microsoft Defender for Servers — Part 1](1-defender-for-servers-part1.md) and [Part 2](1-defender-for-servers-part2.md) (Labs 1a and 1b in this track) first.
 
 ---
 
@@ -13,9 +13,10 @@ Portal experience note: Steps validated against Microsoft Defender for Cloud as 
 
 ```text
 Microsoft Defender for Cloud/
-├── README.md                          ← Track entry point
-├── 1-defender-for-servers.md          ← Lab 1: Workload Protection
-└── 2-jit.md                           ← Lab 2: Bastion + JIT VM Access (you are here)
+├── README.md                            ← Track entry point
+├── 1-defender-for-servers-part1.md       ← Lab 1a: Setup & Security Posture
+├── 1-defender-for-servers-part2.md       ← Lab 1b: Vulnerability Assessment, FIM, Alerts, MDE
+└── 3-jit.md                              ← Lab 2: Bastion + JIT VM Access (you are here)
 ```
 
 ---
@@ -40,7 +41,7 @@ Microsoft Defender for Cloud/
 | Requirement | Detail |
 | --- | --- |
 | Azure Role | **Security Reader** + **Virtual Machine Contributor** on the target VM |
-| Dependency | **Defender for Servers** plan active on the subscription — complete [Microsoft Defender for Servers](1-defender-for-servers.md) (Lab 1 in this track) first |
+| Dependency | **Defender for Servers** plan active on the subscription — complete [Microsoft Defender for Servers — Part 1](1-defender-for-servers-part1.md) and [Part 2](1-defender-for-servers-part2.md) (Labs 1a and 1b) first |
 | Dependency | Azure Bastion deployed — complete [Azure Bastion](../Azure%20Bastion/1-azure-bastion.md) first |
 | Estimated Time | 30–45 minutes |
 | Tools | Azure Portal only — no CLI required |
@@ -206,4 +207,4 @@ See [Naming Convention — JIT NSG Rules](../Naming-Convention.md#jit-nsg-rules)
 
 ---
 
-[← Microsoft Defender for Servers](1-defender-for-servers.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md) | [Azure Bastion — Secure VM Access](../Azure%20Bastion/1-azure-bastion.md)
+[← Microsoft Defender for Servers Part 2](1-defender-for-servers-part2.md) | [↑ Track README](README.md) | [↑ Repo README](../README.md) | [Azure Bastion — Secure VM Access](../Azure%20Bastion/1-azure-bastion.md)

@@ -14,7 +14,7 @@ Microsoft Defender for Cloud/
 ├── README.md                            ← Track entry point
 ├── 1-defender-for-servers-part1.md       ← Lab 1a: Setup & Security Posture
 ├── 1-defender-for-servers-part2.md       ← Lab 1b: Vulnerability Assessment, FIM, Alerts, MDE (you are here)
-└── 2-jit.md                              ← Lab 2: Bastion + JIT VM Access
+└── 3-jit.md                              ← Lab 2: Bastion + JIT VM Access
 ```
 
 ---
@@ -342,7 +342,7 @@ A large share of Recommendations — especially ones worded like **"Ensure 'Audi
 - **Individual recommendations as the emerging fleet-scale model** — per-finding granularity, category-level governance, and Resource Graph queryability are purpose-built for environments with dozens or hundreds of servers, where per-machine review doesn't scale
 - **Alert quality over quantity** — behavioral analytics and MITRE ATT&CK mapping reduce alert noise compared to signature-only detection; each alert includes actionable context
 
-> Combined with JIT VM Access (covered in [2-jit.md](2-jit.md)) and Azure Update Manager (covered in the [Azure Update Manager track](../Azure%20Update%20Manager/1-azure-update-manager.md)), Defender for Servers completes the three-layer posture: *access control + patch currency + runtime protection*.
+> Combined with JIT VM Access (covered in [3-jit.md](3-jit.md)) and Azure Update Manager (covered in the [Azure Update Manager track](../Azure%20Update%20Manager/1-azure-update-manager.md)), Defender for Servers completes the three-layer posture: *access control + patch currency + runtime protection*.
 
 ---
 
@@ -370,4 +370,4 @@ A large share of Recommendations — especially ones worded like **"Ensure 'Audi
 
 ---
 
-[↑ Track README](README.md) | [↑ Repo README](../README.md) | [Bastion + JIT VM Access →](2-jit.md)
+[↑ Track README](README.md) | [↑ Repo README](../README.md) | [Bastion + JIT VM Access →](3-jit.md)
