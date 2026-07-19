@@ -83,6 +83,20 @@ az deployment group create \
   --template-file main.bicep
 ```
 
+### Teardown
+
+When you're done with the lab, run [`teardown.ps1`](teardown.ps1) to remove the resource lock and delete the resource group in one step:
+
+```powershell
+# Interactive (prompts before deleting)
+.\teardown.ps1
+
+# Non-interactive
+.\teardown.ps1 -ResourceGroupName rg-identity-lab -Force
+```
+
+> The script removes the CanNotDelete lock deployed by `locks.bicep` before issuing the delete — skipping this step manually causes a `ScopeLocked` error.
+
 ---
 
 ## CI — Automated Validation

@@ -135,6 +135,9 @@ flowchart TD
 | Standing up AD DS in Azure | [DC in Azure Track](Deploying%20a%20Domain%20Controller%20in%20Azure/README.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG AD DS rules, Availability Set, forest creation, replication, FSMO roles, Key Vault for DSRM secrets |
 | Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Identity Lifecycle |
 | Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
+| Assessing cloud security posture management | [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) *(in development)* | Secure Score, recommendations, regulatory compliance, attack path analysis, governance rules — fleet-scale posture across a hub-and-spoke topology |
+| Reviewing AI-assisted security operations | [Copilot for Security](Copilot%20for%20Security/README.md) *(in development)* | Incident summarisation, identity investigation, KQL assistance, promptbooks — Microsoft Security Copilot integrated into the SOC workflow |
+| Building governed AI agents | [Copilot Studio](Copilot%20Studio/README.md) *(in development)* | SharePoint-grounded agent, Entra ID auth, Purview DLP, Teams publishing — applied AI on a Zero Trust foundation |
 
 ---
 
@@ -170,9 +173,9 @@ What I'm building next reflects where enterprise Azure is heading AI augmented o
 
 | Planned | Why |
 | --- | --- |
-| Defender for Cloud CSPM | Extend cloud security posture management at scale across a hub-and-spoke topology — building on the Defender for Servers foundation already covered in the [Defender for Servers track](Defender%20for%20Servers/README.md) |
-| Copilot for Security | Integrate Microsoft Security Copilot into the incident response and identity investigation workflow |
-| Copilot Studio | AI agent backed by a SharePoint knowledge source, secured with Entra ID applied AI on a Zero Trust foundation |
+| [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) *(in development)* | Extend cloud security posture management at scale across a hub-and-spoke topology — building on the Defender for Servers foundation already covered in the [Defender for Servers track](Defender%20for%20Servers/README.md) |
+| [Copilot for Security](Copilot%20for%20Security/README.md) *(in development)* | Integrate Microsoft Security Copilot into the incident response and identity investigation workflow |
+| [Copilot Studio](Copilot%20Studio/README.md) *(in development)* | AI agent backed by a SharePoint knowledge source, secured with Entra ID applied AI on a Zero Trust foundation |
 
 ---
 

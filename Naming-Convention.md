@@ -44,6 +44,21 @@ README.md
 | `02-managed Identity + Azure Key Vault (Secretless Authentication).md` | `02-managed-identity-keyvault-secretless-auth.md` |
 | `2-JIT.md` (all-caps) | `2-jit.md` |
 
+### Top-level folder names and non-breaking hyphens
+
+A small number of top-level folder names in this repository contain a **non-breaking hyphen (U+2011)** — visually identical to a regular hyphen but a different Unicode code point:
+
+| Folder | Contains U+2011? |
+| --- | --- |
+| `Azure Policy Auto‑Remediation` | ✅ yes — between `Auto` and `Remediation` |
+| `Secure Break‑Glass Accounts` | ✅ yes — between `Break` and `Glass` |
+
+**Why this matters for CLI users:** If you type these paths manually at the terminal, `cd` will fail with "no such file or directory" because your keyboard produces U+002D (regular hyphen), not U+2011.
+
+**Workaround:** Copy the folder name directly from the repository listing (GitHub web UI, `ls` output, or this page) rather than typing it by hand. All Markdown links in this repo already use the correct encoded character (`%E2%80%91`) in URL targets.
+
+**New folders** must use standard hyphens (U+002D) only. The two legacy folders above are retained as-is to preserve git history and existing external links.
+
 > **Tip:** Run `rename-labs.sh` from the repo root (requires a local clone) to apply all renames with `git mv`, preserving file history.
 
 ---
