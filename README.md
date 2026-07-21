@@ -1,6 +1,6 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
-Last validated on: 2026-07-18
+Last validated on: 2026-07-20
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#%F0%9F%97%BA%EF%B8%8F-how-to-follow-these-tracks)
@@ -18,7 +18,7 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 
 ## 👥 Who This Is Designed For
 
-Built for cloud engineers and identity architects evaluating production-aligned Azure engineering — specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
+This portfolio is built for cloud engineers and identity architects evaluating production-aligned Azure engineering — specifically Zero Trust design, IaC with Bicep, and governance in regulated or enterprise environments.
 
 | Role | What you'll find here |
 | --- | --- |
@@ -82,6 +82,7 @@ flowchart TD
     JIT -->|"CVE · Missing KB"| UpdateMgr
     AFD --> App
     DevOps --> App
+    DevOps --> VM
     Monitor --> VM & App
     Monitor --> Arc
     Monitor --> ADDS
@@ -102,14 +103,16 @@ flowchart TD
 
 ## 🧠 Why This Architecture Matters
 
-- 🔐 **Identity-first access** eliminates credential sprawl — Managed Identity + Key Vault enforces secretless authentication at every layer
+- 🔐 **Identity-first access** eliminates credential sprawl — Managed Identity + Key Vault enforce secretless authentication at every layer
 - 🚫 **Zero standing access** (Bastion + JIT) removes all inbound exposure and eliminates persistent privileged sessions
 - 🔑 **Break-Glass accounts** (FIDO2 + Certificate-Based Auth) guarantee emergency access without bypassing Zero Trust controls
 - 🛡️ **Governance-as-code** (Azure Policy + Auto-Remediation) enforces compliance continuously across cloud and hybrid resources — no manual audits
 - 🌍 **Secure public ingress** (Front Door + WAF) protects internet-facing workloads at the edge before traffic reaches the application layer
 - 🏢 **AD DS in Azure** provides a production-grade domain fabric, built on Availability Sets with no public IPs and DSRM secrets sealed in Key Vault
 - 🌐 **Hybrid reach via Azure Arc** extends unified policy, monitoring, and Defender for Servers to on-premises and multi-cloud workloads
-- ⚙️ **VMSS + Azure DevOps + Bicep** delivers repeatable, scalable deployments with multi-stage pipelines and deployment slot promotion
+- 📊 **Unified observability** (Azure Monitor + Log Analytics) surfaces alerts, patch failures, and Arc disconnect events across cloud and hybrid resources in real time
+- ⚙️ **VMSS + Bicep** delivers repeatable, scalable compute through golden image pipelines and infrastructure-as-code
+- 🚀 **App Service + Azure DevOps** enables zero-downtime releases via multi-stage pipelines and deployment slot promotion
 - 💼 **Modern Workplace governance** (Exchange Online, Teams, SharePoint, Purview) extends Zero Trust and compliance into M365 workloads
 - ♻️ **Built-in resilience** (Azure Backup, Site Recovery, VMSS failover) ensures business continuity without sacrificing security posture
 
@@ -123,7 +126,7 @@ flowchart TD
 | Reviewing identity & Zero Trust | [Identity-First Track](Identity-First/README.md) | Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault |
 | Reviewing break-glass & emergency access | [Break-Glass Accounts](Secure%20Break%E2%80%91Glass%20Accounts/README.md) | FIDO2 emergency accounts, Certificate-Based Authentication (CBA) |
 | Reviewing Entra backup & recovery | [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID backup strategies and recovery procedures |
-| Assessing IaC & automation | [Bicep Track](Bicep/README.md) | Modular Bicep deployments, GitHub Actions, PowerShell, Azure CLI |
+| Assessing IaC & automation | [Bicep Track](Bicep/README.md) | Modular Bicep deployments, Azure DevOps, PowerShell, Azure CLI |
 | Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor |
 | Reviewing secure access & networking | [Azure Bastion](Azure%20Bastion/README.md) · [Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | Zero standing access (Bastion — no public IPs, NSG rules, hub-spoke VNet peering), WAF and inbound exposure removal (Front Door) |
 | Assessing workload protection & threat detection | [Defender for Servers](Defender%20for%20Servers/README.md) | Defender for Servers Plan 2, Arc agent health verification and reconnect/reinstall, Secure Score and recommendations (grouped vs. the emerging individual-recommendations model, fleet-scale triage via category tabs and Azure Resource Graph), vulnerability assessment (CVE scanning via MDE — no separate agent), File Integrity Monitoring (FIM), security alert investigation, Guest Configuration extension for local-policy recommendations, and Just-In-Time (JIT) VM access — covers Azure VMs and Arc-enabled servers |
@@ -154,9 +157,9 @@ flowchart TD
 | **Governance & Policy** | Azure Policy (Audit, Deny, DeployIfNotExists), auto-remediation, Resource Locks, Activity Logs, KQL queries |
 | **Resilience & DR** | Azure Backup, Azure Site Recovery (failover/failback), storage replication tiers (LRS → GZRS) |
 | **Hybrid & Arc** | Azure Arc Connected Machine Agent (health verification, reconnect/reinstall), AMA + DCR, Defender for Servers, Guest Configuration, individual vs. grouped recommendations model, Update Manager |
-| **Patch Management** | Azure Update Manager, periodic assessment, hotpatching, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed), cross-subscription patching, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), maintenance configurations (staged: dev → uat → prod → dc), Arc agent disconnect alerting, pre/post Automation runbooks, CVE-to-KB mapping, zero-day response, compliance reporting, Arc Server Patch Verification Toolkit (Azure-only patching mode enforcement + verification), Azure Resource Graph KQL — Azure VMs, Arc servers, VMware vSphere (Arc), SCVMM (Arc), Azure Local |
+| **Patch Management** | Azure Update Manager, periodic assessment, hotpatching, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed), cross-subscription patching, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), maintenance configurations (staged: dev → uat → prod → dc), Arc agent disconnect alerting, pre/post scripts, CVE-to-KB mapping, zero-day response, compliance reporting, Arc Server Patch Verification Toolkit (Azure-only patching mode enforcement + verification), Azure Resource Graph KQL — Azure VMs, Arc servers, VMware vSphere (Arc), SCVMM (Arc), Azure Local |
 | **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |
-| **Microsoft 365** | Exchange Online, SharePoint Online, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk), Zero Trust CA, Entra ID Governance lifecycle workflows |
+| **Microsoft 365** | Exchange Online, SharePoint Online, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk, Compliance Manager), Zero Trust CA, Entra ID Governance lifecycle workflows |
 | **Monitoring & Alerting** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings, Alert Rules, Action Groups, Azure Resource Graph |
 
 ---
@@ -169,7 +172,7 @@ All labs are designed to minimise Azure spend using right-sizing, auto-shutdown,
 
 ## 🚀 Next
 
-What I'm building next reflects where enterprise Azure is heading AI augmented operations, deeper security posture management, and Copilot-native engineering all on a Zero Trust foundation.
+What I'm building next reflects where enterprise Azure is heading — AI-augmented operations, deeper security posture management, and Copilot-native engineering — all on a Zero Trust foundation.
 
 | Planned | Why |
 | --- | --- |
