@@ -1,6 +1,6 @@
 # Azure Update Manager Track
 
-Last validated on: 2026-07-12
+Last validated on: July 2026
 
 This track covers OS patch orchestration for Azure VMs and Arc-enabled servers using **Azure Update Manager** — the successor to the legacy Log Analytics Update Management solution. Labs walk through patch assessment, maintenance window scheduling, update deployments, and compliance reporting, all via the Azure Portal.
 

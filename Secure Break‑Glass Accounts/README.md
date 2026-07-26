@@ -1,6 +1,6 @@
 # Secure Break-Glass Accounts Track
 
-Last validated on: 2026-07-14
+Last validated on: July 2026
 
 This track covers the design, configuration, and validation of emergency access accounts in Microsoft Entra ID — accounts that allow tenant recovery when all normal authentication paths are unavailable (federated identity provider outage, MFA service disruption, accidental lock-out of all administrators).
 
@@ -16,7 +16,7 @@ Secure Break-Glass Accounts/
 ## Lab Sequence
 
 1. [Secure Break-Glass Accounts](1-Secure-Break-Glass-Accounts.md) — create cloud-only emergency access accounts, register FIDO2 security keys, exclude accounts from all Conditional Access policies, configure sign-in alerting, validate access end-to-end, and seal credentials offline
-2. [Certificate-Based Authentication (CBA) for Emergency Access Accounts](2-Certificate-Based%20Authentication(CBA)for%20Emergency%20Access%20Accounts.md) — configure CBA as a second independent credential path using a client certificate, providing access if FIDO2 keys are lost or damaged
+2. [Certificate-Based Authentication (CBA) for Emergency Access Accounts](2-certificate-based-auth-cba.md) — configure CBA as a second independent credential path using a client certificate, providing access if FIDO2 keys are lost or damaged
 
 ## Key Concepts
 

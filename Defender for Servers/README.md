@@ -1,4 +1,4 @@
-# Microsoft Defender for Cloud Track
+# Defender for Servers Track
 
 Last validated on: July 2026
 
@@ -20,7 +20,7 @@ This track covers workload protection and secure access controls using Microsoft
 ## Track Structure
 
 ```text
-Microsoft Defender for Cloud/
+Defender for Servers/
 ├── 1-defender-for-servers-part1.md  # Hands-on: Enable plan, Arc agent health, Secure Score, Recommendations
 ├── 2-defender-for-servers-part2.md  # Hands-on: Vulnerability assessment, FIM, alerts, MDE integration
 └── 3-jit.md                         # Hands-on: JIT VM access + Azure Bastion zero-standing-access pattern

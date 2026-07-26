@@ -15,8 +15,8 @@ Portal experience note: Steps validated against Azure Portal as of June 2026.
 Compute/
 ├── README.md                          ← Track entry point
 ├── 1-build-base-vm.md                 ← Lab 1: Build a Base VM
-├── 2-sysprep-vm.md                    ← Lab 2: Sysprep (Azure-safe)
-└── 3-install-iis.md                   ← Lab 3: Install IIS (you are here)
+├── 3-install-iis.md                   ← Lab 2: Install IIS (you are here)
+└── 2-sysprep-vm.md                    ← Lab 3: Sysprep (Azure-safe)
 ```
 
 ---
