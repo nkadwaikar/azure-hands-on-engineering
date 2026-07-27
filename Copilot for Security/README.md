@@ -1,12 +1,12 @@
 # Copilot for Security
 
-> **Status:** In development — content coming soon.
+Last validated on: July 2026
 
 > **Why this matters:** Security operations teams are overwhelmed by alert volume. Microsoft Security Copilot integrates natural language directly into the investigation and response workflow — summarising incidents, correlating signals across Sentinel, Defender XDR, and Entra ID, and suggesting remediation steps in seconds rather than minutes. The result is faster triage, less analyst fatigue, and decisions grounded in your actual environment context rather than generic playbooks.
 
 ---
 
-## Planned Coverage
+## Coverage
 
 This track integrates Microsoft Security Copilot into the incident response and identity investigation workflow established across the Defender for Servers and Identity-First tracks.
 
@@ -31,17 +31,17 @@ This track integrates Microsoft Security Copilot into the incident response and 
 
 ---
 
-## Track Structure *(planned)*
+## Track Structure
 
 ```text
 Copilot for Security/
-├── README.md                           ← Track entry point (this file)
-├── 1-setup-and-access-control.md       ← Provisioning SCUs; RBAC; data residency
-├── 2-incident-investigation.md         ← Incident summarisation; guided response
-├── 3-identity-investigation.md         ← Entra ID sign-in analysis; risky user triage
-├── 4-kql-assistance.md                 ← KQL generation; Sentinel integration
-└── 5-promptbooks.md                    ← Custom promptbooks for repeatable SOC workflows
+├── README.md                             ← Track entry point (this file)
+└── 1-copilot-for-security.md             ← Lab 1: Provisioning, RBAC, plugins, incident investigation, KQL, promptbooks, audit
 ```
+
+## Lab Sequence
+
+1. [Microsoft Security Copilot — Incident Investigation and SOC Workflows](./1-copilot-for-security.md) — provision SCUs, configure RBAC, connect plugins, summarise incidents, investigate risky users, generate KQL queries, build promptbooks, and audit session activity in Purview
 
 ---
 

@@ -1,12 +1,12 @@
 # Copilot Studio
 
-> **Status:** In development — content coming soon.
+Last validated on: July 2026
 
 > **Why this matters:** Copilot Studio closes the last mile between organisational knowledge and the people who need it. By grounding an AI agent in a SharePoint knowledge source and securing it with Entra ID, you get a governed, auditable assistant that answers questions from your actual documentation — not a generic model. This track shows how to build that pattern correctly: Zero Trust at the identity layer, Purview at the data layer, and DLP policies preventing data exfiltration through the agent surface.
 
 ---
 
-## Planned Coverage
+## Coverage
 
 This track covers building a governed AI agent in Microsoft Copilot Studio backed by a SharePoint knowledge source, secured with Entra ID authentication, and governed with Purview DLP.
 
@@ -32,17 +32,17 @@ This track covers building a governed AI agent in Microsoft Copilot Studio backe
 
 ---
 
-## Track Structure *(planned)*
+## Track Structure
 
 ```text
 Copilot Studio/
-├── README.md                               ← Track entry point (this file)
-├── 1-agent-setup-knowledge-source.md       ← Create agent; connect SharePoint knowledge
-├── 2-entra-id-authentication.md            ← App registration; auth flow; token validation
-├── 3-dlp-and-governance.md                 ← Purview DLP; data boundary enforcement
-├── 4-conditional-access-controls.md        ← CA policy for agent access; device compliance
-└── 5-monitoring-and-audit.md               ← Conversation logging; Purview audit trail
+├── README.md                          ← Track entry point (this file)
+└── 1-copilot-studio-agent.md          ← Lab 1: Build, secure, and govern a SharePoint-grounded AI agent
 ```
+
+## Lab Sequence
+
+1. [Microsoft Copilot Studio — Governed AI Agent on a Zero Trust Foundation](./1-copilot-studio-agent.md) — create an agent, ground it on a SharePoint knowledge source, configure Entra ID authentication, apply Power Platform DLP, publish to Teams, and monitor via analytics and Purview Audit
 
 ---
 
