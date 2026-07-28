@@ -2,8 +2,10 @@
 
 > **Why this matters:** When Defender for Cloud surfaces 200 recommendations across 50 subscriptions, the challenge isn't finding security gaps — it's triaging them fast enough to act on the ones that actually matter. This lab teaches the workflows that make recommendation triage scale: category tabs to cut across resource types, Azure Resource Graph to query unhealthy resources in bulk, and the filter system to isolate high-severity findings before they become incidents.
 
-Last validated on: 2026-07-19
-Portal experience note: Steps validated against **Microsoft Defender for Cloud → Recommendations** as of July 2026. The individual recommendations model (one row per finding) is the current production model following the removal of grouped recommendations on July 31, 2026. All steps in this lab target the individual recommendations view.
+Last validated on: 2026-07-28
+Portal experience note: Steps validated against **Microsoft Defender for Cloud → Recommendations** as of July 2026. Grouped recommendations are deprecated and scheduled for removal from the Azure portal on **July 31, 2026** (three days from this validation date) — the individual recommendations model (one row per finding) is already the recommended best-practice model and is what this lab targets. If you still see grouped recommendations alongside individual ones, that's expected during the transition window; don't build new workflows against grouped recommendation keys.
+
+> **Update note (2026-07-28):** Some recommendations previously shown under the **Cloud apps** category tab are now classified as identity-related and grouped under **Identity** instead — your total Secure Score is unchanged, but expect the counts in Step 1.1's category tabs to look different than in older screenshots. Separately, Microsoft is rolling out an enhanced recommendations experience in the unified Defender portal (with per-asset risk factors and risk-based grouping) — this lab still targets the classic Azure portal Recommendations blade, which remains fully supported.
 
 > **Note:** This lab focuses on the triage workflow — understanding, filtering, and querying recommendations at scale. Remediation mechanics are covered in [Lab 1](1-cspm-secure-score.md). Governance rule assignment (owner + due-date) is covered in [Lab 5](5-governance-rules.md).
 

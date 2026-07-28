@@ -2,8 +2,10 @@
 
 > **Why this matters:** Secure Score is the fastest single signal that tells you whether a subscription's security configuration is improving or degrading over time. Without CSPM, misconfigured resources accumulate silently across subscriptions until an auditor — or an attacker — finds them. Defender for Cloud CSPM turns posture into a measurable, actionable KPI that engineers and leadership can track, and gives you the control-by-control breakdown needed to fix the right things first.
 
-Last validated on: 2026-07-19
+Last validated on: 2026-07-28
 Portal experience note: Steps validated against **Microsoft Defender for Cloud → Cloud Security → Security posture** as of July 2026. The Security posture blade layout and Secure Score calculation methodology described here apply to both Foundational CSPM (free) and Defender CSPM (paid). Features gated to Defender CSPM are called out explicitly.
+
+> **Update note (2026-07-28):** Microsoft now offers **two Secure Score models** — the classic score described in this lab, and a newer model surfaced in the Defender portal. This lab covers the classic Azure portal experience; the mechanics (controls, weighting, recommendations) are the same, but scoring cadence and some UI details differ in the newer model. As of June 30, 2026, over 200 additional AWS and GCP recommendations now contribute to Secure Score as part of expanded multicloud coverage — expect your baseline score to shift if you have connected AWS/GCP accounts. Recommendations flagged **Preview** do not count toward Secure Score until they exit preview.
 
 > **Note:** This lab targets CSPM at the subscription level. If your organisation uses Management Groups, the same controls apply at MG scope — the aggregate score is a weighted average of child subscriptions. See Step 2.3 for multi-subscription scope. This lab builds directly on the [Defender for Servers track](../Defender%20for%20Servers/README.md) — the plan enablement and Secure Score basics covered there are extended here to the full posture management workflow.
 
@@ -182,14 +184,14 @@ If you manage multiple subscriptions under a Management Group:
 
 ### 3.3 Verify score movement
 
-Secure Score does not update in real time — changes are reflected within **15–30 minutes** of a successful remediation.
+Secure Score does not update in real time. Defender for Cloud recalculates each **control** on an **eight-hour cycle** per subscription (or per AWS/GCP connector); individual recommendation status within a control can refresh more frequently than the control-level score itself. Daily score history now reflects an **end-of-day snapshot** rather than an intraday average, so day-over-day comparisons are more precise than they were previously — but same-day movement still won't appear instantly.
 
 1. Navigate back to **Cloud Security → Security posture**.
 2. Select your target subscription in the Environment table.
 3. Locate the control you remediated and confirm the **Unhealthy resources** count has decreased.
 4. Note the updated **Current points** value for that control.
 
-   > If the score hasn't moved after 30 minutes, verify the remediation was actually applied. Check the resource directly (e.g., open the storage account and confirm **Secure transfer required** is **Enabled**).
+   > If the score hasn't moved after the next 8-hour recalculation cycle, verify the remediation was actually applied. Check the resource directly (e.g., open the storage account and confirm **Secure transfer required** is **Enabled**).
 
 ---
 

@@ -2,8 +2,14 @@
 
 > **Why this matters:** A Secure Score tells you your posture is 72%. A regulatory compliance dashboard tells you which specific CIS or NIST controls are failing and gives auditors the evidence they need. For regulated industries — finance, healthcare, government — the compliance dashboard is the difference between passing an audit with documented evidence and scrambling to assemble screenshots the week before a review.
 
-Last validated on: 2026-07-19
+Last validated on: 2026-07-28
 Portal experience note: Steps validated against **Microsoft Defender for Cloud → Regulatory compliance** as of July 2026. Available compliance standards vary by subscription region, plan tier, and Azure policy initiative availability. The standards listed in this lab (CIS, NIST, PCI-DSS, ISO 27001) are available in all commercial Azure regions.
+
+> **Update note (2026-07-28):**
+> - **MCSB v2 (preview)** — the Microsoft Cloud Security Benchmark used as the default day-to-day baseline (Step 1.4) now has a v2 in preview, adding expanded risk/threat-based guidance and new controls for securing AI workloads. You can assess against MCSB v2 alongside v1 during the preview.
+> - **New frameworks in preview** — four additional compliance frameworks have been added across Azure, AWS, and GCP and can be enabled the same way as the standards in Step 2.
+> - **Purview Compliance Manager integration** — any standard you add to the Regulatory compliance dashboard (Azure, AWS, or GCP) now also surfaces its resource-level compliance data in **Microsoft Purview Compliance Manager**, so compliance teams can manage it alongside non-cloud compliance data in one place.
+> - **Permissions correction** — see the updated Prerequisites table below; the roles needed to add and view compliance standards are more specific than "Security Admin / Security Reader."
 
 > **Note:** Regulatory compliance in Defender for Cloud is built on **Azure Policy initiatives** mapped to compliance framework controls. Adding a compliance standard assigns a policy initiative to your subscription — this is a non-destructive read-only audit operation by default; no existing resources are modified.
 
@@ -47,8 +53,8 @@ Defender for Cloud CSPM/
 
 | Requirement | Detail |
 | --- | --- |
-| Azure Role | **Security Admin** to add compliance standards; **Security Reader** to view the dashboard and export reports |
-| Defender for Cloud | Enabled on the target subscription |
+| Azure Role | **Owner** or **Policy Contributor** to add or remove compliance standards. To *view* the dashboard, you need **Reader** (or higher) on the subscription — note that **Security Reader alone does not grant access to policy compliance data**, so a Security-Reader-only account may see the dashboard but not the underlying assessment results. |
+| Defender for Cloud | Enabled on the target subscription. Any Defender plan works **except Defender for Servers Plan 1 or Defender for API Plan 1**, which don't include regulatory compliance. Adding non-default standards (beyond the default MCSB) additionally requires at least one **paid** Defender plan. |
 | Prior labs | [Lab 1 — Secure Score](1-cspm-secure-score.md) and [Lab 2 — Recommendation Triage](2-recommendations-triage.md) recommended — compliance controls map directly to Secure Score recommendations |
 | Estimated time | 30–45 minutes |
 | Tools | Azure Portal only |
@@ -90,7 +96,7 @@ This is a real scenario in regulated environments. The Regulatory compliance das
 
 ## Step 2 — Add a Compliance Standard
 
-1. Click **Manage compliance policies** (link at the top of the Regulatory compliance blade).
+1. Click **Manage compliance policies** (link at the top of the Regulatory compliance blade). You'll need **Owner** or **Policy Contributor** on the subscription to make changes here — Security Admin alone is not sufficient.
    - This opens **Environment settings → Security policies** for your subscription.
 2. Scroll down to the **Industry & regulatory standards** section.
 3. Browse the available standards. Common ones:
@@ -102,6 +108,8 @@ This is a real scenario in regulated environments. The Regulatory compliance das
    | **PCI DSS v4.0** | Payment card environments |
    | **ISO/IEC 27001:2022** | International information security management |
    | **SOC 2 Type 2** | Service Organisation Controls — SaaS and cloud providers |
+
+   > **Preview additions:** **MCSB v2** (an updated version of the default baseline, with AI-workload controls) and four newly added regulatory frameworks are also available here in preview. They appear alongside the standards above and are added the same way.
 
 4. Click the toggle next to **CIS Azure Foundations Benchmark v2.0.0** to enable it.
 5. Click **Save**.
