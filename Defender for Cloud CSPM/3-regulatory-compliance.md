@@ -112,9 +112,8 @@ This is a real scenario in regulated environments. The Regulatory compliance das
    > **Preview additions:** **MCSB v2** (an updated version of the default baseline, with AI-workload controls) and four newly added regulatory frameworks are also available here in preview. They appear alongside the standards above and are added the same way.
 
 4. Click the toggle next to **CIS Azure Foundations Benchmark v2.0.0** to enable it.
-5. Click **Save**.
-6. Navigate back to **Cloud Security → Regulatory compliance**.
-7. The CIS standard now appears as a card. Initial assessment may take up to **30 minutes** to populate — refresh the blade after waiting.
+5. Navigate back to **Cloud Security → Regulatory compliance**.
+6. The CIS standard now appears as a card. Initial assessment may take up to **30 minutes** to populate — refresh the blade after waiting.
 
 ---
 
