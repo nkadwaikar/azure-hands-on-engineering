@@ -1,7 +1,7 @@
 
 # Architecture Overview
 
-Last validated on: 2026-07-15
+Last validated on: August 2026
 
 ## Identity Governance
 
@@ -298,6 +298,77 @@ flowchart LR
 
 ---
 
+## Windows LAPS — Local Admin Password Rotation
+
+Windows LAPS delivers automated local administrator password rotation through Group Policy, with each machine's encrypted password stored directly in Active Directory. No additional agent is required on modern Windows Server builds (April 2023 cumulative update or later). Azure Arc supplements with a compliance audit layer via Machine Configuration — it does not replace GPO as the delivery mechanism.
+
+```mermaid
+flowchart LR
+    subgraph AD["Active Directory Domain Services"]
+        GPO["LAPS GPO\nWindows LAPS \u2013 Server Local Admin Password Policy\n(Encrypted storage \u00b7 24-char \u00b7 30-day rotation \u00b7 Post-auth reset)"]
+        ADDS["AD DS\nEncrypted Password Store\nms-LAPS-EncryptedPassword"]
+    end
+
+    subgraph Targets["Managed Servers"]
+        Server["Windows Server 2019/2022/2025\n(April 2023 CU+)"]
+        LocalAdmin["Local Administrator\nAccount"]
+    end
+
+    subgraph Access["Authorised Decryptors"]
+        Helpdesk["SG-LAPS-Helpdesk\nRead-only"]
+        Ops["SG-LAPS-Ops\nRead + Reset-LapsPassword"]
+        Security["SG-LAPS-Security\nAudit + Read"]
+    end
+
+    Arc["Azure Arc\nMachine Configuration\n(Audit-only compliance view)"]
+
+    GPO -->|"Group Policy delivery"| Server
+    Server -->|"Encrypted password write\n(OU self-permission)"| ADDS
+    Server -->|"Rotates on schedule\nor post-authentication"| LocalAdmin
+    ADDS --> Helpdesk & Ops & Security
+    Arc -->|"LAPS registry key\nCompliance audit"| Server
+```
+
+**Design note:** GPO is the sole policy delivery mechanism — Azure Arc (Machine Configuration) adds a compliance audit view in the portal but does not enforce settings. Schema extension (`Update-LapsADSchema`) is a one-time, forest-wide, irreversible operation and must be tested in a lab forest before production. OU-level self-permission (`Set-LapsADComputerSelfPermission`) must be validated on a pilot OU before expanding to the full server OU. If any server previously ran the legacy LAPS CSE client, the [LAPS Risks & Legacy Migration](./Compute/5-windows-laps-risks-and-legacy-migration.md) guide covers the migration procedure and cleanup sequence.
+
+---
+
+## DFS to Azure File Sync Migration
+
+Azure File Sync replaces DFS-R replication with a cloud-backed, multi-master sync model. Each DFS member server registers with a Storage Sync Service and becomes a server endpoint within a Sync Group. The cloud endpoint (Azure File Share) acts as the authoritative sync target — changes on any server endpoint propagate to all others via the cloud. DFS Namespaces are retained and re-pointed to Azure File Sync–enabled servers, so users see no UNC path change. DFS-R replication groups are retired only after sync health is confirmed. Cloud tiering is optionally enabled post-cutover to recall cold files from Azure on demand and reclaim local disk space.
+
+```mermaid
+flowchart LR
+    subgraph OnPrem["On-Premises — DFS Member Servers"]
+        Server1["File Server 1\nAFS Agent · Server Endpoint\n(D:\\shares\\finance)"]
+        Server2["File Server 2\nAFS Agent · Server Endpoint\n(D:\\shares\\finance)"]
+        DFSR["DFS-R Replication Group\n(Retired post-migration)"]
+        DFSNs["DFS Namespace\n\\\\domain\\dfsroot\\finance\nReferral updated post-cutover"]
+        Server1 -.-|"Retired"| DFSR
+        Server2 -.-|"Retired"| DFSR
+    end
+
+    subgraph AzureSync["Azure — Storage Sync Service"]
+        SG["Sync Group\nsg-finance-share"]
+        CloudEP["Cloud Endpoint\nAzure File Share"]
+        SA["Storage Account\nGPv2 · ZRS/GRS"]
+        CloudEP --> SA
+    end
+
+    Monitor["Azure Monitor\nSync health · Server heartbeat alerts"]
+
+    Users["Users\n(unchanged UNC path)"] --> DFSNs
+    DFSNs -->|"Referral → AFS-enabled server"| Server1
+    Server1 <-->|"HTTPS 443 · Encrypted sync"| SG
+    Server2 <-->|"HTTPS 443 · Encrypted sync"| SG
+    SG --> CloudEP
+    Monitor --> SG
+```
+
+**Design note:** Each Sync Group has exactly one cloud endpoint and one or more server endpoints. Changes written to any server endpoint replicate to all others via the cloud endpoint — no hub server is required. Cloud tiering is per server endpoint: enabling it on one server does not affect others in the same Sync Group. DFS Namespaces are not replaced — only DFS-R is retired. The rollback path (re-point DFS Namespace referrals back to the original servers) is available until DFS-R replication groups are removed.
+
+---
+
 ## Lab Tracks
 
 | Track | Description |
@@ -308,7 +379,7 @@ flowchart LR
 | [Bicep](./Bicep/README.md) | Modular IaC: UAMI, Key Vault, RBAC, Resource Lock, Storage, VM, Diagnostics — composed via main.bicep |
 | [App Service + Managed Identity + Deployment Slots + Azure DevOps](./App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | System-Assigned Managed Identity per slot, Key Vault references (secretless), deployment slots, multi-stage Azure DevOps YAML pipeline, manual approval gates |
 | [Azure Policy Auto-Remediation](./Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Custom policy, DeployIfNotExists, remediation tasks |
-| [Compute](./Compute/README.md) | Base VM build, Sysprep, IIS installation |
+| [Compute](./Compute/README.md) | Base VM build, Sysprep, IIS installation, Windows LAPS deployment (GPO-based local admin password rotation, encrypted AD storage, authorised decryptor delegation, Azure Arc compliance audit) |
 | [VMSS](./VMSS/README.md) | Golden image capture, Compute Gallery, scale set deployment |
 | [Azure Front Door](./Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | WAF, custom domains, static website origin, caching behavior |
 | [Recovery Services Vaults](./Recovery%20Services%20vaults/README.md) | VM backup, restore, ASR replication |
@@ -318,6 +389,7 @@ flowchart LR
 | [Azure Arc Hybrid Server Architecture](./Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Hybrid server landing zone: Arc projection, CMA onboarding, AMA + DCR monitoring, Policy/Guest Config compliance, Automation runbooks, lifecycle management, Hyper-V lab for Arc validation — dedicated tracks for [Defender for Servers](./Defender%20for%20Servers/README.md) and [Update Manager](./Azure%20Update%20Manager/README.md) |
 | [Azure Update Manager](./Azure%20Update%20Manager/README.md) | Patch assessment, maintenance configurations (per patch group: dev → uat → prod → dc), scheduled and one-time deployments, pre/post Automation runbooks, compliance dashboard, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed native alerting), cross-subscription patching, advanced KQL, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, Azure Monitor alerting for Arc disconnects, Bicep IaC — covers Azure VMs, Arc-enabled servers, VMware vSphere (Arc), SCVMM (Arc), and Azure Local |
 | [Deploying a Domain Controller in Azure](./Deploying%20a%20Domain%20Controller%20in%20Azure/1-deploying-domain-controller-in-azure.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG with AD DS port rules, Availability Set, static private IPs, dedicated data disk (host caching: None), forest creation, second DC promotion, automatic replication, FSMO role distribution, Azure DNS forwarder, Key Vault for DSRM secrets |
+| [Migrate DFS to Azure File Sync](./Migrate%20Distributed%20File%20System%20%28DFS%29%20to%20Azure%20File%20Sync/README.md) | DFS Namespace and DFS-R migration to Azure File Sync: topology inventory, Storage Sync Service and Sync Group deployment, server endpoint registration, initial sync monitoring, DFS Namespace cutover (keep or retire), cloud tiering, DFS-R retirement, validation checklist |
 | [Modern Workplace (Microsoft 365)](./Microsoft%20365/README.md) | Exchange Online advanced mail flow, SharePoint information architecture, Teams lifecycle governance, Purview compliance automation, Zero Trust Conditional Access, Identity Governance lifecycle workflows |
 
 [← Back to Azure Hands-On Engineering](./README.md)

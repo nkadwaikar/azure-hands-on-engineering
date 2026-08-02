@@ -1,6 +1,6 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
-Last validated on: July 2026
+Last validated on: August 2026
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#🗺️-how-to-follow-these-tracks)
@@ -104,7 +104,8 @@ flowchart TD
 ## 🧠 Why This Architecture Matters
 
 - 🔐 **Identity-first access** eliminates credential sprawl — Managed Identity + Key Vault enforce secretless authentication at every layer
-- 🚫 **Zero standing access** (Bastion + JIT) removes all inbound exposure and eliminates persistent privileged sessions
+- � **Windows LAPS** (GPO-based local admin password rotation) eliminates shared local administrator credentials across the server fleet — each machine carries a unique, automatically rotated password stored encrypted in Active Directory, removing a persistent lateral movement vector
+- �🚫 **Zero standing access** (Bastion + JIT) removes all inbound exposure and eliminates persistent privileged sessions
 - 🔑 **Break-Glass accounts** (FIDO2 + Certificate-Based Auth) guarantee emergency access without bypassing Zero Trust controls
 - 🛡️ **Governance-as-code** (Azure Policy + Auto-Remediation) enforces compliance continuously across cloud and hybrid resources — no manual audits
 - 🌍 **Secure public ingress** (Front Door + WAF) protects internet-facing workloads at the edge before traffic reaches the application layer
@@ -130,12 +131,13 @@ flowchart TD
 | Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor |
 | Reviewing secure access & networking | [Azure Bastion](Azure%20Bastion/README.md) · [Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | Zero standing access (Bastion — no public IPs, NSG rules, hub-spoke VNet peering), WAF and inbound exposure removal (Front Door) |
 | Assessing workload protection & threat detection | [Defender for Servers](Defender%20for%20Servers/README.md) | Defender for Servers Plan 2, Arc agent health verification and reconnect/reinstall, Secure Score and recommendations (grouped vs. the emerging individual-recommendations model, fleet-scale triage via category tabs and Azure Resource Graph), vulnerability assessment (CVE scanning via MDE — no separate agent), File Integrity Monitoring (FIM), security alert investigation, Guest Configuration extension for local-policy recommendations, and Just-In-Time (JIT) VM access — covers Azure VMs and Arc-enabled servers |
-| Following compute & image lifecycle | [Compute Track](Compute/README.md) · [VMSS](VMSS/README.md) | VMs, VMSS, VNets, NSGs, Load Balancers — built for resilience |
+| Following compute & image lifecycle | [Compute Track](Compute/README.md) · [VMSS](VMSS/README.md) | VMs, VMSS, VNets, NSGs, Load Balancers — built for resilience; Windows LAPS (native GPO-based local admin password rotation, Hybrid AD + Azure Arc) |
 | Assessing App Service & DevOps pipelines | [App Service + Managed Identity](App%20Service%20%2B%20Managed%20Identity%20%2B%20Deployment%20Slots%20%2B%20Azure%20DevOps/README.md) | Deployment slots, multi-stage pipelines, secretless auth |
 | Reviewing business continuity & resilience | [Recovery Services Track](Recovery%20Services%20vaults/README.md) | Azure Backup, Site Recovery, VMSS failover patterns |
 | Exploring hybrid & Arc-enabled servers | [Azure Arc Track](Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) | Arc projection, CMA onboarding, AMA + DCR monitoring, hybrid governance, Hyper-V lab |
 | Assessing patch compliance & update orchestration | [Azure Update Manager](Azure%20Update%20Manager/README.md) | Patch assessment, periodic (24-hour) assessment, maintenance windows, update deployments, compliance dashboard, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed native alerting), cross-subscription patching, hotpatching, pricing and licensing, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), patch group tagging strategy, prod vs non-prod patching strategy, Arc agent disconnect alerting, pre/post scripts, rollback, CVE-to-KB mapping, zero-day response playbook, DC staggered reboot runbook, Bicep IaC, and [Arc Server Patch Verification Toolkit](Azure%20Update%20Manager/Arc%20Server%20Patch%20Verification%20Toolkit/README.md) (enforce and verify Azure-only patching mode before configuring Update Manager) — covers Azure VMs, Arc-enabled servers, VMware vSphere (Arc), SCVMM (Arc), and Azure Local |
 | Standing up AD DS in Azure | [DC in Azure Track](Deploying%20a%20Domain%20Controller%20in%20Azure/README.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG AD DS rules, Availability Set, forest creation, replication, FSMO roles, Key Vault for DSRM secrets |
+| Migrating file shares from DFS to Azure | [DFS to Azure File Sync](Migrate%20Distributed%20File%20System%20%28DFS%29%20to%20Azure%20File%20Sync/README.md) | DFS-R retirement, Azure File Sync deployment (Storage Sync Service, Sync Groups, server endpoint registration), DFS Namespace cutover, cloud tiering, validation and cleanup |
 | Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Identity Lifecycle |
 | Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
 | Assessing cloud security posture management | [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) *(Labs 1–3 available; Labs 4–5 in development)* | Secure Score, recommendations, regulatory compliance, attack path analysis, governance rules — fleet-scale posture across a hub-and-spoke topology |
@@ -151,11 +153,12 @@ flowchart TD
 | **Identity & Access** | Microsoft Entra ID, Managed Identity (UAMI + SAMI), RBAC, Conditional Access, Authentication Strength, FIDO2, CBA, Privileged Identity Management |
 | **Secrets & Key Management** | Azure Key Vault (RBAC mode), secretless app authentication, Key Vault references in App Service |
 | **Infrastructure as Code** | Bicep (modular, parameterised), Azure CLI, PowerShell, ARM deployment scopes |
-| **Compute** | Azure Virtual Machines, VM Scale Sets, Compute Gallery, golden image pipeline (Sysprep → capture → VMSS) |
+| **Compute** | Azure Virtual Machines, VM Scale Sets, Compute Gallery, golden image pipeline (Sysprep → capture → VMSS), Windows LAPS (native GPO-based local admin password rotation, encrypted AD storage, Hybrid AD + Azure Arc) |
 | **Networking & Secure Access** | Azure Bastion, JIT VM access, NSG design, VNet Peering, Azure Front Door, WAF |
 | **App Delivery & DevOps** | Azure App Service, deployment slots, system-assigned Managed Identity per slot, Azure DevOps YAML pipelines, multi-stage approvals |
 | **Governance & Policy** | Azure Policy (Audit, Deny, DeployIfNotExists), auto-remediation, Resource Locks, Activity Logs, KQL queries |
 | **Resilience & DR** | Azure Backup, Azure Site Recovery (failover/failback), storage replication tiers (LRS → GZRS) |
+| **Storage & File Services** | Azure Storage Accounts, Azure File Sync (Storage Sync Service, Sync Groups, server endpoint registration, cloud tiering), DFS Namespace and DFS-R migration (inventory → sync → namespace cutover → DFS-R retirement) |
 | **Hybrid & Arc** | Azure Arc Connected Machine Agent (health verification, reconnect/reinstall), AMA + DCR, Defender for Servers, Guest Configuration, individual vs. grouped recommendations model, Update Manager |
 | **Patch Management** | Azure Update Manager, periodic assessment, hotpatching, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed), cross-subscription patching, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), maintenance configurations (staged: dev → uat → prod → dc), Arc agent disconnect alerting, pre/post scripts, CVE-to-KB mapping, zero-day response, compliance reporting, Arc Server Patch Verification Toolkit (Azure-only patching mode enforcement + verification), Azure Resource Graph KQL — Azure VMs, Arc servers, VMware vSphere (Arc), SCVMM (Arc), Azure Local |
 | **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |

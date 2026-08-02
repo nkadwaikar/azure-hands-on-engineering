@@ -1,6 +1,6 @@
 # Naming Convention
 
-Last validated on: 2026-07-15
+Last validated on: August 2026
 
 All resources across these labs follow a consistent pattern aligned with the Azure Cloud Adoption Framework (CAF). This page is the single reference for the abbreviations, segment order, and per-resource-type rules used throughout every lab guide.
 
@@ -121,6 +121,8 @@ Instance numbers (`01`, `02`, …) are appended when multiple instances of the s
 | `alert` | Azure Monitor Alert Rule |
 | `ag` | Azure Monitor Action Group |
 | `rb` | Automation Runbook |
+| `sss` | Storage Sync Service (Azure File Sync) |
+| `sg` | Sync Group (Azure File Sync) |
 
 ---
 
@@ -175,7 +177,40 @@ Examples:
 stidentitylabcore01             Identity lab core storage
 stfntechlabbkp01                Backup scenario storage
 stpolicylabremedy01             Policy remediation storage
+stfntechfilesynclablab01        Azure File Sync source file share storage
 ```
+
+### Azure File Sync
+
+Azure File Sync resources follow the standard `{type}-{project}-{region}-{env}` pattern. Sync Group names are descriptive, matching the DFS folder or logical data grouping they replace.
+
+```text
+sss-{project}-{region}-{env}    Storage Sync Service (one per environment)
+sg-{folder}-{env}               Sync Group (one per DFS folder or logical share)
+```
+
+Examples:
+
+```text
+sss-fntech-eus-lab              Storage Sync Service for the lab environment (East US)
+sg-finance-share                Sync Group replacing the Finance DFS folder target
+sg-hr-share                     Sync Group replacing the HR DFS folder target
+```
+
+**Sync Group naming conventions:**
+
+- Use a short, lowercase, hyphenated description that matches the DFS folder name or share purpose — it appears directly in the Azure Portal sync group list.
+- Omit the `{region}` and `{env}` segments from the Sync Group name: they are scoped to the parent Storage Sync Service, which already carries those segments.
+- One Sync Group per DFS folder (or per logical data grouping). Do not combine unrelated shares in a single Sync Group.
+
+Server endpoint paths are local filesystem paths on registered servers and are not subject to the naming pattern:
+
+```text
+D:\shares\finance               Local path on DFS member server — matches the existing DFS folder target path
+D:\shares\hr
+```
+
+---
 
 ### Networking
 
@@ -588,6 +623,66 @@ Variable groups (Library) use a descriptive lowercase-hyphen name:
 
 ```text
 {project}-{env}-vars        e.g., appservice-lab-vars
+```
+
+---
+
+### Windows LAPS (Hybrid AD + Azure Arc)
+
+Windows LAPS does not create Azure resources with `{type}-` prefixes — naming applies to Group Policy Objects, Active Directory security groups, and the local admin account being managed.
+
+#### Group Policy Objects
+
+GPO names follow a descriptive `{Feature} – {Scope} {Role} {PolicyType}` pattern, readable directly in the GPMC console:
+
+```text
+Windows LAPS – {scope} {account} Password Policy
+```
+
+Examples:
+
+```text
+Windows LAPS – Server Local Admin Password Policy    GPO linked to the server OU
+Windows LAPS – DC DSRM Password Policy               GPO for Domain Controllers (DSRM backup enabled)
+```
+
+**GPO naming conventions:**
+
+- Use an em dash (`–`) as the separator between the feature name and the scope description.
+- Keep the name self-describing in the GPMC linked GPOs list — do not use abbreviations that require a lookup.
+- One GPO per scope (server OU, DC OU) — do not combine scopes in a single GPO.
+
+#### Security Groups (LAPS delegation and scoping)
+
+Security groups used for GPO scope filtering and LAPS attribute delegation follow the `SG-{Feature}-{Role}` pattern:
+
+| Group name | Purpose |
+| --- | --- |
+| `SG-LAPS-Servers` | GPO security filtering group — servers that receive the LAPS policy |
+| `SG-LAPS-Helpdesk` | Delegation — read-only access to `ms-LAPS-EncryptedPassword` |
+| `SG-LAPS-Ops` | Delegation — read access; members may run `Reset-LapsPassword` via RSAT |
+| `SG-LAPS-Security` | Delegation — read access for audit and incident response |
+| `SG-LAPS-Automation` | Delegation — read-only; used by Arc extensions or SOAR/scripting accounts |
+
+#### Local admin account
+
+The managed local administrator account is specified in the GPO setting **Name of administrator account to manage**:
+
+| Value | When to use |
+| --- | --- |
+| `Administrator` (built-in, RID 500) | Default — use when the built-in account has not been renamed |
+| `lapsadmin` | Use when a dedicated local admin account is provisioned for LAPS management; keeps LAPS-managed credentials separate from any renamed built-in account |
+
+> **Note:** Windows LAPS and legacy LAPS must never target the same local account simultaneously. If migrating from legacy LAPS (Option B coexistence path), provision a second account (`lapsadmin`) for Windows LAPS until the legacy client is fully removed.
+
+#### AD OU — authorised decryptors
+
+The authorised decryptors setting in the GPO accepts group or user object distinguished names. Use the security groups defined above rather than individual user accounts to avoid policy churn when team membership changes:
+
+```text
+CN=SG-LAPS-Helpdesk,OU=Security Groups,DC=yourdomain,DC=com
+CN=SG-LAPS-Ops,OU=Security Groups,DC=yourdomain,DC=com
+CN=SG-LAPS-Security,OU=Security Groups,DC=yourdomain,DC=com
 ```
 
 ---
