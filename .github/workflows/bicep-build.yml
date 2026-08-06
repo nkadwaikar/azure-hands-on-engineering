@@ -1,0 +1,45 @@
+name: Bicep Build Validation
+
+on:
+  pull_request:
+    paths:
+      - '**/*.bicep'
+  push:
+    branches: [main]
+    paths:
+      - '**/*.bicep'
+
+jobs:
+  bicep-build:
+    name: Build and lint Bicep files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Bicep CLI
+        run: az bicep install
+
+      - name: Build all Bicep files
+        run: |
+          failed=0
+          while IFS= read -r -d '' file; do
+            echo "::group::build — $file"
+            if az bicep build --file "$file" --stdout > /dev/null; then
+              echo "✓ $file"
+            else
+              echo "::error file=$file::Bicep build failed"
+              failed=1
+            fi
+            echo "::endgroup::"
+          done < <(find . -name '*.bicep' -print0)
+          exit $failed
+
+      - name: Lint all Bicep files
+        run: |
+          while IFS= read -r -d '' file; do
+            echo "::group::lint — $file"
+            az bicep lint --file "$file"
+            echo "::endgroup::"
+          done < <(find . -name '*.bicep' -print0)
