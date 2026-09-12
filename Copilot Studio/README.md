@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-1.5--2.5%20hours-0A66C2?style=flat-square)](#track-structure)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#track-structure)
+
 > **Why this matters:** Copilot Studio closes the last mile between organisational knowledge and the people who need it. By grounding an AI agent in a SharePoint knowledge source and securing it with Entra ID, you get a governed, auditable assistant that answers questions from your actual documentation — not a generic model. This track shows how to build that pattern correctly: Zero Trust at the identity layer, Purview at the data layer, and DLP policies preventing data exfiltration through the agent surface.
 
 ---

@@ -2,6 +2,9 @@
 
 Last validated on: August 2026
 
+[![Duration](https://img.shields.io/badge/Duration-2.5--4%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers VM provisioning from scratch through to a deployable web workload and local admin credential management — base build, image preparation via Sysprep, IIS installation for server role validation, and Windows LAPS deployment for automated local administrator password rotation.
 
 ## Track Structure

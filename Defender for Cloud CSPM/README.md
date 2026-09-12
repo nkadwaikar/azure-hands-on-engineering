@@ -1,12 +1,15 @@
 # Defender for Cloud CSPM
 
-> **Status:** In progress — Labs 1–3 available; Labs 4–5 in development.
+Last validated on: September 2026
+
+[![Duration](https://img.shields.io/badge/Duration-2.5--4.5%20hours-0A66C2?style=flat-square)](#track-structure)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate%20to%20Advanced-0052CC?style=flat-square)](#track-structure)
 
 > **Why this matters:** Cloud Security Posture Management (CSPM) gives a continuous, scored view of your security configuration across every subscription and resource type. Without it, misconfigurations go undetected until they become incidents. Defender for Cloud CSPM closes that loop — surfacing risks, mapping them to regulatory frameworks, and integrating auto-remediation so your posture improves without manual audits.
 
 ---
 
-## Planned Coverage
+## Coverage
 
 This track extends the [Defender for Servers](../Defender%20for%20Servers/README.md) foundation to fleet-scale posture management across a hub-and-spoke topology.
 
@@ -39,10 +42,13 @@ Defender for Cloud CSPM/
 ├── README.md                        ← Track entry point (this file)
 ├── 1-cspm-secure-score.md           ← Secure Score, controls, and improvement workflow
 ├── 2-recommendations-triage.md      ← Fleet-scale recommendation triage; ARG queries
-├── 3-regulatory-compliance.md       ← Compliance dashboard; framework mapping; export
-├── 4-attack-path-analysis.md        ← Attack path graph; exploitable path review *(planned)*
-└── 5-governance-rules.md            ← Owner assignment; SLA tracking; reporting *(planned)*
+└── 3-regulatory-compliance.md       ← Compliance dashboard; framework mapping; export
 ```
+
+## Roadmap
+
+- Lab 4 (planned): Attack path analysis workflow and exploitable path suppression
+- Lab 5 (planned): Governance rules, ownership model, SLA tracking, and reporting
 
 ---
 

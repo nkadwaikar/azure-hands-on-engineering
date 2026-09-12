@@ -18,9 +18,7 @@ Defender for Cloud CSPM/
 ├── README.md                        ← Track entry point
 ├── 1-cspm-secure-score.md           ← Lab 1: Secure Score, controls, improvement workflow (you are here)
 ├── 2-recommendations-triage.md      ← Lab 2: Fleet-scale recommendation triage; ARG queries
-├── 3-regulatory-compliance.md       ← Lab 3: Compliance dashboard; framework mapping; export
-├── 4-attack-path-analysis.md        ← Lab 4: Attack path graph; exploitable path review
-└── 5-governance-rules.md            ← Lab 5: Owner assignment; SLA tracking; reporting
+└── 3-regulatory-compliance.md       ← Lab 3: Compliance dashboard; framework mapping; export
 ```
 
 ---

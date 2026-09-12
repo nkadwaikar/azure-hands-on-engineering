@@ -1,6 +1,11 @@
 # Azure Arc Hybrid Server Architecture Track
 
-> **Last validated:** July 2026 — Azure Portal UI; agent installation steps apply to Windows Server and supported Linux distributions.
+Last validated on: July 2026
+
+[![Duration](https://img.shields.io/badge/Duration-5--7%20hours-0A66C2?style=flat-square)](#guide-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-0052CC?style=flat-square)](#guide-sequence)
+
+Validation scope: Azure Portal UI; agent installation steps apply to Windows Server and supported Linux distributions.
 
 This track covers designing and operating a hybrid server landing zone using **Azure Arc** as the projection layer and **Microsoft Defender for Cloud** as the security brain — onboarding non-Azure servers (on-prem, VMware, AWS, GCP) into Azure Resource Manager for unified policy, monitoring, patching, and security.
 

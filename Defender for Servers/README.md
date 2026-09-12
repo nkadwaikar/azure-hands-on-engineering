@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-2.5--4%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers workload protection and secure access controls using Microsoft Defender for Cloud — enabling Defender for Servers plan coverage, managing Secure Score and recommendations, running vulnerability assessments, monitoring with File Integrity Monitoring (FIM), and enabling Just-In-Time VM access for zero-standing-access connectivity.
 
 > **Note:** Lab 1 (Defender for Servers) is split across two files — **Part 1** (setup and security posture) and **Part 2** (vulnerability assessment, FIM, alerts, and MDE integration) — to keep each file to a manageable length. Complete Part 1 before Part 2; Lab 2 (JIT) depends on both.

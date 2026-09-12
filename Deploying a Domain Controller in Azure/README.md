@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-2--3%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers deploying a production-ready Active Directory Domain Services (AD DS) environment in Azure — two domain controllers on Windows Server 2022, secured with Azure Bastion (no public IPs), resilient across an Availability Set, and integrated with Azure Key Vault, Azure Monitor, and Azure Backup.
 
 ## Track Structure

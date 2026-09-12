@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-4.5--7%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate%20to%20Advanced-0052CC?style=flat-square)](#lab-sequence)
+
 A portal-first, then Bicep-driven track that builds a secure, secretless, RBAC-governed Azure foundation from scratch — covering Entra ID fundamentals, Managed Identity, Key Vault integration, Resource Locks, Azure Policy, and observability. Labs 7, 8, and 11 continue in the `Bicep/` folder as the IaC capstone.
 
 ## Track Structure

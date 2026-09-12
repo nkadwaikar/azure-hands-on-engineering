@@ -2,6 +2,9 @@
 
 Last validated on: September 2026
 
+[![Duration](https://img.shields.io/badge/Duration-1.75--2.75%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 > **Why this matters:** Hybrid identity attacks often begin on-premises and then pivot into cloud control planes. Microsoft Defender for Identity provides identity-native detections for Active Directory reconnaissance, credential theft, lateral movement, and domain dominance activity, then correlates those signals in Microsoft Defender XDR for faster investigation and containment.
 
 ---

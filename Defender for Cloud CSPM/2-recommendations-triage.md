@@ -7,7 +7,7 @@ Portal experience note: Steps validated against **Microsoft Defender for Cloud �
 
 > **Update note (2026-07-28):** Some recommendations previously shown under the **Cloud apps** category tab are now classified as identity-related and grouped under **Identity** instead — your total Secure Score is unchanged, but expect the counts in Step 1.1's category tabs to look different than in older screenshots. Separately, Microsoft is rolling out an enhanced recommendations experience in the unified Defender portal (with per-asset risk factors and risk-based grouping) — this lab still targets the classic Azure portal Recommendations blade, which remains fully supported.
 
-> **Note:** This lab focuses on the triage workflow — understanding, filtering, and querying recommendations at scale. Remediation mechanics are covered in [Lab 1](1-cspm-secure-score.md). Governance rule assignment (owner + due-date) is part of the planned Labs 4-5 track extension; see [CSPM Track README](README.md) for current status.
+> **Note:** This lab focuses on the triage workflow — understanding, filtering, and querying recommendations at scale. Remediation mechanics are covered in [Lab 1](1-cspm-secure-score.md). Governance ownership and SLA workflows are tracked in the roadmap section of the [CSPM Track README](README.md).
 
 ---
 
@@ -18,9 +18,7 @@ Defender for Cloud CSPM/
 ├── README.md                        ← Track entry point
 ├── 1-cspm-secure-score.md           ← Lab 1: Secure Score, controls, improvement workflow
 ├── 2-recommendations-triage.md      ← Lab 2: Fleet-scale recommendation triage; ARG queries (you are here)
-├── 3-regulatory-compliance.md       ← Lab 3: Compliance dashboard; framework mapping; export
-├── 4-attack-path-analysis.md        ← Lab 4: Attack path graph; exploitable path review
-└── 5-governance-rules.md            ← Lab 5: Owner assignment; SLA tracking; reporting
+└── 3-regulatory-compliance.md       ← Lab 3: Compliance dashboard; framework mapping; export
 ```
 
 ---

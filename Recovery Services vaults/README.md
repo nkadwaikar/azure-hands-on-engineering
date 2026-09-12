@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-2--3%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers the full Azure resilience stack — VM backup and restore, cross-region replication with Azure Site Recovery, and storage-level redundancy options.
 
 ## Track Structure

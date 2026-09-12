@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-1--1.5%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers Entra directory backup, difference reports, and object-level recovery using the Microsoft Entra admin center — portal-only.
 
 ## Track Structure

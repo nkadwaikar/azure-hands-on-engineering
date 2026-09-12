@@ -22,9 +22,7 @@ Defender for Cloud CSPM/
 ├── README.md                        ← Track entry point
 ├── 1-cspm-secure-score.md           ← Lab 1: Secure Score, controls, improvement workflow
 ├── 2-recommendations-triage.md      ← Lab 2: Fleet-scale recommendation triage; ARG queries
-├── 3-regulatory-compliance.md       ← Lab 3: Compliance dashboard; framework mapping; export (you are here)
-├── 4-attack-path-analysis.md        ← Lab 4: Attack path graph; exploitable path review
-└── 5-governance-rules.md            ← Lab 5: Owner assignment; SLA tracking; reporting
+└── 3-regulatory-compliance.md       ← Lab 3: Compliance dashboard; framework mapping; export (you are here)
 ```
 
 ---
@@ -45,7 +43,7 @@ Defender for Cloud CSPM/
 - [Step 5 — Create a Custom Compliance Initiative (Optional)](#step-5--create-a-custom-compliance-initiative-optional)
 - [Cleanup](#cleanup)
 
-**Continue to:** Labs 4-5 are in development. See [CSPM Track README](README.md) for status and sequence updates.
+**Next:** Labs 4-5 are planned. See the roadmap in [CSPM Track README](README.md) for status updates.
 
 ---
 

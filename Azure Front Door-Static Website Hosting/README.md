@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-1--2%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers global static website delivery through Azure Front Door — origin configuration, routing rules, caching behaviour, and WAF at the edge.
 
 ## Track Structure

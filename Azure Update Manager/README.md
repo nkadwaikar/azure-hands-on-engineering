@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-3--5%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate%20to%20Advanced-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers OS patch orchestration for Azure VMs and Arc-enabled servers using **Azure Update Manager** — the successor to the legacy Log Analytics Update Management solution. Labs walk through patch assessment, maintenance window scheduling, update deployments, and compliance reporting, all via the Azure Portal.
 
 > **Relationship to other tracks:** Azure Update Manager works across both native Azure VMs and Arc-enabled hybrid servers. If you're managing Arc-enabled servers, complete the [Azure Arc Hybrid Server Architecture track](../Azure%20Arc%20Hybrid%20Server%20Architecture/README.md) first so your servers are already onboarded and visible in Azure Resource Manager.

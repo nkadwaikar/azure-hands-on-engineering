@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-2--3.5%20hours-0A66C2?style=flat-square)](#folder-structure)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate%20to%20Advanced-0052CC?style=flat-square)](#folder-structure)
+
 [![Bicep Validate](https://github.com/nkadwaikar/azure-hands-on-engineering/actions/workflows/bicep-lint.yml/badge.svg)](https://github.com/nkadwaikar/azure-hands-on-engineering/actions/workflows/bicep-lint.yml)
 
 This track covers modular Bicep deployments for identity-first Azure infrastructure. Every module is scoped to a single responsibility, composed through a root `main.bicep`, and aligned to production governance standards.

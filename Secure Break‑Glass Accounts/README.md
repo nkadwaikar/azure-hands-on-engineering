@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-2--3%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers the design, configuration, and validation of emergency access accounts in Microsoft Entra ID — accounts that allow tenant recovery when all normal authentication paths are unavailable (federated identity provider outage, MFA service disruption, accidental lock-out of all administrators).
 
 ## Track Structure

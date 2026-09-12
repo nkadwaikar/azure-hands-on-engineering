@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-1.5--2.5%20hours-0A66C2?style=flat-square)](#track-structure)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#track-structure)
+
 > **Why this matters:** Security operations teams are overwhelmed by alert volume. Microsoft Security Copilot integrates natural language directly into the investigation and response workflow — summarising incidents, correlating signals across Sentinel, Defender XDR, and Entra ID, and suggesting remediation steps in seconds rather than minutes. The result is faster triage, less analyst fatigue, and decisions grounded in your actual environment context rather than generic playbooks.
 
 ---

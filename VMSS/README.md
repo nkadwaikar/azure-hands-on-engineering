@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-1.5--2.5%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers the full VM scale set lifecycle — capturing a generalised image from a prepared VM, validating it with a test deployment, and deploying a scale set from the known-good image.
 
 ## Track Structure

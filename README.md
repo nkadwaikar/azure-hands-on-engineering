@@ -13,6 +13,7 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 
 > **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.
 > **Jumping in?** Use the [track navigator below](#🗺️-how-to-follow-these-tracks), or go straight to the [Modern Workplace Track](Microsoft%20365/README.md) or [Architecture Overview](Architecture%20Overview.md).
+> **Role-based route?** Use the [Role-Based Learning Paths](Role-Based-Learning-Paths.md) page for guided sequences and total time estimates.
 
 ---
 
@@ -26,6 +27,16 @@ This portfolio is built for cloud engineers and identity architects evaluating p
 | **Identity & Security Engineer** | Zero Trust, Managed Identity, Key Vault, RBAC, Conditional Access, Break-Glass accounts, JIT |
 | **Governance / Compliance Engineer** | Azure Policy + auto-remediation, Resource Locks, Purview DLP, Compliance Manager, Activity Logs |
 | **Modern Workplace Engineer** | Exchange Online, Teams lifecycle, SharePoint IA, Purview, Entra ID Governance lifecycle workflows |
+
+Need a curated start-to-finish sequence by role? See [Role-Based Learning Paths](Role-Based-Learning-Paths.md).
+
+## 📌 Role Path Matrix
+
+| Role | Recommended Path | Estimated Total Time | Difficulty |
+| --- | --- | --- | --- |
+| **Security Engineer** | [Role-Based Learning Paths](Role-Based-Learning-Paths.md#security-engineer-path) | 17.75-26.75 hours | Intermediate to Advanced |
+| **Platform Engineer** | [Role-Based Learning Paths](Role-Based-Learning-Paths.md#platform-engineer-path) | 23.5-37 hours | Advanced |
+| **M365 Engineer** | [Role-Based Learning Paths](Role-Based-Learning-Paths.md#m365-engineer-path) | 13-20 hours | Intermediate to Advanced |
 
 ---
 
@@ -160,7 +171,7 @@ flowchart TD
 | Migrating file shares from DFS to Azure | [DFS to Azure File Sync](Migrate%20Distributed%20File%20System%20%28DFS%29%20to%20Azure%20File%20Sync/README.md) | DFS-R retirement, Azure File Sync deployment (Storage Sync Service, Sync Groups, server endpoint registration), DFS Namespace cutover, cloud tiering, validation and cleanup |
 | Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Zero Trust Advanced, Identity Lifecycle |
 | Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
-| Assessing cloud security posture management | [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) *(Labs 1–3 available; Labs 4–5 in development)* | Secure Score, recommendations, regulatory compliance, attack path analysis, governance rules — fleet-scale posture across a hub-and-spoke topology |
+| Assessing cloud security posture management | [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) | Secure Score, recommendations, and regulatory compliance — fleet-scale posture across a hub-and-spoke topology |
 | Reviewing AI-assisted security operations | [Copilot for Security](Copilot%20for%20Security/README.md) | Incident summarisation, identity investigation, KQL assistance, promptbooks — Microsoft Security Copilot integrated into the SOC workflow |
 | Building governed AI agents | [Copilot Studio](Copilot%20Studio/README.md) | SharePoint-grounded agent, Entra ID auth, Purview DLP, Teams publishing — applied AI on a Zero Trust foundation |
 
@@ -201,7 +212,7 @@ What I'm building next reflects where enterprise Azure is heading — AI-augment
 
 | Planned | Why |
 | --- | --- |
-| [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) *(Labs 4–5 in development)* | Extend cloud security posture management at scale across a hub-and-spoke topology — attack path analysis and governance rules, building on the Defender for Servers foundation already covered in the [Defender for Servers track](Defender%20for%20Servers/README.md) |
+| [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) | Extend cloud security posture management at scale across a hub-and-spoke topology, with roadmap expansion into attack path analysis and governance rules, building on the Defender for Servers foundation already covered in the [Defender for Servers track](Defender%20for%20Servers/README.md) |
 
 ---
 

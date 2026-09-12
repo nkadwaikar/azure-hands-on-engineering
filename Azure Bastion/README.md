@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-1--1.5%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Beginner%20to%20Intermediate-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers secure VM access using Azure Bastion — connecting to virtual machines over a browser-based RDP/SSH session without exposing public IPs, retrieving credentials from Azure Key Vault, and configuring VNet Peering for cross-VNet access.
 
 ## Track Structure

@@ -2,6 +2,9 @@
 
 Last validated on: August 2026
 
+[![Duration](https://img.shields.io/badge/Duration-2--3%20hours-0A66C2?style=flat-square)](#lab-sequence)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate%20to%20Advanced-0052CC?style=flat-square)](#lab-sequence)
+
 This track covers migrating an enterprise DFS Namespace and DFS-R replication topology to Azure File Sync — replacing DFS-R as the replication mechanism while retaining DFS Namespaces to minimise user disruption. Cloud tiering is configured post-cutover to reduce on-premises storage footprint.
 
 ## Track Structure

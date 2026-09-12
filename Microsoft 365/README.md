@@ -2,6 +2,9 @@
 
 Last validated on: July 2026
 
+[![Duration](https://img.shields.io/badge/Duration-4--6%20hours-0A66C2?style=flat-square)](#track-overview)
+[![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-0052CC?style=flat-square)](#track-overview)
+
 ## Identity-First Security · Zero Trust · Collaboration · Compliance · Governance
 
 This repository contains a complete, enterprise-grade Modern Workplace engineering track for Microsoft 365, Entra ID, Exchange Online, SharePoint Online, Microsoft Teams, Microsoft Purview, and Entra ID Governance.
