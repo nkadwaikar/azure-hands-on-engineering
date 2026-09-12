@@ -37,15 +37,15 @@ Defender for Cloud CSPM/
 - [Step 1 — Open the Regulatory Compliance Dashboard](#step-1--open-the-regulatory-compliance-dashboard)
 - [Step 2 — Add a Compliance Standard](#step-2--add-a-compliance-standard)
 - [Step 3 — Navigate Controls and Assessments](#step-3--navigate-controls-and-assessments)
-  - [3.1 — Control pass/fail and assessment detail](#31--control-passfail-and-assessment-detail)
-  - [3.2 — Understand assessment-to-control mapping](#32--understand-assessment-to-control-mapping)
+   - [3.1 — Control pass/fail and assessment detail](#31-control-passfail-and-assessment-detail)
+   - [3.2 — Understand assessment-to-control mapping](#32-understand-assessment-to-control-mapping)
 - [Step 4 — Export a Compliance Report](#step-4--export-a-compliance-report)
-  - [4.1 — PDF export for auditors](#41--pdf-export-for-auditors)
-  - [4.2 — CSV export for engineering teams](#42--csv-export-for-engineering-teams)
+   - [4.1 — PDF export for auditors](#41-pdf-export-for-auditors)
+   - [4.2 — CSV export for engineering teams](#42-csv-export-for-engineering-teams)
 - [Step 5 — Create a Custom Compliance Initiative (Optional)](#step-5--create-a-custom-compliance-initiative-optional)
 - [Cleanup](#cleanup)
 
-**Continue to:** [Lab 4 — Attack Path Analysis →](4-attack-path-analysis.md)
+**Continue to:** Labs 4-5 are in development. See [CSPM Track README](README.md) for status and sequence updates.
 
 ---
 
@@ -205,6 +205,6 @@ To remove a standard if no longer needed:
 
 ---
 
-**Continue to:** [Lab 4 — Attack Path Analysis →](4-attack-path-analysis.md)
+**Continue to:** Labs 4-5 are in development. See [CSPM Track README](README.md) for status and sequence updates.
 
 ← [Back to CSPM Track README](README.md)

@@ -14,7 +14,7 @@ Deploying a Domain Controller in Azure/
 └── README.md
 ```
 
-**Track context:** This lab complements the [Azure Bastion](../Azure%20Bastion/README.md) and [Identity-First](../Identity-First/README.md) tracks. Bastion provides secure access to the DCs; the Identity-First track covers cloud-only Managed Identity patterns that exist alongside (not instead of) AD DS.
+**Track context:** This lab complements the [Azure Bastion](../Azure%20Bastion/README.md) and [Identity-First](../Identity-First/README.md) tracks. Bastion provides secure access to the DCs; the Identity-First track covers cloud-only Managed Identity patterns that exist alongside (not instead of) AD DS. For threat detection on this AD DS foundation, continue with [Defender for Identity Lab 1](../Defender%20for%20Identity/1-defender-for-identity.md) and [Defender for Identity Lab 2](../Defender%20for%20Identity/2-advanced-identity-investigation.md).
 
 ## Quick Navigation
 

@@ -33,7 +33,7 @@ Azure Bastion/
 - [Bastion vs Jumpbox vs Private Endpoint](#10-bastion-vs-jumpbox-vs-private-endpoint--comparison)
 - [Cleanup / Teardown](#11-cleanup--teardown)
 - [VNet Peering for Cross-VNet Bastion Access](#12-vnet-peering-for-cross-vnet-bastion-access)
-- [Bastion + JIT Lab](../Defender%20for%20Servers/2-jit.md)
+- [Bastion + JIT Lab](../Defender%20for%20Servers/3-jit.md)
 
 ---
 

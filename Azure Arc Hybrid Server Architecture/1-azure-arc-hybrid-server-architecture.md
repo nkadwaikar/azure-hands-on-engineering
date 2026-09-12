@@ -348,7 +348,7 @@ Not every server fits every policy. Establish a formal exemption process:
 
 ## 6. Security Architecture with Defender for Servers
 
-> **Dedicated track:** Hands-on Defender for Servers labs (enable plan, Secure Score, vulnerability assessment, FIM, alert investigation) live in the [Defender for Servers track](../Defender%20for%20Servers/README.md). JIT VM access is covered separately in [2-jit.md](../Defender%20for%20Servers/2-jit.md). This section documents the security architecture as it relates to Arc.
+> **Dedicated track:** Hands-on Defender for Servers labs (enable plan, Secure Score, vulnerability assessment, FIM, alert investigation) live in the [Defender for Servers track](../Defender%20for%20Servers/README.md). JIT VM access is covered separately in [3-jit.md](../Defender%20for%20Servers/3-jit.md). This section documents the security architecture as it relates to Arc.
 
 ### 6.1 Defender for Cloud Integration
 
@@ -390,9 +390,9 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.5 Just-in-Time (JIT) Admin Access
 
-> **See also:** [2-jit.md](../Defender%20for%20Servers/2-jit.md) — hands-on lab for enabling and using JIT VM access in Defender for Cloud.
+> **See also:** [3-jit.md](../Defender%20for%20Servers/3-jit.md) — hands-on lab for enabling and using JIT VM access in Defender for Cloud.
 
-- Enable [**JIT VM access**](../Defender%20for%20Servers/2-jit.md) in Defender for Cloud for all production Arc servers.
+- Enable [**JIT VM access**](../Defender%20for%20Servers/3-jit.md) in Defender for Cloud for all production Arc servers.
 - Require explicit JIT request approval before any administrative session (RDP/SSH) is permitted.
 - Set maximum session duration (e.g., 2 hours) and restrict source IPs to known admin ranges or Azure Bastion.
 - Log all JIT approvals and sessions to Log Analytics for audit trail.
@@ -408,7 +408,7 @@ Build **Logic App workflows** for high-severity alerts (lateral movement, ransom
 
 ### 6.7 Defender Plan Cost Management
 
-- **Plan 2** (full EDR + FIM + [JIT](../Defender%20for%20Servers/2-jit.md) + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
+- **Plan 2** (full EDR + FIM + [JIT](../Defender%20for%20Servers/3-jit.md) + vulnerability assessment) should be reserved for Tier1/Tier2 servers.
 - **Plan 1** (foundational posture only) is sufficient for Tier3 / dev/test servers — apply via subscription filter or resource tag.
 - Review the **Defender for Cloud cost estimate** monthly; use the `microsoft.security/pricings` resource to apply granular plan overrides per resource group.
 - Set **budget alerts** in Azure Cost Management for the Defender spend envelope.

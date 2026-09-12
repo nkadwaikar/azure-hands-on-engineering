@@ -7,7 +7,7 @@ Portal experience note: Steps validated against **Microsoft Defender for Cloud �
 
 > **Update note (2026-07-28):** Some recommendations previously shown under the **Cloud apps** category tab are now classified as identity-related and grouped under **Identity** instead — your total Secure Score is unchanged, but expect the counts in Step 1.1's category tabs to look different than in older screenshots. Separately, Microsoft is rolling out an enhanced recommendations experience in the unified Defender portal (with per-asset risk factors and risk-based grouping) — this lab still targets the classic Azure portal Recommendations blade, which remains fully supported.
 
-> **Note:** This lab focuses on the triage workflow — understanding, filtering, and querying recommendations at scale. Remediation mechanics are covered in [Lab 1](1-cspm-secure-score.md). Governance rule assignment (owner + due-date) is covered in [Lab 5](5-governance-rules.md).
+> **Note:** This lab focuses on the triage workflow — understanding, filtering, and querying recommendations at scale. Remediation mechanics are covered in [Lab 1](1-cspm-secure-score.md). Governance rule assignment (owner + due-date) is part of the planned Labs 4-5 track extension; see [CSPM Track README](README.md) for current status.
 
 ---
 
@@ -31,12 +31,12 @@ Defender for Cloud CSPM/
 - [Learning Objectives](#2-learning-objectives)
 - [Scenario](#3-scenario)
 - [Step 1 — Navigate the Recommendations Blade](#step-1--navigate-the-recommendations-blade)
-  - [1.1 — Category tabs](#11--category-tabs)
-  - [1.2 — Severity and freshness filters](#12--severity-and-freshness-filters)
+   - [1.1 — Category tabs](#11-category-tabs)
+   - [1.2 — Severity and freshness filters](#12-severity-and-freshness-filters)
 - [Step 2 — Triage by Resource Type](#step-2--triage-by-resource-type)
 - [Step 3 — Query Unhealthy Resources with Azure Resource Graph](#step-3--query-unhealthy-resources-with-azure-resource-graph)
-  - [3.1 — Open Cloud Security Explorer](#31--open-cloud-security-explorer)
-  - [3.2 — ARG queries in Log Analytics](#32--arg-queries-in-log-analytics)
+   - [3.1 — Open Cloud Security Explorer](#31-open-cloud-security-explorer)
+   - [3.2 — ARG queries in Log Analytics](#32-arg-queries-in-log-analytics)
 - [Step 4 — Export Recommendations to CSV](#step-4--export-recommendations-to-csv)
 - [Cleanup](#cleanup)
 

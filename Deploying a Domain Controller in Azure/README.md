@@ -34,6 +34,13 @@ Deploying a Domain Controller in Azure/
 - Outbound HTTPS (port 443) from the deployment machine to Azure endpoints
 - Azure Portal access and Azure CLI or PowerShell (Az module) installed
 
+## Next Recommended Track
+
+After this AD DS deployment is complete, continue with identity threat detection:
+
+1. [Defender for Identity Lab 1 — Onboarding, Health Validation, and Detection Workflow](../Defender%20for%20Identity/1-defender-for-identity.md)
+2. [Defender for Identity Lab 2 — Advanced Investigation and Response Workflow](../Defender%20for%20Identity/2-advanced-identity-investigation.md)
+
 ---
 
 [← Back to Azure Hands-On Engineering](../README.md)

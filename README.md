@@ -146,6 +146,7 @@ flowchart TD
 | Reviewing identity & Zero Trust | [Identity-First Track](Identity-First/README.md) · [Lessons Learned](Identity-First/lessons-learned.md) | Entra ID, RBAC, Conditional Access, Managed Identities, Key Vault; IaC capstone (Labs 7–8) continues in [Bicep Track](Bicep/README.md) |
 | Reviewing break-glass & emergency access | [Break-Glass Accounts](Secure%20Break%E2%80%91Glass%20Accounts/README.md) | FIDO2 emergency accounts, Certificate-Based Authentication (CBA) |
 | Reviewing Entra backup & recovery | [Entra Backup & Recovery](Microsoft%20Entra%20Backup%20%26%20Recovery/README.md) | Entra ID backup strategies and recovery procedures |
+| Assessing identity threat detection | [Defender for Identity](Defender%20for%20Identity/README.md) | Identity attack detection for AD DS (reconnaissance, credential theft, lateral movement), sensor health, posture triage, and Defender XDR investigation workflows |
 | Assessing IaC & automation | [Bicep Track](Bicep/README.md) | Modular Bicep deployments, Azure DevOps, PowerShell, Azure CLI; Bicep files validated on every PR via GitHub Actions (`az bicep build` + lint); also serves as the Labs 7–8 IaC capstone for the [Identity-First Track](Identity-First/README.md) |
 | Checking governance & compliance | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | Azure Policy, Resource Locks, Activity Logs, Monitor |
 | Reviewing secure access & networking | [Azure Bastion](Azure%20Bastion/README.md) · [Front Door](Azure%20Front%20Door-Static%20Website%20Hosting/README.md) | Zero standing access (Bastion — no public IPs, NSG rules, hub-spoke VNet peering), WAF and inbound exposure removal (Front Door) |
@@ -170,6 +171,7 @@ flowchart TD
 | Domain | Technologies Demonstrated |
 | --- | --- |
 | **Identity & Access** | Microsoft Entra ID, Managed Identity (UAMI + SAMI), RBAC, Conditional Access, Authentication Strength, FIDO2, CBA, Privileged Identity Management, Entra ID Backup & Recovery (CA policy export, group and role assignment snapshots) |
+| **Identity Threat Detection** | Microsoft Defender for Identity (sensor onboarding and health, identity alerts, posture recommendations, hybrid AD DS attack-path context) |
 | **Secrets & Key Management** | Azure Key Vault (RBAC mode), secretless app authentication, Key Vault references in App Service |
 | **Infrastructure as Code** | Bicep (modular, parameterised), Azure CLI, PowerShell, ARM deployment scopes |
 | **Compute** | Azure Virtual Machines, VM Scale Sets, Compute Gallery, golden image pipeline (Sysprep → capture → VMSS), Windows LAPS (native GPO-based local admin password rotation, encrypted AD storage, Hybrid AD + Azure Arc) |
