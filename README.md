@@ -1,6 +1,6 @@
 # 👋 Hi, I'm **Nadeem Kadwaikar**
 
-Last validated on: August 2026
+Last validated on: October 2026
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#how-to-follow-these-tracks)
@@ -26,7 +26,7 @@ This portfolio is built for cloud engineers and identity architects evaluating p
 | **Cloud / Platform Engineer** | End-to-end IaC (Bicep), VM lifecycle, VMSS, App Service pipelines, Arc hybrid management |
 | **Identity & Security Engineer** | Zero Trust, Managed Identity, Key Vault, RBAC, Conditional Access, Break-Glass accounts, JIT |
 | **Governance / Compliance Engineer** | Azure Policy + auto-remediation, Resource Locks, Purview DLP, Compliance Manager, Activity Logs |
-| **Modern Workplace Engineer** | Exchange Online, Teams lifecycle, SharePoint IA, Purview, Entra ID Governance lifecycle workflows |
+| **Modern Workplace Engineer** | Exchange Online, Teams lifecycle and guest-access governance, SharePoint IA, Purview, Entra ID Governance lifecycle workflows |
 
 Need a curated start-to-finish sequence by role? See [Role-Based Learning Paths](Role-Based-Learning-Paths.md).
 
@@ -195,7 +195,7 @@ flowchart TD
 | **Hybrid & Arc** | Azure Arc Connected Machine Agent (health verification, reconnect/reinstall), AMA + DCR, Defender for Servers, Guest Configuration, individual vs. grouped recommendations model, Update Manager |
 | **Patch Management** | Azure Update Manager, periodic assessment, hotpatching, Updates pane (CVE/KB-centric view), Quick Alerts (ARG-backed), cross-subscription patching, hybrid fleet pipeline (Arc → Defender for Servers → Update Manager), maintenance configurations (staged: dev → uat → prod → dc), Arc agent disconnect alerting, pre/post scripts, CVE-to-KB mapping, zero-day response, compliance reporting, Arc Server Patch Verification Toolkit (Azure-only patching mode enforcement + verification), Azure Resource Graph KQL — Azure VMs, Arc servers, VMware vSphere (Arc), SCVMM (Arc), Azure Local |
 | **Active Directory** | AD DS forest in Azure (two DCs, Availability Set, static IPs, DSRM in Key Vault, FSMO distribution) |
-| **Microsoft 365** | Exchange Online, SharePoint Online, Teams lifecycle governance, Microsoft Purview (DLP, auto-labeling, Insider Risk, Compliance Manager), Zero Trust CA, Entra ID Governance lifecycle workflows |
+| **Microsoft 365** | Exchange Online, SharePoint Online, Teams lifecycle and guest-access governance (Entra invitation controls and team sensitivity labels), Microsoft Purview (DLP, auto-labeling, Insider Risk, Compliance Manager), Zero Trust CA, Entra ID Governance lifecycle workflows |
 | **AI & Security Operations** | Microsoft Security Copilot (incident summarisation, identity investigation, KQL assistance, promptbooks), Copilot Studio (SharePoint-grounded agent, Entra ID auth, Purview DLP, Teams publishing) |
 | **Monitoring & Alerting** | Azure Monitor, Log Analytics Workspaces, KQL, Diagnostic Settings, Alert Rules, Action Groups, Azure Resource Graph |
 

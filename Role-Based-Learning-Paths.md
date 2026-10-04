@@ -1,6 +1,6 @@
 # Role-Based Learning Paths
 
-Last validated on: September 2026
+Last validated on: October 2026
 
 This page provides guided learning sequences by role, with estimated total effort based on the track Duration badges.
 
@@ -58,6 +58,8 @@ Recommended focus: collaboration governance, compliance automation, Zero Trust c
 | 5 | [Copilot Studio](Copilot%20Studio/README.md) | 1.5-2.5 hours |
 
 Estimated total: 13-20 hours
+
+Supplemental collaboration-governance reference: [Microsoft Teams Guest Policy](Teams/Microsoft%20Teams%20Guest%20Policy.md) covers organization-wide Teams guest access, Microsoft Entra guest invitations, and sensitivity-label controls for selected teams. It is not included in the Microsoft 365 track time estimate; allow for label propagation time when practicing the per-team control.
 
 ## Optional Deep-Dive Add-Ons
 
