@@ -2,11 +2,13 @@
 
 > **Why this matters:** Storing connection strings or API keys in app settings means one leaked credential requires both a rotation and a redeployment — this lab replaces credentials entirely by assigning a Managed Identity to a VM and granting it scoped Key Vault access via RBAC.
 >
-> **Prerequisites:** This lab continues from Lab 1 (see `01-identity-fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).  
-> **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.  
+> **Prerequisites:** This lab continues from Lab 1 (see `01-identity-fundamentals.md`), using the same Resource Group (`rg-identity-eus-lab-core`).
+> **Note:** All user accounts use the placeholder domain `@contoso.com` to avoid exposing real Azure AD tenant domains.
 > **Admin Required:** Steps requiring IAM changes must be performed by an administrator with elevated privileges.
+>
+> **Lab-only security:** Use a disposable test environment and non-sensitive secret values. This walkthrough connects to a VM through its public IP; restrict inbound SSH (TCP 22) to your current public IP (/32), or use Azure Bastion. Never leave SSH open to `Any`, and clean up the resources after validation.
 
-Last validated on: 2026-06-25  
+Last validated on: 2026-06-25
 Portal experience note: Steps validated against Azure Portal as of June 2026; labels can vary slightly by region and feature rollout.
 
 ## Learning Objectives
@@ -55,6 +57,7 @@ Ensure you have completed:
 - **Username:** `azureuser`
 - **SSH public key source:** Generate new key pair
 - **Key pair name:** `bootcamp-key`
+- **Inbound SSH source:** Restrict the NSG rule to your current public IP (/32); do not allow source `Any`
 
 1. Click **Review + Create → Create**
 2. Download the SSH key when prompted
@@ -104,7 +107,7 @@ Azure automatically creates a service principal for the VM.
 
 - **Upload options:** Manual
 - **Name:** `app-secret`
-- **Secret value:** `SuperSecretValue123`
+- **Secret value:** `SuperSecretValue123` (disposable test value only; never use a real or reused credential)
 
 1. Click **Create**
 
@@ -131,9 +134,9 @@ Grant the VM's managed identity permission to read secrets.
 
 The VM identity now has permissions to:
 
- **Read** secrets  
- **Not** write or delete secrets  
- **Not** manage Key Vault settings  
+ **Read** secrets
+ **Not** write or delete secrets
+ **Not** manage Key Vault settings
 
 This enforces the **principle of least privilege**.
 
@@ -236,8 +239,8 @@ SuperSecretValue123
 
 ### Error: `ForbiddenByRbac`
 
-**Cause:** Missing or incorrect RBAC assignment  
-**Fix:**  
+**Cause:** Missing or incorrect RBAC assignment
+**Fix:**
 
 1. Verify the role assignment in Key Vault → Access Control (IAM)
 2. Ensure `Key Vault Secrets User` is assigned to `vm-identity-eus-lab-app01` managed identity
@@ -248,7 +251,7 @@ SuperSecretValue123
 
 ## Error: `az: command not found`
 
-**Cause:** Azure CLI not installed on the VM  
+**Cause:** Azure CLI not installed on the VM
 **Fix:** Install Azure CLI:
 
 ```bash
@@ -265,8 +268,8 @@ az version
 
 ### Error: `ResourceNotFound`
 
-**Cause:** Incorrect Key Vault name or the vault doesn't exist  
-**Fix:**  
+**Cause:** Incorrect Key Vault name or the vault doesn't exist
+**Fix:**
 
 1. Verify the exact Key Vault name in Azure Portal (under Key Vaults)
 2. Ensure the name includes any unique suffix you added
@@ -276,8 +279,8 @@ az version
 
 ### Error: `Forbidden` or Permission Denied
 
-**Cause:** RBAC propagation delay  
-**Fix:**  
+**Cause:** RBAC propagation delay
+**Fix:**
 
 1. Wait 3-5 minutes after assigning the role
 2. Try logging out and back in: `az logout && az login --identity`
@@ -287,8 +290,8 @@ az version
 
 ### SSH Connection Issues
 
-**Cause:** Incorrect key permissions or incorrect path  
-**Fix:**  
+**Cause:** Incorrect key permissions or incorrect path
+**Fix:**
 
 1. Set correct permissions:
 
@@ -304,8 +307,8 @@ chmod 400 ~/Downloads/bootcamp-key.pem
 
 ### Error: `The client with object id does not have authorization`
 
-**Cause:** Role assignment not completed or propagated  
-**Fix:**  
+**Cause:** Role assignment not completed or propagated
+**Fix:**
 
 1. Confirm the managed identity is enabled on the VM
 2. Re-verify the RBAC assignment
@@ -342,20 +345,20 @@ In this lab you learned:
 
 ## ▶️ Next Lab
 
-**Lab 3 — Azure AD Roles + RBAC Scopes**  
+**Lab 3 — Azure AD Roles + RBAC Scopes**
 [03-azuread-roles-rbac-scopes.md](03-azuread-roles-rbac-scopes.md)
 
 ## ⬅️ Previous Lab
 
-**Lab 1 — Identity Fundamentals + RBAC Basics**  
+**Lab 1 — Identity Fundamentals + RBAC Basics**
 [01-identity-fundamentals.md](01-identity-fundamentals.md)
 
 ---
 
 ## 🔗 Related Resources
 
-- **Lab 4 — Azure Locks + Resource Policies**  
+- **Lab 4 — Azure Locks + Resource Policies**
   [04-azurelocks-resource-policies.md](04-azurelocks-resource-policies.md)
 
-- **Lab 5 — Access Validation (Portal + CLI)**  
+- **Lab 5 — Access Validation (Portal + CLI)**
   [05-access-validation.md](05-access-validation.md)

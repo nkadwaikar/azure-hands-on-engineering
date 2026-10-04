@@ -2,8 +2,8 @@ name: Bicep End-to-End Deploy and Teardown
 
 # Runs on manual trigger or weekly schedule.
 # Deploys the full Bicep identity stack, validates all outputs,
-# then tears the resource group down — proving the IaC is deployable
-# end-to-end, not just lint-clean.
+# then removes only the run-scoped deployment resources. The dedicated CI
+# resource group and Log Analytics workspace persist for subsequent runs.
 #
 # Prerequisites (one-time setup — see Bicep/README.md#one-time-setup-for-the-what-if-job):
 #   Secrets: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
@@ -17,6 +17,10 @@ on:
 permissions:
   id-token: write   # Required for OIDC login
   contents: read
+
+concurrency:
+  group: bicep-deploy-ci
+  cancel-in-progress: false
 
 env:
   AZURE_LOCATION: eastus
@@ -56,13 +60,15 @@ jobs:
         run: |
           # Key Vault names must be globally unique — suffix with run ID
           KV_NAME="kv-bci-${{ github.run_id }}"
+          UAMI_NAME="ci-uami-${{ github.run_id }}"
           echo "kv_name=$KV_NAME" >> "$GITHUB_OUTPUT"
+          echo "uami_name=$UAMI_NAME" >> "$GITHUB_OUTPUT"
 
           result=$(az deployment group create \
             --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
             --template-file Bicep/main.bicep \
             --parameters \
-                identityName=ci-uami \
+                identityName="$UAMI_NAME" \
                 kvName="$KV_NAME" \
                 workspaceId="${{ vars.CI_WORKSPACE_ID }}" \
             --output json)
@@ -100,11 +106,11 @@ jobs:
         run: |
           count=$(az identity list \
             --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
-            --query "length([?name=='ci-uami'])" \
+            --query "length([?name=='${{ steps.deploy.outputs.uami_name }}'])" \
             --output tsv)
           echo "Managed Identity count: $count"
           if [ "$count" -lt 1 ]; then
-            echo "::error::Managed Identity 'ci-uami' not found in resource group"
+            echo "::error::Managed Identity '${{ steps.deploy.outputs.uami_name }}' not found in resource group"
             exit 1
           fi
 
@@ -116,7 +122,7 @@ jobs:
             --query id --output tsv)
 
           uami_principal=$(az identity show \
-            --name ci-uami \
+            --name "${{ steps.deploy.outputs.uami_name }}" \
             --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
             --query principalId --output tsv)
 
@@ -165,22 +171,73 @@ jobs:
       # -----------------------------------------------------------------------
       # Teardown — always runs, even if validation fails
       # -----------------------------------------------------------------------
-      - name: Teardown — remove resource locks (required before group deletion)
+      - name: Teardown — remove the deployment lock
         if: always()
         run: |
-          lock_ids=$(az lock list \
+          if az lock show \
+            --name wk1-lock \
             --resource-group "${{ vars.CI_RESOURCE_GROUP }}" \
-            --query "[].id" --output tsv)
-          for id in $lock_ids; do
-            echo "Removing lock: $id"
-            az lock delete --ids "$id"
-          done
+            --output none 2>/dev/null; then
+            az lock delete \
+              --name wk1-lock \
+              --resource-group "${{ vars.CI_RESOURCE_GROUP }}"
+          else
+            echo "Run-scoped lock is absent; nothing to remove"
+          fi
 
-      - name: Teardown — delete CI resource group
+      - name: Teardown — delete the run-scoped Key Vault
         if: always()
         run: |
-          az group delete \
-            --name "${{ vars.CI_RESOURCE_GROUP }}" \
-            --yes \
-            --no-wait
-          echo "Resource group deletion queued: ${{ vars.CI_RESOURCE_GROUP }}"
+          kv="${{ steps.deploy.outputs.kv_name }}"
+          uami="${{ steps.deploy.outputs.uami_name }}"
+          rg="${{ vars.CI_RESOURCE_GROUP }}"
+
+          if [ -z "$kv" ]; then
+            echo "No run-scoped Key Vault name was produced; nothing to remove"
+            exit 0
+          fi
+
+          kv_id=$(az keyvault list \
+            --resource-group "$rg" \
+            --query "[?name=='$kv'].id | [0]" \
+            --output tsv)
+
+          if [ -n "$kv_id" ]; then
+            uami_principal=$(az identity list \
+              --resource-group "$rg" \
+              --query "[?name=='$uami'].principalId | [0]" \
+              --output tsv)
+
+            if [ -n "$uami_principal" ]; then
+              role_assignment_ids=$(az role assignment list \
+                --scope "$kv_id" \
+                --assignee "$uami_principal" \
+                --query "[?roleDefinitionId contains '4633458b-17de-408a-b874-0445c86b69e6'].id" \
+                --output tsv)
+              for role_assignment_id in $role_assignment_ids; do
+                az role assignment delete --ids "$role_assignment_id"
+              done
+            fi
+
+            az keyvault delete --name "$kv" --resource-group "$rg"
+          else
+            echo "Run-scoped Key Vault '$kv' is absent; nothing to remove"
+          fi
+
+      - name: Teardown — delete the run-scoped managed identity
+        if: always()
+        run: |
+          uami="${{ steps.deploy.outputs.uami_name }}"
+          rg="${{ vars.CI_RESOURCE_GROUP }}"
+          uami_id=$(az identity list \
+            --resource-group "$rg" \
+            --query "[?name=='$uami'].id | [0]" \
+            --output tsv)
+
+          if [ -n "$uami_id" ]; then
+            az identity delete --name "$uami" --resource-group "$rg"
+          else
+            echo "Run-scoped managed identity is absent; nothing to remove"
+          fi
+
+          echo "Preserved dedicated CI resource group and Log Analytics workspace: $rg"

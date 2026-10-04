@@ -3,7 +3,7 @@
 Last validated on: August 2026
 
 [![Cloud & Identity Engineer](https://img.shields.io/badge/Cloud%20%26%20Identity-Engineer-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](Identity-First/README.md)
-[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#🗺️-how-to-follow-these-tracks)
+[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](#how-to-follow-these-tracks)
 [![Zero Trust](https://img.shields.io/badge/Zero%20Trust-0052CC?style=flat-square&logo=security&logoColor=white)](Identity-First/README.md)
 [![IaC Bicep](https://img.shields.io/badge/IaC-Bicep-0078D4?style=flat-square&logo=azurepipelines&logoColor=white)](Bicep/README.md)
 [![Azure Policy](https://img.shields.io/badge/Governance-Azure%20Policy-0052CC?style=flat-square&logo=trustpilot&logoColor=white)](Azure%20Policy%20Auto%E2%80%91Remediation/README.md)
@@ -12,7 +12,7 @@ Last validated on: August 2026
 I build identity‑first Azure platforms that remain secure, compliant, and maintainable long after deployment. My work centres on Zero Trust, Infrastructure as Code, and production-aligned governance — the engineering patterns that keep regulated environments safe and teams unblocked. Every solution is built with [cost and security governance](Cost%20and%20Security%20Governance.md) as a design constraint, not an afterthought.
 
 > **New here?** Start with [Identity-First](Identity-First/README.md) — every other track builds on it.
-> **Jumping in?** Use the [track navigator below](#🗺️-how-to-follow-these-tracks), or go straight to the [Modern Workplace Track](Microsoft%20365/README.md) or [Architecture Overview](Architecture%20Overview.md).
+> **Jumping in?** Use the [track navigator below](#how-to-follow-these-tracks), or go straight to the [Modern Workplace Track](Microsoft%20365/README.md) or [Architecture Overview](Architecture%20Overview.md).
 > **Role-based route?** Use the [Role-Based Learning Paths](Role-Based-Learning-Paths.md) page for guided sequences and total time estimates.
 
 ---
@@ -148,7 +148,7 @@ flowchart TD
 
 ---
 
-## 🗺️ How to Follow These Tracks
+## How to Follow These Tracks
 
 | If you're… | Start here | What's covered |
 | --- | --- | --- |
@@ -170,6 +170,7 @@ flowchart TD
 | Standing up AD DS in Azure | [DC in Azure Track](Deploying%20a%20Domain%20Controller%20in%20Azure/README.md) | Azure-hosted AD DS: VNet + Bastion (no public IPs), NSG AD DS rules, Availability Set, forest creation, replication, FSMO roles, Key Vault for DSRM secrets |
 | Migrating file shares from DFS to Azure | [DFS to Azure File Sync](Migrate%20Distributed%20File%20System%20%28DFS%29%20to%20Azure%20File%20Sync/README.md) | DFS-R retirement, Azure File Sync deployment (Storage Sync Service, Sync Groups, server endpoint registration), DFS Namespace cutover, cloud tiering, validation and cleanup |
 | Reviewing Modern Workplace (M365) | [Modern Workplace Track](Microsoft%20365/README.md) | Exchange Online, SharePoint, Teams, Purview, Zero Trust Advanced, Identity Lifecycle |
+| Reviewing Teams guest access and invitations | [Microsoft Teams Guest Policy](Teams/Microsoft%20Teams%20Guest%20Policy.md) | Organization-wide Teams guest access, Microsoft Entra guest-invitation controls, and team-level sensitivity labels |
 | Understanding the naming standard | [Naming Convention](Naming-Convention.md) | One consistent naming scheme across the entire portfolio |
 | Assessing cloud security posture management | [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) | Secure Score, recommendations, and regulatory compliance — fleet-scale posture across a hub-and-spoke topology |
 | Reviewing AI-assisted security operations | [Copilot for Security](Copilot%20for%20Security/README.md) | Incident summarisation, identity investigation, KQL assistance, promptbooks — Microsoft Security Copilot integrated into the SOC workflow |

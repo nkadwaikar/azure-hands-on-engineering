@@ -115,7 +115,9 @@ The `what-if` job runs only when `CI_RESOURCE_GROUP` is set — it skips automat
 
 ### One-Time Setup for the What-If Job
 
-**1. Create the CI resource group and Log Analytics workspace**
+**Resource lifecycle:** Keep `rg-bicep-ci` and `law-bicep-ci` in place between runs. Both the What-If and scheduled deploy workflows use this dedicated resource group and workspace. The scheduled workflow creates run-specific Key Vault and managed identity resources, then removes those resources and its resource lock; it does not delete the resource group or workspace. Do not place unrelated resources in `rg-bicep-ci`, because the CI identity has Owner permissions on it.
+
+#### 1. Create the CI resource group and Log Analytics workspace
 
 ```bash
 az group create --name rg-bicep-ci --location eastus
@@ -125,7 +127,7 @@ az monitor log-analytics workspace create \
   --workspace-name law-bicep-ci
 ```
 
-**2. Create a service principal with federated credentials (OIDC — no stored secret)**
+#### 2. Create a service principal with federated credentials (OIDC — no stored secret)
 
 ```bash
 # Create the app registration
@@ -142,7 +144,7 @@ az role assignment create \
   --scope $(az group show --name rg-bicep-ci --query id -o tsv)
 ```
 
-**3. Add the federated credential for GitHub Actions**
+#### 3. Add the federated credential for GitHub Actions
 
 In the Azure portal: **App registrations → github-bicep-ci → Certificates & secrets → Federated credentials → Add credential**
 
@@ -156,7 +158,7 @@ In the Azure portal: **App registrations → github-bicep-ci → Certificates & 
 
 Add a second credential with **Entity type: Pull request** to cover PR runs.
 
-**4. Configure GitHub repository secrets and variables**
+#### 4. Configure GitHub repository secrets and variables
 
 Go to **Settings → Secrets and variables → Actions**:
 

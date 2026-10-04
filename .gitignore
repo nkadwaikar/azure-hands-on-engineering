@@ -15,3 +15,7 @@ bin/
 obj/
 *.user
 *.rsuser
+*.pem
+*.key
+*.pfx
+*.p12

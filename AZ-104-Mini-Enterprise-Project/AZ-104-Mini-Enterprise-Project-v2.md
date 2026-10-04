@@ -43,7 +43,7 @@ AZ-104-Mini-Enterprise-Project/
 - [ ] Invite a guest/B2B user; explore administrative units
 - [ ] Move a resource between resource groups (and note what can't be moved)
 
-### Validation
+### Phase 1 Validation
 
 - **RBAC inheritance:** Remove a role at RG scope — confirm the subscription-level assignment still appears under the user's Effective roles
 - **Policy compliance:** After assignment, Policy → Compliance shows non-compliant resources within 30 minutes
@@ -67,7 +67,7 @@ AZ-104-Mini-Enterprise-Project/
 - [ ] Stand up a quick **point-to-site VPN Gateway**; understand it conceptually vs. ExpressRoute
 - [ ] Deploy a **NAT Gateway** for outbound-only internet access from a subnet
 
-### Validation
+### Phase 2 Validation
 
 - **Peering:** Both VNets show "Connected" status under Virtual Network → Peerings; ping across peered VNets succeeds
 - **NSG + UDR:** Network Watcher → IP Flow Verify returns the expected Allow/Deny; `Get-NetRoute` on the VM shows the custom next-hop
@@ -92,7 +92,7 @@ AZ-104-Mini-Enterprise-Project/
 - [ ] Set up **Azure Update Manager** for patch scheduling (distinct from backup)
 - [ ] ⭐ Enable **Azure Arc** on a VM (even a local VM registered as "on-prem") — just enough to recognize its purpose
 
-### Validation
+### Phase 3 Validation
 
 - **Availability set:** Both VMs show different Fault Domains in the Availability Set blade
 - **Bicep deployment:** `az deployment group show -g <rg> -n <name> --query properties.provisioningState` returns `"Succeeded"`
@@ -117,7 +117,7 @@ AZ-104-Mini-Enterprise-Project/
 - [ ] Configure **storage account network rules** (firewall, private endpoint, allowed VNets)
 - [ ] Move data with **AzCopy** or Storage Explorer
 
-### Validation
+### Phase 4 Validation
 
 - **Lifecycle policy:** Storage Account → Data Management → Lifecycle management shows the rule active; use a blob with a past `LastModified` date to trigger it immediately in a test container
 - **Azure Files mount:** `net use Z: \\\\<storage>.file.core.windows.net\\<share>` returns “The command completed successfully”; `Z:\` is accessible from the VM
@@ -139,7 +139,7 @@ AZ-104-Mini-Enterprise-Project/
 - [ ] Check **Azure Advisor** recommendations across the environment
 - [ ] Review **Service Health / Resource Health** for a deployed resource
 
-### Validation
+### Phase 5 Validation
 
 - **Log Analytics agents:** `Heartbeat | summarize max(TimeGenerated) by Computer` — all VMs appear with a timestamp within the last 5 minutes
 - **Diagnostic settings:** `AzureDiagnostics | where ResourceType == "MICROSOFT.NETWORK/NETWORKSECURITYGROUPS" | take 5` returns rows
@@ -179,4 +179,4 @@ Delete resources in reverse phase order to avoid dependency errors.
 - Added: App Service + deployment slots, VM extensions, managed disk types/encryption, Update Manager, VMSS autoscale (Phase 3)
 - Added: SAS tokens/key rotation, storage network rules, AzCopy (Phase 4)
 - Added: diagnostic settings, autoscale-alert integration, Azure Advisor, Service/Resource Health (Phase 5)
-- Added: per-phase Validation subsections and Cleanup table (v2 formatting pass)
+- Added: phase-specific validation subsections with unique headings, plus a Cleanup table (v2 formatting pass)
