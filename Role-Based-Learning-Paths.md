@@ -25,7 +25,7 @@ Recommended focus: identity protection, posture management, secure access, and i
 | 7 | [Azure Policy Auto-Remediation](Azure%20Policy%20Auto%E2%80%91Remediation/README.md) | 1-1.5 hours |
 | 8 | [Copilot for Security](Copilot%20for%20Security/README.md) | 1.5-2.5 hours |
 
-Estimated total: 17.75-26.75 hours
+Estimated total: 16.75-26.75 hours
 
 ## Platform Engineer Path
 

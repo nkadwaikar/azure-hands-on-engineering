@@ -34,7 +34,7 @@ Need a curated start-to-finish sequence by role? See [Role-Based Learning Paths]
 
 | Role | Recommended Path | Estimated Total Time | Difficulty |
 | --- | --- | --- | --- |
-| **Security Engineer** | [Role-Based Learning Paths](Role-Based-Learning-Paths.md#security-engineer-path) | 17.75-26.75 hours | Intermediate to Advanced |
+| **Security Engineer** | [Role-Based Learning Paths](Role-Based-Learning-Paths.md#security-engineer-path) | 16.75-26.75 hours | Intermediate to Advanced |
 | **Platform Engineer** | [Role-Based Learning Paths](Role-Based-Learning-Paths.md#platform-engineer-path) | 23.5-37 hours | Advanced |
 | **M365 Engineer** | [Role-Based Learning Paths](Role-Based-Learning-Paths.md#m365-engineer-path) | 13-20 hours | Intermediate to Advanced |
 
@@ -211,9 +211,9 @@ All labs are designed to minimise Azure spend using right-sizing, auto-shutdown,
 
 What I'm building next reflects where enterprise Azure is heading — AI-augmented operations, deeper security posture management, and Copilot-native engineering — all on a Zero Trust foundation.
 
-| Planned | Why |
+| Planned expansion | Why |
 | --- | --- |
-| [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) | Extend cloud security posture management at scale across a hub-and-spoke topology, with roadmap expansion into attack path analysis and governance rules, building on the Defender for Servers foundation already covered in the [Defender for Servers track](Defender%20for%20Servers/README.md) |
+| [Defender for Cloud CSPM](Defender%20for%20Cloud%20CSPM/README.md) | Expand the existing track beyond its current labs with attack path analysis and governance rules, building on the Defender for Servers foundation already covered in the [Defender for Servers track](Defender%20for%20Servers/README.md) |
 
 ---
 

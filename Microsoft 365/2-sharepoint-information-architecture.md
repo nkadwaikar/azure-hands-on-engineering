@@ -16,7 +16,7 @@ This lab builds a scalable, governed SharePoint Online information architecture 
 **License required:** Microsoft 365 E3 or E5
 **Portals used:**
 
-- [SharePoint Admin Center](https://tenant-admin.sharepoint.com)
+- [SharePoint Admin Center](https://admin.microsoft.com/sharepoint)
 - [Microsoft Purview portal](https://compliance.microsoft.com)
 - SharePoint site settings (accessed from each site)
 
