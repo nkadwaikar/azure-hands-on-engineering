@@ -15,6 +15,10 @@ I build identity‑first Azure platforms that remain secure, compliant, and main
 > **Jumping in?** Use the [track navigator below](#how-to-follow-these-tracks), or go straight to the [Modern Workplace Track](Microsoft%20365/README.md) or [Architecture Overview](Architecture%20Overview.md).
 > **Role-based route?** Use the [Role-Based Learning Paths](Role-Based-Learning-Paths.md) page for guided sequences and total time estimates.
 
+**On this page:** [Audience](#-who-this-is-designed-for) · [Role paths](#-role-path-matrix) · [Featured architecture](#%EF%B8%8F-featured-architecture) · [Architecture rationale](#-why-this-architecture-matters) · [Track navigator](#how-to-follow-these-tracks)
+
+[Skills](#%EF%B8%8F-skills--technology-coverage) · [Cost governance](#-cost-governance) · [Next](#-next) · [Engineering philosophy](#-engineering-philosophy) · [Connect](#-connect)
+
 ---
 
 ## 👥 Who This Is Designed For
